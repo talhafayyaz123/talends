@@ -136,22 +136,15 @@ class HomeController extends Controller
 
 
      public function whyTalends(){
-        $homepage = SiteManagement::getMetaValue('why_talends');
-          
+        $inner_page = SiteManagement::getMetaValue('why_talends');
+       
         $page_header = '';
-        $selected_page = Page::find($homepage['why_talends']);
-        $page_data = $selected_page->toArray();
-        
         $page = array();
-        $home = true;
-        $page['id'] = $page_data['id'];
-        $page['title'] = $page_data['title'];
-        $page['slug'] = $page_data['slug'];
-        //$page['section_list'] = !empty($page_data['sections']) ? Helper::getUnserializeData($page_data['sections']) : array();
-      
-        $description = $page_data['body'];
-         $page_meta = SiteManagement::where('meta_key', 'seo-desc-' . $homepage['why_talends'])->select('meta_value')->pluck('meta_value')->first();       
-        $meta_desc = !empty($page_meta) ? $page_meta : '';
+        $home = false;
+
+        $meta_title = !empty($inner_page) && !empty($inner_page[0]['title']) ? $inner_page[0]['title'] : trans('lang.why-talends-title');
+        $meta_desc = !empty($inner_page) && !empty($inner_page[0]['desc']) ? $inner_page[0]['desc'] : trans('lang.why-talends-desc');
+        $page['title'] = $meta_title;
        
         return view('front-end.pages.why-talends',compact('page','home','meta_desc'));
      }

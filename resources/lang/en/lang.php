@@ -1574,4 +1574,7 @@ return [
         'usd' => 'United States Dollar',
         'gpb' => 'Greater British Pound',
     ],
+
+    'why-talends-title'=>'Why Talends',
+    'why-talends-desc'=>'About Us',
 ];
