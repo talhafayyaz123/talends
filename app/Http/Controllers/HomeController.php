@@ -12,6 +12,9 @@ use App\Skill;
 use App\Location;
 use App\Language;
 use Illuminate\Support\Facades\Schema;
+use App\Job;
+use DataTables;
+
 
 class HomeController extends Controller
 {
@@ -152,66 +155,96 @@ class HomeController extends Controller
 
 
      public function government(){
-        $homepage = SiteManagement::getMetaValue('government');
-          
-        $page_header = '';
-        $selected_page = Page::find($homepage['government']);
-        $page_data = $selected_page->toArray();
-        
-        $page = array();
-        $home = true;
-        $page['id'] = $page_data['id'];
-        $page['title'] = $page_data['title'];
-        $page['slug'] = $page_data['slug'];
-        //$page['section_list'] = !empty($page_data['sections']) ? Helper::getUnserializeData($page_data['sections']) : array();
-      
-        $description = $page_data['body'];
-         $page_meta = SiteManagement::where('meta_key', 'seo-desc-' . $homepage['government'])->select('meta_value')->pluck('meta_value')->first();       
-        $meta_desc = !empty($page_meta) ? $page_meta : '';
+
+        $inner_page = SiteManagement::getMetaValue('government');
        
+        $page_header = '';
+        $page = array();
+        $home = false;
+
+        $meta_title = !empty($inner_page) && !empty($inner_page[0]['title']) ? $inner_page[0]['title'] : trans('lang.government-title');
+        $meta_desc = !empty($inner_page) && !empty($inner_page[0]['desc']) ? $inner_page[0]['desc'] : trans('lang.government-desc');
+        $page['title'] = $meta_title;
         return view('front-end.pages.government',compact('page','home','meta_desc'));
      }
 
 
-     public function browseJobs(){
-        $homepage = SiteManagement::getMetaValue('browse-jobs');
-          
+     public function browseJobs(Request $request){
+        $inner_page = SiteManagement::getMetaValue('browse-jobs');
+        $filter = $request->input('filter');
+        $data = $request->all();
+
         $page_header = '';
-        $selected_page = Page::find($homepage['browse-jobs']);
-        $page_data = $selected_page->toArray();
-        
         $page = array();
-        $home = true;
-        $page['id'] = $page_data['id'];
-        $page['title'] = $page_data['title'];
-        $page['slug'] = $page_data['slug'];
-        //$page['section_list'] = !empty($page_data['sections']) ? Helper::getUnserializeData($page_data['sections']) : array();
-      
-        $description = $page_data['body'];
-         $page_meta = SiteManagement::where('meta_key', 'seo-desc-' . $homepage['browse-jobs'])->select('meta_value')->pluck('meta_value')->first();       
-        $meta_desc = !empty($page_meta) ? $page_meta : '';
-       
-        return view('front-end.pages.browse-jobs',compact('page','home','meta_desc'));
+        $home = false;
+
+        $meta_title = !empty($inner_page) && !empty($inner_page[0]['title']) ? $inner_page[0]['title'] : trans('lang.browse-jobs-title');
+        $meta_desc = !empty($inner_page) && !empty($inner_page[0]['desc']) ? $inner_page[0]['desc'] : trans('lang.browse-jobs-desc');
+        $page['title'] = $meta_title;
+
+
+          if (!empty($filter)) {
+            
+          $job_details = Job::with('employer','skills','languages')->when($request->category_id != null, function ($query) use ($request) {
+        
+            $query->whereRelation('categories', 'categories.id',  $request->category_id);
+            
+          })->when($request->project_length != null, function ($query) use ($request) {
+        
+            $query->where('jobs.duration',  $request->project_length);
+            
+          })->when($request->price != null, function ($query) use ($request) {
+        
+            $min_max_range = explode('-', $request->price);
+
+                
+              if(!isset($min_max_range[1])){
+                if($min_max_range[0] !=0){
+
+                    $min_price = $min_max_range[0];                   
+                        $query->where('price', '>=',explode("+", $min_max_range[0])[0] );
+                  }
+              }else{
+                $min_price = $min_max_range[0];
+                $max_price = $min_max_range[1];
+                $query->whereBetween('price', array($min_price, $max_price)); 
+              }
+            
+            
+          })->when($request->location != null, function ($query) use ($request) {
+        
+            $query->whereRelation('location', 'locations.id',  $request->location);
+            
+          })->latest()->paginate(5);
+
+        } else {
+
+            $job_details = Job::with('employer','location','categories','skills','languages')->latest()->paginate(5);
+        } 
+
+        
+        
+        $currency   = SiteManagement::getMetaValue('commision');
+        $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
+
+        $categories = Category::latest()->get();
+        $locations = Location::latest()->get();
+        
+        return view('front-end.pages.browse-jobs',compact('page','home','meta_desc','job_details','currency','categories','locations','data'));
      }
 
      public function findTalents(){
-        $homepage = SiteManagement::getMetaValue('find-talents');
           
-        $page_header = '';
-        $selected_page = Page::find($homepage['find-talents']);
-        $page_data = $selected_page->toArray();
-        
-        $page = array();
-        $home = true;
-        $page['id'] = $page_data['id'];
-        $page['title'] = $page_data['title'];
-        $page['slug'] = $page_data['slug'];
-        //$page['section_list'] = !empty($page_data['sections']) ? Helper::getUnserializeData($page_data['sections']) : array();
-      
-        $description = $page_data['body'];
-         $page_meta = SiteManagement::where('meta_key', 'seo-desc-' . $homepage['find-talents'])->select('meta_value')->pluck('meta_value')->first();       
-        $meta_desc = !empty($page_meta) ? $page_meta : '';
+        $inner_page = SiteManagement::getMetaValue('find-talents');
        
+        $page_header = '';
+        $page = array();
+        $home = false;
+
+        $meta_title = !empty($inner_page) && !empty($inner_page[0]['title']) ? $inner_page[0]['title'] : trans('lang.find-talents-title');
+        $meta_desc = !empty($inner_page) && !empty($inner_page[0]['desc']) ? $inner_page[0]['desc'] : trans('lang.find-talents-desc');
+        $page['title'] = $meta_title;
+
         return view('front-end.pages.find-talents',compact('page','home','meta_desc'));
      }
 

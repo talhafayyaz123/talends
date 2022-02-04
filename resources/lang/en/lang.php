@@ -1577,4 +1577,14 @@ return [
 
     'why-talends-title'=>'Why Talends',
     'why-talends-desc'=>'About Us',
+
+    
+    'government-title'=>'Government',
+    'government-desc'=>'Government',
+
+    'browse-jobs-title'=>'Browse Jobs',
+    'browse-jobs-desc'=>'Browse Jobs',
+
+    'find-talents-title'=>'Find Talents',
+    'find-talents-desc'=>'Find Talents',
 ];

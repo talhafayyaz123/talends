@@ -71,6 +71,7 @@ class User extends Authenticatable
         );
     }
 
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -91,6 +92,10 @@ class User extends Authenticatable
         $this->notify(new MailResetPasswordNotification($token));
     }
 
+
+      public function getFullNameAttribute($value){
+        return $this->attributes['first_name'].'  '.$this->attributes['last_name'];
+      }
     /**
      * User Can have multiple articles
      *

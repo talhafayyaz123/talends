@@ -46,155 +46,116 @@
     </section>
     <section class="">
         <div class="container">
+        <form class="form-inline" method="GET">
             <div class="row row-eq-height">
+
+            
                 <div class="col-md-12">
                     <div class="talent_filters">
-                        <select name="" class="talent_select" id="">
+                        <select class="talent_select" id="category_id" name="category_id">
                           <option value="">Category</option>
-                          <option value="Video Editors">Video Editors</option>
-                          <option value="Data Analyst">Data Analyst</option>
+                          @foreach($categories as $category):
+                            <option value="{{ $category->id }}">{{ $category->title }}</option>
+                            @endforeach
                       </select>
+                         <input type="hidden" value='filter' name='filter'>
                         <select name="" class="talent_select" id="">
                           <option value="">Project Attributes</option>
                           <option value="Video Editors">Video Editors</option>
                           <option value="Data Analyst">Data Analyst</option>
                       </select>
-                        <select name="" class="talent_select" id="">
+                      
+                      <select  class="talent_select" id="price" name="price">
                           <option value="">Price</option>
-                          <option value="Video Editors">Video Editors</option>
-                          <option value="Data Analyst">Data Analyst</option>
+                          <option value="10-100">$10-100</option>
+                          <option value="100-500">$100-500</option>
+                          <option value="500-1500">$500-1500</option>
+                          <option value="1500-2500">$1500-2500</option>
+                          <option value="2500+">$2500+</option>
                       </select>
-                        <select name="" class="talent_select" id="">
-                          <option value="">Delivery Time</option>
-                          <option value="Video Editors">Video Editors</option>
-                          <option value="Data Analyst">Data Analyst</option>
+
+
+                        <select  class="talent_select" id="project_length" name="project_length">
+                          <option value="">Project Length</option>
+                          <option value="weekly">Less than a week</option>
+                          <option value="monthly">Less than a month</option>
+                          <option value="three_month">01 to 03 months</option>
+                          <option value="six_month">03 to 06 months</option>
+                          <option value="more_than_six">More than 06 months</option>
                       </select>
-                        <select name="" class="talent_select" id="">
-                          <option value="">Talent Details</option>
-                          <option value="Video Editors">Video Editors</option>
-                          <option value="Data Analyst">Data Analyst</option>
+
+
+                        <select  class="talent_select" id="location" name="location">
+                          <option value="">Location</option>
+                          @foreach($locations as $location):
+                            <option value="{{ $location->id }}">{{ $location->title }}</option>
+                            @endforeach
                       </select>
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                   <br>
+                    <button type='submit' class="theme_btn inverse_btn">Filter</button>
+                </div>
+              
+            </div>
+            </form>
+
+
+
+
         </div>
     </section>
     <section>
         <div class="container">
             <div class="row">
+            @if(!empty($job_details) && $job_details->count())
+                @foreach($job_details as $key => $value)
                 <div class="col-md-12">
                     <div class="job_list_box">
                         <div class="job_list_head">
+                        
                             <ul>
                                 <li>
-                                    <h4><img src="{{ asset('talends/assets/img/find-talents/user1.png')}}" alt=""> Mohammed Ismail</h4>
+                                    <h4><img src="{{ asset('talends/assets/img/find-talents/user4.png')}}" alt=""> {{  $value->employer->FullName }}</h4>
                                 </li>
                                 <li>
-                                    <h4>Posted 2 hours ago</h4>
+                                    <h4>{{  $value->created_at->diffForHumans()}}</h4>
                                 </li>
                                 <li>
-                                    <h4><i class="fas fa-map-marker-alt">&nbsp;</i>Remote</h4>
+                                    <h4><i class="fas fa-map-marker-alt">&nbsp;</i>{{  $value->location->title }}</h4>
                                 </li>
                             </ul>
                             <ul class="job_price">
-                                <li class="theme_color">$1000-1500</li>
+                                <li class="theme_color">${{  $value->price }}</li>
                             </ul>
                         </div>
-                        <h4>Wireframing websites, content strategy, Virtual Assistant</h4>
-                        <p>I am a freelance wordpress developer. i have clients that have ideas they need brought to life on their websites but i dont have the time to wireframe and build their ideas for them...</p>
+
+                        
+                        <h4>{{  $value->title }}</h4>
+                        
+                        {!! $value->description !!}
                         <ul class="job_list_category">
-                            <li><a href="#">Web Design</a></li>
-                            <li><a href="#">Logo Design</a></li>
-                            <li><a href="#">SEO</a></li>
-                            <li><a href="#">Copywriting</a></li>
+                        @foreach($value->categories as  $category)
+                            <li><a href="">{{ $category->title }}</a></li>
+                            @endforeach
                         </ul>
                     </div>
+                    
                 </div>
-                <div class="col-md-12">
-                    <div class="job_list_box">
-                        <div class="job_list_head">
-                            <ul>
-                                <li>
-                                    <h4><img src="{{ asset('talends/assets/img/find-talents/user2.png')}}" alt=""> Mohammed Ismail</h4>
-                                </li>
-                                <li>
-                                    <h4>Posted 2 hours ago</h4>
-                                </li>
-                                <li>
-                                    <h4><i class="fas fa-map-marker-alt">&nbsp;</i>Remote</h4>
-                                </li>
-                            </ul>
-                            <ul class="job_price">
-                                <li class="theme_color">$1500</li>
-                            </ul>
-                        </div>
-                        <h4>Simple Mobile Responsive Sales Pages in Wordpress</h4>
-                        <p>Are you a website designer? Would you say you have a GREAT eye for design? And consider yourself more of a designer than a developer?</p>
-                        <ul class="job_list_category">
-                            <li><a href="#">Web Design</a></li>
-                            <li><a href="#">Logo Design</a></li>
-                            <li><a href="#">SEO</a></li>
-                            <li><a href="#">Copywriting</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="job_list_box">
-                        <div class="job_list_head">
-                            <ul>
-                                <li>
-                                    <h4><img src="{{ asset('talends/assets/img/find-talents/user3.png')}}" alt=""> Mohammed Ismail</h4>
-                                </li>
-                                <li>
-                                    <h4>Posted 2 hours ago</h4>
-                                </li>
-                                <li>
-                                    <h4><i class="fas fa-map-marker-alt">&nbsp;</i>Remote</h4>
-                                </li>
-                            </ul>
-                            <ul class="job_price">
-                                <li class="theme_color">$3000-4500</li>
-                            </ul>
-                        </div>
-                        <h4>Recurrent work: Create Sales Pages in Wordpress</h4>
-                        <p>Are you a website designer? Would you say you have a GREAT eye for design? And consider yourself more of a designer than a developer?</p>
-                        <ul class="job_list_category">
-                            <li><a href="#">Web Design</a></li>
-                            <li><a href="#">Logo Design</a></li>
-                            <li><a href="#">SEO</a></li>
-                            <li><a href="#">Copywriting</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="job_list_box">
-                        <div class="job_list_head">
-                            <ul>
-                                <li>
-                                    <h4><img src="{{ asset('talends/assets/img/find-talents/user4.png')}}" alt=""> Mohammed Ismail</h4>
-                                </li>
-                                <li>
-                                    <h4>Posted 2 hours ago</h4>
-                                </li>
-                                <li>
-                                    <h4><i class="fas fa-map-marker-alt">&nbsp;</i>Remote</h4>
-                                </li>
-                            </ul>
-                            <ul class="job_price">
-                                <li class="theme_color">$1000-1500</li>
-                            </ul>
-                        </div>
-                        <h4>Website Designer with PSD to HTML/CSS skills required</h4>
-                        <p>Are you a website designer? Would you say you have a GREAT eye for design? And consider yourself more of a designer than a developer?</p>
-                        <ul class="job_list_category">
-                            <li><a href="#">Web Design</a></li>
-                            <li><a href="#">Logo Design</a></li>
-                            <li><a href="#">SEO</a></li>
-                            <li><a href="#">Copywriting</a></li>
-                        </ul>
-                    </div>
-                </div>
+                @endforeach
+            @endif
             </div>
+            
+            {!! $job_details->appends(Request::except('page'))->render() !!}
+
+            <p>
+            Displaying {{$job_details->count()}} of {{ $job_details->total() }} jobs.
+            </p>
+
         </div>
     </section>
     <section class="theme_bg_dark">
