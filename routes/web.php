@@ -59,6 +59,11 @@ Route::get('why-talends', 'HomeController@whyTalends')->name('whyTalends');
 Route::get('government', 'HomeController@government')->name('government');
 Route::get('browse-jobs', 'HomeController@browseJobs')->name('browseJobs');
 Route::get('find-talents', 'HomeController@findTalents')->name('findTalents');
+Route::get('freelancer/detail/{id}', 'HomeController@FreelancerDetail')->name('FreelancerDetail');
+Route::get('freelancer/experience-education/{id}', 'HomeController@experienceEducation')->name('freelancerExperience');
+Route::get('freelancer/get-freelancer-educations', 'FreelancerController@getFreelancerEducations');
+Route::get('freelancer/project-awards/{id}', 'HomeController@projectAwardsSettings')->name('freelancerProjectAwards');
+
 
 
 Route::get('articles/{category?}', 'ArticleController@articlesList')->name('articlesList');

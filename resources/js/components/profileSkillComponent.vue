@@ -214,6 +214,7 @@
             });
         },
         created: function() {
+            console.log('ddd');
             this.getSkills();
             this.getUserSkills();
         } 

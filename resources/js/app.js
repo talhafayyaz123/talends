@@ -67,7 +67,10 @@ Vue.component('page-order', require('./components/PageOrderComponent.vue').defau
 Vue.component('freelancer_experience', require('./components/ProfileExperienceComponent.vue').default);
 Vue.component('freelancer_education', require('./components/ProfileEducationComponent.vue').default);
 Vue.component('freelancer_project', require('./components/ProfileProjectComponent.vue').default);
+
 Vue.component('freelancer_award', require('./components/ProfileAwardComponent.vue').default);
+
+
 Vue.component('job_attachments', require('./components/UploadJobAttachmentComponent.vue').default);
 Vue.component('job_multiple-attachments', require('./components/JobMultipleAttachmentComponent.vue').default);
 Vue.component('job_skills', require('./components/JobSkillComponent.vue').default);

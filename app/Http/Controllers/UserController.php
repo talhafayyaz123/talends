@@ -2220,6 +2220,7 @@ class UserController extends Controller
                 );
             } else {
                 $users = User::select('*')->latest()->paginate(10);
+                
             }
             if (file_exists(resource_path('views/extend/back-end/admin/users/index.blade.php'))) {
                 return view('extend.back-end.admin.users.index', compact('users'));

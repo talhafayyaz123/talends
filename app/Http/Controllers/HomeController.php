@@ -13,8 +13,12 @@ use App\Location;
 use App\Language;
 use Illuminate\Support\Facades\Schema;
 use App\Job;
-use DataTables;
-
+use App\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Traits\HasRoles;
+use App\Profile;
+use DB;
+use App\Package;
 
 class HomeController extends Controller
 {
@@ -173,7 +177,8 @@ class HomeController extends Controller
         $inner_page = SiteManagement::getMetaValue('browse-jobs');
         $filter = $request->input('filter');
         $data = $request->all();
-
+        $search = $request->input('search');
+        
         $page_header = '';
         $page = array();
         $home = false;
@@ -217,26 +222,36 @@ class HomeController extends Controller
             
           })->latest()->paginate(5);
 
+        }elseif(!empty($search)){
+          
+
+        $job_details = Job::with('employer','location','categories','skills','languages')->when($search != null, function ($query) use ($search) {
+        
+            $query->where('jobs.title', 'like', '%'.$search.'%');
+            
+            })->latest()->paginate(5);
+
+
         } else {
 
             $job_details = Job::with('employer','location','categories','skills','languages')->latest()->paginate(5);
         } 
 
-        
-        
         $currency   = SiteManagement::getMetaValue('commision');
         $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
 
         $categories = Category::latest()->get();
         $locations = Location::latest()->get();
         
-        return view('front-end.pages.browse-jobs',compact('page','home','meta_desc','job_details','currency','categories','locations','data'));
+        return view('front-end.pages.browse-jobs',compact('page','home','meta_desc','job_details','currency','categories','locations','data','search'));
      }
 
-     public function findTalents(){
+     public function findTalents(Request $request){
           
         $inner_page = SiteManagement::getMetaValue('find-talents');
-       
+        $filter = $request->input('filter');
+        $users = User::select('*')->role('freelancer')->latest()->paginate(6);
+        $skills     = Skill::all();
         $page_header = '';
         $page = array();
         $home = false;
@@ -245,8 +260,158 @@ class HomeController extends Controller
         $meta_desc = !empty($inner_page) && !empty($inner_page[0]['desc']) ? $inner_page[0]['desc'] : trans('lang.find-talents-desc');
         $page['title'] = $meta_title;
 
-        return view('front-end.pages.find-talents',compact('page','home','meta_desc'));
+        return view('front-end.pages.find-talents',compact('page','home','meta_desc','users','skills'));
      }
+
+     public function freelancerDetail($user_id){
+        $locations = Location::pluck('title', 'id');
+        $skills = Skill::pluck('title', 'id');
+
+        $profile = Profile::where('user_id', $user_id)
+            ->get()->first();
+        $user = User::find($user_id);
+        $freelancer_skills = $user->skills()->orderBy('title')->get();
+    
+        $gender = !empty($profile->gender) ? $profile->gender : '';
+        $hourly_rate = !empty($profile->hourly_rate) ? $profile->hourly_rate : '';
+        $tagline = !empty($profile->tagline) ? $profile->tagline : '';
+        $description = !empty($profile->description) ? $profile->description : '';
+        $address = !empty($profile->address) ? $profile->address : '';
+        $longitude = !empty($profile->longitude) ? $profile->longitude : '';
+        $latitude = !empty($profile->latitude) ? $profile->latitude : '';
+        $banner = !empty($profile->banner) ? $profile->banner : '';
+        $avater = !empty($profile->avater) ? $profile->avater : '';
+        $role_id =  Helper::getRoleByUserID($user_id);
+        $packages = DB::table('items')->where('subscriber', $user_id)->count();
+        $package_options = Package::select('options')->where('role_id', $role_id)->first();
+        $options = !empty($package_options) ? unserialize($package_options['options']) : array();
+        $videos = !empty($profile->videos) ? Helper::getUnserializeData($profile->videos) : '';
+        $user_location = Location::find($user->location_id);
+       
+        return view(
+            'front-end.pages.profile-settings.personal-detail.index',
+            compact(
+                'freelancer_skills',
+                'user_location',
+                'videos',
+                'locations',
+                'skills',
+                'profile',
+                'gender',
+                'hourly_rate',
+                'tagline',
+                'description',
+                'banner',
+                'address',
+                'longitude',
+                'latitude',
+                'avater',
+                'options',
+                'user',
+                'user_id'
+            )
+        );
+    }
+
+
+    public function experienceEducation($user_id)
+    {
+        $weekdays =[
+            trans('lang.weekdays.mon'),
+            trans('lang.weekdays.tue'),
+            trans('lang.weekdays.wed'),
+            trans('lang.weekdays.thu'),
+            trans('lang.weekdays.fri'),
+            trans('lang.weekdays.sat'),
+            trans('lang.weekdays.sun'),
+        ];
+        $months =[
+            trans('lang.months.january'),
+            trans('lang.months.february'),
+            trans('lang.months.march'),
+            trans('lang.months.april'),
+            trans('lang.months.may'),
+            trans('lang.months.june'),
+            trans('lang.months.july'),
+            trans('lang.months.august'),
+            trans('lang.months.september'),
+            trans('lang.months.october'),
+            trans('lang.months.november'),
+            trans('lang.months.december'),
+        ];
+
+        $profile = Profile::select('education','experience')
+        ->where('user_id', $user_id)->get()->first();
+         
+        $stored_educations = unserialize($profile->education);
+        $stored_experiences = unserialize($profile->experience);
+       
+     return view('front-end.pages.profile-settings.experience-education.index', compact('weekdays', 'months','user_id','stored_experiences','stored_educations'));
+        
+    }
+
+    public function projectAwardsSettings ($user_id)
+    {
+        $weekdays =[
+            trans('lang.weekdays.mon'),
+            trans('lang.weekdays.tue'),
+            trans('lang.weekdays.wed'),
+            trans('lang.weekdays.thu'),
+            trans('lang.weekdays.fri'),
+            trans('lang.weekdays.sat'),
+            trans('lang.weekdays.sun'),
+        ];
+        $months =[
+            trans('lang.months.january'),
+            trans('lang.months.february'),
+            trans('lang.months.march'),
+            trans('lang.months.april'),
+            trans('lang.months.may'),
+            trans('lang.months.june'),
+            trans('lang.months.july'),
+            trans('lang.months.august'),
+            trans('lang.months.september'),
+            trans('lang.months.october'),
+            trans('lang.months.november'),
+            trans('lang.months.december'),
+        ];
+        $profile = Profile::select('projects')
+        ->where('user_id', $user_id)->get()->first();
+
+        $profile_projects = array();
+        if (!empty($profile)) {
+            $projects = !empty($profile->projects) ? Helper::getUnserializeData($profile->projects) : array();
+            if (!empty($projects)) {
+                foreach ($projects as $key => $project) {
+                    $profile_projects[$key]['project_title'] = !empty($project['project_title']) ? $project['project_title'] : '';
+                    $profile_projects[$key]['project_url'] = !empty($project['project_url']) ? $project['project_url'] : '';
+                    $profile_projects[$key]['project_hidden_image'] = !empty($project['project_hidden_image']) ? url('/uploads/users/'.$user_id.'/projects/'.$project['project_hidden_image']) : '';
+                    $profile_projects[$key]['project_image'] = !empty($project['project_hidden_image']) ? $project['project_hidden_image'] : '';
+                }
+            }
+
+        }
+
+
+        $profile = Profile::select('awards')
+        ->where('user_id', $user_id)->get()->first();
+        $profile_awards = array();
+        if (!empty($profile)) {
+            $awards = !empty($profile->awards) ? Helper::getUnserializeData($profile->awards) : array();
+            if (!empty($awards)) {
+                foreach ($awards as $key => $award) {
+                    $profile_awards[$key]['award_title'] = $award['award_title'];
+                    $profile_awards[$key]['award_date'] = $award['award_date'];
+                    $profile_awards[$key]['award_hidden_image'] = url('/uploads/users/'.$user_id.'/awards/'.$award['award_hidden_image']);
+                    $profile_awards[$key]['award_image'] = !empty($award['award_hidden_image']) ? $award['award_hidden_image'] : '';
+                }
+            }
+            
+        }
+    
+        return view('front-end.pages.profile-settings.projects-awards.index', compact('weekdays', 'months','user_id','profile_projects','profile_awards'));
+
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -268,6 +268,7 @@ class PublicController extends Controller
      */
     public function showUserProfile($slug)
     {
+        
         $user = User::select('id')->where('slug', $slug)->first();
         if (!empty($user)) {
             $user = User::find($user->id);
@@ -285,6 +286,7 @@ class PublicController extends Controller
             $current_date = Carbon::now()->format('M d, Y');
             $tagline = !empty($profile) ? $profile->tagline : '';
             $desc = !empty($profile) ? $profile->description : '';
+        
             if ($user->getRoleNames()->first() === 'freelancer') {
                 $services = array();
                 if (Schema::hasTable('services') && Schema::hasTable('service_user')) {
@@ -433,6 +435,7 @@ class PublicController extends Controller
                         )
                     );
                 } else {
+                
                     return View(
                         'front-end.users.employer-show',
                         compact(

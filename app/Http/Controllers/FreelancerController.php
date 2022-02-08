@@ -112,6 +112,7 @@ class FreelancerController extends Controller
                 )
             );
         } else {
+            
             return view(
                 'back-end.freelancer.profile-settings.personal-detail.index',
                 compact(
@@ -514,6 +515,7 @@ class FreelancerController extends Controller
      */
     public function getFreelancerEducations()
     {
+        
         $json = array();
         $user_id = Auth::user()->id;
         if (Auth::user()) {

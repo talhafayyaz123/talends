@@ -285,12 +285,14 @@ class PageController extends Controller
             $selected_page = $this->page::find($id);
             $count = 0;
             $sections = Helper::getPageSections();
+           
             if (!empty($selected_page)) {
                 $page_data = $selected_page->toArray();
                 $page['id'] = $page_data['id'];
                 $page['title'] = $page_data['title'];
                 $page['slug'] = $page_data['slug'];
                 $page['section_list'] = Helper::getUnserializeData($page_data['sections']);
+                
                 $parent_selected_id = '';
                 $parent_page = DB::table('pages')->select('id', 'title')->where('id', '!=', $id)->where('relation_type', '=', 0)->get()->toArray();
                 $has_child = $this->page->pageHasChild($id);
