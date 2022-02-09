@@ -100,6 +100,8 @@ Route::group(
         Route::post('admin/conversation/delete-message', 'MessageController@deleteMessage');
         Route::post('admin/conversation/delete', 'MessageController@deleteConversation');
         Route::post('admin/update/user-verify', 'UserController@updateUserVerification');
+       
+ 
         // Article Category Routes
         Route::get('admin/article/categories', 'ArticleCategoryController@index')->name('articleCategories');
         Route::get('admin/article/categories/edit-cats/{id}', 'ArticleCategoryController@edit')->name('editArticleCategories');
@@ -243,6 +245,13 @@ Route::group(
         Route::post('admin/store/project-settings', 'SiteManagementController@storeProjectSettings');
         Route::post('admin/store/bank-detail', 'SiteManagementController@storeBankDetail');
         Route::post('admin/store/order-settings', 'SiteManagementController@storeOrderSettings');
+      
+       // Home page  Government
+       Route::get('admin/pages/government', 'HomePagesController@index')->name('GovernmentPage');
+       Route::post('admin/store-government', 'HomePagesController@store');
+       Route::post('admin/update-government/{id}', 'HomePagesController@update');
+
+
         // Pages Routes
         Route::get('admin/pages', 'PageController@index')->name('pages');
         Route::get('admin/create/pages', 'PageController@create')->name('createPage');

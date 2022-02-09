@@ -120,6 +120,7 @@
                             <ul class="sub-menu">
                                 <li><hr><a href="{{{ route('pages') }}}">{{ trans('lang.all_pages') }}</a></li>
                                 <li><hr><a href="{{{ route('createPage') }}}">{{ trans('lang.add_pages') }}</a></li>
+                                <li><hr><a href="{{{ route('GovernmentPage') }}}">Government</a></li>
 
                             </ul>
                         </li>
