@@ -59,6 +59,7 @@ Route::get('why-talends', 'HomeController@whyTalends')->name('whyTalends');
 Route::get('government', 'HomeController@government')->name('government');
 Route::get('browse-jobs', 'HomeController@browseJobs')->name('browseJobs');
 Route::get('find-talents', 'HomeController@findTalents')->name('findTalents');
+Route::get('companies', 'HomeController@Companies')->name('Companies');
 Route::get('freelancer/detail/{id}', 'HomeController@FreelancerDetail')->name('FreelancerDetail');
 Route::get('freelancer/experience-education/{id}', 'HomeController@experienceEducation')->name('freelancerExperience');
 Route::get('freelancer/get-freelancer-educations', 'FreelancerController@getFreelancerEducations');
@@ -248,8 +249,14 @@ Route::group(
       
        // Home page  Government
        Route::get('admin/pages/government', 'HomePagesController@index')->name('GovernmentPage');
+       
        Route::post('admin/store-government', 'HomePagesController@store');
        Route::post('admin/update-government/{id}', 'HomePagesController@update');
+ 
+       // Home Page About Talends
+       Route::get('admin/pages/about-talends', 'HomePagesController@aboutTalends')->name('aboutTalends');
+       Route::post('admin/save-about-talends', 'HomePagesController@storeTalends');
+       Route::post('admin/update-about-talends/{id}', 'HomePagesController@updateTalends');
 
 
         // Pages Routes

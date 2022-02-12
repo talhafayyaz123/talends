@@ -25,6 +25,7 @@ use App\Helper;
 use App\SiteManagement;
 use Illuminate\Support\Facades\Schema;
 use App\GovernmentPage;
+use App\AboutTalendsPage;
 
 /**
  * Class PageController
@@ -83,6 +84,30 @@ class HomePagesController extends Controller
        
     }
 
+
+    public function aboutTalends()
+    {
+
+         $about=AboutTalendsPage::where('page_type','about_talends')->first();
+
+         if(empty($about)){
+            return view(
+                'back-end.admin.home-pages.about-talends.create'
+            );
+    
+         }else{
+            $about_talends=$about->toArray();
+        
+            return view(
+                'back-end.admin.home-pages.about-talends.edit',
+                compact(
+                    'about_talends'
+                )
+            ); 
+         }
+      
+       
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -110,6 +135,32 @@ class HomePagesController extends Controller
         return Redirect::back();
     }
 
+
+    public function storeTalends(Request $request)
+    { 
+        $this->validate(
+            $request, [
+       'banner_description' => 'required',
+        'features_text' => 'required',
+        'services_description' => 'required',
+        'project_description' => 'required',
+        'work_description' => 'required',
+        'payment_description' => 'required',
+        'support_description' => 'required',
+        'freelancer_benefits' => 'required',
+        'internees_benefits' => 'required',
+        'agencies_benefits' => 'required',
+        'government_benefits' => 'required',
+            ]
+        );
+       
+
+        $about_talends = new AboutTalendsPage;
+        $about_talends->saveAboutTalends($request);
+        Session::flash('message','About Talends Record Saved Successfully');
+        return Redirect::back();
+    }
+
     /**
      * Display the specified resource.
      *
@@ -117,124 +168,7 @@ class HomePagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
-    {
-        if (!empty($slug)) {
-            $sections = Helper::getPageSections();
-            $selected_page_data = $this->page->getPageData($slug);
-            if (!empty($selected_page_data)) {
-                $selected_page = $this->page::find($selected_page_data->id);
-                $page_data = $selected_page->toArray();
-                $page = array();
-                $page['id'] = $page_data['id'];
-                $page['title'] = $page_data['title'];
-                $page['slug'] = $page_data['slug'];
-                $page['section_list'] = !empty($page_data['sections']) ? Helper::getUnserializeData($page_data['sections']) : array();
-                $description = $page_data['body'];
-                $page_meta = SiteManagement::where('meta_key', 'seo-desc-' . $selected_page_data->id)->select('meta_value')->pluck('meta_value')->first();
-                $page_banner = SiteManagement::where('meta_key', 'page-banner-' . $selected_page_data->id)->select('meta_value')->pluck('meta_value')->first();
-                $show_banner = SiteManagement::where('meta_key', 'show-banner-' . $selected_page_data->id)->select('meta_value')->pluck('meta_value')->first();
-                $breadcrumbs_settings = SiteManagement::getMetaValue('show_breadcrumb');
-                $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'true';
-                $show_banner_image = false;
-                if ($show_banner == false) {
-                    $show_banner_image = false;
-                } else {
-                    $show_banner_image = true;
-                }
-                $banner = !empty($page_banner) ? Helper::getBannerImage('uploads/pages/'.$page['id'].'/'. $page_banner) : 'images/bannerimg/img-02.jpg';
-                $meta_desc = !empty($page_meta) ? $page_meta : '';
-                $type = Helper::getAccessType() == 'services' ? 'service' : Helper::getAccessType();
-                // $home_id = SiteManagement::getMetaValue('homepage');
-                $slider_section = '';
-                $slider_style = '';
-                $slider_order = '';
-                $show_title = '';
-                if (Schema::hasTable('metas')) {
-                    foreach ($selected_page->meta->toArray() as $key => $meta) {
-                        preg_match_all('!\d+!', $meta['meta_key'], $matches);
-                        $meta_key_modify = preg_replace('/\d/', '', $meta['meta_key']);
-                        if ($meta_key_modify == 'sliders') {
-                            $slider_section = Helper::getUnserializeData($meta['meta_value']);
-                            $slider_style = !empty($slider_section['style']) ? $slider_section['style'] : '';
-                            $slider_order = $slider_section['parentIndex'];
-                        } else if ($meta_key_modify == 'title') {
-                            $show_title = $meta['meta_value'];
-                        }
-                    }
-                }
-                $home = false;
-                $categories = '';
-                $skills = '';
-                $locations = '';
-                $languages = '';
-                $page_header = Helper::getPageHeader($selected_page_data->id);
-                $currency   = SiteManagement::getMetaValue('commision');
-                $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
-                if (file_exists(resource_path('views/extend/front-end/pages/show.blade.php'))) {
-                    return View::make(
-                        'extend.front-end.pages.show',
-                        compact(
-                            'symbol',
-                            'page_header',
-                            'page',
-                            'slug',
-                            'meta_desc',
-                            'banner',
-                            'show_banner',
-                            'show_banner_image',
-                            'show_breadcrumbs',
-                            'selected_page',
-                            'sections',
-                            'type',
-                            'slider_style',
-                            'slider_section',
-                            'description',
-                            'slider_order',
-                            'home',
-                            'show_title',
-                            'categories',
-                            'skills',
-                            'locations',
-                            'languages'
-                        )
-                    );
-                } else {
-                    return View::make(
-                        'front-end.pages.show',
-                        compact(
-                            'symbol',
-                            'page_header',
-                            'page',
-                            'slug',
-                            'meta_desc',
-                            'banner',
-                            'show_banner',
-                            'show_banner_image',
-                            'show_breadcrumbs',
-                            'selected_page',
-                            'sections',
-                            'type',
-                            'slider_style',
-                            'slider_section',
-                            'description',
-                            'slider_order',
-                            'home',
-                            'show_title',
-                            'categories',
-                            'skills',
-                            'locations',
-                            'languages'
-                        )
-                    );
-                }
-            } else {
-                abort(404);
-            }
-        } else {
-            abort(404);
-        }
-    }
+  
 
     /**
      * Show the form for editing the specified resource.
@@ -395,6 +329,32 @@ class HomePagesController extends Controller
         $government = new GovernmentPage;
         $government->updateGovernment($request,$id);
         Session::flash('message','Government Record updated Successfully');
+        return Redirect::back();
+    }
+
+
+    public function updateTalends(Request $request,$id)
+    {
+      
+        $this->validate(
+            $request, [
+       'banner_description' => 'required',
+        'features_text' => 'required',
+        'services_description' => 'required',
+        'project_description' => 'required',
+        'work_description' => 'required',
+        'payment_description' => 'required',
+        'support_description' => 'required',
+        'freelancer_benefits' => 'required',
+        'internees_benefits' => 'required',
+        'agencies_benefits' => 'required',
+        'government_benefits' => 'required',
+            ]
+        );
+        
+        $about_talends = new AboutTalendsPage();
+        $about_talends->updateAboutTalends($request,$id);
+        Session::flash('message','About Talends Record updated Successfully');
         return Redirect::back();
     }
 

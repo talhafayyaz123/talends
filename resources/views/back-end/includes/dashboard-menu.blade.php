@@ -122,6 +122,8 @@
                                 <li><hr><a href="{{{ route('createPage') }}}">{{ trans('lang.add_pages') }}</a></li>
                                 <li><hr><a href="{{{ route('GovernmentPage') }}}">Government</a></li>
 
+                                <li><hr><a href="{{{ route('aboutTalends') }}}">About Talends</a></li>
+
                             </ul>
                         </li>
                             <li>

@@ -19,6 +19,8 @@ use Spatie\Permission\Traits\HasRoles;
 use App\Profile;
 use DB;
 use App\Package;
+use App\GovernmentPage;
+use App\AboutTalendsPage;
 
 class HomeController extends Controller
 {
@@ -144,7 +146,8 @@ class HomeController extends Controller
 
      public function whyTalends(){
         $inner_page = SiteManagement::getMetaValue('why_talends');
-       
+        $about_talends=AboutTalendsPage::where('page_type','about_talends')->first();
+
         $page_header = '';
         $page = array();
         $home = false;
@@ -153,7 +156,7 @@ class HomeController extends Controller
         $meta_desc = !empty($inner_page) && !empty($inner_page[0]['desc']) ? $inner_page[0]['desc'] : trans('lang.why-talends-desc');
         $page['title'] = $meta_title;
        
-        return view('front-end.pages.why-talends',compact('page','home','meta_desc'));
+        return view('front-end.pages.why-talends',compact('page','home','meta_desc','about_talends'));
      }
 
 
@@ -161,7 +164,7 @@ class HomeController extends Controller
      public function government(){
 
         $inner_page = SiteManagement::getMetaValue('government');
-       
+        $government=GovernmentPage::find(1);
         $page_header = '';
         $page = array();
         $home = false;
@@ -169,7 +172,7 @@ class HomeController extends Controller
         $meta_title = !empty($inner_page) && !empty($inner_page[0]['title']) ? $inner_page[0]['title'] : trans('lang.government-title');
         $meta_desc = !empty($inner_page) && !empty($inner_page[0]['desc']) ? $inner_page[0]['desc'] : trans('lang.government-desc');
         $page['title'] = $meta_title;
-        return view('front-end.pages.government',compact('page','home','meta_desc'));
+        return view('front-end.pages.government',compact('page','home','meta_desc','government'));
      }
 
 
