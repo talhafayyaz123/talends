@@ -315,7 +315,18 @@ class HomeController extends Controller
             )
         );
     }
+    public function Companies(){
+          
+     
+        return view('front-end.pages.companies');
+     }
 
+
+     public function CompanyDetail(){
+          
+     
+        return view('front-end.pages.company_detail');
+     }
 
     public function experienceEducation($user_id)
     {
