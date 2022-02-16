@@ -126,6 +126,8 @@ class HomePagesController extends Controller
                 'process'    => 'required',
                 'features_text'    => 'required',
                 'services_description'    => 'required',
+                'government_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'content_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
             ]
         );
 
@@ -151,6 +153,16 @@ class HomePagesController extends Controller
         'internees_benefits' => 'required',
         'agencies_benefits' => 'required',
         'government_benefits' => 'required',
+
+        'about_talends_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_project_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_work_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_payment_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_support_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'short_term_project_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'recurring_engagements_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'long_term_work_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg'
+
             ]
         );
        
@@ -323,6 +335,8 @@ class HomePagesController extends Controller
                 'process'    => 'required',
                 'features_text'    => 'required',
                 'services_description'    => 'required',
+                'government_image' => 'mimes:jpeg,png,jpg,gif,svg',
+                'content_image' => 'mimes:jpeg,png,jpg,gif,svg'
             ]
         );
 
@@ -349,6 +363,16 @@ class HomePagesController extends Controller
         'internees_benefits' => 'required',
         'agencies_benefits' => 'required',
         'government_benefits' => 'required',
+        
+        'about_talends_image' =>'mimes:jpeg,png,jpg,gif,svg',
+        'talends_project_image'=>'mimes:jpeg,png,jpg,gif,svg',
+        'talends_work_image'=>'mimes:jpeg,png,jpg,gif,svg',
+        'talends_payment_image'=>'mimes:jpeg,png,jpg,gif,svg',
+        'talends_support_image'=>'mimes:jpeg,png,jpg,gif,svg',
+        'short_term_project_image'=>'mimes:jpeg,png,jpg,gif,svg',
+        'recurring_engagements_image'=>'mimes:jpeg,png,jpg,gif,svg',
+        'long_term_work_image'=>'mimes:jpeg,png,jpg,gif,svg'
+
             ]
         );
         

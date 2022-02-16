@@ -28,6 +28,7 @@
 
 @endsection
 @push('scripts')
+@stack('backend_scripts')
     <script src="{{ asset('js/chosen.jquery.js') }}"></script>
     <script src="{{ asset('js/jquery.basictable.min.js') }}"></script>
     <script>

@@ -9,7 +9,15 @@
                 </div>
             </div>
             <div class="wt-haslayout wt-post-job-wrap">
-
+            @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
                 {!! Form::open(['url' => url('admin/update-about-talends/'.$about_talends['id'].''),
                 'enctype'=>'multipart/form-data',
                 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory', 'id' => 'categories'] )
@@ -42,11 +50,8 @@
 
                                             <div class="form-group form-group-label">
                                                 <div class="wt-labelgroup">
-                                                    <label for="about_talends_image">
+                                                <input type="file" value="" class="" name="about_talends_image" id='about_talends_image'>
 
-                                                        <span class="wt-btn">{{ trans('lang.select_files') }}</span>
-                                                    </label>
-                                                    <input type="file" value="" class="" name="about_talends_image" id='about_talends_image'>
 
                                                 </div>
                                             </div>
@@ -123,10 +128,8 @@
                                             <h2>Attachment</h2>
                                             <div class="form-group form-group-label">
                                                 <div class="wt-labelgroup">
-                                                    <label for="talends_project_image">
-                                                        <span class="wt-btn">{{ trans('lang.select_files') }}</span>
-                                                    </label>
-                                                    <input type="file" value="" class="" name="talends_project_image" id='talends_project_image'>
+                                                <input type="file" value="" class="" name="talends_project_image" id='talends_project_image'>
+
 
                                                 </div>
                                             </div>
@@ -172,10 +175,8 @@
                                             <h2>Attachment</h2>
                                             <div class="form-group form-group-label">
                                                 <div class="wt-labelgroup">
-                                                    <label for="talends_work_image">
-                                                        <span class="wt-btn">{{ trans('lang.select_files') }}</span>
-                                                    </label>
-                                                    <input type="file" value="" class="" name="talends_work_image" id='talends_work_image'>
+                                                <input type="file" value="" class="" name="talends_work_image" id='talends_work_image'>
+
 
                                                 </div>
                                             </div>
@@ -221,10 +222,8 @@
                                             <h2>Attachment</h2>
                                             <div class="form-group form-group-label">
                                                 <div class="wt-labelgroup">
-                                                    <label for="talends_payment_image">
-                                                        <span class="wt-btn">{{ trans('lang.select_files') }}</span>
-                                                    </label>
-                                                    <input type="file" value="" class="" name="talends_payment_image" id='talends_payment_image'>
+                                                <input type="file" value="" class="" name="talends_payment_image" id='talends_payment_image'>
+
 
                                                 </div>
                                             </div>
@@ -271,10 +270,8 @@
                                             <h2>Attachment</h2>
                                             <div class="form-group form-group-label">
                                                 <div class="wt-labelgroup">
-                                                    <label for="talends_support_image">
-                                                        <span class="wt-btn">{{ trans('lang.select_files') }}</span>
-                                                    </label>
-                                                    <input type="file" value="" class="" name="talends_support_image" id='talends_support_image'>
+                                                <input type="file" value="" class="" name="talends_support_image" id='talends_support_image'>
+
 
                                                 </div>
                                             </div>
@@ -389,10 +386,8 @@
                                             <h2>Short Term Project</h2>
                                             <div class="form-group form-group-label">
                                                 <div class="wt-labelgroup">
-                                                    <label for="short_term_project_image">
-                                                        <span class="wt-btn">{{ trans('lang.select_files') }}</span>
-                                                    </label>
-                                                    <input type="file" value="" class="" name="short_term_project_image" id='short_term_project_image'>
+                                                <input type="file" value="" class="" name="short_term_project_image" id='short_term_project_image'>
+
 
                                                 </div>
                                             </div>
@@ -421,10 +416,8 @@
                                             <h2>Recurring engagements</h2>
                                             <div class="form-group form-group-label">
                                                 <div class="wt-labelgroup">
-                                                    <label for="recurring_engagements_image">
-                                                        <span class="wt-btn">{{ trans('lang.select_files') }}</span>
-                                                    </label>
-                                                    <input type="file" value="" class="" name="recurring_engagements_image" id='recurring_engagements_image'>
+                                                <input type="file" value="" class="" name="recurring_engagements_image" id='recurring_engagements_image'>
+
 
                                                 </div>
                                             </div>
@@ -455,10 +448,8 @@
                                             <h2>Long-term work</h2>
                                             <div class="form-group form-group-label">
                                                 <div class="wt-labelgroup">
-                                                    <label for="long_term_work_image">
-                                                        <span class="wt-btn">{{ trans('lang.select_files') }}</span>
-                                                    </label>
-                                                    <input type="file" value="" class="" name="long_term_work_image" id='long_term_work_image'>
+                                                <input type="file" value="" class="" name="long_term_work_image" id='long_term_work_image'>
+
 
                                                 </div>
                                             </div>

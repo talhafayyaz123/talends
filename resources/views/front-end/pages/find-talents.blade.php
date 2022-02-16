@@ -131,51 +131,6 @@
             </p>
         </div>
     </section>
-    <section class="theme_bg_dark">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-md-12 pb-5 text-center">
-                    <h2 class="text-white">HOW, IT ACTUALLY WORKS!</h2>
-                </div>
-                <div class="col-md-4">
-                    <div class="how_its_works_box">
-                        <h3>A. SHARE A PROJECT</h3>
-                        <p>Submit a job to let us know what you need—the more details the better. Whether it’s a single talent or cross-functional team of talents, Talends can do it all.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="how_its_works_box">
-                        <h3>B. DEDICATED MANAGER</h3>
-                        <p>Our dedicated porject manager will be ready to work with you immediately. He will evaluate candidate & notify you upon the completion of the screening process. And if we currently don’t have a matched talent, we will work tirelessly
-                            to find one.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="how_its_works_box">
-                        <h3>C. APPROVALS</h3>
-                        <p>They become part of your Team right after we finalise the terms & conditions, financials & timelines.Talends will take complete responsibility of project delivery, quality & milestones.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="how_its_works_box">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="how_its_works_box">
-                        <h3>E. TIME TO GO LIVE</h3>
-                        <p>Once, we launch the product, to the moon. That’s what makes us the most happiest company in the Universe.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="how_its_works_box">
-                        <h3>D. PROTOTYPE/ MVP</h3>
-                        <p>We 100% make sure the MVP is the exact product what you dream of initially, or we will assist you completely until it’s not up to the mark. </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-           
          
     </div>
 @endsection

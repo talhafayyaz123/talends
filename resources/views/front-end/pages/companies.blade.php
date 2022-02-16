@@ -299,37 +299,7 @@ opacity: 0.7;
             </div>
         </div>
     </section>
-    <section class="theme_bg_dark">
-        <div class="container py-5">
-            <div class="row">
-                <div class="col-md-12 pb-5 text-center">
-                    <h2 class="text-white">HOW, IT ACTUALLY WORKS!</h2>
-                </div>
-                <div class="col-md-4">
-                    <div class="how_its_works_box">
-                        <img src="{{ asset('talends/assets/img/icons/share-project.png')}}" alt="">
-                        <h3>A. Select the company</h3>
-                        <p>Select the company that best suits your needs, share your project with them and wait for their bids.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="how_its_works_box">
-                        <img src="{{ asset('talends/assets/img/icons/dedicated-manager.png')}}" alt="">
-                        <h3>B. Accept the offer</h3>
-                        <p>Once you accept the bid, or company accept the offer you can simply start working on your dream project.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="how_its_works_box">
-                        <img src="{{ asset('talends/assets/img/icons/time-to-go-live.png')}}" alt="">
-                        <h3>C. Delivery</h3>
-                        <p>Our hand-picked companies will make sure that the job is delivered in a very professional and deserved way.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-           
+   
          
     </div>
 @endsection

@@ -9,7 +9,15 @@
                 </div>
             </div>
             <div class="wt-haslayout wt-post-job-wrap">
-
+            @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
                 {!! Form::open(['url' => url('admin/update-government/'.$government['id'].''),
                 'enctype'=>'multipart/form-data',
                 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory', 'id' => 'categories'] )
@@ -40,11 +48,8 @@
 
                                             <div class="form-group form-group-label">
                                                 <div class="wt-labelgroup">
-                                                    <label for="government_image">
+                                                <input type="file" value="" class="" name="government_image" id='government_image'>
 
-                                                        <span class="wt-btn">{{ trans('lang.select_files') }}</span>
-                                                    </label>
-                                                    <input type="file" value="" class="" name="government_image" id='government_image'>
 
                                                 </div>
                                             </div>
@@ -92,11 +97,7 @@
                                             <h2>Attachment</h2>
                                             <div class="form-group form-group-label">
                                                 <div class="wt-labelgroup">
-                                                    <label for="content_image">
-
-                                                        <span class="wt-btn">{{ trans('lang.select_files') }}</span>
-                                                    </label>
-                                                    <input type="file" value="" class="" name="content_image" id='content_image'>
+                                                <input type="file" value="" class="" name="content_image" id='content_image'>
 
                                                 </div>
                                             </div>
