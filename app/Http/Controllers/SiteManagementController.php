@@ -266,6 +266,8 @@ class SiteManagementController extends Controller
         }
     }
 
+    
+
     /**
      * Show home page settings form.
      *

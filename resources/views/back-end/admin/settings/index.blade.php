@@ -114,6 +114,8 @@
                                 @include('back-end.admin.settings.footer.index')
                             @endif
                         </div>
+
+                        
                         <div class="wt-securityhold tab-pane la-footer-setting" id="wt-register">
                             @if (file_exists(resource_path('views/extend/back-end/admin/settings/register/index.blade.php')))
                                 @include('extend.back-end.admin.settings.register.index')

@@ -340,4 +340,129 @@ class AboutTalendsPage extends Model
         }
     }
 
+
+    public function saveHowActuallyWork($request)
+    {
+
+            if (!empty($request)) {
+            
+            $this->page_type = 'footer-how-work';
+            
+            $this->banner_description = $request['footer_image1_description'];
+            $this->features_text = $request['footer_image2_description'];
+            $this->services_description = $request['footer_image3_description'];
+         
+ 
+             if (!empty($request->hasFile('footer_image1'))) {
+                $footer_image1 = $request->file('footer_image1');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/footer';
+                $imageName = time().'.'.$footer_image1->getClientOriginalName();
+                $request->footer_image1->move($new_path, $imageName);
+                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->about_talends_image = null;
+            }
+
+
+            if (!empty($request->hasFile('footer_image2'))) {
+                $footer_image2 = $request->file('footer_image2');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/footer';
+                $imageName = time().'.'.$footer_image2->getClientOriginalName();
+                $request->footer_image2->move($new_path, $imageName);
+                $this->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->talends_project_image = null;
+            }
+
+
+            if (!empty($request->hasFile('footer_image3'))) {
+                $footer_image3 = $request->file('footer_image3');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/footer';
+                $imageName = time().'.'.$footer_image3->getClientOriginalName();
+                $request->footer_image3->move($new_path, $imageName);
+                $this->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->talends_work_image = null;
+            }
+
+            $this->save();
+            $json['type'] = 'success';
+            $json['message'] = 'About Talends Record Created';
+            return $json;
+        }
+    }
+
+    public function updateHowActuallyWork($request, $id)
+    {
+
+        if (!empty($request)) {
+            $footer_how_work = self::find($id);
+         
+            $footer_how_work->banner_description = $request['footer_image1_description'];
+            $footer_how_work->features_text = $request['footer_image2_description'];
+            $footer_how_work->services_description = $request['footer_image3_description'];
+          
+            
+            if (!empty($request->hasFile('footer_image1'))) {
+                $footer_image1 = $request->file('footer_image1');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/footer' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/footer' . '/' . $request->hidden_about_talends_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/footer';
+                $imageName = time().'.'.$footer_image1->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->footer_image1->move($new_path, $imageName);
+                $footer_how_work->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $footer_how_work->about_talends_image = $request->hidden_about_talends_image;
+            }
+
+
+            if (!empty($request->hasFile('footer_image2'))) {
+                $footer_image2 = $request->file('footer_image2');
+
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/footer' . '/' . $request->hidden_talends_project_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/footer' . '/' . $request->hidden_talends_project_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/footer';
+                $imageName = time().'.'.$footer_image2->getClientOriginalName();
+                $request->footer_image2->move($new_path, $imageName);
+                $footer_how_work->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $footer_how_work->talends_project_image = $request->hidden_talends_project_image;
+            }
+
+
+            if (!empty($request->hasFile('footer_image3'))) {
+                $footer_image3 = $request->file('footer_image3');
+
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/footer' . '/' . $request->hidden_talends_work_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/footer' . '/' . $request->hidden_talends_work_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/footer';
+                $imageName = time().'.'.$footer_image3->getClientOriginalName();
+                $request->footer_image3->move($new_path, $imageName);
+                $footer_how_work->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $footer_how_work->talends_work_image = $request->hidden_talends_work_image;
+            }
+
+
+            return $footer_how_work->save();
+        }
+    }
+
 }

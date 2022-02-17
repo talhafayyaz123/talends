@@ -173,6 +173,61 @@ class HomePagesController extends Controller
         return Redirect::back();
     }
 
+    public function frontFooter($footer_type=''){
+       
+        $footer_how_work=AboutTalendsPage::where('page_type','footer-how-work')->first();
+
+        if($footer_type=='how-works'){
+            return view(
+                'back-end.admin.settings.front-footer.how-work.index',
+                compact('footer_how_work')
+                
+            );
+        }
+
+    }
+
+    public function storeFooterHowWork(Request $request)
+    { 
+        $this->validate(
+            $request, [
+         'footer_image1_description' => 'required',
+          'footer_image2_description' => 'required',
+          'footer_image3_description' => 'required',
+        'footer_image1' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        'footer_image2'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        'footer_image3'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        ]
+        );
+       
+
+        $about_talends = new AboutTalendsPage;
+        $about_talends->saveHowActuallyWork($request);
+        Session::flash('message','Footer How Actually It Works Record Saved Successfully');
+        return Redirect::back();
+    }
+
+
+    public function updateFooterHowWork(Request $request,$id)
+    { 
+        $this->validate(
+            $request, [
+         'footer_image1_description' => 'required',
+          'footer_image2_description' => 'required',
+          'footer_image3_description' => 'required',
+        'footer_image1' =>'mimes:jpeg,png,jpg,gif,svg|max:1024',
+        'footer_image2'=>'mimes:jpeg,png,jpg,gif,svg|max:1024',
+        'footer_image3'=>'mimes:jpeg,png,jpg,gif,svg|max:1024',
+        ]
+        );
+       
+        $about_talends = new AboutTalendsPage;
+        $about_talends->updateHowActuallyWork($request,$id);
+        Session::flash('message','Footer How Actually It Works Record updated Successfully');
+        return Redirect::back();
+    }
+
+
     /**
      * Display the specified resource.
      *

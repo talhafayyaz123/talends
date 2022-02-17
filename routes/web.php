@@ -206,6 +206,14 @@ Route::group(
         Route::post('admin/response-time/delete-response-time', 'ResponseTimeController@destroy');
         Route::post('admin/response-time/update-response-time/{id}', 'ResponseTimeController@update');
         Route::post('admin/delete-checked-response-time', 'ResponseTimeController@deleteSelected');
+
+
+        //Front Footer
+        Route::get('admin/settings/front-footer/{type}', 'HomePagesController@frontFooter')->name('frontFooter');
+        Route::post('admin/store-footer-how-work', 'HomePagesController@storeFooterHowWork');
+        Route::post('admin/update-footer-how-work/{id}', 'HomePagesController@updateFooterHowWork');
+
+        
         // Site Management Routes
         Route::get('admin/settings', 'SiteManagementController@Settings')->name('settings');
         Route::post('admin/store/email-settings', 'SiteManagementController@storeEmailSettings');
@@ -250,7 +258,6 @@ Route::group(
       
        // Home page  Government
        Route::get('admin/pages/government', 'HomePagesController@index')->name('GovernmentPage');
-       
        Route::post('admin/store-government', 'HomePagesController@store');
        Route::post('admin/update-government/{id}', 'HomePagesController@update');
  
@@ -259,7 +266,7 @@ Route::group(
        Route::post('admin/save-about-talends', 'HomePagesController@storeTalends');
        Route::post('admin/update-about-talends/{id}', 'HomePagesController@updateTalends');
 
-
+    
         // Pages Routes
         Route::get('admin/pages', 'PageController@index')->name('pages');
         Route::get('admin/create/pages', 'PageController@create')->name('createPage');
