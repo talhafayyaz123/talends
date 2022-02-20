@@ -586,20 +586,7 @@
         </div>
     </section>
    
-    <section class="join_community pb-0">
-        <div class="container">
-            <div class="row row-eq-height">
-                <div class="col-md-8 pb-3 align-self-center">
-                    <h2 class="text-white">Join Talends <span class="theme_color">Community</span></h2>
-                    <a href="" class="theme_btn">Find A JOB</a>
-                    <a href="" class="theme_btn inverse_btn ml-3">Submit a job</a>
-                </div>
-                <div class="col-md-4">
-                    <img src="{{ asset('talends/assets/img/join_talend.png')}}" class="w-100" alt="">
-                </div>
-            </div>
-        </div>
-    </section>
+  
 
       
              

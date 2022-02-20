@@ -647,6 +647,302 @@ class SiteManagement extends Model
         }
     }
 
+
+    public static function saveFooterMenu1($request)
+    {
+        $json = array();
+        $menu_title = $request['menu_title'];
+        $menu = $request['search'];
+        if (!empty($menu)) {
+            foreach ($menu as $key => $value) {
+                if (($value['title'] == null || $value['url'] == null)) {
+                    $json['type'] = 'error';
+                    return $json;
+                }
+            }
+            
+            $existing_menu_item = SiteManagement::getMetaValue('footer_menu1');
+            if (!empty($existing_menu_item)) {
+                DB::table('site_managements')->where('meta_key', '=', 'footer_menu1')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'footer_menu1', 'meta_value' => serialize($menu),
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $existing_menu_title = DB::table('site_managements')->where('meta_key', 'footer_title1')->first();
+            if (!empty($existing_menu_title)) {
+                DB::table('site_managements')->where('meta_key', '=', 'footer_title1')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'footer_title1', 'meta_value' => $menu_title,
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $json['type'] = 'success';
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            return $json;
+        }
+    }
+
+
+    public static function saveFooterMenu2($request)
+    {
+        $json = array();
+        $menu_title = $request['menu_title_2'];
+        $menu = $request['search2'];
+        
+        if (!empty($menu)) {
+            foreach ($menu as $key => $value) {
+                if (($value['title'] == null || $value['url'] == null)) {
+                    $json['type'] = 'error';
+                    return $json;
+                }
+            }
+            
+            $existing_menu_item = SiteManagement::getMetaValue('footer_menu2');
+        
+            if (!empty($existing_menu_item)) {
+                DB::table('site_managements')->where('meta_key', '=', 'footer_menu2')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'footer_menu2', 'meta_value' => serialize($menu),
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $existing_menu_title = DB::table('site_managements')->where('meta_key', 'footer_title2')->first();
+            if (!empty($existing_menu_title)) {
+                DB::table('site_managements')->where('meta_key', '=', 'footer_title2')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'footer_title2', 'meta_value' => $menu_title,
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $json['type'] = 'success';
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            return $json;
+        }
+    }
+
+    public static function saveFooterMenu3($request)
+    {
+        $json = array();
+        $menu_title = $request['menu_title_3'];
+        $menu = $request['search3'];
+        
+        if (!empty($menu)) {
+            foreach ($menu as $key => $value) {
+                if (($value['title'] == null || $value['url'] == null)) {
+                    $json['type'] = 'error';
+                    return $json;
+                }
+            }
+            
+            $existing_menu_item = SiteManagement::getMetaValue('footer_menu3');
+        
+            if (!empty($existing_menu_item)) {
+                DB::table('site_managements')->where('meta_key', '=', 'footer_menu3')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'footer_menu3', 'meta_value' => serialize($menu),
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $existing_menu_title = DB::table('site_managements')->where('meta_key', 'footer_title3')->first();
+            if (!empty($existing_menu_title)) {
+                DB::table('site_managements')->where('meta_key', '=', 'footer_title3')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'footer_title3', 'meta_value' => $menu_title,
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $json['type'] = 'success';
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            return $json;
+        }
+    }
+
+    public static function saveFooterMenu4($request)
+    {
+        $json = array();
+        $menu_title = $request['menu_title_4'];
+        $menu = $request['search4'];
+        
+        if (!empty($menu)) {
+            foreach ($menu as $key => $value) {
+                if (($value['title'] == null || $value['url'] == null)) {
+                    $json['type'] = 'error';
+                    return $json;
+                }
+            }
+            
+            $existing_menu_item = SiteManagement::getMetaValue('footer_menu4');
+        
+            if (!empty($existing_menu_item)) {
+                DB::table('site_managements')->where('meta_key', '=', 'footer_menu4')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'footer_menu4', 'meta_value' => serialize($menu),
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $existing_menu_title = DB::table('site_managements')->where('meta_key', 'footer_title4')->first();
+            if (!empty($existing_menu_title)) {
+                DB::table('site_managements')->where('meta_key', '=', 'footer_title4')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'footer_title4', 'meta_value' => $menu_title,
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $json['type'] = 'success';
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            return $json;
+        }
+    }
+
+    public static function saveHeaderMenus($request){
+        $json = array();
+        $header_menu_title1 = $request['header_menu_title1'];
+        
+        
+        if (!empty($header_menu_title1)) {
+       
+            $existing_menu_title = DB::table('site_managements')->where('meta_key', 'header_menu_title1')->first();
+            if (!empty($existing_menu_title)) {
+                DB::table('site_managements')->where('meta_key', '=', 'header_menu_title1')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'header_menu_title1', 'meta_value' => $header_menu_title1,
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+
+            $header_menu_title2 = DB::table('site_managements')->where('meta_key', 'header_menu_title2')->first();
+            if (!empty($header_menu_title2)) {
+                DB::table('site_managements')->where('meta_key', '=', 'header_menu_title2')->delete();
+            }
+            
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'header_menu_title2', 'meta_value' => $request['header_menu_title2'],
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+
+            $json['type'] = 'success';
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            return $json;
+        }
+    }
+
+    public static function saveHeaderMenus2($request)
+    {
+        $json = array();
+        $menu_title = $request['header_menu_title3'];
+        $menu = $request['search2'];
+        
+        if (!empty($menu)) {
+            foreach ($menu as $key => $value) {
+                if (($value['title'] == null || $value['url'] == null)) {
+                    $json['type'] = 'error';
+                    return $json;
+                }
+            }
+            
+            $existing_menu_item = SiteManagement::getMetaValue('header_menu3');
+        
+            if (!empty($existing_menu_item)) {
+                DB::table('site_managements')->where('meta_key', '=', 'header_menu3')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'header_menu3', 'meta_value' => serialize($menu),
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $existing_menu_title = DB::table('site_managements')->where('meta_key', 'header_menu_title3')->first();
+            if (!empty($existing_menu_title)) {
+                DB::table('site_managements')->where('meta_key', '=', 'header_menu_title3')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'header_menu_title3', 'meta_value' => $menu_title,
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $json['type'] = 'success';
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            return $json;
+        }
+    }
+
+
+    public static function saveHeaderMenus3($request)
+    {
+        $json = array();
+        $menu_title = $request['header_menu_title4'];
+        $menu = $request['search3'];
+       
+        if (!empty($menu)) {
+            foreach ($menu as $key => $value) {
+                if (($value['title'] == null || $value['url'] == null)) {
+                    $json['type'] = 'error';
+                    return $json;
+                }
+            }
+            
+            $existing_menu_item = SiteManagement::getMetaValue('header_menu4');
+        
+            if (!empty($existing_menu_item)) {
+                DB::table('site_managements')->where('meta_key', '=', 'header_menu4')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'header_menu4', 'meta_value' => serialize($menu),
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $existing_menu_title = DB::table('site_managements')->where('meta_key', 'header_menu_title4')->first();
+            if (!empty($existing_menu_title)) {
+                DB::table('site_managements')->where('meta_key', '=', 'header_menu_title4')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'header_menu_title4', 'meta_value' => $menu_title,
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $json['type'] = 'success';
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            return $json;
+        }
+    }
     /**
      * Save commision settings
      *

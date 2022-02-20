@@ -30,6 +30,7 @@ use App\User;
 use App\Page;
 use App\SiteManagement;
 use App\Badge;
+use App\AboutTalendsPage;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Schema;
 use Request;
@@ -53,6 +54,165 @@ class Helper extends Model
         return $gender;
     }
 
+
+     public static function getfooterHowWork(){
+        $footer_how_work=AboutTalendsPage::where('page_type','footer-how-work')->first();
+        return $footer_how_work;
+    }
+
+    public static function footerMenu1(){
+        
+        $data=array();
+        $existing_menu_title = DB::table('site_managements')->where('meta_key', 'footer_title1')->first();
+        $existing_menu_item = SiteManagement::getMetaValue('footer_menu1');
+        
+
+         $title='';
+        if(!empty($existing_menu_title) &&  isset($existing_menu_title)  ){
+           $title= $existing_menu_title->meta_value;
+        }
+        $data['title']=$title;
+
+        $menu_items='';
+        if(!empty($existing_menu_item) &&  isset($existing_menu_item)  ){
+          $menu_items=$existing_menu_item;
+        }
+        
+        $data['menu_items']=$menu_items;
+
+        return $data;
+    }
+    public static function footerMenu2(){
+        
+        $data=array();
+        $existing_menu_title = DB::table('site_managements')->where('meta_key', 'footer_title2')->first();
+        $existing_menu_item = SiteManagement::getMetaValue('footer_menu2');
+        
+
+         $title='';
+        if(!empty($existing_menu_title) &&  isset($existing_menu_title)  ){
+           $title= $existing_menu_title->meta_value;
+        }
+        $data['title']=$title;
+
+        $menu_items='';
+        if(!empty($existing_menu_item) &&  isset($existing_menu_item)  ){
+          $menu_items=$existing_menu_item;
+        }
+        
+        $data['menu_items']=$menu_items;
+
+        return $data;
+    }
+
+    public static function footerMenu3(){
+        
+        $data=array();
+        $existing_menu_title = DB::table('site_managements')->where('meta_key', 'footer_title3')->first();
+        $existing_menu_item = SiteManagement::getMetaValue('footer_menu3');
+        
+
+         $title='';
+        if(!empty($existing_menu_title) &&  isset($existing_menu_title)  ){
+           $title= $existing_menu_title->meta_value;
+        }
+        $data['title']=$title;
+
+        $menu_items='';
+        if(!empty($existing_menu_item) &&  isset($existing_menu_item)  ){
+          $menu_items=$existing_menu_item;
+        }
+        
+        $data['menu_items']=$menu_items;
+
+        return $data;
+    }
+
+    public static function footerMenu4(){
+        
+        $data=array();
+        $existing_menu_title = DB::table('site_managements')->where('meta_key', 'footer_title4')->first();
+        $existing_menu_item = SiteManagement::getMetaValue('footer_menu4');
+        
+
+         $title='';
+        if(!empty($existing_menu_title) &&  isset($existing_menu_title)  ){
+           $title= $existing_menu_title->meta_value;
+        }
+        $data['title']=$title;
+
+        $menu_items='';
+        if(!empty($existing_menu_item) &&  isset($existing_menu_item)  ){
+          $menu_items=$existing_menu_item;
+        }
+        
+        $data['menu_items']=$menu_items;
+
+        return $data;
+    }
+
+    public static function headerMenus(){
+        $data=array();
+        $header_menu_title1 = DB::table('site_managements')->where('meta_key', 'header_menu_title1')->first();
+        $header_menu_title2 = DB::table('site_managements')->where('meta_key', 'header_menu_title2')->first();
+        $header_menu_title3 = DB::table('site_managements')->where('meta_key', 'header_menu_title3')->first();
+        $header_menu_title4 = DB::table('site_managements')->where('meta_key', 'header_menu_title4')->first();
+
+        $header_menu3 = SiteManagement::getMetaValue('header_menu3');
+        $header_menu4 = SiteManagement::getMetaValue('header_menu4');
+
+        $title1='';
+        if(!empty($header_menu_title1) &&  isset($header_menu_title1)  ){
+           $title1= $header_menu_title1->meta_value;
+        }
+        $data['title1']=$title1;
+       
+        
+        $title2='';
+        if(!empty($header_menu_title2) &&  isset($header_menu_title2)  ){
+           $title2= $header_menu_title2->meta_value;
+        }
+        $data['title2']=$title2;
+
+
+        
+        $title3='';
+        if(!empty($header_menu_title3) &&  isset($header_menu_title3)  ){
+           $title3= $header_menu_title3->meta_value;
+        }
+        $data['title3']=$title3;
+
+
+        
+        $title4='';
+        if(!empty($header_menu_title4) &&  isset($header_menu_title4)  ){
+           $title4= $header_menu_title4->meta_value;
+        }
+        $data['title4']=$title4;
+
+        
+        $sub_menu_item1='';
+        if(!empty($header_menu3) &&  isset($header_menu3)  ){
+          $sub_menu_item1=$header_menu3;
+        }
+        
+        $data['sub_menu_item1']=$sub_menu_item1;
+
+
+        $sub_menu_item2='';
+        if(!empty($header_menu4) &&  isset($header_menu4)  ){
+          $sub_menu_item2=$header_menu4;
+        }
+        
+        $data['sub_menu_item2']=$sub_menu_item2;
+       return $data;
+
+    }
+
+    public static function getSkillsCategories(){
+       $categories=Category::all();
+       return $categories;
+    }
     /**
      * Generate random code
      *

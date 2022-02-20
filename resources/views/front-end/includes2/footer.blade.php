@@ -1,3 +1,6 @@
+@php
+ $footer_how_work=App\Helper::getfooterHowWork();
+@endphp
 <section class="theme_bg_dark">
         <div class="container py-5">
             <div class="row">
@@ -6,31 +9,39 @@
                 </div>
                 <div class="col-md-4">
                     <div class="how_its_works_box">
-                        <img src="{{ asset('talends/assets/img/icons/share-project.png')}}" alt="">
-                        <h3>A. SHARE A PROJECT</h3>
-                        <p>Submit a job to let us know what you need—the more details the better. Whether it’s a single talent or cross-functional team of talents, Talends can do it all.</p>
+                      @if( isset($footer_how_work->about_talends_image) )
+                        <img src="{{asset('uploads/home-pages/footer/'.$footer_how_work->about_talends_image)}}" alt="">
+                        @endif
+
+                       {!!  $footer_how_work->banner_description  ?? ''  !!}
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="how_its_works_box">
-                        <img src="{{ asset('talends/assets/img/icons/dedicated-manager.png')}}" alt="">
-                        <h3>B. DEDICATED MANAGER</h3>
-                        <p>Our dedicated porject manager will be ready to work with you immediately. He will evaluate candidate & notify you upon the completion of the screening process. And if we currently don’t have a matched talent, we will work tirelessly
-                            to find one.</p>
+
+                    @if(isset( $footer_how_work->talends_project_image) )
+                        <img src="{{asset('uploads/home-pages/footer/'.$footer_how_work->talends_project_image)}}" alt="">
+                        @endif                        
+                        {!!  $footer_how_work->features_text ?? '' !!}
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="how_its_works_box">
-                        <img src="{{ asset('talends/assets/img/icons/time-to-go-live.png')}}" alt="">
-                        <h3>C. TIME TO GO LIVE</h3>
-                        <p>Once, we launch the product, to the moon. That’s what makes us the most happiest company in the Universe.</p>
+                    @if(  isset($footer_how_work->talends_work_image) )
+                        <img src="{{asset('uploads/home-pages/footer/'.$footer_how_work->talends_work_image)}}" alt="">
+                        @endif 
+                            {!!  $footer_how_work->services_description ?? '' !!}
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-<section class="">
+
+    @php
+        $skills_categories=App\Helper::getSkillsCategories();
+        @endphp
+        <section class="">
         <div class="container">
             <div class="row row-eq-height">
                 <div class="col-md-12 pb-3">
@@ -52,76 +63,35 @@
                     <div class="tab-content">
                         <div id="ptabs_ms_d_365" class="tab-pane active">
                             <div class="services_list_box_row">
-                                <div class="services_list_box"><a href="#">Data Entry Specialists</a></div>
-                                <div class="services_list_box"><a href="#">Video Editors</a></div>
-                                <div class="services_list_box"><a href="#">Data Analyst</a></div>
-                                <div class="services_list_box"><a href="#">Shopify Developer</a></div>
-                                <div class="services_list_box"><a href="#">Ruby on Rails Developer</a></div>
-                                <div class="services_list_box"><a href="#">Android Developer</a></div>
-                                <div class="services_list_box"><a href="#">Bookkeeper</a></div>
-                                <div class="services_list_box"><a href="#">Content Writer</a></div>
-                                <div class="services_list_box"><a href="#">Copywriter</a></div>
-                                <div class="services_list_box"><a href="#">Database Administrator</a></div>
-                                <div class="services_list_box"><a href="#">Data Scientist</a></div>
-                                <div class="services_list_box"><a href="#">Front-End Developer</a></div>
-                                <div class="services_list_box"><a href="#">Game Developer</a></div>
-                                <div class="services_list_box"><a href="#">Graphic Designer</a></div>
-                                <div class="services_list_box"><a href="#">iOS Developer</a></div>
-                                <div class="services_list_box"><a href="#">Java Developer</a></div>
-                                <div class="services_list_box"><a href="#">JavaScript Developer</a></div>
-                                <div class="services_list_box"><a href="#">Logo Designer</a></div>
-                                <div class="services_list_box"><a href="#">Mobile App Developer</a></div>
-                                <div class="services_list_box"><a href="#">PHP Developer</a></div>
-                                <div class="services_list_box"><a href="#">Python Developer</a></div>
-                                <div class="services_list_box"><a href="#">Resume Writer</a></div>
-                                <div class="services_list_box"><a href="#">SEO Expert</a></div>
-                                <div class="services_list_box"><a href="#">Social Media Manager</a></div>
-                                <div class="services_list_box"><a href="#">Software Developer</a></div>
-                                <div class="services_list_box"><a href="#">Software Engineer</a></div>
-                                <div class="services_list_box"><a href="#">Technical Writer</a></div>
-                                <div class="services_list_box"><a href="#">UI Designer</a></div>
-                                <div class="services_list_box"><a href="#">UX Designer</a></div>
-                                <div class="services_list_box"><a href="#">Virtual Assistant</a></div>
-                                <div class="services_list_box"><a href="#">Web Designer</a></div>
-                                <div class="services_list_box"><a href="#">Wordpress Developer</a></div>
+                            @if(isset( $skills_categories))  
+                            @foreach($skills_categories as $key =>$category)  
+                            @if($category['parent_category']=='skills in demand')
+                            <div class="services_list_box"><a href="#">{{ $category['title'] }}</a></div>
+                            @endif
+                            @endforeach  
+                            @endif
                             </div>
                         </div>
                         <div id="ptabs_ms_b_solution" class="tab-pane">
                             <div class="services_list_box_row">
-                                <div class="services_list_box"><a href="#">Database Administrator</a></div>
-                                <div class="services_list_box"><a href="#">Data Scientist</a></div>
-                                <div class="services_list_box"><a href="#">Front-End Developer</a></div>
-                                <div class="services_list_box"><a href="#">Game Developer</a></div>
-                                <div class="services_list_box"><a href="#">Graphic Designer</a></div>
-                                <div class="services_list_box"><a href="#">iOS Developer</a></div>
-                                <div class="services_list_box"><a href="#">Java Developer</a></div>
-                                <div class="services_list_box"><a href="#">JavaScript Developer</a></div>
-                                <div class="services_list_box"><a href="#">Logo Designer</a></div>
-                                <div class="services_list_box"><a href="#">Mobile App Developer</a></div>
-                                <div class="services_list_box"><a href="#">PHP Developer</a></div>
-                                <div class="services_list_box"><a href="#">Python Developer</a></div>
-                                <div class="services_list_box"><a href="#">Resume Writer</a></div>
-                                <div class="services_list_box"><a href="#">SEO Expert</a></div>
-                                <div class="services_list_box"><a href="#">Social Media Manager</a></div>
-                                <div class="services_list_box"><a href="#">Web Designer</a></div>
-                                <div class="services_list_box"><a href="#">Wordpress Developer</a></div>
+                            @if(isset( $skills_categories))  
+                            @foreach($skills_categories as $key =>$category)  
+                            @if($category['parent_category']=='local projects')
+                            <div class="services_list_box"><a href="#">{{ $category['title'] }}</a></div>
+                            @endif
+                            @endforeach  
+                            @endif
                             </div>
                         </div>
                         <div id="ptabs_ms_power_platform" class="tab-pane">
                             <div class="services_list_box_row">
-                                <div class="services_list_box"><a href="#">Database Administrator</a></div>
-                                <div class="services_list_box"><a href="#">Data Scientist</a></div>
-                                <div class="services_list_box"><a href="#">Front-End Developer</a></div>
-                                <div class="services_list_box"><a href="#">Game Developer</a></div>
-                                <div class="services_list_box"><a href="#">Graphic Designer</a></div>
-                                <div class="services_list_box"><a href="#">iOS Developer</a></div>
-                                <div class="services_list_box"><a href="#">Java Developer</a></div>
-                                <div class="services_list_box"><a href="#">Technical Writer</a></div>
-                                <div class="services_list_box"><a href="#">UI Designer</a></div>
-                                <div class="services_list_box"><a href="#">UX Designer</a></div>
-                                <div class="services_list_box"><a href="#">Virtual Assistant</a></div>
-                                <div class="services_list_box"><a href="#">Web Designer</a></div>
-                                <div class="services_list_box"><a href="#">Wordpress Developer</a></div>
+                            @if(isset( $skills_categories))  
+                            @foreach($skills_categories as $key =>$category)  
+                            @if($category['parent_category']=='government initiatives')
+                            <div class="services_list_box"><a href="#">{{ $category['title'] }}</a></div>
+                            @endif
+                            @endforeach  
+                            @endif
                             </div>
                         </div>
                     </div>
@@ -130,57 +100,73 @@
         </div>
     </section>
 
+    <section class="join_community pb-0">
+        <div class="container">
+            <div class="row row-eq-height">
+                <div class="col-md-8 pb-3 align-self-center">
+                    <h2 class="text-white">Join Talends <span class="theme_color">Community</span></h2>
+                    <a href="" class="theme_btn">Find A JOB</a>
+                    <a href="" class="theme_btn inverse_btn ml-3">Submit a job</a>
+                </div>
+                <div class="col-md-4">
+                    <img src="{{ asset('talends/assets/img/join_talend.png')}}" class="w-100" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
 
-
-
+    @php
+        $footer_menus_1=App\Helper::footerMenu1();
+        $footer_menus_2=App\Helper::footerMenu2();
+        $footer_menus_3=App\Helper::footerMenu3();
+        $footer_menus_4=App\Helper::footerMenu4();
+        @endphp
 
 
     <footer>
         <div class="container">
             <div class="row py-30">
                 <div class="col-md-3">
-                    <h4> For Clients</h4>
+                    <h4> {{ $footer_menus_1['title']}} </h4>
                     <ul class="quick-links">
-                        <li> <a href="javascript:;" target="_self">How to Hire</a></li>
-                        <li> <a href="javascript:;" target="_self">Talent Markerplace</a></li>
-                        <li> <a href="javascript:;" target="_self">Project Catalog</a></li>
-                        <li> <a href="javascript:;" target="_self">Project Manager</a></li>
-                        <li> <a href="javascript:;" target="_self">Hire Locally</a></li>
-                        <li> <a href="javascript:;" target="_self">Hire in Dubai</a></li>
-                        <li> <a href="javascript:;" target="_self">Hire in Abu Dhabi</a></li>
+                        @if(!empty($footer_menus_1['menu_items']))
+                        @foreach($footer_menus_1['menu_items'] as $key=>$value)
+                        <li> <a href="javascript:;" target="_self">{{ $value['title']}}</a></li>
+                       @endforeach
+                       @endif
+                    </ul>
+                </div>
+
+ 
+                <div class="col-md-3">
+                    <h4> {{ $footer_menus_2['title']}} </h4>
+                    <ul class="quick-links">
+                        @if(!empty($footer_menus_2['menu_items']))
+                        @foreach($footer_menus_2['menu_items'] as $key=>$value)
+                        <li> <a href="javascript:;" target="_self">{{ $value['title']}}</a></li>
+                       @endforeach
+                       @endif
                     </ul>
                 </div>
                 <div class="col-md-3">
-                    <h4>For Talents & Internee</h4>
+                    <h4> {{ $footer_menus_3['title']}} </h4>
                     <ul class="quick-links">
-                        <li> <a href="javascript:;" target="_self">How to Find a Job</a></li>
-                        <li> <a href="javascript:;" target="_self">Find freelance job in Dubai</a></li>
-                        <li> <a href="javascript:;" target="_self">Find freelance job in Abu Dhabi</a></li>
-                        <li> <a href="javascript:;" target="_self">Find freelance job in Sharjah</a></li>
+                        @if(!empty($footer_menus_3['menu_items']))
+                        @foreach($footer_menus_3['menu_items'] as $key=>$value)
+                        <li> <a href="javascript:;" target="_self">{{ $value['title']}}</a></li>
+                       @endforeach
+                       @endif
                     </ul>
                 </div>
                 <div class="col-md-3">
-                    <h4>Government</h4>
+                    <h4> {{ $footer_menus_4['title']}} </h4>
                     <ul class="quick-links">
-                        <li> <a href="javascript:;" target="_self">How to Hire</a></li>
-                        <li> <a href="javascript:;" target="_self">Dedicated Project Manager</a></li>
-                        <li> <a href="javascript:;" target="_self">Quality Assurance</a></li>
-                        <li> <a href="javascript:;" target="_self">Data Security</a></li>
-                        <li> <a href="javascript:;" target="_self">Talent Verification Check</a></li>
+                        @if(!empty($footer_menus_4['menu_items']))
+                        @foreach($footer_menus_4['menu_items'] as $key=>$value)
+                        <li> <a href="javascript:;" target="_self">{{ $value['title']}}</a></li>
+                       @endforeach
+                       @endif
                     </ul>
-                </div>
-                <div class="col-md-3">
-                    <div class="footer_left_inner_box">
-                        <h4>Company</h4>
-                        <ul class="quick-links">
-                            <li> <a href="javascript:;" target="_self">About Us</a></li>
-                            <li> <a href="javascript:;" target="_self">Why Talends</a></li>
-                            <li> <a href="javascript:;" target="_self">Careers</a></li>
-                            <li> <a href="javascript:;" target="_self">Terms & Conditions</a></li>
-                            <li> <a href="javascript:;" target="_self">Trust & Safety</a></li>
-                            <li> <a href="javascript:;" target="_self">CSR</a></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
             <div class="row">

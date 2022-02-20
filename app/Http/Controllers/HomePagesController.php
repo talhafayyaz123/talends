@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Schema;
 use App\GovernmentPage;
 use App\AboutTalendsPage;
 
+
 /**
  * Class PageController
  *
@@ -177,12 +178,41 @@ class HomePagesController extends Controller
        
         $footer_how_work=AboutTalendsPage::where('page_type','footer-how-work')->first();
 
-        if($footer_type=='how-works'){
+        $unserialize_menu_array = SiteManagement::getMetaValue('footer_menu1');
+        $menu_title = DB::table('site_managements')->select('meta_value')->where('meta_key', 'footer_title1')->get()->first();
+
+        $unserialize_menu2_array = SiteManagement::getMetaValue('footer_menu2');
+        $menu_title2 = DB::table('site_managements')->select('meta_value')->where('meta_key', 'footer_title2')->get()->first();
+
+        
+        $unserialize_menu3_array = SiteManagement::getMetaValue('footer_menu3');
+        $menu_title3 = DB::table('site_managements')->select('meta_value')->where('meta_key', 'footer_title3')->get()->first();
+
+        $unserialize_menu4_array = SiteManagement::getMetaValue('footer_menu4');
+        $menu_title4 = DB::table('site_managements')->select('meta_value')->where('meta_key', 'footer_title4')->get()->first();
+
+         // header menus
+         $header_menu_title1 = DB::table('site_managements')->select('meta_value')->where('meta_key', 'header_menu_title1')->get()->first();
+         $header_menu_title2 = DB::table('site_managements')->select('meta_value')->where('meta_key', 'header_menu_title2')->get()->first();
+
+         $unserialize_header_menu3_array = SiteManagement::getMetaValue('header_menu3');
+         $header_menu_title3 = DB::table('site_managements')->select('meta_value')->where('meta_key', 'header_menu_title3')->get()->first();
+ 
+         $unserialize_menu4_array = SiteManagement::getMetaValue('header_menu4');
+         $header_menu_title4 = DB::table('site_managements')->select('meta_value')->where('meta_key', 'header_menu_title4')->get()->first();
+
+
+         if($footer_type=='how-works'){
             return view(
-                'back-end.admin.settings.front-footer.how-work.index',
+                'back-end.admin.settings.front-footer.how-work',
                 compact('footer_how_work')
-                
             );
+        }else if($footer_type=='footer_menus'){
+            return view(
+                'back-end.admin.settings.front-footer.footer_menus.create',compact('menu_title','menu_title2','menu_title3','menu_title4','unserialize_menu_array','unserialize_menu2_array','unserialize_menu3_array','unserialize_menu4_array'));
+        }else if($footer_type=='header_menus'){
+            return view(
+                'back-end.admin.settings.front-footer.header_menus.index',compact('header_menu_title1','header_menu_title2','header_menu_title3','unserialize_header_menu3_array','header_menu_title4','unserialize_menu4_array'));
         }
 
     }

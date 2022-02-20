@@ -50,7 +50,22 @@
             <nav id="wt-navdashboard" class="wt-navdashboard">
                 <ul>
                     @if ($role === 'admin')
-                        <li class="menu-item-has-children">
+                        
+                    <li class="menu-item-has-children">
+                            <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
+                            <a href="javascript:void(0)">
+                                <i class="ti-layers"></i>
+                                <span>Front Footer & Header</span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><hr><a href="{{{ url('admin/settings/front-footer/how-works') }}}">Footer How It Works</a></li>
+                                <li><hr><a href="{{{ url('admin/settings/front-footer/footer_menus') }}}">Footer Menus</a></li>
+                                <li><hr><a href="{{{ url('admin/settings/front-footer/header_menus') }}}">Header Menus</a></li>
+                               
+                            </ul>
+                        </li>
+
+                    <li class="menu-item-has-children">
                             <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                             <a href="javascript:void(0)">
                                 <i class="ti-layers"></i>

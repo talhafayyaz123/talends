@@ -913,6 +913,154 @@ class SiteManagementController extends Controller
         }
     }
 
+    public function storeFooterMenu1(Request $request,$type)
+    {
+
+        $server = Helper::worketicIsDemoSiteAjax();
+        if (!empty($server)) {
+            $response['type'] = 'error';
+            $response['message'] = $server->getData()->message;
+            return $response;
+        }
+       
+
+        if($type=='footer_menu1'){
+            $this->validate(
+                $request,
+                [
+                    'menu_title' => 'required',
+                ]
+            );
+           }else if($type=='footer_menu2'){
+              
+            $this->validate(
+                $request,
+                [
+                    'menu_title_2' => 'required',
+                ]
+            );
+
+           }else if($type=='footer_menu3'){
+              
+            $this->validate(
+                $request,
+                [
+                    'menu_title_3' => 'required',
+                ]
+            );
+
+           }else if($type=='footer_menu4'){
+              
+            $this->validate(
+                $request,
+                [
+                    'menu_title_4' => 'required',
+                ]
+            );
+
+           }
+
+
+
+        $json = array();
+        if (!empty($request)) {
+           if($type=='footer_menu1'){
+            $search_menu = $this->settings->saveFooterMenu1($request);
+           }else if($type=='footer_menu2'){
+            $search_menu = $this->settings->saveFooterMenu2($request);
+           }else if($type=='footer_menu3'){
+            $search_menu = $this->settings->saveFooterMenu3($request);
+           }else if($type=='footer_menu4'){
+            $search_menu = $this->settings->saveFooterMenu4($request);
+           }
+           
+           
+            if ($search_menu['type'] == "success") {
+                                
+                Session::flash('message','Footer Menus Record Saved Successfully');
+                return Redirect::back();
+
+            } else {
+               
+                Session::flash('message',trans('lang.all_required'));
+                return Redirect::back();
+
+            }
+        } 
+        
+
+       
+
+
+    }
+
+    public function storeHeaderMenu(Request $request,$type)
+    {
+
+        $server = Helper::worketicIsDemoSiteAjax();
+        if (!empty($server)) {
+            $response['type'] = 'error';
+            $response['message'] = $server->getData()->message;
+            return $response;
+        }
+       
+
+        if($type=='header_menu1'){
+            $this->validate(
+                $request,
+                [
+                    'header_menu_title1' => 'required',
+                    'header_menu_title2' => 'required',
+                ]
+            );
+           }elseif($type=='header_menu2'){
+               $this->validate(
+                   $request,
+                   [
+                       'header_menu_title3' => 'required',
+                   ]
+               );
+              }elseif($type=='header_menu3'){
+                $this->validate(
+                    $request,
+                    [
+                        'header_menu_title4' => 'required',
+                    ]
+                );
+               }
+
+
+
+        $json = array();
+        if (!empty($request)) {
+           if($type=='header_menu1'){
+            $search_menu = $this->settings->saveHeaderMenus($request);
+           }else if($type=='header_menu2'){
+            $search_menu = $this->settings->saveHeaderMenus2($request);
+           }else if($type=='header_menu3'){
+            $search_menu = $this->settings->saveHeaderMenus3($request);
+           }
+           
+           
+            if ($search_menu['type'] == "success") {
+                                
+                Session::flash('message','Header Menus Record Saved Successfully');
+                return Redirect::back();
+
+            } else {
+               
+                Session::flash('message',trans('lang.all_required'));
+                return Redirect::back();
+
+            }
+        } 
+        
+
+       
+
+
+    }
+
     /**
      * Store social settings
      *

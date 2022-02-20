@@ -2069,12 +2069,46 @@ if (document.getElementById("settings")) {
                 success_message: '',
                 loading: false
             },
+            footer_menu2_count: {
+                search_name: Vue.prototype.trans('lang.add_title'),
+                search_url: '',
+                count: 0,
+                success_message: '',
+                loading: false
+            },
+            footer_menu3_count: {
+                search_name: Vue.prototype.trans('lang.add_title'),
+                search_url: '',
+                count: 0,
+                success_message: '',
+                loading: false
+            },
+            footer_menu4_count: {
+                search_name: Vue.prototype.trans('lang.add_title'),
+                search_url: '',
+                count: 0,
+                success_message: '',
+                loading: false
+            },
+            
             socials: [],
             first_social_name: '',
             first_social_url: '',
             searches: [],
+            searches2: [],
+            searches3: [],
+            searches4: [],
             first_search_title: '',
             first_search_url: '',
+            first_search_title2: '',
+            first_search_url2: '',
+
+            first_search_title3: '',
+            first_search_url3: '',
+            
+            first_search_title4: '',
+            first_search_url4: '',
+
             loading: false,
         },
         created: function () {
@@ -2180,10 +2214,58 @@ if (document.getElementById("settings")) {
                 Vue.delete(this.socials, index);
             },
             addSearchItem: function () {
+    
                 this.searches.push(Vue.util.extend({}, this.search, this.search.count++))
+            },
+
+            addFooterMenuItem1: function () {
+                var length=$('.footer1_menu_list > div').length;
+                this.search.count=length-1;
+                this.searches.push(Vue.util.extend({}, this.search, this.search.count))
+            },
+
+            addFooterMenuItem2: function () {
+                var length=$('.footer2_menu_list > div').length;
+                this.footer_menu2_count.count=length-1;
+                this.searches2.push(Vue.util.extend({}, this.footer_menu2_count, this.footer_menu2_count.count))
+
+            },
+            addFooterMenuItem3: function () {
+                var length=$('.footer3_menu_list > div').length;
+                this.footer_menu3_count.count=length-1;
+                this.searches3.push(Vue.util.extend({}, this.footer_menu3_count, this.footer_menu3_count.count))
+
+            },
+            addFooterMenuItem4: function () {
+                var length=$('.footer4_menu_list > div').length;
+                this.footer_menu4_count.count=length-1;
+                this.searches4.push(Vue.util.extend({}, this.footer_menu4_count, this.footer_menu4_count.count))
+
+            },
+
+            addFooterMenu2: function () {
+               
+                this.searches2.push(Vue.util.extend({}, this.footer_menu2_count, this.footer_menu2_count.count++))
+            },
+            addFooterMenu3: function () {
+               
+                this.searches3.push(Vue.util.extend({}, this.footer_menu3_count, this.footer_menu3_count.count++))
+            },
+            addFooterMenu4: function () {
+               
+                this.searches4.push(Vue.util.extend({}, this.footer_menu4_count, this.footer_menu4_count.count++))
             },
             removeSearchItem: function (index) {
                 Vue.delete(this.searches, index);
+            },
+            removeFooterItem2: function (index) {
+                Vue.delete(this.searches2, index);
+            },
+            removeFooterItem3: function (index) {
+                Vue.delete(this.searches3, index);
+            },
+            removeFooterItem4: function (index) {
+                Vue.delete(this.searches4, index);
             },
             showCompleted(message) {
                 return this.$toast.success(' ', message, this.notificationSystem.options.completed);

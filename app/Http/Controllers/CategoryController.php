@@ -91,8 +91,11 @@ class CategoryController extends Controller
         $this->validate(
             $request, [
                 'category_title'    => 'required',
+                'parent_category'    => 'required',
             ]
         );
+
+    
         $this->category->saveCategories($request);
         Session::flash('message', trans('lang.save_category'));
         return Redirect::back();
@@ -140,6 +143,7 @@ class CategoryController extends Controller
         $this->validate(
             $request, [
                 'category_title' => 'required',
+                'parent_category'    => 'required',
             ]
         );
         $this->category->updateCategories($request, $id);

@@ -58,7 +58,7 @@ Route::get(
 Route::get('why-talends', 'HomeController@whyTalends')->name('whyTalends');
 Route::get('government', 'HomeController@government')->name('government');
 Route::get('browse-jobs', 'HomeController@browseJobs')->name('browseJobs');
-Route::get('find-talents', 'HomeController@findTalents')->name('findTalents');
+Route::get('find-talends', 'HomeController@findTalents')->name('findTalends');
 Route::get('companies', 'HomeController@Companies')->name('Companies');
 Route::get('company-detail', 'HomeController@CompanyDetail')->name('CompanyDetail');
 Route::get('freelancer/detail/{id}', 'HomeController@FreelancerDetail')->name('FreelancerDetail');
@@ -212,8 +212,11 @@ Route::group(
         Route::get('admin/settings/front-footer/{type}', 'HomePagesController@frontFooter')->name('frontFooter');
         Route::post('admin/store-footer-how-work', 'HomePagesController@storeFooterHowWork');
         Route::post('admin/update-footer-how-work/{id}', 'HomePagesController@updateFooterHowWork');
-
         
+        Route::post('admin/store-footer-menu1/{type}', 'SiteManagementController@storeFooterMenu1');
+        Route::post('admin/store-header-menu/{type}', 'SiteManagementController@storeHeaderMenu');
+        
+
         // Site Management Routes
         Route::get('admin/settings', 'SiteManagementController@Settings')->name('settings');
         Route::post('admin/store/email-settings', 'SiteManagementController@storeEmailSettings');
