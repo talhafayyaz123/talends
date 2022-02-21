@@ -432,6 +432,7 @@ if (document.getElementById("registration")) {
             user_email: '',
             first_name: '',
             last_name: '',
+            user_type: '',
             form_step1: {
                 email_error: '',
                 is_email_error: false,
@@ -439,6 +440,8 @@ if (document.getElementById("registration")) {
                 is_first_name_error: false,
                 last_name_error: '',
                 is_last_name_error: false,
+                user_type_error: '',
+                is_user_type_error: false,
             },
             form_step2: {
                 locations_error: '',
@@ -532,12 +535,16 @@ if (document.getElementById("registration")) {
                     })
             },
             checkStep1: function (e) {
+                this.form_step1.user_type_error = '';
+                this.form_step1.is_user_type_error = false;
+                
                 this.form_step1.first_name_error = '';
                 this.form_step1.is_first_name_error = false;
                 this.form_step1.last_name_error = '';
                 this.form_step1.is_last_name_error = false;
                 this.form_step1.email_error = '';
                 this.form_step1.is_email_error = false;
+
                 var self = this;
                 let register_Form = document.getElementById('register_form');
                 let form_data = new FormData(register_Form);
@@ -550,6 +557,13 @@ if (document.getElementById("registration")) {
                             self.form_step1.first_name_error = error.response.data.errors.first_name[0];
                             self.form_step1.is_first_name_error = true;
                         }
+
+                        if (error.response.data.errors.user_type) {
+                            self.form_step1.user_type_error = error.response.data.errors.user_type[0];
+                            self.form_step1.is_user_type_error = true;
+                        }
+
+                        
                         if (error.response.data.errors.last_name) {
                             self.form_step1.last_name_error = error.response.data.errors.last_name[0];
                             self.form_step1.is_last_name_error = true;

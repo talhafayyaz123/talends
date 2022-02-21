@@ -46,6 +46,7 @@
                 <div class="wt-registerformhold">
                     <div class="wt-registerformmain">
                         <div class="wt-joinforms">
+                            
                             @if ($selected_registration_type == 'single')
                                 <form method="POST"  class="wt-formtheme wt-formregister" @submit.prevent="checkSingleForm" id="register_form">
                                     @csrf
@@ -181,8 +182,10 @@
                                     {{-- </div> --}}
                                 </form>
                             @else 
+                            
                                 <form method="POST" action="{{{ url('register/form-step1-custom-errors') }}}" class="wt-formtheme wt-formregister" @submit.prevent="checkStep1" id="register_form">
                                     @csrf
+
                                     <fieldset class="wt-registerformgroup">
                                         <div class="wt-haslayout" v-if="step === 1" v-cloak>
                                             <div class="wt-registerhead">
@@ -199,6 +202,20 @@
                                                 <li><a href="javascrip:void(0);">{{{ trans('lang.03') }}}</a></li>
                                                 <li><a href="javascrip:void(0);">{{{ trans('lang.04') }}}</a></li>
                                             </ul>
+                                            <div class="form-group">
+                                               
+                                                <select name="user_type" id='user_type' class="form-control" v-bind:class="{ 'is-invalid': form_step1.is_user_type_error }" v-model="user_type">
+                                                    <option value="">Select User Type</option>
+                                                    <option value="freelancer">Freelancer</option>
+                                                    <option value="employer">Employer</option>
+                                                    <option value="company">Company</option>
+                                                </select>
+                                               
+                                                <span class="help-block" v-if="form_step1.user_type_error">
+                                                    <strong v-cloak>@{{form_step1.user_type_error}}</strong>
+                                                </span>
+                                            </div>
+                                            
                                             <div class="form-group form-group-half">
                                                 <input type="text" name="first_name" class="form-control" placeholder="{{{ trans('lang.ph_first_name') }}}" v-bind:class="{ 'is-invalid': form_step1.is_first_name_error }" v-model="first_name">
                                                 <span class="help-block" v-if="form_step1.first_name_error">
@@ -223,6 +240,7 @@
                                         </div>
                                     </fieldset>
                                     <div class="wt-haslayout" v-if="step === 2" v-cloak>
+                                      
                                         <fieldset class="wt-registerformgroup">
                                             <div class="wt-registerhead">
                                                 <div class="wt-title">
@@ -234,12 +252,14 @@
                                                     </div>
                                                 @endif
                                             </div>
+                                            
                                             <ul class="wt-joinsteps">
                                                 <li class="wt-done-next"><a href="javascrip:void(0);"><i class="fa fa-check"></i></a></li>
                                                 <li class="wt-active"><a href="javascrip:void(0);">{{{ trans('lang.02') }}}</a></li>
                                                 <li><a href="javascrip:void(0);">{{{ trans('lang.03') }}}</a></li>
                                                 <li><a href="javascrip:void(0);">{{{ trans('lang.04') }}}</a></li>
                                             </ul>
+                                            
                                             @if (!empty($locations))
                                                 <div class="form-group">
                                                     <span class="wt-select">
@@ -267,25 +287,52 @@
                                             <div class="wt-title wt-formtitle">
                                                 <h4>{{{ trans('lang.start_as') }}}</h4>
                                             </div>
+                                            
                                             @if(!empty($roles))
                                                 <ul class="wt-accordionhold wt-formaccordionhold accordion">
                                                     @foreach ($roles as $key => $role)
                                                         @if (!in_array($role['id'] == 1, $roles))
+                                                          
                                                             <li v-bind:class="{ 'role-is-invalid': form_step2.is_role_error }">
-                                                                <div class="wt-accordiontitle" id="headingOne" data-toggle="collapse" data-target="#collapseOne">
-                                                                    <span class="wt-radio">
-                                                                    <input id="wt-company-{{$key}}" type="radio" name="role" value="{{{ $role['role_type'] }}}" checked="" v-model="user_role" v-on:change="selectedRole(user_role)">
+                                                                
+                                                        
+                                                            <div  class="wt-accordiontitle" id="headingOne" data-toggle="collapse" data-target="#collapseOne">
+                                                                   
+                                                            @if ($role['role_type'] === 'employer')
+                                                                  <span class="wt-radio" v-if='user_type== "employer" '>
+                                                                    <input id="wt-company-{{$key}}" type="radio" name="role" value="{{{ $role['role_type'] }}}" checked="checked" v-model="user_role" v-on:change="selectedRole(user_role)">
                                                                     <label for="wt-company-{{$key}}">
-                                                                        {{ $role['name'] === 'freelancer' ? trans('lang.freelancer') : trans('lang.employer')}}
-                                                                        <span> 
-                                                                            ({{ $role['name'] === 'freelancer' ? trans('lang.signup_as_freelancer') : trans('lang.signup_as_country')}})
+                                                                        
+                                                                        {{ trans('lang.employer')}} <span> ({{ trans('lang.signup_as_country')}})
                                                                         </span>
                                                                     </label>
                                                                     </span>
+
+                                                                    @endif
+
+
+                                                                    
+                                                            @if ($role['role_type'] === 'freelancer')
+                                                                  <span class="wt-radio" v-if='user_type== "freelancer" '>
+                                                                    <input id="wt-company-{{$key}}" type="radio" name="role" value="{{{ $role['role_type'] }}}" checked="checked" v-model="user_role" >
+                                                                    <label for="wt-company-{{$key}}">
+                                                                        
+                                                                        {{  trans('lang.freelancer')}}<span> ({{ trans('lang.signup_as_freelancer')}})
+                                                                        </span>
+                                                                    </label>
+                                                                    </span>
+
+                                                                    @endif
+
+
                                                                 </div>
+
+
+
+                                                                <div class="employer_properties" v-if='user_type== "employer" '>
                                                                 @if ($role['role_type'] === 'employer')
                                                                     @if ($show_emplyr_inn_sec === 'true')
-                                                                        <div class="wt-accordiondetails collapse show" id="collapseOne" aria-labelledby="headingOne" v-if="is_show">
+                                                                        <div class="wt-accordiondetails collapse show" id="collapseOne" aria-labelledby="headingOne">
                                                                             <div class="wt-radioboxholder">
                                                                                 <div class="wt-title">
                                                                                     <h4>{{{ trans('lang.no_of_employees') }}}</h4>
@@ -316,6 +363,7 @@
                                                                         </div>
                                                                     @endif    
                                                                 @endif
+                                                                </div>
                                                             </li>
                                                         @endif
                                                     @endforeach

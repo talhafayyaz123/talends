@@ -57,7 +57,9 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 @if (!empty($logo) || Schema::hasTable('site_managements'))
-                                    <strong class="wt-logo"><a href="{{{ url('/') }}}"><img src="{{{ asset($logo) }}}" alt="{{{ trans('Logo') }}}"></a></strong>
+                                    <strong class="wt-logo">
+                                        <a href="{{{ url('/') }}}"><img src="{{{ asset($logo) }}}" alt="{{{ trans('Logo') }}}"></a>
+                                    </strong>
                                 @endif
                                 <div class="wt-rightarea">
                                     @guest

@@ -79,7 +79,7 @@
                             <a class="nav-link menu_green_cta" href="">Sign In</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link menu_green_cta_trans" href="">Join Now</a>
+                            <a class="nav-link menu_green_cta_trans" href="{{ route('register') }}">Join Now</a>
                         </li>
                     </ul>
                 </div>

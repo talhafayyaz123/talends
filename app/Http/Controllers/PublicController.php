@@ -105,6 +105,7 @@ class PublicController extends Controller
                 'first_name' => 'required',
                 'last_name' => 'required',
                 'email' => 'required|email|unique:users',
+                'user_type' => 'required',
             ]
         );
     }
