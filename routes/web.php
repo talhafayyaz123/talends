@@ -27,6 +27,8 @@ Route::get(
         \Artisan::call('config:cache');
         \Artisan::call('cache:clear');
         \Artisan::call('config:clear');
+        \Artisan::call('optimize:clear');
+        \Artisan::call('route:clear');
         return redirect()->back();
     }
 );
@@ -365,7 +367,7 @@ Route::group(
 );
 // Freelancer Routes
 Route::group(
-    ['middleware' => ['role:freelancer']],
+    ['middleware' => ['role:freelancer|company']],
     function () {
         Route::get('/get-freelancer-skills', 'SkillController@getFreelancerSkills');
         Route::get('/get-skills', 'SkillController@getSkills');
@@ -385,6 +387,10 @@ Route::group(
         Route::get('freelancer/job/{slug}', 'FreelancerController@showOnGoingJobDetail')->name('showOnGoingJobDetail');
         Route::get('freelancer/proposals', 'FreelancerController@showFreelancerProposals')->name('showFreelancerProposals');
         Route::get('freelancer/dashboard', 'FreelancerController@freelancerDashboard')->name('freelancerDashboard');
+
+        Route::get('company/dashboard', 'FreelancerController@companyDashboard')->name('companyDashboard');
+        
+
         Route::get('freelancer/profile', 'FreelancerController@index')->name('personalDetail');
         Route::post('freelancer/upload-temp-image', 'FreelancerController@uploadTempImage');
         Route::get('freelancer/dashboard/post-service', 'ServiceController@create')->name('freelancerPostService');

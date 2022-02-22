@@ -2,6 +2,8 @@
 @section('content')
 @php
     $employees      = Helper::getEmployeesList();
+    $company_bedget      = Helper::getComapnyBudgetList();
+
     $departments    = App\Department::all();
     $locations      = App\Location::select('title', 'id')->get()->pluck('title', 'id')->toArray();
     $roles          = Spatie\Permission\Models\Role::all()->toArray();
@@ -295,7 +297,7 @@
                                                           
                                                             <li v-bind:class="{ 'role-is-invalid': form_step2.is_role_error }">
                                                                 
-                                                        
+                                                         
                                                             <div  class="wt-accordiontitle" id="headingOne" data-toggle="collapse" data-target="#collapseOne">
                                                                    
                                                             @if ($role['role_type'] === 'employer')
@@ -325,7 +327,23 @@
                                                                     @endif
 
 
+                                                                    @if ($role['role_type'] === 'company')
+                                                                  <span class="wt-radio" v-if='user_type== "company" '>
+                                                                    <input id="wt-company-{{$key}}" type="radio" name="role" value="{{{ $role['role_type'] }}}" checked="checked" v-model="user_role" >
+                                                                    <label for="wt-company-{{$key}}">
+                                                                        
+                                                                       Company<span> ((Signup As Company & Get Hired))
+                                                                        </span>
+                                                                    </label>
+                                                                    </span>
+
+                                                                    @endif
+
+
                                                                 </div>
+
+
+                                                                
 
 
 
@@ -364,6 +382,43 @@
                                                                     @endif    
                                                                 @endif
                                                                 </div>
+
+
+                                                                <div class="company_properties" v-if='user_type== "company" '>
+                                                                @if ($role['role_type'] === 'company')
+                                                                    @if ($show_emplyr_inn_sec === 'true')
+                                                                        <div class="wt-accordiondetails collapse show" id="collapseOne" aria-labelledby="headingOne">
+                                                                            <div class="wt-radioboxholder">
+                                                                                <div class="wt-title">
+                                                                                    <h4>Total Team Strength</h4>
+                                                                                </div>
+                                                                                @foreach ($employees as $key => $employee)
+                                                                                    <span class="wt-radio">
+                                                                                        <input id="wt-just-{{{$key}}}" type="radio" name="employees" value="{{{$employee['value']}}}" checked="">
+                                                                                        <label for="wt-just-{{{$key}}}">{{{$employee['title']}}}</label>
+                                                                                    </span>
+                                                                                @endforeach
+                                                                            </div>
+                                                                            @if ($departments->count() > 0)
+                                                                                <div class="wt-radioboxholder">
+                                                                                    <div class="wt-title">
+                                                                                        <h4>Minimum Budget</h4>
+                                                                                    </div>
+                                                                                 
+                                                                                @foreach ($company_bedget as $key => $budget)
+                                                                                    <span class="wt-radio">
+                                                                                        <input id="wt-budget-{{{$key}}}" type="radio" name="budget" value="{{{$budget['value']}}}" checked="">
+                                                                                        <label for="wt-budget-{{{$key}}}">{{{$budget['title']}}}</label>
+                                                                                    </span>
+                                                                                @endforeach
+                                                                            
+                                                                            @endif
+                                                                        </div>
+                                                                    @endif    
+                                                                @endif
+                                                                </div>
+
+
                                                             </li>
                                                         @endif
                                                     @endforeach

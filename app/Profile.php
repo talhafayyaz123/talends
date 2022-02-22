@@ -38,7 +38,7 @@ class Profile extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'department_id', 'no_of_employees', 'freelancer_type',
+        'user_id', 'department_id', 'min_budget','no_of_employees', 'freelancer_type',
         'english_level', 'hourly_rate', 'experience', 'education', 'awards',
         'projects', 'saved_freelancer', 'saved_jobs', 'saved_employers',
         'rating', 'address', 'longitude', 'latitude', 'avater', 'banner',

@@ -1351,6 +1351,7 @@ class SiteManagementController extends Controller
             \Artisan::call('route:clear');
         }
         $json['type'] = 'success';
+        
         return $json;
     }
 

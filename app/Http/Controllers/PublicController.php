@@ -73,6 +73,7 @@ class PublicController extends Controller
     public function loginUser(Request $request)
     {
         $json = array();
+
         if (Session::has('user_id')) {
             $id = Session::get('user_id');
             $user = User::find($id);

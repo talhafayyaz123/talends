@@ -314,6 +314,7 @@ class User extends Authenticatable
      */
     public function storeUser($request, $verification_code, $registration_type = '', $verification_type = '')
     {
+
         if (!empty($request)) {
             $this->first_name = filter_var($request['first_name'], FILTER_SANITIZE_STRING);
             $this->last_name = filter_var($request['last_name'], FILTER_SANITIZE_STRING);
@@ -349,6 +350,9 @@ class User extends Authenticatable
             if (!empty($request['department_name'])) {
                 $department = Department::find($request['department_name']);
                 $profile->department()->associate($department);
+            }
+            if (!empty($request['budget'])) {
+                $profile->min_budget = intval($request['budget']);
             }
             $profile->save();
             $role_id = Helper::getRoleByUserID($user_id);

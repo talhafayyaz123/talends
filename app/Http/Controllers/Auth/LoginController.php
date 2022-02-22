@@ -64,12 +64,18 @@ class LoginController extends Controller
                     Auth::logout();
                     return Redirect::to('/');
                 }
-                $user_role = $user_role_type->role_type;
+                 $user_role = $user_role_type->role_type;
+                
                 if ($user_role === 'freelancer') {
                     return Redirect::to('freelancer/dashboard');
                 } elseif ($user_role === 'employer') {
                     return Redirect::to('employer/dashboard');
-                } else {
+                } elseif($user_role === 'company') {
+                    return Redirect::to('company/dashboard');
+
+                }elseif ($user_role === 'admin') {
+                    return Redirect::to('admin/profile');
+                }else{
                     return Redirect::to(url()->previous());
                 }
             // }

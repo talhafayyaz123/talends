@@ -33,6 +33,7 @@ class Profile extends Migration
                 $table->increments('id');
                 $table->integer('user_id')->nullable();
                 $table->integer('department_id')->nullable();
+                $table->integer('min_budget')->nullable();
                 $table->integer('no_of_employees')->nullable();
                 $table->string('freelancer_type')->nullable();
                 $table->enum(

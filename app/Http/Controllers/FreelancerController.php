@@ -920,6 +920,106 @@ class FreelancerController extends Controller
         }
     }
 
+
+    public function companyDashboard()
+    {
+        
+        if (Auth::user()) {
+            $ongoing_jobs = array();
+            $freelancer_id = Auth::user()->id;
+            $ongoing_projects = Proposal::getProposalsByStatus($freelancer_id, 'hired');
+            $cancelled_projects = Proposal::getProposalsByStatus($freelancer_id, 'cancelled');
+            $package_item = Item::where('subscriber', $freelancer_id)->first();
+            $package = !empty($package_item) ? Package::find($package_item->product_id) : array();
+            $option = !empty($package) && !empty($package['options']) ? unserialize($package['options']) : '';
+            $expiry = !empty($option) ? $package_item->updated_at->addDays($option['duration']) : '';
+            $expiry_date = !empty($expiry) ? Carbon::parse($expiry)->toDateTimeString() : '';
+            $message_status = Message::where('status', 0)->where('receiver_id', $freelancer_id)->count();
+            $notify_class = $message_status > 0 ? 'wt-insightnoticon' : '';
+            $completed_projects = Proposal::getProposalsByStatus($freelancer_id, 'completed');
+            $completed_projects_history = Proposal::getProposalsByStatus($freelancer_id, 'completed', 'completed');
+            $currency   = SiteManagement::getMetaValue('commision');
+            $symbol     = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
+            $trail      = !empty($package) && $package['trial'] == 1 ? 'true' : 'false';
+            $icons      = SiteManagement::getMetaValue('icons');
+            $enable_package = !empty($currency) && !empty($currency[0]['enable_packages']) ? $currency[0]['enable_packages'] : 'true';
+            $latest_proposals_icon = !empty($icons['hidden_latest_proposal']) ? $icons['hidden_latest_proposal'] : 'img-20.png';
+            $latest_package_expiry_icon = !empty($icons['hidden_package_expiry']) ? $icons['hidden_package_expiry'] : 'img-21.png';
+            $latest_new_message_icon = !empty($icons['hidden_new_message']) ? $icons['hidden_new_message'] : 'img-19.png';
+            $latest_saved_item_icon = !empty($icons['hidden_saved_item']) ? $icons['hidden_saved_item'] : 'img-22.png';
+            $latest_cancel_project_icon = !empty($icons['hidden_cancel_project']) ? $icons['hidden_cancel_project'] : 'img-16.png';
+            $latest_ongoing_project_icon = !empty($icons['hidden_ongoing_project']) ? $icons['hidden_ongoing_project'] : 'img-17.png';
+            $latest_pending_balance_icon = !empty($icons['hidden_pending_balance']) ? $icons['hidden_pending_balance'] : 'icon-01.png';
+            $latest_current_balance_icon = !empty($icons['hidden_current_balance']) ? $icons['hidden_current_balance'] : 'icon-02.png';
+            $published_services_icon = !empty($icons['hidden_published_services']) ? $icons['hidden_published_services'] : 'payment-method.png';
+            $cancelled_services_icon = !empty($icons['hidden_cancelled_services']) ? $icons['hidden_cancelled_services'] : 'decline.png';
+            $completed_services_icon = !empty($icons['hidden_completed_services']) ? $icons['hidden_completed_services'] : 'completed-task.png';
+            $ongoing_services_icon = !empty($icons['hidden_ongoing_services']) ? $icons['hidden_ongoing_services'] : 'onservice.png';
+            $access_type = Helper::getAccessType();
+            if (file_exists(resource_path('views/extend/back-end/freelancer/dashboard.blade.php'))) {
+                return view(
+                    'extend.back-end.freelancer.dashboard',
+                    compact(
+                        'freelancer_id',
+                        'completed_projects_history',
+                        'access_type',
+                        'ongoing_projects',
+                        'cancelled_projects',
+                        'expiry_date',
+                        'notify_class',
+                        'completed_projects',
+                        'symbol',
+                        'trail',
+                        'latest_proposals_icon',
+                        'latest_package_expiry_icon',
+                        'latest_new_message_icon',
+                        'latest_saved_item_icon',
+                        'latest_cancel_project_icon',
+                        'latest_ongoing_project_icon',
+                        'latest_pending_balance_icon',
+                        'latest_current_balance_icon',
+                        'published_services_icon',
+                        'cancelled_services_icon',
+                        'completed_services_icon',
+                        'ongoing_services_icon',
+                        'enable_package',
+                        'package'
+                    )
+                );
+            } else {
+                return view(
+                    'back-end.freelancer.company_dashboard',
+                    compact(
+                        'freelancer_id',
+                        'completed_projects_history',
+                        'access_type',
+                        'ongoing_projects',
+                        'cancelled_projects',
+                        'expiry_date',
+                        'notify_class',
+                        'completed_projects',
+                        'symbol',
+                        'trail',
+                        'latest_proposals_icon',
+                        'latest_package_expiry_icon',
+                        'latest_new_message_icon',
+                        'latest_saved_item_icon',
+                        'latest_cancel_project_icon',
+                        'latest_ongoing_project_icon',
+                        'latest_pending_balance_icon',
+                        'latest_current_balance_icon',
+                        'published_services_icon',
+                        'cancelled_services_icon',
+                        'completed_services_icon',
+                        'ongoing_services_icon',
+                        'enable_package',
+                        'package'
+                    )
+                );
+            }
+        }
+    }
+
     /**
      * Show services.
      *

@@ -1,5 +1,6 @@
 <nav id="wt-profiledashboard" class="wt-usernav">
         <ul>
+            
             @if ($role === 'admin')
                 <li class="menu-item-has-children">
                     <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
@@ -125,7 +126,7 @@
                     </ul>
                 </li>
             @endif
-            @if ($role === 'employer' || $role === 'freelancer' )
+            @if ($role === 'employer' || $role === 'freelancer' || $role==='company' )
                 <li>
                     <a href="{{{ url($role.'/dashboard') }}}">
                         <i class="ti-desktop"></i>
@@ -209,7 +210,7 @@
                             </a>
                         </li>
                     @endif
-                @elseif ($role === 'freelancer')
+                @elseif ($role === 'freelancer' || $role==='company')
                     <li class="menu-item-has-children page_item_has_children">
                         <a href="javascript:void(0)">
                             <i class="ti-briefcase"></i>
