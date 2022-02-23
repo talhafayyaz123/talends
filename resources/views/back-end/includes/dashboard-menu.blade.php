@@ -32,13 +32,14 @@
                         </h2>
                         <span>{{{ !empty(Auth::user()->profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Helper::getAuthRoleName() }}}</span>
                     </div>
-                    @if ($role === 'employer')
+                    
+                    @if ($role === 'employer' || $role === 'company')
                     @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'jobs')
                         <div class="wt-btnarea"><a href="{{{ url(route('employerPostJob')) }}}" class="wt-btn">{{{ trans('lang.post_job') }}}</a></div>
                     @else
                         <div class="wt-btnarea"><a href="{{{ url(route('showUserProfile', ['slug' => Auth::user()->slug])) }}}" class="wt-btn">{{{ trans('lang.view_profile') }}}</a></div>
                     @endif
-                    @elseif ($role === 'freelancer')
+                    @elseif ($role === 'freelancer' || $role === 'company')
                         @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services')
                             <div class="wt-btnarea"><a href="{{{ url(route('freelancerPostService')) }}}" class="wt-btn">{{{ trans('lang.post_service') }}}</a></div>
                         @else
@@ -191,7 +192,7 @@
                             </ul>
                         </li>
                     @endif
-                    @if ($role === 'employer' || $role === 'freelancer' )
+                    @if ($role === 'employer' || $role === 'freelancer' || $role === 'company' )
                         <li>
                             <a href="{{{ url($role.'/dashboard') }}}">
                                 <i class="ti-desktop"></i>
@@ -271,7 +272,7 @@
                                     </a>
                                 </li>
                             @endif
-                        @elseif ($role === 'freelancer')
+                        @elseif ($role === 'freelancer' || $role === 'company')
                             <li class="menu-item-has-children">
                                 <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                                 <a href="javascript:void(0)">

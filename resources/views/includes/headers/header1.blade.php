@@ -29,7 +29,10 @@
                         @guest
                             <div class="wt-loginarea">
                                 <div class="wt-loginoption">
-                                    <a href="javascript:void(0);" id="wt-loginbtn" class="wt-loginbtn">{{{trans('lang.login') }}}</a>
+                                    
+                                <a href="javascript:void(0);" id="wt-loginbtn" class="wt-loginbtn signin-btn">{{{trans('lang.login') }}}</a>
+
+
                                     <div class="wt-loginformhold" @if ($errors->has('email') || $errors->has('password')) style="display: block;" @endif>
                                         <div class="wt-loginheader">
                                             <span>{{{ trans('lang.login') }}}</span>
@@ -73,7 +76,7 @@
                                         </form>
                                     </div>
                                 </div>
-                                <a href="{{{ route('register') }}}" class="wt-btn">{{{ trans('lang.join_now') }}}</a>
+                                <a href="{{{ route('register') }}}" class=" joinin-btn">{{{ trans('lang.join_now') }}}</a>
                             </div>
                         @endguest
                         @auth

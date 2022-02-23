@@ -20,7 +20,7 @@
                     @endphp
                     @if ($page->relation_type == 0 && ($show_page == 'true' || $show_page == true))
                         <li 
-                            class="{{!empty($page_has_child) ? 'menu-item-has-children page_item_has_children' : '' }} @if ($pageID == $page->slug ) current-menu-item @endif"
+                            class="{{!empty($page_has_child) ? 'menu-item-has-children page_item_has_children header_text_color' : '' }} @if ($pageID == $page->slug ) current-menu-item @endif"
                             style="{{!empty($order) ? 'order:'.$order : 'order:99' }}"
                         >
                             <a href="{{url('page/'.$page->slug)}}">{{{$page->title}}}</a>

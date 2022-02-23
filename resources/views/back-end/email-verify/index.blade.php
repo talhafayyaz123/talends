@@ -4,7 +4,7 @@
 $breadcrumbs_settings = \App\SiteManagement::getMetaValue('show_breadcrumb');
 $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'true';
 @endphp
-<div class="wt-haslayout wt-innerbannerholder">
+<div class="wt-haslayout wt-innerbannerholder theme_bg_dark ">
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-xs-12 col-sm-12 col-md-8 push-md-2 col-lg-6 push-lg-3">

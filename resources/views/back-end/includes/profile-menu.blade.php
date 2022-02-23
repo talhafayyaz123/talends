@@ -158,7 +158,7 @@
                                 <span>{{{ trans('lang.post_job') }}}</span>
                             </a>
                         </li>
-                        <li class="menu-item-has-children page_item_has_children">
+                        <li class="menu-item-has-children page_item_has_children header_text_color">
                             <a href="javascript:void(0);">
                                 <i class="ti-announcement"></i>
                                 <span>{{ trans('lang.jobs') }}</span>
@@ -211,7 +211,7 @@
                         </li>
                     @endif
                 @elseif ($role === 'freelancer' || $role==='company')
-                    <li class="menu-item-has-children page_item_has_children">
+                    <li class="menu-item-has-children page_item_has_children header_text_color">
                         <a href="javascript:void(0)">
                             <i class="ti-briefcase"></i>
                             <span>{{ trans('lang.all_projects') }}</span>
