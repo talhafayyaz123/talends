@@ -52,6 +52,7 @@
     <script src="{{ asset('talends/jquery-3.4.1.slim.min.js') }}" >
     </script>
     <script defer src="{{ asset('talends/bbcc34f546.js') }}" ></script>
+	<link href="{{ asset('talends/assets/css/main_customization.css') }}" rel="stylesheet">
 
 
 	@if(Helper::getTextDirection() == 'rtl')

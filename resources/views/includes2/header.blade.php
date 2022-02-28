@@ -16,7 +16,7 @@
 
         @endphp
                 <div class="collapse navbar-collapse" id="theme_menu_toggle">
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0 header_menu">
                             <li class="nav-item">
                             <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">{!!  $header_menus['title4']  ?? ''  !!} <i
                                     class="fas fa-angle-down"></i></a>
@@ -75,12 +75,44 @@
                         <li class="nav-item menu_green_cta_box nav_item_right">
                             <a class="nav-link" href="{{ route('government') }}">  {!!  $header_menus['title1']  ?? ''  !!}</a>
                         </li>
+                        @guest
                         <li class="nav-item nav_item_right">
-                            <a class="nav-link menu_green_cta" href="">Sign In</a>
+                            <a class="nav-link menu_green_cta" href="{{ route('login') }}">Sign In</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link menu_green_cta_trans" href="{{ route('register') }}">Join Now</a>
                         </li>
+                       @endguest
+
+                       @auth
+                    <li class="nav-item">
+                    
+                            @php
+                                $user = !empty(Auth::user()) ? Auth::user() : '';
+                                $role = !empty($user) ? $user->getRoleNames()->first() : array();
+                                $profile = \App\User::find(Auth::user()->id)->profile;
+                                $user_image = !empty($profile) ? $profile->avater : '';
+                                $employer_job = \App\Job::select('status')->where('user_id', Auth::user()->id)->first();
+                                $profile_image = !empty($user_image) ? '/uploads/users/'.$user->id.'/'.$user_image : 'images/user-login.png';
+                                $payment_settings = \App\SiteManagement::getMetaValue('commision');
+                                $payment_module = !empty($payment_settings) && !empty($payment_settings[0]['enable_packages']) ? $payment_settings[0]['enable_packages'] : 'true';
+                                $employer_payment_module = !empty($payment_settings) && !empty($payment_settings[0]['employer_package']) ? $payment_settings[0]['employer_package'] : 'true';
+                            @endphp
+                            
+                                <div class="wt-userlogedin">
+                                    <figure class="wt-userimg">
+                                        <img src="{{{ asset(Helper::getImage('uploads/users/' . Auth::user()->id, $profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}">
+                                    </figure>
+                                    <div class="wt-username">
+                                        <h3>{{{ Helper::getUserName(Auth::user()->id) }}}</h3>
+                                        <span>{{{ !empty(Auth::user()->profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Helper::getAuthRoleName() }}}</span>
+                                    </div>
+                                    @include('back-end.includes.profile-menu') 
+
+                                </div>
+                    </li>
+                        @endauth
+
                     </ul>
                 </div>
             </nav>

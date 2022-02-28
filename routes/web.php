@@ -213,6 +213,10 @@ Route::group(
         //Front Footer
         Route::get('admin/settings/front-footer/{type}', 'HomePagesController@frontFooter')->name('frontFooter');
         Route::post('admin/store-footer-how-work', 'HomePagesController@storeFooterHowWork');
+        
+        Route::post('admin/join_community', 'HomePagesController@storeFooterJoinCommunity');
+        Route::post('admin/update-join-community/{id}', 'HomePagesController@updateJoinCommunity');
+
         Route::post('admin/update-footer-how-work/{id}', 'HomePagesController@updateFooterHowWork');
         
         Route::post('admin/store-footer-menu1/{type}', 'SiteManagementController@storeFooterMenu1');

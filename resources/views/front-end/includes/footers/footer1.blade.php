@@ -1,81 +1,73 @@
-<footer id="wt-footer" class="wt-footer wt-haslayout">
-    @if (!empty($footer))
-        <div class="wt-footerholder wt-haslayout">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                        <div class="wt-footerlogohold">
-                            @if (!empty($footer['footer_logo']))
-                                <strong class="wt-logo"><a href="{{{ url('/') }}}"><img src="{{{ asset(\App\Helper::getFooterLogo($footer['footer_logo'])) }}}" alt="company logo here"></a></strong>
-                            @endif
-                            @if (!empty($footer['description']))
-                                <div class="wt-description">
-                                    <p>{{{ str_limit($footer['description'], 150)  }}}</p>
-                                </div>
-                            @endif
-                            @php Helper::displaySocials(); @endphp
-                        </div>
-                    </div>
-                    @if (!empty($footer['menu_title_1']) || !empty($footer['menu_pages_1']))
-                        <div class="col-12 col-sm-6 col-md-3 col-lg-3">
-                            <div class="wt-footercol wt-widgetcompany">
-                                @if (!empty($footer['menu_title_1']))
-                                    <div class="wt-fwidgettitle">
-                                        <h3>{{{ $footer['menu_title_1'] }}}</h3>
-                                    </div>
-                                @endif
-                                @if(!empty($footer['menu_pages_1']))
-                                    <ul class="wt-fwidgetcontent">
-                                        @foreach($footer['menu_pages_1'] as $menu_1_page)
-                                            @php  $page = \App\Page::where('id', $menu_1_page)->first(); @endphp
-                                            @if (!empty($page))
-                                                <li><a href="{{{ url('page/'.$page->slug) }}}">{{{ $page->title }}}</a></li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                @endif
-                            </div>
-                        </div>
-                    @endif
-                    @if (!empty($search_menu) || !empty($menu_title))
-                        <div class="col-12 col-sm-6 col-md-3 col-lg-3">
-                            <div class="wt-footercol wt-widgetcompany">
-                                @if (!empty($menu_title))
-                                    <div class="wt-fwidgettitle">
-                                        <h3>{{ $menu_title->meta_value }}</h3>
-                                    </div>
-                                @endif
-                                <ul class="wt-fwidgetcontent">
-                                    @foreach($search_menu as $key => $page)
-                                        <li><a href="{!! url($page['url']) !!}">{{$page['title']}}</a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </div>
-    @endif
-    <div class="wt-haslayout wt-footerbottom">
+@php
+ $footer_how_work=App\Helper::getfooterHowWork();
+ 
+@endphp
+
+
+    1 @php
+    
+        $footer_menus_1=App\Helper::footerMenu1();
+        $footer_menus_2=App\Helper::footerMenu2();
+        $footer_menus_3=App\Helper::footerMenu3();
+        $footer_menus_4=App\Helper::footerMenu4();
+        @endphp
+
+
+    <footer>
         <div class="container">
+            <div class="row py-30">
+                <div class="col-md-3">
+                    <h4> {{ $footer_menus_1['title']}} </h4>
+                    <ul class="quick-links" id="ftr-links">
+                        @if(!empty($footer_menus_1['menu_items']))
+                        @foreach($footer_menus_1['menu_items'] as $key=>$value)
+                        <li> <a href="javascript:;" target="_self">{{ $value['title']}}</a></li>
+                       @endforeach
+                       @endif
+                    </ul>
+                </div>
+
+ 
+                <div class="col-md-3">
+                    <h4> {{ $footer_menus_2['title']}} </h4>
+                    <ul class="quick-links">
+                        @if(!empty($footer_menus_2['menu_items']))
+                        @foreach($footer_menus_2['menu_items'] as $key=>$value)
+                        <li> <a href="javascript:;" target="_self">{{ $value['title']}}</a></li>
+                       @endforeach
+                       @endif
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h4> {{ $footer_menus_3['title']}} </h4>
+                    <ul class="quick-links">
+                        @if(!empty($footer_menus_3['menu_items']))
+                        @foreach($footer_menus_3['menu_items'] as $key=>$value)
+                        <li> <a href="javascript:;" target="_self">{{ $value['title']}}</a></li>
+                       @endforeach
+                       @endif
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h4> {{ $footer_menus_4['title']}} </h4>
+                    <ul class="quick-links">
+                        @if(!empty($footer_menus_4['menu_items']))
+                        @foreach($footer_menus_4['menu_items'] as $key=>$value)
+                        <li> <a href="javascript:;" target="_self">{{ $value['title']}}</a></li>
+                       @endforeach
+                       @endif
+                    </ul>
+                </div>
+            </div>
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <p class="wt-copyrights"><span>{{{ !empty($footer['copyright']) ? $footer['copyright'] : 'Worketic. All Rights Reserved. Amentotech.'  }}}</p>
-                    @if(!empty($footer['pages']))
-                        <nav class="wt-addnav">
-                            <ul>
-                                @foreach($footer['pages'] as $menu_page)
-                                    @php $page = \App\Page::where('id', $menu_page)->first(); @endphp
-                                    @if (!empty($page))
-                                        <li><a href="{{{ url('page/'.$page->slug) }}}">{{{ $page->title }}}</a></li>
-                                    @endif
-                                @endforeach
-                            </ul>
-                        </nav>
-                    @endif
+                <div class="col-md-6">
+                    <p>© 2021 All Rights Reserved. </p>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-inline mb-0">
+                        <li class="px-2"> <a href="javascript:;" target="_self">Privacy Policy</a> </li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </div>
-</footer>
+    </footer>

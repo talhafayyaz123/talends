@@ -73,20 +73,20 @@
                 </div>
                 <div class="col-md-4">
                     <div class="talend_img_card">
-                    <img src="{{ asset('talends/assets/img/hire.png')}}" alt="">
-                        <h3>Post your job & Hire a Local Talent</h3>
+                    <a href="{{ route('findTalends') }}">  <img src="{{ asset('talends/assets/img/hire.png')}}" alt="">
+                        <h3>Post your job & Hire a Local Talent</h3></a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="talend_img_card">
-                        <img src="{{ asset('talends/assets/img/browse.png')}}" alt="">
-                        <h3>Browse a Job/BUY A PROJECT </h3>
+                    <a href="{{ route('browseJobs') }}">    <img src="{{ asset('talends/assets/img/browse.png')}}" alt="">
+                        <h3>Browse a Job/BUY A PROJECT </h3></a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="talend_img_card">
-                        <img src="{{ asset('talends/assets/img/find.png')}}" alt="">
-                        <h3>Let us help you to find “The Right Talent”</h3>
+                     <a href="{{ route('whyTalends') }}" >   <img src="{{ asset('talends/assets/img/find.png')}}" alt="">
+                        <h3>Let us help you to find “The Right Talent”</h3></a>
                     </div>
                 </div>
             </div>

@@ -29,6 +29,8 @@
 	<link href="{{ asset('css/themify-icons.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/jquery-ui-min.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/linearicons.css') }}" rel="stylesheet">
+
+
 	@stack('sliderStyle')
 	<link href="{{ asset('css/main.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/custom.css') }}" rel="stylesheet">
@@ -41,6 +43,7 @@
 	<link href="{{ asset('css/maintwo.css') }}" rel="stylesheet">
 	@php echo \App\Typo::setSiteStyling(); @endphp
     <link href="{{ asset('css/transitions.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/customization.css') }}" rel="stylesheet">
 	@stack('stylesheets')
 	<script type="text/javascript">
 		var APP_URL = {!! json_encode(url('/')) !!}
@@ -110,6 +113,7 @@
 	<script src="{{ asset('js/scrollbar.min.js') }}"></script>
 	<script src="{{ asset('js/particles.min.js') }}"></script>
     <script src="{{ asset('js/jquery-ui-min.js') }}"></script>
+	<script src="{{ asset('talends/assets/js/main.js') }}"></script>
     @stack('scripts')
     <script>
 		

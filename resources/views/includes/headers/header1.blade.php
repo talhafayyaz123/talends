@@ -1,85 +1,151 @@
-<header id="wt-header" class="wt-header wt-haslayout wt-headervtwo">
-    <div class="wt-navigationarea">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    @auth
-                        {{ Helper::displayEmailWarning() }}
-                    @endauth
-                    @if (!empty($logo) || Schema::hasTable('site_managements'))
-                        <strong class="wt-logo"><a href="{{{ url('/') }}}"><img src="{{{ asset($logo) }}}" alt="{{{ trans('Logo') }}}"></a></strong>
-                    @endif
-                    @if (!empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->uri() != '/' && Route::getCurrentRoute()->uri() != 'home')
-                        <search-form
-                        :placeholder="'{{ trans('lang.looking_for') }}'"
-                        :freelancer_placeholder="'{{ trans('lang.search_filter_list.freelancer') }}'"
-                        :employer_placeholder="'{{ trans('lang.search_filter_list.employers') }}'"
-                        :job_placeholder="'{{ trans('lang.search_filter_list.jobs') }}'"
-                        :service_placeholder="'{{ trans('lang.search_filter_list.services') }}'"
-                        :no_record_message="'{{ trans('lang.no_record') }}'"
-                        >
-                        </search-form>
-                    @endif
-                    <div class="wt-rightarea">
-                        @if (file_exists(resource_path('views/extend/includes/menu.blade.php'))) 
-                            @include('extend.includes.menu', ['page_order' => $page_order])
-                        @else 
-                            @include('includes.menu', ['page_order' => $page_order])
-                        @endif
-                        @guest
-                            <div class="wt-loginarea">
-                                <div class="wt-loginoption">
-                                    
-                                <a href="javascript:void(0);" id="wt-loginbtn" class="wt-loginbtn signin-btn">{{{trans('lang.login') }}}</a>
+<header>
+    <div class="container p-0">
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="{{ route('home') }}">
+                <img src="{{ asset('talends/assets/img/logo.svg')}}" alt="Dynamics">
+            </a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#theme_menu_toggle" aria-expanded="false" aria-controls="theme_menu_toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
 
+            @php
+            $header_menus=App\Helper::headerMenus();
+            $class='';
+            @endphp
 
-                                    <div class="wt-loginformhold" @if ($errors->has('email') || $errors->has('password')) style="display: block;" @endif>
-                                        <div class="wt-loginheader">
-                                            <span>{{{ trans('lang.login') }}}</span>
-                                            <a href="javascript:;"><i class="fa fa-times"></i></a>
-                                        </div>
-                                        <form method="POST" action="{{ route('login') }}" class="wt-formtheme wt-loginform do-login-form">
-                                            @csrf
-                                            <fieldset>
-                                                <div class="form-group">
-                                                    <input id="email" type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-                                                        placeholder="Email" required autofocus>
-                                                    @if ($errors->has('email'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('email') }}</strong>
-                                                    </span>
-                                                    @endif
-                                                </div>
-                                                <div class="form-group">
-                                                    <input id="password" type="password" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
-                                                        placeholder="Password" required>
-                                                    @if ($errors->has('password'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $errors->first('password') }}</strong>
-                                                    </span>
-                                                    @endif
-                                                </div>
-                                                <div class="wt-logininfo">
-                                                        <button type="submit" class="wt-btn do-login-button">{{{ trans('lang.login') }}}</button>
-                                                    <span class="wt-checkbox">
-                                                        <input id="remember" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
-                                                        <label for="remember">{{{ trans('lang.remember') }}}</label>
-                                                    </span>
-                                                </div>
-                                            </fieldset>
-                                            <div class="wt-loginfooterinfo">
-                                                @if (Route::has('password.request'))
-                                                    <a href="{{ route('password.request') }}" class="wt-forgot-password">{{{ trans('lang.forget_pass') }}}</a>
-                                                @endif
-                                                <a href="{{{ route('register') }}}">{{{ trans('lang.create_account') }}}</a>
+            @auth
+                @php
+
+                $class='padding-left: 6% !important;justify-content: normal;';
+                @endphp
+            @endauth
+
+            <div class="collapse navbar-collapse" style="<?php echo $class; ?>" id="theme_menu_toggle">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">{!! $header_menus['title4'] ?? '' !!} <i class="fas fa-angle-down"></i></a>
+                        <div class="nav_dropdown" aria-hidden="false" id="dropdown3">
+                            <ul class="iconList threeColumns">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        @if(isset( $header_menus['sub_menu_item2']) && !empty($header_menus['sub_menu_item2']) )
+                                        @foreach($header_menus['sub_menu_item2'] as $key =>$category)
+
+                                        <div class="col-md-3">
+                                            <div class="menu_browse_box">
+                                                <a href="{{ route('findTalends') }}">
+                                                    {{ $category['title'] }}
+                                                </a>
                                             </div>
-                                        </form>
+                                        </div>
+
+                                        @endforeach
+                                        @endif
+
                                     </div>
                                 </div>
-                                <a href="{{{ route('register') }}}" class=" joinin-btn">{{{ trans('lang.join_now') }}}</a>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">{!! $header_menus['title3'] ?? '' !!} <i class="fas fa-angle-down"></i></a>
+                        <div class="nav_dropdown" aria-hidden="false" id="dropdown3">
+                            <ul class="iconList threeColumns">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        @if(isset( $header_menus['sub_menu_item1'] ) && !empty($header_menus['sub_menu_item1']) )
+                                        @foreach($header_menus['sub_menu_item1'] as $key =>$category)
+
+                                        <div class="col-md-3">
+                                            <div class="menu_browse_box">
+                                                <a href="{{ route('browseJobs') }}">
+                                                    {{ $category['title'] }}
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        @endforeach
+                                        @endif
+
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('whyTalends') }}">{!! $header_menus['title2'] ?? '' !!}</a>
+                    </li>
+                    <li class="nav-item  nav_item_right menu_green_cta_box">
+                        <a class="nav-link" href="{{ route('government') }}"> {!! $header_menus['title1'] ?? '' !!}</a>
+                    </li>
+                    @guest
+                    <li class="nav-item nav_item_right">
+                    
+                       
+                        <div class="wt-loginarea">
+                            <div class="wt-loginoption">
+
+                                <a href="javascript:void(0);" id="wt-loginbtn" class="wt-loginbtn signin-btn nav-link menu_green_cta">{{{trans('lang.login') }}}</a>
+
+
+                                <div class="wt-loginformhold" @if ($errors->has('email') || $errors->has('password')) style="display: block;" @endif>
+                                    <div class="wt-loginheader">
+                                        <span>{{{ trans('lang.login') }}}</span>
+                                        <a href="javascript:;"><i class="fa fa-times"></i></a>
+                                    </div>
+                                    <form method="POST" action="{{ route('login') }}" class="wt-formtheme wt-loginform do-login-form">
+                                        @csrf
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <input id="email" type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Email" required autofocus>
+                                                @if ($errors->has('email'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('email') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
+                                            <div class="form-group">
+                                                <input id="password" type="password" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="Password" required>
+                                                @if ($errors->has('password'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('password') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
+                                            <div class="wt-logininfo">
+                                                <button type="submit" class="wt-btn do-login-button">{{{ trans('lang.login') }}}</button>
+                                                <span class="wt-checkbox">
+                                                    <input id="remember" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                                                    <label for="remember">{{{ trans('lang.remember') }}}</label>
+                                                </span>
+                                            </div>
+                                        </fieldset>
+                                        <div class="wt-loginfooterinfo">
+                                            @if (Route::has('password.request'))
+                                            <a href="{{ route('password.request') }}" class="wt-forgot-password">{{{ trans('lang.forget_pass') }}}</a>
+                                            @endif
+                                            <a href="{{{ route('register') }}}">{{{ trans('lang.create_account') }}}</a>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                        @endguest
-                        @auth
+                        </div>
+                     
+                    </li>
+                    <li class="nav-item">
+                        
+                        <a class="nav-link joinin-btn" href="{{ route('register') }}">Join Now</a>
+                        
+                    </li>
+                    @endguest
+
+
+                    @auth
+                    <li class="nav-item">
+                    
                             @php
                                 $user = !empty(Auth::user()) ? Auth::user() : '';
                                 $role = !empty($user) ? $user->getRoleNames()->first() : array();
@@ -91,6 +157,7 @@
                                 $payment_module = !empty($payment_settings) && !empty($payment_settings[0]['enable_packages']) ? $payment_settings[0]['enable_packages'] : 'true';
                                 $employer_payment_module = !empty($payment_settings) && !empty($payment_settings[0]['employer_package']) ? $payment_settings[0]['employer_package'] : 'true';
                             @endphp
+                            
                                 <div class="wt-userlogedin">
                                     <figure class="wt-userimg">
                                         <img src="{{{ asset(Helper::getImage('uploads/users/' . Auth::user()->id, $profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}">
@@ -105,13 +172,12 @@
                                         @include('back-end.includes.profile-menu', ['styling' => $page_header_styling])
                                     @endif
                                 </div>
+                    </li>
                         @endauth
-                        @if (!empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->uri() != '/' && Route::getCurrentRoute()->uri() != 'home')
-                            <div class="wt-respsonsive-search"><a href="javascript:;" class="wt-searchbtn"><i class="fa fa-search"></i></a></div>
-                        @endif
-                    </div>
-                </div>
+
+
+                </ul>
             </div>
-        </div>
+        </nav>
     </div>
 </header>

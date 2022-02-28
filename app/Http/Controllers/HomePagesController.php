@@ -178,6 +178,8 @@ class HomePagesController extends Controller
        
         $footer_how_work=AboutTalendsPage::where('page_type','footer-how-work')->first();
 
+        $join_community=AboutTalendsPage::where('page_type','join_community')->first();
+
         $unserialize_menu_array = SiteManagement::getMetaValue('footer_menu1');
         $menu_title = DB::table('site_managements')->select('meta_value')->where('meta_key', 'footer_title1')->get()->first();
 
@@ -213,9 +215,16 @@ class HomePagesController extends Controller
         }else if($footer_type=='header_menus'){
             return view(
                 'back-end.admin.settings.front-footer.header_menus.index',compact('header_menu_title1','header_menu_title2','header_menu_title3','unserialize_header_menu3_array','header_menu_title4','unserialize_menu4_array'));
+        }else if($footer_type=='join_community'){
+            return view(
+                'back-end.admin.settings.front-footer.join-community',
+                compact('join_community')
+            );
         }
 
     }
+
+
 
     public function storeFooterHowWork(Request $request)
     { 
@@ -238,6 +247,23 @@ class HomePagesController extends Controller
     }
 
 
+    public function storeFooterJoinCommunity(Request $request)
+    { 
+        $this->validate(
+            $request, [
+         'banner_description' => 'required',
+        'about_talends_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        ]
+        );
+       
+
+        $about_talends = new AboutTalendsPage;
+        $about_talends->saveJoinCommunity($request);
+        Session::flash('message','Join Community Record Saved Successfully');
+        return Redirect::back();
+    }
+
+
     public function updateFooterHowWork(Request $request,$id)
     { 
         $this->validate(
@@ -254,6 +280,22 @@ class HomePagesController extends Controller
         $about_talends = new AboutTalendsPage;
         $about_talends->updateHowActuallyWork($request,$id);
         Session::flash('message','Footer How Actually It Works Record updated Successfully');
+        return Redirect::back();
+    }
+
+
+    public function updateJoinCommunity(Request $request,$id)
+    { 
+        $this->validate(
+            $request, [
+         'banner_description' => 'required',
+        'about_talends_image'=>'mimes:jpeg,png,jpg,gif,svg|max:1024',
+        ]
+        );
+    
+        $about_talends = new AboutTalendsPage;
+        $about_talends->updateJoinCommunity($request,$id);
+        Session::flash('message','Footer Join Community Record updated Successfully');
         return Redirect::back();
     }
 

@@ -99,17 +99,21 @@
             </div>
         </div>
     </section>
-
+    @php
+ $join_community=App\Helper::getJoinCommunity();
+@endphp
     <section class="join_community pb-0">
         <div class="container">
             <div class="row row-eq-height">
                 <div class="col-md-8 pb-3 align-self-center">
-                    <h2 class="text-white">Join Talends <span class="theme_color">Community</span></h2>
-                    <a href="" class="theme_btn">Find A JOB</a>
+                {!!  $join_community->banner_description  ?? ''  !!}
+                                    <a href="" class="theme_btn">Find A JOB</a>
                     <a href="" class="theme_btn inverse_btn ml-3">Submit a job</a>
                 </div>
                 <div class="col-md-4">
-                    <img src="{{ asset('talends/assets/img/join_talend.png')}}" class="w-100" alt="">
+                @if(isset( $join_community->about_talends_image) )
+                        <img src="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="w-100" alt="">
+                        @endif          
                 </div>
             </div>
         </div>

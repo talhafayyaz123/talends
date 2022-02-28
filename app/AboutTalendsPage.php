@@ -465,4 +465,67 @@ class AboutTalendsPage extends Model
         }
     }
 
+    public function saveJoinCommunity($request)
+    {
+
+            if (!empty($request)) {
+            
+            $this->page_type = 'join_community';
+            
+            $this->banner_description = $request['banner_description'];
+         
+ 
+             if (!empty($request->hasFile('about_talends_image'))) {
+                $about_talends_image = $request->file('about_talends_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/footer';
+                $imageName = time().'.'.$about_talends_image->getClientOriginalName();
+                $request->about_talends_image->move($new_path, $imageName);
+                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->about_talends_image = null;
+            }
+
+            $this->save();
+            $json['type'] = 'success';
+            $json['message'] = 'About Talends Record Created';
+            return $json;
+        }
+    }
+
+
+    public function updateJoinCommunity($request, $id)
+    {
+
+        if (!empty($request)) {
+            $footer_how_work = self::find($id);
+         
+            $footer_how_work->banner_description = $request['banner_description'];
+         
+            
+            if (!empty($request->hasFile('about_talends_image'))) {
+                $about_talends_image = $request->file('about_talends_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/footer' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/footer' . '/' . $request->hidden_about_talends_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/footer';
+                $imageName = time().'.'.$about_talends_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->about_talends_image->move($new_path, $imageName);
+                $footer_how_work->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $footer_how_work->about_talends_image = $request->hidden_about_talends_image;
+            }
+
+
+            return $footer_how_work->save();
+        }
+    }
+
+
+
 }

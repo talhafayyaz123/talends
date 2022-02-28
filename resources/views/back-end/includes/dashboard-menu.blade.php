@@ -60,6 +60,8 @@
                             </a>
                             <ul class="sub-menu">
                                 <li><hr><a href="{{{ url('admin/settings/front-footer/how-works') }}}">Footer How It Works</a></li>
+                                <li><hr><a href="{{{ url('admin/settings/front-footer/join_community') }}}">Join Community</a></li>
+
                                 <li><hr><a href="{{{ url('admin/settings/front-footer/footer_menus') }}}">Footer Menus</a></li>
                                 <li><hr><a href="{{{ url('admin/settings/front-footer/header_menus') }}}">Header Menus</a></li>
                                

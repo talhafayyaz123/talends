@@ -1941,7 +1941,7 @@ body.wt-login .wt-loginarea {
 	display: block;
 }
 
-.wt-userlogedin {
+/* .wt-userlogedin {
 	float: right;
 	padding: 20px;
 	display: none;
@@ -1949,7 +1949,7 @@ body.wt-login .wt-loginarea {
 	position: relative;
 	padding-right: 0;
 	position: relative;
-}
+} */
 
 .wt-userlogedin:before {
 	left: 0;
@@ -16112,19 +16112,19 @@ a:focus {
 	content: none;
 }
 
-.theme_bg_dark {
+ .theme_bg_dark {
 	background: #166702 !important;
-}
+} 
 
-.header_text_color {
+ .header_text_color {
 	color: #574557 !important;
-}
+} 
 
-.menu_green_cta {
+ .menu_green_cta {
 	background: #349f1a !important;
-}
+} 
 
-.signin-btn {
+/* .signin-btn {
 	border-radius: 30px;
 	margin: 0 !important;
 	padding: 8px 24px;
@@ -16132,7 +16132,7 @@ a:focus {
 	color: #fff !important;
 	background: #349f1a;
 	display: inline-block;
-}
+}*/
 
 .joinin-btn {
 	border: solid 1px #349f1a !important;
@@ -16140,10 +16140,11 @@ a:focus {
 	display: inline-block;
 	border-radius: 30px;
 	margin: 0 !important;
-	padding: 8px 24px !important;
+	padding: 8px 35px !important;
 	text-align: center;
 	background: transparent !important;
-}
+	
+}  
 
 .wt-btn:hover,
 .wt-dropdowarrow,
@@ -16209,13 +16210,13 @@ input:focus,
 	background: #fff !important;
 }
 
-.wt-footer {
+/* .wt-footer {
 	background: #12300b !important;
 }
 
 .wt-copyrights span {
 	color: #ccc;
-}
+} */
 
 .wt-joinsteps li.wt-active a {
 	color: #349f1a !important;
@@ -16228,6 +16229,11 @@ input:focus,
 .wt-companysdetails,.wt-viewjobholder,.wt-articlecontent {
 	background: #f8faf7 !important; 
 }
-.wt-navigation > ul > li:hover > a{
+
+/* .wt-navigation > ul > li:hover > a{
 	color:  #349f1a !important;
+} */
+
+ header .navbar-expand-lg .navbar-collapse {
+	padding-top: 0px !important;	
 }

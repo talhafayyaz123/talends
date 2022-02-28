@@ -60,6 +60,11 @@ class Helper extends Model
         return $footer_how_work;
     }
 
+    public static function getJoinCommunity(){
+        $join_community=AboutTalendsPage::where('page_type','join_community')->first();
+        return $join_community;
+    }
+
     public static function footerMenu1(){
         
         $data=array();
