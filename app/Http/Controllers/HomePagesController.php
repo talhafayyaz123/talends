@@ -224,7 +224,70 @@ class HomePagesController extends Controller
 
     }
 
+    public function HomePageSettings($type=''){
+        $banner_settings=AboutTalendsPage::where('page_type','banner_settings')->first();
+        $find_right_opportunity=AboutTalendsPage::where('page_type','find_right_opportunity')->first();
+        $team_on_demand=AboutTalendsPage::where('page_type','team_on_demand')->first();
+        $why_choose_talends=AboutTalendsPage::where('page_type','why_choose_talends')->first();
+   
+     if($type=='banner_settings'){
+        return view(
+            'back-end.admin.settings.home_page_settings.banner_settings',compact('banner_settings','find_right_opportunity')
+        );
+     }else if($type=='team_demand'){
+        return view(
+            'back-end.admin.settings.home_page_settings.team_on_demand',compact('team_on_demand')
+        );
+     }else if($type=='why_choose_talends'){
+        return view(
+            'back-end.admin.settings.home_page_settings.why_choose_talends',compact('why_choose_talends')
+        );
+     }
 
+
+     
+
+    }
+
+
+ 
+    public function storeBannerSettings(Request $request)
+    { 
+        $this->validate(
+            $request, [
+         'banner_description' => 'required',
+        'internship_description' => 'required',
+        'internship_detail' => 'required',
+        'banner_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        'internship_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        'internship_detail_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+
+        ]
+        );
+       
+        $about_talends = new AboutTalendsPage;
+        $about_talends->saveBannerSettings($request);
+        Session::flash('message','Banner Settings Record Saved Successfully');
+        return Redirect::back();
+    }
+
+    
+    public function storeRightOpportunity(Request $request)
+    { 
+        $this->validate(
+            $request, [
+         'opportunity_heading1' => 'required',
+        'opportunity_heading2' => 'required',
+        'opportunity_heading3' => 'required',
+
+        ]
+        );
+       
+         $about_talends = new AboutTalendsPage;
+        $about_talends->saveRightOpportunitySettings($request);
+        Session::flash('message','Opportunity Provider Record Saved Successfully');
+        return Redirect::back(); 
+    }
 
     public function storeFooterHowWork(Request $request)
     { 
@@ -284,6 +347,28 @@ class HomePagesController extends Controller
     }
 
 
+    public function updateBannerSettings(Request $request,$id)
+    { 
+        $this->validate(
+            $request, [
+         'banner_description' => 'required',
+        'internship_description' => 'required',
+        'internship_detail' => 'required',
+        'banner_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        'internship_image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        'internship_detail_image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        ]
+        );
+
+
+       
+        $about_talends = new AboutTalendsPage;
+        $about_talends->updateBannerSettings($request,$id);
+        Session::flash('message','Banner Settings Record updated Successfully');
+        return Redirect::back();
+    }
+
+
     public function updateJoinCommunity(Request $request,$id)
     { 
         $this->validate(
@@ -300,6 +385,84 @@ class HomePagesController extends Controller
     }
 
 
+    public function storeTeamOnDemandSettings(Request $request)
+    { 
+
+        if($request->team_type=='add'){
+            $this->validate(
+                $request, [
+             'quality_description1' => 'required',
+            'quality_description2' => 'required',
+            'quality_description3' => 'required',
+            'quality_description4' => 'required',
+            'banner_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024'
+    
+            ]
+            );
+        }else{
+
+            $this->validate(
+                $request, [
+             'quality_description1' => 'required',
+            'quality_description2' => 'required',
+            'quality_description3' => 'required',
+            'quality_description4' => 'required',
+            'banner_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
+    
+            ]
+            );
+        }
+        
+       
+        $about_talends = new AboutTalendsPage;
+        $about_talends->storeTeamOnDemandSettings($request);
+        Session::flash('message','Team On Demand Settings Saved Successfully');
+        return Redirect::back();
+    }
+
+    public function storeWhyChooseTalendsSettings(Request $request)
+    { 
+
+        if($request->form_type=='add'){
+            $this->validate(
+                $request, [
+             'title1' => 'required',
+            'title2' => 'required',
+            'title3' => 'required',
+            'title4' => 'required',
+            'title5' => 'required',
+            'title1_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'title2_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'title3_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'title4_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'title5_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            ]
+            );
+        }else{
+
+            $this->validate(
+                $request, [
+            'title1' => 'required',
+            'title2' => 'required',
+            'title3' => 'required',
+            'title4' => 'required',
+            'title5' => 'required',
+            'title1_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'title2_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'title3_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'title4_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'title5_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+    
+            ]
+            );
+        }
+        
+       
+        $about_talends = new AboutTalendsPage;
+        $about_talends->storeWhyChooseTalendsSettings($request);
+        Session::flash('message','Why Choose Talends Settings Saved Successfully');
+        return Redirect::back();
+    }
     /**
      * Display the specified resource.
      *

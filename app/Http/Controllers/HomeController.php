@@ -79,6 +79,10 @@ class HomeController extends Controller
                 $languages = Language::latest()->get()->take(8);
                 $page_header = '';
                 $currency   = SiteManagement::getMetaValue('commision');
+                $find_right_opportunity=AboutTalendsPage::where('page_type','find_right_opportunity')->first();
+                $team_on_demand=AboutTalendsPage::where('page_type','team_on_demand')->first();
+                $why_choose_talends=AboutTalendsPage::where('page_type','why_choose_talends')->first();
+
                 $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
                 if (file_exists(resource_path('views/extend/front-end/pages/show.blade.php'))) {
                     return View::make(
@@ -129,7 +133,10 @@ class HomeController extends Controller
                             'categories',
                             'skills',
                             'locations',
-                            'languages'
+                            'languages',
+                            'find_right_opportunity',
+                            'team_on_demand',
+                            'why_choose_talends'
                         )
                     );
                 }

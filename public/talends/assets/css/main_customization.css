@@ -506,3 +506,28 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 .header_menu{
 	align-items: normal !important;
 }
+.opportunity_card h3 {
+	font: 24px trajan,sans-serif;
+	bottom: unset;
+	top: 0;
+}
+.opportunity_card {
+	min-height: 253px;
+	background: #4ABD2E;
+	border-radius: 16px;
+}
+.opportunity_card span {
+    display: block;
+    color: #fff;
+    font: 24px trajan,sans-serif;
+    position: absolute !important;
+    bottom: 16px;
+    left: 12px;
+}
+.opportunity_card img {
+    width: 34px;
+    height: auto;
+    position: absolute;
+    bottom: 12px;
+    left: 180px;
+}

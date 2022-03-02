@@ -36,9 +36,15 @@
 
                                         <div class="col-md-3">
                                             <div class="menu_browse_box">
-                                                <a href="{{ route('findTalends') }}">
-                                                    {{ $category['title'] }}
-                                                </a>
+                                            @if($category['url']!='#')
+                                                    <a href="{{ route($category['url'])  }}">
+                                                        {{  $category['title'] }}
+                                                    </a>
+                                                    @else
+                                                    <a href="{{ $category['url'] }}">
+                                                        {{  $category['title'] }}
+                                                    </a>
+                                                    @endif
                                             </div>
                                         </div>
 
@@ -61,9 +67,15 @@
 
                                         <div class="col-md-3">
                                             <div class="menu_browse_box">
-                                                <a href="{{ route('browseJobs') }}">
-                                                    {{ $category['title'] }}
-                                                </a>
+                                            @if($category['url']!='#')
+                                                    <a href="{{ route($category['url'])  }}">
+                                                        {{  $category['title'] }}
+                                                    </a>
+                                                    @else
+                                                    <a href="{{ $category['url'] }}">
+                                                        {{  $category['title'] }}
+                                                    </a>
+                                                    @endif
                                             </div>
                                         </div>
 

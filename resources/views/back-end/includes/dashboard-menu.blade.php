@@ -68,6 +68,21 @@
                             </ul>
                         </li>
 
+
+                        <li class="menu-item-has-children">
+                            <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
+                            <a href="javascript:void(0)">
+                                <i class="ti-layers"></i>
+                                <span>Home Page Settings</span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><hr><a href="{{{ url('admin/settings/home-page-settings/banner_settings') }}}">Banner Settings</a></li>
+                                <li><hr><a href="{{{ url('admin/settings/home-page-settings/team_demand') }}}">Team On Demand</a></li>
+                                <li><hr><a href="{{{ url('admin/settings/home-page-settings/why_choose_talends') }}}">Why Choose Talends</a></li>
+
+                            </ul>
+                        </li>
+
                     <li class="menu-item-has-children">
                             <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                             <a href="javascript:void(0)">

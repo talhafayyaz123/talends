@@ -212,6 +212,19 @@ Route::group(
 
         //Front Footer
         Route::get('admin/settings/front-footer/{type}', 'HomePagesController@frontFooter')->name('frontFooter');
+        Route::get('admin/settings/home-page-settings/{type}', 'HomePagesController@HomePageSettings')->name('HomePageSettings');
+        Route::post('admin/store-banner_settings', 'HomePagesController@storeBannerSettings');
+
+        Route::post('admin/store-team_on_demand', 'HomePagesController@storeTeamOnDemandSettings');
+       
+
+        Route::post('admin/store_home_page-right_opportunity', 'HomePagesController@storeRightOpportunity');
+        
+        Route::post('admin/update-homepage-banner-settings/{id}', 'HomePagesController@updateBannerSettings');
+        
+        Route::post('admin/store-why_choose_talends', 'HomePagesController@storeWhyChooseTalendsSettings');
+        
+
         Route::post('admin/store-footer-how-work', 'HomePagesController@storeFooterHowWork');
         
         Route::post('admin/join_community', 'HomePagesController@storeFooterJoinCommunity');

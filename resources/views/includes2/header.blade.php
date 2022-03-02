@@ -13,7 +13,6 @@
 
                 @php
         $header_menus=App\Helper::headerMenus();
-
         @endphp
                 <div class="collapse navbar-collapse" id="theme_menu_toggle">
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0 header_menu">
@@ -28,10 +27,17 @@
                             @foreach($header_menus['sub_menu_item2'] as $key =>$category)  
                             
                             <div class="col-md-3">
-                                                <div class="menu_browse_box">
-                                                    <a href="{{ route('findTalends') }}">
+                           
+                            <div class="menu_browse_box">
+                                                    @if($category['url']!='#')
+                                                    <a href="{{ route($category['url'])  }}">
                                                         {{  $category['title'] }}
                                                     </a>
+                                                    @else
+                                                    <a href="{{ $category['url'] }}">
+                                                        {{  $category['title'] }}
+                                                    </a>
+                                                    @endif
                                                 </div>
                                             </div>
                             
@@ -53,11 +59,22 @@
                                         @if(isset( $header_menus['sub_menu_item1'] )  && !empty($header_menus['sub_menu_item1'])  )  
                             @foreach($header_menus['sub_menu_item1'] as $key =>$category)  
                             
+                          
                             <div class="col-md-3">
                                                 <div class="menu_browse_box">
-                                                    <a href="{{ route('browseJobs') }}">
+
+
+                                                @if($category['url']!='#')
+                                                    <a href="{{ route($category['url'])  }}">
                                                         {{  $category['title'] }}
                                                     </a>
+                                                    @else
+                                                    <a href="{{ $category['url'] }}">
+                                                        {{  $category['title'] }}
+                                                    </a>
+                                                    @endif
+
+                                                    
                                                 </div>
                                             </div>
                             

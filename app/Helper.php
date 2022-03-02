@@ -65,6 +65,14 @@ class Helper extends Model
         return $join_community;
     }
 
+
+    
+    public static function getBannerSettings(){
+        $banner_settings=AboutTalendsPage::where('page_type','banner_settings')->first();
+        return $banner_settings;
+    }
+
+    
     public static function footerMenu1(){
         
         $data=array();
