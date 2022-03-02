@@ -3,7 +3,9 @@
 @php
     $employees      = Helper::getEmployeesList();
     $company_bedget      = Helper::getComapnyBudgetList();
-
+    $skills_categories      = Helper::getSkillsCategories();
+    $skills      = Helper::getSkills();
+    
     $departments    = App\Department::all();
     $locations      = App\Location::select('title', 'id')->get()->pluck('title', 'id')->toArray();
     $roles          = Spatie\Permission\Models\Role::all()->toArray();

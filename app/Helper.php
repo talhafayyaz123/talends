@@ -31,6 +31,7 @@ use App\Page;
 use App\SiteManagement;
 use App\Badge;
 use App\AboutTalendsPage;
+use App\Skill;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Schema;
 use Request;
@@ -72,6 +73,8 @@ class Helper extends Model
         return $banner_settings;
     }
 
+
+    
     
     public static function footerMenu1(){
         
@@ -226,6 +229,12 @@ class Helper extends Model
        $categories=Category::all();
        return $categories;
     }
+
+    public static function getSkills(){
+        $skills=Skill::all();
+        return $skills;
+     }
+
     /**
      * Generate random code
      *
