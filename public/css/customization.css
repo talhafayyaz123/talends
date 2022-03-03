@@ -403,3 +403,7 @@ footer .row .col-md-6:last-child >ul {
     display: block;
     text-align: right;
 }
+
+.freelancer_registration_options{
+	width: 30% !important;
+}

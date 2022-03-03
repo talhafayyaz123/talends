@@ -345,7 +345,102 @@
                                                                 </div>
 
 
-                                                                
+                                                                <div class="freelancer_properties" v-if='user_type== "freelancer" '>
+                                                                @if ($role['role_type'] === 'freelancer')
+                                                                    @if ($show_emplyr_inn_sec === 'true')
+                                                                        <div class="wt-accordiondetails collapse show" id="collapseOne" aria-labelledby="headingOne">
+                                                                          
+                                                                    
+
+                                                                            <div class="wt-radioboxholder freelancer_registration_options">
+                                                                                    <div class="wt-title">
+                                                                                        <h4>Gender</h4>
+                                                                                    </div>
+                                                                                  
+                                                                                        <span class="wt-radio">
+                                                                                            <input id="wt-gender-1" type="radio" name="gender" value="male" checked="">
+                                                                                            <label for="wt-gender-1">Male</label>
+                                                                                        </span>
+
+
+                                                                                        <span class="wt-radio">
+                                                                                            <input id="wt-gender-2" type="radio" name="gender" value="female" checked="">
+                                                                                            <label for="wt-gender-2">Female</label>
+                                                                                        </span>
+                                                                                   
+                                                                                </div>
+
+
+                                                                                <div class="wt-radioboxholder freelancer_registration_options">
+                                                                                    <div class="wt-title">
+                                                                                        <h4>Availability</h4>
+                                                                                    </div>
+                                                                                  
+                                                                                        <span class="wt-radio">
+                                                                                            <input id="wt-avail-1" type="radio" name="availability" value="remote" checked="">
+                                                                                            <label for="wt-avail-1">Remote</label>
+                                                                                        </span>
+
+                                                                                        
+                                                                                        <span class="wt-radio">
+                                                                                            <input id="wt-avail-2" type="radio" name="availability" value="on-site" checked="">
+                                                                                            <label for="wt-avail-2">On Site</label>
+                                                                                        </span>
+                                                                                   
+                                                                                </div>
+
+                                                                                
+                                                                                <div class="wt-radioboxholder freelancer_registration_options">
+                                                                                    <div class="wt-title">
+                                                                                        <h4>Price</h4>
+                                                                                    </div>
+                                                                                 
+                                                                                @foreach ($company_bedget as $key => $budget)
+                                                                                    <span class="wt-radio">
+                                                                                        <input id="wt-budget-{{{$key}}}" type="radio" name="budget" value="{{{$budget['value']}}}" checked="">
+                                                                                        <label for="wt-budget-{{{$key}}}">{{{$budget['title']}}}</label>
+                                                                                    </span>
+                                                                                @endforeach
+                                                                            
+                                                                            
+                                                                        </div>
+
+                                                                          <br><br><br><br><br><br><br><br><br>
+
+                                                                        <div class="wt-radioboxholder">
+                                                                                <div class="wt-title">
+                                                                                    <h4>Categories</h4>
+                                                                                </div>
+                                                                                @foreach ($skills_categories as $key => $category)
+                                                                                    <span class="wt-radio">
+                                                                                        <input id="wt-just-{{{$key}}}" type="radio" name="category_id" value="{{{$category->id}}}" checked="">
+                                                                                        <label for="wt-just-{{{$key}}}">{{{$category->title}}}</label>
+                                                                                    </span>
+                                                                                @endforeach
+                                                                            </div>
+
+
+                                                                            @if ($skills->count() > 0)
+                                                                                <div class="wt-radioboxholder">
+                                                                                    <div class="wt-title">
+                                                                                        <h4>Skills</h4>
+                                                                                    </div>
+                                                                                    @foreach ($skills as $key => $skill)
+                                                                                        <span class="wt-radio">
+                                                                                            <input id="wt-skill-{{{$skill->id}}}" type="radio" name="skill_id" value="{{{$skill->id}}}" checked="">
+                                                                                            <label for="wt-skill-{{{$skill->id}}}">{{{$skill->title}}}</label>
+                                                                                        </span>
+                                                                                    @endforeach
+                                                                                </div>
+                                                                               
+                                                                            @endif
+
+
+
+                                                                        </div>
+                                                                    @endif    
+                                                                @endif
+                                                                </div>
 
 
 
@@ -401,7 +496,8 @@
                                                                                     </span>
                                                                                 @endforeach
                                                                             </div>
-                                                                            @if ($departments->count() > 0)
+                                                                            
+                                                                        
                                                                                 <div class="wt-radioboxholder">
                                                                                     <div class="wt-title">
                                                                                         <h4>Minimum Budget</h4>
@@ -414,7 +510,7 @@
                                                                                     </span>
                                                                                 @endforeach
                                                                             
-                                                                            @endif
+                                                                            
                                                                         </div>
                                                                     @endif    
                                                                 @endif

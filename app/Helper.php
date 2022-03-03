@@ -333,6 +333,7 @@ class Helper extends Model
         return $list;
     }
 
+    
     /**
      * Get location flag
      *
