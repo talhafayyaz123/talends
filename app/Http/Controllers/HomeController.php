@@ -84,6 +84,7 @@ class HomeController extends Controller
                 $find_right_opportunity=AboutTalendsPage::where('page_type','find_right_opportunity')->first();
                 $team_on_demand=AboutTalendsPage::where('page_type','team_on_demand')->first();
                 $why_choose_talends=AboutTalendsPage::where('page_type','why_choose_talends')->first();
+                $trusted_by=AboutTalendsPage::where('page_type','trusted_by')->first();
               
                 $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
                 if (file_exists(resource_path('views/extend/front-end/pages/show.blade.php'))) {
@@ -138,7 +139,8 @@ class HomeController extends Controller
                             'languages',
                             'find_right_opportunity',
                             'team_on_demand',
-                            'why_choose_talends'
+                            'why_choose_talends',
+                            'trusted_by'
                         )
                     );
                 }

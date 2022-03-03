@@ -953,4 +953,60 @@ class AboutTalendsPage extends Model
         }
     }
 
+    public function saveTrustedBySettings($request)
+    {
+
+            if (!empty($request)) {
+                      
+            if($request->form_type=='update'){
+                self::where('page_type','trusted_by')->delete();
+            }
+            $this->page_type = 'trusted_by';
+            
+         
+            if($request->form_type=='add'){
+             if (!empty($request->hasFile('trusted_by_image'))) {
+                $trusted_by_image = $request->file('trusted_by_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
+                $imageName = time().'.'.$trusted_by_image->getClientOriginalName();
+                $request->trusted_by_image->move($new_path, $imageName);
+                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->about_talends_image = null;
+            }
+
+        }else{
+           
+            
+            if (!empty($request->hasFile('trusted_by_image'))) {
+                $trusted_by_image = $request->file('trusted_by_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_about_talends_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
+                $imageName = time().'.'.$trusted_by_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->trusted_by_image->move($new_path, $imageName);
+                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->about_talends_image = $request->hidden_about_talends_image;
+            }
+
+
+
+        }
+           ////////////////////////////////////////////
+
+            $this->save();
+            $json['type'] = 'success';
+            $json['message'] = 'Team On Demand Settings Record Created';
+            return $json;
+        }
+    }
+
 }

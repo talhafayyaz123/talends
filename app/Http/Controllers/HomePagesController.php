@@ -229,10 +229,11 @@ class HomePagesController extends Controller
         $find_right_opportunity=AboutTalendsPage::where('page_type','find_right_opportunity')->first();
         $team_on_demand=AboutTalendsPage::where('page_type','team_on_demand')->first();
         $why_choose_talends=AboutTalendsPage::where('page_type','why_choose_talends')->first();
+        $trusted_by=AboutTalendsPage::where('page_type','trusted_by')->first();
    
      if($type=='banner_settings'){
         return view(
-            'back-end.admin.settings.home_page_settings.banner_settings',compact('banner_settings','find_right_opportunity')
+            'back-end.admin.settings.home_page_settings.banner_settings',compact('banner_settings','find_right_opportunity','trusted_by')
         );
      }else if($type=='team_demand'){
         return view(
@@ -286,6 +287,32 @@ class HomePagesController extends Controller
          $about_talends = new AboutTalendsPage;
         $about_talends->saveRightOpportunitySettings($request);
         Session::flash('message','Opportunity Provider Record Saved Successfully');
+        return Redirect::back(); 
+    }
+
+
+      
+    public function storeTrustedByBanner(Request $request)
+    { 
+        
+        if($request->form_type=='add'){
+            $this->validate(
+                $request, [
+                    'trusted_by_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            ]
+            );
+        }else{
+            $this->validate(
+                $request, [
+                    'trusted_by_image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            ]
+            );
+        }
+        
+       
+         $about_talends = new AboutTalendsPage;
+        $about_talends->saveTrustedBySettings($request);
+        Session::flash('message','Trusted By Banner Saved Successfully');
         return Redirect::back(); 
     }
 

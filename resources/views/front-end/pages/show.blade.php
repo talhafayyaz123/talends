@@ -62,7 +62,9 @@
                 <div class="col-md-9">
                     <div class="trustedby_box">
                         <p>Trusted by:</p>
-                        <img src="{{ asset('talends/assets/img/trustedby.svg')}}" alt="">
+                        @if(isset( $trusted_by->about_talends_image) )
+                        <img src="{{asset('uploads/home-pages/banners/'.$trusted_by->about_talends_image)}}" class="w-100" alt="">
+                        @endif
                     </div>
                 </div>
             </div>

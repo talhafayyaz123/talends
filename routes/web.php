@@ -219,6 +219,8 @@ Route::group(
        
 
         Route::post('admin/store_home_page-right_opportunity', 'HomePagesController@storeRightOpportunity');
+
+        Route::post('admin/store_trusted_by_banner', 'HomePagesController@storeTrustedByBanner');
         
         Route::post('admin/update-homepage-banner-settings/{id}', 'HomePagesController@updateBannerSettings');
         
