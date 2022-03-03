@@ -38,7 +38,7 @@ use App\Payout;
 use App\SiteManagement;
 use App\Service;
 use App\Review;
-
+use App\Category;
 
 /**
  * Class FreelancerController
@@ -75,8 +75,10 @@ class FreelancerController extends Controller
     {
         $locations = Location::pluck('title', 'id');
         $skills = Skill::pluck('title', 'id');
+        $categories = Category::pluck('title','id');
         $profile = $this->freelancer::where('user_id', Auth::user()->id)
             ->get()->first();
+       
         $gender = !empty($profile->gender) ? $profile->gender : '';
         $hourly_rate = !empty($profile->hourly_rate) ? $profile->hourly_rate : '';
         $tagline = !empty($profile->tagline) ? $profile->tagline : '';
@@ -129,7 +131,8 @@ class FreelancerController extends Controller
                     'longitude',
                     'latitude',
                     'avater',
-                    'options'
+                    'options',
+                    'categories'
                 )
             );
         }
@@ -188,6 +191,7 @@ class FreelancerController extends Controller
      */
     public function storeProfileSettings(Request $request)
     {
+        
         $server = Helper::worketicIsDemoSiteAjax();
         if (!empty($server)) {
             $response['type'] = 'error';

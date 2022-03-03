@@ -56,6 +56,9 @@ class Category extends Model
         return $this->morphedByMany('App\User', 'catable');
     }
 
+    public function categoryFreelancers(){
+    	return $this->hasMany(Profile::class,'category_id');
+    }
 
     /**
      * Get all of the jobs that are assigned this category.

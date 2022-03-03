@@ -276,6 +276,7 @@ class User extends Authenticatable
         return $this->hasMany('App\item', 'subscriber');
     }
 
+   
     /**
      * Set slug before saving in DB
      *

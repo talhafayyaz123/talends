@@ -84,6 +84,7 @@ class Profile extends Model
         }
         $user->first_name = filter_var($request['first_name'], FILTER_SANITIZE_STRING);
         $user->last_name = filter_var($request['last_name'], FILTER_SANITIZE_STRING);
+        
         if (!empty($request['email'])) {
             $user->email = filter_var($request['email'], FILTER_SANITIZE_STRING);
         }
@@ -112,6 +113,8 @@ class Profile extends Model
         $profile->user()->associate($user_id);
         $profile->freelancer_type = 'Basic';
         $profile->hourly_rate = intval($request['hourly_rate']);
+        $profile->category_id = intval($request['category']);
+        $profile->availability = ($request['availability']);
         $profile->gender = filter_var($request['gender'], FILTER_SANITIZE_STRING);
         $profile->tagline = filter_var($request['tagline'], FILTER_SANITIZE_STRING);
         $profile->description = filter_var($request['description'], FILTER_SANITIZE_STRING);

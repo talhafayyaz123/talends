@@ -73,7 +73,9 @@ class HomeController extends Controller
                         $slider_order = !empty($slider_section['parentIndex']) ? $slider_section['parentIndex'] : '';
                     }
                 }
-                $categories = Category::latest()->get()->take(8);
+             
+              $categories = Category::with('categoryFreelancers')->latest()->get()->take(5);
+            
                 $skills = Skill::latest()->get()->take(8);
                 $locations = Location::latest()->get()->take(8);
                 $languages = Language::latest()->get()->take(8);
@@ -82,7 +84,7 @@ class HomeController extends Controller
                 $find_right_opportunity=AboutTalendsPage::where('page_type','find_right_opportunity')->first();
                 $team_on_demand=AboutTalendsPage::where('page_type','team_on_demand')->first();
                 $why_choose_talends=AboutTalendsPage::where('page_type','why_choose_talends')->first();
-
+              
                 $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
                 if (file_exists(resource_path('views/extend/front-end/pages/show.blade.php'))) {
                     return View::make(
