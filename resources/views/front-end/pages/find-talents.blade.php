@@ -36,41 +36,85 @@
 
                     <input type="hidden" value='filter' name='filter'>
 
+                    <select class="talent_select" id="category_id" name="category_id">
+                          <option value="">Category</option>
+                          @foreach($categories as $category):
 
-                        <select name="skills" class="talent_select" id="skills">
-                          <option value="">Skills</option>
-                          @foreach($skills as $skill):
-                            <option value="{{ $skill->id }}">{{ $skill->title }}</option>
+                            @php
+                            $category_select='';
+                            if(Request::get('category_id') &&  Request::get('category_id') ==$category->id ){
+                                $category_select='selected=selected';
+                            }
+                            @endphp
+                            <option value="{{ $category->id }}" {{$category_select}}  >{{ $category->title }}</option>
                             @endforeach
                       </select>
-                        <select name="gender" class="talent_select" id="gender">
+
+
+                      <select name="skill_id" class="talent_select" id="skill_id">
+                          <option value="">Skills</option>
+                          @foreach($skills as $skill):
+                            @php
+                            $select='';
+                            if(Request::get('skill_id') &&  Request::get('skill_id') ==$skill->id ){
+                                $select='selected=selected';
+                            }
+                            @endphp
+                            <option value="{{ $skill->id }}" {{ $select}}  >{{ $skill->title }}</option>
+                            @endforeach
+                      </select>
+
+                      <select name="gender" class="talent_select" id="gender">
                           <option value="">Gender</option>
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
+                          <option value="male"  {{  (Request::get('gender') &&  Request::get('gender') =='male') ? 'selected' :''  }}   >Male</option>
+                          <option value="female" {{  (Request::get('gender') &&  Request::get('gender') =='female') ? 'selected' :''  }}>Female</option>
                       </select>
-                        <select name="" class="talent_select" id="">
+                   
+
+                      <select name="price" class="talent_select" id="price">
                           <option value="">Price</option>
-                          <option value="Video Editors">Video Editors</option>
-                          <option value="Data Analyst">Data Analyst</option>
+                          @foreach(Helper::getComapnyBudgetList() as $key=>$price  )
+                          @php
+                            $location_select='';
+                             
+                            if(Request::get('price') &&  Request::get('price') ==$price['value'] ){
+                               
+                                $location_select='selected=selected';
+                            }
+                            @endphp
+                          <option value="{{$price['value']}}" <?php  echo $location_select;  ?>>{{$price['title']}}</option>
+                          @endforeach
                       </select>
-                        <select name="" class="talent_select" id="">
-                          <option value="">Delivery Time</option>
-                          <option value="Video Editors">Video Editors</option>
-                          <option value="Data Analyst">Data Analyst</option>
+                   
+                      <select  class="talent_select" id="location_id" name="location_id">
+                          <option value="">Location</option>
+                          @foreach($locations as $location):
+                            @php
+                            $location_select='';
+                             
+                            if(Request::get('location_id') &&  Request::get('location_id') ==$location->id ){
+                               
+                                $location_select='selected=selected';
+                            }
+                            @endphp
+                            <option value="{{ $location->id }}"   <?php  echo $location_select;  ?> >{{ $location->title }}</option>
+                            @endforeach
                       </select>
-                        <select name="" class="talent_select" id="">
-                          <option value="">Talent Details</option>
-                          <option value="Video Editors">Video Editors</option>
-                          <option value="Data Analyst">Data Analyst</option>
+                   
+                      <select name="availability" class="talent_select" id="availability">
+                          <option value="">Availability</option>
+                          <option value="remote" {{  (Request::get('availability') &&  Request::get('availability') =='remote') ? 'selected' :''  }}>Remote</option>
+                          <option value="on-site" {{  (Request::get('availability') &&  Request::get('availability') =='on-site') ? 'selected' :''  }}>On Site</option>
                       </select>
                     </div>
                 </div>
             </div>
-            <br><br>
+            <br><br><br><br>
             <div>
-                <div class="col-md-6">
+                <div class="filter-btns">
                    
-                    <!-- <button type='submit' class="theme_btn inverse_btn" id='filter_btn'>Filter</button> -->
+                <button type='button' class="theme_btn inverse_btn" id='filter_btn'>Filter</button>
+                <button type='button' class="theme_btn inverse_btn" id='reset_btn'>Reset</button>
 
                 </div>
               
@@ -134,3 +178,102 @@
          
     </div>
 @endsection
+
+
+
+@push('scripts')
+
+<script>
+
+$(document).ready(function() {
+    $("#reset_btn").click(function(){
+        window.location.href = window.location.origin+'/find-talends';
+    });
+    $("#filter_btn").click(function(){
+
+        var url = window.location.pathname.split("/");
+        
+          
+         var category_id=$('#category_id').val();
+         var price=$('#price').val();
+         var skill_id=$('#skill_id').val();
+         var location_id=$('#location_id').val();
+         var gender=$('#gender').val();
+         var availability=$('#availability').val();
+
+         var param_name = getSearchParameters()[0].split("=")[0];
+    
+         if(param_name && param_name!='search'){
+            var url_category_id = getSearchParameters()[0].split("=")[1];
+          
+            
+              if(!category_id){
+                  category_id=url_category_id;
+              }
+
+               if(getSearchParameters()[2]){
+                var url_price = getSearchParameters()[2].split("=")[1];
+
+              if(!price){
+               price=url_price 
+              }
+               }
+
+               if(getSearchParameters()[3]){
+                var url_duration = getSearchParameters()[3].split("=")[1];
+
+                if(!skill_id){
+                    skill_id=url_duration 
+                }
+            }
+               
+               if( getSearchParameters()[4]){
+               var url_location = getSearchParameters()[4].split("=")[1];
+               
+              if(!location_id){
+                location_id=url_location 
+              }
+
+            }
+             
+
+            if( getSearchParameters()[5]){
+               var url_gender = getSearchParameters()[5].split("=")[1];
+               
+              if(!gender){
+                gender=url_gender 
+              }
+
+            }
+
+
+            if( getSearchParameters()[6]){
+               var url_availability = getSearchParameters()[6].split("=")[1];
+               
+              if(!availability){
+                availability=url_availability 
+              }
+
+            }
+           
+           
+
+            window.location.href = window.location.origin+'/find-talends?category_id='+category_id+'&filter=filter&price='+price+'&skill_id='+skill_id+'&location_id='+location_id+'&gender='+gender+'&availability='+availability+'';           
+
+         }else{
+             window.location.href = window.location.origin+'/find-talends?category_id='+category_id+'&filter=filter&price='+price+'&skill_id='+skill_id+'&location_id='+location_id+'&gender='+gender+'&availability='+availability+'';
+         }
+        
+    }); 
+});
+
+function getSearchParameters() {
+        var prmstr = window.location.search.substr(1);
+        var prmarr = prmstr.split("&");
+        
+        return prmarr;
+    }
+
+</script>
+
+@endpush

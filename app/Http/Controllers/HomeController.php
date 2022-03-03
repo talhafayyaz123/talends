@@ -262,8 +262,48 @@ class HomeController extends Controller
           
         $inner_page = SiteManagement::getMetaValue('find-talents');
         $filter = $request->input('filter');
-        $users = User::select('*')->role('freelancer')->latest()->paginate(6);
+        
+        if (!empty($filter)) {
+            
+            $users = User::select('*')->role('freelancer')->when($request->category_id != null, function ($query) use ($request) {
+          
+              $query->whereRelation('profile', 'profiles.category_id',  $request->category_id);
+              
+            })->when($request->skill_id != null, function ($query) use ($request) {
+          
+                $query->whereRelation('profile', 'profiles.skill_id',  $request->skill_id);
+                
+              })->when($request->price != null, function ($query) use ($request) {
+          
+                $query->whereRelation('profile','profiles.min_budget',$request->price );
+
+            })->when($request->gender != null, function ($query) use ($request) {
+          
+                $query->whereRelation('profile', 'profiles.gender',  $request->gender);
+                
+              })->when($request->location_id != null, function ($query) use ($request) {
+          
+              $query->where('location_id',  $request->location_id);
+              
+            })->when($request->availability != null, function ($query) use ($request) {
+          
+                $query->whereRelation('profile', 'profiles.availability',  $request->availability);
+                
+              })->latest()->paginate(6);
+  
+          } else {
+  
+            $users = User::select('*')->role('freelancer')->latest()->paginate(6);
+          }
+        
+
+
+
         $skills     = Skill::all();
+        $categories = Category::latest()->get();
+        $locations = Location::latest()->get();
+        
+  
         $page_header = '';
         $page = array();
         $home = false;
@@ -272,7 +312,7 @@ class HomeController extends Controller
         $meta_desc = !empty($inner_page) && !empty($inner_page[0]['desc']) ? $inner_page[0]['desc'] : trans('lang.find-talents-desc');
         $page['title'] = $meta_title;
 
-        return view('front-end.pages.find-talents',compact('page','home','meta_desc','users','skills'));
+        return view('front-end.pages.find-talents',compact('page','home','meta_desc','users','skills','categories','locations'));
      }
 
      public function freelancerDetail($user_id){

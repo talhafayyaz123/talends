@@ -107,8 +107,8 @@
             <div class="row row-eq-height">
                 <div class="col-md-8 pb-3 align-self-center">
                 {!!  $join_community->banner_description  ?? ''  !!}
-                                    <a href="" class="theme_btn">Find A JOB</a>
-                    <a href="" class="theme_btn inverse_btn ml-3">Submit a job</a>
+                     <a href="{{route('findTalends')}}" class="theme_btn">Find Freelancer</a>
+                    <a href="#" class="theme_btn inverse_btn ml-3">Find Internees</a>
                 </div>
                 <div class="col-md-4">
                 @if(isset( $join_community->about_talends_image) )

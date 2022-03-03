@@ -531,3 +531,6 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
     bottom: 12px;
     left: 180px;
 }
+.filter-btns>button:last-child {
+    margin: 0 0 0 20px;
+}

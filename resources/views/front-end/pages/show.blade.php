@@ -34,7 +34,7 @@
                                     <div class="content_box_wrapper">
                                         <div class="content_box">
                                             {!! $banner_settings->banner_description ?? '' !!}
-                                            <a href="#" class="theme_btn inverse_btn">Find a
+                                            <a href="{{ route('browseJobs') }}" class="theme_btn inverse_btn">Find a
                                                 Job</a>
                                             <a href="#" class="theme_btn">Submit a Project</a>
                                         </div>
