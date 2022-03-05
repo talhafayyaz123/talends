@@ -322,7 +322,8 @@
       </div>
       <fieldset class="search-content footer4_menu_list">
       @php $counter = 0; @endphp
-      @if (!empty($unserialize_menu4_array) && !empty($menu_title4))
+      
+      @if (!empty($unserialize_menu4_footer_array) && !empty($menu_title4))
      
       <div class="wt-formtheme wt-userform">
           <div class="form-group">
@@ -332,7 +333,7 @@
           </div>
       </div>
       
-      @foreach ($unserialize_menu4_array as $unserialize_key => $value)
+      @foreach ($unserialize_menu4_footer_array as $unserialize_key => $value)
           <div class="wrap-search wt-haslayout">
               <div class="form-group">
                   <div class="form-group-holder">

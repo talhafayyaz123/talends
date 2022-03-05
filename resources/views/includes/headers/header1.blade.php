@@ -1,5 +1,5 @@
 <header>
-    <div class="container p-0">
+    <div class="container p-1" style="max-width: 1285px !important;">
         <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="{{ asset('talends/assets/img/logo.svg')}}" alt="Dynamics">
@@ -26,7 +26,8 @@
             <div class="collapse navbar-collapse" style="<?php echo $class; ?>" id="theme_menu_toggle">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">{!! $header_menus['title4'] ?? '' !!} <i class="fas fa-angle-down"></i></a>
+                        
+                        <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">{!!  strtoupper($header_menus['title4'])  ?? '' !!} <i class="fas fa-angle-down"></i></a>
                         <div class="nav_dropdown" aria-hidden="false" id="dropdown3">
                             <ul class="iconList threeColumns">
                                 <div class="container">
@@ -38,11 +39,11 @@
                                             <div class="menu_browse_box">
                                             @if($category['url']!='#')
                                                     <a href="{{ route($category['url'])  }}">
-                                                        {{  $category['title'] }}
+                                                        {{  strtoupper($category['title'])  }}
                                                     </a>
                                                     @else
                                                     <a href="{{ $category['url'] }}">
-                                                        {{  $category['title'] }}
+                                                        {{  strtoupper($category['title'])  }}
                                                     </a>
                                                     @endif
                                             </div>
@@ -57,7 +58,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">{!! $header_menus['title3'] ?? '' !!} <i class="fas fa-angle-down"></i></a>
+                        <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">{!!  strtoupper($header_menus['title3'])  ?? '' !!} <i class="fas fa-angle-down"></i></a>
                         <div class="nav_dropdown" aria-hidden="false" id="dropdown3">
                             <ul class="iconList threeColumns">
                                 <div class="container">
@@ -69,11 +70,11 @@
                                             <div class="menu_browse_box">
                                             @if($category['url']!='#')
                                                     <a href="{{ route($category['url'])  }}">
-                                                        {{  $category['title'] }}
+                                                        {{ strtoupper($category['title'])   }}
                                                     </a>
                                                     @else
                                                     <a href="{{ $category['url'] }}">
-                                                        {{  $category['title'] }}
+                                                        {{strtoupper($category['title']) }}
                                                     </a>
                                                     @endif
                                             </div>
@@ -88,10 +89,10 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('whyTalends') }}">{!! $header_menus['title2'] ?? '' !!}</a>
+                        <a class="nav-link" href="{{ route('whyTalends') }}">{!! strtoupper( $header_menus['title2'] ) ?? '' !!}</a>
                     </li>
                     <li class="nav-item  nav_item_right menu_green_cta_box">
-                        <a class="nav-link" href="{{ route('government') }}"> {!! $header_menus['title1'] ?? '' !!}</a>
+                        <a class="nav-link" href="{{ route('government') }}"> {!! strtoupper($header_menus['title1'])  ?? '' !!}</a>
                     </li>
                     @guest
                     <li class="nav-item nav_item_right">
@@ -100,7 +101,7 @@
                         <div class="wt-loginarea">
                             <div class="wt-loginoption">
 
-                                <a href="javascript:void(0);" id="wt-loginbtn" class="wt-loginbtn signin-btn nav-link menu_green_cta">{{{trans('lang.login') }}}</a>
+                                <a href="javascript:void(0);" id="wt-loginbtn" class="wt-loginbtn signin-btn nav-link menu_green_cta">{{{ ucfirst(trans('lang.login'))  }}}</a>
 
 
                                 <div class="wt-loginformhold" @if ($errors->has('email') || $errors->has('password')) style="display: block;" @endif>
@@ -149,7 +150,7 @@
                     </li>
                     <li class="nav-item">
                         
-                        <a class="nav-link joinin-btn" href="{{ route('register') }}">Join Now</a>
+                        <a class="nav-link joinin-btn" href="{{ route('register') }}">JOIN NOW</a>
                         
                     </li>
                     @endguest

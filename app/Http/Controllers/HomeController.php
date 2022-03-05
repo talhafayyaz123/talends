@@ -366,10 +366,44 @@ class HomeController extends Controller
             )
         );
     }
-    public function Companies(){
+    public function Companies(Request $request){
+      
+        $filter = $request->input('filter');
+        
+        if (!empty($filter)) {
+            
+            $companies = User::select('*')->role('company')->when($request->employees != null, function ($query) use ($request) {
           
-     
-        return view('front-end.pages.companies');
+              $query->whereRelation('profile', 'profiles.no_of_employees',  $request->employees);
+              
+            })->when($request->skill_id != null, function ($query) use ($request) {
+          
+                $query->whereRelation('profile', 'profiles.skill_id',  $request->skill_id);
+                
+              })->when($request->price != null, function ($query) use ($request) {
+          
+                $query->whereRelation('profile','profiles.min_budget',$request->price );
+
+            })->when($request->gender != null, function ($query) use ($request) {
+          
+                $query->whereRelation('profile', 'profiles.gender',  $request->gender);
+                
+              })->when($request->location_id != null, function ($query) use ($request) {
+          
+              $query->where('location_id',  $request->location_id);
+              
+            })->latest()->paginate(6);
+  
+          } else {
+  
+            $companies = User::select('*')->role('company')->latest()->paginate(6);
+          }
+
+        
+
+    $skills     = Skill::all();
+    $locations = Location::latest()->get();
+    return view('front-end.pages.companies',compact('companies','skills','locations'));
      }
 
 

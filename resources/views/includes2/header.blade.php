@@ -15,7 +15,7 @@
         $header_menus=App\Helper::headerMenus();
         @endphp
                 <div class="collapse navbar-collapse" id="theme_menu_toggle">
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0 header_menu">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                             <li class="nav-item">
                             <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">{!!  $header_menus['title4']  ?? ''  !!} <i
                                     class="fas fa-angle-down"></i></a>

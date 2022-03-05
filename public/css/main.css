@@ -1809,7 +1809,7 @@ li.wt-rss a {
 	float: right;
 	margin: 20px 0;
 	padding: 0 0 0 20px;
-	border-left: 1px solid #ddd;
+	/* border-left: 1px solid #ddd; */
 }
 
 .wt-userimg {

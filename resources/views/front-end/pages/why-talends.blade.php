@@ -19,7 +19,7 @@
             <div class="row row-eq-height">
                 <div class="col-md-12 text-center pb-3">
                   {!!  $about_talends->banner_description ?? '' !!} 
-                   <a href="#" class="theme_btn inverse_btn">Get Started</a>
+                   <a href="{{ route('register') }}" class="theme_btn inverse_btn">Get Started</a>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
             <div class="row">
                 <div class="col-md-6">
                 {!!  $about_talends->project_description ?? '' !!} 
-                    <a href="#" class="theme_btn inverse_btn">See other projects</a>
+                    <a href="{{ route('browseJobs') }}" class="theme_btn inverse_btn">See other projects</a>
                 </div>
                 <div class="col-md-6">
                 @if( isset($about_talends->talends_project_image))
@@ -68,7 +68,7 @@
                 </div>
                 <div class="col-md-6">
                 {!!  $about_talends->work_description ?? '' !!} 
-                    <a href="#" class="theme_btn inverse_btn">Apply to Join</a>
+                    <a href="{{ route('register') }}" class="theme_btn inverse_btn">Apply to Join</a>
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
                 <div class="col-md-6">
                 {!!  $about_talends->payment_description ?? '' !!} 
 
-                    <a href="#" class="theme_btn inverse_btn">Find a freelancer</a>
+                    <a href="{{ route('findTalends') }}" class="theme_btn inverse_btn">Find a freelancer</a>
                 </div>
                 <div class="col-md-6">
                 @if( isset($about_talends->talends_payment_image))
@@ -99,7 +99,7 @@
                 </div>
                 <div class="col-md-6">
                 {!!  $about_talends->support_description ?? '' !!} 
-                    <a href="#" class="theme_btn inverse_btn">join talends</a>
+                    <a href="{{ route('register') }}" class="theme_btn inverse_btn">join talends</a>
                 </div>
             </div>
         </div>

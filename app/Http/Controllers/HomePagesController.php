@@ -190,7 +190,7 @@ class HomePagesController extends Controller
         $unserialize_menu3_array = SiteManagement::getMetaValue('footer_menu3');
         $menu_title3 = DB::table('site_managements')->select('meta_value')->where('meta_key', 'footer_title3')->get()->first();
 
-        $unserialize_menu4_array = SiteManagement::getMetaValue('footer_menu4');
+        $unserialize_menu4_footer_array = SiteManagement::getMetaValue('footer_menu4');
         $menu_title4 = DB::table('site_managements')->select('meta_value')->where('meta_key', 'footer_title4')->get()->first();
 
          // header menus
@@ -203,7 +203,7 @@ class HomePagesController extends Controller
          $unserialize_menu4_array = SiteManagement::getMetaValue('header_menu4');
          $header_menu_title4 = DB::table('site_managements')->select('meta_value')->where('meta_key', 'header_menu_title4')->get()->first();
 
-
+        
          if($footer_type=='how-works'){
             return view(
                 'back-end.admin.settings.front-footer.how-work',
@@ -211,7 +211,7 @@ class HomePagesController extends Controller
             );
         }else if($footer_type=='footer_menus'){
             return view(
-                'back-end.admin.settings.front-footer.footer_menus.create',compact('menu_title','menu_title2','menu_title3','menu_title4','unserialize_menu_array','unserialize_menu2_array','unserialize_menu3_array','unserialize_menu4_array'));
+                'back-end.admin.settings.front-footer.footer_menus.create',compact('menu_title','menu_title2','menu_title3','menu_title4','unserialize_menu_array','unserialize_menu2_array','unserialize_menu3_array','unserialize_menu4_footer_array'));
         }else if($footer_type=='header_menus'){
             return view(
                 'back-end.admin.settings.front-footer.header_menus.index',compact('header_menu_title1','header_menu_title2','header_menu_title3','unserialize_header_menu3_array','header_menu_title4','unserialize_menu4_array'));
