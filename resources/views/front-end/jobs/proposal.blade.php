@@ -91,6 +91,7 @@
                             <div class="wt-title">
                                 <h2>{{{ trans('lang.proposal_amount') }}}</h2>
                             </div>
+                            
                             {!! Form::open(['url' => url('proposal/submit-proposal'), 'class' =>'wt-haslayout', 'id' => 'send-propsal',  '@submit.prevent'=>'submitJobProposal('.$job->id.', '.Auth::user()->id.')']) !!}
                                 <div class="wt-proposalamount accordion">
                                     <div class="form-group">

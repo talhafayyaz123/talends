@@ -534,3 +534,9 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 .filter-btns>button:last-child {
     margin: 0 0 0 20px;
 }
+
+.how_its_works_box img{
+	position: relative;
+    left: 25% !important;
+
+}

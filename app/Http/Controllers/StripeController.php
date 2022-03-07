@@ -96,6 +96,7 @@ class StripeController extends Controller
         $input = $request->all();
         if ($validator->passes()) {
             $input = array_except($input, array('_token'));
+            
             if (!empty(env('STRIPE_SECRET'))) {
                 \Artisan::call('optimize:clear');
                 $stripe = Stripe::make(env('STRIPE_SECRET'));
