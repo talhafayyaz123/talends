@@ -132,6 +132,15 @@
                         <div class="tlb__img">
                             @php
                             $avatar = Helper::getProfileImage( $value->profile->user_id, 'medium-small-');
+
+                            $feedbacks = \App\Review::select('feedback')->where('receiver_id', $value->id)->count();
+                            $avg_rating = App\Review::where('receiver_id', $value->id)->sum('avg_rating');
+                            $rating  = $avg_rating != 0 ? round($avg_rating/\App\Review::count()) : 0;
+                            $reviews = \App\Review::where('receiver_id', $value->id)->get();
+                            $stars  = $reviews->sum('avg_rating') != 0 ? (($reviews->sum('avg_rating')/$feedbacks)/5)*100 : 0;
+                            $average_rating_count = !empty($feedbacks) ? $reviews->sum('avg_rating')/$feedbacks : 0;
+
+                         
                             @endphp
                             <img src="{{{ asset($avatar) }}}" alt="{{ trans('lang.img') }}">
                         </div>
@@ -139,7 +148,7 @@
                             <div class="row" >
                             
 
-                                <a href="{{route("FreelancerDetail",['id'=>$value->profile->user_id ])}}">
+                                <a href="{{url("profile",['id'=>$value->slug ])}}">
                             <h3>{{  $value->FullName }}</h3>
                             <p>{{$value->profile->tagline}}</p>
                                 </a>
@@ -155,11 +164,10 @@
                                 <div class="tlb__reviews_score">
                                     <ul>
                                         <li>5.0/5.0</li>
-                                        <li>12 Reviews</li>
+                                        <li>{{  $value->reviews->avg('avg_rating') ?  $value->reviews->avg('avg_rating')  : '0' }} Reviews</li>
                                     </ul>
                                 </div>
                             </div>
-                            <img src="{{ asset('talends/assets/img/find-talents/profile-logos.png')}}" class="w-100" alt="">
                         </div>
                     </div>
                 </div>

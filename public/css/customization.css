@@ -408,3 +408,9 @@ footer .row .col-md-6:last-child >ul {
 .freelancer_registration_options{
 	width: 30% !important;
 }
+
+@media screen and (min-width:991px) {
+	header .nav_dropdown {
+		position: absolute !important;
+	}
+}

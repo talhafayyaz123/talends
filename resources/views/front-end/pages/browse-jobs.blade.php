@@ -144,7 +144,7 @@
                                     <h4>{{  $value->created_at->diffForHumans()}}</h4>
                                 </li>
                                 <li>
-                                    <h4><i class="fas fa-map-marker-alt">&nbsp;</i>{{  $value->location->title }}</h4>
+                                    <h4><i class="fas fa-map-marker-alt">&nbsp;</i>{{  $value->location->title ?? '' }}</h4>
                                 </li>
                             </ul>
                             <ul class="job_price">
