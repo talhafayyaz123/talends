@@ -58,9 +58,14 @@ Route::get(
 )->name('home');
 
 Route::get('why-talends', 'HomeController@whyTalends')->name('whyTalends');
+
+Route::get('find-right-talends', 'HomeController@FindRightTalends')->name('FindRightTalends');
+
+
 Route::get('government', 'HomeController@government')->name('government');
 Route::get('browse-jobs', 'HomeController@browseJobs')->name('browseJobs');
 Route::get('find-talends', 'HomeController@findTalents')->name('findTalends');
+Route::get('find-interns', 'HomeController@findInterns')->name('findInterns');
 Route::get('companies', 'HomeController@Companies')->name('Companies');
 Route::get('company-detail', 'HomeController@CompanyDetail')->name('CompanyDetail');
 Route::get('freelancer/detail/{id}', 'HomeController@FreelancerDetail')->name('FreelancerDetail');
@@ -287,10 +292,15 @@ Route::group(
  
        // Home Page About Talends
        Route::get('admin/pages/about-talends', 'HomePagesController@aboutTalends')->name('aboutTalends');
+       Route::get('admin/pages/find-right-talends', 'HomePagesController@findRightTalends')->name('findRightTalends');
        Route::post('admin/save-about-talends', 'HomePagesController@storeTalends');
        Route::post('admin/update-about-talends/{id}', 'HomePagesController@updateTalends');
 
-    
+       Route::post('admin/update-find_right_talends/{id}', 'HomePagesController@updatefindRightTalends');
+
+
+       Route::post('admin/save-find-right-talends', 'HomePagesController@storeFindRightTalends');
+
         // Pages Routes
         Route::get('admin/pages', 'PageController@index')->name('pages');
         Route::get('admin/create/pages', 'PageController@create')->name('createPage');

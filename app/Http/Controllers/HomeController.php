@@ -170,6 +170,18 @@ class HomeController extends Controller
         return view('front-end.pages.why-talends',compact('page','home','meta_desc','about_talends'));
      }
 
+     public function FindRightTalends(){
+        $page_header = '';
+        $page = array();
+        $home = false;
+        $find_right_talends=AboutTalendsPage::where('page_type','find-right-talends')->first();
+      
+        $meta_desc = 'Find Right Talends';
+        $page['title'] = 'Find Right Talends';
+       
+        return view('front-end.pages.find-right-talends',compact('page','meta_desc','find_right_talends'));
+     }
+
 
 
      public function government(){
@@ -258,6 +270,26 @@ class HomeController extends Controller
         $locations = Location::latest()->get();
         
         return view('front-end.pages.browse-jobs',compact('page','home','meta_desc','job_details','currency','categories','locations','data','search'));
+     }
+
+
+     public function findInterns(){
+         
+        $skills     = Skill::all();
+        $categories = Category::latest()->get();
+        $locations = Location::latest()->get();
+        
+  
+        $page_header = '';
+        $page = array();
+        $home = false;
+
+        $meta_title = !empty($inner_page) && !empty($inner_page[0]['title']) ? $inner_page[0]['title'] : trans('lang.find-talents-title');
+        $meta_desc = !empty($inner_page) && !empty($inner_page[0]['desc']) ? $inner_page[0]['desc'] : trans('lang.find-talents-desc');
+        $page['title'] = $meta_title;
+
+        return view('front-end.pages.interns',compact('skills','categories','locations'));
+   
      }
 
      public function findTalents(Request $request){

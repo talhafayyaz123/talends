@@ -109,6 +109,30 @@ class HomePagesController extends Controller
       
        
     }
+    
+    public function findRightTalends()
+    {
+
+         $find_right_talends=AboutTalendsPage::where('page_type','find-right-talends')->first();
+        
+         if(empty($find_right_talends)){
+            return view(
+                'back-end.admin.home-pages.find_right_talends.create'
+            );
+    
+         }else{
+            $find_right_talends=$find_right_talends->toArray();
+        
+            return view(
+                'back-end.admin.home-pages.find_right_talends.edit',
+                compact(
+                    'find_right_talends'
+                )
+            ); 
+         }
+      
+       
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -170,6 +194,36 @@ class HomePagesController extends Controller
 
         $about_talends = new AboutTalendsPage;
         $about_talends->saveAboutTalends($request);
+        Session::flash('message','About Talends Record Saved Successfully');
+        return Redirect::back();
+    }
+
+    public function storeFindRightTalends(Request $request)
+    { 
+        $this->validate(
+            $request, [
+       'banner_description' => 'required',
+       'features_text' => 'required',
+        'services_description' => 'required',
+        'project_description' => 'required',
+        'work_description' => 'required',
+        'support_description' => 'required',
+        'freelancer_benefits' => 'required',
+       
+
+        'about_talends_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_project_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_work_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_support_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'short_term_project_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'recurring_engagements_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'long_term_work_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg'
+
+            ]
+        );
+       
+        $about_talends = new AboutTalendsPage;
+        $about_talends->savesFindRightTalends($request);
         Session::flash('message','About Talends Record Saved Successfully');
         return Redirect::back();
     }
@@ -663,6 +717,36 @@ class HomePagesController extends Controller
         return Redirect::back();
     }
 
+    public function updatefindRightTalends(Request $request,$id)
+    {
+      
+        $this->validate(
+            $request, [
+       'banner_description' => 'required',
+       'features_text' => 'required',
+        'services_description' => 'required',
+        'project_description' => 'required',
+        'work_description' => 'required',
+        'support_description' => 'required',
+        'freelancer_benefits' => 'required',
+       
+
+        'about_talends_image' =>'image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_project_image'=>'image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_work_image'=>'image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_support_image'=>'image|mimes:jpeg,png,jpg,gif,svg',
+        'short_term_project_image'=>'image|mimes:jpeg,png,jpg,gif,svg',
+        'recurring_engagements_image'=>'image|mimes:jpeg,png,jpg,gif,svg',
+        'long_term_work_image'=>'image|mimes:jpeg,png,jpg,gif,svg'
+
+            ]
+        );
+        
+        $about_talends = new AboutTalendsPage();
+        $about_talends->updatefindRightTalends($request,$id);
+        Session::flash('message','About Talends Record updated Successfully');
+        return Redirect::back();
+    }
 
     public function updateTalends(Request $request,$id)
     {

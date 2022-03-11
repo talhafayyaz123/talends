@@ -29,17 +29,17 @@
                             <div class="col-md-3">
                            
                             <div class="menu_browse_box">
-                                                    @if($category['url']!='#')
-                                                    <a href="{{ route($category['url'])  }}">
-                                                        {{  $category['title'] }}
-                                                    </a>
-                                                    @else
-                                                    <a href="{{ $category['url'] }}">
-                                                        {{  $category['title'] }}
-                                                    </a>
-                                                    @endif
-                                                </div>
-                                            </div>
+                                @if($category['url']!='#' &&  Route::has($category['url'])  )
+                                <a href="{{ route($category['url'])  }}">
+                                    {{  $category['title'] }}
+                                </a>
+                                @else
+                                <a href="{{ $category['url'] }}">
+                                    {{  $category['title'] }}
+                                </a>
+                                @endif
+                            </div>
+                        </div>
                             
                             @endforeach  
                             @endif
@@ -64,7 +64,7 @@
                                                 <div class="menu_browse_box">
 
 
-                                                @if($category['url']!='#')
+                                                @if($category['url']!='#'  &&  Route::has($category['url']) )
                                                     <a href="{{ route($category['url'])  }}">
                                                         {{  $category['title'] }}
                                                     </a>

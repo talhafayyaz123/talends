@@ -37,7 +37,7 @@
 
                                         <div class="col-md-3">
                                             <div class="menu_browse_box">
-                                            @if($category['url']!='#')
+                                            @if($category['url']!='#'  &&  Route::has($category['url']))
                                                     <a href="{{ route($category['url'])  }}">
                                                         {{  strtoupper($category['title'])  }}
                                                     </a>
@@ -68,7 +68,7 @@
 
                                         <div class="col-md-3">
                                             <div class="menu_browse_box">
-                                            @if($category['url']!='#')
+                                            @if($category['url']!='#' &&  Route::has($category['url']))
                                                     <a href="{{ route($category['url'])  }}">
                                                         {{ strtoupper($category['title'])   }}
                                                     </a>

@@ -157,6 +157,8 @@
 
                                 <li><hr><a href="{{{ route('aboutTalends') }}}">About Talends</a></li>
 
+                                <li><hr><a href="{{{ route('findRightTalends') }}}">Let Us Find Right Talends</a></li>
+
                             </ul>
                         </li>
                             <li>

@@ -12,7 +12,7 @@
 @section('content')
    
     <div id="pages-list">
-        
+    
     <section class="internee_sec theme_bg_dark">
         <div class="container">
             <div class="row row-eq-height">
@@ -135,7 +135,7 @@
                 <div class="col-md-12">
                     <div class="job_list_box">
                         <div class="job_list_head">
-                        
+                         
                             <ul>
                                 <li>
                                     <h4><img src="{{ asset('talends/assets/img/find-talents/user4.png')}}" alt=""> {{  $value->employer->FullName }}</h4>
@@ -153,7 +153,7 @@
                         </div>
 
                         
-                        <h4>{{  $value->title }}</h4>
+                        <h4><a href="{{ url('job',['id'=>$value->slug]) }} ">{{  $value->title }}</a></h4>
                         
                         {!! $value->description !!}
                         <ul class="job_list_category">

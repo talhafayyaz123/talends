@@ -65,7 +65,7 @@ $slider = Helper::getPageSlider($page_id);
 
                                         <div class="col-md-3">
                                             <div class="menu_browse_box">
-                                            @if($category['url']!='#')
+                                            @if($category['url']!='#'  &&  Route::has($category['url']) )
                                                     <a href="{{ route($category['url'])  }}">
                                                         {{  strtoupper($category['title'])  }}
                                                     </a>
@@ -96,7 +96,7 @@ $slider = Helper::getPageSlider($page_id);
 
                                         <div class="col-md-3">
                                             <div class="menu_browse_box">
-                                            @if($category['url']!='#')
+                                            @if($category['url']!='#' &&  Route::has($category['url']) )
                                                     <a href="{{ route($category['url'])  }}">
                                                         {{ strtoupper($category['title'])  }}
                                                     </a>

@@ -25,7 +25,7 @@ opacity: 0.7;
    
     <div id="pages-list">
         
-    <section class="internee_sec theme_bg_dark">
+    <section class="internee_sec theme_bg_dark companies_banner_section">
         <div class="container">
             <div class="row row-eq-height">
                 <div class="col-md-7 pb-3 align-self-center">
@@ -62,11 +62,11 @@ opacity: 0.7;
                             @endforeach
                       </select>
 
-                      <select name="gender" class="talent_select" id="gender">
+                      <!-- <select name="gender" class="talent_select" id="gender">
                           <option value="">Gender</option>
                           <option value="male"  {{  (Request::get('gender') &&  Request::get('gender') =='male') ? 'selected' :''  }}   >Male</option>
                           <option value="female" {{  (Request::get('gender') &&  Request::get('gender') =='female') ? 'selected' :''  }}>Female</option>
-                      </select>
+                      </select> -->
                    
 
                       <select name="price" class="talent_select" id="price">
@@ -210,7 +210,7 @@ $(document).ready(function() {
          var price=$('#price').val();
          var skill_id=$('#skill_id').val();
          var location_id=$('#location_id').val();
-         var gender=$('#gender').val();
+        // var gender=$('#gender').val();
          var employees=$('#employees').val();
 
          var param_name = getSearchParameters()[0].split("=")[0];
@@ -248,7 +248,7 @@ $(document).ready(function() {
 
             }
              
-
+/* 
             if( getSearchParameters()[5]){
                var url_gender = getSearchParameters()[5].split("=")[1];
                
@@ -256,14 +256,14 @@ $(document).ready(function() {
                 gender=url_gender 
               }
 
-            }
+            } */
 
            
 
-            window.location.href = window.location.origin+'/companies?employees='+employees+'&filter=filter&price='+price+'&skill_id='+skill_id+'&location_id='+location_id+'&gender='+gender+'';           
+            window.location.href = window.location.origin+'/companies?employees='+employees+'&filter=filter&price='+price+'&skill_id='+skill_id+'&location_id='+location_id+'';           
 
          }else{
-             window.location.href = window.location.origin+'/companies?employees='+employees+'&filter=filter&price='+price+'&skill_id='+skill_id+'&location_id='+location_id+'&gender='+gender+'';
+             window.location.href = window.location.origin+'/companies?employees='+employees+'&filter=filter&price='+price+'&skill_id='+skill_id+'&location_id='+location_id+'';
          }
         
     }); 
