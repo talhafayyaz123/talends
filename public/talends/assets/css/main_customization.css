@@ -2,11 +2,11 @@
 	margin-left: 26px;
 }
 
- .wt-userlogedin:hover .wt-usernav {
+.wt-userlogedin:hover .wt-usernav {
 	top: 88% !important;
 	visibility: visible !important;
 	opacity: 1 !important;
-	
+
 }
 
 .wt-userlogedin:before {
@@ -556,7 +556,7 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 .opportunity_card h3 {
 	display: flex;
 	align-items: flex-end;
-	height: 175px;	
+	height: 175px;
 }
 
 .opportunity_card img {
@@ -577,8 +577,8 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 
 }
 
-.talent_filters{
-	flex-wrap: wrap !important; 
+.talent_filters {
+	flex-wrap: wrap !important;
 }
 
 
@@ -587,7 +587,7 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 	overflow: hidden;
 }
 
-.companies_banner_section{
+.companies_banner_section {
 	padding-top: 96px !important;
 }
 
@@ -600,16 +600,155 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 
 
 @media screen and (min-width:360px) {
-	.intern_reviews ul li+li{
+	.intern_reviews ul li+li {
 		margin-left: 4px;
-    padding-left: 1px;
-	font-size: 14px;
+		padding-left: 1px;
+		font-size: 14px;
 	}
 }
+
 @media screen and (max-width:1280px) {
-	.talent_filters > .talent_select {
+	.talent_filters>.talent_select {
 		margin-bottom: 1em;
 		margin-left: 20px;
 	}
+
+	.nav.nav-tabs.products_tabs {
+		flex-wrap: nowrap;
+	}
+
+	.mega_menu_tabs.nav-tabs .nav-link,
+	.products_tabs.nav-tabs .nav-link {
+		font-size: 20px;
+	}
+
+	.tlb__reviews_score {
+		width: 100%;
+	}
+}
+
+@media screen and (max-width:1024px) {
+	.tlb__reviews_score ul {
+		font-size: 14px;
+	}
+	.intern_reviews ul li+li {
+		padding-left: 4px;
+	}
+
+	.talent_list_box .tlb__content h3 {
+		font-size: 18px;
+	}
+
+	.nav.nav-tabs.meet_talent_network {
+		flex-wrap: nowrap;
+	}
+	.talent_list_box .tlb__content p {
+		font-size: 14px;
+	}
+
+	.mega_menu_tabs.nav-tabs .nav-link,
+	.products_tabs.nav-tabs .nav-link {
+		font-size: 20px;
+	}
+}
+
+@media screen and (max-width:767px) {
+	.talent_list_box .tlb__content p {
+		font-size: 16px;
+	}
+	.talent_list_box .tlb__content h3 {
+		font-size: 24px ;
+	}
+	.meet_talent_network.nav-tabs .nav-item {
+		width: 50%;
+	}
+
+	.nav.nav-tabs.meet_talent_network {
+		flex-wrap: wrap;
+	}
+
+	.products_tabs.nav-tabs .nav-link {
+		font-size: 14px;
+	}
+
+	.meet_talent_network.nav-tabs .nav-link {
+		font-size: 20px !important;
+	}
+
+	.home-banner .carousel-caption {
+		position: unset;
+		transform: unset;
+		-webkit-transform: unset;
+		-moz-transform: unset;
+		-ms-transform: unset;
+		-o-transform: unset;
+	}
+
+	.theme_slider,
+	.theme_slider .carousel-item {
+		height: auto;
+		padding: 0 0.25em;
+	}
+
+	.teams_stack .talent_list_box:last-child {
+		margin: 0 auto;
+	}
+
+	.footer_bottom {
+		flex-wrap: nowrap;
+	}
+}
+
+@media screen and (max-width:499px) {
+
+	.mega_menu_tabs.nav-tabs .nav-link,
+	.products_tabs.nav-tabs .nav-link {
+		font-size: 12px;
+	}
+
+	.meet_talent_network.nav-tabs .nav-link {
+		font-size: 14px !important;
+	}
+
+	.footer_bottom {
+		flex-direction: column;
+		text-align: center;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.footer_bottom>div {
+		width: 100%;
+		text-align: center !important;
+	}
+}
+@media screen and (max-width:400px) {
+	.talent_list_box .tlb__content p {
+		margin: 0;
+	}
+	.talent_list_box {
+		flex-direction: column;
+		align-items: center;
+	}
+	.talent_list_box>div {
+		width: 100% !important;
+		text-align: center;
+	} 
+	.talent_list_box>div:first-child {
+		margin: 0 0 12px 0;
+	}
+	.talent_list_box>div .row {
+		justify-content: center;
+		align-items: center;
+	}
+	.tlb__reviews_score {
+		justify-content: center;
+	}
+}
+
+
+.job_list_box ul.job_list_category li a {
+    display: inline-block !important;
+	overflow: hidden !important;
 }
 

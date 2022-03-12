@@ -59,7 +59,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="row">
+            <div class="row footer_bottom">
                 <div class="col-md-6">
                     <p>© 2021 All Rights Reserved. </p>
                 </div>

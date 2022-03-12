@@ -36,7 +36,7 @@ $slider = Helper::getPageSlider($page_id);
 @endauth
 
 <header id="wt-header" class="wt-haslayout {{$inner_header}}">
-    <div class="container p-1" style="max-width: 1285px !important;">
+    <div class="container p-0">
         <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="{{ asset('talends/assets/img/logo.svg')}}" alt="Dynamics">
