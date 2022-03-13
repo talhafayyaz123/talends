@@ -1,5 +1,5 @@
 <header>
-    <div class="container p-1" >
+    <div class="container p-0">
         <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="{{ asset('talends/assets/img/logo.svg')}}" alt="Dynamics">
@@ -17,17 +17,17 @@
             @endphp
 
             @auth
-                @php
+            @php
 
-                $class='padding-left: 6% !important;justify-content: normal;';
-                @endphp
+            $class='padding-left: 6% !important;justify-content: normal;';
+            @endphp
             @endauth
 
             <div class="collapse navbar-collapse" style="<?php echo $class; ?>" id="theme_menu_toggle">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
-                        
-                        <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">{!!  strtoupper($header_menus['title4'])  ?? '' !!} <i class="fas fa-angle-down"></i></a>
+
+                        <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">{!! ($header_menus['title4']) ?? '' !!} <i class="fas fa-angle-down"></i></a>
                         <div class="nav_dropdown" aria-hidden="false" id="dropdown3">
                             <ul class="iconList threeColumns">
                                 <div class="container">
@@ -37,15 +37,15 @@
 
                                         <div class="col-md-3">
                                             <div class="menu_browse_box">
-                                            @if($category['url']!='#'  &&  Route::has($category['url']))
-                                                    <a href="{{ route($category['url'])  }}">
-                                                        {{  strtoupper($category['title'])  }}
-                                                    </a>
-                                                    @else
-                                                    <a href="{{ $category['url'] }}">
-                                                        {{  strtoupper($category['title'])  }}
-                                                    </a>
-                                                    @endif
+                                                @if($category['url']!='#' && Route::has($category['url']))
+                                                <a href="{{ route($category['url'])  }}">
+                                                    {{ ($category['title'])  }}
+                                                </a>
+                                                @else
+                                                <a href="{{ $category['url'] }}">
+                                                    {{ ($category['title'])  }}
+                                                </a>
+                                                @endif
                                             </div>
                                         </div>
 
@@ -58,7 +58,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">{!!  strtoupper($header_menus['title3'])  ?? '' !!} <i class="fas fa-angle-down"></i></a>
+                        <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">{!! ($header_menus['title3']) ?? '' !!} <i class="fas fa-angle-down"></i></a>
                         <div class="nav_dropdown" aria-hidden="false" id="dropdown3">
                             <ul class="iconList threeColumns">
                                 <div class="container">
@@ -68,15 +68,15 @@
 
                                         <div class="col-md-3">
                                             <div class="menu_browse_box">
-                                            @if($category['url']!='#' &&  Route::has($category['url']))
-                                                    <a href="{{ route($category['url'])  }}">
-                                                        {{ strtoupper($category['title'])   }}
-                                                    </a>
-                                                    @else
-                                                    <a href="{{ $category['url'] }}">
-                                                        {{strtoupper($category['title']) }}
-                                                    </a>
-                                                    @endif
+                                                @if($category['url']!='#' && Route::has($category['url']))
+                                                <a href="{{ route($category['url'])  }}">
+                                                    {{ ($category['title'])   }}
+                                                </a>
+                                                @else
+                                                <a href="{{ $category['url'] }}">
+                                                    {{($category['title']) }}
+                                                </a>
+                                                @endif
                                             </div>
                                         </div>
 
@@ -89,15 +89,15 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('whyTalends') }}">{!! strtoupper( $header_menus['title2'] ) ?? '' !!}</a>
+                        <a class="nav-link" href="{{ route('whyTalends') }}">{!! ( $header_menus['title2'] ) ?? '' !!}</a>
                     </li>
                     <li class="nav-item  nav_item_right menu_green_cta_box">
-                        <a class="nav-link" href="{{ route('government') }}"> {!! strtoupper($header_menus['title1'])  ?? '' !!}</a>
+                        <a class="nav-link" href="{{ route('government') }}"> {!! ($header_menus['title1']) ?? '' !!}</a>
                     </li>
                     @guest
                     <li class="nav-item nav_item_right">
-                    
-                       
+
+
                         <div class="wt-loginarea">
                             <div class="wt-loginoption">
 
@@ -146,47 +146,47 @@
                                 </div>
                             </div>
                         </div>
-                     
+
                     </li>
                     <li class="nav-item">
-                        
-                        <a class="nav-link joinin-btn" href="{{ route('register') }}">JOIN NOW</a>
-                        
+
+                        <a class="nav-link menu_green_cta_trans" href="{{ route('register') }}">JOIN NOW</a>
+
                     </li>
                     @endguest
 
 
                     @auth
                     <li class="nav-item">
-                    
-                            @php
-                                $user = !empty(Auth::user()) ? Auth::user() : '';
-                                $role = !empty($user) ? $user->getRoleNames()->first() : array();
-                                $profile = \App\User::find(Auth::user()->id)->profile;
-                                $user_image = !empty($profile) ? $profile->avater : '';
-                                $employer_job = \App\Job::select('status')->where('user_id', Auth::user()->id)->first();
-                                $profile_image = !empty($user_image) ? '/uploads/users/'.$user->id.'/'.$user_image : 'images/user-login.png';
-                                $payment_settings = \App\SiteManagement::getMetaValue('commision');
-                                $payment_module = !empty($payment_settings) && !empty($payment_settings[0]['enable_packages']) ? $payment_settings[0]['enable_packages'] : 'true';
-                                $employer_payment_module = !empty($payment_settings) && !empty($payment_settings[0]['employer_package']) ? $payment_settings[0]['employer_package'] : 'true';
-                            @endphp
-                            
-                                <div class="wt-userlogedin">
-                                    <figure class="wt-userimg">
-                                        <img src="{{{ asset(Helper::getImage('uploads/users/' . Auth::user()->id, $profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}">
-                                    </figure>
-                                    <div class="wt-username">
-                                        <h3>{{{ Helper::getUserName(Auth::user()->id) }}}</h3>
-                                        <span>{{{ !empty(Auth::user()->profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Helper::getAuthRoleName() }}}</span>
-                                    </div>
-                                    @if (file_exists(resource_path('views/extend/back-end/includes/profile-menu.blade.php'))) 
-                                        @include('extend.back-end.includes.profile-menu', ['styling' => $page_header_styling])
-                                    @else 
-                                        @include('back-end.includes.profile-menu', ['styling' => $page_header_styling])
-                                    @endif
-                                </div>
+
+                        @php
+                        $user = !empty(Auth::user()) ? Auth::user() : '';
+                        $role = !empty($user) ? $user->getRoleNames()->first() : array();
+                        $profile = \App\User::find(Auth::user()->id)->profile;
+                        $user_image = !empty($profile) ? $profile->avater : '';
+                        $employer_job = \App\Job::select('status')->where('user_id', Auth::user()->id)->first();
+                        $profile_image = !empty($user_image) ? '/uploads/users/'.$user->id.'/'.$user_image : 'images/user-login.png';
+                        $payment_settings = \App\SiteManagement::getMetaValue('commision');
+                        $payment_module = !empty($payment_settings) && !empty($payment_settings[0]['enable_packages']) ? $payment_settings[0]['enable_packages'] : 'true';
+                        $employer_payment_module = !empty($payment_settings) && !empty($payment_settings[0]['employer_package']) ? $payment_settings[0]['employer_package'] : 'true';
+                        @endphp
+
+                        <div class="wt-userlogedin">
+                            <figure class="wt-userimg">
+                                <img src="{{{ asset(Helper::getImage('uploads/users/' . Auth::user()->id, $profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}">
+                            </figure>
+                            <div class="wt-username">
+                                <h3>{{{ Helper::getUserName(Auth::user()->id) }}}</h3>
+                                <span>{{{ !empty(Auth::user()->profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Helper::getAuthRoleName() }}}</span>
+                            </div>
+                            @if (file_exists(resource_path('views/extend/back-end/includes/profile-menu.blade.php')))
+                            @include('extend.back-end.includes.profile-menu', ['styling' => $page_header_styling])
+                            @else
+                            @include('back-end.includes.profile-menu', ['styling' => $page_header_styling])
+                            @endif
+                        </div>
                     </li>
-                        @endauth
+                    @endauth
 
 
                 </ul>

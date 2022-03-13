@@ -752,3 +752,9 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 	overflow: hidden !important;
 }
 
+.admin_header_after_login {
+    padding-left: 5% !important;
+    padding-top: 10px !important;
+    justify-content: normal !important;
+}
+

@@ -55,7 +55,7 @@ $slider = Helper::getPageSlider($page_id);
             <div class="collapse navbar-collapse admin_header_after_login" id="theme_menu_toggle">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">{!! strtoupper($header_menus['title4'])  ?? '' !!} <i class="fas fa-angle-down"></i></a>
+                        <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">{!! ($header_menus['title4'])  ?? '' !!} <i class="fas fa-angle-down"></i></a>
                         <div class="nav_dropdown" aria-hidden="false" id="dropdown3">
                             <ul class="iconList threeColumns">
                                 <div class="container">
@@ -67,11 +67,11 @@ $slider = Helper::getPageSlider($page_id);
                                             <div class="menu_browse_box">
                                             @if($category['url']!='#'  &&  Route::has($category['url']) )
                                                     <a href="{{ route($category['url'])  }}">
-                                                        {{  strtoupper($category['title'])  }}
+                                                        {{  ($category['title'])  }}
                                                     </a>
                                                     @else
                                                     <a href="{{ $category['url'] }}">
-                                                        {{ strtoupper($category['title'])  }}
+                                                        {{ ($category['title'])  }}
                                                     </a>
                                                     @endif
                                             </div>
@@ -86,7 +86,7 @@ $slider = Helper::getPageSlider($page_id);
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">{!! strtoupper($header_menus['title3'])  ?? '' !!} <i class="fas fa-angle-down"></i></a>
+                        <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">{!! ($header_menus['title3'])  ?? '' !!} <i class="fas fa-angle-down"></i></a>
                         <div class="nav_dropdown" aria-hidden="false" id="dropdown3">
                             <ul class="iconList threeColumns">
                                 <div class="container">
@@ -98,11 +98,11 @@ $slider = Helper::getPageSlider($page_id);
                                             <div class="menu_browse_box">
                                             @if($category['url']!='#' &&  Route::has($category['url']) )
                                                     <a href="{{ route($category['url'])  }}">
-                                                        {{ strtoupper($category['title'])  }}
+                                                        {{ ($category['title'])  }}
                                                     </a>
                                                     @else
                                                     <a href="{{ $category['url'] }}">
-                                                        {{  strtoupper($category['title'])  }}
+                                                        {{  ($category['title'])  }}
                                                     </a>
                                                     @endif
                                             </div>
@@ -117,10 +117,10 @@ $slider = Helper::getPageSlider($page_id);
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('whyTalends') }}">{!! strtoupper($header_menus['title2'])  ?? '' !!}</a>
+                        <a class="nav-link" href="{{ route('whyTalends') }}">{!! ($header_menus['title2'])  ?? '' !!}</a>
                     </li>
                     <li class="nav-item  nav_item_right menu_green_cta_box">
-                        <a class="nav-link" href="{{ route('government') }}"> {!! strtoupper($header_menus['title1'] ) ?? '' !!}</a>
+                        <a class="nav-link" href="{{ route('government') }}"> {!! ($header_menus['title1'] ) ?? '' !!}</a>
                     </li>
                     @guest
                     <li class="nav-item nav_item_right">

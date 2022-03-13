@@ -30,15 +30,25 @@ Version: 1.0.0
 	padding: 0px;
 }
 
+@font-face {
+	src: url('../talends/assets/fonts/TrajanPro.ttf');
+	font-family: "trajanPro";
+}
+
 :root {
 	--primthemecolor: #f72a85;
 }
 
 body {
-	color: #767676;
 	background: #fff;
 	overflow-x: hidden;
-	font: 400 14px/23px 'Open Sans', Arial, Helvetica, sans-serif;
+	font-family: trajanPro,sans-serif;
+    font-weight: 300;
+    line-height: 1.4;
+    font-size: 16px;
+    color: #434343;
+    position: relative;
+    padding-top: 96px;
 }
 
 body h1,
@@ -16123,28 +16133,6 @@ a:focus {
  .menu_green_cta {
 	background: #349f1a !important;
 } 
-
-/* .signin-btn {
-	border-radius: 30px;
-	margin: 0 !important;
-	padding: 8px 24px;
-	text-align: center;
-	color: #fff !important;
-	background: #349f1a;
-	display: inline-block;
-}*/
-
-.joinin-btn {
-	border: solid 1px #349f1a !important;
-	color: #349f1a !important;
-	display: inline-block;
-	border-radius: 30px;
-	margin: 0 !important;
-	padding: 8px 35px !important;
-	text-align: center;
-	background: transparent !important;
-	
-}  
 
 .wt-btn:hover,
 .wt-dropdowarrow,
