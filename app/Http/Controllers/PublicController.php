@@ -633,6 +633,7 @@ class PublicController extends Controller
         $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'true';
         if (!empty($_GET['type'])) {
             if ($type == 'employer' || $type == 'freelancer') {
+                
                 $users_total_records = User::count();
                 $search =  User::getSearchResult(
                     $type,
@@ -646,6 +647,7 @@ class PublicController extends Controller
                     $search_languages
                 );
                 $users = count($search['users']) > 0 ? $search['users'] : '';
+            
                 $save_freelancer = !empty(auth()->user()->profile->saved_freelancer) ?
                     unserialize(auth()->user()->profile->saved_freelancer) : array();
                 $save_employer = !empty(auth()->user()->profile->saved_employers) ?

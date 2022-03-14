@@ -14,7 +14,7 @@
             ['title' =>  trans('lang.jobs'), 'inner_banner' => $job_inner_banner, 'show_banner' => $show_job_banner ]
         )
     @endif        
-    <div class="wt-haslayout wt-main-section" id="jobs">
+    <div  id="jobs">
         @if (Session::has('payment_message'))
             @php $response = Session::get('payment_message') @endphp
             <div class="flash_msg">

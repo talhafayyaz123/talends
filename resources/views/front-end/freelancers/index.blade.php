@@ -13,12 +13,16 @@
             ['title' => trans('lang.freelancers'), 'inner_banner' => $f_inner_banner, 'show_banner' => $show_f_banner ]
         )
     @else 
-        @include('front-end.includes.inner-banner', 
+      @include('front-end.includes.inner-banner', 
             ['title' =>  trans('lang.freelancers'), 'inner_banner' => $f_inner_banner, 'show_banner' => $show_f_banner ]
-        )
+        )  
+
+         
+   
+
     @endif
     @if (!empty($categories) && $categories->count() > 0)
-        <div class="wt-categoriesslider-holder wt-haslayout {{$show_f_banner == 'false' ? 'la-categorty-top-mt' : ''}}">
+    <!--     <div class="wt-categoriesslider-holder wt-haslayout {{$show_f_banner == 'false' ? 'la-categorty-top-mt' : ''}}">
             <div class="wt-title">
                 <h2>{{ trans('lang.browse_job_cats') }}</h2>
             </div>
@@ -29,7 +33,7 @@
                         $active = (!empty($_GET['category']) && in_array($cat->id, $_GET['category'])) ? 'active-category' : '';
                         $active_wrapper = ( !empty($_GET['category']) && in_array($cat->id, $_GET['category'])) ? 'active-category-wrapper' : '';
                     @endphp
-                    <div class="wt-categoryslidercontent item {{$active_wrapper}}">
+                     <div class="wt-categoryslidercontent item {{$active_wrapper}}">
                         <figure><img src="{{{ asset(Helper::getCategoryImage($cat->image)) }}}" alt="{{{ $cat->title }}}"></figure>
                         <div class="wt-cattitle">
                         <h3><a href="{{{url('search-results?type=job&category%5B%5D='.$cat->slug)}}}" class="{{$active}}">{{{ $cat->title }}}</a></h3>
@@ -38,9 +42,9 @@
                     </div>
                 @endforeach
             </div>
-        </div>
+        </div> -->
     @endif
-    <div class="wt-haslayout wt-main-section" id="user_profile">
+    <div id="user_profile">
         @if (Session::has('payment_message'))
             @php $response = Session::get('payment_message') @endphp
             <div class="flash_msg">

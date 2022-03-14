@@ -63,7 +63,9 @@ body h6 {
 	line-height: 1.5;
 	font-style: normal;
 	text-transform: capitalize;
-	font-family: 'Poppins', Arial, Helvetica, sans-serif;
+	/* font-family: 'Poppins', Arial, Helvetica, sans-serif; */
+	font-family: trajanPro,sans-serif;
+
 }
 
 h1 {

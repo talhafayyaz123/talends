@@ -14,7 +14,8 @@
             ['title' =>  trans('lang.employers'), 'inner_banner' => $e_inner_banner, 'show_banner' => $show_emp_banner ]
         )
     @endif
-    <div class="wt-haslayout wt-main-section" id="user_profile">
+
+    <div id="user_profile">
         @if (Session::has('payment_message'))
             @php $response = Session::get('payment_message') @endphp
             <div class="flash_msg">
@@ -41,6 +42,8 @@
                             <div class="wt-companysinfoholder">
                                 <div class="row">
                                     @if (!empty($users))
+                                      
+                                    
                                         @foreach ($users as $employer)
                                             @php
                                                 $verified_user = \App\User::select('user_verified')->where('id', $employer->id)->pluck('user_verified')->first();

@@ -34,10 +34,14 @@
                                         @foreach($header_menus['sub_menu_item2'] as $key =>$category)
 
                                         <div class="col-md-3">
-
+                                           
                                             <div class="menu_browse_box">
                                                 @if($category['url']!='#' && Route::has($category['url']) )
                                                 <a href="{{ route($category['url'])  }}">
+                                                    {{ $category['title'] }}
+                                                </a>
+                                                @elseif($category['url'] !='#')
+                                                <a href="{{ url($category['url'])  }}">
                                                     {{ $category['title'] }}
                                                 </a>
                                                 @else

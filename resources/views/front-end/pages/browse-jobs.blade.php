@@ -12,7 +12,7 @@
 @section('content')
    
     <div id="pages-list">
-    
+     
     <section class="internee_sec theme_bg_dark">
         <div class="container">
             <div class="row row-eq-height">

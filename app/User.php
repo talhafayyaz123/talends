@@ -442,6 +442,7 @@ class User extends Authenticatable
         $json = array();
         $user_id = array();
         $user_by_role =  User::role($type)->select('id')->get()->pluck('id')->toArray();
+
         $users = !empty($user_by_role) ? User::whereIn('id', $user_by_role)->where('is_disabled', 'false') : array();
         $filters = array();
         if (!empty($users)) {
