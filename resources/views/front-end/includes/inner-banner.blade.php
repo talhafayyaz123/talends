@@ -136,14 +136,14 @@
     </section>
     @endif
 
-    @if(request()->has('type') &&   request()->get('type')=='freelancer')
+    @if(request()->has('type') &&   request()->get('type')=='freelancer' ||  request()->get('type')=='intern')
     
     <section class="internee_sec theme_bg_dark find-freelancer-banner">
         <div class="container">
             <div class="row row-eq-height">
                 <div class="col-md-7 pb-3 align-self-center">
                     <h5 class="text-white opcty_5">talents</h5>
-                    <h2 class="text-white">Find a Talent <br><span class="theme_color"> You'll love</span></h2>
+                    <h2 class="text-white">Find a {{  ucfirst( request()->get('type')) }} <br><span class="theme_color"> You'll love</span></h2>
                     <p class="text-white opcty_5">We have professional designers in over 90 design skill sets. Sign up to find the perfect designer for whatever you need</p>
                 </div>
                 <div class="col-md-5">

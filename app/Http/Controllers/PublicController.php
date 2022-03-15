@@ -632,7 +632,7 @@ class PublicController extends Controller
         $breadcrumbs_settings = SiteManagement::getMetaValue('show_breadcrumb');
         $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'true';
         if (!empty($_GET['type'])) {
-            if ($type == 'employer' || $type == 'freelancer') {
+            if ($type == 'employer' || $type == 'freelancer' || $type == 'intern') {
                 
                 $users_total_records = User::count();
                 $search =  User::getSearchResult(
@@ -758,6 +758,34 @@ class PublicController extends Controller
                             )
                         );
                     }
+                }elseif ($type === 'intern') {
+                    $f_list_meta_title = !empty($inner_page) && !empty($inner_page[0]['f_list_meta_title']) ? $inner_page[0]['f_list_meta_title'] : trans('lang.freelancer_listing');
+                    $f_list_meta_desc = !empty($inner_page) && !empty($inner_page[0]['f_list_meta_desc']) ? $inner_page[0]['f_list_meta_desc'] : trans('lang.freelancer_meta_desc');
+                    $show_f_banner = !empty($inner_page) && !empty($inner_page[0]['show_f_banner']) ? $inner_page[0]['show_f_banner'] : 'true';
+                    $f_inner_banner = !empty($inner_page) && !empty($inner_page[0]['f_inner_banner']) ? $inner_page[0]['f_inner_banner'] : null;
+                    return view(
+                        'front-end.intern.index',
+                        compact(
+                            'type',
+                            'users',
+                            'categories',
+                            'locations',
+                            'languages',
+                            'skills',
+                            'project_length',
+                            'keyword',
+                            'users_total_records',
+                            'save_freelancer',
+                            'symbol',
+                            'current_date',
+                            'f_list_meta_title',
+                            'f_list_meta_desc',
+                            'show_f_banner',
+                            'f_inner_banner',
+                            'enable_package',
+                            'show_breadcrumbs'
+                        )
+                    );
                 } else {
                     abort(404);
                 }
