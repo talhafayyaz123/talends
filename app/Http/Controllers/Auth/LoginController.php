@@ -73,6 +73,9 @@ class LoginController extends Controller
                 } elseif($user_role === 'company') {
                     return Redirect::to('company/dashboard');
 
+                } elseif($user_role === 'intern') {
+                    return Redirect::to('intern/dashboard');
+
                 }elseif ($user_role === 'admin') {
                     return Redirect::to('admin/profile');
                 }else{

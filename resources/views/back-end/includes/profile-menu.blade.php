@@ -126,7 +126,7 @@
                     </ul>
                 </li>
             @endif
-            @if ($role === 'employer' || $role === 'freelancer' || $role==='company' )
+            @if ($role === 'employer' || $role === 'freelancer' || $role==='company' || $role==='intern' )
                 <li>
                     <a href="{{{ url($role.'/dashboard') }}}">
                         <i class="ti-desktop"></i>
@@ -210,7 +210,7 @@
                             </a>
                         </li>
                     @endif
-                @elseif ($role === 'freelancer' || $role==='company')
+                @elseif ($role === 'freelancer' || $role==='company' || $role==='intern')
                     <li class="menu-item-has-children page_item_has_children header_text_color">
                         <a href="javascript:void(0)">
                             <i class="ti-briefcase"></i>

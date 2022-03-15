@@ -396,7 +396,7 @@ Route::group(
 );
 // Freelancer Routes
 Route::group(
-    ['middleware' => ['role:freelancer|company']],
+    ['middleware' => ['role:freelancer|company|intern']],
     function () {
         Route::get('/get-freelancer-skills', 'SkillController@getFreelancerSkills');
         Route::get('/get-skills', 'SkillController@getSkills');
@@ -419,6 +419,7 @@ Route::group(
 
         Route::get('company/dashboard', 'FreelancerController@companyDashboard')->name('companyDashboard');
         
+        Route::get('intern/dashboard', 'FreelancerController@internDashboard')->name('internDashboard');
 
         Route::get('freelancer/profile', 'FreelancerController@index')->name('personalDetail');
         Route::post('freelancer/upload-temp-image', 'FreelancerController@uploadTempImage');

@@ -331,6 +331,18 @@
                                                                     @endif
 
 
+                                                                    @if ($role['role_type'] === 'intern')
+                                                                  <span class="wt-radio" v-if='user_type== "intern" '>
+                                                                    <input id="wt-company-{{$key}}" type="radio" name="role" value="{{{ $role['role_type'] }}}" checked="checked" v-model="user_role" >
+                                                                    <label for="wt-company-{{$key}}">
+                                                                    Intern<span> (Signup As Intern & Get Hired)
+                                                                        </span>
+                                                                    </label>
+                                                                    </span>
+
+                                                                    @endif
+
+
                                                                     @if ($role['role_type'] === 'company')
                                                                   <span class="wt-radio" v-if='user_type== "company" '>
                                                                     <input id="wt-company-{{$key}}" type="radio" name="role" value="{{{ $role['role_type'] }}}" checked="checked" v-model="user_role" >
@@ -513,6 +525,110 @@
                                                                                 @endforeach
                                                                             
                                                                             
+                                                                        </div>
+                                                                    @endif    
+                                                                @endif
+                                                                </div>
+
+
+                                                                
+                                                                <div class="intern_properties" v-if='user_type== "intern" '>
+                                                                @if ($role['role_type'] === 'intern')
+                                                                    @if ($show_emplyr_inn_sec === 'true')
+                                                                        <div class="wt-accordiondetails collapse show" id="collapseOne" aria-labelledby="headingOne">
+                                                                          
+                                                                    
+                                                                           <div class="row">
+                                                                            <div class="wt-radioboxholder freelancer_registration_options">
+                                                                     <div class="wt-radioboxholder">
+                                                                                <div class="wt-title">
+                                                                                    <h4>Categories</h4>
+                                                                                </div>
+                                                                                @foreach ($skills_categories as $key => $category)
+                                                                                    <span class="wt-radio">
+                                                                                        <input id="wt-just-{{{$key}}}" type="radio" name="category_id" value="{{{$category->id}}}" checked="">
+                                                                                        <label for="wt-just-{{{$key}}}">{{{$category->title}}}</label>
+                                                                                    </span>
+                                                                                @endforeach
+                                                                            </div>
+                                                                                   
+                                                                                </div>
+
+
+                                                                                <div class="wt-radioboxholder freelancer_registration_options">
+                                                                                    <div class="wt-title">
+                                                                                        <h4>Availability</h4>
+                                                                                    </div>
+                                                                                  
+                                                                                        <span class="wt-radio">
+                                                                                            <input id="wt-avail-1" type="radio" name="availability" value="remote" checked="">
+                                                                                            <label for="wt-avail-1">Remote</label>
+                                                                                        </span>
+
+                                                                                        
+                                                                                        <span class="wt-radio">
+                                                                                            <input id="wt-avail-2" type="radio" name="availability" value="on-site" checked="">
+                                                                                            <label for="wt-avail-2">On Site</label>
+                                                                                        </span>
+                                                                                   
+                                                                                </div>
+
+                                                                                
+                                                                                <div class="wt-radioboxholder freelancer_registration_options">
+                                                                                    <div class="wt-title">
+                                                                                        <h4>Price</h4>
+                                                                                    </div>
+                                                                                 
+                                                                                @foreach ($company_bedget as $key => $budget)
+                                                                                    <span class="wt-radio">
+                                                                                        <input id="wt-budget-{{{$key}}}" type="radio" name="budget" value="{{{$budget['value']}}}" checked="">
+                                                                                        <label for="wt-budget-{{{$key}}}">{{{$budget['title']}}}</label>
+                                                                                    </span>
+                                                                                @endforeach
+                                                                            
+                                                                            
+                                                                        </div>
+
+                     
+
+                                                                           </div>
+                                                                           <br><br>
+
+                                                                            <div class="row">
+
+                                                                                 <div class="col-md-6">
+                                                                                <div class="wt-title">
+                                                                                    <h4>University</h4>
+                                                                                </div>
+                                                                                   <input class="form-control" id="university" type="text" name="university" value="" required>
+                                                                                    </span>
+                                                                             
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="wt-title">
+                                                                                    <h4>Degree</h4>
+                                                                                </div>
+                                                                                   <input class="form-control" id="grade" type="text" name="grade" value="" required>
+                                                                                    </span>
+                                                                             
+                                                                            </div>
+                                                                        </div>
+
+
+
+                                                                        <div class="row">
+
+                                                                            <div class="col-md-6">
+                                                                            <div class="wt-title">
+                                                                            <h4>Specialization</h4>
+                                                                            </div>
+                                                                            <input class="form-control" id="specialization" type="text" name="specialization" value="" required>
+                                                                            </span>
+
+                                                                            </div>
+                                                                            
+                                                                            </div>
+
                                                                         </div>
                                                                     @endif    
                                                                 @endif

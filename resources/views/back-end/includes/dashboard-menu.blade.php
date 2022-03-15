@@ -39,7 +39,7 @@
                     @else
                         <div class="wt-btnarea"><a href="{{{ url(route('showUserProfile', ['slug' => Auth::user()->slug])) }}}" class="wt-btn">{{{ trans('lang.view_profile') }}}</a></div>
                     @endif
-                    @elseif ($role === 'freelancer' || $role === 'company')
+                    @elseif ($role === 'freelancer' || $role === 'company' || $role === 'intern' )
                         @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services')
                             <div class="wt-btnarea"><a href="{{{ url(route('freelancerPostService')) }}}" class="wt-btn">{{{ trans('lang.post_service') }}}</a></div>
                         @else
@@ -211,7 +211,7 @@
                             </ul>
                         </li>
                     @endif
-                    @if ($role === 'employer' || $role === 'freelancer' || $role === 'company' )
+                    @if ($role === 'employer' || $role === 'freelancer' || $role === 'company' || $role === 'intern')
                         <li>
                             <a href="{{{ url($role.'/dashboard') }}}">
                                 <i class="ti-desktop"></i>
@@ -291,7 +291,7 @@
                                     </a>
                                 </li>
                             @endif
-                        @elseif ($role === 'freelancer' || $role === 'company')
+                        @elseif ($role === 'freelancer' || $role === 'company' || $role === 'intern')
                             <li class="menu-item-has-children">
                                 <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                                 <a href="javascript:void(0)">

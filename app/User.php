@@ -318,7 +318,6 @@ class User extends Authenticatable
 
         if (!empty($request)) {
 
-            
             $this->first_name = filter_var($request['first_name'], FILTER_SANITIZE_STRING);
             $this->last_name = filter_var($request['last_name'], FILTER_SANITIZE_STRING);
             $this->slug = filter_var($request['first_name'], FILTER_SANITIZE_STRING) . '-' .
@@ -371,6 +370,18 @@ class User extends Authenticatable
             }
             if (!empty($request['availability'])) {
                 $profile->availability = ($request['availability']);
+            }
+
+            if (!empty($request['university'])) {
+                $profile->university = ($request['university']);
+            }
+
+            if (!empty($request['grade'])) {
+                $profile->grade = ($request['grade']);
+            }
+
+            if (!empty($request['specialization'])) {
+                $profile->specialization = ($request['specialization']);
             }
             $profile->save();
             $role_id = Helper::getRoleByUserID($user_id);
