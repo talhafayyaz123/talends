@@ -213,6 +213,8 @@
                                                     <option value="freelancer">Freelancer</option>
                                                     <option value="employer">Employer</option>
                                                     <option value="company">Company</option>
+                                                    <option value="intern">Intern</option>
+
                                                 </select>
                                                
                                                 <span class="help-block" v-if="form_step1.user_type_error">

@@ -163,9 +163,8 @@ opacity: 0.7;
                                     </ul>
                                 </div>
                             </div>
-                              
                             <span class="company_description">Minimum Budget</span>
-                            <br>$ {{ $value->profile->min_bedget ?? "0" }}
+                            <br>$ {{ $value->profile->min_budget ?? "0" }}
                              
                             <br>
                         

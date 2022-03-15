@@ -7,10 +7,29 @@
 @section('title'){{ $user_name }} | {{ $tagline }} @stop
 @section('description', "$desc")
 @section('content')
+@php 
+$breadcrumbs = Breadcrumbs::generate('showFreelancerProfile', $user->slug);
+@endphp
     <div class="wt-haslayout wt-innerbannerholder wt-innerbannerholdervtwo" style="background-image: url({{{ asset(Helper::getUserProfileBanner($user->id)) }}});">
         <div class="container">
-            <div class="row justify-content-md-center">
+            <div class="row justify-content-md-center" style="margin-bottom: 200px;">
                 <div class="col-xs-12 col-sm-12 col-md-8 push-md-2 col-lg-6 push-lg-3">
+
+                    <div class="wt-innerbannercontent">
+                        <div class="wt-title"><h2>{{ Helper::getUserName($user->id) }}</h2></div>
+                       
+                            <ol class="wt-breadcrumb">
+                                @foreach ($breadcrumbs as $breadcrumb)
+                                    @if ($breadcrumb->url && !$loop->last)
+                                        <li><a href="{{{ $breadcrumb->url }}}">{{{ $breadcrumb->title }}}</a></li>
+                                    @else
+                                        <li class="active">{{{ $breadcrumb->title }}}</li>
+                                    @endif
+                                @endforeach
+                            </ol>
+                      
+                        </div>
+                    
                 </div>
             </div>
         </div>

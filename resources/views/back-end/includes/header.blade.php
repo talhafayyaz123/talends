@@ -104,6 +104,10 @@ $slider = Helper::getPageSlider($page_id);
                                                     <a href="{{ route($category['url'])  }}">
                                                         {{ ($category['title'])  }}
                                                     </a>
+                                                    @elseif($category['url'] !='#')
+                                                <a href="{{ url($category['url'])  }}">
+                                                    {{ $category['title'] }}
+                                                </a>
                                                     @else
                                                     <a href="{{ $category['url'] }}">
                                                         {{  ($category['title'])  }}

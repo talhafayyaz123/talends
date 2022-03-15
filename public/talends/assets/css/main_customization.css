@@ -590,7 +590,19 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 .companies_banner_section {
 	padding-top: 96px !important;
 }
-
+.nav.nav-tabs.meet_talent_network {
+	justify-content: space-between;
+    align-items: stretch;
+    overflow-x: auto;
+    min-height: auto;
+    overflow-y: hidden;
+    width: 100%;
+}
+.meet_talent_network.nav-tabs .nav-item {
+	width: auto;
+	white-space: nowrap;
+	padding: 0 0 1.5em;
+}
 @media screen and (min-width:991px) {
 	header .nav_dropdown {
 		position: absolute !important;
@@ -663,13 +675,7 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 		width: 50%;
 	}
 
-	.nav.nav-tabs.meet_talent_network {
-		flex-wrap: wrap;
-	}
 
-	.products_tabs.nav-tabs .nav-link {
-		font-size: 14px;
-	}
 
 	.meet_talent_network.nav-tabs .nav-link {
 		font-size: 20px !important;
@@ -701,8 +707,7 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 
 @media screen and (max-width:499px) {
 
-	.mega_menu_tabs.nav-tabs .nav-link,
-	.products_tabs.nav-tabs .nav-link {
+	.mega_menu_tabs.nav-tabs .nav-link  {
 		font-size: 12px;
 	}
 

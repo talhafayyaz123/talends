@@ -826,7 +826,58 @@ class PublicController extends Controller
                         )
                     );
                 }
-            } else {
+            } elseif ($type == 'gov_projects') {
+
+                $min_price = !empty($_GET['minprice']) ? $_GET['minprice'] : 0;
+                $max_price = !empty($_GET['maxprice']) ? $_GET['maxprice'] : 0;
+                $Jobs_total_records = Job::count();
+                $job_list_meta_title = !empty($inner_page) && !empty($inner_page[0]['job_list_meta_title']) ? $inner_page[0]['job_list_meta_title'] : trans('lang.job_listing');
+                $job_list_meta_desc = !empty($inner_page) && !empty($inner_page[0]['job_list_meta_desc']) ? $inner_page[0]['job_list_meta_desc'] : trans('lang.job_meta_desc');
+                $show_job_banner = !empty($inner_page) && !empty($inner_page[0]['show_job_banner']) ? $inner_page[0]['show_job_banner'] : 'true';
+                $job_inner_banner = !empty($inner_page) && !empty($inner_page[0]['job_inner_banner']) ? $inner_page[0]['job_inner_banner'] : null;
+                $project_settings = !empty(SiteManagement::getMetaValue('project_settings')) ? SiteManagement::getMetaValue('project_settings') : array();
+                $completed_project_setting = !empty($project_settings) && !empty($project_settings['enable_completed_projects']) ? $project_settings['enable_completed_projects'] : 'true';
+                $results = Job::getSearchResult(
+                    $address,
+                    $keyword,
+                    $search_categories,
+                    $search_locations,
+                    $search_skills,
+                    $search_project_lengths,
+                    $search_languages,
+                    $completed_project_setting,
+                    $min_price,
+                    $max_price
+                );
+                $jobs = $results['jobs'];
+                
+                if (!empty($jobs)) {
+                      return view(
+                            'front-end.gov_projects.index',
+                            compact(
+                                'address',
+                                'jobs',
+                                'categories',
+                                'locations',
+                                'languages',
+                                'freelancer_skills',
+                                'project_length',
+                                'Jobs_total_records',
+                                'keyword',
+                                'skills',
+                                'type',
+                                'current_date',
+                                'symbol',
+                                'job_list_meta_title',
+                                'job_list_meta_desc',
+                                'show_job_banner',
+                                'job_inner_banner',
+                                'show_breadcrumbs'
+                            )
+                        );
+                }
+            }else {
+                
                 $min_price = !empty($_GET['minprice']) ? $_GET['minprice'] : 0;
                 $max_price = !empty($_GET['maxprice']) ? $_GET['maxprice'] : 0;
                 $Jobs_total_records = Job::count();
