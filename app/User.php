@@ -383,6 +383,12 @@ class User extends Authenticatable
             if (!empty($request['specialization'])) {
                 $profile->specialization = ($request['specialization']);
             }
+
+            
+            if (!empty($request['company_type'])) {
+                $profile->company_type = implode(',',$request['company_type']) ;
+            }
+
             $profile->save();
             $role_id = Helper::getRoleByUserID($user_id);
             $package = Package::select('id', 'title', 'cost')->where('role_id', $role_id)->where('trial', 1)->get()->first();

@@ -499,7 +499,11 @@
                                                                 @if ($role['role_type'] === 'company')
                                                                     @if ($show_emplyr_inn_sec === 'true')
                                                                         <div class="wt-accordiondetails collapse show" id="collapseOne" aria-labelledby="headingOne">
-                                                                            <div class="wt-radioboxholder">
+    
+                                                                        <div class="row">
+
+                                                                          
+                                                                                <div class="wt-radioboxholder">
                                                                                 <div class="wt-title">
                                                                                     <h4>Total Team Strength</h4>
                                                                                 </div>
@@ -511,7 +515,8 @@
                                                                                 @endforeach
                                                                             </div>
                                                                             
-                                                                        
+                                                                            
+
                                                                                 <div class="wt-radioboxholder">
                                                                                     <div class="wt-title">
                                                                                         <h4>Minimum Budget</h4>
@@ -526,6 +531,21 @@
                                                                             
                                                                             
                                                                         </div>
+                                                                        
+                                                                        </div>
+                                                                        <br><br>
+                                                                        <div class="row">
+
+                    
+                                                                        <div class="">
+                                                                            <h4>Type</h4>
+                                                                            <input id="startup" type="checkbox" name="company_type[]" value="Startup" checked="">&nbsp;&nbsp; Startup
+                                                                            &nbsp;&nbsp; &nbsp;&nbsp; <input id="small_medium_enterprises" type="checkbox" name="company_type[]" value="small_medium_enterprises">&nbsp;&nbsp; Small & Mid Enterprises
+                                                                            &nbsp;&nbsp; &nbsp;&nbsp; <input id="large_enterprises" type="checkbox" name="company_type[]" value="large_enterprises">&nbsp;&nbsp; Large enterprises
+
+                                                                            </div>
+                                                                        </div>
+                                                                        
                                                                     @endif    
                                                                 @endif
                                                                 </div>
