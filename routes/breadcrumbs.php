@@ -197,6 +197,17 @@ Breadcrumbs::for(
 
 );
 
+
+Breadcrumbs::for(
+
+    'showInternProfile', function ($trail, $slug) {
+        $trail->parent('home');
+        $trail->push('Intern', url('search-results?type=intern'));
+        $trail->push(trans('lang.profile'), route('showUserProfile', ['slug' => $slug]));
+    }
+
+);
+
 Breadcrumbs::for(
 
     'categoriesListing', function ($trail) {

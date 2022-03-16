@@ -288,8 +288,8 @@ class PublicController extends Controller
             $current_date = Carbon::now()->format('M d, Y');
             $tagline = !empty($profile) ? $profile->tagline : '';
             $desc = !empty($profile) ? $profile->description : '';
-        
-            if ($user->getRoleNames()->first() === 'freelancer') {
+             
+            if ($user->getRoleNames()->first() === 'freelancer'  || $user->getRoleNames()->first() === 'intern') {
                 $services = array();
                 if (Schema::hasTable('services') && Schema::hasTable('service_user')) {
                     $services = $user->services;
@@ -320,6 +320,7 @@ class PublicController extends Controller
                 $feedbacks = Review::select('feedback')->where('receiver_id', $user->id)->count(); 
                 $average_rating_count = !empty($feedbacks) ? $reviews->sum('avg_rating')/$feedbacks : 0;
                 $show_earnings = !empty($settings) && !empty($settings[0]['show_earnings']) ? $settings[0]['show_earnings'] : true;
+                $user_role=$user->getRoleNames()->first();
                 if (file_exists(resource_path('views/extend/front-end/users/freelancer-show.blade.php'))) {
                     return View(
                         'extend.front-end.users.freelancer-show',
@@ -365,6 +366,7 @@ class PublicController extends Controller
                     return View(
                         'front-end.users.freelancer-show',
                         compact(
+                            'user_role',
                             'show_earnings',
                             'average_rating_count',
                             'videos',
