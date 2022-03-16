@@ -10,11 +10,26 @@
             ['title' => trans('lang.employers'), 'inner_banner' => $e_inner_banner, 'show_banner' => $show_emp_banner ]
         )
     @else 
-        @include('front-end.includes.inner-banner', 
-            ['title' =>  trans('lang.employers'), 'inner_banner' => $e_inner_banner, 'show_banner' => $show_emp_banner ]
-        )
-    @endif
+       
 
+    <section class="internee_sec theme_bg_dark">
+        <div class="container">
+            <div class="row row-eq-height">
+                <div class="col-md-7 pb-3 align-self-center">
+                    <h2 class="text-white">Browse Employers </h2>
+                 
+                  
+                </div>
+                <div class="col-md-5">
+                    <img src="{{ asset('talends/assets/img/browse-jobs/banner.png')}}" class="w-100" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+
+    @endif
+   <br><br>
     <div id="user_profile">
         @if (Session::has('payment_message'))
             @php $response = Session::get('payment_message') @endphp

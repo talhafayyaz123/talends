@@ -13,37 +13,28 @@
             ['title' => trans('lang.freelancers'), 'inner_banner' => $f_inner_banner, 'show_banner' => $show_f_banner ]
         )
     @else 
-      @include('front-end.includes.inner-banner', 
-            ['title' =>  trans('lang.freelancers'), 'inner_banner' => $f_inner_banner, 'show_banner' => $show_f_banner ]
-        )  
+     
+    <section class="internee_sec theme_bg_dark find-freelancer-banner">
+        <div class="container">
+            <div class="row row-eq-height">
+                <div class="col-md-7 pb-3 align-self-center">
+                    <h5 class="text-white opcty_5">talents</h5>
+                    <h2 class="text-white">Find a {{  ucfirst( request()->get('type')) }} <br><span class="theme_color"> You'll love</span></h2>
+                    <p class="text-white opcty_5">We have professional designers in over 90 design skill sets. Sign up to find the perfect designer for whatever you need</p>
+                </div>
+                <div class="col-md-5">
+                    <img src="{{ asset('talends/assets/img/find-talents/banner.png')}}" class="w-100" alt="">
+                </div>
+            </div>
+        </div>
+
+    </section>  
 
          
    
 
     @endif
-    @if (!empty($categories) && $categories->count() > 0)
-    <!--     <div class="wt-categoriesslider-holder wt-haslayout {{$show_f_banner == 'false' ? 'la-categorty-top-mt' : ''}}">
-            <div class="wt-title">
-                <h2>{{ trans('lang.browse_job_cats') }}</h2>
-            </div>
-            <div id="wt-categoriesslider" class="wt-categoriesslider owl-carousel">
-                @foreach ($categories as $cat)
-                    @php
-                        $category = \App\Category::find($cat->id);
-                        $active = (!empty($_GET['category']) && in_array($cat->id, $_GET['category'])) ? 'active-category' : '';
-                        $active_wrapper = ( !empty($_GET['category']) && in_array($cat->id, $_GET['category'])) ? 'active-category-wrapper' : '';
-                    @endphp
-                     <div class="wt-categoryslidercontent item {{$active_wrapper}}">
-                        <figure><img src="{{{ asset(Helper::getCategoryImage($cat->image)) }}}" alt="{{{ $cat->title }}}"></figure>
-                        <div class="wt-cattitle">
-                        <h3><a href="{{{url('search-results?type=job&category%5B%5D='.$cat->slug)}}}" class="{{$active}}">{{{ $cat->title }}}</a></h3>
-                            <span>Items: {{{$category->jobs->count()}}}</span>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div> -->
-    @endif
+    <br><br>
     <div id="user_profile">
         @if (Session::has('payment_message'))
             @php $response = Session::get('payment_message') @endphp

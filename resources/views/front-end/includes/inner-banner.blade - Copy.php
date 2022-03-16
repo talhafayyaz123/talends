@@ -101,6 +101,80 @@
 
         @endif
 
+        @if(Route::currentRouteName()=='jobs'   || request()->has('type') &&   request()->get('type')=='job' )
+       <section class="internee_sec theme_bg_dark">
+        <div class="container">
+            <div class="row row-eq-height">
+                <div class="col-md-7 pb-3 align-self-center">
+                    <h2 class="text-white">Browse Jobs </h2>
+                 
+                  
+                </div>
+                <div class="col-md-5">
+                    <img src="{{ asset('talends/assets/img/browse-jobs/banner.png')}}" class="w-100" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
+
+    @if(request()->has('type') &&   request()->get('type')=='gov_projects' )
+       <section class="internee_sec theme_bg_dark">
+        <div class="container">
+            <div class="row row-eq-height">
+                <div class="col-md-7 pb-3 align-self-center">
+                    <h2 class="text-white">Find Government Projects </h2>
+                 
+                  
+                </div>
+                <div class="col-md-5">
+                    <img src="{{ asset('talends/assets/img/browse-jobs/banner.png')}}" class="w-100" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+
+    @if(request()->has('type') &&   request()->get('type')=='freelancer' ||  request()->get('type')=='intern')
+    
+    <section class="internee_sec theme_bg_dark find-freelancer-banner">
+        <div class="container">
+            <div class="row row-eq-height">
+                <div class="col-md-7 pb-3 align-self-center">
+                    <h5 class="text-white opcty_5">talents</h5>
+                    <h2 class="text-white">Find a {{  ucfirst( request()->get('type')) }} <br><span class="theme_color"> You'll love</span></h2>
+                    <p class="text-white opcty_5">We have professional designers in over 90 design skill sets. Sign up to find the perfect designer for whatever you need</p>
+                </div>
+                <div class="col-md-5">
+                    <img src="{{ asset('talends/assets/img/find-talents/banner.png')}}" class="w-100" alt="">
+                </div>
+            </div>
+        </div>
+
+    </section>  
+  
+     @endif
+
+
+     @if(request()->has('type') &&   request()->get('type')=='employer')
+    
+    <section class="internee_sec theme_bg_dark companies_banner_section">
+       <div class="container">
+           <div class="row row-eq-height">
+               <div class="col-md-7 pb-3 align-self-center">
+                   <h5 class="text-white opcty_5">talents</h5>
+                   <h2 class="text-white">Trusted companies  <br><span class="theme_color"> best suits your Needs</span></h2>
+                   <p class="text-white opcty_5">We have Trusted off-shore companies, making sure they deliver the best of what your dream within a very reasonable amount of money.</p>
+               </div>
+               <div class="col-md-5">
+               </div>
+           </div>
+       </div>
+   </section>
+ 
+    @endif
+
        
         @endif        
             <div class="container">

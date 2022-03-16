@@ -18,24 +18,62 @@
         </div>
         <div class="wt-widget wt-effectiveholder">
             <div class="wt-widgettitle">
-                <h2>{{ trans('lang.skills') }}</h2>
+                <h2>College/University</h2>
             </div>
+
             <div class="wt-widgetcontent">
-                <fieldset>
-                    @if (!empty($skills))
-                        <div class="wt-checkboxholder wt-verticalscrollbar">
-                            @foreach ($skills as $key => $skill)
-                                @php $checked = ( !empty($_GET['skills']) && in_array($skill->slug, $_GET['skills'])) ? 'checked' : '' @endphp
-                                <span class="wt-checkbox">
-                                    <input id="skill-{{{ $key }}}" type="checkbox" name="skills[]" value="{{{$skill->slug}}}" {{$checked}} >
-                                    <label for="skill-{{{ $key }}}">{{{ $skill->title }}}</label>
-                                </span>
-                            @endforeach
+                <div class="wt-formtheme wt-formsearch">
+                    <fieldset>
+                        <div class="form-group">
+                            <input type="text" name="university" class="form-control" placeholder="" value="{{$search_university}}">
                         </div>
-                    @endif
-                </fieldset>
+                    </fieldset>
+                </div>
+                
             </div>
+
+           
         </div>
+
+
+        <div class="wt-widget wt-effectiveholder">
+            <div class="wt-widgettitle">
+                <h2>Grade</h2>
+            </div>
+
+            <div class="wt-widgetcontent">
+                <div class="wt-formtheme wt-formsearch">
+                    <fieldset>
+                        <div class="form-group">
+                            <input type="text" name="grade" class="form-control" placeholder="" value="{{$search_grade}}">
+                        </div>
+                    </fieldset>
+                </div>
+                
+            </div>
+
+           
+        </div>
+
+        <div class="wt-widget wt-effectiveholder">
+            <div class="wt-widgettitle">
+                <h2>Speciality</h2>
+            </div>
+
+            <div class="wt-widgetcontent">
+                <div class="wt-formtheme wt-formsearch">
+                    <fieldset>
+                        <div class="form-group">
+                            <input type="text" name="speciality" class="form-control" placeholder="" value="{{$search_speciality}}">
+                        </div>
+                    </fieldset>
+                </div>
+                
+            </div>
+
+           
+        </div>
+
         <div class="wt-widget wt-effectiveholder">
             <div class="wt-widgettitle">
                 <h2>{{ trans('lang.location') }}</h2>

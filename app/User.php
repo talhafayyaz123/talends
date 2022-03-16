@@ -448,7 +448,10 @@ class User extends Authenticatable
         $search_hourly_rates,
         $search_freelaner_types,
         $search_english_levels,
-        $search_languages
+        $search_languages,
+        $search_speciality,
+        $search_university,
+        $search_grade
     ) {
         $json = array();
         $user_id = array();
@@ -478,6 +481,48 @@ class User extends Authenticatable
                 }
                 $users->whereIn('location_id', $locations);
             }
+
+
+            if (!empty($search_speciality)) {
+
+                $filters['speciality'] = $search_speciality;
+                $interns = Profile::where('specialization','like', '%' . $search_speciality . '%')->get();
+                foreach ($interns as $key => $intern) {
+                    if (!empty($intern->user_id)) {
+                        $user_id[] = $intern->user_id;
+                    }
+                }
+                $users->whereIn('id', $user_id)->get();
+            }
+
+
+            if (!empty($search_university)) {
+
+                $filters['university'] = $search_university;
+                $interns = Profile::where('university','like', '%' . $search_university . '%')->get();
+                foreach ($interns as $key => $intern) {
+                    if (!empty($intern->user_id)) {
+                        $user_id[] = $intern->user_id;
+                    }
+                }
+                $users->whereIn('id', $user_id)->get();
+            }
+
+
+            
+            if (!empty($search_grade)) {
+
+                $filters['grade'] = $search_grade;
+                $interns = Profile::where('grade','like', '%' . $search_grade . '%')->get();
+                foreach ($interns as $key => $intern) {
+                    if (!empty($intern->user_id)) {
+                        $user_id[] = $intern->user_id;
+                    }
+                }
+                $users->whereIn('id', $user_id)->get();
+            }
+
+            
             if (!empty($search_employees)) {
                 $filters['employees'] = $search_employees;
                 $employees = Profile::whereIn('no_of_employees', $search_employees)->get();

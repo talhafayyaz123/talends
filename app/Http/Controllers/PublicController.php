@@ -617,6 +617,10 @@ class PublicController extends Controller
         $search_categories = !empty($_GET['category']) ? $_GET['category'] : array();
         $search_locations = !empty($_GET['locations']) ? $_GET['locations'] : array();
         $search_skills = !empty($_GET['skills']) ? $_GET['skills'] : array();
+        $search_speciality = !empty($_GET['speciality']) ? $_GET['speciality'] : '';
+        $search_university = !empty($_GET['university']) ? $_GET['university'] : '';
+        $search_grade = !empty($_GET['grade']) ? $_GET['grade'] : '';
+
         $search_project_lengths = !empty($_GET['project_lengths']) ? $_GET['project_lengths'] : array();
         $search_languages = !empty($_GET['languages']) ? $_GET['languages'] : array();
         $search_employees = !empty($_GET['employees']) ? $_GET['employees'] : array();
@@ -646,7 +650,10 @@ class PublicController extends Controller
                     $search_hourly_rates,
                     $search_freelaner_types,
                     $search_english_levels,
-                    $search_languages
+                    $search_languages,
+                    $search_speciality,
+                    $search_university,
+                    $search_grade
                 );
                 $users = count($search['users']) > 0 ? $search['users'] : '';
             
@@ -765,6 +772,7 @@ class PublicController extends Controller
                     $f_list_meta_desc = !empty($inner_page) && !empty($inner_page[0]['f_list_meta_desc']) ? $inner_page[0]['f_list_meta_desc'] : trans('lang.freelancer_meta_desc');
                     $show_f_banner = !empty($inner_page) && !empty($inner_page[0]['show_f_banner']) ? $inner_page[0]['show_f_banner'] : 'true';
                     $f_inner_banner = !empty($inner_page) && !empty($inner_page[0]['f_inner_banner']) ? $inner_page[0]['f_inner_banner'] : null;
+                   
                     return view(
                         'front-end.intern.index',
                         compact(
@@ -785,7 +793,10 @@ class PublicController extends Controller
                             'show_f_banner',
                             'f_inner_banner',
                             'enable_package',
-                            'show_breadcrumbs'
+                            'show_breadcrumbs',
+                            'search_speciality',
+                            'search_university',
+                            'search_grade'
                         )
                     );
                 } else {

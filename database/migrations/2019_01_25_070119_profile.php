@@ -43,6 +43,7 @@ class Profile extends Migration
                 $table->string('specialization')->nullable();
                 $table->string('grade')->nullable();
                 $table->string('university')->nullable();
+                $table->string('company_type')->nullable();
 
 
                 $table->integer('no_of_employees')->nullable();

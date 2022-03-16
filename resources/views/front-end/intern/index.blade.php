@@ -13,15 +13,28 @@
             ['title' => trans('lang.freelancers'), 'inner_banner' => $f_inner_banner, 'show_banner' => $show_f_banner ]
         )
     @else 
-      @include('front-end.includes.inner-banner', 
-            ['title' =>  trans('lang.freelancers'), 'inner_banner' => $f_inner_banner, 'show_banner' => $show_f_banner ]
-        )  
+      
+    <section class="internee_sec theme_bg_dark find-freelancer-banner">
+        <div class="container">
+            <div class="row row-eq-height">
+                <div class="col-md-7 pb-3 align-self-center">
+                    <h5 class="text-white opcty_5">talents</h5>
+                    <h2 class="text-white">Find a {{  ucfirst( request()->get('type')) }} <br><span class="theme_color"> You'll love</span></h2>
+                    <p class="text-white opcty_5">We have professional designers in over 90 design skill sets. Sign up to find the perfect designer for whatever you need</p>
+                </div>
+                <div class="col-md-5">
+                    <img src="{{ asset('talends/assets/img/find-talents/banner.png')}}" class="w-100" alt="">
+                </div>
+            </div>
+        </div>
+
+    </section>  
 
          
    
 
     @endif
-  
+    <br>><br>
     <div id="user_profile">
         @if (Session::has('payment_message'))
             @php $response = Session::get('payment_message') @endphp
