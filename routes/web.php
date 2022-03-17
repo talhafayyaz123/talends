@@ -422,6 +422,8 @@ Route::group(
         Route::get('intern/dashboard', 'FreelancerController@internDashboard')->name('internDashboard');
 
         Route::get('freelancer/profile', 'FreelancerController@index')->name('personalDetail');
+        Route::get('company/profile', 'FreelancerController@companyProfile')->name('companyProfile');
+
         Route::post('freelancer/upload-temp-image', 'FreelancerController@uploadTempImage');
         Route::get('freelancer/dashboard/post-service', 'ServiceController@create')->name('freelancerPostService');
         Route::get('freelancer/payout-settings', 'FreelancerController@payoutSettings')->name('FreelancerPayoutsSettings');
