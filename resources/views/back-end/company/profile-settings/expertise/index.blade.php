@@ -48,10 +48,10 @@
                             </div>
                             <fieldset class="search-content expertise_list">
                                 @php $counter = 0; @endphp
-                                @if (!empty($unserialize_company_expertise_array) && !empty($unserialize_company_expertise_array))
-
-
-                                @foreach ($unserialize_company_expertise_array as $unserialize_key => $value)
+                                @if (!empty($company_expertise_array) && !empty($company_expertise_array))
+                               
+                                @foreach ($company_expertise_array as $unserialize_key => $value)
+                                
                                 <div class="wrap-search wt-haslayout">
                                     <div class="form-group">
                                         <div class="form-group-holder">

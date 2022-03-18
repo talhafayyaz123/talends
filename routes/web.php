@@ -67,7 +67,7 @@ Route::get('browse-jobs', 'HomeController@browseJobs')->name('browseJobs');
 Route::get('find-talends', 'HomeController@findTalents')->name('findTalends');
 Route::get('find-interns', 'HomeController@findInterns')->name('findInterns');
 Route::get('companies', 'HomeController@Companies')->name('Companies');
-Route::get('company-detail', 'HomeController@CompanyDetail')->name('CompanyDetail');
+Route::get('company-detail/{id}', 'HomeController@CompanyDetail')->name('CompanyDetail');
 Route::get('freelancer/detail/{id}', 'HomeController@FreelancerDetail')->name('FreelancerDetail');
 Route::get('freelancer/experience-education/{id}', 'HomeController@experienceEducation')->name('freelancerExperience');
 Route::get('freelancer/get-freelancer-educations', 'FreelancerController@getFreelancerEducations');
@@ -425,6 +425,8 @@ Route::group(
         Route::get('company/profile', 'CompanyController@index')->name('companyProfile');
         Route::get('company/settings/expertise', 'CompanyController@companyExpertise')->name('companyExpertise');
 
+
+        
         Route::post('company/store-expertise', 'CompanyController@storeExpertise')->name('storeExpertise');
         Route::get('company/add_more-expertise/{no}', 'CompanyController@addMoreExpertise')->name('addMoreExpertise');
 

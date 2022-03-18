@@ -13,7 +13,7 @@
 
 
     .theme_bg_color {
-        background: url("https://media-exp1.licdn.com/dms/image/C4E1BAQHoisFySOjs4A/company-background_10000/0/1597767228875?e=1644775200&v=beta&t=9klFSdcVTeW_B_Iit_5600V7x6M49_LOBloJye3qmGE") no-repeat;
+        background: url("./talends/assets/img/company/banner.jpg") no-repeat;
         background-size: cover;
     }
 
@@ -112,7 +112,7 @@
 
                         <p class="opcty_5 company_description">Bramerz is a leading digital agency, and the perfect partner for any brand, with a full set of digital and creative services.</p>
                     </div>
-                    <div class="col-md-5 p-5">
+             <!--        <div class="col-md-5 p-5">
                         <p>Active Team Members</p>
                         <ul class="team-members">
                             <li><img src=" {{ asset('talends/assets/img/company/netsol.png') }}" alt=""></li>
@@ -121,7 +121,7 @@
                             <li><img src=" {{ asset('talends/assets/img/company/netsol.png') }}" alt=""></li>
                         </ul>
 
-                    </div>
+                    </div> -->
                 </div>
         </section>
 
@@ -134,67 +134,33 @@
     <section>
         <div class="container">
             <div class="row">
+            @if (!empty($company_expertise) && !empty($company_expertise))
+
+
+         @foreach ($company_expertise as $unserialize_key => $value)
                 <div class="col-md-4 company-block">
                     <div class="job_list_box description_list">
-                        <h3>Development Team</h3>
+                        <h3>{{ $value['title'] }}</h3>
                         <span>Total Developers</span>
-                        <p class='active_members'>20 Active Members</p>
+                        <p class='active_members'>{{ $value['total_developers'] }} Active Members</p>
                         
                         <span>Average Project Cost</span>
-                        <p class="active_members">$10,000</p>
+                        <p class="active_members">${{ $value['project_cost'] }}</p>
                         
                         <ul class="job_list_category">
-                            <li><a>Web Design</a></li>
-                            <li><a >Logo Design</a></li>
-                            <li><a >SEO</a></li>
-                            <li><a >Copywriting</a></li>
+                        @foreach ($value['categories'] as $key => $category)
+
+                            <li><a>{{  App\Category::find($category)->title }}</a></li>
+                            @endforeach
+
                         </ul>
-
-
                     </div>
                 </div>
+                @endforeach
+                @else
 
-                <div class="col-md-4 company-block">
-                    <div class="job_list_box description_list">
-                        <h3>Development Team</h3>
-                        <span>Total Developers</span>
-                        <p class='active_members'>20 Active Members</p>
-                        
-                        <span>Average Project Cost</span>
-                        <p class="active_members">$10,000</p>
-                        
-                        <ul class="job_list_category">
-                            <li><a>Web Design</a></li>
-                            <li><a >Logo Design</a></li>
-                            <li><a >SEO</a></li>
-                            <li><a >Copywriting</a></li>
-                        </ul>
-
-
-                    </div>
-                </div>
-
-
-                <div class="col-md-4 company-block">
-                    <div class="job_list_box description_list">
-                        <h3>Development Team</h3>
-                        <span>Total Developers</span>
-                        <p class='active_members'>20 Active Members</p>
-                        
-                        <span>Average Project Cost</span>
-                        <p class="active_members">$10,000</p>
-                        
-                        <ul class="job_list_category">
-                            <li><a>Web Design</a></li>
-                            <li><a >Logo Design</a></li>
-                            <li><a >SEO</a></li>
-                            <li><a >Copywriting</a></li>
-                        </ul>
-
-
-                    </div>
-                </div>
-
+                 <p>Not Found</p>
+                @endif
             </div>
         </div>
     </section>
@@ -205,7 +171,7 @@
         <div class="container">
             <div class="row row-eq-height">
                 <div class="col-md-6 mb-3">
-                    <img src="{{ 'talends/assets/img/goverment/good_hands.png' }}" class="w-100" alt="">
+                <img src="{{ asset( 'talends/assets/img/goverment/good_hands.png') }}" class="w-100" alt="">
                 </div>
                 <div class="col-md-6 pb-3 align-self-center">
                     <h5>Portfolio</h5>
@@ -217,11 +183,11 @@
         </div>
     </section>
 
-    <h3 class="theme_bg_dark text-center text-white container">Latest Update</h3>
+    <!-- <h3 class="theme_bg_dark text-center text-white container">Latest Update</h3> -->
 
 
    
-        <div class="container">
+<!--         <div class="container">
             <div class="row row-eq-height">
 
             <div class="col-md-8 pb-3 align-self-center">
@@ -258,7 +224,7 @@
                 </div>
                 
             </div>
-        </div>
+        </div> -->
     
 
 </div>

@@ -39,6 +39,7 @@ use App\SiteManagement;
 use App\Service;
 use App\Review;
 use App\Category;
+use App\CompanyExpertise;
 
 /**
  * Class FreelancerController
@@ -118,10 +119,10 @@ class CompanyController extends Controller
 
     public function companyExpertise(){
         $categories = Category::pluck('title','id');
-       
-          $unserialize_company_expertise_array = SiteManagement::getMetaValue('company_expertise');      
-          return view(
-            'back-end.company.profile-settings.expertise.index',compact('unserialize_company_expertise_array','categories'));
+        $company_expertise=CompanyExpertise::where('user_id',auth()->user()->id)->first();
+        $company_expertise_array= isset($company_expertise) ? unserialize($company_expertise->description)   : '';
+      
+        return view('back-end.company.profile-settings.expertise.index',compact('company_expertise_array','categories'));
     }
 
 
@@ -163,7 +164,7 @@ class CompanyController extends Controller
         if (!empty($request)) {
           
 
-            $search_menu = SiteManagement::saveCompanyExpertise($request);
+            $search_menu = CompanyExpertise::saveCompanyExpertise($request);
            
             if ($search_menu['type'] == "success") {
                                 

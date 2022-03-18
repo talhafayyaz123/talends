@@ -21,6 +21,8 @@ use DB;
 use App\Package;
 use App\GovernmentPage;
 use App\AboutTalendsPage;
+use App\CompanyExpertise;
+
 
 class HomeController extends Controller
 {
@@ -439,10 +441,12 @@ class HomeController extends Controller
      }
 
 
-     public function CompanyDetail(){
+     public function CompanyDetail($id){
           
-     
-        return view('front-end.pages.company_detail');
+        $company_expertise=CompanyExpertise::where('user_id',$id)->first();
+        $company_expertise= isset($company_expertise) ? unserialize($company_expertise->description)   : '';
+             
+        return view('front-end.pages.company_detail',compact('company_expertise'));
      }
 
     public function experienceEducation($user_id)
