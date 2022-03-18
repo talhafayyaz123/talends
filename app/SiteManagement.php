@@ -1272,7 +1272,38 @@ class SiteManagement extends Model
         }
     }
 
-
+    public static function saveCompanyExpertise($request)
+    {
+        $json = array();
+        $menu = $request['expertise'];
+        
+        if (!empty($menu)) {
+            foreach ($menu as $key => $value) {
+                if (($value['title'] == null || $value['total_developers'] == null || $value['project_cost'] == null)) {
+                    $json['type'] = 'error';
+                    return $json;
+                }
+            }
+            
+            $existing_menu_item = SiteManagement::getMetaValue('company_expertise');
+        
+            if (!empty($existing_menu_item)) {
+                DB::table('site_managements')->where('meta_key', '=', 'company_expertise')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'company_expertise', 'meta_value' => serialize($menu),
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+           
+            $json['type'] = 'success';
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            return $json;
+        }
+    }
     /**
      * Store registration settings
      *

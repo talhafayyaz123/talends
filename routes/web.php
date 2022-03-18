@@ -422,7 +422,12 @@ Route::group(
         Route::get('intern/dashboard', 'FreelancerController@internDashboard')->name('internDashboard');
 
         Route::get('freelancer/profile', 'FreelancerController@index')->name('personalDetail');
-        Route::get('company/profile', 'FreelancerController@companyProfile')->name('companyProfile');
+        Route::get('company/profile', 'CompanyController@index')->name('companyProfile');
+        Route::get('company/settings/expertise', 'CompanyController@companyExpertise')->name('companyExpertise');
+
+        Route::post('company/store-expertise', 'CompanyController@storeExpertise')->name('storeExpertise');
+        Route::get('company/add_more-expertise/{no}', 'CompanyController@addMoreExpertise')->name('addMoreExpertise');
+
 
         Route::post('freelancer/upload-temp-image', 'FreelancerController@uploadTempImage');
         Route::get('freelancer/dashboard/post-service', 'ServiceController@create')->name('freelancerPostService');
