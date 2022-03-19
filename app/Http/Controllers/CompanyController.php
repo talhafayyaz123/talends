@@ -122,7 +122,7 @@ class CompanyController extends Controller
         $company_expertise=CompanyExpertise::where('user_id',auth()->user()->id)->first();
         $company_expertise_array= isset($company_expertise) ? unserialize($company_expertise->description)   : '';
       
-        return view('back-end.company.profile-settings.expertise.index',compact('company_expertise_array','categories'));
+        return view('back-end.company.profile-settings.expertise.index',compact('company_expertise_array','categories','company_expertise'));
     }
 
 
@@ -135,31 +135,14 @@ class CompanyController extends Controller
     public function storeExpertise(Request $request)
     {
 
-       /*  $this->validate(
+         $this->validate(
             $request,
             [
-                '*.title' => 'required',
-                '*.total_developers' => 'required',
-                'expertise[0][project_cost]' => 'required',
-                'expertise[0][categories]' => 'required'
-            ]
+                'portfolio_detail' => 'required',
+                // 'portfolio_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
+          ]
         );
- */
-/*             $input = $request->all();
-            $rules = [];
-
-            foreach($input['expertise'] as $key => $val)
-            {
-                $rules['title.'.$key] = 'required';
-            }
-
-            $validator = Validator::make($input, $rules);
-
-             */
-        
-
-
-
+ 
         $json = array();
         if (!empty($request)) {
           

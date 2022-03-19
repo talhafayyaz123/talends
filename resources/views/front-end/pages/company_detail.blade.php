@@ -171,13 +171,13 @@
         <div class="container">
             <div class="row row-eq-height">
                 <div class="col-md-6 mb-3">
-                <img src="{{ asset( 'talends/assets/img/goverment/good_hands.png') }}" class="w-100" alt="">
+                @if( isset($expertise->portfolio_image) )
+                    <img src="{{ asset('uploads/company/'.$expertise->portfolio_image)}}" class="w-100" alt="">
+                    @endif
                 </div>
                 <div class="col-md-6 pb-3 align-self-center">
                     <h5>Portfolio</h5>
-                    <h2>PROJECTS WON & Delivered</h2>
-                    <h4>A Project of Landing page has been delivered succesfully</h4>
-                   <p>Based on our many years in UAE & GCC market, we do understand the real obstacle of Government Projects, especially when it comes to choosing the right Resource or agency</p>
+                   {!! $expertise->portfolio_detail !!}
                 </div>
             </div>
         </div>

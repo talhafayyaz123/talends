@@ -443,10 +443,10 @@ class HomeController extends Controller
 
      public function CompanyDetail($id){
           
-        $company_expertise=CompanyExpertise::where('user_id',$id)->first();
-        $company_expertise= isset($company_expertise) ? unserialize($company_expertise->description)   : '';
+        $expertise=CompanyExpertise::where('user_id',$id)->first();
+        $company_expertise= isset($expertise) ? unserialize($expertise->description)   : '';
              
-        return view('front-end.pages.company_detail',compact('company_expertise'));
+        return view('front-end.pages.company_detail',compact('company_expertise','expertise'));
      }
 
     public function experienceEducation($user_id)

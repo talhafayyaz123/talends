@@ -24,11 +24,11 @@
 
                         @if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/tabs.blade.php'))) 
 
-                            @include('extend.back-end.freelancer.profile-settings.tabs')
+                            @include('extend.back-end.company.profile-settings.tabs')
 
                         @else 
 
-                            @include('back-end.freelancer.profile-settings.tabs')
+                            @include('back-end.company.profile-settings.tabs')
 
                         @endif
 
@@ -70,11 +70,11 @@
 
                                         @if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/personal-detail/detail.blade.php'))) 
 
-                                            @include('extend.back-end.freelancer.profile-settings.personal-detail.detail')
+                                            @include('extend.back-end.company.profile-settings.personal-detail.detail')
 
                                         @else 
 
-                                            @include('back-end.freelancer.profile-settings.personal-detail.detail')
+                                            @include('back-end.company.profile-settings.personal-detail.detail')
 
                                         @endif
 
@@ -84,11 +84,11 @@
 
                                         @if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/personal-detail/profile_photo.blade.php'))) 
 
-                                            @include('extend.back-end.freelancer.profile-settings.personal-detail.profile_photo') 
+                                            @include('extend.back-end.company.profile-settings.personal-detail.profile_photo') 
 
                                         @else 
 
-                                            @include('back-end.freelancer.profile-settings.personal-detail.profile_photo') 
+                                            @include('back-end.company.profile-settings.personal-detail.profile_photo') 
 
                                         @endif
 
@@ -100,11 +100,11 @@
 
                                             @if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/personal-detail/profile_banner.blade.php'))) 
 
-                                                @include('extend.back-end.freelancer.profile-settings.personal-detail.profile_banner')
+                                                @include('extend.back-end.company.profile-settings.personal-detail.profile_banner')
 
                                             @else 
 
-                                                @include('back-end.freelancer.profile-settings.personal-detail.profile_banner')
+                                                @include('back-end.company.profile-settings.personal-detail.profile_banner')
 
                                             @endif    
 
@@ -116,7 +116,7 @@
 
                                     <div class="wt-location wt-tabsinfo">
 
-                                        @include('back-end.freelancer.profile-settings.personal-detail.category')
+                                        @include('back-end.company.profile-settings.personal-detail.category')
 
                                     </div>
 
@@ -124,11 +124,11 @@
 
                                         @if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/personal-detail/location.blade.php'))) 
 
-                                            @include('extend.back-end.freelancer.profile-settings.personal-detail.location')
+                                            @include('extend.back-end.company.profile-settings.personal-detail.location')
 
                                         @else 
 
-                                            @include('back-end.freelancer.profile-settings.personal-detail.location')
+                                            @include('back-end.company.profile-settings.personal-detail.location')
 
                                         @endif
 
@@ -138,11 +138,11 @@
 
                                         @if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/personal-detail/skill.blade.php'))) 
 
-                                            @include('extend.back-end.freelancer.profile-settings.personal-detail.skill')   
+                                            @include('extend.back-end.company.profile-settings.personal-detail.skill')   
 
                                         @else 
 
-                                            @include('back-end.freelancer.profile-settings.personal-detail.skill')   
+                                            @include('back-end.company.profile-settings.personal-detail.skill')   
 
                                         @endif 
 
@@ -152,11 +152,11 @@
 
                                         @if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/personal-detail/videos.blade.php'))) 
 
-                                            @include('extend.back-end.freelancer.profile-settings.personal-detail.videos')   
+                                            @include('extend.back-end.company.profile-settings.personal-detail.videos')   
 
                                         @else 
 
-                                            @include('back-end.freelancer.profile-settings.personal-detail.videos')   
+                                            @include('back-end.company.profile-settings.personal-detail.videos')   
 
                                         @endif 
 

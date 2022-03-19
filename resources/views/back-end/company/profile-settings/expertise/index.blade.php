@@ -40,7 +40,91 @@
 
 
                             <!-- start of footer menu 2 -->
-                            {!! Form::open(['url' => ('company/store-expertise'), 'class' => 'wt-formtheme wt-skillsform', 'id'=>'header_menu2']) !!}
+                            {!! Form::open(['url' => ('company/store-expertise'), 'class' => 'wt-formtheme wt-skillsform', 'id'=>'header_menu2' ,'enctype'=>'multipart/form-data' ]) !!}
+
+
+                            <div class="wt-tabscontenttitle">
+                                <h2>Portfilio</h2>
+                            </div>
+                            <div class="wt-tabscontenttitle">
+                                <h2>Portfolio Detail</h2>
+                            </div>
+                            @if(!isset($company_expertise->portfolio_detail) && empty($company_expertise->portfolio_detail))
+
+                        
+                            
+                             <div class="wrap-search wt-haslayout">
+                                <fieldset>
+                                {!! Form::textarea('portfolio_detail', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+
+                                </fieldset>
+
+                                <div class="wt-attachmentsholder">
+                                    <div class="lara-attachment-files">
+                                        <div class="wt-tabscontenttitle">
+                                            <h2>Attachment</h2>
+
+                                            <div class="form-group form-group-label">
+                                                <div class="wt-labelgroup">
+                                                    <input type="file" value="" class="" name="portfolio_image" id='portfolio_image'>
+
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        
+                            @else
+
+                          
+                            <div class="wrap-search wt-haslayout">
+                                <fieldset>
+                                {!! Form::textarea('portfolio_detail', e($company_expertise['portfolio_detail']), ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+
+                                </fieldset>
+
+                                <div class="wt-attachmentsholder">
+                                    <div class="lara-attachment-files">
+                                        <div class="wt-tabscontenttitle">
+                                            <h2>Attachment</h2>
+
+                                            <div class="form-group form-group-label">
+                                                <div class="wt-labelgroup">
+                                                    <input type="file" value="" class="" name="portfolio_image" id='portfolio_image'>
+
+
+                                                </div>
+                                            </div>
+
+
+                                            @if (!empty($company_expertise['portfolio_image']))
+                                            @php $image = '/uploads/company/'.$company_expertise['portfolio_image']; @endphp
+                                            <div class="wt-formtheme wt-userform">
+
+                                                <div class="wt-uploadingbox">
+                                                    <figure><img src="{{{  asset($image)}}}" alt="{{{ trans('lang.profile_photo') }}}"></figure>
+
+                                                </div>
+                                                <input type="hidden" name="hidden_portfolio_image" id="hidden_portfolio_image" value="{{{$company_expertise['portfolio_image']}}}">
+                                            </div>
+                                            @endif
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            @endif
 
 
                             <div class="wt-tabscontenttitle">
