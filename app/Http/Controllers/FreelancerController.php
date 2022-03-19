@@ -1025,7 +1025,7 @@ class FreelancerController extends Controller
     }
 
 
-    public function internDashboard()
+    public function interneDashboard()
     {
         
         if (Auth::user()) {

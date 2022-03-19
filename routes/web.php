@@ -419,7 +419,6 @@ Route::group(
 
         Route::get('company/dashboard', 'FreelancerController@companyDashboard')->name('companyDashboard');
         
-        Route::get('intern/dashboard', 'FreelancerController@internDashboard')->name('internDashboard');
 
         Route::get('freelancer/profile', 'FreelancerController@index')->name('personalDetail');
         Route::get('company/profile', 'CompanyController@index')->name('companyProfile');
@@ -430,6 +429,16 @@ Route::group(
         Route::post('company/store-experience-settings', 'CompanyController@storeExperienceEducationSettings');
         Route::get('company/dashboard/project-awards', 'CompanyController@projectAwardsSettings')->name('companyProjectAwards');
         Route::post('company/store-project-award-settings', 'CompanyController@storeProjectAwardSettings');
+
+        /////////intern routes
+        Route::get('intern/profile', 'InterneController@index')->name('interneProfile');
+        Route::get('intern/dashboard', 'InterneController@interneDashboard')->name('interneDashboard');
+        Route::post('interne/store-profile-settings', 'InterneController@storeProfileSettings')->name('interneProfileSetting');
+        Route::get('interne/dashboard/experience-education', 'InterneController@experienceEducationSettings')->name('interneExperienceEducation');
+        Route::post('interne/store-experience-settings', 'InterneController@storeExperienceEducationSettings');
+        Route::get('interne/dashboard/project-awards', 'InterneController@projectAwardsSettings')->name('interneProjectAwards');
+        Route::post('interne/store-project-award-settings', 'InterneController@storeProjectAwardSettings');
+
 
         
         Route::post('company/store-expertise', 'CompanyController@storeExpertise')->name('storeExpertise');

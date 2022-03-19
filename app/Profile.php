@@ -128,6 +128,18 @@ class Profile extends Model
             $department = Department::find($request['department']);
             $profile->department()->associate($department);
         }
+        if ($request['specialization']) {
+            $profile->specialization = $request['specialization'];
+
+        }
+        if ($request['university']) {
+            $profile->university = $request['university'];
+
+        }
+        if ($request['grade']) {
+            $profile->grade = $request['grade'];
+
+        }
         $old_path = Helper::PublicPath() . '/uploads/users/temp';
         if (!empty($request['hidden_avater_image'])) {
             $filename = $request['hidden_avater_image'];

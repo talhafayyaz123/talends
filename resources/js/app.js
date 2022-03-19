@@ -1625,6 +1625,39 @@ if (document.getElementById("user_profile")) {
                 this.uploaded_banner = true;
                 document.getElementById("hidden_banner").value = '';
             },
+            submitInterneProfile: function () {
+                var self = this;
+                var profile_data = document.getElementById('interne_profile');
+                let form_data = new FormData(profile_data);
+                axios.post(APP_URL + '/interne/store-profile-settings', form_data)
+                    .then(function (response) {
+                        if (response.data.type == 'success') {
+                            self.showInfo(Vue.prototype.trans('lang.saving_profile'));
+                        } else if (response.data.type == 'error') {
+                            self.showError(response.data.message);
+                        }
+                    })
+                    .catch(function (error) {
+                        if (error.response.data.errors.first_name) {
+                            self.showError(error.response.data.errors.first_name[0]);
+                        }
+                        if (error.response.data.errors.last_name) {
+                            self.showError(error.response.data.errors.last_name[0]);
+                        }
+                        if (error.response.data.errors.email) {
+                            self.showError(error.response.data.errors.email[0]);
+                        }
+                        if (error.response.data.errors.gender) {
+                            self.showError(error.response.data.errors.gender[0]);
+                        }
+                        if (error.response.data.errors.latitude) {
+                            self.showError(error.response.data.errors.latitude[0]);
+                        }
+                        if (error.response.data.errors.longitude) {
+                            self.showError(error.response.data.errors.longitude[0]);
+                        }
+                    });
+            },
             submitCompanyProfile: function () {
                 var self = this;
                 var profile_data = document.getElementById('company_profile');
@@ -1655,6 +1688,42 @@ if (document.getElementById("user_profile")) {
                         }
                         if (error.response.data.errors.longitude) {
                             self.showError(error.response.data.errors.longitude[0]);
+                        }
+                    });
+            },
+            submitInterneExperienceEduction: function () {
+                var self = this;
+                var exp_edu_data = document.getElementById('experience_form');
+                let form_data = new FormData(exp_edu_data);
+                axios.post(APP_URL + '/interne/store-experience-settings', form_data)
+                    .then(function (response) {
+                        if (response.data.type == 'success') {
+                            self.showInfo(response.data.message);
+                        } else if (response.data.type == 'error') {
+                            self.showError(response.data.message);
+                        }
+                    })
+                    .catch(function (error) {
+                        if (error.response.status == 422) {
+                            self.showError(self.experience_server_error);
+                        }
+                    });
+            },
+            submitInterneAwardsProjects: function () {
+                var self = this;
+                var awards_projects = document.getElementById('awards_projects');
+                let form_data = new FormData(awards_projects);
+                axios.post(APP_URL + '/interne/store-project-award-settings', form_data)
+                    .then(function (response) {
+                        if (response.data.type == 'success') {
+                            self.showInfo(response.data.message);
+                        } else if (response.data.type == 'error') {
+                            self.showError(response.data.message);
+                        }
+                    })
+                    .catch(function (error) {
+                        if (error.response.status == 422) {
+                            self.showError(self.server_error);
                         }
                     });
             },
