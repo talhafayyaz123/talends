@@ -64,7 +64,7 @@
 
                             <div class="wt-personalskillshold tab-pane active fade show" id="wt-skills">
 
-                                {!! Form::open(['url' => '', 'class' =>'wt-userform', 'id' => 'freelancer_profile', '@submit.prevent'=>'submitFreelancerProfile']) !!}
+                                {!! Form::open(['url' => '', 'class' =>'wt-userform', 'id' => 'company_profile', '@submit.prevent'=>'submitCompanyProfile']) !!}
 
                                     <div class="wt-yourdetails wt-tabsinfo">
 

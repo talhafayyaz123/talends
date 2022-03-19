@@ -669,6 +669,7 @@ class UserController extends Controller
                         )
                     );
                 } else {
+
                     return view(
                         'back-end.freelancer.saved-items',
                         compact(

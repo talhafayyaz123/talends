@@ -25,25 +25,25 @@
                     @endif
                     <div class="wt-dashboardbox wt-dashboardtabsholder">
                         @if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/tabs.blade.php'))) 
-                            @include('extend.back-end.freelancer.profile-settings.tabs')
+                            @include('extend.back-end.company.profile-settings.tabs')
                         @else 
-                            @include('back-end.freelancer.profile-settings.tabs')
+                            @include('back-end.company.profile-settings.tabs')
                         @endif
                         <div class="wt-tabscontent tab-content">
                             <div class="wt-educationholder" id="wt-education">
-                                {!! Form::open(['url' => url('freelancer/store-experience-settings'), 'class' =>'wt-formtheme wt-userform', 'id' => 'experience_form', '@submit.prevent'=>'submitExperienceEduction']) !!}
+                                {!! Form::open(['url' => url('freelancer/store-experience-settings'), 'class' =>'wt-formtheme wt-userform', 'id' => 'experience_form', '@submit.prevent'=>'submitCompanyExperienceEduction']) !!}
                                     <div class="wt-userexperience wt-tabsinfo">
                                         @if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/experience-education/experience.blade.php'))) 
-                                            @include('extend.back-end.freelancer.profile-settings.experience-education.experience')
+                                            @include('extend.back-end.company.profile-settings.experience-education.experience')
                                         @else 
-                                            @include('back-end.freelancer.profile-settings.experience-education.experience')
+                                            @include('back-end.company.profile-settings.experience-education.experience')
                                         @endif
                                     </div>
                                     <div class="wt-userexperience wt-tabsinfo">
                                         @if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/experience-education/education.blade.php'))) 
-                                            @include('extend.back-end.freelancer.profile-settings.experience-education.education')
+                                            @include('extend.back-end.company.profile-settings.experience-education.education')
                                         @else 
-                                            @include('back-end.freelancer.profile-settings.experience-education.education')
+                                            @include('back-end.company.profile-settings.experience-education.education')
                                         @endif
                                     </div>
                                     <div class="wt-updatall">

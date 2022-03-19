@@ -252,12 +252,15 @@ class CompanyController extends Controller
             $options = !empty($package_options) ? unserialize($package_options['options']) : array();
             $skills = !empty($options) ? $options['no_of_skills'] : array();
             $payment_settings = SiteManagement::getMetaValue('commision');
+          
             $package_status = '';
             if (empty($payment_settings)) {
                 $package_status = 'true';
             } else {
                 $package_status =!empty($payment_settings[0]['enable_packages']) ? $payment_settings[0]['enable_packages'] : 'true';
             }
+
+
             if ($package_status === 'true') {
                 if ($packages > 0) {
                     if (!empty($request['skills']) && count($request['skills']) > $skills) {
@@ -432,7 +435,7 @@ class CompanyController extends Controller
         if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/experience-education/index.blade.php'))) {
             return view('extend.back-end.freelancer.profile-settings.experience-education.index', compact('weekdays', 'months'));
         } else {
-            return view('back-end.freelancer.profile-settings.experience-education.index', compact('weekdays', 'months'));
+            return view('back-end.company.profile-settings.experience-education.index', compact('weekdays', 'months'));
         }
     }
 
@@ -469,7 +472,7 @@ class CompanyController extends Controller
         if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/projects-awards/index.blade.php'))) {
             return view('extend.back-end.freelancer.profile-settings.projects-awards.index', compact('weekdays', 'months'));
         } else {
-            return view('back-end.freelancer.profile-settings.projects-awards.index', compact('weekdays', 'months'));
+            return view('back-end.company.profile-settings.projects-awards.index', compact('weekdays', 'months'));
         }
     }
 

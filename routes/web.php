@@ -423,8 +423,13 @@ Route::group(
 
         Route::get('freelancer/profile', 'FreelancerController@index')->name('personalDetail');
         Route::get('company/profile', 'CompanyController@index')->name('companyProfile');
-        Route::get('company/settings/expertise', 'CompanyController@companyExpertise')->name('companyExpertise');
+        Route::get('company/dashboard/experience-education', 'CompanyController@experienceEducationSettings')->name('companyExperienceEducation');
 
+        Route::get('company/settings/expertise', 'CompanyController@companyExpertise')->name('companyExpertise');
+        Route::post('company/store-profile-settings', 'CompanyController@storeProfileSettings')->name('CompanyProfileSetting');
+        Route::post('company/store-experience-settings', 'CompanyController@storeExperienceEducationSettings');
+        Route::get('company/dashboard/project-awards', 'CompanyController@projectAwardsSettings')->name('companyProjectAwards');
+        Route::post('company/store-project-award-settings', 'CompanyController@storeProjectAwardSettings');
 
         
         Route::post('company/store-expertise', 'CompanyController@storeExpertise')->name('storeExpertise');

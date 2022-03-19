@@ -66,9 +66,11 @@ class PackageController extends Controller
      */
     public function index($role_type)
     {
+        
         if (Auth::user() && Auth::user()->getRoleNames()[0] != "admin") {
             $role = Role::where('role_type', $role_type)->first();
             $package_options = Helper::getPackageOptions($role_type);
+        
             $packages = $this->package::all()->where('role_id', $role->id)->where('trial', 0);
             $purchase_packages = DB::table('items')->select('product_id')->where('subscriber', Auth::user()->id)->get()->pluck('product_id')->toArray();
             $currency   = SiteManagement::getMetaValue('commision');
@@ -76,6 +78,7 @@ class PackageController extends Controller
             if (file_exists(resource_path('views/extend/back-end/package/index.blade.php'))) {
                 return View::make('extend.back-end.package.index', compact('packages', 'package_options', 'purchase_packages', 'symbol'));
             } else {
+
                 return View::make('back-end.package.index', compact('packages', 'package_options', 'purchase_packages', 'symbol'));
             }
             if (Auth::user()->getRoleNames()[0] != $role_type) {
