@@ -13,7 +13,7 @@
 
 
     .theme_bg_color {
-        background: url("./talends/assets/img/company/banner.jpg") no-repeat;
+        background: url("https://talends.talha-fayyaz.com/talends/assets/img/company/banner.jpg") no-repeat;
         background-size: cover;
     }
 

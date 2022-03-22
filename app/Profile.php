@@ -140,6 +140,15 @@ class Profile extends Model
             $profile->grade = $request['grade'];
 
         }
+        if (!empty($request['company_type'])) {
+            $profile->company_type = implode(',',$request['company_type']) ;
+        }
+        if (!empty($request['employees'])) {
+            $profile->no_of_employees = intval($request['employees']);
+        }
+        if (!empty($request['budget'])) {
+            $profile->min_budget = intval($request['budget']);
+        }
         $old_path = Helper::PublicPath() . '/uploads/users/temp';
         if (!empty($request['hidden_avater_image'])) {
             $filename = $request['hidden_avater_image'];

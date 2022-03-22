@@ -538,7 +538,7 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 }
 
 .opportunity_card {
-	min-height: 253px;
+	min-height: 184px;
 	background: #4ABD2E;
 	border-radius: 16px;
 }
@@ -546,18 +546,12 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 .opportunity_card span {
 	display: block;
 	color: #fff;
-	font: 24px trajan, sans-serif;
+	font: 23px trajan, sans-serif;
 	position: absolute !important;
 	bottom: 16px;
-	left: 12px;
+	left: 22px;
 }
 
-
-.opportunity_card h3 {
-	display: flex;
-	align-items: flex-end;
-	height: 175px;
-}
 
 .opportunity_card img {
 	width: 34px;
@@ -660,7 +654,7 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 
 	.mega_menu_tabs.nav-tabs .nav-link,
 	.products_tabs.nav-tabs .nav-link {
-		font-size: 20px;
+		font-size: 15px;
 	}
 }
 
@@ -751,6 +745,24 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 	}
 }
 
+@media only screen and (max-width: 767px){
+	.home-banner h4 {
+		font-size: 13px !important;
+	}
+
+    .home_page_banner_description h2 br {
+		display: block !important;
+	}
+
+	.home_page_banner_description h2 {
+		font-size: 25px;
+	}
+	.why_organization_choose_box{
+		left: 0px !important;
+	}
+}
+
+
 
 .job_list_box ul.job_list_category li a {
     display: inline-block !important;
@@ -763,3 +775,26 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
     justify-content: normal !important;
 }
 
+.home-banner h4 {
+    font-size: 18px;
+}
+
+.why_organization_choose_talends{
+	font-weight: 600;
+	font-size: 30px;
+}
+
+.why_organization_choose_box{
+	min-height: 400px;
+    background: #edf2eb;
+    border-radius: 16px;
+}
+.why_organization_choose_box h3{
+	font-size: 28px;
+	bottom: 138px !important;
+	color: #000 !important;
+}
+
+.why_organization_choose_box_gap{
+	left: 13px;
+}

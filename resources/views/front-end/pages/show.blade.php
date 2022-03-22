@@ -32,7 +32,7 @@
                             <div class="row row-eq-height">
                                 <div class="col-md-6 align-self-center">
                                     <div class="content_box_wrapper">
-                                        <div class="content_box">
+                                        <div class="content_box home_page_banner_description">
                                             {!! $banner_settings->banner_description ?? '' !!}
                                             <a href="{{ route('browseJobs') }}" class="theme_btn inverse_btn">Find a
                                                 Job</a>
@@ -85,8 +85,10 @@
                         <a href="{{ route('findTalends') }}">
                         
                         <h3> {!! $find_right_opportunity->banner_description ?? '' !!}   </h3>
-                            <span class="tal-readmore">Read More</span>
-                            <img src="{{ asset('talends/assets/img/right-arrows.png')}}" alt=""> 
+                            
+                        <span class="tal-readmore">Read More</span>
+                        <img src="{{ asset('talends/assets/img/right-arrows.png')}}" alt=""> 
+                
                         </a>
                     </div>
                 </div>
@@ -282,11 +284,11 @@
             </div>
         </div>
     </section>
-    <section class="">
+  <!--   <section class="">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 align-self-center">
-                    <h3>Why Organizations <br>Choose Talends</h3>
+                    <h3 class="why_organization_choose_talends" >Why Organizations <br>Choose Talends</h3>
                     <p>Discover the many ways in which our clients have embraced the benefits of the Talends network.</p>
                 </div>
                 <div class="col-md-4">
@@ -330,6 +332,52 @@
                             <h3>{!! $why_choose_talends->work_description ?? '' !!} </h3>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section> -->
+
+    <section class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 align-self-center why_organization_choose_box_gap">
+                    <h3 class="why_organization_choose_talends" >Why Organizations <br>Choose Talends</h3>
+                    <p>Discover the many ways in which our clients have embraced the benefits of the Talends network.</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="talend_img_card why_organization_choose_box why_organization_choose_box_gap">
+                    
+                        <h3>{!! $why_choose_talends->banner_description ?? ''  !!} </h3>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="talend_img_card why_organization_choose_box">
+                                          
+                            <h3>{!! $why_choose_talends->features_text ?? ''  !!} </h3>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="talend_img_card why_organization_choose_box" style="left: 26px;">
+                                         
+                            <h3>{!! $why_choose_talends->services_description ?? ''  !!} </h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                <div class="talend_img_card why_organization_choose_box why_organization_choose_box_gap"    >
+                                          
+                            <h3>{!! $why_choose_talends->project_description ?? ''  !!} </h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="talend_img_card why_organization_choose_box">
+                                        
+                            <h3>{!! $why_choose_talends->work_description ?? '' !!} </h3>
+                    </div>
+                </div>
+        </div>
             </div>
         </div>
     </section>
