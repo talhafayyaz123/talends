@@ -38,6 +38,26 @@
                     </div>
                     <div class="wt-dashboardboxcontent">
                         <div class="wt-jobdescription wt-tabsinfo">
+
+
+
+                    
+                        <div class="wt-tabscontenttitle">
+                                <h2>Main Heading</h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                  
+
+                                <div class="form-group">
+                                {!! Form::textarea('main_heading', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+                                    </div>
+
+                                </fieldset>
+
+
+                            </div>
+
                             <div class="wt-tabscontenttitle">
                                 <h2>Title 1</h2>
                             </div>
@@ -260,6 +280,26 @@
                     </div>
                     <div class="wt-dashboardboxcontent">
                         <div class="wt-jobdescription wt-tabsinfo">
+
+
+                        <div class="wt-tabscontenttitle">
+                                <h2>Main Heading</h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                  
+
+                                    <div class="form-group">
+                                    {!! Form::textarea('main_heading', $why_choose_talends['freelancer_benefits'], ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+                                     </div>
+
+                                </fieldset>
+
+
+                            </div>
+
+
+
                             <div class="wt-tabscontenttitle">
                                 <h2>Title 1</h2>
                             </div>

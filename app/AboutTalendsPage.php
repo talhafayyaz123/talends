@@ -51,7 +51,8 @@ class AboutTalendsPage extends Model
             $this->work_description = $request['work_description'];
             $this->support_description = $request['support_description'];
             $this->freelancer_benefits = $request['freelancer_benefits'];
-          
+            $this->internees_benefits = $request['title'];
+
 
             
          if (!empty($request->hasFile('about_talends_image'))) {
@@ -469,7 +470,8 @@ class AboutTalendsPage extends Model
             if (!empty($request)) {
             
             $this->page_type = 'footer-how-work';
-            
+            $this->project_description = $request['title'];
+
             $this->banner_description = $request['footer_image1_description'];
             $this->features_text = $request['footer_image2_description'];
             $this->services_description = $request['footer_image3_description'];
@@ -525,7 +527,8 @@ class AboutTalendsPage extends Model
 
         if (!empty($request)) {
             $footer_how_work = self::find($id);
-         
+            $footer_how_work->project_description = $request['title'];
+
             $footer_how_work->banner_description = $request['footer_image1_description'];
             $footer_how_work->features_text = $request['footer_image2_description'];
             $footer_how_work->services_description = $request['footer_image3_description'];
@@ -784,7 +787,8 @@ class AboutTalendsPage extends Model
             
             $this->banner_description = $request['opportunity_heading1'];
             $this->features_text = $request['opportunity_heading2'];
-            $this->services_description = $request['opportunity_heading3'];            
+            $this->services_description = $request['opportunity_heading3'];
+            $this->project_description = $request['main_heading'];            
         
             $this->save();
 
@@ -804,6 +808,7 @@ class AboutTalendsPage extends Model
                 self::where('page_type','team_on_demand')->delete();
             }
             $this->page_type = 'team_on_demand';
+            $this->work_description = $request['title'];
             
             $this->banner_description = $request['quality_description1'];
             $this->features_text = $request['quality_description2'];
@@ -864,7 +869,8 @@ class AboutTalendsPage extends Model
                 self::where('page_type','why_choose_talends')->delete();
             }
             $this->page_type = 'why_choose_talends';
-            
+            $this->freelancer_benefits = $request['main_heading'];
+
             $this->banner_description = $request['title1'];
             $this->features_text = $request['title2'];
             $this->services_description = $request['title3'];
@@ -1144,6 +1150,7 @@ class AboutTalendsPage extends Model
             $about_talends->work_description = $request['work_description'];
             $about_talends->support_description = $request['support_description'];
             $about_talends->freelancer_benefits = $request['freelancer_benefits'];
+            $about_talends->internees_benefits = $request['title'];
                
 
             if (!empty($request->hasFile('about_talends_image'))) {

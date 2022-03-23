@@ -330,8 +330,23 @@
                      </div>
                      <div class="wt-dashboardboxcontent">
                          <div class="wt-jobdescription wt-tabsinfo">
+
+
+                         <div class="wt-tabscontenttitle">
+                                 <h2>Main Heading</h2>
+                             </div>
+                             <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                 <fieldset>
+                                 <div class="form-group">
+                                         {!! Form::text('main_heading', null, array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
+                                     </div>
+ 
+                                 </fieldset>
+                             </div>
+
+
                              <div class="wt-tabscontenttitle">
-                                 <h2>Heading 1</h2>
+                                 <h2>Sub Heading 1</h2>
                              </div>
                              <div class="wt-formtheme wt-userform wt-userformvtwo">
                                  <fieldset>
@@ -345,7 +360,7 @@
  
  
                              <div class="wt-tabscontenttitle">
-                                 <h2>Heading 2</h2>
+                                 <h2>Sub Heading 2</h2>
                              </div>
                              <div class="wt-formtheme wt-userform wt-userformvtwo">
                                  <fieldset>
@@ -358,7 +373,7 @@
  
  
                              <div class="wt-tabscontenttitle">
-                                 <h2>Heading 3</h2>
+                                 <h2>Sub Heading 3</h2>
                              </div>
                              <div class="wt-formtheme wt-userform wt-userformvtwo">
                                  <fieldset>
@@ -385,9 +400,23 @@
                          <h2>Find Right Opportunity</h2>
                      </div>
                      <div class="wt-dashboardboxcontent">
-                         <div class="wt-jobdescription wt-tabsinfo">
+                         
+                     <div class="wt-jobdescription wt-tabsinfo">
                              <div class="wt-tabscontenttitle">
-                                 <h2>Heading 1</h2>
+                                 <h2>Main Heading</h2>
+                             </div>
+                             <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                 <fieldset>
+                                 <div class="form-group">
+                                         {!! Form::text('main_heading', $find_right_opportunity['project_description'], array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
+                                     </div>
+ 
+                                 </fieldset>
+                             </div>
+                     
+                     <div class="wt-jobdescription wt-tabsinfo">
+                             <div class="wt-tabscontenttitle">
+                                 <h2>Sub Heading 1</h2>
                              </div>
                              <div class="wt-formtheme wt-userform wt-userformvtwo">
                                  <fieldset>
@@ -401,7 +430,7 @@
  
  
                              <div class="wt-tabscontenttitle">
-                                 <h2>Heading 2</h2>
+                                 <h2>Sub Heading 2</h2>
                              </div>
                              <div class="wt-formtheme wt-userform wt-userformvtwo">
                                  <fieldset>
@@ -414,7 +443,7 @@
  
  
                              <div class="wt-tabscontenttitle">
-                                 <h2>Heading 3</h2>
+                                 <h2>Sub Heading 3</h2>
                              </div>
                              <div class="wt-formtheme wt-userform wt-userformvtwo">
                                  <fieldset>

@@ -305,6 +305,7 @@
                                                             <div  class="wt-accordiontitle" id="headingOne" data-toggle="collapse" data-target="#collapseOne">
                                                                    
                                                             @if ($role['role_type'] === 'employer')
+                                                            
                                                                   <span class="wt-radio" v-if='user_type== "employer" '>
                                                                     <input id="wt-company-{{$key}}" type="radio" name="role" value="{{{ $role['role_type'] }}}" checked="checked" v-model="user_role" v-on:change="selectedRole(user_role)">
                                                                     <label for="wt-company-{{$key}}">
@@ -320,8 +321,9 @@
                                                                     
                                                             @if ($role['role_type'] === 'freelancer')
                                                                   <span class="wt-radio" v-if='user_type== "freelancer" '>
-                                                                    <input id="wt-company-{{$key}}" type="radio" name="role" value="{{{ $role['role_type'] }}}" checked="checked" v-model="user_role" >
-                                                                    <label for="wt-company-{{$key}}">
+                                                                      
+                                                                    <input id="wt-freelancer-{{$key}}" type="radio" name="role" value="{{{ $role['role_type'] }}}" checked="checked" v-model="user_role" >
+                                                                    <label for="wt-freelancer-{{$key}}">
                                                                         
                                                                         {{  trans('lang.freelancer')}}<span> ({{ trans('lang.signup_as_freelancer')}})
                                                                         </span>

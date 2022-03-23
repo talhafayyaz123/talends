@@ -5,7 +5,7 @@
         <div class="container py-5">
             <div class="row">
                 <div class="col-md-12 pb-5 text-center">
-                    <h2 class="text-white">HOW, IT ACTUALLY WORKS!</h2>
+                    <h2 class="text-white"> {!!  $footer_how_work->project_description  ?? ''  !!}</h2>
                 </div>
                 <div class="col-md-4">
                     <div class="how_its_works_box">

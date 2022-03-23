@@ -38,6 +38,26 @@
                     </div>
                     <div class="wt-dashboardboxcontent">
                         <div class="wt-jobdescription wt-tabsinfo">
+
+                        <div class="wt-jobdescription wt-tabsinfo">
+                            <div class="wt-tabscontenttitle">
+                                <h2>Title</h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                  
+
+                                    <div class="form-group">
+                                    {!! Form::textarea('title', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+                                     </div>
+
+                                </fieldset>
+
+
+                            </div>
+                        </div>
+
+
                             <div class="wt-tabscontenttitle">
                                 <h2>Quality 1</h2>
                             </div>
@@ -149,6 +169,27 @@
                         <h2>Talend On Demand</h2>
                     </div>
                     <div class="wt-dashboardboxcontent">
+
+                    <div class="wt-jobdescription wt-tabsinfo">
+                            <div class="wt-tabscontenttitle">
+                                <h2>Title</h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                  
+
+                                    <div class="form-group">                                   
+                                         {!! Form::textarea('title', e($team_on_demand['work_description']), ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+
+                                        </div>
+
+                                </fieldset>
+
+
+                            </div>
+                        </div>
+
+
                         <div class="wt-jobdescription wt-tabsinfo">
                             <div class="wt-tabscontenttitle">
                                 <h2>Quality 1</h2>

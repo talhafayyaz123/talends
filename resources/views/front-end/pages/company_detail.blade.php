@@ -177,7 +177,7 @@
                 </div>
                 <div class="col-md-6 pb-3 align-self-center">
                     <h5>Portfolio</h5>
-                   {!! $expertise->portfolio_detail !!}
+                   {!! $expertise->portfolio_detail ?? '' !!}
                 </div>
             </div>
         </div>

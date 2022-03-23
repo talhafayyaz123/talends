@@ -117,7 +117,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center py-5">
-                    <h2>Hire for any scope of work</h2>
+                    <h2>{!!  $find_right_talends->internees_benefits  ?? '' !!}</h2>
                 </div>
                 <div class="col-md-4 text-center">
 

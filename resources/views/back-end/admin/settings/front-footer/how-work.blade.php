@@ -35,6 +35,20 @@
                     </div>
                     <div class="wt-dashboardboxcontent">
                         <div class="wt-jobdescription wt-tabsinfo">
+
+                        <div class="wt-tabscontenttitle">
+                                 <h2>Title</h2>
+                             </div>
+                             <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                 <fieldset>
+                                 <div class="form-group">
+                                         {!! Form::text('title', null, array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
+                                     </div>
+ 
+                                 </fieldset>
+                             </div>
+
+
                             <div class="wt-tabscontenttitle">
                                 <h2>Footer Image</h2>
                             </div>
@@ -157,6 +171,20 @@
                     </div>
                     <div class="wt-dashboardboxcontent">
                         <div class="wt-jobdescription wt-tabsinfo">
+
+                        
+                        <div class="wt-tabscontenttitle">
+                                 <h2>Title</h2>
+                             </div>
+                             <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                 <fieldset>
+                                 <div class="form-group">
+                                         {!! Form::text('title', e($footer_how_work['project_description']), array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
+                                     </div>
+ 
+                                 </fieldset>
+                             </div>
+
                             <div class="wt-tabscontenttitle">
                                 <h2>Footer Image</h2>
                             </div>

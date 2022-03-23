@@ -279,6 +279,18 @@
                             </div>
                             <div class="wt-formtheme wt-userform wt-userformvtwo">
 
+                            
+                            <div class="wt-tabscontenttitle">
+                                 <h2>Title</h2>
+                             </div>
+                             <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                 <fieldset>
+                                 <div class="form-group">
+                                         {!! Form::text('title', $find_right_talends['internees_benefits'], array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
+                                     </div>
+ 
+                                 </fieldset>
+                             </div>
 
                                 <div class="wt-attachmentsholder">
                                     <div class="lara-attachment-files">

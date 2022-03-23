@@ -77,7 +77,7 @@
             <div class="row">
                 <div class="col-md-12 pb-3">
                     <h5>FOR CLIENTS</h5>
-                    <h2>Find the right opportunity</h2>
+                    <h2>{!! $find_right_opportunity->project_description ?? '' !!} </h2>
                 </div>
                 
                 <div class="col-md-4">
@@ -158,8 +158,8 @@
         <div class="container py-30">
             <div class="row row-eq-height">
                 <div class="col-12">
-                    <h2>Build Amazing <span class="theme_color">Teams, <br> On Demand</span></h2>
-                    <p>Quickly assemble the teams you need, exactly when you need them.</p>
+                    {!!$team_on_demand->work_description  ??  '' !!}
+            
                 </div>
                 
                 <div class="col-md-7">
@@ -339,9 +339,8 @@
     <section class="">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 align-self-center why_organization_choose_box_gap">
-                    <h3 class="why_organization_choose_talends" >Why Organizations <br>Choose Talends</h3>
-                    <p>Discover the many ways in which our clients have embraced the benefits of the Talends network.</p>
+                <div class="col-md-4 align-self-center why_organization_choose_box_gap why_organization_choose_talends">
+                {!! $why_choose_talends->freelancer_benefits ?? ''  !!}
                 </div>
                 <div class="col-md-4">
                     <div class="talend_img_card why_organization_choose_box why_organization_choose_box_gap">

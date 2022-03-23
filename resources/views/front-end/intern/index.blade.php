@@ -34,7 +34,7 @@
    
 
     @endif
-    <br>><br>
+    <br><br>
     <div id="user_profile">
         @if (Session::has('payment_message'))
             @php $response = Session::get('payment_message') @endphp

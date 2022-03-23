@@ -202,6 +202,7 @@ class HomePagesController extends Controller
     { 
         $this->validate(
             $request, [
+        'title' => 'required',
        'banner_description' => 'required',
        'features_text' => 'required',
         'services_description' => 'required',
@@ -331,7 +332,8 @@ class HomePagesController extends Controller
     { 
         $this->validate(
             $request, [
-         'opportunity_heading1' => 'required',
+        'main_heading' => 'required',
+        'opportunity_heading1' => 'required',
         'opportunity_heading2' => 'required',
         'opportunity_heading3' => 'required',
 
@@ -374,6 +376,8 @@ class HomePagesController extends Controller
     { 
         $this->validate(
             $request, [
+                'title' => 'required',
+
          'footer_image1_description' => 'required',
           'footer_image2_description' => 'required',
           'footer_image3_description' => 'required',
@@ -412,6 +416,8 @@ class HomePagesController extends Controller
     { 
         $this->validate(
             $request, [
+                'title' => 'required',
+
          'footer_image1_description' => 'required',
           'footer_image2_description' => 'required',
           'footer_image3_description' => 'required',
@@ -472,6 +478,8 @@ class HomePagesController extends Controller
         if($request->team_type=='add'){
             $this->validate(
                 $request, [
+            'title' => 'required',
+
              'quality_description1' => 'required',
             'quality_description2' => 'required',
             'quality_description3' => 'required',
@@ -484,6 +492,8 @@ class HomePagesController extends Controller
 
             $this->validate(
                 $request, [
+                    'title' => 'required',
+
              'quality_description1' => 'required',
             'quality_description2' => 'required',
             'quality_description3' => 'required',
@@ -507,6 +517,7 @@ class HomePagesController extends Controller
         if($request->form_type=='add'){
             $this->validate(
                 $request, [
+             'main_heading' => 'required',
              'title1' => 'required',
             'title2' => 'required',
             'title3' => 'required',
@@ -523,6 +534,7 @@ class HomePagesController extends Controller
 
             $this->validate(
                 $request, [
+            'main_heading' => 'required',
             'title1' => 'required',
             'title2' => 'required',
             'title3' => 'required',
@@ -729,6 +741,7 @@ class HomePagesController extends Controller
         'work_description' => 'required',
         'support_description' => 'required',
         'freelancer_benefits' => 'required',
+        'title' => 'required',
        
 
         'about_talends_image' =>'image|mimes:jpeg,png,jpg,gif,svg',
