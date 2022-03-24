@@ -1,10 +1,8 @@
-<aside id="wt-sidebar" class="wt-sidebar wt-usersidebar">
+<aside id="wt-sidebar" class="wt-sidebar wt-usersidebar freelancer_filters">
     {!! Form::open(['url' => url('search-results'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch', 'id' => 'wt-formsearch']) !!}
         <input type="hidden" value="{{$type}}" name="type">
         <div class="wt-widget wt-effectiveholder wt-startsearch">
-            <div class="wt-widgettitle">
-                <h2>{{ trans('lang.start_search') }}</h2>
-            </div>
+           
             <div class="wt-widgetcontent">
                 <div class="wt-formtheme wt-formsearch">
                     <fieldset>
@@ -18,9 +16,10 @@
         </div>
         <div class="wt-widget wt-effectiveholder">
             <div class="wt-widgettitle">
-                <h2>{{ trans('lang.skills') }}</h2>
+                <span>{{ trans('lang.skills') }}</span>
+             <span class="filter_toogle"> <a  onclick="toogle_skill()">  <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
             </div>
-            <div class="wt-widgetcontent">
+            <div class="wt-widgetcontent freelancer_skills_filter" style="display: none;">
                 <fieldset>
                     @if (!empty($skills))
                         <div class="wt-checkboxholder wt-verticalscrollbar">
@@ -38,9 +37,11 @@
         </div>
         <div class="wt-widget wt-effectiveholder">
             <div class="wt-widgettitle">
-                <h2>{{ trans('lang.location') }}</h2>
+                <span>{{ trans('lang.location') }}</span>
+                <span class="filter_toogle"> <a  onclick="toogle_location()">  <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
+
             </div>
-            <div class="wt-widgetcontent">
+            <div class="wt-widgetcontent freelancer_location_filter" style="display: none;">
                 <fieldset>
                     <div class="form-group">
                         <input type="text" class="form-control filter-records" placeholder="{{ trans('lang.search_loc') }}">
@@ -73,9 +74,11 @@
         </div>
         <div class="wt-widget wt-effectiveholder">
             <div class="wt-widgettitle">
-                <h2>{{{ trans('lang.hourly_rate') }}}</h2>
+                <span>{{{ trans('lang.hourly_rate') }}}</span>
+                <span class="filter_toogle"> <a  onclick="toogle_price()">  <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
+
             </div>
-            <div class="wt-widgetcontent">
+            <div class="wt-widgetcontent freelancer_price_filter" style="display: none;">
                 <div class="wt-formtheme wt-formsearch">
                     <fieldset>
                         <div class="form-group">
@@ -98,49 +101,14 @@
             </div>
         </div>
         
+      
         <div class="wt-widget wt-effectiveholder">
             <div class="wt-widgettitle">
-                <h2>{{ trans('lang.freelancer_type') }}</h2>
+                <span>{{ trans('lang.langs') }}</span>
+                <span class="filter_toogle"> <a  onclick="toogle_language()">  <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
+
             </div>
-            <div class="wt-widgetcontent">
-                <div class="wt-formtheme wt-formsearch">
-                    <div class="wt-checkboxholder wt-verticalscrollbar">
-                        @foreach (Helper::getFreelancerLevelList() as $key => $freelancer_level)
-                        @php $checked = ( !empty($_GET['freelaner_type']) && in_array($key, $_GET['freelaner_type'])) ? 'checked' : '' @endphp
-                            <span class="wt-checkbox">
-                                <input id="rate-{{ $key }}" type="checkbox" name="freelaner_type[]" value="{{ $key }}" {{ $checked }}>
-                                <label for="rate-{{ $key }}">{{ $freelancer_level }}</label>
-                            </span>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="wt-widget wt-effectiveholder">
-            <div class="wt-widgettitle">
-                <h2>{{ trans('lang.english_level') }}</h2>
-            </div>
-            <div class="wt-widgetcontent">
-                <div class="wt-formtheme wt-formsearch">
-                    <fieldset>
-                        <div class="wt-checkboxholder wt-verticalscrollbar">
-                            @foreach (Helper::getEnglishLevelList() as $key => $english_level)
-                                @php $checked = ( !empty($_GET['english_level']) && in_array($key, $_GET['english_level'])) ? 'checked' : '' @endphp
-                                <span class="wt-checkbox">
-                                    <input id="rate-{{ $key }}" type="checkbox" name="english_level[]" value="{{ $key }}" {{ $checked }}>
-                                    <label for="rate-{{ $key }}">{{ $english_level }}</label>
-                                </span>
-                            @endforeach
-                        </div>
-                    </fieldset>
-                </div>
-            </div>
-        </div>
-        <div class="wt-widget wt-effectiveholder">
-            <div class="wt-widgettitle">
-                <h2>{{ trans('lang.langs') }}</h2>
-            </div>
-            <div class="wt-widgetcontent">
+            <div class="wt-widgetcontent freelancer_language_filter" style="display: none;">
                 <fieldset>
                     <div class="form-group">
                         <input type="text" class="form-control filter-records" placeholder="{{ trans('lang.ph_search_langs') }}">

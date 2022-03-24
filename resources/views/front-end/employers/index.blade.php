@@ -130,3 +130,19 @@
         </div>
     </div>
     @endsection
+
+    @push('scripts')
+
+<script>
+
+function toogle_total_employes(){
+ $('.total_employes_filter').toggle();
+}
+
+function toogle_location(){
+ $('.location_filter').toggle();
+}
+
+</script>
+@endpush
+

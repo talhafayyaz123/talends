@@ -180,8 +180,24 @@
         </div>
     </div>
     @push('scripts')
+
+    
         <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
         <script>
+
+            function toogle_skill(){
+             $('.freelancer_skills_filter').toggle();
+            }
+            function toogle_location(){
+             $('.freelancer_location_filter').toggle();
+            }
+            function toogle_price(){
+             $('.freelancer_price_filter').toggle();
+            }
+
+            function toogle_language(){
+             $('.freelancer_language_filter').toggle();
+            }
             if (APP_DIRECTION == 'rtl') {
                 var direction = true;
             } else {
@@ -205,6 +221,7 @@
                     1760:{items:6,}
                 }
             });
+
         </script>
     @endpush
 @endsection

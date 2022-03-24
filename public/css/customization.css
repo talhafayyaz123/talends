@@ -546,6 +546,24 @@ footer .row .col-md-6:last-child>ul {
     }
 }
 
+.freelancer_filters .wt-widget{
+    margin: 0 0 0px !important;
+    padding-top: 0% !important;
+}
+
+.freelancer_filters .wt-widgettitle{
+    margin-bottom: 15px !important;
+}
+
+.filter_toogle{
+    float: right;
+}
+
+.internee_filters .wt-widget{
+    margin: 0 0 0px !important;
+    padding: 4px !important;
+}
+
 @media screen and (max-width:499px) {
     .footer_bottom {
         flex-direction: column;

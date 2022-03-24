@@ -541,6 +541,13 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 	min-height: 184px;
 	background: #4ABD2E;
 	border-radius: 16px;
+
+	-webkit-transition: all 0.6s ease;
+	-moz-transition: all 0.6s ease;
+	-ms-transition: all 0.6s ease;
+	-o-transition: all 0.6s ease;
+	transition: all 0.6s ease;
+
 }
 
 .opportunity_card span {
@@ -558,7 +565,11 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 	height: auto;
 	position: absolute;
 	bottom: 12px;
-	left: 180px;
+	left: 27px;
+}
+
+.opportunity_card:hover{
+	background: #166702 !important;
 }
 
 .filter-btns>button:last-child {
@@ -785,14 +796,16 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 }
 
 .why_organization_choose_box{
-	min-height: 400px;
+	min-height: 220px;
     background: #edf2eb;
     border-radius: 16px;
 }
 .why_organization_choose_box h3{
 	font-size: 28px;
-	bottom: 138px !important;
 	color: #000 !important;
+	text-align: center;
+	width: 13em;
+	top: 49px;
 }
 
 .why_organization_choose_box_gap{

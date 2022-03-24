@@ -81,23 +81,25 @@
                 </div>
                 
                 <div class="col-md-4">
+                <a href="{{ route('findTalends') }}">
                     <div class="talend_img_card opportunity_card">
-                        <a href="{{ route('findTalends') }}">
+                       
                         
                         <h3> {!! $find_right_opportunity->banner_description ?? '' !!}   </h3>
                             
-                        <span class="tal-readmore">Read More</span>
+                        <!-- <span class="tal-readmore">Read More</span> -->
                         <img src="{{ asset('talends/assets/img/right-arrows.png')}}" alt=""> 
                 
-                        </a>
+                       
                     </div>
+                    </a>
                 </div>
                 <div class="col-md-4">
                     <div class="talend_img_card opportunity_card">
                         <a href="{{ route('Companies') }}">
                             
                         <h3> {{$find_right_opportunity->features_text ?? '' }}   </h3>
-                            <span class="tal-readmore">Read More</span>
+                            <!-- <span class="tal-readmore">Read More</span> -->
                             <img src="{{ asset('talends/assets/img/right-arrows.png')}}" alt=""> 
                         </a>
                     </div>
@@ -106,7 +108,7 @@
                     <div class="talend_img_card opportunity_card">
                         <a href="{{ route('whyTalends') }}">
                         <h3> {{$find_right_opportunity->services_description ?? '' }}   </h3>
-                            <span class="tal-readmore">Read More</span>
+                            <!-- <span class="tal-readmore">Read More</span> -->
                             <img src="{{ asset('talends/assets/img/right-arrows.png')}}" alt=""> 
                         </a>
                     </div>

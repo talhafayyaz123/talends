@@ -1,10 +1,8 @@
 {!! Form::open(['url' => url('search-results'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch']) !!}
     <input type="hidden" value="{{$type}}" name="type">
-    <aside id="wt-sidebar" class="wt-sidebar">
+    <aside id="wt-sidebar" class="wt-sidebar internee_filters">
         <div class="wt-widget wt-startsearch">
-            <div class="wt-widgettitle">
-                <h2>{{ trans('lang.start_search') }}</h2>
-            </div>
+           
             <div class="wt-widgetcontent">
                 <div class="wt-formtheme wt-formsearch">
                     <fieldset>
@@ -17,9 +15,11 @@
         </div>
         <div class="wt-widget wt-effectiveholder">
             <div class="wt-widgettitle">
-                <h2>{{ trans('lang.location') }}</h2>
+                <span>{{ trans('lang.location') }}</span>
+                <span class="filter_toogle"> <a  onclick="toogle_location()">  <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
+
             </div>
-            <div class="wt-widgetcontent">
+            <div class="wt-widgetcontent location_filter" style="display: none;">
                 <div class="wt-formtheme wt-formsearch">
                     <fieldset>
                         <div class="form-group">
@@ -56,9 +56,11 @@
         </div>
         <div class="wt-widget wt-effectiveholder">
             <div class="wt-widgettitle">
-                <h2>{{ trans('lang.no_of_employee') }}</h2>
+                <span>{{ trans('lang.no_of_employee') }}</span>
+                <span class="filter_toogle"> <a  onclick="toogle_total_employes()">  <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
+
             </div>
-            <div class="wt-widgetcontent">
+            <div class="wt-widgetcontent total_employes_filter" style="display: none;">
                 <div class="wt-formtheme wt-formsearch">
                     <fieldset>
                         <div class="wt-checkboxholder wt-verticalscrollbar">

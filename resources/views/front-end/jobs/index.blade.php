@@ -129,3 +129,33 @@
         </div>
     </div>
     @endsection
+    @push('scripts')
+
+    <script>
+
+    function toogle_price(){
+     $('.job_price_filter').toggle();
+    }
+
+    function toogle_categories(){
+     $('.job_categories_filter').toggle();
+    }
+    function toogle_location(){
+     $('.job_location_filter').toggle();
+    }
+
+    function toogle_skill(){
+     $('.job_skill_filter').toggle();
+    }
+
+    function toogle_length(){
+     $('.job_length_filter').toggle();
+    }
+
+    function toogle_language(){
+     $('.job_language_filter').toggle();
+    }
+    
+</script>
+@endpush
+

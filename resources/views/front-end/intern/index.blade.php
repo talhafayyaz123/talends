@@ -182,6 +182,16 @@
     @push('scripts')
         <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
         <script>
+
+           function toogle_location(){
+             $('.location_filter').toggle();
+            }
+            function toogle_price(){
+             $('.price_filter').toggle();
+            }
+            function toogle_language(){
+             $('.language_filter').toggle();
+            }
             if (APP_DIRECTION == 'rtl') {
                 var direction = true;
             } else {
