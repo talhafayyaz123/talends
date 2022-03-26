@@ -105,6 +105,7 @@
                                 @include('extend.back-end.admin.settings.payment.stripe-settings')
                             @else
                                 @include('back-end.admin.settings.payment.stripe-settings')
+                                @include('back-end.admin.settings.payment.paytab-settings')
                             @endif
                         </div>
                         <div class="wt-securityhold tab-pane la-footer-setting" id="wt-footer">

@@ -1118,6 +1118,39 @@ class SiteManagement extends Model
         }
     }
 
+
+    public function savePaytabSettings($request)
+    {
+        $api_key = $request['api_key'];
+     
+        $payment_settings = array();
+        $payment_settings[0]['api_key'] = !empty($api_key) ? $api_key : '';
+     
+        if (!empty($payment_settings)) {
+            $existing_payment_settings = SiteManagement::getMetaValue('paytab_settings');
+            if (!empty($existing_payment_settings)) {
+                DB::table('site_managements')->where('meta_key', '=', 'paytab_settings')->delete();
+                Helper::changeEnv(
+                    [
+                        'PAYTAB_KEY' => ""
+                    ]
+                );
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'paytab_settings', 'meta_value' => serialize($payment_settings),
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            Helper::changeEnv(
+                [
+                    'PAYTAB_KEY' => $api_key
+                ]
+            );
+            return 'success';
+        }
+    }
+
     /**
      * Get Meta Values form meta keys.
      *

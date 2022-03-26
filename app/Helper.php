@@ -55,7 +55,40 @@ class Helper extends Model
         return $gender;
     }
 
+    public static function checkoutPaytab(){
+           
+    $curl = curl_init();
 
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => "https://secure.paytabs.com/payment/request",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "POST",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Dummy Order 35925502061445345\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": 5,\n    \"callback\": \"https://talha-fayyaz.com//gateway.php\",\n    \"return\": \"https://talha-fayyaz.com//gateway.php\"\n  }",
+    CURLOPT_HTTPHEADER => array(
+        "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
+        "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
+        "cache-control: no-cache",
+        "content-type: application/json"
+    ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+    if ($err) {
+    echo "cURL Error #:" . $err;
+    } else {
+    
+    return $response;
+    
+    }
+    }
      public static function getfooterHowWork(){
         $footer_how_work=AboutTalendsPage::where('page_type','footer-how-work')->first();
         return $footer_how_work;
@@ -3573,6 +3606,10 @@ class Helper extends Model
             'stripe' => array(
                 'title' => trans('lang.payment_methods.stripe'),
                 'value' => 'stripe',
+            ), 
+            'paytab' => array(
+                'title' => 'Paytab',
+                'value' => 'paytab',
             ),
         );
         if (!empty($key) && array_key_exists($key, $list)) {

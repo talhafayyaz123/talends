@@ -2666,6 +2666,30 @@ if (document.getElementById("settings")) {
                         }
                     });
             },
+            submitPaytabSettings: function () {
+                let payment_settings = document.getElementById('paytab-form');
+                let data = new FormData(payment_settings);
+                var self = this;
+                axios.post(APP_URL + '/admin/store/paytab-payment-settings', data)
+                    .then(function (response) {
+                        
+                        if (response.data.type == 'success') {
+                            self.success_message = response.data.message;
+                            self.showInfo(response.data.progressing);
+                        } else if (response.data.type == 'error') {
+                            self.showError(response.data.message);
+                        }
+                    })
+                    .catch(function (error) {
+                    
+                        if (error.response.data.errors.api_key) {
+                            self.showError(error.response.data.errors.api_key[0]);
+                        }
+                        if (error.response.data.errors.api_key) {
+                            self.showError(error.response.data.errors.api_key[0]);
+                        }
+                    });
+            },
             emailContent: function (reference) {
                 this.$refs[reference].show();
             },

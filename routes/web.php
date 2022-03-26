@@ -273,6 +273,7 @@ Route::group(
         Route::post('admin/store/commision-settings', 'SiteManagementController@storeCommisionSettings');
         Route::post('admin/store/payment-settings', 'SiteManagementController@storePaymentSettings');
         Route::post('admin/store/stripe-payment-settings', 'SiteManagementController@storeStripeSettings');
+        Route::post('admin/store/paytab-payment-settings', 'SiteManagementController@storePaytabSettings');
         Route::get('admin/email-templates', 'EmailTemplateController@index')->name('emailTemplates');
         Route::get('admin/email-templates/filter-templates', 'EmailTemplateController@index')->name('emailTemplates');
         Route::get('admin/email-templates/{id}', 'EmailTemplateController@edit')->name('editEmailTemplates');

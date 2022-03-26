@@ -121,6 +121,11 @@ class SiteManagementController extends Controller
         $stripe_key = !empty($stripe_settings) ? $stripe_settings[0]['stripe_key'] : '';
         $stripe_secret = !empty($stripe_settings) ? $stripe_settings[0]['stripe_secret'] : '';
         $stripe_img = !empty($stripe_settings) ? $stripe_settings[0]['stripe_img'] : '';
+
+        $paytab_settings = $this->settings::getMetaValue('paytab_settings');
+        $paytab_key = !empty($paytab_settings) ? $paytab_settings[0]['api_key'] : '';
+
+
         $languages = Helper::getTranslatedLang();
         $selected_language = !empty($settings[0]['language']) ? $settings[0]['language'] : '' ;
         $currency = array_pluck(Helper::currencyList(), 'code', 'code');
@@ -260,7 +265,7 @@ class SiteManagementController extends Controller
                     'service_meta_desc', 'access_type', 'reg_form_banner', 'port', 'host', 'homepage_list',
                     'selected_homepage', 'article_meta_title','article_meta_desc','show_article_banner','article_inner_banner',
                     'selected_header', 'selected_footer', 'f_selected_header', 'emp_selected_header', 'job_selected_header',
-                    'service_selected_header', 'article_selected_header'
+                    'service_selected_header', 'article_selected_header','paytab_key'
                 )
             );
         }
@@ -1250,6 +1255,41 @@ class SiteManagementController extends Controller
         $json = array();
         if (!empty($request)) {
             $default_settings = $this->settings->saveStripeSettings($request);
+            if ($default_settings == "success") {
+                $json['type'] = 'success';
+                $json['progressing'] = trans('lang.saving');
+                $json['message'] = trans('lang.settings_saved');
+                return $json;
+            } else {
+                $json['type'] = 'error';
+                $json['message'] = trans('lang.something_wrong');
+                return $json;
+            }
+        } else {
+            $json['type'] = 'error';
+            $json['message'] = trans('lang.something_wrong');
+            return $json;
+        }
+    }
+
+
+    public function storePaytabSettings(Request $request)
+    {
+        $server = Helper::worketicIsDemoSiteAjax();
+        if (!empty($server)) {
+            $response['type'] = 'error';
+            $response['message'] = $server->getData()->message;
+            return $response;
+        }
+        $this->validate(
+            $request,
+            [
+                'api_key' => 'required'
+            ]
+        );
+        $json = array();
+        if (!empty($request)) {
+            $default_settings = $this->settings->savePaytabSettings($request);
             if ($default_settings == "success") {
                 $json['type'] = 'success';
                 $json['progressing'] = trans('lang.saving');
