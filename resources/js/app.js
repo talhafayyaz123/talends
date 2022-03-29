@@ -4340,6 +4340,27 @@ if (document.getElementById("packages")) {
                         console.log(error);
                     });
             },
+            paytabCheckout: function () {
+                axios.get(APP_URL + '/addmoney/paytab/'+$('#proposal_id').val())
+                .then(function (response) {
+                     
+                     if (response.data.type == 'success') {
+                        self.loading = false;
+
+                        setTimeout(function () {
+                            window.location.replace(response.data.url);
+                        }, 1000);
+                    } else if (response.data.type == 'error') {
+                        self.loading = false;
+                        self.showError(response.data.message);
+                    }   
+                })
+                .catch(function (error) {
+                    self.loading = false;
+                    console.log(error);
+                });
+            
+            },
         }
     });
 }

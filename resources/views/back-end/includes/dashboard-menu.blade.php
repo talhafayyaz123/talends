@@ -79,6 +79,7 @@
                                 <li><hr><a href="{{{ url('admin/settings/home-page-settings/banner_settings') }}}">Banner Settings</a></li>
                                 <li><hr><a href="{{{ url('admin/settings/home-page-settings/team_demand') }}}">Team On Demand</a></li>
                                 <li><hr><a href="{{{ url('admin/settings/home-page-settings/why_choose_talends') }}}">Why Choose Talends</a></li>
+                                <li><hr><a href="{{{ url('admin/settings/home-page-settings/interne_university_collaboration') }}}">Interne University Collaboration</a></li>
 
                             </ul>
                         </li>

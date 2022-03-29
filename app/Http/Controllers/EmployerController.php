@@ -666,7 +666,7 @@ class EmployerController extends Controller
         $ongoing_jobs = array();
 
         $employer_id = Auth::user()->id;
-
+        
         if (Auth::user()) {
 
             $ongoing_jobs = Job::where('user_id', $employer_id)->latest()->where('status', 'hired')->paginate(7);

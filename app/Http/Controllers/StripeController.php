@@ -271,7 +271,7 @@ class StripeController extends Controller
 
                 );
 
-
+               
 
                 $payment_intent = $stripe->paymentIntents()->create([
 
@@ -339,7 +339,7 @@ class StripeController extends Controller
 
                 );
 
-
+               
 
                 if ($payment_detail['status'] == 'succeeded') {
 

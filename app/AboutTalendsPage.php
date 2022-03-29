@@ -1079,6 +1079,217 @@ class AboutTalendsPage extends Model
         }
     }
 
+    public function storeInterneUniversityCollaboration($request)
+    {
+
+            if (!empty($request)) {
+                      
+            if($request->form_type=='update'){
+                self::where('page_type','interne_university_collaboration')->delete();
+            }
+            $this->page_type = 'interne_university_collaboration';
+
+            if($request->form_type=='add'){
+             if (!empty($request->hasFile('title1_image'))) {
+                $title1_image = $request->file('title1_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+                $imageName = time().'.'.$title1_image->getClientOriginalName();
+                $request->title1_image->move($new_path, $imageName);
+                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->about_talends_image = null;
+            }
+
+        }else{
+           
+            
+            if (!empty($request->hasFile('title1_image'))) {
+                $title1_image = $request->file('title1_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title1_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title1_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+                $imageName = time().'.'.$title1_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->title1_image->move($new_path, $imageName);
+                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->about_talends_image = $request->hidden_title1_image;
+            }
+
+
+
+        }
+           ////////////////////////////////////////////
+
+           if($request->form_type=='add'){
+            if (!empty($request->hasFile('title2_image'))) {
+               $title2_image = $request->file('title2_image');
+       
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+               $imageName = time().'.'.$title2_image->getClientOriginalName();
+               $request->title2_image->move($new_path, $imageName);
+               $this->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+           } else {
+               $this->talends_project_image = null;
+           }
+
+       }else{
+          
+           
+           if (!empty($request->hasFile('title2_image'))) {
+               $title2_image = $request->file('title2_image');
+               if (file_exists(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title2_image)) {
+                   unlink(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title2_image);               
+               }
+       
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+               $imageName = time().'.'.$title2_image->getClientOriginalName();
+               $imageName=str_replace(' ','_',$imageName);
+             
+               $request->title2_image->move($new_path, $imageName);
+               $this->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+           } else {
+               $this->talends_project_image = $request->hidden_title2_image;
+           }
+
+
+
+       }
+
+           ////////////////////////////////////////
+
+
+           if($request->form_type=='add'){
+            if (!empty($request->hasFile('title3_image'))) {
+               $title3_image = $request->file('title3_image');
+       
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+               $imageName = time().'.'.$title3_image->getClientOriginalName();
+               $request->title3_image->move($new_path, $imageName);
+               $this->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+           } else {
+               $this->talends_work_image = null;
+           }
+
+       }else{
+          
+           
+           if (!empty($request->hasFile('title3_image'))) {
+               $title3_image = $request->file('title3_image');
+               if (file_exists(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title3_image)) {
+                   unlink(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title3_image);               
+               }
+       
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+               $imageName = time().'.'.$title3_image->getClientOriginalName();
+               $imageName=str_replace(' ','_',$imageName);
+             
+               $request->title3_image->move($new_path, $imageName);
+               $this->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+           } else {
+               $this->talends_work_image = $request->hidden_title3_image;
+           }
+
+
+
+       }
+           ///////////////////////////////
+      
+           if($request->form_type=='add'){
+            if (!empty($request->hasFile('title4_image'))) {
+               $title4_image = $request->file('title4_image');
+       
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+               $imageName = time().'.'.$title4_image->getClientOriginalName();
+               $request->title4_image->move($new_path, $imageName);
+               $this->talends_payment_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+           } else {
+               $this->talends_payment_image = null;
+           }
+
+       }else{
+          
+           
+           if (!empty($request->hasFile('title4_image'))) {
+               $title4_image = $request->file('title4_image');
+               if (file_exists(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title4_image)) {
+                   unlink(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title4_image);               
+               }
+       
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+               $imageName = time().'.'.$title4_image->getClientOriginalName();
+               $imageName=str_replace(' ','_',$imageName);
+             
+               $request->title4_image->move($new_path, $imageName);
+               $this->talends_payment_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+           } else {
+               $this->talends_payment_image = $request->hidden_title4_image;
+           }
+
+
+
+       }
+
+
+           //////////////////////////
+
+
+      
+           if($request->form_type=='add'){
+            if (!empty($request->hasFile('title5_image'))) {
+               $title5_image = $request->file('title5_image');
+       
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+               $imageName = time().'.'.$title5_image->getClientOriginalName();
+               $request->title5_image->move($new_path, $imageName);
+               $this->talends_support_image	 = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+           } else {
+               $this->talends_support_image	 = null;
+           }
+
+       }else{
+          
+           
+           if (!empty($request->hasFile('title5_image'))) {
+               $title5_image = $request->file('title5_image');
+               if (file_exists(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title5_image)) {
+                   unlink(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title5_image);               
+               }
+       
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+               $imageName = time().'.'.$title5_image->getClientOriginalName();
+               $imageName=str_replace(' ','_',$imageName);
+             
+               $request->title5_image->move($new_path, $imageName);
+               $this->talends_support_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+           } else {
+               $this->talends_support_image = $request->hidden_title5_image;
+           }
+
+
+
+       }
+           /////////////////////
+            $this->save();
+            $json['type'] = 'success';
+            $json['message'] = 'Team On Demand Settings Record Created';
+            return $json;
+        }
+    }
     public function saveTrustedBySettings($request)
     {
 

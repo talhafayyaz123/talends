@@ -230,7 +230,8 @@ Route::group(
         Route::post('admin/update-homepage-banner-settings/{id}', 'HomePagesController@updateBannerSettings');
         
         Route::post('admin/store-why_choose_talends', 'HomePagesController@storeWhyChooseTalendsSettings');
-        
+        Route::post('admin/interne_university_collaboration', 'HomePagesController@storeInterneUniversityCollaboration');
+
 
         Route::post('admin/store-footer-how-work', 'HomePagesController@storeFooterHowWork');
         
@@ -534,6 +535,9 @@ Route::post('get-freelancer-education', 'PublicController@getFreelancerEducation
 
 Route::get('addmoney/stripe', array('as' => 'addmoney.paywithstripe', 'uses' => 'StripeController@payWithStripe',));
 Route::post('addmoney/stripe', array('as' => 'addmoney.stripe', 'uses' => 'StripeController@postPaymentWithStripe',));
+
+Route::get('addmoney/paytab/{amount}', array('as' => 'addmoney.paytab', 'uses' => 'PaytabController@paytabCheckout',));
+Route::get('redirect/paytab/{proposal_id}/{user_id}', array('as' => 'redirect.paytab', 'uses' => 'PaytabController@postPaymentWithPaytab',));
 
 
 Route::get('service/payment-process/{id}', 'ServiceController@employerPaymentProcess');

@@ -53,6 +53,7 @@ use App\Service;
 use App\DeliveryTime;
 use App\ResponseTime;
 use App\Article;
+use App\AboutTalendsPage;
 
 /**
  * Class PublicController
@@ -637,6 +638,8 @@ class PublicController extends Controller
         $enable_package = !empty($payment_settings) && !empty($payment_settings[0]['enable_packages']) ? $payment_settings[0]['enable_packages'] : 'true';
         $breadcrumbs_settings = SiteManagement::getMetaValue('show_breadcrumb');
         $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'true';
+        $interne_university_collaboration=AboutTalendsPage::where('page_type','interne_university_collaboration')->first();
+
         if (!empty($_GET['type'])) {
             if ($type == 'employer' || $type == 'freelancer' || $type == 'intern') {
                 
@@ -796,7 +799,8 @@ class PublicController extends Controller
                             'show_breadcrumbs',
                             'search_speciality',
                             'search_university',
-                            'search_grade'
+                            'search_grade',
+                            'interne_university_collaboration'
                         )
                     );
                 } else {

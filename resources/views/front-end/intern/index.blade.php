@@ -60,6 +60,7 @@
                                         <span>{{ trans('lang.01') }} {{$users->count()}} of {{\App\User::role('freelancer')->count()}} results @if (!empty($keyword)) for <em>"{{{$keyword}}}"</em> @endif</span>
                                     @endif
                                 </div>
+                               
                                 @if (!empty($users))
                                     @foreach ($users as $key => $freelancer)
                                         @php
@@ -178,7 +179,64 @@
                 </div>
             </div>
         </div>
+
+       
+
     </div>
+
+    <div class="wt-haslayout" style="background-color: #F6F6F6;">
+        <div class="container">
+            <div class="row">
+            <div class="col-md-12 text-center py-5">
+                    <h2  style="color: #959595;">Associated University</h2>
+                </div>
+                <div class="col-md-2">
+                @if(isset( $interne_university_collaboration->about_talends_image) )
+                    <img src="{{asset('uploads/home-pages/interne_uni_collaboration/'.$interne_university_collaboration->about_talends_image)}}" class="w-100" alt="">
+                    @endif
+                </div>
+                <div class="col-md-2">
+                    <div class="talend_img_card why_organization_choose_box why_organization_choose_box_gap">
+                    
+                    @if(isset( $interne_university_collaboration->talends_project_image) )
+                    <img src="{{asset('uploads/home-pages/interne_uni_collaboration/'.$interne_university_collaboration->talends_project_image)}}" class="w-100" alt="">
+                    @endif
+                    </div>
+                </div>
+                
+                <div class="col-md-2">
+                    <div class="talend_img_card why_organization_choose_box">
+                                          
+                    @if(isset( $interne_university_collaboration->talends_work_image) )
+                    <img src="{{asset('uploads/home-pages/interne_uni_collaboration/'.$interne_university_collaboration->talends_work_image)}}" class="w-100" alt="">
+                    @endif
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="talend_img_card why_organization_choose_box">
+                                          
+                    @if(isset( $interne_university_collaboration->talends_payment_image) )
+                    <img src="{{asset('uploads/home-pages/interne_uni_collaboration/'.$interne_university_collaboration->talends_payment_image)}}" class="w-100" alt="">
+                    @endif
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="talend_img_card why_organization_choose_box">
+                                          
+                    @if(isset( $interne_university_collaboration->talends_support_image) )
+                    <img src="{{asset('uploads/home-pages/interne_uni_collaboration/'.$interne_university_collaboration->talends_support_image)}}" class="w-100" alt="">
+                    @endif
+                    </div>
+                </div>
+
+            </div>
+                
+           
+            </div>
+        </div>
+
     @push('scripts')
         <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
         <script>

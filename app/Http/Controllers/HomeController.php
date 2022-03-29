@@ -156,7 +156,15 @@ class HomeController extends Controller
         }
     }
 
-
+    public function gateway(){
+       
+        $response=Helper::checkoutPaytab();
+     
+        if(isset(json_decode( $response,true)['redirect_url'])){
+        echo '<script>window.location.href = "'.json_decode( $response,true)['redirect_url'].'";</script>';
+        } 
+        exit;
+    }
      public function whyTalends(){
         $inner_page = SiteManagement::getMetaValue('why_talends');
         $about_talends=AboutTalendsPage::where('page_type','about_talends')->first();

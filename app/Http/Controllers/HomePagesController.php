@@ -285,6 +285,7 @@ class HomePagesController extends Controller
         $team_on_demand=AboutTalendsPage::where('page_type','team_on_demand')->first();
         $why_choose_talends=AboutTalendsPage::where('page_type','why_choose_talends')->first();
         $trusted_by=AboutTalendsPage::where('page_type','trusted_by')->first();
+        $interne_university_collaboration=AboutTalendsPage::where('page_type','interne_university_collaboration')->first();
    
      if($type=='banner_settings'){
         return view(
@@ -297,6 +298,10 @@ class HomePagesController extends Controller
      }else if($type=='why_choose_talends'){
         return view(
             'back-end.admin.settings.home_page_settings.why_choose_talends',compact('why_choose_talends')
+        );
+     }else if($type=='interne_university_collaboration'){
+        return view(
+            'back-end.admin.settings.home_page_settings.interne_settings',compact('interne_university_collaboration')
         );
      }
 
@@ -554,6 +559,40 @@ class HomePagesController extends Controller
         $about_talends = new AboutTalendsPage;
         $about_talends->storeWhyChooseTalendsSettings($request);
         Session::flash('message','Why Choose Talends Settings Saved Successfully');
+        return Redirect::back();
+    }
+
+    public function storeInterneUniversityCollaboration(Request $request)
+    { 
+
+        if($request->form_type=='add'){
+            $this->validate(
+                $request, [
+            'title1_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'title2_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'title3_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'title4_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'title5_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            ]
+            );
+        }else{
+
+            $this->validate(
+                $request, [
+            'title1_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'title2_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'title3_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'title4_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'title5_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+    
+            ]
+            );
+        }
+        
+       
+        $about_talends = new AboutTalendsPage;
+        $about_talends->storeInterneUniversityCollaboration($request);
+        Session::flash('message','Interne University Collaboration Saved Successfully');
         return Redirect::back();
     }
     /**
