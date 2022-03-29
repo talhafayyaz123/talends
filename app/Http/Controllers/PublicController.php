@@ -599,7 +599,7 @@ class PublicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getSearchResult($search_type = "")
+    public function getSearchResult(Request $request,$search_type = "")
     {
         $categories = array();
         $locations  = array();
@@ -717,59 +717,64 @@ class PublicController extends Controller
                         );
                     }
                 } elseif ($type === 'freelancer') {
+                   
+                   
                     $f_list_meta_title = !empty($inner_page) && !empty($inner_page[0]['f_list_meta_title']) ? $inner_page[0]['f_list_meta_title'] : trans('lang.freelancer_listing');
                     $f_list_meta_desc = !empty($inner_page) && !empty($inner_page[0]['f_list_meta_desc']) ? $inner_page[0]['f_list_meta_desc'] : trans('lang.freelancer_meta_desc');
                     $show_f_banner = !empty($inner_page) && !empty($inner_page[0]['show_f_banner']) ? $inner_page[0]['show_f_banner'] : 'true';
                     $f_inner_banner = !empty($inner_page) && !empty($inner_page[0]['f_inner_banner']) ? $inner_page[0]['f_inner_banner'] : null;
-                    if (file_exists(resource_path('views/extend/front-end/freelancers/index.blade.php'))) {
-                        return view(
-                            'extend.front-end.freelancers.index',
-                            compact(
-                                'type',
-                                'users',
-                                'categories',
-                                'locations',
-                                'languages',
-                                'skills',
-                                'project_length',
-                                'keyword',
-                                'users_total_records',
-                                'save_freelancer',
-                                'symbol',
-                                'current_date',
-                                'f_list_meta_title',
-                                'f_list_meta_desc',
-                                'show_f_banner',
-                                'f_inner_banner',
-                                'enable_package',
-                                'show_breadcrumbs'
-                            )
-                        );
-                    } else {
-                        return view(
-                            'front-end.freelancers.index',
-                            compact(
-                                'type',
-                                'users',
-                                'categories',
-                                'locations',
-                                'languages',
-                                'skills',
-                                'project_length',
-                                'keyword',
-                                'users_total_records',
-                                'save_freelancer',
-                                'symbol',
-                                'current_date',
-                                'f_list_meta_title',
-                                'f_list_meta_desc',
-                                'show_f_banner',
-                                'f_inner_banner',
-                                'enable_package',
-                                'show_breadcrumbs'
-                            )
-                        );
+                  
+                    if($request->ajax()){
+                        $view = view('front-end.freelancers.data',  compact(
+                            'type',
+                            'users',
+                            'categories',
+                            'locations',
+                            'languages',
+                            'skills',
+                            'project_length',
+                            'keyword',
+                            'users_total_records',
+                            'save_freelancer',
+                            'symbol',
+                            'current_date',
+                            'f_list_meta_title',
+                            'f_list_meta_desc',
+                            'show_f_banner',
+                            'f_inner_banner',
+                            'enable_package',
+                            'show_breadcrumbs'
+                        ))->render();
+                        return response()->json(['html'=>$view]);
                     }
+
+                    
+                    return view(
+                        'front-end.freelancers.index',
+                        compact(
+                            'type',
+                            'users',
+                            'categories',
+                            'locations',
+                            'languages',
+                            'skills',
+                            'project_length',
+                            'keyword',
+                            'users_total_records',
+                            'save_freelancer',
+                            'symbol',
+                            'current_date',
+                            'f_list_meta_title',
+                            'f_list_meta_desc',
+                            'show_f_banner',
+                            'f_inner_banner',
+                            'enable_package',
+                            'show_breadcrumbs'
+                        )
+                    );
+                    
+                    
+
                 }elseif ($type === 'intern') {
                     $f_list_meta_title = !empty($inner_page) && !empty($inner_page[0]['f_list_meta_title']) ? $inner_page[0]['f_list_meta_title'] : trans('lang.freelancer_listing');
                     $f_list_meta_desc = !empty($inner_page) && !empty($inner_page[0]['f_list_meta_desc']) ? $inner_page[0]['f_list_meta_desc'] : trans('lang.freelancer_meta_desc');
