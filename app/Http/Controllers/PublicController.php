@@ -601,6 +601,7 @@ class PublicController extends Controller
      */
     public function getSearchResult(Request $request,$search_type = "")
     {
+        
         $categories = array();
         $locations  = array();
         $languages  = array();
@@ -615,6 +616,7 @@ class PublicController extends Controller
         $address = !empty($_GET['addr']) ? $_GET['addr'] : '';
         $keyword = !empty($_GET['s']) ? $_GET['s'] : '';
         $type = !empty($_GET['type']) ? $_GET['type'] : $search_type;
+        
         $search_categories = !empty($_GET['category']) ? $_GET['category'] : array();
         $search_locations = !empty($_GET['locations']) ? $_GET['locations'] : array();
         $search_skills = !empty($_GET['skills']) ? $_GET['skills'] : array();
@@ -950,7 +952,35 @@ class PublicController extends Controller
                     $max_price
                 );
                 $jobs = $results['jobs'];
+                
                 if (!empty($jobs)) {
+
+                    if($request->ajax()){
+                        $view = view('front-end.jobs.ajax_jobs',  
+                         compact(
+                            'address',
+                            'jobs',
+                            'categories',
+                            'locations',
+                            'languages',
+                            'freelancer_skills',
+                            'project_length',
+                            'Jobs_total_records',
+                            'keyword',
+                            'skills',
+                            'type',
+                            'current_date',
+                            'symbol',
+                            'job_list_meta_title',
+                            'job_list_meta_desc',
+                            'show_job_banner',
+                            'job_inner_banner',
+                            'show_breadcrumbs'
+                        ) )->render();
+                        return response()->json(['html'=>$view]);
+                    }
+
+
                     if (file_exists(resource_path('views/extend/front-end/jobs/index.blade.php'))) {
                         return view(
                             'extend.front-end.jobs.index',
