@@ -273,6 +273,21 @@
                     1760:{items:6,}
                 }
             });
+
+            var fixadent = $(".filters-container"),
+        pos = fixadent.offset();
+
+    $(document).scroll(function(e) {
+        e.preventDefault;
+        if ($(this).scrollTop() > (pos.top + 40) && fixadent.css('position') == 'static') {
+            fixadent.addClass('fixed');
+        } else {
+            if ($(this).scrollTop() <= pos.top && fixadent.hasClass('fixed')) {
+                fixadent.removeClass('fixed');
+            }
+        };
+    });
+    
         </script>
     @endpush
 @endsection

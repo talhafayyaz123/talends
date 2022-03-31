@@ -133,7 +133,6 @@
         <div class="wt-widget wt-effectiveholder">
             <div class="wt-widgetcontent">
                 <div class="wt-applyfilters">
-                    <span>{{ trans('lang.apply_filter') }}<br> {{ trans('lang.changes_by_you') }}</span>
                     {!! Form::submit(trans('lang.btn_apply_filters'), ['class' => 'wt-btn']) !!}
                 </div>
             </div>

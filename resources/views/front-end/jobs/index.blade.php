@@ -34,16 +34,22 @@
             </div>
         @endif
         <div class="wt-haslayout">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 filters-container">
+            @if (file_exists(resource_path('views/extend/front-end/jobs/filters.blade.php'))) 
+                @include('extend.front-end.jobs.filters')
+            @else 
+                @include('front-end.jobs.filters')
+            @endif
+        </div>
+            
+        </div>
+
             <div class="container">
                 <div class="row">
                     <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
-                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
-                            @if (file_exists(resource_path('views/extend/front-end/jobs/filters.blade.php'))) 
-                                @include('extend.front-end.jobs.filters')
-                            @else 
-                                @include('front-end.jobs.filters')
-                            @endif
-                        </div>
+                        
                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
                             <div class="wt-userlistingholder wt-haslayout job_list">
                                 @if (!empty($keyword))
@@ -128,6 +134,22 @@
 	              alert('server not responding...');
 	        });
 	} 
+
+
+    var fixadent = $(".filters-container"),
+        pos = fixadent.offset();
+
+    $(document).scroll(function(e) {
+        e.preventDefault;
+        if ($(this).scrollTop() > (pos.top + 40) && fixadent.css('position') == 'static') {
+            fixadent.addClass('fixed');
+        } else {
+            if ($(this).scrollTop() <= pos.top && fixadent.hasClass('fixed')) {
+                fixadent.removeClass('fixed');
+            }
+        };
+    });
+    
 </script>
 
 @endpush

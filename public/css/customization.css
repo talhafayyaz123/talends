@@ -564,6 +564,54 @@ footer .row .col-md-6:last-child>ul {
     padding: 4px !important;
 }
 
+
+.filters-container {
+    position: static;
+    margin: 0 auto;
+    max-width: 92%;
+
+}
+.filters-container.fixed {
+    position: fixed !important;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: #fff;
+    z-index: 100;
+    padding: 24px 0;
+}
+.freelancer_filters .wt-formsearch {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	justify-content: center;
+
+}
+.freelancer_filters .wt-widget {
+    float: unset;
+    width: 16%;
+    padding: 12px;
+}
+.freelancer_price_filter >div {
+    flex-direction: column !important;
+}
+
+@media screen and (max-width:1366px) {
+    .filters-container {
+        width: 1280px;
+    }
+}
+
+@media screen and (max-width:1280px) {
+    /* width: 1280px; */
+    .filters-container { 
+        width: 100%;
+        overflow-x: scroll;
+    }
+   
+
+}
 @media screen and (max-width:499px) {
     .footer_bottom {
         flex-direction: column;
