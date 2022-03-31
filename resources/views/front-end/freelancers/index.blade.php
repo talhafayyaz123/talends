@@ -55,11 +55,11 @@
 
                     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
                         <div class="wt-userlistingholder wt-userlisting wt-haslayout ">
-                            <div class="wt-userlistingtitle">
+                            <!-- <div class="wt-userlistingtitle">
                                 @if (!empty($users))
                                 <span>{{ trans('lang.01') }} {{$users->count()}} of {{\App\User::role('freelancer')->count()}} results @if (!empty($keyword)) for <em>"{{{$keyword}}}"</em> @endif</span>
                                 @endif
-                            </div>
+                            </div> -->
                             <div class="wt-userlistingholder wt-userlisting wt-haslayout freelancer_list">
 
                                 @include('front-end.freelancers.data')
@@ -114,18 +114,33 @@
 <script>
     function toogle_skill() {
         $('.freelancer_skills_filter').toggle();
+        $('.freelancer_location_filter').hide();
+        $('.freelancer_price_filter').hide();
+        $('.freelancer_language_filter').hide();
+
     }
 
     function toogle_location() {
         $('.freelancer_location_filter').toggle();
+        $('.freelancer_skills_filter').hide();
+        $('.freelancer_price_filter').hide();
+        $('.freelancer_language_filter').hide();
+
     }
 
     function toogle_price() {
         $('.freelancer_price_filter').toggle();
+        $('.freelancer_skills_filter').hide();
+        $('.freelancer_location_filter').hide();
+        $('.freelancer_language_filter').hide();
+
     }
 
     function toogle_language() {
         $('.freelancer_language_filter').toggle();
+        $('.freelancer_skills_filter').hide();
+        $('.freelancer_location_filter').hide();
+        $('.freelancer_price_filter').hide();
     }
     if (APP_DIRECTION == 'rtl') {
         var direction = true;

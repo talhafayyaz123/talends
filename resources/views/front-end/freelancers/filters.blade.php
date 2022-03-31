@@ -15,10 +15,11 @@
             </div>
         </div>
         <div class="wt-widget wt-effectiveholder">
-            <div class="wt-widgettitle">
+        <a  onclick="toogle_skill()"> <div class="wt-widgettitle">
                 <span>{{ trans('lang.skills') }}</span>
-             <span class="filter_toogle"> <a  onclick="toogle_skill()">  <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
+             <span class="filter_toogle">   <i class="fa fa-angle-down" aria-hidden="true"></i></span>
             </div>
+          </a>
             <div class="wt-widgetcontent freelancer_skills_filter" style="display: none;">
                 <fieldset>
                     @if (!empty($skills))
@@ -36,18 +37,14 @@
             </div>
         </div>
         <div class="wt-widget wt-effectiveholder">
-            <div class="wt-widgettitle">
+        <a  onclick="toogle_location()">  <div class="wt-widgettitle">
                 <span>{{ trans('lang.location') }}</span>
-                <span class="filter_toogle"> <a  onclick="toogle_location()">  <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
+                <span class="filter_toogle">   <i class="fa fa-angle-down" aria-hidden="true"></i></span>
 
             </div>
+            </a>
             <div class="wt-widgetcontent freelancer_location_filter" style="display: none;">
-                <fieldset>
-                    <div class="form-group">
-                        <input type="text" class="form-control filter-records" placeholder="{{ trans('lang.search_loc') }}">
-                        <a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
-                    </div>
-                </fieldset>
+               
                 <fieldset>
                     @if (!empty($locations))
                         <div class="wt-checkboxholder wt-verticalscrollbar">
@@ -73,19 +70,15 @@
             </div>
         </div>
         <div class="wt-widget wt-effectiveholder">
-            <div class="wt-widgettitle">
+        <a  onclick="toogle_price()"> <div class="wt-widgettitle">
                 <span>{{{ trans('lang.hourly_rate') }}}</span>
-                <span class="filter_toogle"> <a  onclick="toogle_price()">  <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
+                <span class="filter_toogle">  <i class="fa fa-angle-down" aria-hidden="true"></i></span>
 
             </div>
+            </a>
             <div class="wt-widgetcontent freelancer_price_filter" style="display: none;">
                 <div class="wt-formtheme wt-formsearch">
-                    <fieldset>
-                        <div class="form-group">
-                            <input type="text" class="form-control filter-records" placeholder="{{ trans('lang.ph_search_rate') }}">
-                            <a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
-                        </div>
-                    </fieldset>
+                    
                     <fieldset>
                         <div class="wt-checkboxholder wt-verticalscrollbar">
                             @foreach (Helper::getHourlyRate() as $key => $hourly_rate)
@@ -103,18 +96,13 @@
         
       
         <div class="wt-widget wt-effectiveholder">
-            <div class="wt-widgettitle">
+        <a  onclick="toogle_language()"> <div class="wt-widgettitle">
                 <span>{{ trans('lang.langs') }}</span>
-                <span class="filter_toogle"> <a  onclick="toogle_language()">  <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
+                <span class="filter_toogle">  <i class="fa fa-angle-down" aria-hidden="true"></i></span>
 
             </div>
             <div class="wt-widgetcontent freelancer_language_filter" style="display: none;">
-                <fieldset>
-                    <div class="form-group">
-                        <input type="text" class="form-control filter-records" placeholder="{{ trans('lang.ph_search_langs') }}">
-                        <a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
-                    </div>
-                </fieldset>
+               
                 <fieldset>
                     @if (!empty($languages))
                         <div class="wt-checkboxholder wt-verticalscrollbar">

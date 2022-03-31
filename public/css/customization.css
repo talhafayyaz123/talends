@@ -586,15 +586,37 @@ footer .row .col-md-6:last-child>ul {
 	flex-direction: row;
 	align-items: stretch;
 	justify-content: center;
+    flex-wrap: wrap;
 
 }
 .freelancer_filters .wt-widget {
     float: unset;
-    width: 16%;
+    width: 200px;
+    min-width: 200px;
     padding: 12px;
+    position: relative;
 }
 .freelancer_price_filter >div {
     flex-direction: column !important;
+}
+.wt-formsearch fieldset .wt-checkboxholder{
+    position: absolute;
+    top: 0;
+    padding: 6px;
+    z-index: 100;
+    background: #fff;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.freelancer_filters .wt-widgettitle {
+    position: relative;
+}
+.job_price_filter {
+    position: absolute;
+    width: 100%;
+    padding: 6px;
+    z-index: 100;
+    background: #fff;
+    /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
 }
 
 @media screen and (max-width:1366px) {
@@ -611,6 +633,14 @@ footer .row .col-md-6:last-child>ul {
     }
    
 
+}
+@media screen and (max-width:767px) {
+    .wt-usersidebar {
+         display: block !important;
+    }
+    .filters-container.fixed {
+        position: static !important;
+    }
 }
 @media screen and (max-width:499px) {
     .footer_bottom {

@@ -53,9 +53,9 @@
                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
                             <div class="wt-userlistingholder wt-haslayout job_list">
                                 @if (!empty($keyword))
-                                    <div class="wt-userlistingtitle">
+                                    <!-- <div class="wt-userlistingtitle">
                                         <span>{{ trans('lang.01') }} {{$jobs->count()}} of {{$Jobs_total_records}} results for <em>"{{{$keyword}}}"</em></span>
-                                    </div>
+                                    </div> -->
                                 @endif
                                 @include('front-end.jobs.ajax_jobs')
 
@@ -73,25 +73,64 @@
 
     function toogle_price(){
      $('.job_price_filter').toggle();
+     $('.job_categories_filter').hide();
+     $('.job_location_filter').hide();
+     $('.job_skill_filter').hide();
+     $('.job_language_filter').hide();
     }
 
     function toogle_categories(){
      $('.job_categories_filter').toggle();
+     $('.job_price_filter').hide();
+     $('.job_location_filter').hide();
+     $('.job_skill_filter').hide();
+     $('.job_length_filter').hide();
+     $('.job_language_filter').hide();
+
+
     }
     function toogle_location(){
      $('.job_location_filter').toggle();
+
+     $('.job_price_filter').hide();
+     $('.job_categories_filter').hide();
+     $('.job_skill_filter').hide();
+
+     $('.job_length_filter').hide();
+     $('.job_language_filter').hide();
+
     }
 
     function toogle_skill(){
      $('.job_skill_filter').toggle();
+
+     $('.job_price_filter').hide();
+     $('.job_categories_filter').hide();
+     $('.job_categories_filter').hide();
+     $('.job_location_filter').hide();
+     $('.job_length_filter').hide();
+
     }
 
     function toogle_length(){
      $('.job_length_filter').toggle();
+     $('.job_price_filter').hide();
+     $('.job_categories_filter').hide();
+     $('.job_location_filter').hide();
+     $('.job_skill_filter').hide();
+     $('.job_language_filter').hide();
+
+
     }
 
     function toogle_language(){
      $('.job_language_filter').toggle();
+     $('.job_price_filter').hide();
+     $('.job_categories_filter').hide();
+     $('.job_location_filter').hide();
+     $('.job_skill_filter').hide();
+     $('.job_length_filter').hide();
+
     }
     
 </script>
