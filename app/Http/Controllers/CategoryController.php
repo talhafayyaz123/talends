@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Redirect;
 use Session;
 use View;
 use App\Helper;
+use App\Skill;
+use DB;
+use App\SubCategories;
+use App\SubCategorySkills;
 
 /**
  * Class Category Controller
@@ -32,6 +36,8 @@ class CategoryController extends Controller
      * @var    array $category
      */
     protected $category;
+    protected $sub_category;
+    protected $sub_category_skills;
 
     /**
      * Create a new controller instance.
@@ -40,9 +46,11 @@ class CategoryController extends Controller
      *
      * @return void
      */
-    public function __construct(Category $category)
+    public function __construct(Category $category,SubCategories $sub_category,SubCategorySkills $sub_category_skills)
     {
         $this->category = $category;
+        $this->sub_category = $sub_category;
+        $this->sub_category_skills = $sub_category_skills;
     }
 
     /**
@@ -57,6 +65,7 @@ class CategoryController extends Controller
         if (!empty($_GET['keyword'])) {
             $keyword = $_GET['keyword'];
             $cats = $this->category::where('title', 'like', '%' . $keyword . '%')->paginate(7)->setPath('');
+            
             $pagination = $cats->appends(
                 array(
                     'keyword' => $request->get('keyword')
@@ -65,13 +74,40 @@ class CategoryController extends Controller
         } else {
             $cats = $this->category->paginate(10);
         }
+        
+        $skills = Skill::pluck('title', 'id');
+        
         if (file_exists(resource_path('views/extend/back-end/admin/categories/index.blade.php'))) {
-            return View::make('extend.back-end.admin.categories.index', compact('cats'));
+            return View::make('extend.back-end.admin.categories.index', compact('cats','skills'));
         } else {
             return View::make(
-                'back-end.admin.categories.index', compact('cats')
+                'back-end.admin.categories.index', compact('cats','skills')
             );
         }
+    }
+
+
+    public function subCategories(Request $request)
+    {
+        if (!empty($_GET['keyword'])) {
+            $keyword = $_GET['keyword'];
+            $cats = $this->sub_category::where('title', 'like', '%' . $keyword . '%')->paginate(10);
+            
+            $pagination = $cats->appends(
+                array(
+                    'keyword' => $request->get('keyword')
+                )
+            );
+        } else {
+            $cats = $this->sub_category->with('category')->paginate(10);
+        }
+
+        $categories = $this->category::pluck('title', 'id');
+        $skills = Skill::pluck('title', 'id');
+        
+        return View::make(
+            'back-end.admin.sub_categories.index', compact('cats','skills','categories')
+        );
     }
 
     /**
@@ -92,6 +128,8 @@ class CategoryController extends Controller
             $request, [
                 'category_title'    => 'required',
                 'parent_category'    => 'required',
+                'category_title'    => 'required',
+                'sub_category'    => 'required',
             ]
         );
 
@@ -100,7 +138,25 @@ class CategoryController extends Controller
         Session::flash('message', trans('lang.save_category'));
         return Redirect::back();
     }
-
+    public function storeSubCategory(Request $request)
+    {
+        $server_verification = Helper::worketicIsDemoSite();
+        if (!empty($server_verification)) {
+            Session::flash('error', $server_verification);
+            return Redirect::back();
+        }
+        $this->validate(
+            $request, [
+                'category_id'    => 'required',
+                'sub_category'    => 'required',
+            ]
+        );
+       
+    
+        $this->category->saveSubCategories($request);
+        Session::flash('message', trans('lang.save_category'));
+        return Redirect::back();
+    }
     /**
      * Edit Categories.
      *
@@ -125,6 +181,24 @@ class CategoryController extends Controller
         }
     }
 
+
+    public function editSubCategory($id)
+    {
+        if (!empty($id)) {
+            $categories = $this->category::pluck('title', 'id');
+            $skills = Skill::pluck('title', 'id');
+
+            $sub_category = $this->sub_category::where('sub_category_id',$id)->first();
+            $sub_category_skills = $this->sub_category_skills::where('sub_category_id',$id)->pluck('skill_id','sub_category_skill_id');
+         //   dd($sub_category_skills);
+            if (!empty($sub_category)) {
+                return View::make(
+                    'back-end.admin.sub_categories.edit', compact('id', 'sub_category','skills','categories','sub_category_skills')
+                );
+                return Redirect::to('admin/sub_categories');
+            }
+        }
+    }
     /**
      * Update Categories.
      *
@@ -151,6 +225,24 @@ class CategoryController extends Controller
         return Redirect::to('admin/categories');
     }
 
+    public function updateSubCategory(Request $request, $id)
+    {
+        $server_verification = Helper::worketicIsDemoSite();
+        if (!empty($server_verification)) {
+            Session::flash('error', $server_verification);
+            return Redirect::back();
+        }
+        $this->validate(
+            $request, [
+                'category_id'    => 'required',
+                'sub_category'    => 'required',
+            ]
+        );
+        $this->category->updateSubCategories($request, $id);
+        Session::flash('message', trans('lang.cat_updated'));
+        return Redirect::to('admin/sub_categories');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -170,6 +262,26 @@ class CategoryController extends Controller
         $id = $request['id'];
         if (!empty($id)) {
             $this->category::where('id', $id)->delete();
+            $json['type'] = 'success';
+            $json['message'] = trans('lang.cat_deleted');
+            return $json;
+        }
+    }
+
+    public function destroySubCategories(Request $request)
+    {
+        $server = Helper::worketicIsDemoSiteAjax();
+        if (!empty($server)) {
+            $json['type'] = 'error';
+            $json['message'] = $server->getData()->message;
+            return $json;
+        }
+        $json = array();
+        $id = $request['id'];
+        if (!empty($id)) {
+            $this->sub_category::where('sub_category_id', $id)->delete();
+            $this->sub_category_skills::where('sub_category_id', $id)->delete();
+
             $json['type'] = 'success';
             $json['message'] = trans('lang.cat_deleted');
             return $json;

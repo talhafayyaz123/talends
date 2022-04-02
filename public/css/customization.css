@@ -619,6 +619,8 @@ footer .row .col-md-6:last-child>ul {
     /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
 }
 
+
+
 @media screen and (max-width:1366px) {
     .filters-container {
         width: 1280px;

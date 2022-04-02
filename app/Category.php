@@ -17,6 +17,10 @@ use Illuminate\Database\Eloquent\Model;
 use Intervention\Image\Facades\Image;
 use File;
 use Storage;
+use App\SubCategories;
+use App\SubCategorySkills;
+
+use function Psy\debug;
 
 /**
  * Class Category
@@ -58,6 +62,10 @@ class Category extends Model
 
     public function categoryFreelancers(){
     	return $this->hasMany(Profile::class,'category_id');
+    }
+
+    public function subCategories(){
+    	return $this->hasMany(subCategories::class,'category_id');
     }
 
     /**
@@ -116,6 +124,7 @@ class Category extends Model
     public function saveCategories($request)
     {
         if (!empty($request)) {
+           
             $this->title = filter_var($request['category_title'], FILTER_SANITIZE_STRING);
             $this->slug = filter_var($request['category_title'], FILTER_SANITIZE_STRING);
             $this->parent_category = filter_var($request['parent_category'], FILTER_SANITIZE_STRING);
@@ -139,12 +148,96 @@ class Category extends Model
                 $this->image = null;
             }
             $this->save();
+
             $json['type'] = 'success';
             $json['message'] = trans('lang.cat_created');
             return $json;
         }
     }
 
+    public function saveSubCategories($request)
+    {
+        if (!empty($request)) {
+           $category_id = $request['category_id'];
+            
+           // add data into sub categories
+           $SubCategories = new SubCategories();
+           $sub_category= $request['sub_category'];
+
+           $sub_category= filter_var($sub_category, FILTER_SANITIZE_STRING);
+           $sub_category_slug = filter_var($sub_category, FILTER_SANITIZE_STRING);
+
+
+             $sub_cat= $SubCategories::create([
+               'category_id'=> $category_id,
+                   'title'=> $sub_category,
+                    'slug'=>  $sub_category_slug,
+
+           ]);
+         $lastInsertedId= $sub_cat->id ;
+        
+            $skills= $request['skills'];
+           $insert = array();
+
+           foreach($skills as $index=>$value){
+              $draw = [   
+                   'category_id'=>  $category_id,
+                   'sub_category_id'=>  $lastInsertedId,
+                   'skill_id'=>  $value
+
+              ];
+              $insert[] = $draw;
+
+             }
+
+             \DB::table('sub_category_skills')->insert($insert);
+        
+            $json['type'] = 'success';
+            $json['message'] = trans('lang.cat_created');
+            return $json;
+        }
+    }
+
+    public function updateSubCategories($request,$id)
+    {
+        if (!empty($request)) {
+           $category_id = $request['category_id'];
+           
+           // add data into sub categories
+           $sub_category= $request['sub_category'];
+
+           $sub_category= filter_var($sub_category, FILTER_SANITIZE_STRING);
+           $sub_category_slug = filter_var($sub_category, FILTER_SANITIZE_STRING);
+          
+             $sub_cat= SubCategories::where('sub_category_id',$id)->update([
+               'category_id'=> $category_id,
+                'title'=> $sub_category,
+                 'slug'=>  $sub_category_slug,
+           ]);
+            
+
+            SubCategorySkills::where('sub_category_id', $id)->delete();
+
+            $skills= $request['skills'];
+           $insert = array();
+
+           foreach($skills as $index=>$value){
+            $draw = [   
+                 'category_id'=>  $category_id,
+                 'sub_category_id'=>  $id,
+                 'skill_id'=>  $value
+
+            ];
+            $insert[] = $draw;
+           }
+
+           \DB::table('sub_category_skills')->insert($insert);
+
+            $json['type'] = 'success';
+            $json['message'] = trans('lang.cat_created');
+            return $json;
+        }
+    }
     /**
      * Updating Categories
      *

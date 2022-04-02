@@ -174,6 +174,17 @@ Route::group(
         Route::post('admin/categories/update-cats/{id}', 'CategoryController@update');
         Route::post('admin/categories/upload-temp-image', 'CategoryController@uploadTempImage');
         Route::post('admin/delete-checked-cats', 'CategoryController@deleteSelected');
+
+
+        // Sub Category Routes
+        Route::get('admin/sub_categories', 'CategoryController@subCategories')->name('subCategories');
+        Route::post('admin/sub_store-category', 'CategoryController@storeSubCategory');
+        Route::post('admin/sub_categories/delete-sub-cats', 'CategoryController@destroySubCategories');
+        Route::get('admin/sub_categories/search', 'CategoryController@subCategories');
+        Route::get('admin/sub_categories/edit-sub-cats/{id}', 'CategoryController@editSubCategory')->name('editSubCategory');
+        Route::post('admin/sub_categories/update-sub-cats/{id}', 'CategoryController@updateSubCategory');
+
+
         // Badges Routes
         Route::get('admin/badges', 'BadgeController@index')->name('badges');
         Route::get('admin/badges/edit-badges/{id}', 'BadgeController@edit')->name('editbadges');

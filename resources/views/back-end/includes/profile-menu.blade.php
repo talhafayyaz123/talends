@@ -2,7 +2,7 @@
         <ul>
             
             @if ($role === 'admin')
-                <li class="menu-item-has-children">
+                <li class="">
                     <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                     <a href="javascript:void(0)">
                         <i class="ti-layers"></i>
@@ -117,6 +117,7 @@
                     <ul class="sub-menu">
                         <li><a href="{{{ route('skills') }}}">{{ trans('lang.skills') }}</a></li>
                         <li><a href="{{{ route('categories') }}}">{{ trans('lang.job_cats') }}</a></li>
+                        <li><a href="{{{ route('subCategories') }}}">Sub Categories</a></li>
                         <li><a href="{{{ route('departments') }}}">{{ trans('lang.dpts') }}</a></li>
                         <li><a href="{{{ route('languages') }}}">{{ trans('lang.langs') }}</a></li>
                         <li><a href="{{{ route('locations') }}}">{{ trans('lang.locations') }}</a></li>
