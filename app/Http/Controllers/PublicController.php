@@ -108,6 +108,10 @@ class PublicController extends Controller
                 'last_name' => 'required',
                 'email' => 'required|email|unique:users',
                 'user_type' => 'required',
+                'password' => 'required|string|min:6|confirmed',
+                'password_confirmation' => 'required',
+                'termsconditions' => 'required',
+                'role' => 'not_in:admin',
             ]
         );
     }
