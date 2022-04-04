@@ -682,8 +682,9 @@
              },
              verifyCode: function () {
                  this.loading = true;
-                 let register_Form = document.getElementById('verification_form');
-                 let form_data = new FormData(register_Form);
+                     
+                  var form_data = new FormData(document.getElementById("verification_form"));
+
                  var self = this;
                  axios.post(APP_URL + '/register/verify-user-code', form_data)
                      .then(function (response) {
@@ -696,7 +697,7 @@
                      })
                      .catch(function (error) {
                          console.log(error);
-                     });
+                     }); 
              },
              loginRegisterUser: function () {
                  var self = this;

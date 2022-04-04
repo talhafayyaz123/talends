@@ -266,15 +266,16 @@
                                                           
                                                             <li v-bind:class="{ 'role-is-invalid': form_step2.is_role_error }">
                                                                 
-                                                            <input id="wt-company-{{$key}}" type="radio" name="role" value="{{{ $role['role_type'] }}}" checked="checked" v-model="user_role">
 
                                                                <div class="freelancer_properties" v-if='user_type== "freelancer" '>
                                                                 @if ($role['role_type'] === 'freelancer')
                                                                     @if ($show_emplyr_inn_sec === 'true')
+                                                            
+                                                                    <input type="hidden" name="role" value="{{{ $role['role_type'] }}}">
+
                                                                         <div class="wt-accordiondetails collapse show" id="collapseOne" aria-labelledby="headingOne">
                                                                           
-                                                                    
-
+                                                                
                                                                             <div class="wt-radioboxholder freelancer_registration_options">
                                                                                     <div class="wt-title">
                                                                                         <h4>Gender</h4>
@@ -370,6 +371,8 @@
                                                                 <div class="employer_properties" v-if='user_type== "employer" '>
                                                                 @if ($role['role_type'] === 'employer')
                                                                     @if ($show_emplyr_inn_sec === 'true')
+                                                                    <input type="hidden" name="role" value="{{{ $role['role_type'] }}}">
+
                                                                         <div class="wt-accordiondetails collapse show" id="collapseOne" aria-labelledby="headingOne">
                                                                             <div class="wt-radioboxholder">
                                                                                 <div class="wt-title">
@@ -407,6 +410,8 @@
                                                                 <div class="company_properties" v-if='user_type== "company" '>
                                                                 @if ($role['role_type'] === 'company')
                                                                     @if ($show_emplyr_inn_sec === 'true')
+                                                                    <input type="hidden" name="role" value="{{{ $role['role_type'] }}}">
+
                                                                         <div class="wt-accordiondetails collapse show" id="collapseOne" aria-labelledby="headingOne">
     
                                                                         <div class="row">
@@ -464,6 +469,8 @@
                                                                 <div class="intern_properties" v-if='user_type== "intern" '>
                                                                 @if ($role['role_type'] === 'intern')
                                                                     @if ($show_emplyr_inn_sec === 'true')
+                                                                    <input type="hidden" name="role" value="{{{ $role['role_type'] }}}">
+
                                                                         <div class="wt-accordiondetails collapse show" id="collapseOne" aria-labelledby="headingOne">
                                                                           
                                                                     
@@ -583,7 +590,6 @@
                                                         <strong style="color: red;" v-cloak>{{trans('lang.register_termsconditions_error')}}</strong>
                                                     </span>
                                                 </span>
-                                                <!-- <a href="#" @click.prevent="checkStep2('{{ trans('lang.email_not_config') }}')" class="wt-btn">{{{ trans('lang.continue') }}}</a> -->
                                             </div>
                                         </fieldset>
 
@@ -592,8 +598,8 @@
                                             </div>
                                         </div>
                                     </fieldset>
+                                    </form>
                                     <div class="wt-joinformc" v-if="step === 2" v-cloak>
-                                      
                                     <form method="POST" action="" class="wt-formtheme wt-formregister" id="verification_form">
                                         <div class="wt-registerhead">
                                             <div class="wt-title">
@@ -603,15 +609,7 @@
                                                 <p>{{{ $reg_three_subtitle }}}</p>
                                             </div>
                                         </div>
-                                        <ul class="wt-joinsteps">
-                                            <li class="wt-done-next"><a href="javascrip:void(0);"><i class="fa fa-check"></i></a></li>
-                                            <li class="wt-done-next"><a href="javascrip:void(0);"><i class="fa fa-check"></i></a></li>
-                                            <li class="wt-active"><a href="javascrip:void(0);">{{{ trans('lang.03') }}}</a></li>
-                                            <li><a href="javascrip:void(0);">{{{ trans('lang.04') }}}</a></li>
-                                        </ul>
-                                        <figure class="wt-joinformsimg">
-                                            <img src="{{ asset($register_image)}}" alt="{{{ trans('lang.verification_code_img') }}}">
-                                        </figure>
+                                      
                                         <fieldset>
                                             <div class="form-group">
                                                 <label>
@@ -635,17 +633,9 @@
                                     </form>
                                       
                                     </div>
-                                </form>
-                                <div class="wt-joinformc" v-if="step === 3" v-cloak>
-                                    
-                                </div>
-                                <div class="wt-gotodashboard" v-if="step === 4" v-cloak>
-                                    <ul class="wt-joinsteps">
-                                        <li class="wt-done-next"><a href="javascrip:void(0);"><i class="fa fa-check"></i></a></li>
-                                        <li class="wt-done-next"><a href="javascrip:void(0);"><i class="fa fa-check"></i></a></li>
-                                        <li class="wt-done-next"><a href="javascrip:void(0);"><i class="fa fa-check"></i></a></li>
-                                        <li class="wt-done-next"><a href="javascrip:void(0);"><i class="fa fa-check"></i></a></li>
-                                    </ul>
+                                
+                                <div class="wt-gotodashboard" v-if="step === 3" v-cloak>
+                                
                                     <div class="wt-registerhead">
                                         <div class="wt-title">
                                             <h3>{{{ $reg_four_title }}}</h3>
@@ -655,7 +645,9 @@
                                         </div>
                                     </div>
                                     <a href="#" class="wt-btn" @click.prevent="loginRegisterUser()">{{{ trans('lang.goto_dashboard') }}}</a>
+                                
                                 </div>
+                              
                             @endif
                         </div>
                     </div>
