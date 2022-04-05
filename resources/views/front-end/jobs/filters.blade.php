@@ -101,7 +101,7 @@
                                 @endphp
                                 <span class="wt-checkbox">
                                     <input id="location-{{{ $location->slug }}}" type="checkbox" name="locations[]" value="{{{$location->slug}}}" {{$checked}} >
-                                    <label for="location-{{{ $location->slug }}}"> <img src="{{{asset(Helper::getLocationFlag($location->flag))}}}" alt="{{ trans('lang.img') }}"> {{{ $location->title }}}</label>
+                                    <label for="location-{{{ $location->slug }}}"> {{{ $location->title }}}</label>
                                 </span>
                             @endforeach
                         </div>

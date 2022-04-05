@@ -193,6 +193,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
 
                                 <fieldset class="wt-registerformgroup">
                                     <div class="wt-haslayout" v-if="step === 1" v-cloak>
+
                                         <div class="form-group">
                                             <div class="google-signup-wrap">
                                                 <div id="my-signin2"></div>
@@ -259,10 +260,6 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                 </span>
                                                 <i class="fa fa-eye"  id="togglePassword"  onclick="toggePassword()"></i>
                                             </div>
-<!-- 
-                                            <b id="passwordHelpBlock" class="form-text text-muted">
-                                            Your password must be more than 6 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character.</b>
- -->
                                         </fieldset>
 
                                         <fieldset class="wt-formregisterstart" v-if='user_type'>
