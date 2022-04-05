@@ -147,7 +147,7 @@ class Profile extends Model
             $profile->no_of_employees = intval($request['employees']);
         }
         if (!empty($request['budget'])) {
-            $profile->min_budget = intval($request['budget']);
+            $profile->min_budget = ($request['budget']);
         }
         $old_path = Helper::PublicPath() . '/uploads/users/temp';
         if (!empty($request['hidden_avater_image'])) {

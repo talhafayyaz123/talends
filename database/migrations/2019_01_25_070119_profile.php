@@ -33,7 +33,7 @@ class Profile extends Migration
                 $table->increments('id');
                 $table->integer('user_id')->nullable();
                 $table->integer('department_id')->nullable();
-                $table->integer('min_budget')->nullable();
+                $table->string('min_budget')->nullable();
 
                 $table->string('availability')->nullable();
                 $table->integer('category_id')->nullable();

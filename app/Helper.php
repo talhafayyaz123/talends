@@ -368,6 +368,27 @@ class Helper extends Model
         return $list;
     }
 
+    public static function getFreelancerBudgetList()
+    {
+        $list = array(
+            '1' => array(
+                'title' => '$50',
+                'search_title' => '$50',
+                'value' => '50',
+            ),
+            '2' => array(
+                'title' => '$100',
+                'search_title' => '$100',
+                'value' => '100',
+            ),
+            '3' => array(
+                'title' => '$500+',
+                'search_title' => '$500+',
+                'value' => '500+',
+            ),
+        );
+        return $list;
+    }
     
     /**
      * Get location flag

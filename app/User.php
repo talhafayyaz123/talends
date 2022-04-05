@@ -354,7 +354,7 @@ class User extends Authenticatable
                 $profile->department()->associate($department);
             }
             if (!empty($request['budget'])) {
-                $profile->min_budget = intval($request['budget']);
+                $profile->min_budget = ($request['budget']);
             }
 
             if (!empty($request['gender'])) {

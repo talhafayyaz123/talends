@@ -9,6 +9,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="google-signin-client_id" content="34113533971-6ivmbomiqsdlg2kt4caba530p76n4b3e.apps.googleusercontent.com">
+
 	@if (trim($__env->yieldContent('title')))
 		<title>@yield('title')</title>
 	@else 

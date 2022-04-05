@@ -558,6 +558,18 @@
                  this.form_step2.role = '';
                  this.form_step2.is_role = false;
  
+                 this.form_step2.gender_error = '';
+                 this.form_step2.is_gender_error = false;
+
+                 
+                 this.form_step2.availability_error = '';
+                 this.form_step2.is_availability_error = false;
+
+
+                 this.form_step2.budget_error = '';
+                 this.form_step2.is_budget_error = false;
+ 
+
                  axios.post(APP_URL + '/register/form-step1-custom-errors', form_data)
                      .then(function (response) {
                     self.submitUser('multiple')
@@ -584,7 +596,8 @@
                          }
  
                          if (error.response.data.errors.password) {
-                             self.form_step2.password_error = error.response.data.errors.password[0];
+                             //self.form_step2.password_error = error.response.data.errors.password[0];
+                             self.form_step2.password_error = 'Your password must be more than 6 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character';
                              self.form_step2.is_password_error = true;
                          }
                          if (error.response.data.errors.password_confirmation) {
@@ -600,6 +613,23 @@
                              self.form_step2.role_error = error.response.data.errors.role[0];
                              self.form_step2.is_role_error = true;
                          }
+
+                         if (error.response.data.errors.gender) {
+                            self.form_step2.gender_error = error.response.data.errors.gender[0];
+                            self.form_step2.is_gender_error = true;
+                        }
+
+                        if (error.response.data.errors.availability) {
+                            self.form_step2.availability_error = error.response.data.errors.availability[0];
+                            self.form_step2.is_availability_error = true;
+                        }
+
+                        if (error.response.data.errors.budget) {
+                            self.form_step2.budget_error = error.response.data.errors.budget[0];
+                            self.form_step2.is_budget_error = true;
+                        }
+
+                        
  
                      });
              },
