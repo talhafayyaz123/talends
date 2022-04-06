@@ -5,6 +5,8 @@ $employees = Helper::getEmployeesList();
 $company_bedget = Helper::getComapnyBudgetList();
 $freelancer_bedget = Helper::getFreelancerBudgetList();
 $skills_categories = Helper::getSkillsCategories();
+$categories = Helper::getCategories();
+
 $skills = Helper::getSkills();
 
 $departments = App\Department::all();
@@ -276,121 +278,63 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
 
                                                     <div class="freelancer_properties" v-if='user_type== "freelancer" '>
                                                         @if ($role['role_type'] === 'freelancer')
+                                                        
                                                         @if ($show_emplyr_inn_sec === 'true')
 
                                                         <input type="hidden" name="role" value="{{{ $role['role_type'] }}}">
 
-                                                        <div class="wt-accordiondetails collapse show" id="collapseOne" aria-labelledby="headingOne">
+                                                    <div class="form-group">
+
+                                                    <select name="gender" id='gender' class="form-control" v-bind:class="{ 'is-invalid': form_step2.is_gender_error }">
+                                                        <option value="">Select Gender</option>
+                                                        <option value="male">Male</option>
+                                                        <option value="female">Female</option>
+                                                        <option value="no_wish_declare">Do Not Wish To Declare</option>
+
+                                                    </select>
+
+                                                    <span class="help-block" v-if="form_step2.gender_error">
+                                                        <strong v-cloak>@{{form_step2.gender_error}}</strong>
+                                                    </span>
+                                                    </div>
 
 
-                                                            <div class="wt-radioboxholder freelancer_registration_options">
-                                                                <div class="wt-title">
-                                                                    <h4>Gender</h4>
-                                                                </div>
+                                                    <div class="form-group">
 
-                                                                <span class="wt-radio">
-                                                                    <input id="wt-gender-1" type="radio" name="gender" value="male" required>
-                                                                    <label for="wt-gender-1">Male</label>
-                                                                </span>
+                                                    <select name="availability" id='availability' class="form-control" v-bind:class="{ 'is-invalid': form_step2.is_availability_error }">
+                                                        <option value="">Select Availability</option>
+                                                        <option value="remote">Remote</option>
+                                                        <option value="on-site">On Site</option>
+                                                        <option value="hybrid">Hybrid</option>
 
+                                                    </select>
 
-                                                                <span class="wt-radio">
-                                                                    <input id="wt-gender-2" type="radio" name="gender" value="female">
-                                                                    <label for="wt-gender-2">Female</label>
-                                                                </span>
-
-                                                                <span class="wt-radio">
-                                                                    <input id="wt-gender-3" type="radio" name="gender" value="no_wish_declare">
-                                                                    <label for="wt-gender-3">Do Not Wish To Declare</label>
-                                                                </span>
-
-                                                                <span class="help-block" v-if="form_step2.gender_error">
-                                                                    <strong class="error" v-cloak>@{{form_step2.gender_error}}</strong>
-                                                                </span>
-
-                                                            </div>
-
-
-                                                            <div class="wt-radioboxholder freelancer_registration_options">
-                                                                <div class="wt-title">
-                                                                    <h4>Availability</h4>
-                                                                </div>
-
-                                                                <span class="wt-radio">
-                                                                    <input id="wt-avail-1" type="radio" name="availability" value="remote" required>
-                                                                    <label for="wt-avail-1">Remote</label>
-                                                                </span>
-
-
-                                                                <span class="wt-radio">
-                                                                    <input id="wt-avail-2" type="radio" name="availability" value="on-site">
-                                                                    <label for="wt-avail-2">On Site</label>
-                                                                </span>
-
-                                                                <span class="wt-radio">
-                                                                    <input id="wt-avail-3" type="radio" name="availability" value="hybrid">
-                                                                    <label for="wt-avail-3">Hybrid</label>
-                                                                </span>
-
-                                                                <span class="help-block" v-if="form_step2.availability_error">
-                                                                    <strong class="error" v-cloak>@{{form_step2.availability_error}}</strong>
-                                                                </span>
-
-                                                            </div>
-
-
-                                                            <div class="wt-radioboxholder freelancer_registration_options">
-                                                                <div class="wt-title">
-                                                                    <h4>Price</h4>
-                                                                </div>
-
-                                                                @foreach ($freelancer_bedget as $key => $budget)
-                                                                <span class="wt-radio">
-                                                                    <input id="wt-budget-{{{$key}}}" type="radio" name="budget" value="{{{$budget['value']}}}" required>
-                                                                    <label for="wt-budget-{{{$key}}}">{{{$budget['title']}}}</label>
-                                                                </span>
-                                                                @endforeach
-
-                                                                <span class="help-block" v-if="form_step2.budget_error">
-                                                                    <strong class="error" v-cloak>@{{form_step2.budget_error}}</strong>
-                                                                </span>
-
-
-                                                            </div>
-
-                                                            <br><br><br><br><br><br><br><br><br>
-
-                                                            <div class="wt-radioboxholder">
-                                                                <div class="wt-title">
-                                                                    <h4>Categories</h4>
-                                                                </div>
-                                                                @foreach ($skills_categories as $key => $category)
-                                                                <span class="wt-radio">
-                                                                    <input id="wt-just-{{{$key}}}" type="radio" name="category_id" value="{{{$category->id}}}" checked="">
-                                                                    <label for="wt-just-{{{$key}}}">{{{$category->title}}}</label>
-                                                                </span>
-                                                                @endforeach
-                                                            </div>
-
-
-                                                            @if ($skills->count() > 0)
-                                                            <div class="wt-radioboxholder">
-                                                                <div class="wt-title">
-                                                                    <h4>Skills</h4>
-                                                                </div>
-                                                                @foreach ($skills as $key => $skill)
-                                                                <span class="wt-radio">
-                                                                    <input id="wt-skill-{{{$skill->id}}}" type="radio" name="skill_id" value="{{{$skill->id}}}" checked="">
-                                                                    <label for="wt-skill-{{{$skill->id}}}">{{{$skill->title}}}</label>
-                                                                </span>
-                                                                @endforeach
-                                                            </div>
-
-                                                            @endif
+                                                    <span class="help-block" v-if="form_step2.availability_error">
+                                                        <strong v-cloak>@{{form_step2.availability_error}}</strong>
+                                                    </span>
+                                                    </div>
 
 
 
-                                                        </div>
+                                                    
+                                                    <div class="form-group">
+
+                                                    <select name="budget" id='budget' class="form-control" v-bind:class="{ 'is-invalid': form_step2.is_budget_error }">
+                                                        <option value="">Select Price</option>
+                                                        @foreach ($freelancer_bedget as $key => $budget)
+
+                                                        <option value="{{{$budget['value']}}}">{{{$budget['title']}}}</option>
+                                                      
+                                                        @endforeach
+
+                                                    </select>
+
+                                                    <span class="help-block" v-if="form_step2.budget_error">
+                                                        <strong v-cloak>@{{form_step2.budget_error}}</strong>
+                                                    </span>
+                                                    </div>
+
+
                                                         @endif
                                                         @endif
                                                     </div>
@@ -692,6 +636,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
     @push('scripts')
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
     <script>
+
         function onSuccess(googleUser) {
             console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
         }
@@ -722,5 +667,6 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                     toggleBtn.value = "Show the password";
                 }
             }
+
     </script>
     @endpush

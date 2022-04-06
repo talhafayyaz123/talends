@@ -384,6 +384,35 @@ class CategoryController extends Controller
         }
     }
 
+     public function getCategorySubCategories($id){
+     
+      $data['sub_categories'] = $this->sub_category->orderby("title","asc")
+      ->select('title','sub_category_id')
+      ->where('category_id',$id)
+      ->get();
+        
+      return response()->json($data);
+
+     }
+
+
+     public function getSubCategorySkills($id){
+        
+
+        if(!empty($id)){
+          
+          $data['sub_category_skills'] = $this->sub_category_skills->select('skills.id','skills.title')
+          ->whereIn('sub_category_id',explode(',',$id))
+          ->join('skills','skill_id','skills.id')
+          ->groupBy('sub_category_skills.skill_id')
+          ->get();
+            
+          return response()->json($data); 
+   
+        }
+  
+       }
+
     /**
      * get Categories
      *

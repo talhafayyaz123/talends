@@ -512,6 +512,11 @@ Route::get('get-categories', 'CategoryController@getCategories');
 Route::get('get-seven-categories', 'CategoryController@getSevenCategories');
 Route::get('get-articles', 'PublicController@getArticles');
 Route::get('get-home-slider/{id}', 'PageController@getSlider');
+
+Route::get('category_sub_categories/{id}','CategoryController@getCategorySubCategories')->name('category_subcategories');
+Route::get('sub_category_skills/{id}','CategoryController@getSubCategorySkills')->name('sub_category_skills');
+
+
 // Route::get('section/get-iframe/{video}', 'PublicController@getVideo');
 Route::get('get-top-freelancers', 'FreelancerController@getTopFreelancers');
 Route::get('get-all-freelancers', 'FreelancerController@getAllFreelancers');

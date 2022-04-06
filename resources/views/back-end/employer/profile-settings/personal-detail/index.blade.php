@@ -56,6 +56,14 @@
                                         @endif
                                     </div>
                                 @endif
+
+
+                                <div class="wt-location wt-tabsinfo">
+
+                                    @include('back-end.employeer.profile-settings.personal-detail.category')
+
+                                    </div>
+
                                 <div class="wt-location wt-tabsinfo">
                                     @if (file_exists(resource_path('views/extend/back-end/employer/profile-settings/personal-detail/location.blade.php')))
                                         @include('extend.back-end.employer.profile-settings.personal-detail.location')

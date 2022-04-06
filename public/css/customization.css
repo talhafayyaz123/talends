@@ -590,19 +590,28 @@ footer .row .col-md-6:last-child>ul {
 	display: flex;
 	flex-direction: row;
 	align-items: stretch;
-	justify-content: center;
+	justify-content: space-between;
     flex-wrap: wrap;
 
 }
 .freelancer_filters .wt-widget {
     float: unset;
-    width: 200px;
+    width: auto;
     min-width: 200px;
     padding: 12px;
     position: relative;
 }
+.freelnacer_data_filters  .wt-widget {
+    width: 250px;
+}
+.jobs_filters_record .wt-widget {
+    width: 225px;
+}
 .freelancer_price_filter >div {
     flex-direction: column !important;
+}
+.wt-formsearch fieldset .wt-checkboxholder .wt-checkbox label {
+    font-size: 12px;
 }
 .wt-formsearch fieldset .wt-checkboxholder{
     position: absolute;
@@ -611,6 +620,9 @@ footer .row .col-md-6:last-child>ul {
     z-index: 100;
     background: #fff;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.wt-formsearch fieldset .wt-checkboxholder {
+    max-height: 200px;
 }
 .freelancer_filters .wt-widgettitle {
     position: relative;

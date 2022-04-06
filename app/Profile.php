@@ -24,6 +24,10 @@ use App\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
+use App\UserCategories;
+use App\UserSubCategories;
+use App\UserCategorySkills;
+
 
 /**
  * Class Profile
@@ -77,6 +81,7 @@ class Profile extends Model
      */
     public function storeProfile($request, $user_id)
     {
+
         $user = User::find($user_id);
         if ($user->first_name . '-' . $user->last_name != $request['first_name'] . '-' . $request['last_name']) {
             $user->slug = filter_var($request['first_name'], FILTER_SANITIZE_STRING) . '-' .
@@ -101,6 +106,60 @@ class Profile extends Model
                 }
             }
         }
+
+        UserCategories::where('user_id', $user_id)->delete();
+        
+        if($user->getRoleNames()[0]=='freelancer'){
+            $user_categories= new UserCategories;
+            $user_categories->category_id=$request['category_id'];
+            $user_categories->user_id=$user_id;
+            $user_categories->save(); 
+         }
+
+         UserSubCategories::where('user_id', $user_id)->delete();
+            
+         
+         if(isset($request['sub_categories'])  && !empty($request['sub_categories']) ){
+            $sub_categories= $request['sub_categories'];
+            $insert = array();
+           
+            foreach($sub_categories as $index=>$value){
+             $draw = [   
+                  'user_id'=> $user_id,
+                  'sub_category_id'=>  $value,
+                  "created_at" => \Carbon\Carbon::now(), 
+                  'updated_at' => \Carbon\Carbon::now()
+ 
+             ];
+             $insert[] = $draw;
+            }
+ 
+           \DB::table('user_sub_categories')->insert($insert); 
+          } 
+
+
+          UserCategorySkills::where('user_id', $user_id)->delete();
+         
+          if(isset($request['sub_category_skills']) && !empty($request['sub_category_skills']) ){
+            $sub_category_skills= $request['sub_category_skills'];
+            $insert = array();
+  
+            foreach($sub_category_skills as $index=>$value){
+             $draw = [   
+                  'user_id'=> $user_id,
+                  'skill_id'=>  $value,
+                  "created_at" => \Carbon\Carbon::now(), 
+                  'updated_at' => \Carbon\Carbon::now()
+  
+             ];
+             $insert[] = $draw;
+            }
+  
+           \DB::table('user_category_skills')->insert($insert);
+  
+ 
+        }
+    
 
         $user_profile = $this::select('id')->where('user_id', $user_id)
             ->get()->first();

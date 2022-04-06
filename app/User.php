@@ -33,6 +33,10 @@ use canResetPassword;
 use App\Notifications;
 use Event;
 use App\Notifications\MailResetPasswordNotification;
+use App\UserCategories;
+use App\UserSubCategories;
+use App\UserCategorySkills;
+
 
 /**
  * Class User
@@ -317,7 +321,8 @@ class User extends Authenticatable
     {
 
         if (!empty($request)) {
-
+            
+            
             $this->first_name = filter_var($request['first_name'], FILTER_SANITIZE_STRING);
             $this->last_name = filter_var($request['last_name'], FILTER_SANITIZE_STRING);
             $this->slug = filter_var($request['first_name'], FILTER_SANITIZE_STRING) . '-' .
@@ -343,6 +348,11 @@ class User extends Authenticatable
             $this->badge_id = null;
             $this->expiry_date = null;
             $this->save();
+
+          
+             
+
+
             $user_id = $this->id;
             $profile = new Profile();
             $profile->user()->associate($user_id);

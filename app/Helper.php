@@ -265,6 +265,12 @@ class Helper extends Model
        return $categories;
     }
 
+
+    public static function getCategories(){
+        $categories=Category::pluck('title','id');
+        return $categories;
+     }
+
     public static function getSkills(){
         $skills=Skill::all();
         return $skills;
