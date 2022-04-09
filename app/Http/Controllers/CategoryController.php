@@ -384,6 +384,25 @@ class CategoryController extends Controller
         }
     }
 
+    public function getMultipleCategorySubCategories($id){
+     
+    
+        if(!empty($id)){
+          
+            $data['sub_categories'] = $this->sub_category->orderby("title","asc")
+            ->select('title','sub_category_id')
+            ->whereIn('category_id',explode(',',$id))
+            //->groupBy('sub_categories.skill_id')
+
+            ->get();
+              
+            return response()->json($data);
+     
+          }
+
+
+       }
+
      public function getCategorySubCategories($id){
      
       $data['sub_categories'] = $this->sub_category->orderby("title","asc")

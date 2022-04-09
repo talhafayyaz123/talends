@@ -346,35 +346,39 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                         @if ($show_emplyr_inn_sec === 'true')
                                                         <input type="hidden" name="role" value="{{{ $role['role_type'] }}}">
 
-                                                        <div class="wt-accordiondetails collapse show" id="collapseOne" aria-labelledby="headingOne">
-                                                            <div class="wt-radioboxholder">
-                                                                <div class="wt-title">
-                                                                    <h4>{{{ trans('lang.no_of_employees') }}}</h4>
-                                                                </div>
-                                                                @foreach ($employees as $key => $employee)
-                                                                <span class="wt-radio">
-                                                                    <input id="wt-just-{{{$key}}}" type="radio" name="employees" value="{{{$employee['value']}}}" checked="">
-                                                                    <label for="wt-just-{{{$key}}}">{{{$employee['title']}}}</label>
-                                                                </span>
-                                                                @endforeach
-                                                            </div>
-                                                            @if ($departments->count() > 0)
-                                                            <div class="wt-radioboxholder">
-                                                                <div class="wt-title">
-                                                                    <h4>{{{ trans('lang.your_department') }}}</h4>
-                                                                </div>
-                                                                @foreach ($departments as $key => $department)
-                                                                <span class="wt-radio">
-                                                                    <input id="wt-department-{{{$department->id}}}" type="radio" name="department" value="{{{$department->id}}}" checked="">
-                                                                    <label for="wt-department-{{{$department->id}}}">{{{$department->title}}}</label>
-                                                                </span>
-                                                                @endforeach
-                                                            </div>
-                                                            <div class="form-group wt-othersearch d-none">
-                                                                <input type="text" name="department_name" class="form-control" placeholder="{{{ trans('lang.enter_department') }}}">
-                                                            </div>
-                                                            @endif
-                                                        </div>
+                                                        <div class="form-group">
+
+                                                    <select name="employees" id='employees' class="form-control">
+                                                        <option value="">Select {{{ trans('lang.no_of_employees') }}}</option>
+                                                        
+                                                        @foreach ($employees as $key => $employee)
+                                                        <option value="{{{$employee['value']}}}">{{{$employee['title']}}}</option>
+                                                       
+                                                        @endforeach
+
+                                                    </select>
+
+                                                    
+                                                    </div>
+
+                                                    @if ($departments->count() > 0)
+
+                                                    <div class="form-group">
+
+                                                    <select name="department" id='department' class="form-control">
+                                                        <option value="">Select {{{ trans('lang.your_department') }}}</option>
+                                                        
+                                                        @foreach ($departments as $key => $department)
+                                                        <option value="{{{$department->id}}}">{{{$department->title}}}</option>
+                                                    
+                                                        @endforeach
+
+                                                    </select>
+
+
+                                                    </div>
+                                                    @endif
+
                                                         @endif
                                                         @endif
                                                     </div>
@@ -385,42 +389,33 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                         @if ($show_emplyr_inn_sec === 'true')
                                                         <input type="hidden" name="role" value="{{{ $role['role_type'] }}}">
 
+                                                        
+                                                    <div class="form-group">
+
+                                                    <select name="employees" id='employees' class="form-control">
+                                                        <option value="">Select Total Team Strength</option>
+                                                        @foreach ($employees as $key => $employee)
+                                                        <option value="{{{$employee['value']}}}">{{{$employee['title']}}}</option>
+                                                        @endforeach
+                                                    </select>
+
+                                                    </div>
+
+                                                    
+                                                    <div class="form-group">
+
+                                                    <select name="budget" id='budget' class="form-control">
+                                                        <option value="">Select Minimum Budget</option>
+                                                        @foreach ($company_bedget as $key => $budget)
+                                                        <option value="{{{$budget['value']}}}">{{{$budget['title']}}}</option>
+                                                        @endforeach
+                                                    </select>
+
+                                                    </div>
+
                                                         <div class="wt-accordiondetails collapse show" id="collapseOne" aria-labelledby="headingOne">
 
-                                                            <div class="row">
-
-
-                                                                <div class="wt-radioboxholder">
-                                                                    <div class="wt-title">
-                                                                        <h4>Total Team Strength</h4>
-                                                                    </div>
-                                                                    @foreach ($employees as $key => $employee)
-                                                                    <span class="wt-radio">
-                                                                        <input id="wt-just-{{{$key}}}" type="radio" name="employees" value="{{{$employee['value']}}}" checked="">
-                                                                        <label for="wt-just-{{{$key}}}">{{{$employee['title']}}}</label>
-                                                                    </span>
-                                                                    @endforeach
-                                                                </div>
-
-
-
-                                                                <div class="wt-radioboxholder">
-                                                                    <div class="wt-title">
-                                                                        <h4>Minimum Budget</h4>
-                                                                    </div>
-
-                                                                    @foreach ($company_bedget as $key => $budget)
-                                                                    <span class="wt-radio">
-                                                                        <input id="wt-budget-{{{$key}}}" type="radio" name="budget" value="{{{$budget['value']}}}" checked="">
-                                                                        <label for="wt-budget-{{{$key}}}">{{{$budget['title']}}}</label>
-                                                                    </span>
-                                                                    @endforeach
-
-
-                                                                </div>
-
-                                                            </div>
-                                                            <br><br>
+                                                           
                                                             <div class="row">
 
 
@@ -443,65 +438,32 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                             @if ($role['role_type'] === 'intern')
                                                             @if ($show_emplyr_inn_sec === 'true')
                                                             <input type="hidden" name="role" value="{{{ $role['role_type'] }}}">
+                                                            <div class="form-group">
+
+                                                    <select name="budget" id='budget' class="form-control">
+                                                        <option value="">Select Price</option>
+                                                        @foreach ($company_bedget as $key => $budget)
+                                                        <option value="{{{$budget['value']}}}">{{{$budget['title']}}}</option>
+                                                        @endforeach
+                                                    </select>
+
+                                                    </div>
+
+
+                                                    <div class="form-group">
+
+                                                    <select name="availability" id='availability' class="form-control">
+                                                        <option value="">Select Availability</option>
+                                                        <option value="remote">Remote</option>
+                                                        <option value="on-site">On Site</option>
+
+                                                    </select>
+
+                                                    </div>
+
 
                                                             <div class="wt-accordiondetails collapse show" id="collapseOne" aria-labelledby="headingOne">
-
-
-                                                                <div class="row">
-                                                                    <div class="wt-radioboxholder freelancer_registration_options">
-                                                                        <div class="wt-radioboxholder">
-                                                                            <div class="wt-title">
-                                                                                <h4>Categories</h4>
-                                                                            </div>
-                                                                            @foreach ($skills_categories as $key => $category)
-                                                                            <span class="wt-radio">
-                                                                                <input id="wt-just-{{{$key}}}" type="radio" name="category_id" value="{{{$category->id}}}" checked="">
-                                                                                <label for="wt-just-{{{$key}}}">{{{$category->title}}}</label>
-                                                                            </span>
-                                                                            @endforeach
-                                                                        </div>
-
-                                                                    </div>
-
-
-                                                                    <div class="wt-radioboxholder freelancer_registration_options">
-                                                                        <div class="wt-title">
-                                                                            <h4>Availability</h4>
-                                                                        </div>
-
-                                                                        <span class="wt-radio">
-                                                                            <input id="wt-avail-1" type="radio" name="availability" value="remote" checked="">
-                                                                            <label for="wt-avail-1">Remote</label>
-                                                                        </span>
-
-
-                                                                        <span class="wt-radio">
-                                                                            <input id="wt-avail-2" type="radio" name="availability" value="on-site" checked="">
-                                                                            <label for="wt-avail-2">On Site</label>
-                                                                        </span>
-
-                                                                    </div>
-
-
-                                                                    <div class="wt-radioboxholder freelancer_registration_options">
-                                                                        <div class="wt-title">
-                                                                            <h4>Price</h4>
-                                                                        </div>
-
-                                                                        @foreach ($company_bedget as $key => $budget)
-                                                                        <span class="wt-radio">
-                                                                            <input id="wt-budget-{{{$key}}}" type="radio" name="budget" value="{{{$budget['value']}}}" checked="">
-                                                                            <label for="wt-budget-{{{$key}}}">{{{$budget['title']}}}</label>
-                                                                        </span>
-                                                                        @endforeach
-
-
-                                                                    </div>
-
-
-
-                                                                </div>
-                                                                <br><br>
+                                                          
 
                                                                 <div class="row">
 

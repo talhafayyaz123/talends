@@ -109,11 +109,32 @@ class Profile extends Model
 
         UserCategories::where('user_id', $user_id)->delete();
         
-        if($user->getRoleNames()[0]=='freelancer'){
+        if($user->getRoleNames()[0]=='freelancer'  ||$user->getRoleNames()[0]=='intern'){
             $user_categories= new UserCategories;
             $user_categories->category_id=$request['category_id'];
             $user_categories->user_id=$user_id;
             $user_categories->save(); 
+         }else{
+
+            if(isset($request['category'])  && !empty($request['category']) ){
+                $category= $request['category'];
+                $insert = array();
+               
+                foreach($category as $index=>$value){
+                 $draw = [   
+                      'user_id'=> $user_id,
+                      'category_id'=>  $value,
+                      "created_at" => \Carbon\Carbon::now(), 
+                      'updated_at' => \Carbon\Carbon::now()
+     
+                 ];
+                 $insert[] = $draw;
+                }
+     
+               \DB::table('user_categories')->insert($insert); 
+              } 
+
+
          }
 
          UserSubCategories::where('user_id', $user_id)->delete();

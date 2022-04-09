@@ -568,70 +568,78 @@
 
                  this.form_step2.budget_error = '';
                  this.form_step2.is_budget_error = false;
- 
 
-                 axios.post(APP_URL + '/register/form-step1-custom-errors', form_data)
-                     .then(function (response) {
-                    self.submitUser('multiple')
-                     })
-                     .catch(function (error) {
-                         if (error.response.data.errors.first_name) {
-                             self.form_step1.first_name_error = error.response.data.errors.first_name[0];
-                             self.form_step1.is_first_name_error = true;
-                         }
- 
-                         if (error.response.data.errors.user_type) {
-                             self.form_step1.user_type_error = error.response.data.errors.user_type[0];
-                             self.form_step1.is_user_type_error = true;
-                         }
- 
-                         
-                         if (error.response.data.errors.last_name) {
-                             self.form_step1.last_name_error = error.response.data.errors.last_name[0];
-                             self.form_step1.is_last_name_error = true;
-                         }
-                         if (error.response.data.errors.email) {
-                             self.form_step1.email_error = error.response.data.errors.email[0];
-                             self.form_step1.is_email_error = true;
-                         }
- 
-                         if (error.response.data.errors.password) {
-                             //self.form_step2.password_error = error.response.data.errors.password[0];
-                             self.form_step2.password_error = 'Your password must be more than 6 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character';
-                             self.form_step2.is_password_error = true;
-                         }
-                         if (error.response.data.errors.password_confirmation) {
-                             self.form_step2.password_confirm_error = error.response.data.errors.password_confirmation[0];
-                             self.form_step2.is_password_confirm_error = true;
-                         }
-                         if (error.response.data.errors.termsconditions) {
-                             self.form_step2.termsconditions_error = error.response.data.errors.termsconditions[0];
-                             self.form_step2.is_termsconditions_error = true;
-                         }
-                        
-                         if (error.response.data.errors.role) {
-                             self.form_step2.role_error = error.response.data.errors.role[0];
-                             self.form_step2.is_role_error = true;
-                         }
-
-                         if (error.response.data.errors.gender) {
-                            self.form_step2.gender_error = error.response.data.errors.gender[0];
-                            self.form_step2.is_gender_error = true;
-                        }
-
-                        if (error.response.data.errors.availability) {
-                            self.form_step2.availability_error = error.response.data.errors.availability[0];
-                            self.form_step2.is_availability_error = true;
-                        }
-
-                        if (error.response.data.errors.budget) {
-                            self.form_step2.budget_error = error.response.data.errors.budget[0];
-                            self.form_step2.is_budget_error = true;
-                        }
-
-                        
- 
-                     });
+                 $.get("https://ipinfo.io/json?token=36abf09be141d3", function(response) {
+                    if(response.country=='PK' || esponse.country=='AE'){
+                        axios.post(APP_URL + '/register/form-step1-custom-errors', form_data)
+                        .then(function (response) {
+                       self.submitUser('multiple')
+                        })
+                        .catch(function (error) {
+                            if (error.response.data.errors.first_name) {
+                                self.form_step1.first_name_error = error.response.data.errors.first_name[0];
+                                self.form_step1.is_first_name_error = true;
+                            }
+    
+                            if (error.response.data.errors.user_type) {
+                                self.form_step1.user_type_error = error.response.data.errors.user_type[0];
+                                self.form_step1.is_user_type_error = true;
+                            }
+    
+                            
+                            if (error.response.data.errors.last_name) {
+                                self.form_step1.last_name_error = error.response.data.errors.last_name[0];
+                                self.form_step1.is_last_name_error = true;
+                            }
+                            if (error.response.data.errors.email) {
+                                self.form_step1.email_error = error.response.data.errors.email[0];
+                                self.form_step1.is_email_error = true;
+                            }
+    
+                            if (error.response.data.errors.password) {
+                                //self.form_step2.password_error = error.response.data.errors.password[0];
+                                self.form_step2.password_error = 'Your password must be more than 6 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character';
+                                self.form_step2.is_password_error = true;
+                            }
+                            if (error.response.data.errors.password_confirmation) {
+                                self.form_step2.password_confirm_error = error.response.data.errors.password_confirmation[0];
+                                self.form_step2.is_password_confirm_error = true;
+                            }
+                            if (error.response.data.errors.termsconditions) {
+                                self.form_step2.termsconditions_error = error.response.data.errors.termsconditions[0];
+                                self.form_step2.is_termsconditions_error = true;
+                            }
+                           
+                            if (error.response.data.errors.role) {
+                                self.form_step2.role_error = error.response.data.errors.role[0];
+                                self.form_step2.is_role_error = true;
+                            }
+   
+                            if (error.response.data.errors.gender) {
+                               self.form_step2.gender_error = error.response.data.errors.gender[0];
+                               self.form_step2.is_gender_error = true;
+                           }
+   
+                           if (error.response.data.errors.availability) {
+                               self.form_step2.availability_error = error.response.data.errors.availability[0];
+                               self.form_step2.is_availability_error = true;
+                           }
+   
+                           if (error.response.data.errors.budget) {
+                               self.form_step2.budget_error = error.response.data.errors.budget[0];
+                               self.form_step2.is_budget_error = true;
+                           }
+   
+   
+    
+                        });
+                    }else{
+                        self.showError('Only Pakistan And UAE Candidates are allowed to register.');
+  
+                    }
+                }, "jsonp");
+                
+                
              },
              checkStep2: function (error_message) {
                  this.error_message = error_message;

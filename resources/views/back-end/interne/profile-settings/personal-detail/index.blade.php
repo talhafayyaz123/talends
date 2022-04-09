@@ -190,3 +190,74 @@
 
 @endsection
 
+@push('scripts')
+    <script>
+
+
+   function select_sub_categories(event){
+     $('#freelancerSubCategory').find('option').not(':first').remove();
+     $.ajax({
+           url: '/category_sub_categories/'+event.value,
+           type: 'get',
+           dataType: 'json',
+           success: function(response){
+             var len = 0;
+             if(response['sub_categories'] != null){
+               len = response['sub_categories'].length;
+             }
+             if(len > 0){
+               for(var i=0; i<len; i++){
+                 var id = response['sub_categories'][i].sub_category_id;
+                 var title = response['sub_categories'][i].title;
+                 var option = "<option value='"+id+"'>"+title+"</option>"; 
+                 $("#freelancerSubCategory").append(option); 
+                
+               }
+             }
+
+           }
+        });
+   }
+
+   function select_cat_skills (event){
+
+   let skills=$('#freelancerSubCategory').val();
+
+    if (    Array.isArray(skills) && skills.length >0) {
+
+
+        $('#freelancerSkills').find('option').not(':first').remove();
+        var comma_skills = skills.join(","); 
+         
+        $.ajax({
+           url: '/sub_category_skills/'+comma_skills,
+           type: 'get',
+           dataType: 'json',
+           success: function(response){
+             var len = 0;
+             if(response['sub_category_skills'] != null){
+               len = response['sub_category_skills'].length;
+             }
+            
+             if(len > 0){
+               for(var i=0; i<len; i++){
+                 var id = response['sub_category_skills'][i].id;
+                 var title = response['sub_category_skills'][i].title;
+                 var option = "<option value='"+id+"'>"+title+"</option>"; 
+                 $("#freelancerSkills").append(option); 
+                
+               }
+             }
+
+           }
+        });
+
+
+
+    }
+ 
+   }
+
+    </script>
+    @endpush
+

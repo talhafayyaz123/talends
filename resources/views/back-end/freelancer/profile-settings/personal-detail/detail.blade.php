@@ -12,7 +12,7 @@
 
             <span class="wt-select">
 
-                {!! Form::select( 'gender', ['male' => 'Male', 'female' => 'Female'], e($gender), ['placeholder' => trans('lang.ph_select_gender')] ) !!}
+                {!! Form::select( 'gender', ['male' => 'Male', 'female' => 'Female', 'no_wish_declare' => 'Do Not Wish To Declare'], e($gender), ['placeholder' => trans('lang.ph_select_gender')] ) !!}
 
             </span>
 
@@ -47,6 +47,7 @@
         <select name="availability" class='form-control' name="availability">    
             <option value="remote" {{ (Auth::user()->profile->availability=='remote') ? 'selected' :''     }}  >Remote</option>
             <option value="on-site" {{ (Auth::user()->profile->availability=='on-site') ? 'selected' :''   }} >On Site</option>
+
         </div>
 
         <div class="form-group">

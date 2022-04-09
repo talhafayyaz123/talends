@@ -109,10 +109,10 @@
                         <div class="wt-loginarea">
                             <div class="wt-loginoption">
 
-                                <a href="javascript:void(0);" id="wt-loginbtn" class="wt-loginbtn signin-btn nav-link menu_green_cta">{{{ ucfirst(trans('lang.login'))  }}}</a>
+                                <a href="{{ route('login') }}" id="wt-loginbtn1" class="wt-loginbtn signin-btn nav-link menu_green_cta">{{{ ucfirst(trans('lang.login'))  }}}</a>
 
 
-                                <div class="wt-loginformhold" @if ($errors->has('email') || $errors->has('password')) style="display: block;" @endif>
+                                <!-- <div class="wt-loginformhold" @if ($errors->has('email') || $errors->has('password')) style="display: block;" @endif>
                                     <div class="wt-loginheader">
                                         <span>{{{ trans('lang.login') }}}</span>
                                         <a href="javascript:;"><i class="fa fa-times"></i></a>
@@ -151,7 +151,7 @@
                                             <a href="{{{ route('register') }}}">{{{ trans('lang.create_account') }}}</a>
                                         </div>
                                     </form>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
 

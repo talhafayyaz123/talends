@@ -54,6 +54,7 @@ use App\DeliveryTime;
 use App\ResponseTime;
 use App\Article;
 use App\AboutTalendsPage;
+use App\Rules\checkBusinessEmail;
 
 /**
  * Class PublicController
@@ -101,6 +102,8 @@ class PublicController extends Controller
      */
     public function registerStep1Validation(Request $request)
     {
+
+
         $role=$request['role'];
         $validation=array();
         if($role=='freelancer'){
@@ -117,7 +120,23 @@ class PublicController extends Controller
                 'budget' => 'required',
                 
             ];
-        }else{
+        }if($role=='company'){
+            $validation= [
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'email' => ['required','unique:users', 'email', new checkBusinessEmail],
+
+                'user_type' => 'required',
+                'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+                'termsconditions' => 'required',
+                'role' => 'not_in:admin',
+                'gender' => 'required',
+                'availability' => 'required',
+                'budget' => 'required',
+                
+            ];
+
+        } else{
             $validation= [
                 'first_name' => 'required',
                 'last_name' => 'required',

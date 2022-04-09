@@ -59,10 +59,16 @@
 
 
                                 <div class="wt-location wt-tabsinfo">
+      
+                                
 
-                                    @include('back-end.employeer.profile-settings.personal-detail.category')
+                                    @include('back-end.employer.profile-settings.personal-detail.category')
 
                                     </div>
+
+                              
+
+
 
                                 <div class="wt-location wt-tabsinfo">
                                     @if (file_exists(resource_path('views/extend/back-end/employer/profile-settings/personal-detail/location.blade.php')))
@@ -76,6 +82,9 @@
                                     <span>{{{ trans('lang.save_changes_note') }}}</span>
                                     {!! Form::submit(trans('lang.btn_save_update'), ['class' => 'wt-btn', 'id'=>'submit-profile']) !!}
                                 </div>
+
+                                
+                                
                             {!! form::close(); !!}
                         </div>
                     </div>
@@ -84,3 +93,78 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+
+jQuery('.chosen-select').chosen();
+
+   function select_sub_categories(){
+     let category=$('#category_id').val();
+     var comma_category = category.join(","); 
+   
+      $.ajax({
+           url: '/category_sub_categories/multiple/'+comma_category,
+           type: 'get',
+           dataType: 'json',
+           success: function(response){
+             var len = 0;
+             if(response['sub_categories'] != null){
+               len = response['sub_categories'].length;
+             }
+             if(len > 0){
+                $('#freelancerSubCategory').find('option').not(':first').remove();
+
+               for(var i=0; i<len; i++){
+                 var id = response['sub_categories'][i].sub_category_id;
+                 var title = response['sub_categories'][i].title;
+                 var option = "<option value='"+id+"'>"+title+"</option>"; 
+                 $("#freelancerSubCategory").append(option); 
+                
+               }
+             }
+
+           }
+        });
+   }
+
+   function select_cat_skills (event){
+
+   let skills=$('#freelancerSubCategory').val();
+
+    if (    Array.isArray(skills) && skills.length >0) {
+
+
+        $('#freelancerSkills').find('option').not(':first').remove();
+        var comma_skills = skills.join(","); 
+         
+        $.ajax({
+           url: '/sub_category_skills/'+comma_skills,
+           type: 'get',
+           dataType: 'json',
+           success: function(response){
+             var len = 0;
+             if(response['sub_category_skills'] != null){
+               len = response['sub_category_skills'].length;
+             }
+            
+             if(len > 0){
+               for(var i=0; i<len; i++){
+                 var id = response['sub_category_skills'][i].id;
+                 var title = response['sub_category_skills'][i].title;
+                 var option = "<option value='"+id+"'>"+title+"</option>"; 
+                 $("#freelancerSkills").append(option); 
+                
+               }
+             }
+
+           }
+        });
+
+
+
+    }
+ 
+   }
+
+    </script>
+    @endpush

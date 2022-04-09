@@ -679,6 +679,41 @@ footer .row .col-md-6:last-child>ul {
     display: block;
     border-radius: 24px;
 }
+/* signIn customization */
+.login-screen .card-header {
+    background: transparent;
+    border-bottom: unset;
+    text-align: center;
+    font-size: 26px;
+    color: #000;
+}
+.login-screen form .form-group {
+    justify-content: center;
+}
+.login-screen .login-btn {
+    border-radius: 20px;
+    width: 100%;
+    font-size: 19px;
+    background: #349f1a;
+
+}
+.no-ac-txt.tb-center::before,.no-ac-txt.tb-center::after {
+    width: calc(50% - 150px);
+}
+/* categories dropdown */
+.wt-verticalscrollbar-- {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    z-index: 10;
+    top: -64px;
+}
+.wt-verticalscrollbar-- select {
+    border-left: unset;
+    border-right: unset;
+    border-top: unset;
+    border-radius: 0;
+}
 @media screen and (max-width:1366px) {
     .filters-container {
         width: 1280px;

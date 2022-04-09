@@ -40,6 +40,12 @@ use App\Service;
 use App\Review;
 use App\Category;
 use App\CompanyExpertise;
+use App\SubCategories;
+use App\SubCategorySkills;
+
+use App\UserCategories;
+use App\UserSubCategories;
+use App\UserCategorySkills;
 
 /**
  * Class FreelancerController
@@ -94,9 +100,67 @@ class CompanyController extends Controller
         $package_options = Package::select('options')->where('role_id', $role_id)->first();
         $options = !empty($package_options) ? unserialize($package_options['options']) : array();
         $videos = !empty($profile->videos) ? Helper::getUnserializeData($profile->videos) : '';
+
+        $user_categories=  UserCategories::where('user_id', Auth::user()->id)
+        ->join('categories','category_id','categories.id')
+        ->pluck('categories.id');
+
+        $user_sub_categories = UserSubCategories::where('user_id', Auth::user()->id)
+        ->join('sub_categories','user_sub_categories.sub_category_id','sub_categories.sub_category_id')
+        ->select('sub_categories.sub_category_id')
+        ->get();
+
+
+        $selced_sub_categories=array();
+        if(isset($user_sub_categories)){
+            foreach($user_sub_categories as $key =>$value){
+            $selced_sub_categories[]=$value['sub_category_id'];
+            }
+        } 
+
+
+        $sub_categories='';
+        if(isset($user_categories[0]) ){
+           
+            $sub_categories = SubCategories::orderby("title","asc")
+            ->select('title','sub_category_id')
+            ->whereIn('category_id',$user_categories)
+            ->get();
+        }
+
+           ////////////////////////////////////
+           
+       $user_category_skills = UserCategorySkills::where('user_id', Auth::user()->id)
+       ->select('skill_id')
+       ->get();
+    
+       $sub_cat_skills='';
+
+       if(!empty($selced_sub_categories)){
+        
+        $sub_cat_skills =SubCategorySkills::select('skills.id','skills.title')
+        ->whereIn('sub_category_id',$selced_sub_categories)
+        ->join('skills','skill_id','skills.id')
+        ->groupBy('sub_category_skills.skill_id')
+        ->get();
+      }
+
+
+      $seleced_cat_skills=array();
+      if(isset($user_category_skills)){
+          foreach($user_category_skills as $key =>$value){
+          $seleced_cat_skills[]=$value['skill_id'];
+          }
+      } 
+
         return view(
             'back-end.company.profile-settings.personal-detail.index',
             compact(
+                'seleced_cat_skills',
+                'sub_cat_skills',
+            'sub_categories',
+            'selced_sub_categories',
+            'user_categories',
                 'videos',
                 'locations',
                 'skills',

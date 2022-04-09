@@ -1,71 +1,136 @@
-@extends(file_exists(resource_path('views/extend/front-end/master.blade.php')) ? 'extend.front-end.master' : 'front-end.master') 
+@extends(file_exists(resource_path('views/extend/front-end/master.blade.php')) ? 'extend.front-end.master' : 'front-end.master')
 @section('content')
-<div class="container">
+<div class="container login-screen">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ trans('lang.login') }}</div>
+                <div class="card-header"><b>{{ trans('lang.login') }}</b></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ trans('lang.email_address') }}</label>
+                            <!-- <label for="email" class="col-md-4 col-form-label text-md-right">{{ trans('lang.email_address') }}</label> -->
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                            <div class="col-md-8">
+                                <input id="email" type="email" placeholder="{{ trans('lang.email_address') }}" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
 
                                 @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ trans('lang.pass') }}</label>
+                            <!-- <label for="password" class="col-md-4 col-form-label text-md-right">{{ trans('lang.pass') }}</label> -->
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                            <div class="col-md-8">
+                                <input id="password" type="password" placeholder="{{ trans('lang.pass') }}" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
                                 @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
                                 @endif
                             </div>
                         </div>
-
                         <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ trans('lang.remember') }}
-                                    </label>
+                                            <label class="form-check-label" for="remember">
+                                                {{ trans('lang.remember') }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        @if (Route::has('password.request'))
+                                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                                            {{ trans('lang.forget_pass') }}
+                                        </a>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
+                        <div class="form-group row">
+                            <div class="col-md-8">
+                                <button type="submit" class="btn btn-primary login-btn">
+                                    {{ trans('lang.login_email') }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-8">
+                                <p class="form-text tb-center">or</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-8">
+                                <div class="google-signup-wrap">
+                                    <div id="my-signin3"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ trans('lang.login') }}
+                                    {{ trans('lang.login_email') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ trans('lang.forget_pass') }}
-                                    </a>
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ trans('lang.forget_pass') }}
+                                </a>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
                     </form>
+                </div>
+                <div class="card-footer">
+                    <div class="form-group row">
+                        <div class="col-md-12">
+                            <p class="form-text tb-center no-ac-txt"> {{ trans('lang.no_account_text') }}</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                    <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                            <a class="nav-link menu_green_cta_trans" href="{{ route('register') }}">Join Now</a>
+                            </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+    @endsection
+    @push('scripts')
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <script>
+        function onSuccess(googleUser) {
+            console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+        }
+
+        function onFailure(error) {
+            console.log(error);
+        }
+
+        function renderButton() {
+            gapi.signin2.render('my-signin3', {
+                'scope': 'profile email',
+                'width': 510,
+                'height': 45,
+                'longtitle': true,
+                'theme': 'dark',
+                'onsuccess': onSuccess,
+                'onfailure': onFailure
+            });
+        }
+    </script>
+    @endpush
