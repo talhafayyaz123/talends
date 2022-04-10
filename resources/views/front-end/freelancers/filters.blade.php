@@ -1,4 +1,4 @@
-<aside id="wt-sidebar" class="wt-sidebar wt-usersidebar freelancer_filters freelnacer_data_filters">
+<aside id="wt-sidebar" class="wt-sidebar wt-usersidebar freelancer_filters  jobs_filters_record ">
     {!! Form::open(['url' => url('search-results'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch', 'id' => 'wt-formsearch']) !!}
         <input type="hidden" value="{{$type}}" name="type">
         <div class="wt-widget wt-effectiveholder wt-startsearch">
@@ -15,20 +15,26 @@
             </div>
         </div>
         <div class="wt-widget wt-effectiveholder">
-        <a  onclick="toogle_skill()"> <div class="wt-widgettitle">
-                <span>{{ trans('lang.skills') }}</span>
+        <a  onclick="toogle_category()"> <div class="wt-widgettitle">
+                <span>Category</span>  
              <span class="filter_toogle">   <i class="fa fa-angle-down" aria-hidden="true"></i></span>
             </div>
           </a>
-            <div class="wt-widgetcontent freelancer_skills_filter" style="display: none;">
+            <div class="wt-widgetcontent freelancer_skills_filter  freelancer_cat_filter" style="display: none;">
                 <fieldset>
-                    @if (!empty($skills))
+                    @if (!empty($categories))
                         <div class="wt-checkboxholder wt-verticalscrollbar">
-                            @foreach ($skills as $key => $skill)
-                                @php $checked = ( !empty($_GET['skills']) && in_array($skill->slug, $_GET['skills'])) ? 'checked' : '' @endphp
-                                <span class="wt-checkbox">
-                                    <input id="skill-{{{ $key }}}" type="checkbox" name="skills[]" value="{{{$skill->slug}}}" {{$checked}} >
-                                    <label for="skill-{{{ $key }}}">{{{ $skill->title }}}</label>
+                            @foreach ($categories as $key => $category)
+                            @php 
+                            $checked ='';
+                            if( !empty($_GET['category'])  && ($_GET['category']==$category->id)  ){
+                                $checked ='checked';
+                            }
+                            @endphp
+
+                                <span class="wt-radio freelancer_category">
+                                    <input id="category-{{{ $key }}}" type="radio" id="category" name="category" value="{{{$category->id}}}" {{$checked }} >
+                                    <label for="category-{{{ $key }}}">{{{ $category->title }}}</label>
                                 </span>
                             @endforeach
                         </div>
@@ -36,6 +42,23 @@
                 </fieldset>
             </div>
         </div>
+
+        <div class="wt-widget wt-effectiveholder">
+        <a  onclick="toogle_sub_category()"> <div class="wt-widgettitle">
+                <span>Sub Categories</span>  
+             <span class="filter_toogle">   <i class="fa fa-angle-down" aria-hidden="true"></i></span>
+            </div>
+          </a>
+            <div class="wt-widgetcontent freelancer_sub_cat_filter" style="display: none;">
+                <fieldset>
+                <div class="wt-checkboxholder wt-verticalscrollbar sub_categories">
+                          
+                        </div>
+                </fieldset>
+            </div>
+        </div>
+
+
         <div class="wt-widget wt-effectiveholder">
         <a  onclick="toogle_location()">  <div class="wt-widgettitle">
                 <span>{{ trans('lang.location') }}</span>
@@ -96,11 +119,12 @@
         
       
         <div class="wt-widget wt-effectiveholder">
-        <a  onclick="toogle_language()"> <div class="wt-widgettitle">
+        <a  onclick="toogle_language()"> 
+        <div class="wt-widgettitle">
                 <span>{{ trans('lang.langs') }}</span>
                 <span class="filter_toogle">  <i class="fa fa-angle-down" aria-hidden="true"></i></span>
 
-            </div>
+            </div></a>
             <div class="wt-widgetcontent freelancer_language_filter" style="display: none;">
                
                 <fieldset>

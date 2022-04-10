@@ -43,23 +43,23 @@
             </div>
         @endif
         <div class="wt-haslayout">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 filters-container">
+            @include('front-end.intern.filters')
+            </div>
+        </div>
             <div class="container">
                 <div class="row">
                     <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
-                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
-                            @if (file_exists(resource_path('views/extend/front-end/freelancers/filters.blade.php'))) 
-                                @include('extend.front-end.freelancers.filters')
-                            @else 
-                                @include('front-end.intern.filters')
-                            @endif
-                        </div>
+                        
                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
                             <div class="wt-userlistingholder wt-userlisting wt-haslayout">
-                                <div class="wt-userlistingtitle">
+                              <!--   <div class="wt-userlistingtitle">
                                     @if (!empty($users))
                                         <span>{{ trans('lang.01') }} {{$users->count()}} of {{\App\User::role('freelancer')->count()}} results @if (!empty($keyword)) for <em>"{{{$keyword}}}"</em> @endif</span>
                                     @endif
-                                </div>
+                                </div> -->
                                
                                 @if (!empty($users))
                                     @foreach ($users as $key => $freelancer)
@@ -243,13 +243,33 @@
 
            function toogle_location(){
              $('.location_filter').toggle();
+             $('.price_filter').hide();
+             $('.language_filter').hide();
+             $('.category_filter').hide();
             }
+
+            
             function toogle_price(){
              $('.price_filter').toggle();
+             $('.location_filter').hide();
+             $('.language_filter').hide();
+             $('.category_filter').hide();
             }
+
             function toogle_language(){
              $('.language_filter').toggle();
+             $('.location_filter').hide();
+             $('.price_filter').hide();
+             $('.category_filter').hide();
             }
+
+            function toogle_category(){
+                $('.category_filter').toggle();
+                $('.location_filter').hide();
+                $('.price_filter').hide();
+                $('.language_filter').hide();
+            }
+
             if (APP_DIRECTION == 'rtl') {
                 var direction = true;
             } else {

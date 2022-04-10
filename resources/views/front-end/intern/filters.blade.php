@@ -1,4 +1,4 @@
-<aside id="wt-sidebar" class="wt-sidebar wt-usersidebar internee_filters">
+<aside id="wt-sidebar" class="wt-sidebar wt-usersidebar internee_filters  internee_filters_record">
     {!! Form::open(['url' => url('search-results'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch', 'id' => 'wt-formsearch']) !!}
         <input type="hidden" value="{{$type}}" name="type">
         <div class="wt-widget wt-effectiveholder wt-startsearch">
@@ -15,15 +15,12 @@
             </div>
         </div>
         <div class="wt-widget wt-effectiveholder">
-            <div class="wt-widgettitle">
-                <span>College/University</span>
-            </div>
-
+          
             <div class="wt-widgetcontent">
                 <div class="wt-formtheme wt-formsearch">
                     <fieldset>
                         <div class="form-group">
-                            <input type="text" name="university" class="form-control" placeholder="" value="{{$search_university}}">
+                            <input type="text" name="university" class="form-control" placeholder="College/University" value="{{$search_university}}">
                         </div>
                     </fieldset>
                 </div>
@@ -35,15 +32,12 @@
 
 
         <div class="wt-widget wt-effectiveholder">
-            <div class="wt-widgettitle">
-                <span>Grade</span>
-            </div>
-
+          
             <div class="wt-widgetcontent">
                 <div class="wt-formtheme wt-formsearch">
                     <fieldset>
                         <div class="form-group">
-                            <input type="text" name="grade" class="form-control" placeholder="" value="{{$search_grade}}">
+                            <input type="text" name="grade" class="form-control" placeholder="Grade" value="{{$search_grade}}">
                         </div>
                     </fieldset>
                 </div>
@@ -54,37 +48,46 @@
         </div>
 
         <div class="wt-widget wt-effectiveholder">
-            <div class="wt-widgettitle">
-                <span>Speciality</span>
-            </div>
+        <a  onclick="toogle_category()"><div class="wt-widgettitle">
+                <span>Category</span>
+                <span class="filter_toogle">  <i class="fa fa-angle-down" aria-hidden="true"></i></span>
 
-            <div class="wt-widgetcontent">
+            </div></a>
+            <div class="wt-widgetcontent category_filter" style="display: none;">
                 <div class="wt-formtheme wt-formsearch">
-                    <fieldset>
-                        <div class="form-group">
-                            <input type="text" name="speciality" class="form-control" placeholder="" value="{{$search_speciality}}">
-                        </div>
-                    </fieldset>
-                </div>
-                
-            </div>
-
-           
-        </div>
-
-        <div class="wt-widget wt-effectiveholder">
-            <div class="wt-widgettitle">
-                <span>{{ trans('lang.location') }}</span>
-                <span class="filter_toogle"> <a  onclick="toogle_location()">  <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
-
-            </div>
-            <div class="wt-widgetcontent location_filter" style="display: none;">
                 <fieldset>
-                    <div class="form-group">
-                        <input type="text" class="form-control filter-records" placeholder="{{ trans('lang.search_loc') }}">
-                        <a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
-                    </div>
+                    @if (!empty($categories))
+                        <div class="wt-checkboxholder wt-verticalscrollbar">
+                            @foreach ($categories as $key => $category)
+                            @php 
+                            $checked ='';
+                            if( !empty($_GET['category'])  && in_array($category->id,$_GET['category'])  ){
+                                $checked ='checked';
+                            }
+                            @endphp
+
+                                <span class="wt-checkbox freelancer_category">
+                                    <input id="category-{{{ $key }}}" type="checkbox" id="category" name="category[]" value="{{{$category->id}}}" {{$checked }} >
+                                    <label for="category-{{{ $key }}}">{{{ $category->title }}}</label>
+                                </span>
+                            @endforeach
+                        </div>
+                    @endif
                 </fieldset>
+                </div>
+                
+            </div>
+
+        </div>
+
+        <div class="wt-widget wt-effectiveholder">
+        <a  onclick="toogle_location()"><div class="wt-widgettitle">
+                <span>{{ trans('lang.location') }}</span>
+                <span class="filter_toogle">  <i class="fa fa-angle-down" aria-hidden="true"></i></span>
+
+            </div></a>
+            <div class="wt-widgetcontent location_filter" style="display: none;">
+  
                 <fieldset>
                     @if (!empty($locations))
                         <div class="wt-checkboxholder wt-verticalscrollbar">
@@ -101,7 +104,7 @@
                                 @endphp
                                 <span class="wt-checkbox">
                                     <input id="location-{{{ $location->slug }}}" type="checkbox" name="locations[]" value="{{{$location->slug}}}" {{$checked}} >
-                                    <label for="location-{{{ $location->slug }}}"> <img src="{{{asset(App\Helper::getLocationFlag($location->flag))}}}" alt="{{ trans('lang.img') }}"> {{{ $location->title }}}</label>
+                                    <label for="location-{{{ $location->slug }}}">  {{{ $location->title }}}</label>
                                 </span>
                             @endforeach
                         </div>
@@ -110,19 +113,14 @@
             </div>
         </div>
         <div class="wt-widget wt-effectiveholder">
-            <div class="wt-widgettitle">
+        <a  onclick="toogle_price()"> <div class="wt-widgettitle">
                 <span>{{{ trans('lang.hourly_rate') }}}</span>
-                <span class="filter_toogle"> <a  onclick="toogle_price()">  <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
+                <span class="filter_toogle">   <i class="fa fa-angle-down" aria-hidden="true"></i></span>
 
-            </div>
+            </div></a>
             <div class="wt-widgetcontent price_filter" style="display: none;">
                 <div class="wt-formtheme wt-formsearch">
-                    <fieldset>
-                        <div class="form-group">
-                            <input type="text" class="form-control filter-records" placeholder="{{ trans('lang.ph_search_rate') }}">
-                            <a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
-                        </div>
-                    </fieldset>
+                   
                     <fieldset>
                         <div class="wt-checkboxholder wt-verticalscrollbar">
                             @foreach (Helper::getHourlyRate() as $key => $hourly_rate)
@@ -139,18 +137,13 @@
         </div>
        
         <div class="wt-widget wt-effectiveholder">
-            <div class="wt-widgettitle">
+        <a  onclick="toogle_language()"><div class="wt-widgettitle">
                 <span>{{ trans('lang.langs') }}</span>
-                <span class="filter_toogle"> <a  onclick="toogle_language()">  <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
+                <span class="filter_toogle">   <i class="fa fa-angle-down" aria-hidden="true"></i></span>
 
-            </div>
+            </div></a>
             <div class="wt-widgetcontent language_filter" style="display: none;">
-                <fieldset>
-                    <div class="form-group">
-                        <input type="text" class="form-control filter-records" placeholder="{{ trans('lang.ph_search_langs') }}">
-                        <a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
-                    </div>
-                </fieldset>
+              
                 <fieldset>
                     @if (!empty($languages))
                         <div class="wt-checkboxholder wt-verticalscrollbar">
@@ -169,7 +162,6 @@
         <div class="wt-widget wt-effectiveholder">
             <div class="wt-widgetcontent">
                 <div class="wt-applyfilters">
-                    <span>{{ trans('lang.apply_filter') }}<br> {{ trans('lang.changes_by_you') }}</span>
                     {!! Form::submit(trans('lang.btn_apply_filters'), ['class' => 'wt-btn']) !!}
                 </div>
             </div>

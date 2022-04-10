@@ -37,6 +37,7 @@ use App\UserCategories;
 use App\UserSubCategories;
 use App\UserCategorySkills;
 
+use function PHPSTORM_META\type;
 
 /**
  * Class User
@@ -467,8 +468,12 @@ class User extends Authenticatable
         $search_languages,
         $search_speciality,
         $search_university,
-        $search_grade
+        $search_grade,
+        $search_categories,
+        $search_sub_categories
     ) {
+
+       
         $json = array();
         $user_id = array();
         $user_by_role =  User::role($type)->select('id')->get()->pluck('id')->toArray();
@@ -485,6 +490,45 @@ class User extends Authenticatable
                 $users->whereIn('id', $user_by_role);
                 $users->where('is_disabled', 'false');
             }
+           
+            if(!empty($search_categories)){
+                $filters['category'] = $search_categories;
+                if($type=='freelancer'){
+                    $user_categories = UserCategories::where('category_id', $search_categories)->get();
+
+                }else{
+                    $user_categories = UserCategories::whereIn('category_id', $search_categories)->get();
+
+                }
+                foreach ($user_categories as $key => $category) {
+                    if (!empty($category->user_id)) {
+                        $user_id[] = $category->user_id;
+                    }
+                }
+              
+                $users->whereIn('id', $user_id);
+
+            }
+
+            if(!empty($search_sub_categories)){
+
+                $filters['sub_categories'] = $search_sub_categories;
+                    
+                    $user_categories = UserSubCategories::whereIn('sub_category_id', $search_sub_categories)->get();
+
+                
+                foreach ($user_categories as $key => $category) {
+                    if (!empty($category->user_id)) {
+                        $user_id[] = $category->user_id;
+                    }
+                }
+
+                $users->whereIn('id', $user_id);
+
+            }
+            
+        
+
             if (!empty($search_locations)) {
                 $locations = array();
                 $filters['locations'] = $search_locations;
@@ -611,6 +655,7 @@ class User extends Authenticatable
             }
             $users = $users->paginate(8)->setPath('');
         }
+
         foreach ($filters as $key => $filter) {
             $pagination = $users->appends(
                 array(

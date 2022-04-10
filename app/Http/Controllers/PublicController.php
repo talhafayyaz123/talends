@@ -660,6 +660,8 @@ class PublicController extends Controller
         $type = !empty($_GET['type']) ? $_GET['type'] : $search_type;
         
         $search_categories = !empty($_GET['category']) ? $_GET['category'] : array();
+    
+        $search_sub_categories = !empty($_GET['sub_categories']) ? $_GET['sub_categories'] : array();
         $search_locations = !empty($_GET['locations']) ? $_GET['locations'] : array();
         $search_skills = !empty($_GET['skills']) ? $_GET['skills'] : array();
         $search_speciality = !empty($_GET['speciality']) ? $_GET['speciality'] : '';
@@ -700,7 +702,9 @@ class PublicController extends Controller
                     $search_languages,
                     $search_speciality,
                     $search_university,
-                    $search_grade
+                    $search_grade ,
+                    $search_categories,
+                    $search_sub_categories
                 );
                 $users = count($search['users']) > 0 ? $search['users'] : '';
             

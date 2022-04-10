@@ -112,12 +112,20 @@
 
 <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
 <script>
-    function toogle_skill() {
+    function toogle_category() {
         $('.freelancer_skills_filter').toggle();
         $('.freelancer_location_filter').hide();
         $('.freelancer_price_filter').hide();
         $('.freelancer_language_filter').hide();
+        $('.freelancer_sub_cat_filter').hide();
+    }
 
+    function toogle_sub_category(){
+        $('.freelancer_sub_cat_filter').toggle();
+        $('.freelancer_skills_filter').hide();
+        $('.freelancer_location_filter').hide();
+        $('.freelancer_price_filter').hide();
+        $('.freelancer_language_filter').hide();
     }
 
     function toogle_location() {
@@ -125,7 +133,7 @@
         $('.freelancer_skills_filter').hide();
         $('.freelancer_price_filter').hide();
         $('.freelancer_language_filter').hide();
-
+        $('.freelancer_sub_cat_filter').hide();
     }
 
     function toogle_price() {
@@ -133,7 +141,7 @@
         $('.freelancer_skills_filter').hide();
         $('.freelancer_location_filter').hide();
         $('.freelancer_language_filter').hide();
-
+        $('.freelancer_sub_cat_filter').hide();
     }
 
     function toogle_language() {
@@ -141,6 +149,7 @@
         $('.freelancer_skills_filter').hide();
         $('.freelancer_location_filter').hide();
         $('.freelancer_price_filter').hide();
+        $('.freelancer_sub_cat_filter').hide();
     }
     if (APP_DIRECTION == 'rtl') {
         var direction = true;
@@ -188,6 +197,78 @@
             }
         };
     });
+
+   var category_id=$('input[name="category"]:checked').val();
+   if(category_id){
+    
+    $.ajax({
+           url: '/category_sub_categories/'+category_id,
+           type: 'get',
+           dataType: 'json',
+           success: function(response){
+             var len = 0;
+             if(response['sub_categories'] != null){
+               len = response['sub_categories'].length;
+             }
+             $(".sub_categories").html('');  
+             const params = new URLSearchParams(window.location.search);
+
+             if(len > 0){
+
+               for(var i=0; i<len; i++){
+                 var id = response['sub_categories'][i].sub_category_id;
+                 var title = response['sub_categories'][i].title;
+ 
+
+                 var option = "<span class='wt-checkbox'><input id='sub_category-"+id+"' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
+                   option+="<label for='sub_category-"+id+"'> "+title+" </label></span>" ; 
+                   
+                 $(".sub_categories").append(option);  
+                
+               }
+             }
+
+           }
+        });
+
+   }
+
+    $(".freelancer_cat_filter :radio").change(function(){
+        if( $(this).is(":checked") ){
+            var category_id = $(this).val();
+
+     $.ajax({
+           url: '/category_sub_categories/'+category_id,
+           type: 'get',
+           dataType: 'json',
+           success: function(response){
+             var len = 0;
+             if(response['sub_categories'] != null){
+               len = response['sub_categories'].length;
+             }
+             $(".sub_categories").html('');  
+
+             if(len > 0){
+
+               for(var i=0; i<len; i++){
+                 var id = response['sub_categories'][i].sub_category_id;
+                 var title = response['sub_categories'][i].title;
+                                
+                 var option = "<span class='wt-checkbox'><input id='sub_category-"+id+"' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
+                   option+="<label for='sub_category-"+id+"'> "+title+" </label></span>" ; 
+                   
+                 $(".sub_categories").append(option);  
+                
+               }
+             }
+
+           }
+        });
+
+
+        }
+    });
+
 </script>
 @endpush
 @endsection

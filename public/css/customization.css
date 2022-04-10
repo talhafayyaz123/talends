@@ -607,6 +607,16 @@ footer .row .col-md-6:last-child>ul {
 .jobs_filters_record .wt-widget {
     width: 225px;
 }
+
+.internee_filters_record .wt-widget {
+    width: 200px;
+}
+
+.internee_filters_record .wt-widgettitle {
+    margin-bottom: auto;
+
+}
+
 .freelancer_price_filter >div {
     flex-direction: column !important;
 }
