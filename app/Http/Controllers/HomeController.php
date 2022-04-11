@@ -445,7 +445,9 @@ class HomeController extends Controller
 
     $skills     = Skill::all();
     $locations = Location::latest()->get();
-    return view('front-end.pages.companies',compact('companies','skills','locations'));
+    $categories = Category::latest()->get();
+
+    return view('front-end.pages.companies',compact('companies','skills','locations','categories'));
      }
 
 

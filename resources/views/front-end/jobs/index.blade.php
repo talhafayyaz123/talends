@@ -36,7 +36,7 @@
         <div class="wt-haslayout">
 
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 filters-container">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 filters-container freelancer_job_filter_container">
             @if (file_exists(resource_path('views/extend/front-end/jobs/filters.blade.php'))) 
                 @include('extend.front-end.jobs.filters')
             @else 

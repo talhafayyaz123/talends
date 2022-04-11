@@ -1,4 +1,4 @@
-<aside id="wt-sidebar" class="wt-sidebar freelancer_filters jobs_filters_record ">
+<aside id="wt-sidebar" class="wt-sidebar freelancer_filters jobs_filters_record freelancer_job_filters_setting">
     {!! Form::open(['url' => url('search-results'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch']) !!}
         <input type="hidden" value="{{$type}}" name="type">
         <div class="wt-widget wt-effectiveholder wt-startsearch" style="display: none;">
@@ -109,7 +109,7 @@
                 </fieldset>
             </div>
         </div>
-        <div class="wt-widget wt-effectiveholder">
+        <!-- <div class="wt-widget wt-effectiveholder">
         <a  onclick="toogle_skill()"> <div class="wt-widgettitle">
                 <span>{{ trans('lang.skills') }}</span>
                 <span class="filter_toogle">  <i class="fa fa-angle-down" aria-hidden="true"></i></span>
@@ -130,7 +130,7 @@
                     @endif
                 </fieldset>
             </div>
-        </div>
+        </div> -->
         <div class="wt-widget wt-effectiveholder">
         <a  onclick="toogle_length()"><div class="wt-widgettitle">
                 <span>{{ trans('lang.project_length') }}</span>
@@ -176,7 +176,7 @@
                 </fieldset>
             </div>
         </div>
-        <div class="wt-widget wt-effectiveholder">
+        <div class="wt-widget wt-effectiveholder freelancer_job_find_btn">
             <div class="wt-widgetcontent">
                 <div class="wt-applyfilters">
                     {!! Form::submit(trans('lang.btn_apply_filters'), ['class' => 'wt-btn']) !!}

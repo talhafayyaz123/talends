@@ -1,7 +1,7 @@
-<aside id="wt-sidebar" class="wt-sidebar wt-usersidebar freelancer_filters  jobs_filters_record ">
+<aside id="wt-sidebar" class="wt-sidebar wt-usersidebar freelancer_filters  freelancer_job_filters_setting ">
     {!! Form::open(['url' => url('search-results'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch', 'id' => 'wt-formsearch']) !!}
         <input type="hidden" value="{{$type}}" name="type">
-        <div class="wt-widget wt-effectiveholder wt-startsearch">
+<!--         <div class="wt-widget wt-effectiveholder wt-startsearch">
            
             <div class="wt-widgetcontent">
                 <div class="wt-formtheme wt-formsearch">
@@ -14,7 +14,7 @@
                 
             </div>
         </div>
-        <div class="wt-widget wt-effectiveholder">
+ -->        <div class="wt-widget wt-effectiveholder">
         <a  onclick="toogle_category()"> <div class="wt-widgettitle">
                 <span>Category</span>  
              <span class="filter_toogle">   <i class="fa fa-angle-down" aria-hidden="true"></i></span>
@@ -142,7 +142,7 @@
                 </fieldset>
             </div>
         </div>
-        <div class="wt-widget wt-effectiveholder">
+        <div class="wt-widget wt-effectiveholder freelancer_job_find_btn">
             <div class="wt-widgetcontent">
                 <div class="wt-applyfilters">
                     {!! Form::submit(trans('lang.btn_apply_filters'), ['class' => 'wt-btn']) !!}

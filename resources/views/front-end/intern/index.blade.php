@@ -45,7 +45,7 @@
         <div class="wt-haslayout">
 
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 filters-container">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 filters-container freelancer_job_filter_container">
             @include('front-end.intern.filters')
             </div>
         </div>
@@ -246,6 +246,7 @@
              $('.price_filter').hide();
              $('.language_filter').hide();
              $('.category_filter').hide();
+             $('.freelancer_sub_cat_filter').hide();
             }
 
             
@@ -254,6 +255,7 @@
              $('.location_filter').hide();
              $('.language_filter').hide();
              $('.category_filter').hide();
+             $('.freelancer_sub_cat_filter').hide();
             }
 
             function toogle_language(){
@@ -261,6 +263,7 @@
              $('.location_filter').hide();
              $('.price_filter').hide();
              $('.category_filter').hide();
+             $('.freelancer_sub_cat_filter').hide();
             }
 
             function toogle_category(){
@@ -268,7 +271,16 @@
                 $('.location_filter').hide();
                 $('.price_filter').hide();
                 $('.language_filter').hide();
+                $('.freelancer_sub_cat_filter').hide();
             }
+
+            function toogle_sub_category(){
+                $('.freelancer_sub_cat_filter').toggle();
+                $('.category_filter').hide();
+                $('.location_filter').hide();
+                $('.price_filter').hide();
+                $('.language_filter').hide();
+    }
 
             if (APP_DIRECTION == 'rtl') {
                 var direction = true;
@@ -307,6 +319,82 @@
             }
         };
     });
+
+
+    var values = [];
+        $('input[name="category[]"]:checked').each(function() {
+            values[values.length] = (this.checked ? $(this).val() : "");
+        });
+        var comma_category = values.join(","); 
+
+
+       if(comma_category.length!=0){
+        $.ajax({
+           url: '/category_sub_categories/multiple/'+comma_category,
+           type: 'get',
+           dataType: 'json',
+           success: function(response){
+             var len = 0;
+             if(response['sub_categories'] != null){
+               len = response['sub_categories'].length;
+             }
+             $(".sub_categories").html('');  
+
+             if(len > 0){
+
+               for(var i=0; i<len; i++){
+                 var id = response['sub_categories'][i].sub_category_id;
+                 var title = response['sub_categories'][i].title;
+                 var option = "<span class='wt-checkbox'><input id='sub_category-"+id+"' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
+                   option+="<label for='sub_category-"+id+"'> "+title+" </label></span>" ; 
+                   
+                 $(".sub_categories").append(option); 
+                
+               }
+             } 
+
+           }
+        });
+       }
+
+
+    $('.freelancer_category :checkbox').change(function() {
+        var values = [];
+        $('input[name="category[]"]:checked').each(function() {
+            values[values.length] = (this.checked ? $(this).val() : "");
+        });
+        var comma_category = values.join(","); 
+
+
+        $.ajax({
+           url: '/category_sub_categories/multiple/'+comma_category,
+           type: 'get',
+           dataType: 'json',
+           success: function(response){
+             var len = 0;
+             if(response['sub_categories'] != null){
+               len = response['sub_categories'].length;
+             }
+             $(".sub_categories").html('');  
+
+             if(len > 0){
+
+               for(var i=0; i<len; i++){
+                 var id = response['sub_categories'][i].sub_category_id;
+                 var title = response['sub_categories'][i].title;
+                 var option = "<span class='wt-checkbox'><input id='sub_category-"+id+"' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
+                   option+="<label for='sub_category-"+id+"'> "+title+" </label></span>" ; 
+                   
+                 $(".sub_categories").append(option); 
+                
+               }
+             } 
+
+           }
+        });        
+    });
+
+ 
     
         </script>
     @endpush

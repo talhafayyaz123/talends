@@ -617,6 +617,22 @@ footer .row .col-md-6:last-child>ul {
 
 }
 
+.freelancer_job_filters_setting .wt-widget{
+    width: 290px;
+}
+
+.freelancer_job_find_btn{
+    width: 230px !important;
+}
+.freelancer_job_filter_container{
+    max-width: 97% !important;
+}
+.internee_filters_setting .wt-widget{
+
+    width: 212px!important;
+}
+
+
 .freelancer_price_filter >div {
     flex-direction: column !important;
 }

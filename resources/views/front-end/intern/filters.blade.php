@@ -1,7 +1,7 @@
-<aside id="wt-sidebar" class="wt-sidebar wt-usersidebar internee_filters  internee_filters_record">
+<aside id="wt-sidebar" class="wt-sidebar wt-usersidebar internee_filters  internee_filters_record internee_filters_setting">
     {!! Form::open(['url' => url('search-results'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch', 'id' => 'wt-formsearch']) !!}
         <input type="hidden" value="{{$type}}" name="type">
-        <div class="wt-widget wt-effectiveholder wt-startsearch">
+        <!-- <div class="wt-widget wt-effectiveholder wt-startsearch">
             
             <div class="wt-widgetcontent">
                 <div class="wt-formtheme wt-formsearch">
@@ -13,7 +13,7 @@
                 </div>
                 
             </div>
-        </div>
+        </div> -->
         <div class="wt-widget wt-effectiveholder">
           
             <div class="wt-widgetcontent">
@@ -67,7 +67,7 @@
                             @endphp
 
                                 <span class="wt-checkbox freelancer_category">
-                                    <input id="category-{{{ $key }}}" type="checkbox" id="category" name="category[]" value="{{{$category->id}}}" {{$checked }} >
+                                    <input  id="category-{{{ $key }}}" type="checkbox"  name="category[]" value="{{{$category->id}}}" {{$checked }} >
                                     <label for="category-{{{ $key }}}">{{{ $category->title }}}</label>
                                 </span>
                             @endforeach
@@ -78,6 +78,23 @@
                 
             </div>
 
+        </div>
+
+
+        
+        <div class="wt-widget wt-effectiveholder">
+        <a  onclick="toogle_sub_category()"> <div class="wt-widgettitle">
+                <span>Sub Categories</span>  
+             <span class="filter_toogle">   <i class="fa fa-angle-down" aria-hidden="true"></i></span>
+            </div>
+          </a>
+            <div class="wt-widgetcontent freelancer_sub_cat_filter" style="display: none;">
+                <fieldset>
+                <div class="wt-checkboxholder wt-verticalscrollbar sub_categories">
+                          
+                        </div>
+                </fieldset>
+            </div>
         </div>
 
         <div class="wt-widget wt-effectiveholder">
