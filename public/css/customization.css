@@ -559,7 +559,30 @@ footer .row .col-md-6:last-child>ul {
 .freelancer_filters .wt-widgettitle{
     margin-bottom: 15px !important;
 }
-
+.freelancer_filters form a {
+    font-size: 15px;
+}
+.freelancer_filters .wt-widgetcontent {
+    position: absolute;
+    min-width: 230px;
+    width: 100%;
+    max-width: 300px;
+    left: 0;
+    z-index: 2;
+    height: auto;
+    border-radius: 53px;
+}
+.freelancer_filters .wt-widgettitle {
+    padding: 18px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+.wt-formsearch fieldset .wt-checkboxholder {
+    padding: 6px 6px 0 12px;
+    left: 18px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
 .filter_toogle{
     float: right;
 }
@@ -573,12 +596,17 @@ footer .row .col-md-6:last-child>ul {
 .filters-container {
     position: static;
     margin: 0 auto;
-    max-width: 92%;
+    max-width: 96%;
 
 }
+
+.interne-filters-container.fixed{
+    width: 94% !important;
+}
+
 .filters-container.fixed {
     position: fixed !important;
-    width: 100%;
+    width: 70%;
     left: 0;
     right: 0;
     top: 0;
@@ -597,8 +625,8 @@ footer .row .col-md-6:last-child>ul {
 .freelancer_filters .wt-widget {
     float: unset;
     width: auto;
-    min-width: 200px;
-    padding: 12px;
+    min-width: 140px;
+    padding: 15px;
     position: relative;
 }
 .freelnacer_data_filters  .wt-widget {
@@ -617,6 +645,8 @@ footer .row .col-md-6:last-child>ul {
 
 }
 
+
+
 .freelancer_job_filters_setting .wt-widget{
     width: 290px;
 }
@@ -629,7 +659,13 @@ footer .row .col-md-6:last-child>ul {
 }
 .internee_filters_setting .wt-widget{
 
-    width: 212px!important;
+    float: unset;
+    width: auto;
+    min-width: 205px;
+    padding: 14px;
+    position: relative;
+
+    
 }
 
 
@@ -641,7 +677,7 @@ footer .row .col-md-6:last-child>ul {
 }
 .wt-formsearch fieldset .wt-checkboxholder{
     position: absolute;
-    top: 0;
+    top: -8px;
     padding: 6px;
     z-index: 100;
     background: #fff;

@@ -91,7 +91,8 @@ opacity: 0.7;
                             $location_select='';
                              
                             if(Request::get('location_id') &&  Request::get('location_id') ==$location->id ){
-                               
+                     
+                                
                                 $location_select='selected=selected';
                             }
                             @endphp

@@ -1,4 +1,4 @@
-<aside id="wt-sidebar" class="wt-sidebar wt-usersidebar internee_filters  internee_filters_record internee_filters_setting">
+<aside id="wt-sidebar" class="wt-sidebar wt-usersidebar freelancer_filters  internee_filters_setting">
     {!! Form::open(['url' => url('search-results'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch', 'id' => 'wt-formsearch']) !!}
         <input type="hidden" value="{{$type}}" name="type">
         <!-- <div class="wt-widget wt-effectiveholder wt-startsearch">

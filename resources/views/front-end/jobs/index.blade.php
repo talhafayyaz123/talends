@@ -35,21 +35,14 @@
         @endif
         <div class="wt-haslayout">
 
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 filters-container freelancer_job_filter_container">
-            @if (file_exists(resource_path('views/extend/front-end/jobs/filters.blade.php'))) 
-                @include('extend.front-end.jobs.filters')
-            @else 
-                @include('front-end.jobs.filters')
-            @endif
-        </div>
-            
-        </div>
 
             <div class="container">
                 <div class="row">
                     <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
-                        
+                        <div class="filters-container">
+                    @include('front-end.jobs.filters')
+                        </div>
+
                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
                             <div class="wt-userlistingholder wt-haslayout job_list">
                                 @if (!empty($keyword))

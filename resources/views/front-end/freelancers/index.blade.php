@@ -41,19 +41,18 @@
 
     <div class="wt-haslayout">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 filters-container freelancer_job_filter_container">
-                @if (file_exists(resource_path('views/extend/front-end/freelancers/filters.blade.php')))
-                @include('extend.front-end.freelancers.filters')
-                @else
-                @include('front-end.freelancers.filters')
-                @endif
-            </div>
+           
         </div>
         <div class="container">
             <div class="row">
+           
                 <div id="" class="wt-haslayout">
+                    <div class="filters-container">
+                  @include('front-end.freelancers.filters')
+                    </div>
 
                     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
+                        
                         <div class="wt-userlistingholder wt-userlisting wt-haslayout ">
                             <!-- <div class="wt-userlistingtitle">
                                 @if (!empty($users))

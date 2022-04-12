@@ -1,4 +1,4 @@
-<aside id="wt-sidebar" class="wt-sidebar wt-usersidebar freelancer_filters  freelancer_job_filters_setting ">
+<aside id="wt-sidebar" class="wt-sidebar wt-usersidebar freelancer_filters">
     {!! Form::open(['url' => url('search-results'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch', 'id' => 'wt-formsearch']) !!}
         <input type="hidden" value="{{$type}}" name="type">
 <!--         <div class="wt-widget wt-effectiveholder wt-startsearch">
@@ -17,7 +17,7 @@
  -->        <div class="wt-widget wt-effectiveholder">
         <a  onclick="toogle_category()"> <div class="wt-widgettitle">
                 <span>Category</span>  
-             <span class="filter_toogle">   <i class="fa fa-angle-down" aria-hidden="true"></i></span>
+             <span class="filter_toogle1">   <i class="fa fa-angle-down" aria-hidden="true"></i></span>
             </div>
           </a>
             <div class="wt-widgetcontent freelancer_skills_filter  freelancer_cat_filter" style="display: none;">
@@ -46,7 +46,7 @@
         <div class="wt-widget wt-effectiveholder">
         <a  onclick="toogle_sub_category()"> <div class="wt-widgettitle">
                 <span>Sub Categories</span>  
-             <span class="filter_toogle">   <i class="fa fa-angle-down" aria-hidden="true"></i></span>
+             <span class="filter_toogle1">   <i class="fa fa-angle-down" aria-hidden="true"></i></span>
             </div>
           </a>
             <div class="wt-widgetcontent freelancer_sub_cat_filter" style="display: none;">
@@ -62,7 +62,7 @@
         <div class="wt-widget wt-effectiveholder">
         <a  onclick="toogle_location()">  <div class="wt-widgettitle">
                 <span>{{ trans('lang.location') }}</span>
-                <span class="filter_toogle">   <i class="fa fa-angle-down" aria-hidden="true"></i></span>
+                <span class="filter_toogle1">   <i class="fa fa-angle-down" aria-hidden="true"></i></span>
 
             </div>
             </a>
@@ -95,7 +95,7 @@
         <div class="wt-widget wt-effectiveholder">
         <a  onclick="toogle_price()"> <div class="wt-widgettitle">
                 <span>{{{ trans('lang.hourly_rate') }}}</span>
-                <span class="filter_toogle">  <i class="fa fa-angle-down" aria-hidden="true"></i></span>
+                <span class="filter_toogle1">  <i class="fa fa-angle-down" aria-hidden="true"></i></span>
 
             </div>
             </a>
@@ -122,7 +122,7 @@
         <a  onclick="toogle_language()"> 
         <div class="wt-widgettitle">
                 <span>{{ trans('lang.langs') }}</span>
-                <span class="filter_toogle">  <i class="fa fa-angle-down" aria-hidden="true"></i></span>
+                <span class="filter_toogle1">  <i class="fa fa-angle-down" aria-hidden="true"></i></span>
 
             </div></a>
             <div class="wt-widgetcontent freelancer_language_filter" style="display: none;">
