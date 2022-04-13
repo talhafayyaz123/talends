@@ -440,8 +440,12 @@ Route::group(
         Route::get('company/settings/expertise', 'CompanyController@companyExpertise')->name('companyExpertise');
         Route::post('company/store-profile-settings', 'CompanyController@storeProfileSettings')->name('CompanyProfileSetting');
         Route::post('company/store-experience-settings', 'CompanyController@storeExperienceEducationSettings');
+       
         Route::get('company/dashboard/project-awards', 'CompanyController@projectAwardsSettings')->name('companyProjectAwards');
         Route::post('company/store-project-award-settings', 'CompanyController@storeProjectAwardSettings');
+
+        Route::get('company/dashboard/work-detail', 'CompanyController@companyWorkDetail')->name('companyWorkDetail');
+        Route::post('company/store-work-detail', 'CompanyController@storeCompanyWorkDetail');
 
         /////////intern routes
         Route::get('intern/profile', 'InterneController@index')->name('interneProfile');

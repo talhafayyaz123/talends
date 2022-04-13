@@ -43,14 +43,18 @@
         <div class="row">
            
         </div>
+      
+
         <div class="container">
             <div class="row">
            
                 <div id="" class="wt-haslayout">
+               
                     <div class="filters-container">
                   @include('front-end.freelancers.filters')
+                  
                     </div>
-
+                    
                     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
                         
                         <div class="wt-userlistingholder wt-userlisting wt-haslayout ">
@@ -60,7 +64,7 @@
                                 @endif
                             </div> -->
                             <div class="wt-userlistingholder wt-userlisting wt-haslayout freelancer_list">
-
+                            
                                 @include('front-end.freelancers.data')
                             </div>
                         </div>

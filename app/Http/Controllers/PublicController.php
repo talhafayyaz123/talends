@@ -7,7 +7,7 @@
  *
  * @package Worketic
  * @author  Amentotech <theamentotech@gmail.com>
- * @license http://www.amentotech.com Amentotech
+ * @license http://www.amentotech.com Amentotechfseatc
  * @link    http://www.amentotech.com
  */
 
@@ -90,7 +90,15 @@ class PublicController extends Controller
             return $json;
         }
     }
-
+    public function universityAutocomplete(){
+        $name=$_POST['name'];
+         $result= DB::table('universities')->select('name')->where("name","LIKE","%{$name}%")->get();
+         $array = json_decode(json_encode($result), true);
+         foreach($array as $row){
+            $names[]=$row['name'];
+        }
+         echo json_encode($names); 
+        }
     /**
      * Step1 Registeration Validation
      *
@@ -660,7 +668,6 @@ class PublicController extends Controller
         $type = !empty($_GET['type']) ? $_GET['type'] : $search_type;
         
         $search_categories = !empty($_GET['category']) ? $_GET['category'] : array();
-    
         $search_sub_categories = !empty($_GET['sub_categories']) ? $_GET['sub_categories'] : array();
         $search_locations = !empty($_GET['locations']) ? $_GET['locations'] : array();
         $search_skills = !empty($_GET['skills']) ? $_GET['skills'] : array();
@@ -707,7 +714,7 @@ class PublicController extends Controller
                     $search_sub_categories
                 );
                 $users = count($search['users']) > 0 ? $search['users'] : '';
-            
+               //dd($users);
                 $save_freelancer = !empty(auth()->user()->profile->saved_freelancer) ?
                     unserialize(auth()->user()->profile->saved_freelancer) : array();
                 $save_employer = !empty(auth()->user()->profile->saved_employers) ?

@@ -1759,6 +1759,52 @@
                          }
                      });
              },
+             submitWorkDetails: function () {
+                var self = this;
+                var company_work_detail = document.getElementById('company_work_detail');
+                let form_data = new FormData(company_work_detail);
+                console.log(form_data);
+                axios.post(APP_URL + '/company/store-work-detail', form_data)
+                    .then(function (response) {
+                        if (response.data.type == 'success') {
+                            self.showInfo(Vue.prototype.trans('lang.saving_profile'));
+                        } else if (response.data.type == 'error') {
+                            self.showError(response.data.message);
+                        }
+                    })
+                    .catch(function (error) {
+                        if (error.response.data.errors.company_name) {
+                            self.showError(error.response.data.errors.company_name[0]);
+                        }
+                        if (error.response.data.errors.total_earned) {
+                            self.showError(error.response.data.errors.total_earned[0]);
+                        }
+                        if (error.response.data.errors.total_hours) {
+                            self.showError(error.response.data.errors.total_hours[0]);
+                        }
+                        if (error.response.data.errors.total_jobs) {
+                            self.showError(error.response.data.errors.total_jobs[0]);
+                        }
+                        if (error.response.data.errors.last_work_date) {
+                            self.showError(error.response.data.errors.last_work_date[0]);
+                        }
+                        if (error.response.data.errors.office_location) {
+                            self.showError(error.response.data.errors.office_location[0]);
+                        }
+                        if (error.response.data.errors.detail) {
+                            self.showError(error.response.data.errors.detail[0]);
+                        }
+                        if (error.response.data.errors.portfolio) {
+                            self.showError(error.response.data.errors.portfolio[0]);
+                        }
+                        if (error.response.data.errors.team_detail) {
+                            self.showError(error.response.data.errors.team_detail[0]);
+                        }
+                        if (error.response.data.errors.experience) {
+                            self.showError(error.response.data.errors.experience[0]);
+                        }
+                    }); 
+            },
              submitInterneExperienceEduction: function () {
                  var self = this;
                  var exp_edu_data = document.getElementById('experience_form');

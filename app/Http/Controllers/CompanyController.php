@@ -46,7 +46,7 @@ use App\SubCategorySkills;
 use App\UserCategories;
 use App\UserSubCategories;
 use App\UserCategorySkills;
-
+use App\CompanyDetail;
 /**
  * Class FreelancerController
  *
@@ -109,7 +109,6 @@ class CompanyController extends Controller
         ->join('sub_categories','user_sub_categories.sub_category_id','sub_categories.sub_category_id')
         ->select('sub_categories.sub_category_id')
         ->get();
-
 
         $selced_sub_categories=array();
         if(isset($user_sub_categories)){
@@ -540,6 +539,12 @@ class CompanyController extends Controller
         }
     }
 
+    public function companyWorkDetail(){
+        $company_work_detail=CompanyDetail::where('user_id',Auth()->user()->id)->first();
+    
+        return view('back-end.company.profile-settings.work-detail.index',compact('company_work_detail'));
+    }
+
     /**
      * Show the form for creating and updating experiance and education settings.
      *
@@ -665,6 +670,48 @@ class CompanyController extends Controller
             );
             $user_id = Auth::user()->id;
             $store_awards_projects = $this->freelancer->updateAwardProjectSettings($request, $user_id);
+            if ($store_awards_projects['type'] == 'success') {
+                $json['type'] = 'success';
+                $json['message'] = trans('lang.saving_profile');
+                $json['complete_message'] = 'Profile Updated Successfully';
+            } else {
+                $json['type'] = 'error';
+                $json['message'] = trans('lang.empty_fields_not_allowed');
+            }
+            return $json;
+        }
+    }
+
+
+    public function storeCompanyWorkDetail(Request $request)
+    {
+        $server = Helper::worketicIsDemoSiteAjax();
+        if (!empty($server)) {
+            $response['type'] = 'error';
+            $response['message'] = $server->getData()->message;
+            return $response;
+        }
+        $json = array();
+        if (!empty($request)) {
+            $this->validate(
+                $request,
+                [
+                    'company_name' => 'required',
+                    'total_earned'    => 'required',
+                    'total_hours'    => 'required',
+                    'total_jobs' => 'required',
+                    'last_work_date'    => 'required',
+                    'office_location'    => 'required',
+                    'detail'    => 'required',
+                    'portfolio' => 'required',
+                    'team_detail'    => 'required',
+                    'experience'    => 'required',
+                ]
+            );
+
+            
+            $user_id = Auth::user()->id;
+            $store_awards_projects =CompanyDetail::saveCompanyWorkDetail($request, $user_id);
             if ($store_awards_projects['type'] == 'success') {
                 $json['type'] = 'success';
                 $json['message'] = trans('lang.saving_profile');

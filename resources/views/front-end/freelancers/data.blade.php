@@ -1,7 +1,9 @@
 
 @if (!empty($users))
     @foreach ($users as $key => $freelancer)
-        @php
+        
+     {{$freelancer->user_skills  }}
+    @php
             $user_image = !empty($freelancer->profile->avater) ?
                             '/uploads/users/'.$freelancer->id.'/'.$freelancer->profile->avater :
                             'images/user.jpg';
@@ -25,6 +27,20 @@
                 $badge_color = '';
                 $badge_img    = '';
             }
+
+            $user_category_skills = \App\UserCategorySkills::where('user_id', $freelancer->id)->get();
+            $skills_arr=array();
+            foreach($user_category_skills as $skill)
+            {
+                $skills_arr[]=$skill['skill_id'];
+            }
+            
+            if(!empty($skills_arr)){
+                $skills = \App\Skill::whereIn('id', $skills_arr)->get();
+                
+            }
+         
+           
         @endphp
         <div class="wt-userlistinghold {{ $feature_class }}">
             @if(!empty($enable_package) && $enable_package === 'true')
@@ -92,9 +108,9 @@
                     <p>{!! html_entity_decode(nl2br(e(str_limit($freelancer->profile->description, 180)))) !!}</p>
                 </div>
             @endif
-            @if (!empty($freelancer->skills))
+            @if (!empty($skills))
                 <div class="wt-tag wt-widgettag">
-                    @foreach($freelancer->skills as $skill)
+                    @foreach($skills as $skill)
                         <a href="{{{url('search-results?type=job&skills%5B%5D='.$skill->slug)}}}">{{{ $skill->title }}}</a>
                     @endforeach
                 </div>

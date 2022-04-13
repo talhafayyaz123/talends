@@ -9,5 +9,8 @@
         <li class="nav-item">
             <a class="{{{ \Request::route()->getName()==='companyProjectAwards'? 'active': '' }}}" href="{{{ route('companyProjectAwards') }}}">{{{ trans('lang.project_awards') }}}</a>
         </li>
+        <li class="nav-item">
+            <a class="{{{ \Request::route()->getName()==='companyWorkDetail'? 'active': '' }}}" href="{{{ route('companyWorkDetail') }}}">Work Detail</a>
+        </li>
     </ul>
 </div>
