@@ -586,6 +586,9 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 	flex-wrap: wrap !important;
 }
 
+.company_talends_filter{
+flex-wrap: initial !important;
+}
 
 .search_optinos_list a {
 	display: inline-block !important;
@@ -670,6 +673,7 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 }
 
 @media screen and (max-width:767px) {
+	
 	.talent_list_box .tlb__content p {
 		font-size: 16px;
 	}

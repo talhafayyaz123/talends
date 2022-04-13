@@ -22,7 +22,12 @@ use App\Package;
 use App\GovernmentPage;
 use App\AboutTalendsPage;
 use App\CompanyExpertise;
+use App\UserCategories;
+use App\UserSubCategories;
+use App\SubCategories;
 
+
+use function Psy\debug;
 
 class HomeController extends Controller
 {
@@ -418,11 +423,19 @@ class HomeController extends Controller
           
               $query->whereRelation('profile', 'profiles.no_of_employees',  $request->employees);
               
-            })->when($request->skill_id != null, function ($query) use ($request) {
+            })->when($request->category_id != null, function ($query) use ($request) {
           
-                $query->whereRelation('profile', 'profiles.skill_id',  $request->skill_id);
-                
-              })->when($request->price != null, function ($query) use ($request) {
+
+                $user_categories = UserCategories::whereIn('category_id', explode(',',$request->category_id))->get();
+                foreach ($user_categories as $key => $category) {
+                    if (!empty($category->user_id)) {
+                        $user_id[] = $category->user_id;
+                    }
+                }
+
+                $query->whereIn('id', $user_id);
+
+            })->when($request->price != null, function ($query) use ($request) {
           
                 $query->whereRelation('profile','profiles.min_budget',$request->price );
 
@@ -446,8 +459,17 @@ class HomeController extends Controller
     $skills     = Skill::all();
     $locations = Location::latest()->get();
     $categories = Category::all();
+    $sub_categories='';
+    if(!empty($request->get('category_id'))){
 
-    return view('front-end.pages.companies',compact('companies','skills','locations','categories'));
+        $sub_categories =SubCategories::orderby("title","asc")
+        ->select('title','sub_category_id')
+        ->whereIn('category_id',explode(',',$request->get('category_id')))
+        ->get();
+
+    }
+
+    return view('front-end.pages.companies',compact('companies','skills','locations','categories','sub_categories'));
      }
 
 

@@ -572,6 +572,11 @@ footer .row .col-md-6:last-child>ul {
     height: auto;
     border-radius: 53px;
 }
+
+.wt-widgetcontent.interne_widgetcontent {
+    min-width: 205px !important;
+}
+
 .freelancer_filters .wt-widgettitle {
     padding: 18px;
     border: 1px solid #ddd;
@@ -794,11 +799,15 @@ footer .row .col-md-6:last-child>ul {
 
 }
 @media screen and (max-width:767px) {
+    .wt-btn[type=submit] {
+		width: 100%;
+	}
     .wt-usersidebar {
          display: block !important;
     }
     .filters-container.fixed {
         position: static !important;
+        width: 96%;
     }
 
     .freelancer_filters .wt-widgetcontent {
@@ -815,7 +824,33 @@ footer .row .col-md-6:last-child>ul {
     }
 
 }
+@media screen and (max-width:640px) {
+    .freelancer_filters .wt-widget {
+        width: 48%;
+    }
+    
+}
+@media screen and (max-width:640px) {
+    .freelancer_filters .wt-widget {
+        width: 46%;
+        margin: 0 6px !important;
+    }
+}
+@media screen and (max-width:360px) {
+    .freelancer_filters .wt-widget {
+        width: auto;
+        min-width: 200px;
+        
+    }
+    
+}
 @media screen and (max-width:499px) {
+    .freelancer_filters .wt-formsearch {
+        justify-content: center;
+    }
+    .freelancer_filters .wt-formsearch {
+		padding-bottom: 20px;
+	}
     .footer_bottom {
         flex-direction: column;
         text-align: center;

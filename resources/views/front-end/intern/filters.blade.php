@@ -16,7 +16,7 @@
         </div> -->
         <div class="wt-widget wt-effectiveholder">
           
-            <div class="wt-widgetcontent">
+            <div class="wt-widgetcontent interne_widgetcontent">
                 <div class="wt-formtheme wt-formsearch">
                     <fieldset>
                         <div class="form-group">
@@ -33,7 +33,7 @@
 
         <div class="wt-widget wt-effectiveholder">
           
-            <div class="wt-widgetcontent">
+            <div class="wt-widgetcontent interne_widgetcontent">
                 <div class="wt-formtheme wt-formsearch">
                     <fieldset>
                         <div class="form-group">

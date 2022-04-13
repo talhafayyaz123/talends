@@ -1260,7 +1260,7 @@ return [
     'btn_load_more' => 'Load More',
     'btn_submit' => 'Submit',
     'btn_gotit' => 'Got It',
-    'btn_apply_filters' => 'Finds',
+    'btn_apply_filters' => 'Find',
     'btn_add' => 'Add',
     'btn_send_feedback' => 'Send Feedback',
     'btn_import_updates' => 'Import',
