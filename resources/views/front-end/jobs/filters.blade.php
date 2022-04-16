@@ -1,5 +1,5 @@
 <aside id="wt-sidebar" class="wt-sidebar freelancer_filters">
-    {!! Form::open(['url' => url('search-results'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch']) !!}
+    {!! Form::open(['url' => url('search-results'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch','style'=>'border-bottom: 1px solid #ddd4d4']) !!}
         <input type="hidden" value="{{$type}}" name="type">
         <div class="wt-widget wt-effectiveholder wt-startsearch" style="display: none;">
             

@@ -25,7 +25,7 @@ use App\CompanyExpertise;
 use App\UserCategories;
 use App\UserSubCategories;
 use App\SubCategories;
-
+use App\CompanyDetail;
 
 use function Psy\debug;
 
@@ -477,8 +477,9 @@ class HomeController extends Controller
           
         $expertise=CompanyExpertise::where('user_id',$id)->first();
         $company_expertise= isset($expertise) ? unserialize($expertise->description)   : '';
-             
-        return view('front-end.pages.company_detail',compact('company_expertise','expertise'));
+        $company_detail=CompanyDetail::where('user_id',$id)->first();
+        $profile = Profile::where('user_id', $id)->get()->first();
+        return view('front-end.pages.company_detail',compact('company_expertise','expertise','company_detail','id','profile'));
      }
 
     public function experienceEducation($user_id)

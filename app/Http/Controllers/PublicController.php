@@ -138,8 +138,7 @@ class PublicController extends Controller
                 'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
                 'termsconditions' => 'required',
                 'role' => 'not_in:admin',
-                'gender' => 'required',
-                'availability' => 'required',
+               
                 'budget' => 'required',
                 
             ];

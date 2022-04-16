@@ -612,7 +612,7 @@ footer .row .col-md-6:last-child>ul {
 
 .filters-container.fixed {
     position: fixed !important;
-    width: 68%;
+    width: 74%;
     left: 0;
     right: 0;
     top: 0;
@@ -667,7 +667,7 @@ footer .row .col-md-6:last-child>ul {
 
     float: unset;
     width: auto;
-    min-width: 205px;
+    min-width: 174px;
     padding: 14px;
     position: relative;
 

@@ -50,6 +50,7 @@
                                         <span>{{ trans('lang.01') }} {{$jobs->count()}} of {{$Jobs_total_records}} results for <em>"{{{$keyword}}}"</em></span>
                                     </div> -->
                                 @endif
+                                <br>
                                 @include('front-end.jobs.ajax_jobs')
 
                             </div>
