@@ -74,7 +74,6 @@ Route::get('freelancer/get-freelancer-educations', 'FreelancerController@getFree
 Route::get('freelancer/project-awards/{id}', 'HomeController@projectAwardsSettings')->name('freelancerProjectAwards');
 
 
-
 Route::get('articles/{category?}', 'ArticleController@articlesList')->name('articlesList');
 Route::get('article/{slug}', 'ArticleController@showArticle')->name('showArticle');
 Route::get('profile/{slug}', 'PublicController@showUserProfile')->name('showUserProfile');
@@ -431,7 +430,11 @@ Route::group(
         Route::get('freelancer/dashboard', 'FreelancerController@freelancerDashboard')->name('freelancerDashboard');
 
         Route::get('company/dashboard', 'FreelancerController@companyDashboard')->name('companyDashboard');
+        Route::get('company/hiring_requests', 'CompanyController@companyHiringRequests')->name('companyHiringRequests');
+        Route::get('company/hiring_request_detail/{id}', 'CompanyController@companyHiringRequestDetail')->name('companyHiringRequestDetail');
+
         
+
 
         Route::get('freelancer/profile', 'FreelancerController@index')->name('personalDetail');
         Route::get('company/profile', 'CompanyController@index')->name('companyProfile');
@@ -446,6 +449,7 @@ Route::group(
 
         Route::get('company/dashboard/work-detail', 'CompanyController@companyWorkDetail')->name('companyWorkDetail');
         Route::post('company/store-work-detail', 'CompanyController@storeCompanyWorkDetail');
+
 
         /////////intern routes
         Route::get('intern/profile', 'InterneController@index')->name('interneProfile');
@@ -511,6 +515,12 @@ Route::group(
         Route::post('user/submit/transection', 'UserController@submitTransection');
     }
 );
+
+Route::get('hire/agency/{id}', 'CompanyController@hireAgencyForm')->name('hireAgencyForm');
+Route::post('store/hire/agency/{id}', 'CompanyController@storeHireAgency')->name('storeHireAgency');
+
+
+
 Route::get('page/get-page-data/{id}', 'PageController@getPage');
 Route::get('get-categories', 'CategoryController@getCategories');
 Route::get('get-seven-categories', 'CategoryController@getSevenCategories');

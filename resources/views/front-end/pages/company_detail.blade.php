@@ -308,7 +308,9 @@
                         <p>Our dedicated support team always excited & ready to keep up with your projects.</p>
                     </div>
                     <div class="d-flex align-contents-center">
-                        <a href="" class="theme_btn m-0 ">Hire The Agency Now</a>
+                    @guest<a href="{{ route('login') }}" class="theme_btn m-0 ">Hire The Agency Now</a>@endguest
+                    @auth<a href="{{url("hire/agency",['id'=>$id ])}}" class="theme_btn m-0 ">Hire The Agency Now</a>@endauth
+
                         <p class="d-flex align-items-center mb-0 ml-4">Contact<a href="tel:+923214757001" class="pl-2">+923214757001</a></p>
                     </div>
                 </div>

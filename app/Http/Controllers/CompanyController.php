@@ -47,6 +47,7 @@ use App\UserCategories;
 use App\UserSubCategories;
 use App\UserCategorySkills;
 use App\CompanyDetail;
+use App\HireAgency;
 /**
  * Class FreelancerController
  *
@@ -229,6 +230,63 @@ class CompanyController extends Controller
        
 
 
+    }
+
+
+    public function storeHireAgency(Request $request,$id)
+    {
+
+         $this->validate(
+            $request,
+            [
+                'full_name' => 'required',
+                'company_name' => 'required',
+                'email' => 'required',
+                'phone_number' => 'required',
+                'description' => 'required',
+          ]
+
+        );
+
+        $full_name=$request['full_name'];
+        $company_name=$request['company_name'];
+        $email=$request['email'];
+        $mobile_number=$request['phone_number'];
+        $description=$request['description'];
+        
+        HireAgency::create([
+        'agency_id'=>  $id,
+        'full_name'=> $full_name,
+        'company_name'=> $company_name,
+        'email'=>  $email,
+        'phone_number'=>  $mobile_number,
+        'detail'=>  $description,
+        ]);
+
+        Session::flash('message', 'Response has been saved');
+        return Redirect::back();
+
+    }
+
+    public function companyHiringRequests(){
+        $hiring_requests=HireAgency::where('agency_id',Auth::user()->id)->get();
+        return view(
+            'back-end.company.hiring_requests.index',
+            compact(
+                'hiring_requests'
+            )
+        );
+    }
+
+    public function companyHiringRequestDetail($id){
+        $hiring_request=HireAgency::where('id',$id)->first();
+    
+        return view(
+            'back-end.company.hiring_requests.show',
+            compact(
+                'hiring_request'
+            )
+        );
     }
     /**
      * Upload Image to temporary folder.
@@ -541,8 +599,14 @@ class CompanyController extends Controller
 
     public function companyWorkDetail(){
         $company_work_detail=CompanyDetail::where('user_id',Auth()->user()->id)->first();
-    
+        
         return view('back-end.company.profile-settings.work-detail.index',compact('company_work_detail'));
+    }
+
+    public function hireAgencyForm($id){
+        $company_work_detail=CompanyDetail::where('user_id',$id)->first();
+        return view('front-end.pages.hire-agency',compact('id','company_work_detail'));
+
     }
 
     /**

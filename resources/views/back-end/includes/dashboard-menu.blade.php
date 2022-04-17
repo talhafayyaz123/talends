@@ -274,6 +274,7 @@
                                     <span> {{ trans('lang.payouts') }}</span>
                                 </a>
                             </li>
+                          
                             <li class="menu-item-has-children">
                                 <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                                 <a href="javascript:void(0)">
@@ -333,6 +334,12 @@
                                 <a href="{{{ route('FreelancerPayoutsSettings') }}}">
                                     <i class="ti-money"></i>
                                     <span> {{ trans('lang.payouts') }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{{ route('companyHiringRequests') }}}">
+                                <i class="ti-bookmark-alt"></i>
+                                    <span> Hire Agency Request</span>
                                 </a>
                             </li>
                             @if ($payment_module === 'true' )

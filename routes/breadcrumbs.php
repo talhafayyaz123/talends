@@ -197,6 +197,16 @@ Breadcrumbs::for(
 
 );
 
+Breadcrumbs::for(
+
+    'hireAgencyForm', function ($trail, $id) {
+        
+        $trail->parent('home');
+        $trail->push('Agency', url('company-detail/'.$id));
+        $trail->push('Hire Now', route('hireAgencyForm', ['id' => $id]));
+    }
+
+);
 
 Breadcrumbs::for(
 
