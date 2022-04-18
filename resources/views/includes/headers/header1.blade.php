@@ -177,6 +177,8 @@
                         $payment_settings = \App\SiteManagement::getMetaValue('commision');
                         $payment_module = !empty($payment_settings) && !empty($payment_settings[0]['enable_packages']) ? $payment_settings[0]['enable_packages'] : 'true';
                         $employer_payment_module = !empty($payment_settings) && !empty($payment_settings[0]['employer_package']) ? $payment_settings[0]['employer_package'] : 'true';
+                        $total_hire_agencies = \App\HireAgency::select('is_seen')->where('is_seen', 0)->count();
+
                         @endphp
 
                         <div class="wt-userlogedin">
@@ -194,6 +196,16 @@
                             @endif
                         </div>
                     </li>
+
+                    @if( $role === 'admin' || $role === 'company' )
+                    <li>
+                  
+                    &nbsp;&nbsp;<div class="wt-username">
+                            <a  class="notif"><span class="num">{{$total_hire_agencies }}</span></a>                            
+
+                        </div></li>
+                        @endif
+                    
                     @endauth
 
 

@@ -714,6 +714,22 @@ flex-wrap: initial !important;
 	}
 }
 
+a.notif {
+	position: relative;
+	display: block;
+	height: 50px;
+	width: 50px;
+	background: url('/uploads/settings/general/bell.png');
+	background-size: contain;
+	text-decoration: none;
+  }
+  .num {
+	position: absolute;
+	right: 20px;
+	top: 14px;
+	color: #d71d1d;
+  }
+
 @media screen and (max-width:499px) {
 
 	.mega_menu_tabs.nav-tabs .nav-link  {

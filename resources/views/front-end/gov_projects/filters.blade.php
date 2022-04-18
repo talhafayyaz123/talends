@@ -1,7 +1,7 @@
 <aside id="wt-sidebar" class="wt-sidebar freelancer_filters">
-    {!! Form::open(['url' => url('search-results'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch']) !!}
+    {!! Form::open(['url' => url('search-results'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch','style'=>'border-bottom: 1px solid #ddd4d4']) !!}
         <input type="hidden" value="{{$type}}" name="type">
-        <div class="wt-widget wt-effectiveholder wt-startsearch">
+        <div class="wt-widget wt-effectiveholder wt-startsearch" style="display: none;">
             
             <div class="wt-widgetcontent">
                 <div class="wt-formtheme wt-formsearch">
@@ -13,7 +13,7 @@
                 </div>
             </div>
         </div>
-        <div class="wt-widget wt-effectiveholder wt-startsearch">
+        <div class="wt-widget wt-effectiveholder wt-startsearch" style="display: none;">
             
             <div class="wt-widgetcontent">
                 <div class="wt-formtheme wt-formsearch">
@@ -26,10 +26,10 @@
             </div>
         </div>
         <div class="wt-widget wt-widgetrange">
-            <div class="wt-widgettitle">
+        <a  onclick="toogle_price()">    <div class="wt-widgettitle">
                 <span>{{ trans('lang.price_range') }}</span>
-                <span class="filter_toogle"> <a  onclick="toogle_price()">  <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
-            </div>
+                <span class="filter_toogle">  <i class="fa fa-angle-down" aria-hidden="true"></i></span>
+            </div></a>
             <div class="wt-widgetcontent job_price_filter" style="display: none;">
                 <div class="wt-formtheme wt-formsearch">
                     <fieldset>
@@ -55,18 +55,13 @@
             </div>
         </div>
         <div class="wt-widget wt-effectiveholder">
-            <div class="wt-widgettitle">
+        <a  onclick="toogle_categories()">  <div class="wt-widgettitle">
                 <span>{{ trans('lang.cats') }}</span>
-                <span class="filter_toogle"> <a  onclick="toogle_categories()">  <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
+                <span class="filter_toogle">  <i class="fa fa-angle-down" aria-hidden="true"></i></span>
 
-            </div>
+            </div></a>
             <div class="wt-widgetcontent job_categories_filter" style="display: none;">
-                <fieldset>
-                    <div class="form-group">
-                        <input type="text" class="form-control filter-records" placeholder="{{ trans('lang.ph_search_cat') }}">
-                        <a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
-                    </div>
-                </fieldset>
+               
                 <fieldset>
                     @if (!empty($categories))
                         <div class="wt-checkboxholder wt-verticalscrollbar">
@@ -83,18 +78,13 @@
             </div>
         </div>
         <div class="wt-widget wt-effectiveholder">
-            <div class="wt-widgettitle">
+        <a  onclick="toogle_location()">   <div class="wt-widgettitle">
                 <span>{{ trans('lang.locations') }}</span>
-                <span class="filter_toogle"> <a  onclick="toogle_location()">  <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
+                <span class="filter_toogle">   <i class="fa fa-angle-down" aria-hidden="true"></i></span>
 
-            </div>
+            </div></a>
             <div class="wt-widgetcontent job_location_filter" style="display: none;">
-                <fieldset>
-                    <div class="form-group">
-                        <input type="text" class="form-control filter-records" placeholder="{{ trans('lang.ph_search_locations') }}">
-                        <a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
-                    </div>
-                </fieldset>
+              
                 <fieldset>
                     @if (!empty($locations))
                         <div class="wt-checkboxholder wt-verticalscrollbar">
@@ -111,7 +101,7 @@
                                 @endphp
                                 <span class="wt-checkbox">
                                     <input id="location-{{{ $location->slug }}}" type="checkbox" name="locations[]" value="{{{$location->slug}}}" {{$checked}} >
-                                    <label for="location-{{{ $location->slug }}}"> <img src="{{{asset(Helper::getLocationFlag($location->flag))}}}" alt="{{ trans('lang.img') }}"> {{{ $location->title }}}</label>
+                                    <label for="location-{{{ $location->slug }}}"> {{{ $location->title }}}</label>
                                 </span>
                             @endforeach
                         </div>
@@ -119,12 +109,12 @@
                 </fieldset>
             </div>
         </div>
-        <div class="wt-widget wt-effectiveholder">
-            <div class="wt-widgettitle">
+        <!-- <div class="wt-widget wt-effectiveholder">
+        <a  onclick="toogle_skill()"> <div class="wt-widgettitle">
                 <span>{{ trans('lang.skills') }}</span>
-                <span class="filter_toogle"> <a  onclick="toogle_skill()">  <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
+                <span class="filter_toogle">  <i class="fa fa-angle-down" aria-hidden="true"></i></span>
 
-            </div>
+            </div></a>
             <div class="wt-widgetcontent job_skill_filter" style="display: none;">
                 <fieldset>
                     @if (!empty($skills))
@@ -140,13 +130,13 @@
                     @endif
                 </fieldset>
             </div>
-        </div>
+        </div> -->
         <div class="wt-widget wt-effectiveholder">
-            <div class="wt-widgettitle">
+        <a  onclick="toogle_length()"><div class="wt-widgettitle">
                 <span>{{ trans('lang.project_length') }}</span>
-                <span class="filter_toogle"> <a  onclick="toogle_length()">  <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
+                <span class="filter_toogle">   <i class="fa fa-angle-down" aria-hidden="true"></i></span>
 
-            </div>
+            </div></a>
             <div class="wt-widgetcontent job_length_filter" style="display: none;">
                 <fieldset>
                     @if (!empty($project_length))
@@ -164,18 +154,13 @@
             </div>
         </div>
         <div class="wt-widget wt-effectiveholder">
-            <div class="wt-widgettitle">
+        <a  onclick="toogle_language()"> <div class="wt-widgettitle">
                 <span>{{ trans('lang.langs') }}</span>
-                <span class="filter_toogle"> <a  onclick="toogle_language()">  <i class="fa fa-angle-down" aria-hidden="true"></i></a></span>
+                <span class="filter_toogle">  <i class="fa fa-angle-down" aria-hidden="true"></i></span>
 
-            </div>
+            </div></a>
             <div class="wt-widgetcontent job_language_filter" style="display: none;">
-                <fieldset>
-                    <div class="form-group">
-                        <input type="text" class="form-control filter-records" placeholder="{{ trans('lang.ph_search_langs') }}">
-                        <a href="javascrip:void(0);" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></a>
-                    </div>
-                </fieldset>
+              
                 <fieldset>
                     @if (!empty($languages))
                         <div class="wt-checkboxholder wt-verticalscrollbar">
@@ -191,7 +176,7 @@
                 </fieldset>
             </div>
         </div>
-        <div class="wt-widget wt-effectiveholder">
+        <div class="wt-widget wt-effectiveholder freelancer_job_find_btn">
             <div class="wt-widgetcontent">
                 <div class="wt-applyfilters">
                     {!! Form::submit(trans('lang.btn_apply_filters'), ['class' => 'wt-btn']) !!}

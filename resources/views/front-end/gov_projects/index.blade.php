@@ -35,28 +35,24 @@
         @endif
         <div class="wt-haslayout">
 
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 filters-container">
-            @if (file_exists(resource_path('views/extend/front-end/jobs/filters.blade.php'))) 
-                @include('extend.front-end.gov_projects.filters')
-            @else 
-                @include('front-end.gov_projects.filters')
-            @endif
-            </div>
-        </div>
 
             <div class="container">
                 <div class="row">
                     <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
-                           
+                    <div class="filters-container">
+                    @if (file_exists(resource_path('views/extend/front-end/jobs/filters.blade.php'))) 
+                @include('extend.front-end.gov_projects.filters')
+            @else 
+                @include('front-end.gov_projects.filters')
+            @endif 
+                    </div>
+
+            <br>
                         
                         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
-                            <div class="wt-userlistingholder wt-haslayout">
-                                @if (!empty($keyword))
-                                    <div class="wt-userlistingtitle">
-                                        <span>{{ trans('lang.01') }} {{$jobs->count()}} of {{$Jobs_total_records}} results for <em>"{{{$keyword}}}"</em></span>
-                                    </div>
-                                @endif
+                            <br>
+                            <div class="wt-userlistingholder wt-haslayout job_list">
+                               <!--  -->
                                
                                         <div class="wt-userlistinghold wt-userlistingholdvtwo">
                                           
@@ -167,32 +163,75 @@
 
     @push('scripts')
 
-<script>
+
+    <script>
 
 function toogle_price(){
  $('.job_price_filter').toggle();
+ $('.job_categories_filter').hide();
+ $('.job_location_filter').hide();
+ $('.job_skill_filter').hide();
+ $('.job_language_filter').hide();
 }
 
 function toogle_categories(){
  $('.job_categories_filter').toggle();
+ $('.job_price_filter').hide();
+ $('.job_location_filter').hide();
+ $('.job_skill_filter').hide();
+ $('.job_length_filter').hide();
+ $('.job_language_filter').hide();
+
+
 }
 function toogle_location(){
  $('.job_location_filter').toggle();
+
+ $('.job_price_filter').hide();
+ $('.job_categories_filter').hide();
+ $('.job_skill_filter').hide();
+
+ $('.job_length_filter').hide();
+ $('.job_language_filter').hide();
+
 }
 
 function toogle_skill(){
  $('.job_skill_filter').toggle();
+
+ $('.job_price_filter').hide();
+ $('.job_categories_filter').hide();
+ $('.job_categories_filter').hide();
+ $('.job_location_filter').hide();
+ $('.job_length_filter').hide();
+
 }
 
 function toogle_length(){
  $('.job_length_filter').toggle();
+ $('.job_price_filter').hide();
+ $('.job_categories_filter').hide();
+ $('.job_location_filter').hide();
+ $('.job_skill_filter').hide();
+ $('.job_language_filter').hide();
+
+
 }
 
 function toogle_language(){
  $('.job_language_filter').toggle();
+ $('.job_price_filter').hide();
+ $('.job_categories_filter').hide();
+ $('.job_location_filter').hide();
+ $('.job_skill_filter').hide();
+ $('.job_length_filter').hide();
+
 }
 
-var fixadent = $(".filters-container"),
+</script>
+
+<script>
+    var fixadent = $(".filters-container"),
         pos = fixadent.offset();
 
     $(document).scroll(function(e) {

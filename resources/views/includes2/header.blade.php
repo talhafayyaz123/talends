@@ -1,4 +1,5 @@
 <header>
+
     <div class="container p-0">
         <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand" href="{{ route('home') }}">
@@ -124,10 +125,14 @@
                         $profile = \App\User::find(Auth::user()->id)->profile;
                         $user_image = !empty($profile) ? $profile->avater : '';
                         $employer_job = \App\Job::select('status')->where('user_id', Auth::user()->id)->first();
+                       
                         $profile_image = !empty($user_image) ? '/uploads/users/'.$user->id.'/'.$user_image : 'images/user-login.png';
                         $payment_settings = \App\SiteManagement::getMetaValue('commision');
                         $payment_module = !empty($payment_settings) && !empty($payment_settings[0]['enable_packages']) ? $payment_settings[0]['enable_packages'] : 'true';
                         $employer_payment_module = !empty($payment_settings) && !empty($payment_settings[0]['employer_package']) ? $payment_settings[0]['employer_package'] : 'true';
+                   
+                        $total_hire_agencies = \App\HireAgency::select('is_seen')->where('is_seen', 0)->count();
+                       
                         @endphp
 
                         <div class="wt-userlogedin">
@@ -138,10 +143,22 @@
                                 <h3>{{{ Helper::getUserName(Auth::user()->id) }}}</h3>
                                 <span>{{{ !empty(Auth::user()->profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Helper::getAuthRoleName() }}}</span>
                             </div>
+                            
                             @include('back-end.includes.profile-menu')
 
                         </div>
+                      
+                            
                     </li>
+                    @if( $role === 'admin' || $role === 'company' )
+                    <li>
+                  
+                    &nbsp;&nbsp;<div class="wt-username">
+                            <a  class="notif"><span class="num">{{$total_hire_agencies }}</span></a>                            
+
+                        </div></li>
+                        @endif
+
                     @endauth
 
                 </ul>

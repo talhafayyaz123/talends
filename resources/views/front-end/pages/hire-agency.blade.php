@@ -85,30 +85,45 @@ $breadcrumbs = Breadcrumbs::generate('hireAgencyForm', $id);
 
                                 {!! Form::open(['url' => ('store/hire/agency/'.$id.''), 'class' =>'wt-userform', 'id' => 'company_profile']) !!}
                                 
-                                <div class="form-group form-group-half">
+                                <div class="row">
+                                   
+                                <div class="col-md-6">
+
+                                <div class="form-group">
 
                                     {!! Form::text( 'full_name', null, ['class' =>'form-control', 'placeholder' => 'Full Name' ,'required' ] ) !!}
 
-                                </div>
+                                </div>      </div>
 
-                                <div class="form-group form-group-half">
+
+                                <div class="col-md-6">
+                                <div class="form-group">
 
                                     {!! Form::text( 'company_name', null, ['class' =>'form-control', 'placeholder' => 'Company Name','required'] ) !!}
 
+                                </div> </div>
                                 </div>
+                                
 
-
-                                <div class="form-group form-group-half">
+                                <div class="row">
+                                   
+                                <div class="col-md-6">
+                                <div class="form-group">
 
                                     {!! Form::text( 'email', null, ['class' =>'form-control', 'placeholder' => 'Email','required'] ) !!}
 
                                 </div>
+                                </div>
 
-                                <div class="form-group form-group-half">
+                                <div class="col-md-6">
+                                <div class="form-group">
 
                                     {!! Form::text( 'phone_number', null, ['class' =>'form-control', 'placeholder' => 'Mobile phone number','required'] ) !!}
 
+                                </div> </div>
+
                                 </div>
+
 
                                 <div class="form-group">
 

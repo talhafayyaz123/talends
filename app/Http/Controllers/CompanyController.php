@@ -261,6 +261,7 @@ class CompanyController extends Controller
         'email'=>  $email,
         'phone_number'=>  $mobile_number,
         'detail'=>  $description,
+        'is_seen'=>0
         ]);
 
         Session::flash('message', 'Response has been saved');
@@ -269,18 +270,32 @@ class CompanyController extends Controller
     }
 
     public function companyHiringRequests(){
-        $hiring_requests=HireAgency::where('agency_id',Auth::user()->id)->get();
+
+        $role=Auth::user()->getRoleNames()[0];
+           if( $role=='admin'){
+            $hiring_requests=HireAgency::all();
+
+           }else{
+               
+            $hiring_requests=HireAgency::where('agency_id',Auth::user()->id)->get();
+
+           }
         return view(
             'back-end.company.hiring_requests.index',
             compact(
-                'hiring_requests'
+                'hiring_requests','role'
             )
         );
     }
 
     public function companyHiringRequestDetail($id){
         $hiring_request=HireAgency::where('id',$id)->first();
-    
+        
+        $sub_cat= HireAgency::where('id',$id)->update([
+            'is_seen'=> 1
+        ]);
+
+
         return view(
             'back-end.company.hiring_requests.show',
             compact(

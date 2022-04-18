@@ -174,6 +174,17 @@
                                 <span>{{ trans('lang.payouts') }}</span>
                             </a>
                         </li>
+
+                        @if( $role === 'admin')
+                            <li>
+                                <a href="{{{ route('adminHiringRequests') }}}">
+                                <i class="ti-bookmark-alt"></i>
+                                    <span> Hire Agency Request</span>
+                                </a>
+
+                            </li>
+                            @endif
+
                         @if (empty(\App\SiteManagement::getMetaValue('homepage')))
                             <li>
                                 <a href="{{{ route('homePageSettings') }}}">
@@ -336,12 +347,19 @@
                                     <span> {{ trans('lang.payouts') }}</span>
                                 </a>
                             </li>
+
+                        
+                             @if( $role === 'company')
                             <li>
                                 <a href="{{{ route('companyHiringRequests') }}}">
                                 <i class="ti-bookmark-alt"></i>
                                     <span> Hire Agency Request</span>
                                 </a>
+
                             </li>
+                            @endif
+
+                            
                             @if ($payment_module === 'true' )
                                 <li class="menu-item-has-children">
                                     <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>

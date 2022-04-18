@@ -109,7 +109,10 @@ Route::group(
         Route::post('admin/conversation/delete', 'MessageController@deleteConversation');
         Route::post('admin/update/user-verify', 'UserController@updateUserVerification');
        
- 
+        Route::get('admin/hiring_requests', 'CompanyController@companyHiringRequests')->name('adminHiringRequests');
+        Route::get('admin/hiring_request_detail/{id}', 'CompanyController@companyHiringRequestDetail')->name('adminHiringRequestDetail');
+
+
         // Article Category Routes
         Route::get('admin/article/categories', 'ArticleCategoryController@index')->name('articleCategories');
         Route::get('admin/article/categories/edit-cats/{id}', 'ArticleCategoryController@edit')->name('editArticleCategories');

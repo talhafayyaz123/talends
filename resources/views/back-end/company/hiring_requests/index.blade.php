@@ -29,8 +29,12 @@
                             </div>
                             <div class="wt-rightarea">
                                 <div class="wt-btnarea">
-                                   
-                                    <a href="{{{ url('company/hiring_request_detail/'.$request->id) }}}" class="wt-btn">View Details</a>
+                                @if($role=='admin')
+                                    <a href="{{{ url('admin/hiring_request_detail/'.$request->id) }}}" class="wt-btn">View Details</a>
+                                @else
+                                <a href="{{{ url('company/hiring_request_detail/'.$request->id) }}}" class="wt-btn">View Details</a>
+
+                                @endif
                                 </div>
                             </div>
                         </div>
