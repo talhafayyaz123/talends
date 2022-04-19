@@ -78,9 +78,9 @@
 
         <div class="container">
 
-            <form class="form-inline" method="GET">
+            <form class="form-inline_" method="GET">
 
-                <div class="row row-eq-height">
+                <div class="row_ row-eq-height_">
 
                     <div class="col-md-12">
 
@@ -96,7 +96,7 @@
 
                             <select name="category[]" class="talent_select form-control " id="category_id" multiple onchange=select_sub_categories(this)>
 
-                                <option value="">Categories</option>
+                                <option value="">Select Category</option>
 
                                 @foreach($categories as $category)
 
@@ -157,9 +157,6 @@
                                 @endif
 
                             </select>
-
-
-
 
 
                             <select name="price" class="form-control" id="price">
@@ -678,7 +675,7 @@
 
         $('#category_id').multiselect({
             buttonWidth: '230px',
-            dropRight: true
+            dropRight: true,
         });
 
         $('#freelancerSubCategory').multiselect({

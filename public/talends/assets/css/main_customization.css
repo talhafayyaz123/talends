@@ -743,14 +743,16 @@ a.notif {
 	display: flex;
 	flex-wrap: wrap !important;
 	align-items: stretch;
-	justify-content: center;
+	justify-content: space-between;
 }
 
 .company_talends_filter .dropdown-menu.show {
-	left: 50% !important;
-	transform: translateX(-50%) !important;
-	top: 40px !important;
+	top: 55px !important;
 	width: 100% !important;
+	min-width: 230px;
+	right: unset;
+	left: 0 !important;
+	transform: translateX(0px) !important;
 }
 
 .company_talends_filter .form-check {
@@ -774,10 +776,12 @@ a.notif {
 .company_talends_filter>select.form-control {
 	/* min-width: 168px;
 	  width: auto; */
-	flex-grow: 1;
-	flex-basis: 0;
+	/* flex-grow: 1;
+	flex-basis: 0; */
 	font-size: 14px;
-	margin: 0 8px;
+	min-width: 168px;
+	width: 168px;
+	position: relative;
 }
 
 #location_id {
@@ -800,6 +804,41 @@ a.notif {
     padding: 15px 0;
     position: relative;
   } */
+
+.company_talends_filter_wrap .custom-select,
+.company_talends_filter>select.form-control,
+.company_talends_filter_wrap .theme_btn.inverse_btn {
+	min-height: 51px;
+	font-size: 15px !important;
+	text-align: left !important;
+	position: relative;
+
+}
+
+.company_talends_filter_wrap .custom-select::before,
+.company_talends_filter>select.form-control::before {
+	content: '\f107';
+	font-family: FontAwesome;
+	font-size: 15px;
+	width: auto;
+	height: auto;
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: rgb(73, 80, 87);
+
+}
+
+.company_talends_filter_wrap .custom-select {
+	background: transparent;
+	position: relative;
+}
+
+.company_talends_filter_wrap .btn-group.dropright {
+	width: auto !important;
+}
+
 
 
 @media screen and (max-width:499px) {
