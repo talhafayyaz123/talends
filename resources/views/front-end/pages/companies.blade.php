@@ -5,7 +5,6 @@
 @push('stylesheets')
 
 <style>
-
     .company_description {
 
         font-style: normal;
@@ -31,7 +30,6 @@
         height: 263px;
 
     }
-
 </style>
 
 
@@ -76,7 +74,7 @@
 
     </section>
 
-    <section class="">
+    <section class="company_talends_filter_wrap">
 
         <div class="container">
 
@@ -96,7 +94,7 @@
 
 
 
-                            <select name="category[]" class="talent_select form-control" id="category_id" multiple onchange=select_sub_categories(this)>
+                            <select name="category[]" class="talent_select form-control " id="category_id" multiple onchange=select_sub_categories(this)>
 
                                 <option value="">Categories</option>
 
@@ -124,15 +122,15 @@
 
 
 
-                            <select name="sub_categories[]" multiple id="freelancerSubCategory"  class="talent_select" onchange='select_cat_skills(this)'>
+                            <select name="sub_categories[]" multiple id="freelancerSubCategory" class="talent_select form-control" onchange='select_cat_skills(this)'>
 
                                 <option value="">Select Sub Categories</option>
 
-                                @if(isset($sub_categories) && !empty($sub_categories)  )     
+                                @if(isset($sub_categories) && !empty($sub_categories) )
 
                                 @foreach($sub_categories as $key =>$value)
 
-                                
+
 
                                 @php
 
@@ -150,13 +148,13 @@
 
 
 
-                          <option value="{{  $value->sub_category_id }}"  {{ $select }}   >{{  $value->title }}</option>
+                                <option value="{{  $value->sub_category_id }}" {{ $select }}>{{ $value->title }}</option>
 
 
 
-                          @endforeach
+                                @endforeach
 
-                          @endif
+                                @endif
 
                             </select>
 
@@ -258,13 +256,13 @@
 
                             <div class="filter-btns">
 
-                    <button type='button' class="theme_btn inverse_btn" id='filter_btn'>{{trans('lang.btn_apply_filters')}}</button>
+                                <button type='button' class="theme_btn inverse_btn" id='filter_btn'>{{trans('lang.btn_apply_filters')}}</button>
 
 
 
 
 
-                    </div>
+                            </div>
 
                         </div>
 
@@ -272,11 +270,11 @@
 
                     </div>
 
-                    
+
 
                 </div>
 
-               
+
 
             </form>
 
@@ -461,24 +459,17 @@
 
 
 <script>
-
-
-
-
-
-
-
     function select_sub_categories(event) {
 
         let category = $('#category_id').val();
 
         var comma_category = category.join(",");
 
-       
+
 
         $.ajax({
 
-            url:  "{{ url('/category_sub_categories/multiple') }}"+ '/' + comma_category,
+            url: "{{ url('/category_sub_categories/multiple') }}" + '/' + comma_category,
 
             type: 'get',
 
@@ -494,39 +485,38 @@
 
                 }
                 $('#freelancerSubCategory').find('option').not(':first').remove();
-                if (len > 0) {
-                  
-                    for (var i = 0; i < len; i++) {
-
-                        var id = response['sub_categories'][i].sub_category_id;
-
-                        var title = response['sub_categories'][i].title;
-
-                        var option = "<option value='" + id + "'>" + title + "</option>";
-
-                        $("#freelancerSubCategory").append(option);
 
 
+                var optionsArray = [
+                ];
 
-                    }
+                 if (len > 0) {
+
+
+                     for (var i = 0; i < len; i++) {
+
+                         var id = response['sub_categories'][i].sub_category_id;
+
+                         var title = response['sub_categories'][i].title;
+
+                optionsArray.push({
+                value: id,
+                label: title
+            });
+
+                     }
+
+                     $("#freelancerSubCategory").multiselect('dataprovider', optionsArray);
+
 
                 }
-
-
+             
 
             }
 
         });
 
     }
-
-
-
-
-
-
-
-
 
 
 
@@ -554,11 +544,11 @@
 
             var location_id = $('#location_id').val();
 
-            
+
 
             var sub_category_id = $('#freelancerSubCategory').val();
 
-           
+
 
 
 
@@ -568,7 +558,7 @@
 
             var param_name = getSearchParameters()[0].split("=")[0];
 
-            
+
 
             if (param_name && param_name != 'search') {
 
@@ -636,37 +626,32 @@
 
 
 
-                
-
-                    if( getSearchParameters()[5]){
-
-                        var url_sub_category_id = getSearchParameters()[5].split("=")[1];
-
-                        if(!sub_category_id){
-
-                            sub_category_id=url_sub_category_id 
-
-                        }
 
 
+                if (getSearchParameters()[5]) {
 
-                    } 
+                    var url_sub_category_id = getSearchParameters()[5].split("=")[1];
+
+                    if (!sub_category_id) {
+
+                        sub_category_id = url_sub_category_id
+
+                    }
 
 
 
+                }
 
-
-                
 
                 // window.location.href = window.location.origin + '/companies?employees=' + employees + '&filter=filter&price=' + price + '&category_id=' + category_id + '&location_id=' + location_id + '&sub_category_id=' + sub_category_id+ '';
-                window.location.href = {!! json_encode(url('/')) !!} + '/companies?employees=' + employees + '&filter=filter&price=' + price + '&category_id=' + category_id + '&location_id=' + location_id + '&sub_category_id=' + sub_category_id+ '';
+                window.location.href = {!!json_encode(url('/')) !!} + '/companies?employees=' + employees + '&filter=filter&price=' + price + '&category_id=' + category_id + '&location_id=' + location_id + '&sub_category_id=' + sub_category_id + '';
 
 
 
             } else {
-               
-               // window.location.href = window.location.origin + '/companies?employees=' + employees + '&filter=filter&price=' + price + '&category_id=' + category_id + '&location_id=' + location_id+ '&sub_category_id=' + sub_category_id+ '';
-               window.location.href = {!! json_encode(url('/')) !!} + '/companies?employees=' + employees + '&filter=filter&price=' + price + '&category_id=' + category_id + '&location_id=' + location_id+ '&sub_category_id=' + sub_category_id+ '';
+
+                // window.location.href = window.location.origin + '/companies?employees=' + employees + '&filter=filter&price=' + price + '&category_id=' + category_id + '&location_id=' + location_id+ '&sub_category_id=' + sub_category_id+ '';
+                window.location.href = {!!json_encode(url('/')) !!} + '/companies?employees=' + employees + '&filter=filter&price=' + price + '&category_id=' + category_id + '&location_id=' + location_id + '&sub_category_id=' + sub_category_id + '';
 
             }
 
@@ -689,16 +674,21 @@
         return prmarr;
 
     }
-    /* $(document).ready(function() {
-  
-                                        $('#category_id').multiselect({
-                                          
-                                        });
+    $(document).ready(function() {
 
-                                        $('#freelancerSubCategory').multiselect({
-                                          
-                                        });
-                                    }); */
+        $('#category_id').multiselect({
+            buttonWidth: '230px',
+            dropRight: true
+        });
+
+        $('#freelancerSubCategory').multiselect({
+            buttonWidth: '230px',
+            dropRight: true
+
+});
+
+
+    });
 </script>
 
 
