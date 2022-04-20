@@ -90,6 +90,28 @@ class PublicController extends Controller
             return $json;
         }
     }
+
+    public function gmailLoginUser($email){
+        $json = array();
+        $user = User::where('email',$email)->first();
+        
+        if (isset($user)) {
+
+            session()->put(['user_id' => $user->id]);
+            session()->put(['email' => $user->email]);
+            $id = $user->id;
+            $user = User::find($id);
+            Auth::login($user);
+            $json['type'] = 'success';
+            $json['role'] = $user->getRoleNames()->first();
+            session()->forget('user_id');
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            $json['message'] = trans('lang.something_wrong');
+            return $json;
+        } 
+    }
     public function universityAutocomplete(){
         $name=$_POST['name'];
          $result= DB::table('universities')->select('name')->where("name","LIKE","%{$name}%")->get();

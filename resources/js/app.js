@@ -28,6 +28,8 @@
  Vue.prototype.trans = (key) => {
      return _.get(window.trans, key, key);
  };
+
+ 
  
  Vue.filter('two_digits', function (value) {
      if (value.toString().length <= 1) {
@@ -109,6 +111,10 @@
  
  Vue.component('slider-skeleton', require('./components/pages/show/skeleton/slider.vue').default);
  // end new page builder
+ 
+ 
+ 
+ 
  jQuery(document).ready(function () {
      jQuery(document).on('click', '.wt-back', function (e) {
          e.preventDefault();
@@ -150,6 +156,7 @@
      });
  
  
+     
      function fixedNav() {
          $(window).scroll(function () {
              var $pscroll = $(window).scrollTop();
@@ -471,12 +478,31 @@
                  this.step++;
              },
              selectedRole: function (role) {
+                
                  if (role == 'employer') {
                      this.is_show = true;
                  } else {
                      this.is_show = false;
                  }
              },
+             selectedType: function () {
+                
+                if($('#user_email').val()){
+                    this.user_email=$('#user_email').val();
+                }
+                
+                
+                
+                if($('#first_name').val()){
+                    this.first_name=$('#first_name').val();
+                }
+                
+                
+                if($('#last_name').val()){
+                    this.last_name=$('#last_name').val();
+                }
+            },
+
              checkSingleForm: function (error_message) {
                  this.error_message = error_message
                  this.loading = true
@@ -569,8 +595,26 @@
                  this.form_step2.budget_error = '';
                  this.form_step2.is_budget_error = false;
 
+                 
+                    if($('#user_email').val()){
+                        this.user_email=$('#user_email').val();
+                    }
+                    
+
+                    
+                    if($('#first_name').val()){
+                        this.first_name=$('#first_name').val();
+                    }
+
+                    
+                    if($('#last_name').val()){
+                        this.last_name=$('#last_name').val();
+                    }
+
+
                  $.get("https://ipinfo.io/json?token=36abf09be141d3", function(response) {
                     if(response.country=='PK' || response.country=='AE'){
+                        
                         axios.post(APP_URL + '/register/form-step1-custom-errors', form_data)
                         .then(function (response) {
                        self.submitUser('multiple')
@@ -4318,6 +4362,9 @@
              },
              selectedRole: function (role) {
                  this.selected_role = role;
+              
+
+
                  if (role == 2) {
                      this.employer_options = true;
                      this.freelancer_options = false;

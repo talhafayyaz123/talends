@@ -99,6 +99,11 @@ Route::post('register/form-step2-custom-errors', 'PublicController@RegisterStep2
 Route::post('register/single-form-custom-errors', 'PublicController@singleFormValidation');
 Route::get('search-results', 'PublicController@getSearchResult')->name('searchResults');
 Route::post('user/add-wishlist', 'UserController@addWishlist');
+
+
+Route::get('gamail/login/{email}', 'PublicController@gmailLoginUser')->name('loginUser');
+
+
 // Admin Routes
 Route::group(
     ['middleware' => ['role:admin']],

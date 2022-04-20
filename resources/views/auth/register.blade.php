@@ -68,17 +68,18 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                             </div>
                                         </div>
                                         <div class="form-group form-group-half">
-                                            <input type="text" name="first_name" class="form-control" placeholder="{{{ trans('lang.ph_first_name') }}}" v-bind:class="{ 'is-invalid': form_step1.is_first_name_error }" v-model="first_name">
+                                            <input type="text" name="first_name" id="first_name" class="form-control" placeholder="{{{ trans('lang.ph_first_name') }}}" v-bind:class="{ 'is-invalid': form_step1.is_first_name_error }" v-model="first_name">
                                             <span class="help-block" v-if="form_step1.first_name_error">
                                                 <strong v-cloak>@{{form_step1.first_name_error}}</strong>
                                             </span>
                                         </div>
                                         <div class="form-group form-group-half">
-                                            <input type="text" name="last_name" class="form-control" placeholder="{{{ trans('lang.ph_last_name') }}}" v-bind:class="{ 'is-invalid': form_step1.is_last_name_error }" v-model="last_name">
+                                            <input type="text" name="last_name" id="last_name" class="form-control" placeholder="{{{ trans('lang.ph_last_name') }}}" v-bind:class="{ 'is-invalid': form_step1.is_last_name_error }" v-model="last_name">
                                             <span class="help-block" v-if="form_step1.last_name_error">
                                                 <strong v-cloak>@{{form_step1.last_name_error}}</strong>
                                             </span>
                                         </div>
+                                        
                                         <div class="form-group">
                                             <input id="user_email" type="email" class="form-control" name="email" placeholder="{{{ trans('lang.ph_email') }}}" value="{{ old('email') }}" v-bind:class="{ 'is-invalid': form_step1.is_email_error }" v-model="user_email">
                                             <span class="help-block" v-if="form_step1.email_error">
@@ -207,7 +208,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                         </div>
                                         <div class="form-group">
 
-                                            <select name="user_type" id='user_type' class="form-control" v-bind:class="{ 'is-invalid': form_step1.is_user_type_error }" v-model="user_type">
+                                            <select name="user_type" id='user_type' class="form-control" v-bind:class="{ 'is-invalid': form_step1.is_user_type_error }" v-model="user_type" v-on:change="selectedType()">
                                                 <option value="">Select User Type</option>
                                                 <option value="freelancer">Freelancer</option>
                                                 <option value="employer">Employer</option>
@@ -234,13 +235,13 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                             @endif
 
                                         <div class="form-group form-group-half">
-                                            <input type="text" name="first_name" class="form-control" placeholder="{{{ trans('lang.ph_first_name') }}}" v-bind:class="{ 'is-invalid': form_step1.is_first_name_error }" v-model="first_name">
+                                            <input type="text" name="first_name" id="first_name" class="form-control" placeholder="{{{ trans('lang.ph_first_name') }}}" v-bind:class="{ 'is-invalid': form_step1.is_first_name_error }" v-model="first_name">
                                             <span class="help-block" v-if="form_step1.first_name_error">
                                                 <strong v-cloak>@{{form_step1.first_name_error}}</strong>
                                             </span>
                                         </div>
                                         <div class="form-group form-group-half">
-                                            <input type="text" name="last_name" class="form-control" placeholder="{{{ trans('lang.ph_last_name') }}}" v-bind:class="{ 'is-invalid': form_step1.is_last_name_error }" v-model="last_name">
+                                            <input type="text" name="last_name" id="last_name" class="form-control" placeholder="{{{ trans('lang.ph_last_name') }}}" v-bind:class="{ 'is-invalid': form_step1.is_last_name_error }" v-model="last_name">
                                             <span class="help-block" v-if="form_step1.last_name_error">
                                                 <strong v-cloak>@{{form_step1.last_name_error}}</strong>
                                             </span>
@@ -600,7 +601,23 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
     <script>
 
         function onSuccess(googleUser) {
-            console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+
+            if(gapi.auth2){
+     
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {
+                    auth2.disconnect();
+                });
+            }
+
+            var profile = googleUser.getBasicProfile();
+          
+          $('#user_email').val(profile.getEmail());
+
+          $('#first_name').val(profile.getGivenName());
+
+          $('#last_name').val(profile.getFamilyName());
+
         }
 
         function onFailure(error) {
