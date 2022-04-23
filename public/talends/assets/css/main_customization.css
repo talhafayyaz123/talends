@@ -538,7 +538,7 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 }
 
 .opportunity_card {
-	min-height: 184px;
+	min-height: 185px;
 	background: #4ABD2E;
 	border-radius: 16px;
 
@@ -561,11 +561,20 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 
 
 .opportunity_card img {
-	width: 34px;
-	height: auto;
-	position: absolute;
-	bottom: 12px;
-	left: 27px;
+    width: 64px;
+    height: auto;
+    position: absolute;
+    bottom: 0;
+    right: 0px;
+    background: #1f7a08;
+    transition: all 0.6s ease;
+    padding: 15px;
+    border-bottom-right-radius: 16px;
+    border-top-left-radius: 16px;
+}
+.opportunity_card:hover img{
+	/* left: 32px; */
+	
 }
 
 .opportunity_card:hover {
@@ -648,6 +657,10 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 	.tlb__reviews_score {
 		width: 100%;
 	}
+	.opportunity_card h3{
+		font-size: 20px;
+	}
+
 }
 
 @media screen and (max-width:1024px) {
@@ -937,16 +950,22 @@ a.notif {
 	min-height: 220px;
 	background: #edf2eb;
 	border-radius: 16px;
+	display: flex;
+    position: unset !important;
+    justify-content: center;
+    align-items: center;
 }
 
 .why_organization_choose_box h3 {
 	font-size: 28px;
 	color: #000 !important;
 	text-align: center;
-	width: 13em;
-	top: 49px;
+	width: 100%;
+	position: unset !important;
 }
 
 .why_organization_choose_box_gap {
 	left: 13px;
+
+ 
 }
