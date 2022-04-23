@@ -1933,6 +1933,22 @@ section.featured_success_stories_sec .carousel-inner h2 {
     .goverment_banner h2 {
         font-size: 24px;
     }
+    section.featured_success_stories_sec .carousel-inner h2 {
+        font-size: 24px;
+        margin-bottom: 30px;
+        font-weight: bold;
+        max-width: calc(100% - 100px);
+    }
+    .fss_box_row .col-md-6{
+        margin-bottom: 20px;
+    }
+    .fss_box_row{
+        padding: 5px;
+    }
+    .fss_box_row .fss_box{
+        min-height: 200px;
+        padding: 20px 15px;
+    }
 }
 
 @media only screen and (max-width: 575px) {

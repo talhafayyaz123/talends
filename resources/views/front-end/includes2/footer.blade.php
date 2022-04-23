@@ -138,7 +138,7 @@ $skills_categories=App\Helper::getSkillsCategories();
 @php
 $join_community=App\Helper::getJoinCommunity();
 @endphp
-<section class="join_community py-0">
+<section class="join_community pb-0">
     <div class="container">
         <div class="row row-eq-height">
             <div class="col-md-8 pb-3 align-self-center">
