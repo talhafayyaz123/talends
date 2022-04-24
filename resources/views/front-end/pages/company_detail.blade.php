@@ -309,7 +309,14 @@
                     </div>
                     <div class="d-flex align-contents-center">
                     @guest<a href="{{ route('login') }}" class="theme_btn m-0 ">Hire The Agency Now</a>@endguest
-                    @auth<a href="{{url("hire/agency",['id'=>$id ])}}" class="theme_btn m-0 ">Hire The Agency Now</a>@endauth
+                    @auth
+                      
+                    @if(Auth::user()->getRoleNames()[0]=='employer')
+                     
+                    <a href="{{url("hire/agency",['id'=>$id ])}}" class="theme_btn m-0 ">Hire The Agency Now</a>
+                    @endif
+                    
+                    @endauth
 
                         <p class="d-flex align-items-center mb-0 ml-4">Contact<a href="tel:+923214757001" class="pl-2">+923214757001</a></p>
                     </div>

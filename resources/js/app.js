@@ -616,6 +616,7 @@
                      
                     if(response.country=='PK' || response.country=='AE'){
                         
+                        
                         axios.post(APP_URL + '/register/form-step1-custom-errors', form_data)
                         .then(function (response) {
                        self.submitUser('multiple')
