@@ -242,7 +242,7 @@ class CompanyController extends Controller
                 'full_name' => 'required',
                 'company_name' => 'required',
                 'email' => 'required',
-                'phone_number' => 'required',
+              'phone_number' => 'required',
                 'description' => 'required',
           ]
 
@@ -265,7 +265,7 @@ class CompanyController extends Controller
         ]);
 
         Session::flash('message', 'Response has been saved');
-        return Redirect::back();
+        return redirect()->route('successHireAgency', ['id' => $id]);
 
     }
 
@@ -624,6 +624,12 @@ class CompanyController extends Controller
 
     }
 
+    
+    public function successHireAgencyForm($id){
+        $company_work_detail=CompanyDetail::where('user_id',$id)->first();
+        return view('front-end.pages.success-hire-agency',compact('id','company_work_detail'));
+
+    }
     /**
      * Show the form for creating and updating experiance and education settings.
      *
