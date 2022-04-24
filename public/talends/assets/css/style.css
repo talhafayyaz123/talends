@@ -108,8 +108,15 @@ header.sticky_header {
 
 .join_community {
     background: #166702;
+    margin-top: 50px;
+    padding: 0;
+    overflow: visible;
 }
-
+.join_community img{
+    
+    margin-top: -80px;
+    
+}
 @keyframes smoothScroll {
     0% {
         transform: translateY(-100px);

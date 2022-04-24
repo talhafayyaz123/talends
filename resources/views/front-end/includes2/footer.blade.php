@@ -143,12 +143,12 @@ $join_community=App\Helper::getJoinCommunity();
         <div class="row row-eq-height">
             <div class="col-md-8 pb-3 align-self-center">
                 {!! $join_community->banner_description ?? '' !!}
-                <a href="{{route('findTalends')}}" class="theme_btn">Find Freelancer</a>
-                <a href="#" class="theme_btn inverse_btn ml-3">Find Internees</a>
+                <a href="{{route('findTalends')}}" class="theme_btn">Find A Job</a>
+                <a href="#" class="theme_btn inverse_btn ml-3">Submit A Job</a>
             </div>
             <div class="col-md-4">
                 @if(isset( $join_community->about_talends_image) )
-                <img src="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="w-100"
+                <img src="{{asset('/talends/assets/img/join_talend_new.png')}}" class="w-100"
                     alt="">
                 @endif
             </div>
