@@ -27,6 +27,7 @@ use App\UserSubCategories;
 use App\SubCategories;
 use App\CompanyDetail;
 
+
 use function Psy\debug;
 
 class HomeController extends Controller
@@ -92,7 +93,9 @@ class HomeController extends Controller
                 $team_on_demand=AboutTalendsPage::where('page_type','team_on_demand')->first();
                 $why_choose_talends=AboutTalendsPage::where('page_type','why_choose_talends')->first();
                 $trusted_by=AboutTalendsPage::where('page_type','trusted_by')->first();
-              
+                $featured_success_stories=AboutTalendsPage::where('page_type','featured_success_stories')->first();
+                $agency_profile=AboutTalendsPage::where('page_type','agency_profile')->first();
+
                 $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
                 if (file_exists(resource_path('views/extend/front-end/pages/show.blade.php'))) {
                     return View::make(
@@ -124,6 +127,8 @@ class HomeController extends Controller
                     return View::make(
                         'front-end.pages.show',
                         compact(
+                            'agency_profile',
+                            'featured_success_stories',
                             'symbol',
                             'page_header',
                             'page',

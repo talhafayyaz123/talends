@@ -234,12 +234,17 @@ Route::group(
 
 
         //Front Footer
+
+        
         Route::get('admin/settings/front-footer/{type}', 'HomePagesController@frontFooter')->name('frontFooter');
         Route::get('admin/settings/home-page-settings/{type}', 'HomePagesController@HomePageSettings')->name('HomePageSettings');
         Route::post('admin/store-banner_settings', 'HomePagesController@storeBannerSettings');
 
         Route::post('admin/store-team_on_demand', 'HomePagesController@storeTeamOnDemandSettings');
        
+        // success stories
+        Route::post('admin/store-featured_success_stories', 'HomePagesController@storeFeaturedSuccessStories');
+        Route::post('admin/update-featured_success_stories/{id}', 'HomePagesController@updateFeaturedSuccessStories');
 
         Route::post('admin/store_home_page-right_opportunity', 'HomePagesController@storeRightOpportunity');
 
@@ -255,6 +260,11 @@ Route::group(
         
         Route::post('admin/join_community', 'HomePagesController@storeFooterJoinCommunity');
         Route::post('admin/update-join-community/{id}', 'HomePagesController@updateJoinCommunity');
+
+
+        
+        Route::post('admin/store/agency_profile', 'HomePagesController@storeAgencyProfile');
+         Route::post('admin/update-agency-profile/{id}', 'HomePagesController@updateAgencyProfile');
 
         Route::post('admin/update-footer-how-work/{id}', 'HomePagesController@updateFooterHowWork');
         

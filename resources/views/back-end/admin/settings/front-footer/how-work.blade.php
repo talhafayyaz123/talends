@@ -31,11 +31,12 @@
 
                 <div class="wt-dashboardbox">
                     <div class="wt-dashboardboxtitle">
-                        <h2>Front Footer Settings</h2>
+                        <h2>Footer How It Works</h2>
                     </div>
                     <div class="wt-dashboardboxcontent">
                         <div class="wt-jobdescription wt-tabsinfo">
 
+                        
                         <div class="wt-tabscontenttitle">
                                  <h2>Title</h2>
                              </div>
@@ -48,111 +49,122 @@
                                  </fieldset>
                              </div>
 
-
                             <div class="wt-tabscontenttitle">
-                                <h2>Footer Image</h2>
+                                <h2>Inner Text 1</h2>
                             </div>
                             <div class="wt-formtheme wt-userform wt-userformvtwo">
                                 <fieldset>
                                     <div class="form-group">
-                                        {!! Form::textarea('footer_image1_description', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
-
+                                    {!! Form::text('inner_text1', null, array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
                                     </div>
 
                                 </fieldset>
 
-                                <div class="wt-attachmentsholder">
-                                    <div class="lara-attachment-files">
-                                        <div class="wt-tabscontenttitle">
-                                            <h2>Attachment</h2>
-
-
-                                            <div class="form-group form-group-label">
-                                                <div class="wt-labelgroup">
-                                                    <input type="file" value="" class="" name="footer_image1" id='footer_image1'>
-
-
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
                         </div>
 
 
-
-                        <div class="wt-jobcategories wt-tabsinfo">
-                            <div class="wt-tabscontenttitle">
-                                <h2>Footer Image 2 </h2>
+                        <div class="wt-tabscontenttitle">
+                                <h2>Inner Text 2</h2>
                             </div>
                             <div class="wt-formtheme wt-userform wt-userformvtwo">
                                 <fieldset>
                                     <div class="form-group">
-                                        {!! Form::textarea('footer_image2_description', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
-
+                                    {!! Form::text('inner_text2', null, array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
                                     </div>
 
                                 </fieldset>
 
-                                <div class="wt-attachmentsholder">
-                                    <div class="lara-attachment-files">
-                                        <div class="wt-tabscontenttitle">
-                                            <h2>Attachment</h2>
-                                            <div class="form-group form-group-label">
-                                                <div class="wt-labelgroup">
-                                                    <input type="file" value="" class="" name="footer_image2" id='footer_image2'>
-
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
                         </div>
 
 
 
-                        <div class="wt-jobcategories wt-tabsinfo">
-                            <div class="wt-tabscontenttitle">
-                                <h2>Footer Image 3 </h2>
+                        <div class="wt-tabscontenttitle">
+                                <h2>Inner Text 3</h2>
                             </div>
                             <div class="wt-formtheme wt-userform wt-userformvtwo">
                                 <fieldset>
                                     <div class="form-group">
-                                        {!! Form::textarea('footer_image3_description', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
-
+                                    {!! Form::text('inner_text3', null, array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
                                     </div>
 
                                 </fieldset>
 
-                                <div class="wt-attachmentsholder">
-                                    <div class="lara-attachment-files">
-                                        <div class="wt-tabscontenttitle">
-                                            <h2>Attachment</h2>
-                                            <div class="form-group form-group-label">
-                                                <div class="wt-labelgroup">
-                                                    <input type="file" value="" class="" name="footer_image3" id='footer_image3'>
-
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
                         </div>
 
 
+                        <div class="wt-tabscontenttitle">
+                                <h2>Inner Text 4</h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                    <div class="form-group">
+                                    {!! Form::text('inner_text4', null, array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
+                                    </div>
+
+                                </fieldset>
+
+                        </div>
+
+
+
+
+
+                        <div class="wt-tabscontenttitle">
+                                <h2>Inner Text 5</h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                    <div class="form-group">
+                                    {!! Form::text('inner_text5', null, array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
+                                    </div>
+
+                                </fieldset>
+
+                        </div>
+
+
+                        <div class="wt-tabscontenttitle">
+                                <h2>Inner Text 6</h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                    <div class="form-group">
+                                    {!! Form::text('inner_text6', null, array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
+                                    </div>
+
+                                </fieldset>
+
+                        </div>
+
+
+
+
+                        <div class="wt-tabscontenttitle">
+                                <h2>Inner Text 7</h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                    <div class="form-group">
+                                    {!! Form::text('inner_text7', null, array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
+                                    </div>
+
+                                </fieldset>
+
+                        </div>
+
+
+                        <div class="wt-tabscontenttitle">
+                                <h2>Inner Text 8</h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                    <div class="form-group">
+                                    {!! Form::text('inner_text8', null, array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
+                                    </div>
+
+                                </fieldset>
+
+                        </div>
 
 
 
@@ -167,7 +179,7 @@
 
                 <div class="wt-dashboardbox">
                     <div class="wt-dashboardboxtitle">
-                        <h2>Front Footer Settings</h2>
+                        <h2>Footer How It Works</h2>
                     </div>
                     <div class="wt-dashboardboxcontent">
                         <div class="wt-jobdescription wt-tabsinfo">
@@ -186,149 +198,121 @@
                              </div>
 
                             <div class="wt-tabscontenttitle">
-                                <h2>Footer Image</h2>
+                                <h2>Inner Text 1</h2>
                             </div>
                             <div class="wt-formtheme wt-userform wt-userformvtwo">
                                 <fieldset>
                                     <div class="form-group">
-                                        {!! Form::textarea('footer_image1_description', e($footer_how_work['banner_description']), ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
-
+                                    {!! Form::text('inner_text1', e($footer_how_work['banner_description']), array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
                                     </div>
 
                                 </fieldset>
 
-                                <div class="wt-attachmentsholder">
-                                    <div class="lara-attachment-files">
-                                        <div class="wt-tabscontenttitle">
-                                            <h2>Attachment</h2>
-
-
-                                            <div class="form-group form-group-label">
-                                                <div class="wt-labelgroup">
-                                                    <input type="file" value="" class="" name="footer_image1" id='footer_image1'>
-
-
-                                                </div>
-                                            </div>
-
-
-                                            @if (!empty($footer_how_work['about_talends_image']))
-                                            @php $image = '/uploads/home-pages/footer/'.$footer_how_work['about_talends_image']; @endphp
-                                            <div class="wt-formtheme wt-userform">
-
-                                                <div class="wt-uploadingbox">
-                                                    <figure><img src="{{{  asset($image)}}}" alt="{{{ trans('lang.profile_photo') }}}"></figure>
-
-                                                </div>
-                                                <input type="hidden" name="hidden_about_talends_image" id="hidden_about_talends_image" value="{{{$footer_how_work['about_talends_image']}}}">
-                                            </div>
-                                            @endif
-
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
                         </div>
 
 
-
-                        <div class="wt-jobcategories wt-tabsinfo">
-                            <div class="wt-tabscontenttitle">
-                                <h2>Footer Image 2 </h2>
+                        <div class="wt-tabscontenttitle">
+                                <h2>Inner Text 2</h2>
                             </div>
                             <div class="wt-formtheme wt-userform wt-userformvtwo">
                                 <fieldset>
                                     <div class="form-group">
-                                        {!! Form::textarea('footer_image2_description', e($footer_how_work['features_text']), ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
-
+                                    {!! Form::text('inner_text2', e($footer_how_work['features_text']), array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
                                     </div>
 
                                 </fieldset>
 
-                                <div class="wt-attachmentsholder">
-                                    <div class="lara-attachment-files">
-                                        <div class="wt-tabscontenttitle">
-                                            <h2>Attachment</h2>
-                                            <div class="form-group form-group-label">
-                                                <div class="wt-labelgroup">
-                                                    <input type="file" value="" class="" name="footer_image2" id='footer_image2'>
-
-
-                                                </div>
-                                            </div>
-
-                                            
-                                            @if (!empty($footer_how_work['talends_project_image']))
-                                            @php $image = '/uploads/home-pages/footer/'.$footer_how_work['talends_project_image']; @endphp
-                                            <div class="wt-formtheme wt-userform">
-
-                                                <div class="wt-uploadingbox">
-                                                    <figure><img src="{{{  asset($image)}}}" alt="{{{ trans('lang.profile_photo') }}}"></figure>
-
-                                                </div>
-                                                <input type="hidden" name="hidden_talends_project_image" id="hidden_talends_project_image" value="{{{$footer_how_work['talends_project_image']}}}">
-                                            </div>
-                                            @endif
-
-
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
                         </div>
 
 
 
-                        <div class="wt-jobcategories wt-tabsinfo">
-                            <div class="wt-tabscontenttitle">
-                                <h2>Footer Image 3 </h2>
+                        <div class="wt-tabscontenttitle">
+                                <h2>Inner Text 3</h2>
                             </div>
                             <div class="wt-formtheme wt-userform wt-userformvtwo">
                                 <fieldset>
                                     <div class="form-group">
-                                        {!! Form::textarea('footer_image3_description', e($footer_how_work['services_description']), ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
-
+                                    {!! Form::text('inner_text3', e($footer_how_work['services_description']), array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
                                     </div>
 
                                 </fieldset>
 
-                                <div class="wt-attachmentsholder">
-                                    <div class="lara-attachment-files">
-                                        <div class="wt-tabscontenttitle">
-                                            <h2>Attachment</h2>
-                                            <div class="form-group form-group-label">
-                                                <div class="wt-labelgroup">
-                                                    <input type="file" value="" class="" name="footer_image3" id='footer_image3'>
-
-
-                                                </div>
-                                            </div>
-
-                                            @if (!empty($footer_how_work['talends_work_image']))
-                                            @php $image = '/uploads/home-pages/footer/'.$footer_how_work['talends_work_image']; @endphp
-                                            <div class="wt-formtheme wt-userform">
-
-                                                <div class="wt-uploadingbox">
-                                                    <figure><img src="{{{  asset($image)}}}" alt="{{{ trans('lang.profile_photo') }}}"></figure>
-
-                                                </div>
-                                                <input type="hidden" name="hidden_talends_work_image" id="hidden_talends_work_image" value="{{{$footer_how_work['talends_work_image']}}}">
-                                            </div>
-                                            @endif
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
                         </div>
 
 
+                        <div class="wt-tabscontenttitle">
+                                <h2>Inner Text 4</h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                    <div class="form-group">
+                                    {!! Form::text('inner_text4', e($footer_how_work['work_description']), array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
+                                    </div>
+
+                                </fieldset>
+
+                        </div>
+
+
+
+
+
+                        <div class="wt-tabscontenttitle">
+                                <h2>Inner Text 5</h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                    <div class="form-group">
+                                    {!! Form::text('inner_text5', e($footer_how_work['payment_description']), array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
+                                    </div>
+
+                                </fieldset>
+
+                        </div>
+
+
+                        <div class="wt-tabscontenttitle">
+                                <h2>Inner Text 6</h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                    <div class="form-group">
+                                    {!! Form::text('inner_text6', e($footer_how_work['support_description']), array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
+                                    </div>
+
+                                </fieldset>
+
+                        </div>
+
+
+
+
+                        <div class="wt-tabscontenttitle">
+                                <h2>Inner Text 7</h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                    <div class="form-group">
+                                    {!! Form::text('inner_text7', e($footer_how_work['freelancer_benefits']), array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
+                                    </div>
+
+                                </fieldset>
+
+                        </div>
+
+
+                        <div class="wt-tabscontenttitle">
+                                <h2>Inner Text 8</h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                    <div class="form-group">
+                                    {!! Form::text('inner_text8', e($footer_how_work['internees_benefits']), array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}
+                                    </div>
+
+                                </fieldset>
+
+                        </div>
 
 
 

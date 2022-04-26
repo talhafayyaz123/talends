@@ -19,7 +19,7 @@
                                 <div class="wt-insightdetails">
                                     <div class="wt-title">
                                         <h3>Total Leads</h3>
-                                        600
+                                        {{$total_leads}}
                                     </div>
                                 </div>
                             </div>
@@ -34,7 +34,7 @@
                                 <div class="wt-insightdetails">
                                     <div class="wt-title">
                                         <h3>Unread Leads</h3>
-                                        400
+                                        {{$unread_leads}}
                                     </div>
                                 </div>
                             </div>

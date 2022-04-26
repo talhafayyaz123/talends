@@ -258,7 +258,9 @@ class HomePagesController extends Controller
          $unserialize_menu4_array = SiteManagement::getMetaValue('header_menu4');
          $header_menu_title4 = DB::table('site_managements')->select('meta_value')->where('meta_key', 'header_menu_title4')->get()->first();
 
-        
+         $agency_profile=AboutTalendsPage::where('page_type','agency_profile')->first();
+
+
          if($footer_type=='how-works'){
             return view(
                 'back-end.admin.settings.front-footer.how-work',
@@ -275,6 +277,11 @@ class HomePagesController extends Controller
                 'back-end.admin.settings.front-footer.join-community',
                 compact('join_community')
             );
+        }else if($footer_type=='agency_profile'){
+            return view(
+                'back-end.admin.settings.home_page_settings.agency_profile',compact('agency_profile'),
+                compact('agency_profile')
+            );
         }
 
     }
@@ -286,7 +293,8 @@ class HomePagesController extends Controller
         $why_choose_talends=AboutTalendsPage::where('page_type','why_choose_talends')->first();
         $trusted_by=AboutTalendsPage::where('page_type','trusted_by')->first();
         $interne_university_collaboration=AboutTalendsPage::where('page_type','interne_university_collaboration')->first();
-   
+        $featured_success_stories=AboutTalendsPage::where('page_type','featured_success_stories')->first();
+
      if($type=='banner_settings'){
         return view(
             'back-end.admin.settings.home_page_settings.banner_settings',compact('banner_settings','find_right_opportunity','trusted_by')
@@ -302,6 +310,10 @@ class HomePagesController extends Controller
      }else if($type=='interne_university_collaboration'){
         return view(
             'back-end.admin.settings.home_page_settings.interne_settings',compact('interne_university_collaboration')
+        );
+     }else if($type=='featured_success_stories'){
+        return view(
+            'back-end.admin.settings.home_page_settings.featured_success_stories',compact('featured_success_stories')
         );
      }
 
@@ -332,6 +344,49 @@ class HomePagesController extends Controller
         return Redirect::back();
     }
 
+
+    
+    public function storeFeaturedSuccessStories(Request $request)
+    { 
+        $this->validate(
+            $request, [
+         'description1' => 'required',
+        'description2' => 'required',
+        'description3' => 'required',
+        'description4' => 'required',
+        'about_talends_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        'talends_project_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        'talends_work_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        'talends_payment_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        ]
+        );
+       
+        $about_talends = new AboutTalendsPage;
+        $about_talends->saveFeaturedSuccessStories($request);
+        Session::flash('message','Success Stories Record Saved Successfully');
+        return Redirect::back();
+    }
+
+    public function updateFeaturedSuccessStories(Request $request,$id)
+    { 
+        $this->validate(
+            $request, [
+         'description1' => 'required',
+        'description2' => 'required',
+        'description3' => 'required',
+        'description4' => 'required',
+        'about_talends_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        'talends_project_image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        'talends_work_image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        'talends_payment_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        ]
+        );
+
+        $about_talends = new AboutTalendsPage;
+        $about_talends->updateFeaturedSuccessStories($request,$id);
+        Session::flash('message','Success Stories Record updated Successfully');
+        return Redirect::back();
+    }
     
     public function storeRightOpportunity(Request $request)
     { 
@@ -381,14 +436,20 @@ class HomePagesController extends Controller
     { 
         $this->validate(
             $request, [
-                'title' => 'required',
+               
+            'title' => 'required',
 
-         'footer_image1_description' => 'required',
-          'footer_image2_description' => 'required',
-          'footer_image3_description' => 'required',
-        'footer_image1' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
-        'footer_image2'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
-        'footer_image3'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'inner_text1' => 'required',
+             'inner_text2' => 'required',
+             
+            'inner_text3' => 'required',
+            'inner_text4' => 'required',
+            
+            'inner_text5' => 'required',
+            'inner_text6' => 'required',
+            
+            'inner_text7' => 'required',
+            'inner_text8' => 'required',            
         ]
         );
        
@@ -399,6 +460,21 @@ class HomePagesController extends Controller
         return Redirect::back();
     }
 
+    public function storeAgencyProfile(Request $request)
+    { 
+        $this->validate(
+            $request, [
+         'banner_description' => 'required',
+        'about_talends_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+        ]
+        );
+       
+       
+        $about_talends = new AboutTalendsPage;
+        $about_talends->saveAgencyProfile($request);
+        Session::flash('message','Agency Profile Record Saved Successfully');
+        return Redirect::back();
+    }
 
     public function storeFooterJoinCommunity(Request $request)
     { 
@@ -416,6 +492,23 @@ class HomePagesController extends Controller
         return Redirect::back();
     }
 
+    
+
+    public function updateAgencyProfile(Request $request,$id)
+    { 
+        $this->validate(
+            $request, [
+         'banner_description' => 'required',
+        'about_talends_image'=>'mimes:jpeg,png,jpg,gif,svg|max:1024',
+        ]
+        );
+    
+        $about_talends = new AboutTalendsPage;
+        $about_talends->updateAgencyProfile($request,$id);
+        Session::flash('message','Footer Join Community Record updated Successfully');
+        return Redirect::back();
+    }
+
 
     public function updateFooterHowWork(Request $request,$id)
     { 
@@ -423,12 +516,18 @@ class HomePagesController extends Controller
             $request, [
                 'title' => 'required',
 
-         'footer_image1_description' => 'required',
-          'footer_image2_description' => 'required',
-          'footer_image3_description' => 'required',
-        'footer_image1' =>'mimes:jpeg,png,jpg,gif,svg|max:1024',
-        'footer_image2'=>'mimes:jpeg,png,jpg,gif,svg|max:1024',
-        'footer_image3'=>'mimes:jpeg,png,jpg,gif,svg|max:1024',
+         'inner_text1' => 'required',
+          'inner_text2' => 'required',
+          
+         'inner_text3' => 'required',
+         'inner_text4' => 'required',
+
+         'inner_text5' => 'required',
+         'inner_text6' => 'required',
+
+         'inner_text7' => 'required',
+         'inner_text8' => 'required',
+
         ]
         );
        

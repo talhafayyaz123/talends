@@ -561,20 +561,21 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 
 
 .opportunity_card img {
-    width: 64px;
-    height: auto;
-    position: absolute;
-    bottom: 0;
-    right: 0px;
-    background: #1f7a08;
-    transition: all 0.6s ease;
-    padding: 15px;
-    border-bottom-right-radius: 16px;
-    border-top-left-radius: 16px;
+	width: 64px;
+	height: auto;
+	position: absolute;
+	bottom: 0;
+	right: 0px;
+	background: #1f7a08;
+	transition: all 0.6s ease;
+	padding: 15px;
+	border-bottom-right-radius: 16px;
+	border-top-left-radius: 16px;
 }
-.opportunity_card:hover img{
+
+.opportunity_card:hover img {
 	/* left: 32px; */
-	
+
 }
 
 .opportunity_card:hover {
@@ -657,7 +658,8 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 	.tlb__reviews_score {
 		width: 100%;
 	}
-	.opportunity_card h3{
+
+	.opportunity_card h3 {
 		font-size: 20px;
 	}
 
@@ -876,6 +878,40 @@ a.notif {
 		text-align: center !important;
 	}
 }
+.note-section .row>div:first-child {
+	border-radius: 18px 0 0 18px;
+}
+.note-section .row>div:last-child {
+	border: 0 18px 18px 0;
+}
+.note-section .row>div {
+	padding: 0;
+}
+
+.note-section .theme_bg_dark {
+	background: #3ABF19;
+
+}
+
+.note-section p {
+    font: 28px trajan, sans-serif;
+    color: #fff;
+    padding: 1em 5em 0 1em;
+}
+
+.note-section .img-wrap > img {
+	width: 100%;
+	display: block;
+	height: 100%;
+}
+
+.note-section .theme_btn {
+    width: auto;
+    font-size: 12px;
+    padding: 1.4em;
+    margin: 3em 0 3em 2em;
+}
+
 
 @media screen and (max-width:400px) {
 	.talent_list_box .tlb__content p {
@@ -951,9 +987,9 @@ a.notif {
 	background: #edf2eb;
 	border-radius: 16px;
 	display: flex;
-    position: unset !important;
-    justify-content: center;
-    align-items: center;
+	position: unset !important;
+	justify-content: center;
+	align-items: center;
 }
 
 .why_organization_choose_box h3 {
@@ -967,5 +1003,5 @@ a.notif {
 .why_organization_choose_box_gap {
 	left: 13px;
 
- 
+
 }

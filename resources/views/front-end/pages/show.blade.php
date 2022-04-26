@@ -150,23 +150,32 @@
                                 <div class="row fss_box_row fss_red_bg">
                                     <div class="col-md-6">
                                         <div class="fss_box">
-                                            <img src="{{asset('talends/assets/img/success-stories/rta-logo.png')}}"
-                                                alt="">
+                                        @if(isset( $featured_success_stories->about_talends_image) )
+                                        <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->about_talends_image)}}"
+                                            class="w-100" alt="">
+                                        @endif
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="fss_box_content">
-                                            <h3>RTA</h3>
-                                            <br>
-                                            <h3>Celebration of A UAE flag day Video production</h3>
-                                            <br>
-                                            <hr>
-                                            <h4>3 Days</h4>
-                                            <h4>time to engage and complete the project</h4>
-                                            <br>
-                                            <h4>3x Faster</h4>
-                                            <h4>Faster project turnaround</h4>
-
+                                           {!! $featured_success_stories->banner_description !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row fss_box_row fss_blue_bg">
+                                    <div class="col-md-6">
+                                        <div class="fss_box">
+                                        @if(isset( $featured_success_stories->talends_project_image) )
+                                        <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->talends_project_image)}}"
+                                            class="w-100" alt="">
+                                        @endif
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="fss_box_content">
+                                        {!! $featured_success_stories->project_description !!}
 
                                         </div>
                                     </div>
@@ -176,28 +185,15 @@
                                 <div class="row fss_box_row fss_blue_bg">
                                     <div class="col-md-6">
                                         <div class="fss_box">
-                                            <img src="{{asset('talends/assets/img/success-stories/world-gov-summit-logo.png')}}"
-                                                alt="">
+                                        @if(isset( $featured_success_stories->talends_work_image) )
+                                        <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->talends_work_image)}}"
+                                            class="w-100" alt="">
+                                        @endif
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="fss_box_content">
-                                            <h3>World Government Summit</h3>
-                                            <br>
-                                            <h3>Event Coverage</h3>
-                                            <h3>Live Streaming, Photography</h3>
-                                            <br>
-                                            <h4>Result</h4>
-                                            <hr class="mt-0">
-                                            <h4>Quick Resource hiring</h4>
-                                            <h4>Resources were hired within days</h4>
-                                            <br>
-                                            <h4>Quality</h4>
-                                            <h4>World Class quality was assured by resources</h4>
-
-
-
-
+                                        {!! $featured_success_stories->work_description !!}
 
                                         </div>
                                     </div>
@@ -207,52 +203,16 @@
                                 <div class="row fss_box_row fss_blue_bg">
                                     <div class="col-md-6">
                                         <div class="fss_box">
-                                            <img src="{{asset('talends/assets/img/success-stories/bhuth-logo.png')}}"
-                                                alt="">
+                                        @if(isset( $featured_success_stories->talends_payment_image) )
+                                        <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->talends_payment_image)}}"
+                                            class="w-100" alt="">
+                                        @endif
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="fss_box_content">
-                                            <h3>B’huth</h3>
-                                            <br>
-                                            <h3>Search Engine Optimization</h3>
-                                            <h3>Content Writing, Website Development</h3>
-                                            <br>
-                                            <h4>Result</h4>
-                                            <hr class="mt-0">
-                                            <h4>access to chose best resources</h4>
-                                            <h4>resources were chosen by Talends.com & best quality was assured within
-                                                timeline</h4>
-                                            <br>
-                                            <h4>sensitive project</h4>
-                                            <h4>Security of data was assured</h4>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="row fss_box_row fss_blue_bg">
-                                    <div class="col-md-6">
-                                        <div class="fss_box">
-                                            <img src="{{asset('talends/assets/img/success-stories/fp7-logo.png')}}"
-                                                alt="">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="fss_box_content">
-                                            <h3>fp7 McCANN</h3>
-                                            <br>
-                                            <h3>Video Editing</h3>
-                                            <h3>Video production</h3>
-                                            <br>
-                                            <h4>Result</h4>
-                                            <hr class="mt-0">
-                                            <h4>quick resources</h4>
-                                            <h4>find best resources in no time</h4>
-                                            <br>
-                                            <h4>3x Faster</h4>
-                                            <h4>Faster project turnaround & award winning quality</h4>
+                                        
+                                        {!! $featured_success_stories->payment_description !!}
 
 
 
@@ -297,6 +257,27 @@
             </div>
         </div>
     </section>
+    <section class="note-section">
+        <div class="container py-30">
+            <div class="row row-eq-height">
+                <div class="col-xs-12 col-sm-8 theme_bg_dark">
+                {!! $agency_profile->banner_description ?? '' !!}
+                @guest
+                        <a href="{{ route('register') }}" class="theme_btn">Create your Agency Profile</a>    
+                        @endguest
+                </div>
+                <div class="col-xs-12 col-sm-4 img-wrap">
+                @if(isset($agency_profile->about_talends_image) )
+                            <img src="{{asset('uploads/home-pages/agency_profile/'.$agency_profile->about_talends_image)}}"
+                                 alt="" class="w-100">
+                            @endif
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
 
     <section class="d-none">
         <div class="container py-30">

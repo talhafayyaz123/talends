@@ -9,27 +9,27 @@ $footer_how_work=App\Helper::getfooterHowWork();
             </div>
             <div class="col-md-3">
                 <div class="how_its_works_box_steps">
-                    <h2>1</h2>
-                    <h3>Connect</h3>
+                    <h2>{!! $footer_how_work->banner_description ?? '' !!}</h2>
+                    <h3>{!! $footer_how_work->features_text ?? '' !!}</h3>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="how_its_works_box_steps">
-                    <h2>2</h2>
-                    <h3>Brief</h3>
+                    <h2>{!! $footer_how_work->services_description ?? '' !!}</h2>
+                    <h3>{!! $footer_how_work->work_description ?? '' !!}</h3>
 
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="how_its_works_box_steps">
-                    <h2>3</h2>
-                    <h3>Collaborate</h3>
+                    <h2>{!! $footer_how_work->payment_description ?? '' !!}</h2>
+                    <h3>{!! $footer_how_work->support_description ?? '' !!}</h3>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="how_its_works_box_steps">
-                    <h2>4</h2>
-                    <h3>Go live</h3>
+                    <h2>{!! $footer_how_work->freelancer_benefits ?? '' !!}</h2>
+                    <h3>{!! $footer_how_work->internees_benefits ?? '' !!}</h3>
 
                 </div>
             </div>
