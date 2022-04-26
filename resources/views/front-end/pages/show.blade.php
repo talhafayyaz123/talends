@@ -158,7 +158,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="fss_box_content">
-                                           {!! $featured_success_stories->banner_description ? '' !!}
+                                           {!! $featured_success_stories->banner_description ?? '' !!}
                                         </div>
                                     </div>
                                 </div>
@@ -175,7 +175,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="fss_box_content">
-                                        {!! $featured_success_stories->project_description ? '' !!}
+                                        {!! $featured_success_stories->project_description ?? '' !!}
 
                                         </div>
                                     </div>
@@ -193,7 +193,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="fss_box_content">
-                                        {!! $featured_success_stories->work_description ? '' !!}
+                                        {!! $featured_success_stories->work_description ?? '' !!}
 
                                         </div>
                                     </div>
@@ -212,7 +212,7 @@
                                     <div class="col-md-6">
                                         <div class="fss_box_content">
                                         
-                                        {!! $featured_success_stories->payment_description ? '' !!}
+                                        {!! $featured_success_stories->payment_description ?? '' !!}
 
 
 
