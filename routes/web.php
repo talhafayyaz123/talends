@@ -67,6 +67,8 @@ Route::get('browse-jobs', 'HomeController@browseJobs')->name('browseJobs');
 Route::get('find-talends', 'HomeController@findTalents')->name('findTalends');
 Route::get('find-interns', 'HomeController@findInterns')->name('findInterns');
 Route::get('companies', 'HomeController@Companies')->name('Companies');
+Route::get('why_agency_plan', 'HomeController@whyAgencyPlan')->name('whyAgencyPlan');
+
 Route::get('company-detail/{id}', 'HomeController@CompanyDetail')->name('CompanyDetail');
 Route::get('freelancer/detail/{id}', 'HomeController@FreelancerDetail')->name('FreelancerDetail');
 Route::get('freelancer/experience-education/{id}', 'HomeController@experienceEducation')->name('freelancerExperience');
@@ -322,10 +324,17 @@ Route::group(
  
        // Home Page About Talends
        Route::get('admin/pages/about-talends', 'HomePagesController@aboutTalends')->name('aboutTalends');
+       Route::get('admin/pages/why_agency_plan', 'HomePagesController@whyAgencyPlan')->name('whyAgencyPlan');
+
        Route::get('admin/pages/find-right-talends', 'HomePagesController@findRightTalends')->name('findRightTalends');
        Route::post('admin/save-about-talends', 'HomePagesController@storeTalends');
        Route::post('admin/update-about-talends/{id}', 'HomePagesController@updateTalends');
 
+     
+       Route::post('admin/save-why-agency-plan', 'HomePagesController@storeWhyAgencyPlan');
+        Route::post('admin/update-why-agency-plan/{id}', 'HomePagesController@updateWhyAgencyPlan');
+
+     
        Route::post('admin/update-find_right_talends/{id}', 'HomePagesController@updatefindRightTalends');
 
 

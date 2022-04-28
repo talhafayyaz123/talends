@@ -110,6 +110,30 @@ class HomePagesController extends Controller
        
     }
     
+    public function whyAgencyPlan()
+    {
+
+         $why_agency_plan=AboutTalendsPage::where('page_type','why_agency_plan')->first();
+
+         if(empty($why_agency_plan)){
+            return view(
+                'back-end.admin.home-pages.why_agency_plan.create'
+            );
+    
+         }else{
+            $why_agency_plan=$why_agency_plan->toArray();
+        
+            return view(
+                'back-end.admin.home-pages.why_agency_plan.edit',
+                compact(
+                    'why_agency_plan'
+                )
+            ); 
+         }
+      
+       
+    }
+
     public function findRightTalends()
     {
 
@@ -197,6 +221,70 @@ class HomePagesController extends Controller
         Session::flash('message','About Talends Record Saved Successfully');
         return Redirect::back();
     }
+
+
+    public function storeWhyAgencyPlan(Request $request)
+    { 
+
+        $this->validate(
+            $request, [
+        'banner_description' => 'required',
+        'features_text' => 'required',
+        'services_description' => 'required',
+        'project_description' => 'required',
+        'work_description' => 'required',
+        'payment_description' => 'required',
+        'support_description' => 'required',
+        'freelancer_benefits' => 'required',
+        'internees_benefits' => 'required',
+ 
+        'about_talends_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg',
+         'talends_project_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'short_term_project_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'recurring_engagements_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'long_term_work_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_work_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+            ]
+        );
+       
+      
+        $about_talends = new AboutTalendsPage;
+        $about_talends->storeWhyAgencyPlan($request);
+        Session::flash('message','Why Agency Plan Record Saved Successfully');
+        return Redirect::back();
+    }
+
+    public function updateWhyAgencyPlan(Request $request,$id)
+    {
+      
+        $this->validate(
+            $request, [
+                'banner_description' => 'required',
+                'features_text' => 'required',
+                'services_description' => 'required',
+                'project_description' => 'required',
+                'work_description' => 'required',
+                'payment_description' => 'required',
+                'support_description' => 'required',
+                'freelancer_benefits' => 'required',
+                'internees_benefits' => 'required',
+         
+                'about_talends_image' =>'image|mimes:jpeg,png,jpg,gif,svg',
+                 'talends_project_image'=>'image|mimes:jpeg,png,jpg,gif,svg',
+                'short_term_project_image'=>'image|mimes:jpeg,png,jpg,gif,svg',
+                'recurring_engagements_image'=>'image|mimes:jpeg,png,jpg,gif,svg',
+                'long_term_work_image'=>'image|mimes:jpeg,png,jpg,gif,svg',
+                'talends_work_image'=>'image|mimes:jpeg,png,jpg,gif,svg',
+           
+            ]
+        );
+        
+        $about_talends = new AboutTalendsPage();
+        $about_talends->updateWhyAgencyPlan($request,$id);
+        Session::flash('message','Why Agency Plan Record updated Successfully');
+        return Redirect::back();
+    }
+
 
     public function storeFindRightTalends(Request $request)
     { 
