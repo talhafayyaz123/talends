@@ -34,7 +34,7 @@
                                     <div class="content_box_wrapper">
                                         <div class="content_box home_page_banner_description">
                                             {!! $banner_settings->banner_description ?? '' !!}
-                                            <a href="{{ route('browseJobs') }}" class="theme_btn inverse_btn">Find a
+                                            <a href="{{ route('jobs') }}" class="theme_btn inverse_btn">Find a
                                                 Job</a>
                                             <a href="#" class="theme_btn">Submit a Project</a>
                                         </div>
@@ -262,9 +262,8 @@
             <div class="row row-eq-height">
                 <div class="col-xs-12 col-sm-8 theme_bg_dark">
                 {!! $agency_profile->banner_description ?? '' !!}
-                @guest
-                        <a href="{{ route('register') }}" class="theme_btn">Create your Agency Profile</a>    
-                        @endguest
+                        <a href="{{ route('whyAgencyPlan') }}" class="theme_btn">Create your Agency Profile</a>    
+        
                 </div>
                 <div class="col-xs-12 col-sm-4 img-wrap">
                 @if(isset($agency_profile->about_talends_image) )

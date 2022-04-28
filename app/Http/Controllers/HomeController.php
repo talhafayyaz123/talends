@@ -190,6 +190,12 @@ class HomeController extends Controller
         return view('front-end.pages.why-talends',compact('page','home','meta_desc','about_talends'));
      }
 
+     public function whyAgencyPlan(){
+        $why_agency_plan=AboutTalendsPage::where('page_type','why_agency_plan')->first();
+ 
+        return view('front-end.pages.why_agency_plan',compact('why_agency_plan'));
+     }
+
      public function FindRightTalends(){
         $page_header = '';
         $page = array();

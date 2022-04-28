@@ -161,6 +161,8 @@
                                 <li><hr><a href="{{{ route('GovernmentPage') }}}">Government</a></li>
 
                                 <li><hr><a href="{{{ route('aboutTalends') }}}">About Talends</a></li>
+                                <li><hr><a href="{{{ route('whyAgencyPlan') }}}">Why Agency Plan</a></li>
+
 
                                 <li><hr><a href="{{{ route('findRightTalends') }}}">Let Us Find Right Talends</a></li>
 
