@@ -324,7 +324,7 @@ Route::group(
  
        // Home Page About Talends
        Route::get('admin/pages/about-talends', 'HomePagesController@aboutTalends')->name('aboutTalends');
-       Route::get('admin/pages/why_agency_plan', 'HomePagesController@whyAgencyPlan')->name('whyAgencyPlan');
+       Route::get('admin/pages/why_agency_plan', 'HomePagesController@whyAgencyPlan')->name('adminWhyAgencyPlan');
 
        Route::get('admin/pages/find-right-talends', 'HomePagesController@findRightTalends')->name('findRightTalends');
        Route::post('admin/save-about-talends', 'HomePagesController@storeTalends');
