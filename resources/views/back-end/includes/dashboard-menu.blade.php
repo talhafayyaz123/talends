@@ -62,6 +62,7 @@
                                 <li><hr><a href="{{{ url('admin/settings/front-footer/how-works') }}}">Footer How It Works</a></li>
                                 <li><hr><a href="{{{ url('admin/settings/front-footer/join_community') }}}">Join Community</a></li>
 
+
                                 <li><hr><a href="{{{ url('admin/settings/front-footer/footer_menus') }}}">Footer Menus</a></li>
                                 <li><hr><a href="{{{ url('admin/settings/front-footer/header_menus') }}}">Header Menus</a></li>
                                
@@ -77,6 +78,9 @@
                             </a>
                             <ul class="sub-menu">
                                 <li><hr><a href="{{{ url('admin/settings/home-page-settings/banner_settings') }}}">Banner Settings</a></li>
+                                <li><hr><a href="{{{ url('admin/settings/front-footer/agency_profile') }}}">Agency Profile</a></li>
+
+                                <li><hr><a href="{{{ url('admin/settings/home-page-settings/featured_success_stories') }}}">Success Stories</a></li>
                                 <li><hr><a href="{{{ url('admin/settings/home-page-settings/team_demand') }}}">Team On Demand</a></li>
                                 <li><hr><a href="{{{ url('admin/settings/home-page-settings/why_choose_talends') }}}">Why Choose Talends</a></li>
                                 <li><hr><a href="{{{ url('admin/settings/home-page-settings/interne_university_collaboration') }}}">Interne University Collaboration</a></li>
@@ -157,6 +161,8 @@
                                 <li><hr><a href="{{{ route('GovernmentPage') }}}">Government</a></li>
 
                                 <li><hr><a href="{{{ route('aboutTalends') }}}">About Talends</a></li>
+                                <li><hr><a href="{{{ route('adminWhyAgencyPlan') }}}">Why Agency Plan</a></li>
+
 
                                 <li><hr><a href="{{{ route('findRightTalends') }}}">Let Us Find Right Talends</a></li>
 

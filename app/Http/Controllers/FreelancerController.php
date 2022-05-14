@@ -45,7 +45,7 @@ use App\SubCategorySkills;
 use App\UserCategories;
 use App\UserSubCategories;
 use App\UserCategorySkills;
-
+use App\HireAgency;
 
 /**
  * Class FreelancerController
@@ -1026,6 +1026,10 @@ class FreelancerController extends Controller
             $completed_services_icon = !empty($icons['hidden_completed_services']) ? $icons['hidden_completed_services'] : 'completed-task.png';
             $ongoing_services_icon = !empty($icons['hidden_ongoing_services']) ? $icons['hidden_ongoing_services'] : 'onservice.png';
             $access_type = Helper::getAccessType();
+           
+            $unread_leads=HireAgency::where('is_seen',0)->where('agency_id',$freelancer_id)->count();
+            $total_leads=HireAgency::where('agency_id',$freelancer_id)->count();
+            
             if (file_exists(resource_path('views/extend/back-end/freelancer/dashboard.blade.php'))) {
                 return view(
                     'extend.back-end.freelancer.dashboard',
@@ -1060,6 +1064,8 @@ class FreelancerController extends Controller
                 return view(
                     'back-end.freelancer.company_dashboard',
                     compact(
+                        'total_leads',
+                        'unread_leads',
                         'freelancer_id',
                         'completed_projects_history',
                         'access_type',

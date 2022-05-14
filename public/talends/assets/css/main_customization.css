@@ -538,7 +538,7 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 }
 
 .opportunity_card {
-	min-height: 145px;
+	min-height: 185px;
 	background: #4ABD2E;
 	border-radius: 16px;
 
@@ -561,11 +561,21 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 
 
 .opportunity_card img {
-	width: 34px;
+	width: 64px;
 	height: auto;
 	position: absolute;
-	bottom: 12px;
-	left: 27px;
+	bottom: 0;
+	right: 0px;
+	background: #1f7a08;
+	transition: all 0.6s ease;
+	padding: 15px;
+	border-bottom-right-radius: 16px;
+	border-top-left-radius: 16px;
+}
+
+.opportunity_card:hover img {
+	/* left: 32px; */
+
 }
 
 .opportunity_card:hover {
@@ -614,6 +624,193 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 	padding: 0 0 1.5em;
 }
 
+.tal-features {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+.tal-features>li {
+    margin: 0 0 1em 0;
+}
+
+.tal-features>li .t-f {
+    width: auto;
+    max-width: 480px;
+    border: 1px solid #166702;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 2em 1em;
+}
+.tal-features>li .t-f >div {
+    padding: 0 18px;
+}
+.tal-features>li .t-f .ficon-wrap::before {
+    content: '';
+    width: 70px;
+    height: 70px;
+    border: 1px dashed #96D586;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+}
+
+.tal-features>li .t-f .ficon-wrap {
+	position: relative;
+}
+.t-f .ficon-wrap .ficon {
+	width: 160px;
+	height: 170px;
+}
+.t-f .ficon-wrap .icon-strength {
+	background: url('../talends/assets/img/short-term.png') no-repeat center center;
+}
+.t-checklist {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+}
+.t-checklist > li {
+	width: 50%;
+}
+.flex-plans-sec {
+	color: #fff;
+}
+.flex-plans-sec .row >div:first-child {
+    padding: 2em 5em 2em;
+}
+.flex-plans-sec h2 {
+	color: #fff;
+	font-size: 42px;
+	text-align: center;
+}
+.flex-plans-sec h2 span {
+	color: #98FF7C;
+}
+.block-wrap {
+	display: flex;
+	justify-content: space-between;
+}
+.block-wrap p {
+    margin: 0;
+    padding: 13px 0;
+}
+.block-wrap p span {
+    color: #98FF7C;
+}
+.flex-plans-sec .row {
+    border-radius: 16px;
+}
+.flex-plans-sec .row img {
+	max-height: 360px;
+	object-fit: cover;
+}
+.plans-wrap {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: stretch;
+}
+.plan {
+    border: 1px solid #2E6434;
+    padding: 2em 4em;
+    border-radius: 12px;
+}
+.price-feature > li {
+    margin: 0 0 2em 0;
+}
+.plan-h >h3 {
+    text-align: center;
+    margin: 0 0 2.5em 0;
+}
+.plan-f {
+    margin: 3em 0 0 0;
+    border-top: 1px dashed #ccc;
+    padding: 0.5em 0 0 0;
+}
+.pf-wrap {
+    display: flex;
+    justify-content: space-between;
+}
+.pf-wrap p {
+    margin: 0;
+    font-size: 13px;
+}
+.plan-btn {
+    display: block;
+    text-decoration: none;
+    background: #479041;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 12px 0;
+    margin: 12px 0;
+    text-transform: capitalize;
+}
+.tal-faq {
+	background: #C5E2BD;
+}
+.faq-item {
+    border-bottom: 1px solid #349F1A;
+    padding: 2em 0;
+}
+.tal-faq h3 {
+    font-weight: bold;
+}
+.faq-q > strong {
+    font-weight: bold;
+    margin: 0 0 1em 0;
+    display: block;
+}
+.banner-sec {
+    margin: 4em 0;
+}
+.custom-banner {
+	display: block;
+	margin: 0 auto;
+	padding: 2em 4em;
+    border-radius: 12px;
+}
+.custom-banner h3{
+  text-align: center;
+}
+.banner-sec .theme_btn {
+    display: block;
+    width: 310px;
+    margin: 1em auto 1em;
+}
+/*
+.tal-features  > li .t-f .ficon-wrap::before {
+	content: '';
+	width: 160px;
+	height: 170px;
+	background: linear-gradient(180deg, #EAFFED 0%, #B6F0BF 100%);
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.tal-features  > li .t-f .ficon-wrap::after {
+	content: '';
+	width: 160px;
+	height: 170px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	border: 1px dashed #96D586;;
+} */
+.t-f .ficon-wrap .ftitle-wrap {
+	display: block;
+}
+
+.t-f  .ftitle-wrap strong {
+	font: 20px trajan, sans-serif;
+	color: #349F1A;
+	text-transform: uppercase;
+}
+
 @media screen and (min-width:991px) {
 	header .nav_dropdown {
 		position: absolute !important;
@@ -648,6 +845,11 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 	.tlb__reviews_score {
 		width: 100%;
 	}
+
+	.opportunity_card h3 {
+		font-size: 20px;
+	}
+
 }
 
 @media screen and (max-width:1024px) {
@@ -864,6 +1066,43 @@ a.notif {
 	}
 }
 
+.note-section .row>div:first-child {
+	border-radius: 18px 0 0 18px;
+}
+
+.note-section .row>div:last-child {
+	border: 0 18px 18px 0;
+}
+
+.note-section .row>div {
+	padding: 0;
+}
+
+.note-section .theme_bg_dark {
+	background: #3ABF19;
+
+}
+
+.note-section p {
+	font: 28px trajan, sans-serif;
+	color: #fff;
+	padding: 1em 5em 0 1em;
+}
+
+.note-section .img-wrap>img {
+	width: 100%;
+	display: block;
+	height: 100%;
+}
+
+.note-section .theme_btn {
+	width: auto;
+	font-size: 12px;
+	padding: 1.4em;
+	margin: 3em 0 3em 2em;
+}
+
+
 @media screen and (max-width:400px) {
 	.talent_list_box .tlb__content p {
 		margin: 0;
@@ -937,16 +1176,22 @@ a.notif {
 	min-height: 220px;
 	background: #edf2eb;
 	border-radius: 16px;
+	display: flex;
+	position: unset !important;
+	justify-content: center;
+	align-items: center;
 }
 
 .why_organization_choose_box h3 {
 	font-size: 28px;
 	color: #000 !important;
 	text-align: center;
-	width: 13em;
-	top: 49px;
+	width: 100%;
+	position: unset !important;
 }
 
 .why_organization_choose_box_gap {
 	left: 13px;
+
+
 }

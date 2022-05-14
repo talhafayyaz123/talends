@@ -67,6 +67,8 @@ Route::get('browse-jobs', 'HomeController@browseJobs')->name('browseJobs');
 Route::get('find-talends', 'HomeController@findTalents')->name('findTalends');
 Route::get('find-interns', 'HomeController@findInterns')->name('findInterns');
 Route::get('companies', 'HomeController@Companies')->name('Companies');
+Route::get('why_agency_plan', 'HomeController@whyAgencyPlan')->name('whyAgencyPlan');
+
 Route::get('company-detail/{id}', 'HomeController@CompanyDetail')->name('CompanyDetail');
 Route::get('freelancer/detail/{id}', 'HomeController@FreelancerDetail')->name('FreelancerDetail');
 Route::get('freelancer/experience-education/{id}', 'HomeController@experienceEducation')->name('freelancerExperience');
@@ -234,12 +236,17 @@ Route::group(
 
 
         //Front Footer
+
+        
         Route::get('admin/settings/front-footer/{type}', 'HomePagesController@frontFooter')->name('frontFooter');
         Route::get('admin/settings/home-page-settings/{type}', 'HomePagesController@HomePageSettings')->name('HomePageSettings');
         Route::post('admin/store-banner_settings', 'HomePagesController@storeBannerSettings');
 
         Route::post('admin/store-team_on_demand', 'HomePagesController@storeTeamOnDemandSettings');
        
+        // success stories
+        Route::post('admin/store-featured_success_stories', 'HomePagesController@storeFeaturedSuccessStories');
+        Route::post('admin/update-featured_success_stories/{id}', 'HomePagesController@updateFeaturedSuccessStories');
 
         Route::post('admin/store_home_page-right_opportunity', 'HomePagesController@storeRightOpportunity');
 
@@ -255,6 +262,11 @@ Route::group(
         
         Route::post('admin/join_community', 'HomePagesController@storeFooterJoinCommunity');
         Route::post('admin/update-join-community/{id}', 'HomePagesController@updateJoinCommunity');
+
+
+        
+        Route::post('admin/store/agency_profile', 'HomePagesController@storeAgencyProfile');
+         Route::post('admin/update-agency-profile/{id}', 'HomePagesController@updateAgencyProfile');
 
         Route::post('admin/update-footer-how-work/{id}', 'HomePagesController@updateFooterHowWork');
         
@@ -312,10 +324,17 @@ Route::group(
  
        // Home Page About Talends
        Route::get('admin/pages/about-talends', 'HomePagesController@aboutTalends')->name('aboutTalends');
+       Route::get('admin/pages/why_agency_plan', 'HomePagesController@whyAgencyPlan')->name('adminWhyAgencyPlan');
+
        Route::get('admin/pages/find-right-talends', 'HomePagesController@findRightTalends')->name('findRightTalends');
        Route::post('admin/save-about-talends', 'HomePagesController@storeTalends');
        Route::post('admin/update-about-talends/{id}', 'HomePagesController@updateTalends');
 
+     
+       Route::post('admin/save-why-agency-plan', 'HomePagesController@storeWhyAgencyPlan');
+        Route::post('admin/update-why-agency-plan/{id}', 'HomePagesController@updateWhyAgencyPlan');
+
+     
        Route::post('admin/update-find_right_talends/{id}', 'HomePagesController@updatefindRightTalends');
 
 
@@ -526,6 +545,7 @@ Route::group(
 
 Route::get('hire/agency/{id}', 'CompanyController@hireAgencyForm')->name('hireAgencyForm');
 Route::post('store/hire/agency/{id}', 'CompanyController@storeHireAgency')->name('storeHireAgency');
+Route::get('success/hire/agency/{id}', 'CompanyController@successHireAgencyForm')->name('successHireAgency');
 
 
 

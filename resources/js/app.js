@@ -612,8 +612,10 @@
                     }
 
 
-                 $.get("https://ipinfo.io/json?token=36abf09be141d3", function(response) {
+                 $.get("https://ipinfo.io/json?token=20e8fc0c5775d3", function(response) {
+                     
                     if(response.country=='PK' || response.country=='AE'){
+                        
                         
                         axios.post(APP_URL + '/register/form-step1-custom-errors', form_data)
                         .then(function (response) {
