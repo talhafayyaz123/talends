@@ -104,7 +104,7 @@ class Helper extends Model
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n \"tokenise\": 2,\n \"show_save_card\": true,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Company Registration Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://localhost/talends/public/registration/success?user_id=$user_id\",\n    \"return\": \"https://localhost/talends/public/registration/success?user_id=$user_id\"\n  }",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n \"tokenise\": 2,\n \"show_save_card\": true,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Company Registration Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://development.talends.com/registration/success?user_id=$user_id\",\n    \"return\": \"https://development.talends.com/registration/success?user_id=$user_id\"\n  }",
     CURLOPT_HTTPHEADER => array(
         "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
         "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
@@ -151,7 +151,7 @@ curl_setopt_array($curl, array(
     "cart_currency": "AED",
     "cart_amount": 100,
     "cart_description": "Company recurring Payment",
-    "callback": "https://localhost/talends/public/registration/success?user_id='.$user_id.'"
+    "callback": "https://development.talends.com/registration/success?user_id='.$user_id.'"
 }',
   CURLOPT_HTTPHEADER => array(
     'authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6',
