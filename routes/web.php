@@ -69,6 +69,12 @@ Route::get('find-interns', 'HomeController@findInterns')->name('findInterns');
 Route::get('companies', 'HomeController@Companies')->name('Companies');
 Route::get('why_agency_plan', 'HomeController@whyAgencyPlan')->name('whyAgencyPlan');
 
+Route::get('company/registration', 'HomeController@companyRegistration')->name('companyRegistraton');
+Route::post('/registration/success', 'HomeController@companyRegistrationSuccess')->name('companyRegistratonSuccess');
+Route::get('registration/again/payment', 'Auth\RegisterController@registrationAgainPayment')->name('registrationAgainPayment');
+
+
+
 Route::get('company-detail/{id}', 'HomeController@CompanyDetail')->name('CompanyDetail');
 Route::get('freelancer/detail/{id}', 'HomeController@FreelancerDetail')->name('FreelancerDetail');
 Route::get('freelancer/experience-education/{id}', 'HomeController@experienceEducation')->name('freelancerExperience');
@@ -95,7 +101,8 @@ Route::get('user/password/reset/{verify_code}', 'PublicController@resetPasswordV
 Route::post('user/update/password', 'PublicController@resetUserPassword')->name('resetUserPassword');
 // Authentication|Guest Routes
 Route::post('register/login-register-user', 'PublicController@loginUser')->name('loginUser');
-Route::post('register/verify-user-code', 'PublicController@verifyUserCode');
+Route::get('register/verify-user-code/{code}', 'PublicController@verifyUserCode');
+
 Route::post('register/form-step1-custom-errors', 'PublicController@RegisterStep1Validation');
 Route::post('register/form-step2-custom-errors', 'PublicController@RegisterStep2Validation');
 Route::post('register/single-form-custom-errors', 'PublicController@singleFormValidation');
@@ -599,6 +606,7 @@ Route::post('addmoney/stripe', array('as' => 'addmoney.stripe', 'uses' => 'Strip
 Route::get('addmoney/paytab/{amount}', array('as' => 'addmoney.paytab', 'uses' => 'PaytabController@paytabCheckout',));
 Route::get('redirect/paytab/{proposal_id}/{user_id}', array('as' => 'redirect.paytab', 'uses' => 'PaytabController@postPaymentWithPaytab',));
 
+Route::post('company/registration', 'Auth\RegisterController@userRegister')->name('userRegister');
 
 Route::get('service/payment-process/{id}', 'ServiceController@employerPaymentProcess');
 

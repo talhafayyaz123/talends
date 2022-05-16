@@ -782,6 +782,13 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
     width: 310px;
     margin: 1em auto 1em;
 }
+
+.already_member{
+	position: relative;
+    left: 39.65%;
+    font-size: 17px;
+    letter-spacing: 0.25px;
+}
 /*
 .tal-features  > li .t-f .ficon-wrap::before {
 	content: '';
@@ -1192,6 +1199,22 @@ a.notif {
 
 .why_organization_choose_box_gap {
 	left: 13px;
+}
 
+.company_registration_form i#togglePassword{
+	position: absolute;
+    right: -8px;
+    top: 79%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    padding: 18px 18px;
+}
 
+.error{
+	color: red;
+    font-size: 20px;
+}
+
+.field_error{
+	border-color: #a94442 !important;
 }

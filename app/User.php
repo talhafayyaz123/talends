@@ -417,6 +417,151 @@ class User extends Authenticatable
         }
     }
 
+    public function storeCompanyUser($request, $verification_code, $registration_type = '', $verification_type = '')
+    {
+
+        if (!empty($request)) {
+           
+            $this->first_name =  isset($request['first_name']) ?  filter_var($request['first_name'], FILTER_SANITIZE_STRING) : '';
+
+            $this->last_name = isset($request['last_name']) ?  filter_var($request['last_name'], FILTER_SANITIZE_STRING) :'';
+
+            $this->slug = isset($request['company_name'] ) ? filter_var($request['company_name'], FILTER_SANITIZE_STRING)  :'' ;
+
+                $this->email = filter_var($request['email'], FILTER_VALIDATE_EMAIL);
+
+                $this->password = Hash::make($request['password']);
+              
+            if ($registration_type !== 'single' && $verification_type !== 'auto_verify') {
+                $this->verification_code = $verification_code;
+                $this->user_verified = 0;
+            } else if ($registration_type == 'single' && $verification_type == 'auto_verify') {
+                $this->verification_code = null;
+                $this->user_verified = 1;
+            
+            } else if ($registration_type == 'single' && $verification_type == 'admin_verify') {
+                $this->verification_code = null;
+                $this->user_verified = 0;
+            }    
+            $this->assignRole($request['role']);
+            if (!empty($request['locations'])) {
+                $location = Location::find($request['locations']);
+                $this->location()->associate($location);
+            }
+            $this->badge_id = null;
+            $this->expiry_date = null;
+            $this->save();
+
+          
+             
+
+
+            $user_id = $this->id;
+            $profile = new Profile();
+            $profile->user()->associate($user_id);
+            if (!empty($request['employees'])) {
+                $profile->no_of_employees = intval($request['employees']);
+            }
+            if (!empty($request['department_name'])) {
+                $department = Department::find($request['department_name']);
+                $profile->department()->associate($department);
+            }
+            if (!empty($request['budget'])) {
+                $profile->min_budget = ($request['budget']);
+            }
+
+            if (!empty($request['gender'])) {
+                $profile->gender = ($request['gender']);
+            }
+
+            if (!empty($request['category_id'])) {
+                $profile->category_id = intval($request['category_id']);
+            }
+
+            if (!empty($request['skill_id'])) {
+                $profile->skill_id = intval($request['skill_id']);
+            }
+            if (!empty($request['availability'])) {
+                $profile->availability = ($request['availability']);
+            }
+
+            if (!empty($request['university'])) {
+                $profile->university = ($request['university']);
+            }
+
+            if (!empty($request['grade'])) {
+                $profile->grade = ($request['grade']);
+            }
+
+            if (!empty($request['specialization'])) {
+                $profile->specialization = ($request['specialization']);
+            }
+
+            
+            if (!empty($request['company_type'])) {
+                $profile->company_type = implode(',',$request['company_type']) ;
+            }
+
+
+            if (!empty($request['company_name'])) {
+                $profile->company_name = ($request['company_name']);
+            }
+
+
+            
+            if (!empty($request['company_name'])) {
+                $profile->phone_number = ($request['phone_number']);
+            }
+
+
+            if (!empty($request['agency_language'])) {
+                $profile->company_language = ($request['agency_language']);
+            }
+
+            
+            if (!empty($request['agency_website'])) {
+                $profile->company_website = ($request['agency_website']);
+            }
+
+
+            $profile->save();
+
+            
+            if(isset($request['categories'])  && !empty($request['categories']) ){
+                $categories=$request['categories'][0];
+                $categories= explode(',',$categories);
+                $insert = array();
+               
+                foreach($categories as $index=>$value){
+                 $draw = [   
+                      'user_id'=> $user_id,
+                      'category_id'=>  $value,
+                      "created_at" => \Carbon\Carbon::now(), 
+                      'updated_at' => \Carbon\Carbon::now()
+     
+                 ];
+                 $insert[] = $draw;
+                }
+     
+               \DB::table('user_categories')->insert($insert); 
+              } 
+
+
+           $role_id = Helper::getRoleByUserID($user_id);
+            $package = Package::select('id', 'title', 'cost')->where('role_id', $role_id)->where('trial', 1)->get()->first();
+            $trial_invoice = Invoice::select('id')->where('type', 'trial')->get()->first();
+            if (!empty($package) && !empty($trial_invoice)) {
+                DB::table('items')->insert(
+                    [
+                        'invoice_id' => $trial_invoice->id, 'product_id' => $package->id, 'subscriber' => $user_id,
+                        'item_name' => $package->title, 'item_price' => $package->cost, 'item_qty' => 1,
+                        "created_at" => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now()
+                    ]
+                );
+            } 
+            return $user_id;
+        }
+    }
     /**
      * Get user role type by user ID
      *

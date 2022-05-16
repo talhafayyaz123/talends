@@ -237,6 +237,9 @@ class HomePagesController extends Controller
         'support_description' => 'required',
         'freelancer_benefits' => 'required',
         'internees_benefits' => 'required',
+        
+        'monthly_plan_price' => 'required',
+        'yearly_plan_price' => 'required',
  
         'about_talends_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg',
          'talends_project_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
@@ -268,6 +271,9 @@ class HomePagesController extends Controller
                 'support_description' => 'required',
                 'freelancer_benefits' => 'required',
                 'internees_benefits' => 'required',
+         
+                'monthly_plan_price' => 'required',
+                'yearly_plan_price' => 'required',
          
                 'about_talends_image' =>'image|mimes:jpeg,png,jpg,gif,svg',
                  'talends_project_image'=>'image|mimes:jpeg,png,jpg,gif,svg',

@@ -152,6 +152,10 @@ class GeneralEmailMailable extends Mailable
 
             $email_message = $this->prepareEmailResetPassword($this->email_params);
 
+        }elseif ($this->type == 'recurring_payment_reminder') {
+
+            $email_message = $this->prepareEmailPaymentReminder($this->email_params);
+
         }
 
         $message = $this->from(env('MAIL_FROM_ADDRESS'))
@@ -684,6 +688,67 @@ class GeneralEmailMailable extends Mailable
 
         $app_content = str_replace("%signature%", $signature, $app_content);
 
+
+
+        $body = "";
+
+        $body .= EmailHelper::getEmailHeader();
+
+        $body .= $app_content;
+
+        $body .= EmailHelper::getEmailFooter();
+
+        return $body;
+
+    }
+
+
+    public function prepareEmailPaymentReminder($email_params)
+
+    {
+
+        extract($email_params);
+        $expiry_date = $expiry_date;
+
+        $user_amount= $amount;
+
+        $company_name = $company_name;
+
+      $signature = EmailHelper::getSignature();
+           
+        $app_content = $this->template->content;
+
+  
+
+        $email_content_default =    "Hi %company_name%!
+
+
+
+                                    I am reminding you that 3 days has been left for your next  Recurring payment.
+
+                                    Next payment date is  %expiry_date% .
+
+
+
+                                    Automatically  amount $ %amount%  will deduct from your account.
+
+
+                                    %signature%";
+
+        //set default contents
+
+        if (empty($app_content)) {
+
+            $app_content = $email_content_default;
+
+        }
+
+        $app_content = str_replace("%company_name%", $company_name, $app_content);
+
+        $app_content = str_replace("%expiry_date%", $expiry_date, $app_content);
+
+        $app_content = str_replace("%amount%", $user_amount, $app_content);
+        $app_content = str_replace("%signature%", $signature, $app_content);
 
 
         $body = "";

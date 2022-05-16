@@ -22,6 +22,7 @@ class CreateHireAgenciesTable extends Migration
             $table->string('phone_number')->nullable();   
             $table->text('detail')->nullable();   
             $table->integer('is_seen')->default(0);   
+            $table->text('questions')->nullable();   
             $table->timestamps();
         });
     }
