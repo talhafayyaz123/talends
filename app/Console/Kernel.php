@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\RecurringPaymentCron::class,
+
     ];
 
     /**
@@ -30,6 +31,9 @@ class Kernel extends ConsoleKernel
                 Helper::updatePayouts();
             }
         )->everyMinute();
+
+        $schedule->command('recurring-payment:cron')
+                 ->everyMinute();
     }
 
     /**

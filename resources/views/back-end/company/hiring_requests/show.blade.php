@@ -66,6 +66,107 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <div class="wt-projecthistory">
+                            <div class="wt-tabscontenttitle">
+                                <label>What type of project is this?</label>
+                                {!! $questions[0]['question1'] ?? '' !!}
+                            </div>
+                           
+                        </div>
+
+
+                        <div class="wt-projecthistory">
+                            <div class="wt-tabscontenttitle">
+                                <label>What is your requirement?</label>
+                                {!! $questions[0]['question2'] ?? '' !!}
+                            </div>
+                           
+                        </div>
+
+
+                        <div class="wt-projecthistory">
+                            <div class="wt-tabscontenttitle">
+                                <label>What type of business is this for?</label>
+                                {!! $questions[0]['question3'] ?? '' !!}
+                            </div>
+                           
+                        </div>
+
+
+                        <div class="wt-projecthistory">
+                            <div class="wt-tabscontenttitle">
+                                <label>What industry do you operate in?</label>
+                                {!! $questions[0]['question4'] ?? '' !!}
+                            </div>
+                           
+                        </div>
+
+
+                        <div class="wt-projecthistory">
+                            <div class="wt-tabscontenttitle">
+                                <label>Which programming language(s) would you consider using?</label>
+                                {!! $questions[0]['question5'] ?? '' !!}
+                            </div>
+                           
+                        </div>
+
+
+                        
+                        <div class="wt-projecthistory">
+                            <div class="wt-tabscontenttitle">
+                                <label>How soon would you like the project to begin?</label>
+                                {!! $questions[0]['question6'] ?? '' !!}
+                            </div>
+                           
+                        </div>
+
+                        <div class="wt-projecthistory">
+                            <div class="wt-tabscontenttitle">
+                                <label>How likely are you to make a hiring decision?</label>
+                                {!! $questions[0]['question7'] ?? '' !!}
+                            </div>
+                           
+                        </div>
+
+                        <div class="wt-projecthistory">
+                            <div class="wt-tabscontenttitle">
+                                <label>What is your estimated budget for this project?</label>
+                                {!! $questions[0]['question8'] ?? '' !!}
+                            </div>
+                           
+                        </div>
+
+
+                        
+                        <div class="wt-projecthistory">
+                            <div class="wt-tabscontenttitle">
+                                <label>Do you have a budget in mind?</label>
+                                {!! $questions[0]['question9'] ?? '' !!}
+                            </div>
+                           
+                        </div>
+
+
+                        
+                        <div class="wt-projecthistory">
+                            <div class="wt-tabscontenttitle">
+                                <label>What type of business is this for?</label>
+                                {!! $questions[0]['question10'] ?? '' !!}
+                            </div>
+                           
+                        </div>
+
+
+                        
+                        <div class="wt-projecthistory">
+                            <div class="wt-tabscontenttitle">
+                                <label>When would you like the website to go live/be updated?</label>
+                                {!! $questions[0]['question11'] ?? '' !!}
+                            </div>
+                           
+                        </div>
+                        
                         <div class="wt-projecthistory">
                             <div class="wt-tabscontenttitle">
                                 <h2>Detail</h2>

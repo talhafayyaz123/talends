@@ -91,6 +91,115 @@ class Helper extends Model
     
     }
     }
+
+
+    public static function registrationPayment($amount,$user_id){
+
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => "https://secure.paytabs.com/payment/request",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "POST",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n \"tokenise\": 2,\n \"show_save_card\": true,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Company Registration Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://localhost/talends/public/registration/success?user_id=$user_id\",\n    \"return\": \"https://localhost/talends/public/registration/success?user_id=$user_id\"\n  }",
+    CURLOPT_HTTPHEADER => array(
+        "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
+        "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
+        "cache-control: no-cache",
+        "content-type: application/json"
+    ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+    if ($err) {
+    echo "cURL Error #:" . $err;
+    } else {
+    
+    return $response;
+    
+    }
+    }
+
+    public static function recurringPayment($token,$amount,$tran_ref,$cart_id,$user_id){
+
+        
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://secure.paytabs.com/payment/request',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS =>'{
+    "profile_id": "91323",
+    "tran_type": "sale",
+    "tran_class": "recurring",
+    "token":  "'.$token.'",
+    "tran_ref": "'.$tran_ref.'",
+    "cart_id":"'.$cart_id.'",
+    "cart_currency": "AED",
+    "cart_amount": 100,
+    "cart_description": "Company recurring Payment",
+    "callback": "https://localhost/talends/public/registration/success?user_id='.$user_id.'"
+}',
+  CURLOPT_HTTPHEADER => array(
+    'authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6',
+    'content-type: application/json'
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+return $response;
+        }
+ 
+     public static function transection_query($tran_ref){
+         
+        $curl = curl_init();
+        
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => "https://secure.paytabs.com/payment/query",
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "POST",
+          CURLOPT_POSTFIELDS => "{\r\n  \"profile_id\": \"91323\",\r\n  \"tran_ref\": \"$tran_ref\"\r\n}",
+          CURLOPT_HTTPHEADER => array(
+            "Postman-Token: ed553a7a-f8a3-4ab8-914a-dc2f303dd116",
+            "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
+            "cache-control: no-cache",
+            "content-type: application/json"
+          ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+    
+        curl_close($curl);
+    
+        if ($err) {
+        echo "cURL Error #:" . $err;
+        } else {
+        
+        return $response;
+        
+        }
+     }
+
      public static function getfooterHowWork(){
         $footer_how_work=AboutTalendsPage::where('page_type','footer-how-work')->first();
         return $footer_how_work;

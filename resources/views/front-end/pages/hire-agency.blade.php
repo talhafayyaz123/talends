@@ -125,6 +125,126 @@ $breadcrumbs = Breadcrumbs::generate('hireAgencyForm', $id);
                                 </div>
 
 
+                                <div class="row">
+                                   
+                                   <div class="col-md-6">
+                                   <div class="form-group">
+   
+                                       {!! Form::text( 'question[0][question1]', null, ['class' =>'form-control', 'placeholder' => 'What type of project is this?','required'] ) !!}
+   
+                                   </div>
+                                   </div>
+   
+                                   <div class="col-md-6">
+                                   <div class="form-group">
+   
+                                       {!! Form::text( 'question[0][question2]', null, ['class' =>'form-control', 'placeholder' => 'What is your requirement?','required'] ) !!}
+   
+                                   </div> </div>
+   
+                                   </div>
+
+
+
+                                   <div class="row">
+                                   
+                                   <div class="col-md-6">
+                                   <div class="form-group">
+   
+                                       {!! Form::text( 'question[0][question3]', null, ['class' =>'form-control', 'placeholder' => 'What type of business is this for?','required'] ) !!}
+   
+                                   </div>
+                                   </div>
+   
+                                   <div class="col-md-6">
+                                   <div class="form-group">
+   
+                                       {!! Form::text( 'question[0][question4]', null, ['class' =>'form-control', 'placeholder' => 'What industry do you operate in?','required'] ) !!}
+   
+                                   </div> </div>
+   
+                                   </div>
+
+
+                                   
+
+                                   <div class="row">
+                                   
+                                   <div class="col-md-6">
+                                   <div class="form-group">
+   
+                                       {!! Form::text( 'question[0][question5]', null, ['class' =>'form-control', 'placeholder' => 'Which programming language(s) would you consider using?','required'] ) !!}
+   
+                                   </div>
+                                   </div>
+   
+                                   <div class="col-md-6">
+                                   <div class="form-group">
+   
+                                       {!! Form::text( 'question[0][question6]', null, ['class' =>'form-control', 'placeholder' => 'How soon would you like the project to begin?','required'] ) !!}
+   
+                                   </div> </div>
+   
+                                   </div>
+
+
+                                   <div class="row">
+                                   
+                                   <div class="col-md-6">
+                                   <div class="form-group">
+   
+                                       {!! Form::text( 'question[0][question7]', null, ['class' =>'form-control', 'placeholder' => 'How likely are you to make a hiring decision?','required'] ) !!}
+   
+                                   </div>
+                                   </div>
+   
+                                   <div class="col-md-6">
+                                   <div class="form-group">
+   
+                                       {!! Form::text( 'question[0][question8]', null, ['class' =>'form-control', 'placeholder' => 'What is your estimated budget for this project?','required'] ) !!}
+   
+                                   </div> </div>
+   
+                                   </div>
+
+
+
+                                   
+                                   <div class="row">
+                                   
+                                   <div class="col-md-6">
+                                   <div class="form-group">
+   
+                                       {!! Form::text( 'question[0][question9]', null, ['class' =>'form-control', 'placeholder' => 'Do you have a budget in mind?','required'] ) !!}
+   
+                                   </div>
+                                   </div>
+   
+                                   <div class="col-md-6">
+                                   <div class="form-group">
+   
+                                       {!! Form::text( 'question[0][question10]', null, ['class' =>'form-control', 'placeholder' => 'What type of business is this for?','required'] ) !!}
+   
+                                   </div> </div>
+   
+                                   </div>
+
+              
+                                   <div class="row">
+                                   
+                                   <div class="col-md-6">
+                                   <div class="form-group">
+   
+                                       {!! Form::text( 'question[0][question11]', null, ['class' =>'form-control', 'placeholder' => 'When would you like the website to go live/be updated?','required'] ) !!}
+   
+                                   </div>
+                                   </div>
+   
+                                  
+   
+                                   </div>
+
+
                                 <div class="form-group">
 
                                     {!! Form::textarea( 'description', null, ['class' =>'form-control', 'placeholder' => trans('lang.ph_desc')] ,'required') !!}
