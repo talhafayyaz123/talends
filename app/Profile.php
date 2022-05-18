@@ -111,9 +111,12 @@ class Profile extends Model
         
         if($user->getRoleNames()[0]=='freelancer'  ||$user->getRoleNames()[0]=='intern'){
             $user_categories= new UserCategories;
-            $user_categories->category_id=$request['category_id'];
-            $user_categories->user_id=$user_id;
-            $user_categories->save(); 
+            if(isset($request['category_id']) && !empty($request['category_id']) ){
+                $user_categories->category_id=$request['category_id'];
+                $user_categories->user_id=$user_id;
+                $user_categories->save(); 
+    
+            }
          }else{
 
             if(isset($request['category'])  && !empty($request['category']) ){

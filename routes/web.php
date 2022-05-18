@@ -402,11 +402,15 @@ Route::group(
     }
 );
 Route::group(
-    ['middleware' => ['role:freelancer|admin']],
+    ['middleware' => ['role:freelancer|admin|intern']],
     function () {
         if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services') {
             Route::get('freelancer/services/{status}', 'FreelancerController@showServices')->name('ServiceListing');
             Route::get('freelancer/service/{id}/{status}', 'FreelancerController@showServiceDetail')->name('ServiceDetail');
+
+            Route::get('internee/services/{status}', 'InterneController@showInterneServices')->name('InterneserviceListing');
+            Route::get('internee/service/{id}/{status}', 'InterneController@showInterneServiceDetail')->name('InterneServiceDetail');
+
         }
         Route::post('services/change-status', 'ServiceController@changeStatus');
         Route::get('freelancer/dashboard/edit-service/{id}', 'ServiceController@edit')->name('edit_service');
@@ -463,6 +467,15 @@ Route::group(
         Route::get('freelancer/proposals', 'FreelancerController@showFreelancerProposals')->name('showFreelancerProposals');
         Route::get('freelancer/dashboard', 'FreelancerController@freelancerDashboard')->name('freelancerDashboard');
 
+        ///////////////////
+        //internee routes
+        Route::get('internee/proposals', 'InterneController@showInterneProposals')->name('showInterneProposals');
+        Route::get('internee/job/{slug}', 'InterneController@showOnGoingJobDetail')->name('showOnGoingInterneJobDetail');
+        Route::get('internee/jobs/{status}', 'InterneController@showInterneeJobs')->name('showInterneeOnGoingJobDetail');
+        Route::get('internee/dispute/{slug}', 'UserController@raiseInterneDispute');
+
+        
+        //////////////////
         Route::get('company/dashboard', 'FreelancerController@companyDashboard')->name('companyDashboard');
         Route::get('company/hiring_requests', 'CompanyController@companyHiringRequests')->name('companyHiringRequests');
         Route::get('company/hiring_request_detail/{id}', 'CompanyController@companyHiringRequestDetail')->name('companyHiringRequestDetail');
@@ -493,6 +506,7 @@ Route::group(
         Route::post('interne/store-experience-settings', 'InterneController@storeExperienceEducationSettings');
         Route::get('interne/dashboard/project-awards', 'InterneController@projectAwardsSettings')->name('interneProjectAwards');
         Route::post('interne/store-project-award-settings', 'InterneController@storeProjectAwardSettings');
+        Route::get('interne/payout-settings', 'InterneController@payoutSettings')->name('InterneePayoutsSettings');
 
 
         
@@ -508,7 +522,7 @@ Route::group(
 );
 // Employer|Freelancer Routes
 Route::group(
-    ['middleware' => ['role:employer|freelancer|admin|company']],
+    ['middleware' => ['role:employer|freelancer|admin|company|intern']],
     function () {
         Route::post('proposal/upload-temp-image', 'ProposalController@uploadTempImage');
         Route::get('job/proposal/{job_slug}', 'ProposalController@createProposal')->name('createProposal');
@@ -540,6 +554,7 @@ Route::group(
         Route::post('user/generate-order/bacs/{id}/{type}', 'UserController@generateOrder');
         Route::get('employer/{type}/invoice', 'UserController@getEmployerInvoices')->name('employerInvoice');
         Route::get('freelancer/{type}/invoice', 'UserController@getFreelancerInvoices')->name('freelancerInvoice');
+        Route::get('internee/{type}/invoice', 'UserController@getInterneeInvoices')->name('InterneeInvoice');
         Route::get('show/invoice/{id}', 'UserController@showInvoice');
         Route::post('service/upload-temp-message_attachments', 'ServiceController@uploadTempMessageAttachments');
         // Route::post('user/verify/emailcode', 'UserController@verifyUserEmailCode');

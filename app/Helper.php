@@ -1474,7 +1474,7 @@ return $response;
                     '4' => trans('lang.emp_pkg_opt.banner'),
                     '5' => trans('lang.emp_pkg_opt.pvt_cht'),
                 );
-            } elseif ($role == 'freelancer' || $role == 'company' ) {
+            } elseif ($role == 'freelancer' || $role == 'company' || $role == 'intern') {
                 $list = array(
                     '0' => trans('lang.freelancer_pkg_opt.price'),
                     '1' => trans('lang.freelancer_pkg_opt.no_of_credits'),

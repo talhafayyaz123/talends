@@ -68,6 +68,8 @@ class ProposalController extends Controller
                 $proposal_status = Job::find($job->id)->proposals()->where('status', 'hired')->first();
                 $role_id =  Helper::getRoleByUserID(Auth::user()->id);
                 $package = DB::table('items')->where('subscriber', Auth::user()->id)->select('product_id', 'updated_at')->first();
+
+                
                 $package_options = Package::select('options')->where('id', $package->product_id)->get()->first();
                 $options = !empty($package_options) ? unserialize($package_options['options']) : array();
                 $settings = SiteManagement::getMetaValue('settings');
