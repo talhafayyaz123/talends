@@ -632,6 +632,7 @@ class UserController extends Controller
             $saved_employers   = !empty($profile->saved_employers) ? unserialize($profile->saved_employers) : array();
             $currency          = SiteManagement::getMetaValue('commision');
             $symbol            = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
+           
             if ($request->path() === 'employer/saved-items') {
                 if (file_exists(resource_path('views/extend/back-end/employer/saved-items.blade.php'))) {
                     return view(
@@ -672,6 +673,31 @@ class UserController extends Controller
 
                     return view(
                         'back-end.freelancer.saved-items',
+                        compact(
+                            'profile',
+                            'saved_jobs',
+                            'saved_freelancers',
+                            'saved_employers',
+                            'symbol'
+                        )
+                    );
+                }
+            } elseif ($request->path() === 'intern/saved-items') {
+                if (file_exists(resource_path('views/extend/back-end/freelancer/saved-items.blade.php'))) {
+                    return view(
+                        'extend.back-end.freelancer.saved-items',
+                        compact(
+                            'profile',
+                            'saved_jobs',
+                            'saved_freelancers',
+                            'saved_employers',
+                            'symbol'
+                        )
+                    );
+                } else {
+
+                    return view(
+                        'back-end.interne.saved-items',
                         compact(
                             'profile',
                             'saved_jobs',
@@ -1308,10 +1334,11 @@ class UserController extends Controller
             $payment_gateway = !empty($payout_settings) && !empty($payout_settings[0]['payment_method']) ? $payout_settings[0]['payment_method'] : array();
             $symbol = !empty($payout_settings) && !empty($payout_settings[0]['currency']) ? Helper::currencyList($payout_settings[0]['currency']) : array();
             $mode = !empty($payout_settings) && !empty($payout_settings[0]['payment_mode']) ? $payout_settings[0]['payment_mode'] : 'true';
+        
             if (file_exists(resource_path('views/extend/back-end/package/checkout.blade.php'))) {
                 return view::make('extend.back-end.package.checkout', compact('stripe_img', 'package', 'package_options', 'payment_gateway', 'symbol', 'mode'));
             } else {
-                return view::make('back-end.package.checkout', compact('stripe_img', 'package', 'package_options', 'payment_gateway', 'symbol', 'mode'));
+                return view::make('back-end.package.checkout', compact('stripe_img', 'package', 'package_options', 'payment_gateway', 'symbol', 'mode','id'));
             }
         }
     }
@@ -1848,6 +1875,38 @@ class UserController extends Controller
         }
     }
 
+
+    public function getInterneeInvoices($type = '')
+    {
+        if (Auth::user()->getRoleNames()[0] != 'admin' && Auth::user()->getRoleNames()[0] === 'intern') {
+            $invoices = array();
+            $invoices = DB::table('invoices')
+                ->join('items', 'items.invoice_id', '=', 'invoices.id')
+                ->join('packages', 'packages.id', '=', 'items.product_id')
+                ->select('invoices.*', 'packages.options')
+                ->where('items.subscriber', Auth::user()->id)
+                ->where('invoices.type', $type)
+                ->get();
+            $expiry_date = '';
+            $currency   = SiteManagement::getMetaValue('commision');
+            $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
+            if ($type === 'project') {
+                if (file_exists(resource_path('views/extend/back-end/interne/invoices/project.blade.php'))) {
+                    return view('extend.back-end.interne.invoices.project', compact('invoices', 'type', 'expiry_date', 'symbol'));
+                } else {
+                    return view('back-end.interne.invoices.project', compact('invoices', 'type', 'expiry_date', 'symbol'));
+                }
+            } elseif ($type === 'package') {
+                if (file_exists(resource_path('views/extend/back-end/interne/invoices/package.blade.php'))) {
+                    return view('extend.back-end.interne.invoices.package', compact('invoices', 'type', 'expiry_date', 'symbol'));
+                } else {
+                    return view('back-end.interne.invoices.package', compact('invoices', 'type', 'expiry_date', 'symbol'));
+                }
+            }
+        } else {
+            abort(404);
+        }
+    }
     /**
      * Get Invoices.
      *
@@ -2138,6 +2197,33 @@ class UserController extends Controller
         } else {
             return View(
                 'back-end.freelancer.jobs.dispute',
+                compact(
+                    'job',
+                    'reasons',
+                    'show_breadcrumbs'
+                )
+            );
+        }
+    }
+
+    public function raiseInterneDispute($slug)
+    {
+        $breadcrumbs_settings = SiteManagement::getMetaValue('show_breadcrumb');
+        $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'true';
+        $job = Job::where('slug', $slug)->first();
+        $reasons = Arr::pluck(Helper::getReportReasons(), 'title', 'title');
+        if (file_exists(resource_path('views/extend/back-end/freelancer/jobs/dispute.blade.php'))) {
+            return View(
+                'extend.back-end.interne.jobs.dispute',
+                compact(
+                    'job',
+                    'reasons',
+                    'show_breadcrumbs'
+                )
+            );
+        } else {
+            return View(
+                'back-end.interne.jobs.dispute',
                 compact(
                     'job',
                     'reasons',

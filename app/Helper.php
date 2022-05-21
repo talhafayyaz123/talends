@@ -91,6 +91,82 @@ class Helper extends Model
     
     }
     }
+    
+
+    public static function packagePaymentPaytab($amount,$id){
+           
+        $user=Auth::user();
+    
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => "https://secure.paytabs.com/payment/request",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "POST",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://localhost/talends/public/redirect/package/paytab?package_id=$id&type=package&user_id=$user->id\",\n    \"return\": \"https://localhost/talends/public/redirect/package/paytab?package_id=$id&type=package&user_id=$user->id\"\n  }",
+    CURLOPT_HTTPHEADER => array(
+        "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
+        "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
+        "cache-control: no-cache",
+        "content-type: application/json"
+    ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+    if ($err) {
+    echo "cURL Error #:" . $err;
+    } else {
+    
+    return $response;
+    
+    }
+    }
+
+
+    public static function ServicePaymentPaytab($amount,$service_id,$service_seller){
+           
+        $user=Auth::user();
+    
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => "https://secure.paytabs.com/payment/request",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "POST",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://localhost/talends/public/redirect/package/paytab?service_id=$service_id&type=project&user_id=$user->id&service_seller=$service_seller\",\n    \"return\": \"https://localhost/talends/public/redirect/package/paytab?service_id=$service_id&type=project&user_id=$user->id&service_seller=$service_seller\"\n  }",
+    CURLOPT_HTTPHEADER => array(
+        "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
+        "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
+        "cache-control: no-cache",
+        "content-type: application/json"
+    ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+    if ($err) {
+    echo "cURL Error #:" . $err;
+    } else {
+    
+    return $response;
+    
+    }
+    }
 
 
     public static function registrationPayment($amount,$user_id){
@@ -1474,7 +1550,7 @@ return $response;
                     '4' => trans('lang.emp_pkg_opt.banner'),
                     '5' => trans('lang.emp_pkg_opt.pvt_cht'),
                 );
-            } elseif ($role == 'freelancer' || $role == 'company' ) {
+            } elseif ($role == 'freelancer' || $role == 'company' || $role == 'intern') {
                 $list = array(
                     '0' => trans('lang.freelancer_pkg_opt.price'),
                     '1' => trans('lang.freelancer_pkg_opt.no_of_credits'),

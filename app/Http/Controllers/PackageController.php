@@ -72,7 +72,9 @@ class PackageController extends Controller
             $package_options = Helper::getPackageOptions($role_type);
         
             $packages = $this->package::all()->where('role_id', $role->id)->where('trial', 0);
+    
             $purchase_packages = DB::table('items')->select('product_id')->where('subscriber', Auth::user()->id)->get()->pluck('product_id')->toArray();
+            
             $currency   = SiteManagement::getMetaValue('commision');
             $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
             if (file_exists(resource_path('views/extend/back-end/package/index.blade.php'))) {

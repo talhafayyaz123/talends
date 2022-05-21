@@ -1202,7 +1202,7 @@ class PublicController extends Controller
     public function checkProposalAuth()
     {
         $json = array();
-        if (Auth::user() && Auth::user()->getRoleNames()->first() === 'freelancer') {
+        if (Auth::user() && (Auth::user()->getRoleNames()->first() === 'freelancer') || (Auth::user()->getRoleNames()->first() === 'intern')  ) {
             $json['auth'] = true;
             return $json;
         } else {
