@@ -69,7 +69,7 @@ class Helper extends Model
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"http://localhost/talends/public/redirect/paytab/$id/$user->id\",\n    \"return\": \"http://localhost/talends/public/redirect/paytab/$id/$user->id\"\n  }",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://development.talends.com/redirect/paytab/$id/$user->id\",\n    \"return\": \"https://development.talends.com/redirect/paytab/$id/$user->id\"\n  }",
     CURLOPT_HTTPHEADER => array(
         "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
         "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
@@ -107,7 +107,7 @@ class Helper extends Model
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://localhost/talends/public/redirect/package/paytab?package_id=$id&type=package&user_id=$user->id\",\n    \"return\": \"https://localhost/talends/public/redirect/package/paytab?package_id=$id&type=package&user_id=$user->id\"\n  }",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://development.talends.com/redirect/package/paytab?package_id=$id&type=package&user_id=$user->id\",\n    \"return\": \"https://development.talends.com/redirect/package/paytab?package_id=$id&type=package&user_id=$user->id\"\n  }",
     CURLOPT_HTTPHEADER => array(
         "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
         "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
@@ -145,7 +145,7 @@ class Helper extends Model
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://localhost/talends/public/redirect/package/paytab?service_id=$service_id&type=project&user_id=$user->id&service_seller=$service_seller\",\n    \"return\": \"https://localhost/talends/public/redirect/package/paytab?service_id=$service_id&type=project&user_id=$user->id&service_seller=$service_seller\"\n  }",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://development.talends.com/redirect/package/paytab?service_id=$service_id&type=project&user_id=$user->id&service_seller=$service_seller\",\n    \"return\": \"https://development.talends.com/redirect/package/paytab?service_id=$service_id&type=project&user_id=$user->id&service_seller=$service_seller\"\n  }",
     CURLOPT_HTTPHEADER => array(
         "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
         "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
