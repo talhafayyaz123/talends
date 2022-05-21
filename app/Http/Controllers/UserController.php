@@ -1334,10 +1334,11 @@ class UserController extends Controller
             $payment_gateway = !empty($payout_settings) && !empty($payout_settings[0]['payment_method']) ? $payout_settings[0]['payment_method'] : array();
             $symbol = !empty($payout_settings) && !empty($payout_settings[0]['currency']) ? Helper::currencyList($payout_settings[0]['currency']) : array();
             $mode = !empty($payout_settings) && !empty($payout_settings[0]['payment_mode']) ? $payout_settings[0]['payment_mode'] : 'true';
+        
             if (file_exists(resource_path('views/extend/back-end/package/checkout.blade.php'))) {
                 return view::make('extend.back-end.package.checkout', compact('stripe_img', 'package', 'package_options', 'payment_gateway', 'symbol', 'mode'));
             } else {
-                return view::make('back-end.package.checkout', compact('stripe_img', 'package', 'package_options', 'payment_gateway', 'symbol', 'mode'));
+                return view::make('back-end.package.checkout', compact('stripe_img', 'package', 'package_options', 'payment_gateway', 'symbol', 'mode','id'));
             }
         }
     }

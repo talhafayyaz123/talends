@@ -621,6 +621,13 @@ Route::post('addmoney/stripe', array('as' => 'addmoney.stripe', 'uses' => 'Strip
 Route::get('addmoney/paytab/{amount}', array('as' => 'addmoney.paytab', 'uses' => 'PaytabController@paytabCheckout',));
 Route::get('redirect/paytab/{proposal_id}/{user_id}', array('as' => 'redirect.paytab', 'uses' => 'PaytabController@postPaymentWithPaytab',));
 
+
+Route::get('paytab/package/payment/{package_id}', array('as' => 'package-payment.paytab', 'uses' => 'PaytabController@paytabPackageGateway',));
+Route::post('/redirect/package/paytab', 'PaytabController@postPackagePaymentWithPaytab');
+
+
+Route::get('paytab/service/payment/{service_id}/{service_seller}', array('as' => 'service-payment.paytab', 'uses' => 'PaytabController@paytabServicePayment'));
+
 Route::post('company/registration', 'Auth\RegisterController@userRegister')->name('userRegister');
 
 Route::get('service/payment-process/{id}', 'ServiceController@employerPaymentProcess');
