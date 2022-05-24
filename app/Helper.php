@@ -35,7 +35,10 @@ use App\Skill;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Schema;
 use Request;
-
+use App\Profile;
+use App\UserCategorySkills;
+use App\CompanyExpertise;
+use App\CompanyDetail;
 /**
  * Class Helper
  *
@@ -5314,6 +5317,53 @@ return $response;
         $data['sectionColor'] = '#ffffff';
         return serialize($data);
     }
+
+
+   public static function getProfileCompleteRatio()
+   {
+       $ratio=30;
+       $user_id=Auth::user()->id;
+       $user_category_skills=UserCategorySkills::where('user_id',$user_id)->count();
+       $company_expertise=CompanyExpertise::where('user_id',$user_id)->first();
+       $profile=Profile::where('user_id',$user_id)->first();
+       $company_detail=CompanyDetail::where('user_id',$user_id)->first();
+
+       if($user_category_skills!=0){
+         $ratio+=5;
+       }
+
+         if($company_expertise){
+            $ratio+=10;
+
+         }
+
+         if($profile->projects){
+            $ratio+=10;
+         }
+
+         if($profile->banner){
+            $ratio+=10;
+         }
+
+         if($profile->avater){
+            $ratio+=10;
+         }
+
+         if($profile->hourly_rate){
+            $ratio+=10;
+         }
+        if($company_detail ){
+        if($company_detail->detail){
+            $ratio+=5;
+        }
+        if($company_detail->portfolio){
+            $ratio+=10;
+        }
+        }
+      return $ratio;
+   }
+
+  
 
     /**
      * Get Seeder Data
