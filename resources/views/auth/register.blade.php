@@ -41,8 +41,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
 ['title' => trans('lang.join_for_free'), 'inner_banner' => $reg_form_banner, 'path' => 'uploads/settings/home/', 'show_banner' => $show_reg_form_banner ]
 )
 @endif
-<div class="wt-haslayout">
-    <div class="container">
+    <!-- <div class="container">
         <div class="row justify-content-md-center">
             <div class="col-xs-12 col-sm-12 col-md-10 push-md-1 col-lg-8 push-lg-2" id="registration">
                 <div class="preloader-section" v-if="loading" v-cloak>
@@ -53,7 +52,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                 <div class="wt-registerformhold">
                     <div class="wt-registerformmain">
                         <div class="wt-joinforms">
-
+                            jeera
                             @if ($selected_registration_type == 'single')
                             <form method="POST" class="wt-formtheme wt-formregister" @submit.prevent="checkSingleForm" id="register_form">
                                 @csrf
@@ -593,11 +592,430 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                 </div>
             </div>
         </div>
+    </div> -->
+    <style>
+        .entity-form{display: none;}
+    </style>
+    <section class="auth-sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex align-items-center min-vh-100">
+                    <div class="w-100 d-block bg-white shadow-lg rounded my-5">
+                        <div class="row">
+                            
+                            <div class="col-lg-6">
+                                <div class="auth-content">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-6">
+                                            <h3>Ready to get customers from <span>Dubai & UAE</span></h3>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <p>We need you to help us with some basic information for your account creation. Here are our <a href="javascript:;">terms and conditins</a>. Please read them carefully. We are GDRP compliiant</span></p>
+                                        </div>
+                                    </div>
+                                    <hr style="border-top: 1px dashed #dedede;">
+                                    <form action="" class="mt-4">
+                                        <div class="row" id="entityType">
+                                            <div class="col-lg-6">
+                                                <div class="custom-control custom-radio entity-box">
+                                                    <input type="radio" id="customRadio1" name="customRadio" value="freelancer" class="custom-control-input">
+                                                    <label class="custom-control-label" for="customRadio1">
+                                                        <img src="{{ asset('talends/assets/img/icons/freelancer.png')}}" class="rounded-circle img-fluid mr-3" width="40"/>Freelancer
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="custom-control custom-radio entity-box">
+                                                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="employer">
+                                                    <label class="custom-control-label" for="customRadio2">
+                                                        <img src="{{ asset('talends/assets/img/icons/employer.png')}}" class="rounded-circle img-fluid mr-3" width="40"/>Employer
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="custom-control custom-radio entity-box">
+                                                    <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input" value="business">
+                                                    <label class="custom-control-label" for="customRadio3">
+                                                        <img src="{{ asset('talends/assets/img/icons/company.png')}}" class="rounded-circle img-fluid mr-3" width="40"/>Company
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="custom-control custom-radio entity-box">
+                                                    <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input" value="intern">
+                                                    <label class="custom-control-label" for="customRadio4">
+                                                        <img src="{{ asset('talends/assets/img/icons/intern.png')}}" class="rounded-circle img-fluid mr-3" width="40"/>Intern
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="entity-form freelancer mytab" id="freelancer">
+                                            <div class="row">
+                                                <div class="col-lg-6 mb-3">
+                                                    <input type="text" class="form-control" placeholder="First Name">
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <input type="text" class="form-control" placeholder="Last Name">
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <input type="email" class="form-control" placeholder="Email Address">
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <input type="password" class="form-control" placeholder="**************">
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <select class="form-control">
+                                                        <option>Gender</option>
+                                                        <option>Male</option>
+                                                        <option>Female</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <select class="form-control">
+                                                        <option>Availability</option>
+                                                        <option>Remote</option>
+                                                        <option>On-site</option>
+                                                        <option>Hybrid</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <select class="form-control">
+                                                        <option>Location</option>
+                                                        <option>Male</option>
+                                                        <option>Female</option>
+                                                        <option>Do not wish to declare</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <select class="form-control">
+                                                        <option>Price</option>
+                                                        <option>$10</option>
+                                                        <option>$50</option>
+                                                        <option>$100</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                        <label class="custom-control-label" for="customCheck1">
+                                                        Agree to our<a href="javascript:;" class="btn-link text-success"> terms and conditions</a>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mb-3 text-center">
+                                                    <button class="btn btn-theme rounded-pill" style="width: 350px;">Create Account</button>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <div class="or-text">
+                                                        <p>or</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mb-3 text-center">
+                                                    <button class="btn btn-outline-theme rounded-pill" style="width: 350px;">
+                                                        <i class="bi-google mr-2"></i> Signin with google
+                                                    </button>
+                                                </div>
+                                                <div class="col-12 text-center mb-3">
+                                                    Already have an account? 
+                                                    <a href="javascript:;" class="ml-2 btn-link text-success">Sign in</a>
+                                                </div>
+                                                <div class="col-12 text-center mb-3">
+                                                    Not a freelancer?
+                                                    <a href="javascript:;" class="ml-2 btn-link text-success">Create Account</a>
+                                                </div>
+                                                <div class="col-12 text-center mb-3">
+                                                    <p class="small">By creating an account, you agree to the Pangea's 
+                                                        <a href="javascript:;" class="btn-link text-success">Terms of Service</a> and 
+                                                        <a href="javascript:;" class="btn-link text-success">Privacy Policy</a>.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="entity-form employer mytab" id="employer">
+                                            <!-- <h4>It’s time to find the right help you need</h4> -->
+                                            <div class="row">
+                                                <div class="col-lg-6 mb-3">
+                                                    <input type="text" class="form-control" placeholder="First Name">
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <input type="text" class="form-control" placeholder="Last Name">
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <input type="email" class="form-control" placeholder="Email Address">
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <input type="password" class="form-control" placeholder="***************">
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <select class="form-control">
+                                                        <option>Department</option>
+                                                        <option>Male</option>
+                                                        <option>Female</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <select class="form-control">
+                                                        <option>No. of Employees</option>
+                                                        <option>less than 10</option>
+                                                        <option>less than 50</option>
+                                                        <option>100+</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-12 mb-3">
+                                                    <select class="form-control">
+                                                        <option>Location</option>
+                                                        <option>Male</option>
+                                                        <option>Female</option>
+                                                        <option>Do not wish to declare</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <div class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input" id="accountCheck">
+                                                        <label class="custom-control-label" for="accountCheck">
+                                                            Agree to our<a href="javascript:;" class="btn-link text-success"> terms and conditions</a>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mb-3 text-center">
+                                                    <button class="btn btn-theme rounded-pill" style="width: 350px;">Create Account</button>
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <div class="or-text">
+                                                        <p>or</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 mb-3 text-center">
+                                                    <button class="btn btn-outline-theme rounded-pill" style="width: 350px;">
+                                                        <i class="bi-google mr-2"></i> Signin with google
+                                                    </button>
+                                                </div>
+                                                <div class="col-12 text-center mb-3">
+                                                    Already have an account? 
+                                                    <a href="javascript:;" class="ml-2 btn-link text-success">Sign in</a>
+                                                </div>
+                                                <div class="col-12 text-center mb-3">
+                                                    Not an Employer?
+                                                    <a href="javascript:;" class="ml-2 btn-link text-success">Create Account</a>
+                                                </div>
+                                                <div class="col-12 text-center mb-3">
+                                                    <p class="small">By creating an account, you agree to the Pangea's 
+                                                        <a href="javascript:;" class="btn-link text-success">Terms of Service</a> and 
+                                                        <a href="javascript:;" class="btn-link text-success">Privacy Policy</a>.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="entity-form business mytab" id="business">
+                                            <!-- <h4>It’s time to find the right help you need</h4> -->
+                                            <div class="row">
+                                                <div class="col-lg-6 mb-3">
+                                                    <input type="text" class="form-control" placeholder="First Name">
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <input type="text" class="form-control" placeholder="Last Name">
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <input type="email" class="form-control" placeholder="Email Address">
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <input type="password" class="form-control" placeholder="*************">
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <select class="form-control">
+                                                        <option>Team Strength</option>
+                                                        <option>Male</option>
+                                                        <option>Female</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <select class="form-control">
+                                                        <option>Minimum Budget</option>
+                                                        <option>less than 10</option>
+                                                        <option>less than 50</option>
+                                                        <option>100+</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-12 mb-3">
+                                                    <select class="form-control">
+                                                        <option>Location</option>
+                                                        <option>Male</option>
+                                                        <option>Female</option>
+                                                        <option>Do not wish to declare</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-3 mb-4">                                           
+                                                    <div class="custom-control custom-checkbox btn-check">
+                                                        <input type="checkbox" class="custom-control-input" id="startupCheck">
+                                                        <label class="custom-control-label" for="startupCheck">Startup</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-5 mb-4">                                               
+                                                    <div class="custom-control custom-checkbox btn-check">
+                                                        <input type="checkbox" class="custom-control-input" id="mEnterpriseCheck">
+                                                        <label class="custom-control-label" for="mEnterpriseCheck">Small & Mid Enterprise</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 mb-4">
+                                                    <div class="custom-control custom-checkbox btn-check">
+                                                        <input type="checkbox" class="custom-control-input" id="lEnterprise">
+                                                        <label class="custom-control-label" for="lEnterprise">Large Enterprise</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 mb-3 text-center">
+                                                    <button class="btn btn-theme rounded-pill px-5" style="width: 350px;">Create Account</button>
+                                                </div>
+                                                <div class="col-lg-12 mb-3">
+                                                    <div class="or-text">
+                                                        <p>or</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 mb-3 text-center">
+                                                    <button class="btn btn-outline-theme px-5 rounded-pill" style=" width: 350px;">
+                                                        <i class="bi-google mr-2"></i> Signin with google
+                                                    </button>
+                                                </div>
+                                                <div class="col-12 text-center mb-3">
+                                                    Already have an account? 
+                                                    <a href="javascript:;" class="ml-2 btn-link text-success">Sign in</a>
+                                                </div>
+                                                <div class="col-12 text-center mb-3">
+                                                    Not a Business?
+                                                    <a href="javascript:;" class="ml-2 btn-link text-success">Create Account</a>
+                                                </div>
+                                                <div class="col-12 text-center mb-3">
+                                                    <p class="small">By creating an account, you agree to the Pangea's 
+                                                        <a href="javascript:;" class="btn-link text-success">Terms of Service</a> and 
+                                                        <a href="javascript:;" class="btn-link text-success">Privacy Policy</a>.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="entity-form intern mytab" id="intern">
+                                            <div class="row">
+                                                <div class="col-lg-6 mb-3">
+                                                    <input type="text" class="form-control" placeholder="First Name">
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <input type="text" class="form-control" placeholder="Last Name">
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <input type="email" class="form-control" placeholder="Email Address">
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <input type="password" class="form-control" placeholder="***********">
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <select class="form-control">
+                                                        <option>Gender</option>
+                                                        <option>Male</option>
+                                                        <option>Female</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <select class="form-control">
+                                                        <option>Availability</option>
+                                                        <option>Remote</option>
+                                                        <option>On-site</option>
+                                                        <option>Hybrid</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <select class="form-control">
+                                                        <option>Location</option>
+                                                        <option>Male</option>
+                                                        <option>Female</option>
+                                                        <option>Do not wish to declare</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <select class="form-control">
+                                                        <option>Price</option>
+                                                        <option>$10</option>
+                                                        <option>$50</option>
+                                                        <option>$100</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-12 mb-3">
+                                                    <input type="search" class="form-control" placeholder="University">
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <select class="form-control">
+                                                        <option>Degree</option>
+                                                        <option>$10</option>
+                                                        <option>$50</option>
+                                                        <option>$100</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-6 mb-3">
+                                                    <input type="search" class="form-control" placeholder="Specialization">
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <div class="custom-control custom-checkbox custom-control-inline">
+                                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                        <label class="custom-control-label" for="customCheck1">
+                                                        Agree to our<a href="javascript:;" class="btn-link text-success"> terms and conditions</a>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 mb-3 text-center">
+                                                    <button class="btn btn-theme rounded-pill px-5" style="width: 350px;">Create Account</button>
+                                                </div>
+                                                <div class="col-lg-12 mb-3">
+                                                    <div class="or-text">
+                                                        <p>or</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 mb-3 text-center">
+                                                    <button class="btn btn-outline-theme px-5 rounded-pill" style=" width: 350px;">
+                                                        <i class="bi-google mr-2"></i> Signin with google
+                                                    </button>
+                                                </div>
+                                                <div class="col-12 text-center mb-3">
+                                                    Already have an account? 
+                                                    <a href="javascript:;" class="ml-2 btn-link text-success">Sign in</a>
+                                                </div>
+                                                <div class="col-12 text-center mb-3">
+                                                    Not an Intern?
+                                                    <a href="javascript:;" class="ml-2 btn-link text-success">Create Account</a>
+                                                </div>
+                                                <div class="col-12 text-center mb-3">
+                                                    <p class="small">By creating an account, you agree to the Pangea's 
+                                                        <a href="javascript:;" class="btn-link text-success">Terms of Service</a> and 
+                                                        <a href="javascript:;" class="btn-link text-success">Privacy Policy</a>.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div> <!-- end col -->
+                            <div class="col-lg-6 d-none d-lg-block rounded-right">
+                                <div class="bg-login"></div>
+                            </div>
+                        </div> 
+                    </div> 
+                </div> 
+            </div> 
+        </div> 
     </div>
+    </section>
     @endsection
 
     @push('scripts')
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <script>
+            $('input[type="radio"]').click(function(){
+                var inputValue = $(this).attr("value");
+                console.log(inputValue);
+                var targetBox = $("." + inputValue);
+                $(".mytab").not(targetBox).hide();
+                $(targetBox).show();
+                $("#entityType").hide();
+            });
+            
+    </script>
     <script>
 
         function onSuccess(googleUser) {

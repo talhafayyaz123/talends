@@ -96,8 +96,8 @@
 
     <link rel="stylesheet" href="{{ asset('talends/assets/css/style.css')}}">
 
-
-
+	<!-- bootstrap icons -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
 
 
     <script src="{{ asset('talends/jquery-3.4.1.slim.min.js') }}" >
@@ -242,24 +242,11 @@
 
 
 
-   <script src="{{ asset('talends/npm/popper_js_1.16.0/dist/umd/popper.min.js') }}" >
-
-    </script>
-
-    <script src="{{ asset('talends/bootstrap/4.4.1/js/bootstrap.min.js') }}" >
-
-    </script>
-
+	<script src="{{ asset('talends/npm/popper_js_1.16.0/dist/umd/popper.min.js') }}" ></script>
+	<script src="{{ asset('talends/bootstrap/4.4.1/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('talends/assets/js/wow.min.js') }}"></script>
-
     <script src="{{ asset('talends/assets/js/main.js') }}"></script>
-
-
-
 	@yield('bootstrap_script')
-
-	
-
     @stack('scripts')
 
 </body>

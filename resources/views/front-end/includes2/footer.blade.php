@@ -7,26 +7,26 @@ $footer_how_work=App\Helper::getfooterHowWork();
             <div class="col-md-12 pb-5 text-center">
                 <h2 class="text-white opcty_5"> {!! $footer_how_work->project_description ?? '' !!}</h2>
             </div>
-            <div class="col-md-3">
+            <div class="col-lg-3 col-md-6 mb-2">
                 <div class="how_its_works_box_steps">
                     <h2>{!! $footer_how_work->banner_description ?? '' !!}</h2>
                     <h3>{!! $footer_how_work->features_text ?? '' !!}</h3>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-lg-3 col-md-6 mb-2">
                 <div class="how_its_works_box_steps">
                     <h2>{!! $footer_how_work->services_description ?? '' !!}</h2>
                     <h3>{!! $footer_how_work->work_description ?? '' !!}</h3>
 
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-lg-3 col-md-6 mb-2">
                 <div class="how_its_works_box_steps">
                     <h2>{!! $footer_how_work->payment_description ?? '' !!}</h2>
                     <h3>{!! $footer_how_work->support_description ?? '' !!}</h3>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-lg-3 col-md-6 mb-2">
                 <div class="how_its_works_box_steps">
                     <h2>{!! $footer_how_work->freelancer_benefits ?? '' !!}</h2>
                     <h3>{!! $footer_how_work->internees_benefits ?? '' !!}</h3>
@@ -77,11 +77,11 @@ $footer_how_work=App\Helper::getfooterHowWork();
 @php
 $skills_categories=App\Helper::getSkillsCategories();
 @endphp
-<section class="">
+<section>
     <div class="container">
         <div class="row row-eq-height">
             <div class="col-md-12 pb-3">
-                <ul class="nav nav-tabs products_tabs" role="tablist">
+                <ul class="nav nav-tabs products_tabs" role="tablist"  id="product_tabs">
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#ptabs_ms_d_365">Skills in Demand</a>
                     </li>
@@ -138,9 +138,9 @@ $skills_categories=App\Helper::getSkillsCategories();
 @php
 $join_community=App\Helper::getJoinCommunity();
 @endphp
-<section class="join_community pb-0">
+<section class="join_community pb-md-0 pt-4">
     <div class="container">
-        <div class="row row-eq-height">
+        <div class="row align-items-end">
             <div class="col-md-8 pb-3 align-self-center">
                 {!! $join_community->banner_description ?? '' !!}
                 <a href="{{route('findTalends')}}" class="theme_btn">Find A Job</a>

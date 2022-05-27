@@ -32,18 +32,12 @@
 
     <div class="container">
 
-        <div class="row row-eq-height">
-
+        <div class="row">
             <div class="col-md-7 pb-3 align-self-center">
-
                 <h5 class="text-white opcty_5">talents</h5>
-
                 <h2 class="text-white">Find a {{ ucfirst( request()->get('type')) }} <br><span class="theme_color"> You'll love</span></h2>
-
                 <p class="text-white opcty_5">We have professional designers in over 90 design skill sets. Sign up to find the perfect designer for whatever you need</p>
-
             </div>
-
             <div class="col-md-5">
 
                 <img src="{{ asset('talends/assets/img/find-talents/banner.png')}}" class="w-100" alt="">
@@ -62,93 +56,53 @@
 
 @endif
 
-<br><br>
-
-<div id="user_profile">
-
+<section id="user_profile">
     @if (Session::has('payment_message'))
 
-    @php $response = Session::get('payment_message') @endphp
+        @php $response = Session::get('payment_message') @endphp
 
-    <div class="flash_msg">
-
-        <flash_messages :message_class="'{{{$response['code']}}}'" :time='5' :message="'{{{ $response['message'] }}}'" v-cloak></flash_messages>
-
-    </div>
+        <div class="flash_msg">
+            <flash_messages :message_class="'{{{$response['code']}}}'" :time='5' :message="'{{{ $response['message'] }}}'" v-cloak></flash_messages>
+        </div>
 
     @endif
-
-
-
     <div class="wt-haslayout">
-
-        <div class="row">
-
-           
-
-        </div>
-
-      
-
-
-
+        <!-- <div class="row"></div> -->
         <div class="container">
-
             <div class="row">
-
-           
-
-                <div id="" class="wt-haslayout">
-
-               
-
+                <div class="col-12">
                     <div class="filters-container">
-
-                  @include('front-end.freelancers.filters')
-
-                  
-
+                        @include('front-end.freelancers.filters')
                     </div>
-
-                    
-
-                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
-
-                        
-
-                        <div class="wt-userlistingholder wt-userlisting wt-haslayout ">
-
-                            <!-- <div class="wt-userlistingtitle">
-
-                                @if (!empty($users))
-
-                                <span>{{ trans('lang.01') }} {{$users->count()}} of {{\App\User::role('freelancer')->count()}} results @if (!empty($keyword)) for <em>"{{{$keyword}}}"</em> @endif</span>
-
-                                @endif
-
-                            </div> -->
-
-                            <div class="wt-userlistingholder wt-userlisting wt-haslayout freelancer_list">
-
-                            
-
-                                @include('front-end.freelancers.data')
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
                 </div>
+                <!-- <div id="" class="wt-haslayout"> -->
+                <div class="col-md-12 col-lg-7 col-xl-8">
+                    <div class="wt-userlistingholder wt-userlisting wt-haslayout ">
+                        <!-- <div class="wt-userlistingtitle">
 
+                            @if (!empty($users))
+
+                            <span>{{ trans('lang.01') }} {{$users->count()}} of {{\App\User::role('freelancer')->count()}} results @if (!empty($keyword)) for <em>"{{{$keyword}}}"</em> @endif</span>
+
+                            @endif
+
+                        </div> -->
+                        <div class="wt-userlistingholder wt-userlisting wt-haslayout freelancer_list">
+                            @include('front-end.freelancers.data')
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-5 col-xl-4">
+                    <div class="support-content-box d-flex flex-column align-items-center justify-content-between sticky-top mt-4">
+                        <p>our dedictaed team works round the clock to bring exceptional talent, agencies & services. we verify every memeber before they join our talends.com community. our support team response within 1 hr time for any query for 100% satisfacation.</p>
+                        <button class="btn btn-success my-5 px-5">Support</button>
+                        <img src="{{ asset('talends/assets/img/find-agency-img.png')}}" class="w-100" alt="">
+                    </div>
+                </div>
             </div>
-
         </div>
-
     </div>
-
-</div>
+</section>
 
 
 
@@ -376,31 +330,31 @@
 
     });
 
-    var fixadent = $(".filters-container"),
+    // var fixadent = $(".support-content-box"),
 
-        pos = fixadent.offset();
+    //     pos = fixadent.offset();
 
 
 
-    $(document).scroll(function(e) {
+    // $(document).scroll(function(e) {
 
-        e.preventDefault;
+    //     e.preventDefault;
 
-        if ($(this).scrollTop() > (pos.top + 40) && fixadent.css('position') == 'static') {
+    //     if ($(this).scrollTop() > (pos.top + 40) && fixadent.css('position') == 'static') {
 
-            fixadent.addClass('fixed');
+    //         fixadent.addClass('fixed');
 
-        } else {
+    //     } else {
 
-            if ($(this).scrollTop() <= pos.top && fixadent.hasClass('fixed')) {
+    //         if ($(this).scrollTop() <= pos.top && fixadent.hasClass('fixed')) {
 
-                fixadent.removeClass('fixed');
+    //             fixadent.removeClass('fixed');
 
-            }
+    //         }
 
-        };
+    //     };
 
-    });
+    // });
 
 
 
