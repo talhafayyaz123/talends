@@ -24,7 +24,7 @@ Version: 1.0.0
 
 /* Theme Reset Style */
 @import url(https://fonts.googleapis.com/css?family=Poppins:400,500,600,700|Open+Sans:400,600,700);
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap');
 * {
 	margin: 0px;
 	padding: 0px;
@@ -41,8 +41,9 @@ Version: 1.0.0
 
 body {
 	background: #fff;
-	overflow-x: hidden;
-	font-family: trajanPro,sans-serif;
+	/* overflow-x: hidden; */
+	/* font-family: trajanPro,sans-serif; */
+	font-family: 'Montserrat', sans-serif;
     font-weight: 300;
     line-height: 1.4;
     font-size: 16px;
@@ -64,7 +65,7 @@ body h6 {
 	font-style: normal;
 	text-transform: capitalize;
 	/* font-family: 'Poppins', Arial, Helvetica, sans-serif; */
-	font-family: trajanPro,sans-serif;
+	font-family: 'Montserrat', sans-serif;
 
 }
 
@@ -177,7 +178,7 @@ input[type="color"],
 .uneditable-input {
 	color: #999;
 	outline: none;
-	height: 50px;
+	height: 46px;
 	background: #fff;
 	font-size: 14px;
 	-webkit-box-shadow: none;
@@ -185,8 +186,8 @@ input[type="color"],
 	line-height: 18px;
 	padding: 10px 20px;
 	border-radius: 4px;
-	display: inline-block;
-	vertical-align: middle;
+	display:block;
+	/* vertical-align: middle; */
 	border: 1px solid #ddd;
 	text-transform: inherit;
 	-webkit-box-sizing: border-box;
@@ -424,6 +425,7 @@ address {
 	width: 100%;
 	float: left;
 	position: relative;
+	/* white-space: nowrap; */
 }
 
 .wt-radio label,
@@ -566,12 +568,11 @@ address {
 /* Theme Global Elements */
 .wt-haslayout {
 	width: 100%;
-	float: left;
 }
 
-.wt-main-section {
+/* .wt-main-section {
 	padding: 80px 0;
-}
+} */
 
 .wt-paddingnull {
 	padding: 0;
@@ -599,7 +600,7 @@ address {
 
 .wt-btn {
 	color: #fff;
-	padding: 0 50px;
+	padding: 0 30px;
 	background: #fff;
 	position: relative;
 	text-align: center;
@@ -607,7 +608,7 @@ address {
 	display: inline-block;
 	vertical-align: middle;
 	text-transform: uppercase;
-	font: 700 13px/50px 'Poppins', Arial, Helvetica, sans-serif;
+	font: 700 13px/45px 'Poppins', Arial, Helvetica, sans-serif;
 }
 
 input[type=submit],
@@ -1324,7 +1325,7 @@ li.wt-rss a {
 
 .wt-formtheme {
 	width: 100%;
-	float: left;
+	/* float: left; */
 }
 
 .wt-formtheme fieldset {
@@ -1332,7 +1333,7 @@ li.wt-rss a {
 	margin: 0;
 	padding: 0;
 	width: 100%;
-	float: left;
+	/* float: left; */
 	position: relative;
 }
 
@@ -1512,9 +1513,9 @@ li.wt-rss a {
 }
 
 /* Theme Styling */
-.wt-main {
+/* .wt-main {
 	padding: 0 0 20px;
-}
+} */
 
 #pages-list .wt-footeraboutus {
 	margin-top: 0;
@@ -2181,7 +2182,7 @@ body.wt-login .wt-userlogedin {
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-	-webkit-align-content: center;
+	/* -webkit-align-content: center; */
 	-ms-flex-line-pack: center;
 	height: 100%;
 }
@@ -2430,7 +2431,7 @@ body.wt-login .wt-userlogedin {
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-	-webkit-align-content: center;
+	/* -webkit-align-content: center; */
 	-ms-flex-line-pack: center;
 }
 
@@ -2566,7 +2567,7 @@ body.wt-login .wt-userlogedin {
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-	-webkit-align-content: center;
+	/* -webkit-align-content: center; */
 	-ms-flex-line-pack: center;
 }
 
@@ -2734,7 +2735,7 @@ body.wt-login .wt-userlogedin {
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-	-webkit-align-content: center;
+	/* -webkit-align-content: center; */
 	-ms-flex-line-pack: center;
 	position: relative;
 }
@@ -3177,7 +3178,7 @@ body.wt-login .wt-userlogedin {
 }
 
 .wt-tagsshare .wt-tag span {
-	float: left;
+	/* float: left; */
 	font-size: 14px;
 	line-height: 18px;
 	display: inline-block;
@@ -3488,10 +3489,10 @@ body.wt-login .wt-userlogedin {
 	line-height: 18px;
 }
 
-.wt-widgetcontent {
+/* .wt-widgetcontent {
 	float: left;
 	width: 100%;
-}
+} */
 
 .wt-categoriescontent {
 	margin: 0;
@@ -4265,17 +4266,21 @@ body.wt-login .wt-userlogedin {
 	margin: 20px 0 0;
 }
 
-.wt-checkboxholder {
+/* .wt-checkboxholder {
 	float: left;
 	width: 100%;
 	margin: 30px 0 0;
-}
+} */
 
 .wt-checkboxholder .wt-radio,
 .wt-checkboxholder .wt-checkbox {
-	margin: 0 0 20px;
+	margin: 0;
+	padding: .6rem;
 }
-
+.wt-checkboxholder .wt-radio:hover,
+.wt-checkboxholder .wt-checkbox:hover{
+	background: #f5f5f5;
+}
 .wt-checkboxholder .wt-checkbox input[type=checkbox]+label {
 	color: #323232;
 	font-size: 14px;
@@ -4470,7 +4475,7 @@ body.wt-login .wt-userlogedin {
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-	-webkit-align-content: center;
+	/* -webkit-align-content: center; */
 	-ms-flex-line-pack: center;
 	border-right: 1px solid #ddd;
 }
@@ -4521,7 +4526,7 @@ body.wt-login .wt-userlogedin {
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-	-webkit-align-content: center;
+	/* -webkit-align-content: center; */
 	-ms-flex-line-pack: center;
 }
 
@@ -4569,7 +4574,7 @@ body.wt-login .wt-userlogedin {
 
 .wt-formsearch fieldset .form-group .form-control {
 	width: 100%;
-	padding-right: 60px;
+	/* padding-right: 60px; */
 }
 
 .wt-searchgbtn {
@@ -4603,9 +4608,9 @@ body.wt-login .wt-userlogedin {
 	color: #767676;
 }
 
-.wt-formsearch fieldset .wt-checkboxholder {
+/* .wt-formsearch fieldset .wt-checkboxholder {
 	max-height: 150px;
-}
+} */
 
 .wt-formsearch fieldset .wt-checkboxholder .wt-checkbox label img {
 	width: auto;
@@ -5366,7 +5371,7 @@ body.wt-login .wt-userlogedin {
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-	-webkit-align-content: center;
+	/* -webkit-align-content: center; */
 	-ms-flex-line-pack: center;
 }
 
@@ -6365,7 +6370,7 @@ body.wt-login .wt-userlogedin {
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-	-webkit-align-content: center;
+	/* -webkit-align-content: center; */
 	-ms-flex-line-pack: center;
 }
 
@@ -6492,7 +6497,7 @@ body.wt-login .wt-userlogedin {
 	background: url(../images/img-skills.png);
 	background-repeat: repeat;
 	background-size: cover;
-	-webkit-animation: move 2s linear infinite;
+	/* -webkit-animation: move 2s linear infinite; */
 }
 
 @-webkit-keyframes move {
@@ -7368,7 +7373,7 @@ body.wt-login .wt-userlogedin {
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-	-webkit-align-content: center;
+	/* -webkit-align-content: center; */
 	-ms-flex-line-pack: center;
 }
 
@@ -8284,7 +8289,7 @@ table.wt-tablecategories tbody tr td figure {
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-	-webkit-align-content: center;
+	/* -webkit-align-content: center; */
 	-ms-flex-line-pack: center;
 }
 
@@ -8477,7 +8482,7 @@ select.is-invalid {
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-	-webkit-align-content: center;
+	/* -webkit-align-content: center; */
 	-ms-flex-line-pack: center;
 }
 
@@ -8864,7 +8869,7 @@ select.is-invalid {
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-	-webkit-align-content: center;
+	/* -webkit-align-content: center; */
 	-ms-flex-line-pack: center;
 }
 
@@ -9566,7 +9571,7 @@ select.is-invalid {
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-	-webkit-align-content: center;
+	/* -webkit-align-content: center; */
 	-ms-flex-line-pack: center;
 }
 
@@ -9595,7 +9600,7 @@ select.is-invalid {
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-	-webkit-align-content: center;
+	/* -webkit-align-content: center; */
 	-ms-flex-line-pack: center;
 	border: 3px dashed #ddd;
 }
@@ -10814,7 +10819,7 @@ body.lang-ja .wt-loginfooterinfo a+a:before {
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-	-webkit-align-content: center;
+	/* -webkit-align-content: center; */
 	-ms-flex-line-pack: center;
 }
 
@@ -11652,7 +11657,7 @@ body.lang-ja .wt-loginfooterinfo a+a:before {
 	-webkit-align-items: center;
 	-ms-flex-align: center;
 	align-items: center;
-	-webkit-align-content: center;
+	/* -webkit-align-content: center; */
 	-ms-flex-line-pack: center;
 }
 
@@ -14408,7 +14413,7 @@ a:focus {
 	margin-left: 5px;
 	color: #676767;
 	display: inline-block;
-	float: left;
+	/* float: left; */
 	vertical-align: middle;
 }
 
@@ -15724,9 +15729,9 @@ a:focus {
 	border-radius: 4px;
 }
 
-.wt-wrapper {
+/* .wt-wrapper {
 	overflow: hidden;
-}
+} */
 
 .wt-border-bg svg {
 	height: 108px;

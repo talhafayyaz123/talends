@@ -30,7 +30,7 @@
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="row row-eq-height">
-                                <div class="col-md-6 align-self-center">
+                                <div class="col-md-8 col-lg-6 align-self-center">
                                     <div class="content_box_wrapper">
                                         <div class="content_box home_page_banner_description">
                                             {!! $banner_settings->banner_description ?? '' !!}
@@ -40,7 +40,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 align-self-center">
+                                <div class="col-md-4 col-lg-6 align-self-center">
                                     <div class="content_box_wrapper">
                                         <div class="content_box">
                                             @if(isset( $banner_settings->about_talends_image) )
@@ -97,23 +97,23 @@
                     </a>
                 </div>
                 <div class="col-md-4">
-                    <div class="talend_img_card opportunity_card">
-                        <a href="{{ route('Companies') }}">
+                    <a href="{{ route('Companies') }}">
+                        <div class="talend_img_card opportunity_card">
 
                             <h3> {{$find_right_opportunity->features_text ?? '' }} </h3>
                             <!-- <span class="tal-readmore">Read More</span> -->
                             <img src="{{ asset('talends/assets/img/right-arrows.png')}}" alt="">
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
                 <div class="col-md-4">
-                    <div class="talend_img_card opportunity_card">
-                        <a href="{{ route('whyTalends') }}">
+                    <a href="{{ route('whyTalends') }}">
+                        <div class="talend_img_card opportunity_card">
                             <h3> {{$find_right_opportunity->services_description ?? '' }} </h3>
                             <!-- <span class="tal-readmore">Read More</span> -->
                             <img src="{{ asset('talends/assets/img/right-arrows.png')}}" alt="">
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
@@ -122,13 +122,13 @@
 
     <section class="internee_sec theme_bg_dark">
         <div class="container">
-            <div class="row row-eq-height">
+            <div class="row align-items-end">
                 <div class="col-md-7 pb-3 align-self-center">
 
                     {!! $banner_settings->features_text ?? '' !!}
 
                     <a href="#" class="theme_btn inverse_btn">I’m an Intern</a>
-                    <a href="#" class="theme_btn ml-3">I’m Hiring an Intern</a>
+                    <a href="#" class="theme_btn ml-md-3">I’m Hiring an Intern</a>
                 </div>
                 <div class="col-md-5">
                     @if(isset( $banner_settings->talends_project_image) )
@@ -239,45 +239,44 @@
     <section class="">
         <div class="container">
             <div class="row row-eq-height">
-                <div class="col-md-6 mb-4">
+                <div class="col-lg-6 mb-4">
                     @if(isset( $banner_settings->talends_work_image) )
                     <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->talends_work_image)}}"
                         class="w-100" alt="">
                     @endif
                 </div>
-                <div class="col-md-6 pb-3 align-self-center">
+                <div class="col-lg-6 pb-3 align-self-center">
 
                     {!! $banner_settings->services_description ?? '' !!}
 
-                    <div class="d-flex align-contents-center"><a class="theme_btn m-0">Join the community</a>
-                        <p class="d-flex align-items-center mb-0 ml-4">Support 24/7<a class="pl-2"
-                                href="tel:052-768-4867">052-768-4867</a></p>
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-sm-6 col-12 text-center">
+                            <a class="theme_btn m-0">Join the community</a>
+                        </div>
+                        <div class="col-lg-6 col-sm-6 col-12 px-0 text-center">
+                            <p class="mb-0">Support 24/7 <a class="" href="tel:052-768-4867">052-768-4867</a></p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="note-section">
-        <div class="container py-30">
-            <div class="row row-eq-height">
-                <div class="col-xs-12 col-sm-8 theme_bg_dark">
-                {!! $agency_profile->banner_description ?? '' !!}
-                        <a href="{{ route('whyAgencyPlan') }}" class="theme_btn">Create your Agency Profile</a>    
-        
+    <section class="py-4">
+        <div class="container">
+            <div class="row note-row">
+                <div class="col-md-4 order-md-2 px-0 d-flex align-items-stretched">
+                    @if(isset($agency_profile->about_talends_image) )
+                        <img src="{{asset('uploads/home-pages/agency_profile/'.$agency_profile->about_talends_image)}}"
+                        alt="" class="img-fluid w-100">
+                    @endif
                 </div>
-                <div class="col-xs-12 col-sm-4 img-wrap">
-                @if(isset($agency_profile->about_talends_image) )
-                            <img src="{{asset('uploads/home-pages/agency_profile/'.$agency_profile->about_talends_image)}}"
-                                 alt="" class="w-100">
-                            @endif
+                <div class="col-md-8 order-md-1">
+                    {!! $agency_profile->banner_description ?? '' !!}
+                    <a href="{{ route('whyAgencyPlan') }}" class="theme_btn">Create your Agency Profile</a>
                 </div>
             </div>
         </div>
     </section>
-
-
-
-
     <section class="d-none">
         <div class="container py-30">
             <div class="row row-eq-height">

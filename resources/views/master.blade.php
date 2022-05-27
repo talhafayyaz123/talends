@@ -9,7 +9,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="google-signin-client_id" content="673600264341-g8j2kqvt50q3c2ekkuhuh8hunnvheel6.apps.googleusercontent.com">
+  	<meta name="google-signin-client_id" content="673600264341-g8j2kqvt50q3c2ekkuhuh8hunnvheel6.apps.googleusercontent.com">
 
 	@if (trim($__env->yieldContent('title')))
 		<title>@yield('title')</title>
@@ -40,7 +40,7 @@
 		<link href="{{ asset('css/rtl.css') }}" rel="stylesheet">
 	@endif
 	<link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
-
+	<link rel="icon" href="{{{ asset(Helper::getSiteFavicon()) }}}" type="image/x-icon">
 	<link href="{{ asset('css/color.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/maintwo.css') }}" rel="stylesheet">
 	@php echo \App\Typo::setSiteStyling(); @endphp
@@ -81,6 +81,8 @@
 		echo json_encode($trans);
 		?>;
 	</script>
+	<!-- bootstrap icons -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
 </head>
 
 <body class="wt-login {{Helper::getBodyLangClass()}} {{Helper::getTextDirection()}} {{empty(Request::segment(1)) ? 'home-wrapper' : '' }}">
@@ -117,8 +119,7 @@
     <script src="{{ asset('js/jquery-ui-min.js') }}"></script>
 	<script src="{{ asset('talends/assets/js/main.js') }}"></script>
     @stack('scripts')
-    <script>
-		
+    <script>		
         jQuery(window).load(function () {
             jQuery(".preloader-outer").delay(500).fadeOut();
             jQuery(".pins").delay(500).fadeOut("slow");
