@@ -71,7 +71,7 @@ Route::get('why_agency_plan', 'HomeController@whyAgencyPlan')->name('whyAgencyPl
 
 Route::get('company/registration', 'HomeController@companyRegistration')->name('companyRegistraton');
 Route::post('/registration/success', 'HomeController@companyRegistrationSuccess')->name('companyRegistratonSuccess');
-Route::get('registration/again/payment', 'Auth\RegisterController@registrationAgainPayment')->name('registrationAgainPayment');
+Route::get('registration/again/payment/{id}/{package_id}', 'Auth\RegisterController@registrationAgainPayment')->name('registrationAgainPayment');
 
 
 

@@ -20,7 +20,7 @@
                          </p>
                     <a href="{{ route('home') }}" class="theme_btn inverse_btn">Close</a>
                     
-                    <a href="{{url("registration/again/payment",['id'=>$id ])}}" class="theme_btn inverse_btn">Again Payment</a>
+                    <a href="{{url("registration/again/payment",['id'=>$id,'package_id'=>$package_id ])}}" class="theme_btn inverse_btn">Again Payment</a>
 
                 </div>
             </div>

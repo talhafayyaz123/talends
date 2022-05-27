@@ -172,7 +172,7 @@ class Helper extends Model
     }
 
 
-    public static function registrationPayment($amount,$user_id){
+    public static function registrationPayment($amount,$user_id,$package_id){
 
     $curl = curl_init();
     curl_setopt_array($curl, array(
@@ -183,7 +183,7 @@ class Helper extends Model
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n \"tokenise\": 2,\n \"show_save_card\": true,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Company Registration Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://localhost/talends/public/registration/success?user_id=$user_id\",\n    \"return\": \"https://localhost/talends/public/registration/success?user_id=$user_id\"\n  }",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n \"tokenise\": 2,\n \"show_save_card\": true,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Company Registration Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://localhost/talends/public/registration/success?user_id=$user_id&package_id=$package_id\",\n    \"return\": \"https://localhost/talends/public/registration/success?user_id=$user_id&package_id=$package_id\"\n  }",
     CURLOPT_HTTPHEADER => array(
         "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
         "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
@@ -1553,7 +1553,7 @@ return $response;
                     '4' => trans('lang.emp_pkg_opt.banner'),
                     '5' => trans('lang.emp_pkg_opt.pvt_cht'),
                 );
-            } elseif ($role == 'freelancer' || $role == 'company' || $role == 'intern') {
+            } elseif ($role == 'freelancer'  || $role == 'intern') {
                 $list = array(
                     '0' => trans('lang.freelancer_pkg_opt.price'),
                     '1' => trans('lang.freelancer_pkg_opt.no_of_credits'),
@@ -1564,6 +1564,26 @@ return $response;
                     '6' => trans('lang.freelancer_pkg_opt.badge'),
                     '7' => trans('lang.freelancer_pkg_opt.banner'),
                     '8' => trans('lang.freelancer_pkg_opt.pvt_cht'),
+                );
+            }elseif($role == 'company'  ){
+                $list = array(
+                    '0' => trans('lang.freelancer_pkg_opt.price'),
+                    '2' => trans('lang.freelancer_pkg_opt.no_of_skills'),
+                    '3' => trans('lang.freelancer_pkg_opt.no_of_services'),
+                    '4' => trans('lang.freelancer_pkg_opt.no_of_featured_services'),
+                    '5' => trans('lang.freelancer_pkg_opt.pkg_duration'),
+                    '6' => trans('lang.freelancer_pkg_opt.badge'),
+                    '7' => trans('lang.freelancer_pkg_opt.banner'),
+                    '8' => trans('lang.freelancer_pkg_opt.pvt_cht'),
+
+                    '9' => 'Access to Talends Lead Management CRM',
+                    '10' => 'Your Own Landing Page with CMS',
+                    '11' => 'Dedicated Support',
+                    '12' => 'Get a boost visibility',
+                    '13' => 'Get qualified leads and opportunities',
+                    '14' => '0% Commission free on signed deals',
+
+
                 );
             }
             return $list;

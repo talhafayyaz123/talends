@@ -32,12 +32,19 @@ use App\UserPayments;
 use Illuminate\Support\Facades\Mail;
 use App\EmailTemplate;
 use App\Mail\GeneralEmailMailable;
+use App\Services\PaymentService;
 
 
 use function Psy\debug;
 
 class HomeController extends Controller
 {
+
+    protected $paymentService;
+    public function __construct(PaymentService $paymentService)
+    {
+        $this->paymentService = $paymentService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -209,9 +216,12 @@ class HomeController extends Controller
         $locations = Location::select('title', 'id')->get()->pluck('title', 'id')->toArray();
         $company_bedget = Helper::getComapnyBudgetList();
         $languages=Language::all();
+        $package=Package::where('role_id',4)->where('trial','!=',1)->orderBy('id','asc')->take(2)->get();
 
+        $monthly_options = !empty($package[0]->options) ? unserialize($package[0]->options) : array();
+        $yearly_options = !empty($package[1]->options) ? unserialize($package[1]->options) : array();
     
-        return view('auth.company_registration',compact('why_agency_plan','categories','employees','locations','company_bedget','languages'));
+        return view('auth.company_registration',compact('yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
      }
 
      public function companyRegistrationSuccess(Request $request){
@@ -219,8 +229,11 @@ class HomeController extends Controller
        
       
         $content = $request->input();
-        $id = $content['user_id'];
     
+        $id = $content['user_id'];
+
+       $package_id = $content['package_id'];
+
        
         $user_payments=UserPayments::where('user_id',$id)->first();
          
@@ -249,6 +262,10 @@ class HomeController extends Controller
             $expiry_date = Carbon::now()->addMonth();
             $expiry_date = $expiry_date->format('Y-m-d H:i:s');
             
+             // call service to set package record
+             $this->paymentService->purchasePackage($content,$package_id);
+
+            
             UserPayments::where('user_id',$id)->update(
                 [
                    'is_success'=>1,
@@ -272,7 +289,7 @@ class HomeController extends Controller
             return view('auth.company_registration_success',compact('page','home','meta_desc','about_talends'));
            
         }else{
-            return view('auth.company_registration_fail',compact('page','home','meta_desc','about_talends','id'));
+            return view('auth.company_registration_fail',compact('page','home','meta_desc','about_talends','id','package_id'));
 
         }
 

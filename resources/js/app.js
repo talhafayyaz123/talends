@@ -4327,6 +4327,12 @@
              freelancer_options: false,
              banner_option: false,
              private_chat: false,
+             lead_management_crm: false,
+             landing_page_cms: false,
+             package_support: false,
+             boost_visibility: false,
+             leads_opportunities: false,
+             commission_signed_deals: false,
              packageID: '',
              loading: false,
              package: {
@@ -4447,6 +4453,7 @@
                      })
                          .then(function (response) {
                              if (response.data.type == 'success') {
+                                  
                                  if ((response.data.banner_option == 'true')) {
                                      self.banner_option = true;
                                  } else {
@@ -4457,6 +4464,48 @@
                                  } else {
                                      self.private_chat = false;
                                  }
+
+                                  if(response.data.role_id==4){
+                                 if ((response.data.lead_management_crm == 'true')) {
+                                    self.lead_management_crm = true;
+                                } else {
+                                    self.lead_management_crm = false;
+                                }
+
+                                if ((response.data.landing_page_cms == 'true')) {
+                                    self.landing_page_cms = true;
+                                } else {
+                                    self.landing_page_cms = false;
+                                }
+
+                                if ((response.data.package_support == 'true')) {
+                                    self.package_support = true;
+                                } else {
+                                    self.package_support = false;
+                                }
+
+                                if ((response.data.boost_visibility == 'true')) {
+                                    self.boost_visibility = true;
+                                } else {
+                                    self.boost_visibility = false;
+                                }
+
+
+                                if ((response.data.leads_opportunities == 'true')) {
+                                    self.leads_opportunities = true;
+                                } else {
+                                    self.leads_opportunities = false;
+                                }
+
+
+                                if ((response.data.commission_signed_deals == 'true')) {
+                                    self.commission_signed_deals = true;
+                                } else {
+                                    self.commission_signed_deals = false;
+                                }
+
+                            }
+
                              }
                          }).catch(function (error) {
                              console.log(error);
