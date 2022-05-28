@@ -91,13 +91,10 @@
                                         <div class="row">  
                                             
                                                 <div class="col-md-4 mb-3">
-                                                    <input type="radio"> $5
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <input type="radio"> $10
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <input type="radio"> $15
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                                                        <label class="custom-control-label" for="customRadio1">$5</label>
+                                                    </div>
                                                 </div>
                                         </div>                                        
                                     </div>
@@ -110,13 +107,10 @@
                                         <div class="row">  
                                             
                                                 <div class="col-md-4 mb-3">
-                                                    <input type="radio"> Dubai
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <input type="radio"> United Arab Emirates
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <input type="radio"> Pakistan
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                                        <label class="custom-control-label" for="customRadio2">Dubai</label>
+                                                    </div>
                                                 </div>
                                         </div>                                        
                                     </div>
@@ -129,13 +123,10 @@
                                         <div class="row">  
                                             
                                                 <div class="col-md-4 mb-3">
-                                                    <input type="radio"> Less than 5
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <input type="radio"> 10
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <input type="radio"> 30
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                                                        <label class="custom-control-label" for="customRadio3">Less than 10</label>
+                                                    </div>
                                                 </div>
                                         </div>                                        
                                     </div>
