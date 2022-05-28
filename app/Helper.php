@@ -529,33 +529,33 @@ return $response;
     {
         $list = array(
             '1' => array(
-                'title' => '50$',
-                'search_title' => '50$',
+                'title' => '$50',
+                'search_title' => '$50',
                 'value' => '50',
             ),
             '2' => array(
-                'title' => '100$',
-                'search_title' => '100$',
+                'title' => '$100',
+                'search_title' => '$100',
                 'value' => '100',
             ),
             '3' => array(
-                'title' => '500$',
-                'search_title' => '500$',
+                'title' => '$500',
+                'search_title' => '$500',
                 'value' => '500',
             ),
             '4' => array(
-                'title' => '1000$',
-                'search_title' => '1000$',
+                'title' => '$1000',
+                'search_title' => '$1000',
                 'value' => '1000',
             ),
             '5' => array(
-                'title' => '1500$',
-                'search_title' => '1500$',
+                'title' => '$1500',
+                'search_title' => '$1500',
                 'value' => '1500',
             ),
             '6' => array(
-                'title' => '2500$',
-                'search_title' => '2500$',
+                'title' => '$2500',
+                'search_title' => '$2500',
                 'value' => '2500',
             ),
         );

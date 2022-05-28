@@ -108,8 +108,8 @@
 
 	<link href="{{ asset('talends/assets/css/main_customization.css') }}" rel="stylesheet">
 
-	<link href="{{ asset('talends/assets/css/register.css') }}" rel="stylesheet">
-
+<!-- 	<link href="{{ asset('talends/assets/css/register.css') }}" rel="stylesheet">
+ -->
 
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 

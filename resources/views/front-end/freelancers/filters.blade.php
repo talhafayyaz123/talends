@@ -28,14 +28,14 @@
                         @foreach ($categories as $key => $category)
                             @php 
                                 $checked ='';
-                                if( !empty($_GET['category'])  && ($_GET['category']==$category->id)  ){
+                                if( !empty($_GET['category'])  && in_array($category->id,$_GET['category']) ){
                                     $checked ='checked';
                                 }
                             @endphp
                             
                                 <div class="col-md-4">
                                     <span class="wt-checkbox freelancer_category">
-                                        <input id="category-{{{ $key }}}" type="checkbox" id="category" name="category" value="{{{$category->id}}}" {{$checked }} >
+                                        <input id="category-{{{ $key }}}" type="checkbox" id="category" name="category[]" value="{{{$category->id}}}" {{$checked }} >
                                         <label for="category-{{{ $key }}}">{{{ $category->title }}}</label>
                                     </span>
                                 </div>

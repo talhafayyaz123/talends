@@ -48,13 +48,15 @@ Why Join Agency Plan
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="content-box">
-{!! $why_agency_plan->features_text ?? '' !!}
+            {!! $why_agency_plan->features_text ?? '' !!}
                     </div>
                 </div>
                 <div class="col-md-6 text-md-right text-center">
                     <div class="img-box">
-                        <img src="{{asset('uploads/home-pages/find-right-talends/Group 37323.png')}}" class="img-fluid" alt="">
-                    </div>
+                        
+                    @if(isset($why_agency_plan->short_term_project_image) )
+                <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->short_term_project_image)}}" class="img-fluid" alt="">
+                    @endif             
                 </div>
             </div>
         </div>
@@ -136,9 +138,9 @@ Why Join Agency Plan
         <div class="container">
             <div class="row align-items-end">
                 <div class="col-md-7">
-                    {!! $why_agency_plan->work_description ?? '' !!}
+                    <!-- {!! $why_agency_plan->work_description ?? '' !!} -->
 
-                    <div class="block-wrap">
+                  <!--   <div class="block-wrap">
                         <a href="{{ route('companyRegistraton') }}" class="theme_btn inverse_btn">join talends</a>
                         <p>Support 24/7 <span>+971 52 768 4867</span></p>
                     </div> -->
@@ -171,8 +173,10 @@ Why Join Agency Plan
                 </div>
                 <div class="col-md-5">
                     @if( isset($why_agency_plan->talends_work_image ))
-                    <!--  -->
-                    <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->talends_work_image)}}" @endif </div>
+                    
+                    <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->talends_work_image)}}" >
+                    @endif 
+                </div>
                 </div>
             </div>
     </section>
