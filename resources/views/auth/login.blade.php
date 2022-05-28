@@ -2,6 +2,69 @@
 
 @section('content')
 
+<section class="login-auth">   
+    <!-- Page -->
+    <div class="container-fluid h-100">
+        <!-- Row -->
+        <div class="row h-100">
+            <div class="col-md-4 col-lg-5 col-xl-5 d-none d-lg-block text-center auth-left d-lg-flex align-items-center justify-content-center">
+                <div class="mt-5 pt-4 p-2">
+                    <img src="{{asset('talends/assets/img/logo.png')}}" class="img-fluid d-inline-block" alt="logo" width="220">
+                </div>
+            </div>
+            <div class="col-sm-10 col-md-8 col-lg-7 col-xl-7 ml-auto bg-white">
+                <div class="login-auth-content my-md-5">
+                    <div class="text-center">
+                        <img src="{{asset('talends/assets/img/logo.png')}}" class=" d-lg-none d-inline-block img-fluid my-4" width="130" alt="logo">
+                    </div>
+                    <form>
+                        <p>Welcome back!</p>
+                        <h2>Login to your account</h2>
+                        <div class="form-group">
+                            <label>Account Type</label>
+                            <select name="" id="" class="form-control">
+                                <option value="">Freelancer</option>
+                                <option value="">Employer</option>
+                                <option value="">Company</option>
+                                <option value="">Intern</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input class="form-control" placeholder="Enter your email" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input class="form-control" placeholder="Enter your password" type="password">
+                        </div>
+                        <div class="form-group mb-3 text-center">
+                            <button class="btn btn-theme rounded-pill px-5 btn-block">Sign in</button>
+                        </div>
+                        <div class="mb-3">
+                            <a href="javascript:;" class="text-theme">Forgot password?</a>
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="or-text">
+                                <p>or</p>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3 text-center">
+                            <button class="btn btn-outline-theme px-5 rounded-pill btn-block">
+                                <i class="bi-google mr-2"></i> Signin with google
+                            </button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-5 ml-0">
+                        <div>Don't have an account? <a href="register.html" class="text-theme">Register Here</a></div>
+                    </div>					  
+                </div>
+            </div>
+                    
+        </div>
+        <!-- End Row -->
+
+    </div>
+</section>
 <div class="container login-screen">
 
     <div class="row justify-content-center">
@@ -220,7 +283,8 @@
         </div>
 
     </div>
-
+    </div>
+</div>
     @endsection
 
     @push('scripts')

@@ -594,30 +594,24 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
         </div>
     </div> -->
     <style>
-        .entity-form{display: none;}
+        .entity-form,
+        #register-text{display: none;}
     </style>
     <section class="auth-sec">
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <div class="d-flex align-items-center min-vh-100">
-                    <div class="w-100 d-block bg-white shadow-lg rounded my-5">
+                    <div class="w-75 d-block bg-white shadow-lg rounded my-5 mx-auto">
                         <div class="row">
-                            
-                            <div class="col-lg-6">
+                            <div class="col-lg-7">
                                 <div class="auth-content">
-                                    <div class="row align-items-center">
-                                        <div class="col-lg-6">
-                                            <h3>Ready to get customers from <span>Dubai & UAE</span></h3>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <p>We need you to help us with some basic information for your account creation. Here are our <a href="javascript:;">terms and conditins</a>. Please read them carefully. We are GDRP compliiant</span></p>
-                                        </div>
-                                    </div>
-                                    <hr style="border-top: 1px dashed #dedede;">
-                                    <form action="" class="mt-4">
-                                        <div class="row" id="entityType">
-                                            <div class="col-lg-6">
+                                    <form action="">
+                                        <div class="row pb-5 mb-4" id="entityType">
+                                            <div class="col-12">
+                                                <h3 class="mb-4">Ready to get customers <br/>from <span class="text-theme">Dubai & UAE</span></h3>
+                                            </div>
+                                            <div class="col-lg-6 pt-5">
                                                 <div class="custom-control custom-radio entity-box">
                                                     <input type="radio" id="customRadio1" name="customRadio" value="freelancer" class="custom-control-input">
                                                     <label class="custom-control-label" for="customRadio1">
@@ -625,7 +619,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-6 pt-5">
                                                 <div class="custom-control custom-radio entity-box">
                                                     <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="employer">
                                                     <label class="custom-control-label" for="customRadio2">
@@ -679,7 +673,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                         <option>Hybrid</option>
                                                     </select>
                                                 </div>
-                                                <div class="col-lg-6 mb-3">
+                                                <div class="col-lg-6 mb-5">
                                                     <select class="form-control">
                                                         <option>Location</option>
                                                         <option>Male</option>
@@ -687,7 +681,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                         <option>Do not wish to declare</option>
                                                     </select>
                                                 </div>
-                                                <div class="col-lg-6 mb-3">
+                                                <div class="col-lg-6 mb-5">
                                                     <select class="form-control">
                                                         <option>Price</option>
                                                         <option>$10</option>
@@ -695,16 +689,8 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                         <option>$100</option>
                                                     </select>
                                                 </div>
-                                                <div class="col-12 mb-3">
-                                                    <div class="custom-control custom-checkbox custom-control-inline">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                                        <label class="custom-control-label" for="customCheck1">
-                                                        Agree to our<a href="javascript:;" class="btn-link text-success"> terms and conditions</a>
-                                                        </label>
-                                                    </div>
-                                                </div>
                                                 <div class="col-12 mb-3 text-center">
-                                                    <button class="btn btn-theme rounded-pill" style="width: 350px;">Create Account</button>
+                                                    <button class="btn btn-theme rounded-pill" style="width: 300px;">Create Account</button>
                                                 </div>
                                                 <div class="col-12 mb-3">
                                                     <div class="or-text">
@@ -712,7 +698,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                     </div>
                                                 </div>
                                                 <div class="col-12 mb-3 text-center">
-                                                    <button class="btn btn-outline-theme rounded-pill" style="width: 350px;">
+                                                    <button class="btn btn-outline-theme rounded-pill" style="width: 300px;">
                                                         <i class="bi-google mr-2"></i> Signin with google
                                                     </button>
                                                 </div>
@@ -725,7 +711,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                     <a href="javascript:;" class="ml-2 btn-link text-success">Create Account</a>
                                                 </div>
                                                 <div class="col-12 text-center mb-3">
-                                                    <p class="small">By creating an account, you agree to the Pangea's 
+                                                    <p class="small">By creating an account, you agree to the Talends 
                                                         <a href="javascript:;" class="btn-link text-success">Terms of Service</a> and 
                                                         <a href="javascript:;" class="btn-link text-success">Privacy Policy</a>.
                                                     </p>
@@ -769,14 +755,6 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                         <option>Female</option>
                                                         <option>Do not wish to declare</option>
                                                     </select>
-                                                </div>
-                                                <div class="col-12 mb-3">
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input" id="accountCheck">
-                                                        <label class="custom-control-label" for="accountCheck">
-                                                            Agree to our<a href="javascript:;" class="btn-link text-success"> terms and conditions</a>
-                                                        </label>
-                                                    </div>
                                                 </div>
                                                 <div class="col-12 mb-3 text-center">
                                                     <button class="btn btn-theme rounded-pill" style="width: 350px;">Create Account</button>
@@ -951,14 +929,6 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                 <div class="col-lg-6 mb-3">
                                                     <input type="search" class="form-control" placeholder="Specialization">
                                                 </div>
-                                                <div class="col-12 mb-3">
-                                                    <div class="custom-control custom-checkbox custom-control-inline">
-                                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                                        <label class="custom-control-label" for="customCheck1">
-                                                        Agree to our<a href="javascript:;" class="btn-link text-success"> terms and conditions</a>
-                                                        </label>
-                                                    </div>
-                                                </div>
                                                 <div class="col-lg-12 mb-3 text-center">
                                                     <button class="btn btn-theme rounded-pill px-5" style="width: 350px;">Create Account</button>
                                                 </div>
@@ -991,8 +961,10 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                     </form>
                                 </div>
                             </div> <!-- end col -->
-                            <div class="col-lg-6 d-none d-lg-block rounded-right">
-                                <div class="bg-login"></div>
+                            <div class="col-lg-5 d-none d-lg-block rounded-right ml-auto">
+                                <div class="bg-login pt-4">
+                                    <h3 id="register-text">Ready to get customers from <span class="text-success">Dubai & UAE</span></h3>
+                                </div>
                             </div>
                         </div> 
                     </div> 
@@ -1012,6 +984,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                 var targetBox = $("." + inputValue);
                 $(".mytab").not(targetBox).hide();
                 $(targetBox).show();
+                $("#register-text").show();
                 $("#entityType").hide();
             });
             
