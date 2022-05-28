@@ -576,12 +576,6 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 	border-bottom-right-radius: 16px;
 	border-top-left-radius: 16px;
 }
-
-.opportunity_card:hover img {
-	/* left: 32px; */
-
-}
-
 .opportunity_card:hover {
 	background: #166702 !important;
 }
@@ -721,7 +715,7 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 }
 .plan {
     border: 1px solid #2E6434;
-    padding: 2em 4em;
+    padding: 2em 3em;
     border-radius: 12px;
 }
 .price-feature > li {
@@ -786,6 +780,13 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
     display: block;
     width: 310px;
     margin: 1em auto 1em;
+}
+
+.already_member{
+	position: relative;
+    left: 39.65%;
+    font-size: 17px;
+    letter-spacing: 0.25px;
 }
 /*
 .tal-features  > li .t-f .ficon-wrap::before {
@@ -1217,6 +1218,13 @@ a.notif {
 
 /* Abdul Manan's css */
 /* Agency Page */
+.custom-radio .custom-control-label::before{
+	border-radius: 3px;
+}
+.custom-control-input:checked~.custom-control-label::before{
+	border-color: #349F1A;
+	background-color: #349F1A;
+}
 .text-theme{
 	color: #349F1A;
 }
@@ -1440,7 +1448,7 @@ a.notif {
 	font-size: 18px;
 
 }
-#msform {
+#agencyform {
     text-align: center;
     position: relative;
     margin-top: 20px;
@@ -1452,7 +1460,7 @@ a.notif {
     z-index: 0;
 }
 
-#msform fieldset {
+#agencyform fieldset {
     background: white;
     border: 0 none;
     border-radius: 0.5rem;
@@ -1463,7 +1471,7 @@ a.notif {
     position: relative;
     text-align: left;
 }
-#msform label{
+#agencyform label{
     font-weight: 500;
     font-size: 18px;
     line-height: 20px;
@@ -1479,7 +1487,7 @@ a.notif {
     color: #6F6C90;
     position:absolute;
 }
-#msform .form-control{
+#agencyform .form-control{
     background: #FFFFFF;
     border: 1px solid #EFF0F7;
     box-shadow: 0px 2px 6px rgba(19, 18, 66, 0.07);
@@ -1489,14 +1497,14 @@ a.notif {
     border-radius: 50px;
     padding: 7px 50px 7px 20px;
 }
-#msform .form-control:focus{
+#agencyform .form-control:focus{
 	border: 2px solid #349F1A;
 }
 /*Hide all except first fieldset*/
-#msform fieldset:not(:first-of-type) {display: none;}
+#agencyform fieldset:not(:first-of-type) {display: none;}
 
 /*Next Buttons*/
-#msform .action-button {
+#agencyform .action-button {
     background: #349f1a;
     font-weight: bold;
     color: white;
@@ -1508,10 +1516,10 @@ a.notif {
     float: right;
 }
 
-#msform .action-button:hover, 
-#msform .action-button:focus {background-color: #349f1a;}
+#agencyform .action-button:hover, 
+#agencyform .action-button:focus {background-color: #349f1a;}
 /*Previous Buttons*/
-#msform .action-button-previous {
+#agencyform .action-button-previous {
     background: transparent;
     font-weight: bold;
     color: #349f1a;
@@ -1522,8 +1530,8 @@ a.notif {
     margin: 10px 5px 10px 0px;
     float: left;
 }
-#msform .action-button-previous:hover, 
-#msform .action-button-previous:focus {
+#agencyform .action-button-previous:hover, 
+#agencyform .action-button-previous:focus {
     background-color: #349f1a;
 	color: #ffffff;
 }
@@ -1537,19 +1545,19 @@ a.notif {
     font-size: 24px;
     line-height: 35px;
 }
-#msform p{
+#agencyform p{
 	font-size: 18px;
 	color: #170F49;
 }
 /*Icon progressbar*/
-#progressbar {
+#progressbaragency {
     margin-bottom: 30px;
     overflow: hidden;
     border-bottom: 1px solid #e3e4e5;
     padding-bottom: 30px;
 }
-#progressbar .active {color: #349F1A;}
-#progressbar li span{
+#progressbaragency .active {color: #349F1A;}
+#progressbaragency li span{
     color: #6F6C90;
     background: #eff0f6;
     padding: 1rem;
@@ -1561,11 +1569,11 @@ a.notif {
     font-size: 18px;
     font-weight: bold;
 }
-#progressbar .active span {
+#progressbaragency .active span {
     color: #ffffff;
     background-color: #349F1A;
 }
-#progressbar li {
+#progressbaragency li {
     list-style-type: none;
     font-size: 15px;
     width: 25%;
@@ -1574,7 +1582,7 @@ a.notif {
     font-weight: 400;
 }
 /*ProgressBar connectors*/
-#progressbar li:before{
+#progressbaragency li:before{
     content: '';
     width: 100%;
     height: 6px;
@@ -1584,11 +1592,11 @@ a.notif {
     top: 25px;
     z-index: -1;
 }
-#progressbar #account:before{
+#progressbaragency #account:before{
     width: 50%;
     right: 0;
 }
-#progressbar li:after {
+#progressbaragency li:after {
     content: '';
     width: 50%;
     height: 6px;
@@ -1597,21 +1605,21 @@ a.notif {
     top: 25px;
     z-index: -1;
 }
-#progressbar #personal.active::after,
-#progressbar #payment.active::after{
+#progressbaragency #personal.active::after,
+#progressbaragency #payment.active::after{
 	width: 100%;
 	left: 0;
 }
-#progressbar #confirm:before{
+#progressbaragency #confirm:before{
     width: 50%;
     left: 0;
 }
-#progressbar #confirm.active::after{
+#progressbaragency #confirm.active::after{
 	left: 0;
 }
 
 /*Color number of the step and the connector before it*/
-#progressbar li.active:after {
+#progressbaragency li.active:after {
     background: #349F1A;
     color: #ffffff;
 }
@@ -1855,16 +1863,17 @@ a.notif {
 	border-radius: 16px;
 	padding: 30px 50px 0;
 }
-.flex-plans-sec h3 {
+.flex-plans-sec h2 {
     font-weight: 500;
     font-size: 60px;
     line-height: 1.1;
+	color: #ffffff;
     text-transform: capitalize;
 }
-.flex-plans-sec h3 span{
+.flex-plans-sec h2 span{
 	color: #349f1a;
 }
-.flex-plans-sec h6 {
+.flex-plans-sec p {
     font-size: 24px;
     line-height: 1.1;
     text-transform: capitalize;
@@ -1949,7 +1958,7 @@ a.notif {
 		font-size: 32px;
 		line-height: 1.2;
 	}
-	#msform{
+	#agencyform{
 		padding: 20px 20px;
 	}
 	.skill-tags ul{
@@ -1990,13 +1999,20 @@ a.notif {
 	.talends-plan .plan-content .col-plan2{width: auto;}
 }
 
+.company_registration_form i#togglePassword{
+	position: absolute;
+    right: -8px;
+    top: 79%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    padding: 18px 18px;
+}
 
+.error{
+	color: red;
+    font-size: 20px;
+}
 
-
-
-
-
-
-
-
-
+.field_error{
+	border-color: #a94442 !important;
+}

@@ -239,16 +239,19 @@ class PublicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function verifyUserCode(Request $request)
+    public function verifyUserCode($code)
     {
+
+//     session()->put(['user_id' => '108']);
+
         $json = array();
         if (Session::has('user_id')) {
             $id = Session::get('user_id');
             $email = Session::get('email');
             $password = Session::get('password');
             $user = User::find($id);
-            if (!empty($request['code'])) {
-                if ($request['code'] === $user->verification_code) {
+            if (!empty($code)) {
+                if ($code === $user->verification_code) {
                     $user->user_verified = 1;
                     $user->verification_code = null;
                     $user->save();
@@ -277,16 +280,20 @@ class PublicController extends Controller
                             $email_params['name'] = Helper::getUserName($id);
                             $email_params['email'] = $email;
                             $email_params['link'] = url('profile/' . $user->slug);
-                            Mail::to(config('mail.username'))
+                           /*  Mail::to(config('mail.username'))
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_registration',
                                         $template_data,
                                         $email_params
                                     )
-                                );
+                                ); */
                         }
                     }
+
+                    Auth::login($user);
+                    $json['redirect_url'] =env('APP_URL').'/'. $user->getRoleNames()->first().'/dashboard';
+                    session()->forget('user_id');
                     session()->forget('password');
                     session()->forget('email');
                     return $json;
@@ -1195,7 +1202,7 @@ class PublicController extends Controller
     public function checkProposalAuth()
     {
         $json = array();
-        if (Auth::user() && Auth::user()->getRoleNames()->first() === 'freelancer') {
+        if (Auth::user() && (Auth::user()->getRoleNames()->first() === 'freelancer') || (Auth::user()->getRoleNames()->first() === 'intern')  ) {
             $json['auth'] = true;
             return $json;
         } else {

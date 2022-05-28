@@ -72,7 +72,9 @@ class PackageController extends Controller
             $package_options = Helper::getPackageOptions($role_type);
         
             $packages = $this->package::all()->where('role_id', $role->id)->where('trial', 0);
+    
             $purchase_packages = DB::table('items')->select('product_id')->where('subscriber', Auth::user()->id)->get()->pluck('product_id')->toArray();
+            
             $currency   = SiteManagement::getMetaValue('commision');
             $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
             if (file_exists(resource_path('views/extend/back-end/package/index.blade.php'))) {
@@ -187,6 +189,7 @@ class PackageController extends Controller
         if (!empty($slug)) {
             $package = $this->package::where('slug', $slug)->first();
             $options = unserialize($package->options);
+
             $no_of_services = !empty($options['no_of_services']) ? $options['no_of_services'] : null; 
             $no_of_featured_services = !empty($options['no_of_featured_services']) ? $options['no_of_featured_services'] : null; 
             $roles = Role::where('name', '!=', 'admin')->pluck('name', 'id')->toArray();
@@ -194,6 +197,8 @@ class PackageController extends Controller
             $badges = Badge::select('id', 'title')->get()->pluck('title', 'id');
             $employer_trial = $this->package::select('trial')->where('role_id', 2)->where('trial', 1)->get();
             $freelancer_trial = $this->package::select('trial')->where('role_id', 3)->where('trial', 1)->get();
+            $agency_trial = $this->package::select('trial')->where('role_id', 4)->where('trial', 1)->get();
+            
             $package_duration = unserialize($package['options'])['duration'];
             if (!empty($package)) {
                 if (file_exists(resource_path('views/extend/back-end/admin/packages/edit.blade.php'))) {
@@ -225,7 +230,8 @@ class PackageController extends Controller
                             'badges',
                             'employer_trial',
                             'freelancer_trial',
-                            'package_duration'
+                            'package_duration',
+                            'agency_trial'
                         )
                     );
                 }
@@ -296,15 +302,43 @@ class PackageController extends Controller
         $json = array();
         if ($request['slug']) {
             $package = $this->package::where('slug', $request['slug'])->first();
+        
             $options = unserialize($package->options);
             if (!empty($options)) {
                 $json['type'] = 'success';
+                $json['role_id'] = $package->role_id;
                 if ($options['banner_option'] == 'true') {
                     $json['banner_option'] = 'true';
                 }
                 if ($options['private_chat'] == 'true') {
                     $json['private_chat'] = 'true';
                 }
+                
+                if($package->role_id==4){
+                if ($options['lead_management_crm'] == 'true') {
+                    $json['lead_management_crm'] = 'true';
+                }
+                if ($options['landing_page_cms'] == 'true') {
+                    $json['landing_page_cms'] = 'true';
+                }
+              
+                
+                if ($options['package_support'] == 'true') {
+                    $json['package_support'] = 'true';
+                }
+
+                if ($options['boost_visibility'] == 'true') {
+                    $json['boost_visibility'] = 'true';
+                }
+
+                if ($options['leads_opportunities'] == 'true') {
+                    $json['leads_opportunities'] = 'true';
+                }
+
+                if ($options['commission_signed_deals'] == 'true') {
+                    $json['commission_signed_deals'] = 'true';
+                }
+            }
             } else {
                 $json['type'] = 'error';
             }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use App\SiteManagement;
@@ -26,12 +27,24 @@ use App\UserCategories;
 use App\UserSubCategories;
 use App\SubCategories;
 use App\CompanyDetail;
+use App\UserTransactions;
+use App\UserPayments;
+use Illuminate\Support\Facades\Mail;
+use App\EmailTemplate;
+use App\Mail\GeneralEmailMailable;
+use App\Services\PaymentService;
 
 
 use function Psy\debug;
 
 class HomeController extends Controller
 {
+
+    protected $paymentService;
+    public function __construct(PaymentService $paymentService)
+    {
+        $this->paymentService = $paymentService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -166,6 +179,7 @@ class HomeController extends Controller
         }
     }
 
+    
     public function gateway(){
        
         $response=Helper::checkoutPaytab();
@@ -192,8 +206,93 @@ class HomeController extends Controller
 
      public function whyAgencyPlan(){
         $why_agency_plan=AboutTalendsPage::where('page_type','why_agency_plan')->first();
- 
         return view('front-end.pages.why_agency_plan',compact('why_agency_plan'));
+     }
+
+     public function companyRegistration(){
+        $why_agency_plan=AboutTalendsPage::where('page_type','why_agency_plan')->first();
+        $categories = Category::all();
+        $employees = Helper::getEmployeesList();
+        $locations = Location::select('title', 'id')->get()->pluck('title', 'id')->toArray();
+        $company_bedget = Helper::getComapnyBudgetList();
+        $languages=Language::all();
+        $package=Package::where('role_id',4)->where('trial','!=',1)->orderBy('id','asc')->take(2)->get();
+
+        $monthly_options = !empty($package[0]->options) ? unserialize($package[0]->options) : array();
+        $yearly_options = !empty($package[1]->options) ? unserialize($package[1]->options) : array();
+    
+        return view('auth.company_registration',compact('yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
+     }
+
+     public function companyRegistrationSuccess(Request $request){
+
+       
+      
+        $content = $request->input();
+    
+        $id = $content['user_id'];
+
+       $package_id = $content['package_id'];
+
+       
+        $user_payments=UserPayments::where('user_id',$id)->first();
+         
+       $transection=Helper::transection_query($user_payments['tran_ref']);
+       $transection_status=json_decode($transection,true)['payment_result']['response_status'];
+       
+    
+        $inner_page = SiteManagement::getMetaValue('why_talends');
+        $about_talends=AboutTalendsPage::where('page_type','about_talends')->first();
+
+        $page_header = '';
+        $page = array();
+        $home = false;
+
+        $meta_title = !empty($inner_page) && !empty($inner_page[0]['title']) ? $inner_page[0]['title'] : trans('lang.why-talends-title');
+        $meta_desc = !empty($inner_page) && !empty($inner_page[0]['desc']) ? $inner_page[0]['desc'] : trans('lang.why-talends-desc');
+        $page['title'] = $meta_title;
+               
+        if($transection_status=='A' ){
+            // status approved
+            $token = $content['token'];
+            $tranRef = $content['tranRef'];
+            $customer_email = $content['customerEmail'];
+              $cartId=$content['cartId'];
+            
+            $expiry_date = Carbon::now()->addMonth();
+            $expiry_date = $expiry_date->format('Y-m-d H:i:s');
+            
+             // call service to set package record
+             $this->paymentService->purchasePackage($content,$package_id);
+
+            
+            UserPayments::where('user_id',$id)->update(
+                [
+                   'is_success'=>1,
+                   'token'=>$token,
+                   'tran_ref'=>$tranRef,
+                   'customer_email'=>$customer_email,
+                   'expiry_date'=>$expiry_date
+                ]
+      
+              );
+
+              UserTransactions::create([
+               'user_id'=>$id,
+               'tran_ref'=>$tranRef,
+               'cart_id	'=>$cartId,
+               'cart_amount'=>$user_payments['cart_amount'],
+               'transection_type'=>'sale'
+              ]);
+
+              session()->put(['user_id' => $id]);
+            return view('auth.company_registration_success',compact('page','home','meta_desc','about_talends'));
+           
+        }else{
+            return view('auth.company_registration_fail',compact('page','home','meta_desc','about_talends','id','package_id'));
+
+        }
+
      }
 
      public function FindRightTalends(){
@@ -470,6 +569,7 @@ class HomeController extends Controller
     $skills     = Skill::all();
     $locations = Location::latest()->get();
     $categories = Category::all();
+    
     $sub_categories='';
     if(!empty($request->get('category_id'))){
 

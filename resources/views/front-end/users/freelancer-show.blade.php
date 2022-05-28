@@ -233,6 +233,7 @@ if($user_role=='freelancer'){
                                 <div class="wt-usertitle wt-titlewithselect">
                                     <h2>{{ trans('lang.client_feedback') }}</h2>
                                 </div>
+                                
                                 @if (!empty($reviews) && $reviews->count() > 0)
                                     @foreach ($reviews as $key => $review)
                                         @php

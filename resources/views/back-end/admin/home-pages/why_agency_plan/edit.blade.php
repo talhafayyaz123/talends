@@ -326,6 +326,22 @@
                             </div>
                         </div>
 
+                        
+                        <div class="wt-jobdescription wt-tabsinfo">
+                            <div class="wt-tabscontenttitle">
+                                <h2>Monthly Plan Price</h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                    <div class="form-group">
+                                    {!! Form::number('monthly_plan_price',  e($why_agency_plan['agencies_benefits']), array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}                                    </div>
+
+                                </fieldset>
+
+
+                            </div>
+                        </div>
+
 
                         <div class="wt-jobdescription wt-tabsinfo">
                             <div class="wt-tabscontenttitle">
@@ -343,7 +359,20 @@
                             </div>
                         </div>
 
+                        <div class="wt-jobdescription wt-tabsinfo">
+                            <div class="wt-tabscontenttitle">
+                                <h2>Yearly Plan Price</h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                    <div class="form-group">
+                                    {!! Form::number('yearly_plan_price',  e($why_agency_plan['government_benefits']), array('class' => 'form-control', 'placeholder' => trans('lang.menu_title'))) !!}                                    </div>
 
+                                </fieldset>
+
+
+                            </div>
+                        </div>
 
 
                         <div class="wt-jobcategories wt-tabsinfo">

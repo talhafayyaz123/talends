@@ -244,10 +244,11 @@ class CompanyController extends Controller
                 'email' => 'required',
               'phone_number' => 'required',
                 'description' => 'required',
+                'question.*' => 'required',
           ]
 
         );
-
+       
         $full_name=$request['full_name'];
         $company_name=$request['company_name'];
         $email=$request['email'];
@@ -261,7 +262,8 @@ class CompanyController extends Controller
         'email'=>  $email,
         'phone_number'=>  $mobile_number,
         'detail'=>  $description,
-        'is_seen'=>0
+        'is_seen'=>0,
+        'questions'=> !empty($request['question']) ? serialize($request['question']) : '',
         ]);
 
         Session::flash('message', 'Response has been saved');
@@ -290,6 +292,7 @@ class CompanyController extends Controller
 
     public function companyHiringRequestDetail($id){
         $hiring_request=HireAgency::where('id',$id)->first();
+        $questions = !empty($hiring_request) && !empty($hiring_request->questions) ? unserialize($hiring_request->questions) : '';
         
         $sub_cat= HireAgency::where('id',$id)->update([
             'is_seen'=> 1
@@ -299,6 +302,7 @@ class CompanyController extends Controller
         return view(
             'back-end.company.hiring_requests.show',
             compact(
+                'questions',
                 'hiring_request'
             )
         );

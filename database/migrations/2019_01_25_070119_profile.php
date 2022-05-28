@@ -45,6 +45,12 @@ class Profile extends Migration
                 $table->string('university')->nullable();
                 $table->string('company_type')->nullable();
 
+                $table->string('company_name')->nullable();
+                $table->integer('company_language')->nullable();
+                $table->string('company_website')->nullable();
+                $table->string('phone_number')->nullable();
+
+
 
                 $table->integer('no_of_employees')->nullable();
                 $table->string('freelancer_type')->nullable();

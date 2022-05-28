@@ -12,9 +12,9 @@ Why Join Agency Plan
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 text-center pb-5">
-                    <h2>Get projects from Dubai and Drive Revenue like Never <span>Before</span></h2>
-                    <p>Dubai is known for it’s thriving economy, advanced Technology infrastructure & Luxury. Talends.com is first one of it’s kind premium agencies marketplace that connects world-class agencies to Dubai & UAE.</p>
-                   <!-- {!! $why_agency_plan->banner_description ?? '' !!} -->
+                    <!-- <h2>Get projects from Dubai and Drive Revenue like Never <span>Before</span></h2> -->
+                    <!-- <p>Dubai is known for it’s thriving economy, advanced Technology infrastructure & Luxury. Talends.com is first one of it’s kind premium agencies marketplace that connects world-class agencies to Dubai & UAE.</p> -->
+                   {!! $why_agency_plan->banner_description ?? '' !!}
                     <a href="{{ route('register') }}" class="btn btn-theme px-4 rounded-pill">Register Your Agency</a>
                 </div>
             </div>
@@ -38,7 +38,7 @@ Why Join Agency Plan
                 </div>
                 <div class="col-md-6">
                     <ul class="theme_list_labels">
-                    {!! $why_agency_plan->services_description ?? '' !!}
+                        {!! $why_agency_plan->services_description ?? '' !!}
 
                     </ul>
                 </div>
@@ -50,8 +50,9 @@ Why Join Agency Plan
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="content-box">
-                        <h2>How Talends brings The best for every<span>agency</span></h2>
-                        <p>Your all-in-one marketing and sales solution for your agency much affordable & Generate Leads that are 100 times better than many marketing tools</p>
+                        <!-- <h2>How Talends brings The best for every<span>agency</span></h2> -->
+                        <!-- <p>Your all-in-one marketing and sales solution for your agency much affordable & Generate Leads that are 100 times better than many marketing tools</p> -->
+                        {!! $why_agency_plan->features_text ?? '' !!}
                     </div>
                 </div>
                 <div class="col-md-6 text-md-right text-center">
@@ -66,7 +67,7 @@ Why Join Agency Plan
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                {!! $why_agency_plan->project_description ?? '' !!}
+                    {!! $why_agency_plan->project_description ?? '' !!}
 
                 </div>
                 <div class="col-md-6">
@@ -74,10 +75,10 @@ Why Join Agency Plan
                         <li>
                             <div class="t-f">
                                 <div class="ficon-wrap">
-                                @if(isset($why_agency_plan->talends_project_image) )
-                            <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->talends_project_image)}}"
-                                 alt="" class="w-100">
-                            @endif                                </div>
+                                    @if(isset($why_agency_plan->talends_project_image) )
+                                    <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->talends_project_image)}}" alt="" class="w-100">
+                                    @endif
+                                </div>
                                 <div class="ftitle-wrap">
                                     <strong>Strengthen your online reputation</strong>
                                 </div>
@@ -86,10 +87,10 @@ Why Join Agency Plan
                         <li>
                             <div class="t-f">
                                 <div class="ficon-wrap">
-                                @if(isset($why_agency_plan->short_term_project_image) )
-                            <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->short_term_project_image)}}"
-                                 alt="" class="w-100">
-                            @endif                                </div>
+                                    @if(isset($why_agency_plan->short_term_project_image) )
+                                    <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->short_term_project_image)}}" alt="" class="w-100">
+                                    @endif
+                                </div>
                                 <div class="ftitle-wrap">
                                     <strong>Strengthen your online reputation</strong>
                                 </div>
@@ -98,10 +99,10 @@ Why Join Agency Plan
                         <li>
                             <div class="t-f">
                                 <div class="ficon-wrap">
-                                @if(isset($why_agency_plan->recurring_engagements_image) )
-                            <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->recurring_engagements_image)}}"
-                                 alt="" class="w-100">
-                            @endif                                 </div>
+                                    @if(isset($why_agency_plan->recurring_engagements_image) )
+                                    <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->recurring_engagements_image)}}" alt="" class="w-100">
+                                    @endif
+                                </div>
                                 <div class="ftitle-wrap">
                                     <strong>Strengthen your online reputation</strong>
                                 </div>
@@ -125,10 +126,10 @@ Why Join Agency Plan
                 </div>
                 <div class="col-md-9">
                     <div class="trustedby_box">
-                    @if(isset($why_agency_plan->long_term_work_image) )
-                            <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->long_term_work_image)}}"
-                                 alt="" class="w-100">
-                            @endif                      </div>
+                        @if(isset($why_agency_plan->long_term_work_image) )
+                        <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->long_term_work_image)}}" alt="" class="w-100">
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
@@ -139,15 +140,15 @@ Why Join Agency Plan
         <div class="container">
             <div class="row align-items-end">
                 <div class="col-md-7">
-                    <!-- {!! $why_agency_plan->work_description ?? '' !!}
-                    <div class="block-wrap">
-                        <a href="{{ route('register') }}" class="theme_btn inverse_btn">join talends</a>
+                    <!--<div class="block-wrap">
+                        <a href="{{ route('companyRegistraton') }}" class="theme_btn inverse_btn">join talends</a>
                         <p>Support 24/7 <span>+971 52 768 4867</span></p>
                     </div> -->
                     <div class="content-box">
-                        <h3>Our Flexible & Affordable <span>plans</span></h3>
-                        <h6>“You grow we Grow”</h6>
-                        <ul class="my-5">
+                        {!! $why_agency_plan->work_description ?? '' !!}
+                        <!-- <h3>Our Flexible & Affordable <span>plans</span></h3> -->
+                        <!-- <h6>“You grow we Grow”</h6> -->
+                        <!-- <ul class="my-5">
                             <div class="row p-0">
                                 <div class="col-md-6">
                                     <li>Get a certified member badge</li>
@@ -162,7 +163,7 @@ Why Join Agency Plan
                                     <li>Dedicated Support</li>
                                 </div>
                             </div>                            
-                        </ul>
+                        </ul> -->
                         <div class="mb-5">
                             <a href="{{ route('register') }}" class="rounded-pill px-4 btn mb-2">Talk to an Advisor</a>
                             <span class="ml-md-4 mb-2">Support 24/7 <a href="tel:+971 52 768 4867" class="phone-number ml-2">+971 52 768 4867</a></span>
@@ -172,13 +173,12 @@ Why Join Agency Plan
 
                 </div>
                 <div class="col-md-5">
-                    <img src="{{asset('uploads/home-pages/why_agency_plan/plan-img.png')}}" class="img-fluid"/>
-                    <!-- @if( isset($why_agency_plan->talends_work_image ))
-                    <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->talends_work_image)}}"/>
-                    @endif -->
+                    <!-- <img src="{{asset('uploads/home-pages/why_agency_plan/plan-img.png')}}" class="img-fluid"/> -->
+                    @if( isset($why_agency_plan->talends_work_image ))
+                        <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->talends_work_image)}}"/>
+                    @endif
                 </div>
             </div>
-        </div>
     </section>
     <div class="talends-plan">
         <div class="container">
@@ -326,7 +326,8 @@ Why Join Agency Plan
             </div>
         </div>
     </section>
-    <!-- <section class="tal-p-plans">
+    
+    <!--<section class="tal-p-plans">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -335,14 +336,12 @@ Why Join Agency Plan
                             <div class="plan">
                                 {!! $why_agency_plan->payment_description ?? '' !!}
 
-                                  <a class="plan-btn" href="#">Choose</a>
+                                <a class="plan-btn" href="{{url("company/registration",['plan'=>'monthly' ])}}">Choose</a>
 
                             </div>
                             <div class="plan">
                                 {!! $why_agency_plan->support_description ?? '' !!}
-
-                                <a class="plan-btn" href="#">Choose</a>
-
+                                <a class="plan-btn" href="{{url("company/registration",['plan'=>'yearly' ])}}">Choose</a>
                             </div>
                         </div>
                     </div>
@@ -357,7 +356,7 @@ Why Join Agency Plan
                     <h3>Frequently asked questions</h3>
                 </div>
                 <div class="col-md-8">
-                {!! $why_agency_plan->freelancer_benefits ?? '' !!}
+                    {!! $why_agency_plan->freelancer_benefits ?? '' !!}
 
                 </div>
             </div>
@@ -367,8 +366,8 @@ Why Join Agency Plan
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12 theme_bg_dark text-center text-white custom-banner">
-                    <h2 class="text-white">Your one-in-all platform to increase your Agency Sales in <span class="text-theme">Dubai & UAE</span></h2>
-                    <!-- {!! $why_agency_plan->internees_benefits ?? '' !!} -->
+                    <!-- <h2 class="text-white">Your one-in-all platform to increase your Agency Sales in <span class="text-theme">Dubai & UAE</span></h2> -->
+                    {!! $why_agency_plan->internees_benefits ?? '' !!}
                     <a href="#" class="btn btn-theme-white rounded-pill px-4">Register your Agecny</a>
                 </div>
             </div>

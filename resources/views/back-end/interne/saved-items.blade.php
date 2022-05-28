@@ -80,7 +80,7 @@
                                     @endif
                                 @endif
                             </div>
-                            @if ( method_exists($saved_jobs,'links') )
+                            @if ( !empty($saved_jobs) &&  method_exists($saved_jobs,'links') )
                                 {{ $saved_jobs->links('pagination.custom') }}
                             @endif
                         </div>
@@ -133,7 +133,7 @@
                                     @endif
                                 @endif
                             </div>
-                            @if ( method_exists($saved_employers,'links') )
+                            @if ( !empty($saved_employers) &&  method_exists($saved_employers,'links') )
                                 {{ $saved_employers->links('pagination.custom') }}
                             @endif
                         </div>
@@ -204,7 +204,7 @@
                                     @endif
                                 @endif
                             </div>
-                            @if ( method_exists($saved_freelancers,'links') )
+                            @if  ( !empty($saved_freelancers) && method_exists($saved_freelancers,'links') )
                                 {{ $saved_freelancers->links('pagination.custom') }}
                             @endif
                         </div>

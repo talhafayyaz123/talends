@@ -70,6 +70,9 @@
                     </table>
                 </div>
                     @if ($mode == 'true' && !empty($payment_gateway))
+
+                    <input type="hidden" value="{{ $id }}" id='package_id'>
+
                         <div class="sj-checkpaymentmethod">
                             <div class="sj-title">
                                 <h3>{{ trans('lang.select_pay_method') }}</h3>
@@ -86,6 +89,11 @@
                                             <a href="javascrip:void(0);" v-on:click.prevent="getStriprForm">
                                                 <i class="fab fa-stripe-s"></i>
                                                 <span><em>{{ trans('lang.pay_amount_via') }}</em> {{ Helper::getPaymentMethodList($gatway)['title']}} {{ trans('lang.pay_gateway') }}</span>
+                                            </a>
+                                            @elseif($gatway == "paytab")
+                                        <a href="javascrip:void(0);" @click="paytabPackagePayment">
+                                                <i class="fa fa-credit-card"></i>
+                                                <span><em>Pay via Cedit Card</em> {{ Helper::getPaymentMethodList($gatway)['title']}} {{ trans('lang.pay_gateway') }}</span>
                                             </a>
                                         @endif
                                     </li>

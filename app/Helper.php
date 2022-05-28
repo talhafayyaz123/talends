@@ -35,7 +35,10 @@ use App\Skill;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Schema;
 use Request;
-
+use App\Profile;
+use App\UserCategorySkills;
+use App\CompanyExpertise;
+use App\CompanyDetail;
 /**
  * Class Helper
  *
@@ -91,6 +94,191 @@ class Helper extends Model
     
     }
     }
+    
+
+    public static function packagePaymentPaytab($amount,$id){
+           
+        $user=Auth::user();
+    
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => "https://secure.paytabs.com/payment/request",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "POST",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://localhost/talends/public/redirect/package/paytab?package_id=$id&type=package&user_id=$user->id\",\n    \"return\": \"https://localhost/talends/public/redirect/package/paytab?package_id=$id&type=package&user_id=$user->id\"\n  }",
+    CURLOPT_HTTPHEADER => array(
+        "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
+        "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
+        "cache-control: no-cache",
+        "content-type: application/json"
+    ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+    if ($err) {
+    echo "cURL Error #:" . $err;
+    } else {
+    
+    return $response;
+    
+    }
+    }
+
+
+    public static function ServicePaymentPaytab($amount,$service_id,$service_seller){
+           
+        $user=Auth::user();
+    
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => "https://secure.paytabs.com/payment/request",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "POST",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://localhost/talends/public/redirect/package/paytab?service_id=$service_id&type=project&user_id=$user->id&service_seller=$service_seller\",\n    \"return\": \"https://localhost/talends/public/redirect/package/paytab?service_id=$service_id&type=project&user_id=$user->id&service_seller=$service_seller\"\n  }",
+    CURLOPT_HTTPHEADER => array(
+        "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
+        "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
+        "cache-control: no-cache",
+        "content-type: application/json"
+    ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+    if ($err) {
+    echo "cURL Error #:" . $err;
+    } else {
+    
+    return $response;
+    
+    }
+    }
+
+
+    public static function registrationPayment($amount,$user_id,$package_id){
+
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => "https://secure.paytabs.com/payment/request",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "POST",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n \"tokenise\": 2,\n \"show_save_card\": true,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Company Registration Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://localhost/talends/public/registration/success?user_id=$user_id&package_id=$package_id\",\n    \"return\": \"https://localhost/talends/public/registration/success?user_id=$user_id&package_id=$package_id\"\n  }",
+    CURLOPT_HTTPHEADER => array(
+        "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
+        "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
+        "cache-control: no-cache",
+        "content-type: application/json"
+    ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+    if ($err) {
+    echo "cURL Error #:" . $err;
+    } else {
+    
+    return $response;
+    
+    }
+    }
+
+    public static function recurringPayment($token,$amount,$tran_ref,$cart_id,$user_id){
+
+        
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://secure.paytabs.com/payment/request',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS =>'{
+    "profile_id": "91323",
+    "tran_type": "sale",
+    "tran_class": "recurring",
+    "token":  "'.$token.'",
+    "tran_ref": "'.$tran_ref.'",
+    "cart_id":"'.$cart_id.'",
+    "cart_currency": "AED",
+    "cart_amount": 100,
+    "cart_description": "Company recurring Payment",
+    "callback": "https://localhost/talends/public/registration/success?user_id='.$user_id.'"
+}',
+  CURLOPT_HTTPHEADER => array(
+    'authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6',
+    'content-type: application/json'
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+return $response;
+        }
+ 
+     public static function transection_query($tran_ref){
+         
+        $curl = curl_init();
+        
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => "https://secure.paytabs.com/payment/query",
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "POST",
+          CURLOPT_POSTFIELDS => "{\r\n  \"profile_id\": \"91323\",\r\n  \"tran_ref\": \"$tran_ref\"\r\n}",
+          CURLOPT_HTTPHEADER => array(
+            "Postman-Token: ed553a7a-f8a3-4ab8-914a-dc2f303dd116",
+            "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
+            "cache-control: no-cache",
+            "content-type: application/json"
+          ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+    
+        curl_close($curl);
+    
+        if ($err) {
+        echo "cURL Error #:" . $err;
+        } else {
+        
+        return $response;
+        
+        }
+     }
+
      public static function getfooterHowWork(){
         $footer_how_work=AboutTalendsPage::where('page_type','footer-how-work')->first();
         return $footer_how_work;
@@ -1365,7 +1553,7 @@ class Helper extends Model
                     '4' => trans('lang.emp_pkg_opt.banner'),
                     '5' => trans('lang.emp_pkg_opt.pvt_cht'),
                 );
-            } elseif ($role == 'freelancer' || $role == 'company' ) {
+            } elseif ($role == 'freelancer'  || $role == 'intern') {
                 $list = array(
                     '0' => trans('lang.freelancer_pkg_opt.price'),
                     '1' => trans('lang.freelancer_pkg_opt.no_of_credits'),
@@ -1376,6 +1564,26 @@ class Helper extends Model
                     '6' => trans('lang.freelancer_pkg_opt.badge'),
                     '7' => trans('lang.freelancer_pkg_opt.banner'),
                     '8' => trans('lang.freelancer_pkg_opt.pvt_cht'),
+                );
+            }elseif($role == 'company'  ){
+                $list = array(
+                    '0' => trans('lang.freelancer_pkg_opt.price'),
+                    '2' => trans('lang.freelancer_pkg_opt.no_of_skills'),
+                    '3' => trans('lang.freelancer_pkg_opt.no_of_services'),
+                    '4' => trans('lang.freelancer_pkg_opt.no_of_featured_services'),
+                    '5' => trans('lang.freelancer_pkg_opt.pkg_duration'),
+                    '6' => trans('lang.freelancer_pkg_opt.badge'),
+                    '7' => trans('lang.freelancer_pkg_opt.banner'),
+                    '8' => trans('lang.freelancer_pkg_opt.pvt_cht'),
+
+                    '9' => 'Access to Talends Lead Management CRM',
+                    '10' => 'Your Own Landing Page with CMS',
+                    '11' => 'Dedicated Support',
+                    '12' => 'Get a boost visibility',
+                    '13' => 'Get qualified leads and opportunities',
+                    '14' => '0% Commission free on signed deals',
+
+
                 );
             }
             return $list;
@@ -5129,6 +5337,53 @@ class Helper extends Model
         $data['sectionColor'] = '#ffffff';
         return serialize($data);
     }
+
+
+   public static function getProfileCompleteRatio()
+   {
+       $ratio=30;
+       $user_id=Auth::user()->id;
+       $user_category_skills=UserCategorySkills::where('user_id',$user_id)->count();
+       $company_expertise=CompanyExpertise::where('user_id',$user_id)->first();
+       $profile=Profile::where('user_id',$user_id)->first();
+       $company_detail=CompanyDetail::where('user_id',$user_id)->first();
+
+       if($user_category_skills!=0){
+         $ratio+=5;
+       }
+
+         if($company_expertise){
+            $ratio+=10;
+
+         }
+
+         if($profile->projects){
+            $ratio+=10;
+         }
+
+         if($profile->banner){
+            $ratio+=10;
+         }
+
+         if($profile->avater){
+            $ratio+=10;
+         }
+
+         if($profile->hourly_rate){
+            $ratio+=10;
+         }
+        if($company_detail ){
+        if($company_detail->detail){
+            $ratio+=5;
+        }
+        if($company_detail->portfolio){
+            $ratio+=10;
+        }
+        }
+      return $ratio;
+   }
+
+  
 
     /**
      * Get Seeder Data

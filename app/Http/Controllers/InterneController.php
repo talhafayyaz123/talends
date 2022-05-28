@@ -754,7 +754,7 @@ class InterneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showFreelancerJobs($status)
+    public function showInterneeJobs($status)
     {
         $ongoing_jobs = array();
         $freelancer_id = Auth::user()->id;
@@ -765,9 +765,10 @@ class InterneController extends Controller
             $completed_jobs = Proposal::select('job_id')->latest()->where('freelancer_id', $freelancer_id)->where('status', 'completed')->paginate(7);
             $cancelled_jobs = Proposal::select('job_id')->latest()->where('freelancer_id', $freelancer_id)->where('status', 'cancelled')->paginate(7);
             if (!empty($status) && $status === 'hired') {
+                
                 if (file_exists(resource_path('views/extend/back-end/freelancer/jobs/ongoing.blade.php'))) {
                     return view(
-                        'extend.back-end.freelancer.jobs.ongoing',
+                        'extend.back-end.interne.jobs.ongoing',
                         compact(
                             'ongoing_jobs',
                             'symbol'
@@ -775,7 +776,7 @@ class InterneController extends Controller
                     );
                 } else {
                     return view(
-                        'back-end.freelancer.jobs.ongoing',
+                        'back-end.interne.jobs.ongoing',
                         compact(
                             'ongoing_jobs',
                             'symbol'
@@ -785,7 +786,7 @@ class InterneController extends Controller
             } elseif (!empty($status) && $status === 'completed') {
                 if (file_exists(resource_path('views/extend/back-end/freelancer/jobs/completed.blade.php'))) {
                     return view(
-                        'extend.back-end.freelancer.jobs.completed',
+                        'extend.back-end.interne.jobs.completed',
                         compact(
                             'completed_jobs',
                             'symbol'
@@ -793,7 +794,7 @@ class InterneController extends Controller
                     );
                 } else {
                     return view(
-                        'back-end.freelancer.jobs.completed',
+                        'back-end.interne.jobs.completed',
                         compact(
                             'completed_jobs',
                             'symbol'
@@ -803,7 +804,7 @@ class InterneController extends Controller
             } elseif (!empty($status) && $status === 'cancelled') {
                 if (file_exists(resource_path('views/extend/back-end/freelancer/jobs/cancelled.blade.php'))) {
                     return view(
-                        'extend.back-end.freelancer.jobs.cancelled',
+                        'extend.back-end.interne.jobs.cancelled',
                         compact(
                             'cancelled_jobs',
                             'symbol'
@@ -811,7 +812,7 @@ class InterneController extends Controller
                     );
                 } else {
                     return view(
-                        'back-end.freelancer.jobs.cancelled',
+                        'back-end.interne.jobs.cancelled',
                         compact(
                             'cancelled_jobs',
                             'symbol'
@@ -869,7 +870,7 @@ class InterneController extends Controller
                 );
             } else {
                 return view(
-                    'back-end.freelancer.jobs.show',
+                    'back-end.interne.jobs.show',
                     compact(
                         'job',
                         'employer_name',
@@ -890,14 +891,15 @@ class InterneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showFreelancerProposals()
+    public function showInterneProposals()
     {
         $proposals = Proposal::select('job_id', 'status', 'id')->where('freelancer_id', Auth::user()->id)->latest()->paginate(7);
         $currency  = SiteManagement::getMetaValue('commision');
         $symbol    = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
+      
         if (file_exists(resource_path('views/extend/back-end/freelancer/proposals/index.blade.php'))) {
             return view(
-                'extend.back-end.freelancer.proposals.index',
+                'extend.back-end.interne.proposals.index',
                 compact(
                     'proposals',
                     'symbol'
@@ -905,7 +907,7 @@ class InterneController extends Controller
             );
         } else {
             return view(
-                'back-end.freelancer.proposals.index',
+                'back-end.interne.proposals.index',
                 compact(
                     'proposals',
                     'symbol'
@@ -1194,7 +1196,7 @@ class InterneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showServices($status)
+    public function showInterneServices($status)
     {
         $freelancer_id = Auth::user()->id;
         if (Auth::user()) {
@@ -1206,7 +1208,7 @@ class InterneController extends Controller
                 $services = $freelancer->services;
                 if (file_exists(resource_path('views/extend/back-end/freelancer/services/index.blade.php'))) {
                     return view(
-                        'extend.back-end.freelancer.services.index',
+                        'extend.back-end.interne.services.index',
                         compact(
                             'services',
                             'symbol',
@@ -1215,7 +1217,7 @@ class InterneController extends Controller
                     );
                 } else {
                     return view(
-                        'back-end.freelancer.services.index',
+                        'back-end.interne.services.index',
                         compact(
                             'services',
                             'symbol',
@@ -1225,9 +1227,9 @@ class InterneController extends Controller
                 }
             } else if (!empty($status) && $status === 'hired') {
                 $services = Helper::getFreelancerServices('hired', Auth::user()->id);
-                if (file_exists(resource_path('views/extend/back-end/freelancer/services/ongoing.blade.php'))) {
+                if (file_exists(resource_path('views/extend/back-end/interne/services/ongoing.blade.php'))) {
                     return view(
-                        'extend.back-end.freelancer.services.ongoing',
+                        'extend.back-end.interne.services.ongoing',
                         compact(
                             'services',
                             'symbol'
@@ -1235,7 +1237,7 @@ class InterneController extends Controller
                     );
                 } else {
                     return view(
-                        'back-end.freelancer.services.ongoing',
+                        'back-end.interne.services.ongoing',
                         compact(
                             'services',
                             'symbol'
@@ -1244,9 +1246,9 @@ class InterneController extends Controller
                 }
             } elseif (!empty($status) && $status === 'completed') {
                 $services = Helper::getFreelancerServices('completed', Auth::user()->id);
-                if (file_exists(resource_path('views/extend/back-end/freelancer/services/completed.blade.php'))) {
+                if (file_exists(resource_path('views/extend/back-end/interne/services/completed.blade.php'))) {
                     return view(
-                        'extend.back-end.freelancer.services.completed',
+                        'extend.back-end.interne.services.completed',
                         compact(
                             'services',
                             'symbol'
@@ -1254,7 +1256,7 @@ class InterneController extends Controller
                     );
                 } else {
                     return view(
-                        'back-end.freelancer.services.completed',
+                        'back-end.interne.services.completed',
                         compact(
                             'services',
                             'symbol'
@@ -1263,9 +1265,9 @@ class InterneController extends Controller
                 }
             } elseif (!empty($status) && $status === 'cancelled') {
                 $services = Helper::getFreelancerServices('cancelled', Auth::user()->id);
-                if (file_exists(resource_path('views/extend/back-end/freelancer/services/cancelled.blade.php'))) {
+                if (file_exists(resource_path('views/extend/back-end/interne/services/cancelled.blade.php'))) {
                     return view(
-                        'extend.back-end.freelancer.services.cancelled',
+                        'extend.back-end.interne.services.cancelled',
                         compact(
                             'services',
                             'symbol'
@@ -1273,7 +1275,7 @@ class InterneController extends Controller
                     );
                 } else {
                     return view(
-                        'back-end.freelancer.services.cancelled',
+                        'back-end.interne.services.cancelled',
                         compact(
                             'services',
                             'symbol'
@@ -1292,7 +1294,7 @@ class InterneController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showServiceDetail($id, $status)
+    public function showInterneServiceDetail($id, $status)
     {
         if (Auth::user()) {
             $pivot_service = Helper::getPivotService($id);

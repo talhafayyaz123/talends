@@ -18,6 +18,7 @@ class HireAgency extends Model
         'email',
         'phone_number',
         'detail',
+        'questions',
         'is_seen'
     );
 }
