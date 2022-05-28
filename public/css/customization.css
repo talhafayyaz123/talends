@@ -888,6 +888,9 @@ a.notif {
     }
 }
 /* Abdul's CSS */
+.text-theme{
+	color: #349F1A;
+}
 .custom-control-input:checked ~ .custom-control-label::before {
     color: #fff;
     border-color: #349f1a;
@@ -1138,14 +1141,14 @@ a.notif {
 }
 .bg-login{
     background-image: url('/talends/assets/img/auth-bg.png');
-    background-position: right center;
+    background-position: right bottom;
     background-size: contain;
     background-repeat: no-repeat;
     width: 100%;
     height: 100%;
 }
 .auth-content {
-    padding: 25px;
+    padding: 25px 20px 25px 35px;
     position: relative;
 }
 .auth-content h3{
@@ -1159,7 +1162,7 @@ a.notif {
     color: #349f1a;
 }
 .auth-content p{
-    font-size: 12px;
+    font-size: 11px;
     font-style: normal;
     line-height: 24px;
     margin-bottom: 0;
@@ -1167,6 +1170,7 @@ a.notif {
 .auth-content p a{
     color: #349f1a;
     text-decoration: none;
+    font-size: 10px;
 }
 .entity-box {
     position: relative;
@@ -1180,8 +1184,8 @@ a.notif {
     background: #FFFFFF;
     border: 1px solid #EFF0F7;
     box-shadow: 0px 2px 6px rgba(19, 18, 66, 0.07);
-    border-radius: 16px;
-    padding: 25px 10px 25px 25px;
+    border-radius: 12px;
+    padding: 15px 10px 15px 25px;
     display: block;
     margin-bottom: 1.5rem;
     cursor: pointer;
@@ -1225,7 +1229,7 @@ a.notif {
 }
 .btn-check label{
     border: solid 1px #cbf0c0;
-    font-size: 14px;
+    font-size: 12px;
     border-radius: 5px;
     color: #777;
     display: block;
@@ -1270,6 +1274,62 @@ a.notif {
     float: none;
     text-align: center;
     text-transform: uppercase;
+    background-color: #ffffff;
+    display: inline;
+    padding: 0 15px;
+}
+/*======Authentication=========*/
+.login-auth{
+	min-height:100vh;
+    background-color: #F9FAFF;
+    padding: 0;
+}
+.auth-left{
+	background-color: #e1ffd8;
+}
+.login-auth-content{
+    max-width: 380px;
+    width: 100%;
+    margin: 0 auto;
+}
+.login-auth-content p{
+    font-size: 16px;
+    line-height: 1.2;
+}
+.login-auth-content h2{
+	font-size:24px;
+	font-weight:700;
+	margin-bottom:2.5rem;
+	line-height:1;
+	color:#3e4959;
+}
+.login-auth-content label{
+	font-weight:600;
+}
+.login-auth-content .form-control{
+	height:42px;
+	border:2px solid #cbf0c0;
+	border-radius:10px;
+	color:rgba(53,64,82,0.7);
+}
+.login-auth-content .or-text{
+    position: relative;
+    text-align: center;
+}
+.login-auth-content .or-text::before {
+    content: '';
+    background-color: #dedede;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 1px;
+    left: 0;
+}
+.login-auth-content .or-text p {
+    margin-bottom: 0;
+    float: none;
+    text-align: center;
     background-color: #ffffff;
     display: inline;
     padding: 0 15px;

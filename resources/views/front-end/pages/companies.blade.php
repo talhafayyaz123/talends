@@ -221,7 +221,7 @@
             </div>
             <div class="row align-items-center">
 
-                <div class="col-md-7 col-sm-9 mb-2">
+                <div class="col-xl-3 col-md-7 col-sm-9 col-12 mb-2">
                     <div class="custom-control custom-switch rounded-pill p-2" style="background-color:#f7f5f5;">
                         <span>
                             <svg viewBox="0 0 16 16" height="16" width="16" class="text-success small" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.735.07a.533.533 0 0 1 .53 0l7.466 4.267A.533.533 0 0 1 16 4.8v.768c0 4.835-3.205 9.083-7.853 10.412a.534.534 0 0 1-.294 0A10.828 10.828 0 0 1 0 5.567V4.8c0-.191.103-.368.269-.463L7.735.07Zm-.192 11.355 4.607-5.759L11.317 5 7.39 9.91 4.608 7.59l-.683.82 3.618 3.015Z" fill="currentColor"></path></svg>
@@ -233,7 +233,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-5 col-sm-3 mb-2">
+                <div class="col-xl-3 col-md-5 col-sm-3 col-12 mb-2">
                     <a href="javascript:;" class="btn-link">
                         <span class="mr-2">
                         <svg viewBox="0 0 24 24" height="24" width="24" class="verified-filter__info-container-icon" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12s4.477 10 10 10 10-4.477 10-10ZM3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0Zm7.982-3.949a.25.25 0 0 1 .25-.25h1.01c.137 0 .249.11.25.248l.006.91a.25.25 0 0 1-.249.251l-1.016.007a.25.25 0 0 1-.251-.25V8.05Zm1.475 7.253h2.038c.165 0 .286.035.365.105.078.07.117.18.117.333 0 .173-.037.293-.111.359-.074.065-.21.098-.41.098H9.532c-.17 0-.296-.038-.381-.114-.085-.076-.127-.19-.127-.343 0-.148.044-.258.133-.33.09-.072.222-.108.4-.108h1.936v-4.069h-1.238c-.173 0-.305-.039-.396-.117-.091-.079-.137-.192-.137-.34 0-.148.043-.259.127-.333.085-.074.212-.111.381-.111h1.86a.46.46 0 0 1 .27.07c.065.046.098.11.098.19v4.71Z" fill="currentColor"></path></svg>
