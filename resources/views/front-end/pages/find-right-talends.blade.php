@@ -15,9 +15,7 @@
             <div class="row row-eq-height">
                 <div class="col-md-12 text-center pb-3">
                     <div class="content-box">
-                        <!-- {!!  $find_right_talends->banner_description  ?? '' !!} -->
-                        <h2>Talends Recruiters is your ticket to the best Fit for you</h2>
-                        <p>Our recruiters build your dreams team. They’ll give you a shortlist of pre-vetted, highly-skilled talent who fits your project needs.</p>
+                         {!!  $find_right_talends->banner_description  ?? '' !!}
                         <a href="{{ route('register') }}" class="btn btn-theme rounded-pill px-4">Get Started</a>
                     </div>
 
@@ -25,10 +23,8 @@
             </div>
         </div>
         <div class="container-fluid px-0">
-        <!-- <img src="{{ asset('talends/assets/img/find-talents/MDX.png')}}" class="img-fluid mr-md-0 mr-3 mb-3 mb-md-0" alt=""> -->
-                <img src="{{asset('uploads/home-pages/find-right-talends/1647025531.1644604510.why.png')}}" class="w-100" alt="">
                  @if(isset( $find_right_talends->about_talends_image) )
-                    <!-- <img src="{{asset('uploads/home-pages/find-right-talends/'.$find_right_talends->about_talends_image)}}" class="w-100" alt=""> -->
+                 <img src="{{asset('uploads/home-pages/find-right-talends/'.$find_right_talends->about_talends_image)}}" class="w-100" alt="">
                 @endif
 
         </div>
@@ -38,48 +34,31 @@
             <div class="row">
                 <div class="col-md-6">
                     <ul class="theme_list_labels pl-0">
-                    <li><h4>Hiring Expert on your Side, 24/7</h4></li>
-                    <li><h4>Scale up or down, whenever required</h4></li>
-                    <li><h4>Elimnate Guesswork & build with confidence</h4></li>
+                    {!!  $find_right_talends->services_description  ?? '' !!}
                     </ul>
                 </div>
                 <div class="col-md-6">
                     <div class="content-box">
-                        <h2>Recruitment without costing you nerves.</h2>
-                        <p>Our experienced recruiters make sure to bring best talent from alredy available pool of Talent.</p>
+                    {!!  $find_right_talends->features_text  ?? '' !!}
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <ul class="theme_list_labels">
-                    {!!  $find_right_talends->services_description  ?? '' !!}
-
-                    </ul>
-                </div>
-                <div class="col-md-6">
-
-                {!!  $find_right_talends->features_text  ?? '' !!}
-                </div>
-            </div>
-        </div>
-    </section> -->
+   
     <section class="budget-sec">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="content-box">
-                        <h2>The best <span>for every budget</span></h2>
-                        <p>our recruiters are laser-focused on finding quality talent for you & serves all business equally. Find high-quality talent at every price point hourly, Monthly or project-based pricing</p>
+                    {!!  $find_right_talends->project_description  ?? '' !!}
                     </div>
                 </div>
                 <div class="col-md-6 text-md-right text-center">
                     <div class="img-box">
-                        <img src="{{asset('uploads/home-pages/find-right-talends/Group 37321.png')}}" class="img-fluid" alt="">
+                    @if(isset( $find_right_talends->talends_project_image) )
+            <img src="{{asset('uploads/home-pages/find-right-talends/'.$find_right_talends->talends_project_image)}}" class="img-fluid" alt="">
+            @endif
                     </div>
                 </div>
             </div>
@@ -89,12 +68,14 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 text-md-left text-center">
-                        <img src="{{asset('uploads/home-pages/find-right-talends/'.$find_right_talends->talends_work_image)}}" class="img-fluid" alt="">
+                @if(isset( $find_right_talends->talends_work_image) )
+            <img src="{{asset('uploads/home-pages/find-right-talends/'.$find_right_talends->talends_work_image)}}" class="img-fluid" alt="">
+            @endif
                 </div>
                 <div class="col-md-6">
                     <div class="content-box">
-                        <h2>QUALITY WORK <span>DONE QUICKLY</span></h2>
-                        <p>Find the right freelancer to begin working on your project within minutes</p>
+                    {!!  $find_right_talends->work_description  ?? '' !!}
+
                     </div>
                 </div>
             </div>

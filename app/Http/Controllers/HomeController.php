@@ -52,6 +52,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        
         if (Schema::hasTable('site_managements')) {
             $homepage = SiteManagement::getMetaValue('homepage');
             if (!empty($homepage['home'])) {
@@ -569,7 +571,8 @@ class HomeController extends Controller
     $skills     = Skill::all();
     $locations = Location::latest()->get();
     $categories = Category::all();
-    
+    $featured_success_stories=AboutTalendsPage::where('page_type','featured_success_stories')->first();
+        
     $sub_categories='';
     if(!empty($request->get('category_id'))){
 
@@ -580,7 +583,7 @@ class HomeController extends Controller
 
     }
 
-    return view('front-end.pages.companies',compact('companies','skills','locations','categories','sub_categories'));
+    return view('front-end.pages.companies',compact('companies','skills','locations','categories','sub_categories','featured_success_stories'));
      }
 
 
