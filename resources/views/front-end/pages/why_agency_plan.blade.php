@@ -12,8 +12,8 @@ Why Join Agency Plan
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 text-center pb-5">
-                    {!! $why_agency_plan->banner_description ?? '' !!}
-                    <a href="{{ route('register') }}" class="theme_btn inverse_btn">Register Your Agency</a>
+                     {!! $why_agency_plan->banner_description ?? '' !!}
+                    <a href="{{ route('register') }}" class="btn btn-theme px-4 rounded-pill">Register Your Agency</a>
                 </div>
             </div>
         </div>
@@ -145,9 +145,10 @@ Why Join Agency Plan
                         <p>Support 24/7 <span>+971 52 768 4867</span></p>
                     </div> -->
                     <div class="content-box">
-                        <h3>Our Flexible & Affordable <span>plans</span></h3>
-                        <h6>“You grow we Grow”</h6>
-                        <ul class="my-5">
+                        {!! $why_agency_plan->work_description ?? '' !!}
+                        <!-- <h3>Our Flexible & Affordable <span>plans</span></h3> -->
+                        <!-- <h6>“You grow we Grow”</h6> -->
+                        <!-- <ul class="my-5">
                             <div class="row p-0">
                                 <div class="col-md-6">
                                     <li>Get a certified member badge</li>
@@ -162,7 +163,7 @@ Why Join Agency Plan
                                     <li>Dedicated Support</li>
                                 </div>
                             </div>                            
-                        </ul>
+                        </ul> -->
                         <div class="mb-5">
                             <a href="{{ route('register') }}" class="rounded-pill px-4 btn mb-2">Talk to an Advisor</a>
                             <span class="ml-md-4 mb-2">Support 24/7 <a href="tel:+971 52 768 4867" class="phone-number ml-2">+971 52 768 4867</a></span>
@@ -340,9 +341,7 @@ Why Join Agency Plan
                             </div>
                             <div class="plan">
                                 {!! $why_agency_plan->support_description ?? '' !!}
-
                                 <a class="plan-btn" href="{{url("company/registration",['plan'=>'yearly' ])}}">Choose</a>
-
                             </div>
                         </div>
                     </div>

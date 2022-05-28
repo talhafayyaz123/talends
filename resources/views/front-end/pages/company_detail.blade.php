@@ -200,9 +200,9 @@
                     <div class="stepper-container">
                         <h2>Hire this Agency</h2>
                         <p class="mb-5">Please fill the brief below to get in touch the agency with much better and faster response. Feel free to add as much detail as needed.</p>
-                        <form id="msform">
+                        <form id="agencyform">
                         <!-- progressbar -->
-                            <ul id="progressbar">
+                            <ul id="progressbaragency">
                                 <li class="active" id="account"><span>1</span></li>
                                 <li id="personal"><span>2</span></li>
                                 <li id="payment"><span>3</span></li>
@@ -592,7 +592,7 @@
         next_fs = $(this).parent().next();
         
         //Add Class Active
-        $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+        $("#progressbaragency li").eq($("fieldset").index(next_fs)).addClass("active");
         
         //show the next fieldset
         next_fs.show(); 
@@ -619,7 +619,7 @@
         previous_fs = $(this).parent().prev();
         
         //Remove class active
-        $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+        $("#progressbaragency li").eq($("fieldset").index(current_fs)).removeClass("active");
         
         //show the previous fieldset
         previous_fs.show();
