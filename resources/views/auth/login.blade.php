@@ -32,9 +32,9 @@
                             <select name="role" id="role" class="form-control">
                             @if(!empty($roles))
                             @foreach ($roles as $key => $role)
-                            @if (!in_array($role['id'] == 1, $roles))
+                            
                                     <option value="{{$role['id']}}">{{$role['role_type']}}</option>
-                                    @endif
+                                
                             @endforeach
                             @endif
                              

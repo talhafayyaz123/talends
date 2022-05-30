@@ -94,9 +94,14 @@
                 </div>
                 <div class="col-md-12 col-lg-5 col-xl-4">
                     <div class="support-content-box d-flex flex-column align-items-center justify-content-between sticky-top mt-4">
-                        <p>our dedictaed team works round the clock to bring exceptional talent, agencies & services. we verify every memeber before they join our talends.com community. our support team response within 1 hr time for any query for 100% satisfacation.</p>
+                        <p>
+                            {!! $freelancer_side_bar->banner_description !!}
+                        </p>
                         <button class="btn btn-success my-5 px-5">Support</button>
-                        <img src="{{ asset('talends/assets/img/find-agency-img.png')}}" class="w-100" alt="">
+                        @if(isset( $freelancer_side_bar->about_talends_image) )
+                        <img src="{{asset('uploads/home-pages/freelancer_sidebar/'.$freelancer_side_bar->about_talends_image)}}"
+                            class="w-100" alt="">
+                        @endif
                     </div>
                 </div>
             </div>

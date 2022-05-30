@@ -1829,6 +1829,63 @@ class AboutTalendsPage extends Model
     }
 
 
+    public function saveFreelancerSideBarSettings($request)
+    {
+
+            if (!empty($request)) {
+
+            if($request->form_type=='update'){
+                self::where('page_type','freelancer_side_bar')->delete();
+            }
+            $this->page_type = 'freelancer_side_bar';
+            $this->banner_description = $request['sidebar_description'];
+
+         
+            if($request->form_type=='add'){
+             if (!empty($request->hasFile('sidebar_image'))) {
+                $sidebar_image = $request->file('sidebar_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/freelancer_sidebar';
+                $imageName = time().'.'.$sidebar_image->getClientOriginalName();
+                $request->sidebar_image->move($new_path, $imageName);
+                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->about_talends_image = null;
+            }
+
+        }else{
+           
+            
+            if (!empty($request->hasFile('sidebar_image'))) {
+                $sidebar_image = $request->file('sidebar_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/freelancer_sidebar' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/freelancer_sidebar' . '/' . $request->hidden_about_talends_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/freelancer_sidebar';
+                $imageName = time().'.'.$sidebar_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->sidebar_image->move($new_path, $imageName);
+                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->about_talends_image = $request->hidden_about_talends_image;
+            }
+
+
+
+        }
+           ////////////////////////////////////////////
+
+            $this->save();
+            $json['type'] = 'success';
+            $json['message'] = 'Freelancer Sidebar  Record Created';
+            return $json;
+        }
+    }
+
 
     public function updatefindRightTalends($request, $id)
     {

@@ -585,7 +585,143 @@
                 </div>
                 {!! form::close(); !!}
 
+              <!--  -->
+              {!! Form::open([
+                 'url' => url('admin/store_freelancer_sidebar'),
+                 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory',
+                 'id'=> 'find_opportunity',
+                 'enctype'=>'multipart/form-data'
+                 ])
+                 !!}
+                @if(!isset($freelancer_side_bar) && empty($freelancer_side_bar))
+                 
+                
+                  <input type="hidden" value="add" name="form_type">
+                 <div class="wt-dashboardbox">
+                     <div class="wt-dashboardboxtitle">
+                         <h2>Freelancer Sidebar</h2>
+                     </div>
+                     <div class="wt-dashboardboxcontent">
+                         <div class="wt-jobdescription wt-tabsinfo">
+                             <div class="wt-tabscontenttitle">
+                                 <h2>Image</h2>
+                             </div>
+                             <div class="wt-attachmentsholder">
+                                    <div class="lara-attachment-files">
+                                        <div class="wt-tabscontenttitle">
+                                            <div class="form-group form-group-label">
+                                                <div class="wt-labelgroup">
+                                                    <input type="file" value="" class="" name="sidebar_image" id='sidebar_image'>
 
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="wt-tabscontenttitle">
+                                 <h2>Description</h2>
+                             </div>
+                             <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                 <fieldset>
+                                 <div class="form-group">
+                                 {!! Form::textarea('sidebar_description', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+
+                                     </div>
+ 
+                                 </fieldset>
+                             </div>
+ 
+ 
+
+                             
+                         </div>
+ 
+ 
+                     </div>
+                 </div>
+ 
+                  @else
+                  <input type="hidden" value="update" name="form_type">
+
+                  <div class="wt-dashboardbox">
+                     <div class="wt-dashboardboxtitle">
+                     <h2>Freelancer Sidebar</h2>
+                     </div>
+                     <div class="wt-dashboardboxcontent">
+                         <div class="wt-jobdescription wt-tabsinfo">
+                             <div class="wt-tabscontenttitle">
+                                 <h2>Image</h2>
+                             </div>
+                             <div class="wt-attachmentsholder">
+                                    <div class="lara-attachment-files">
+                                        <div class="wt-tabscontenttitle">
+                                            <div class="form-group form-group-label">
+                                                <div class="wt-labelgroup">
+                                                    <input type="file" value="" class="" name="sidebar_image" id='sidebar_image'>
+
+
+                                                </div>
+                                            </div>
+
+
+                                                       
+                                        @if (!empty($freelancer_side_bar['about_talends_image']))
+                                            @php $image = '/uploads/home-pages/freelancer_sidebar/'.$freelancer_side_bar['about_talends_image']; @endphp
+                                            <div class="wt-formtheme wt-userform">
+
+                                                <div class="wt-uploadingbox">
+                                                    <figure><img src="{{{  asset($image)}}}" alt="{{{ trans('lang.profile_photo') }}}"></figure>
+
+                                                </div>
+                                                <input type="hidden" name="hidden_about_talends_image" id="hidden_about_talends_image" value="{{{$freelancer_side_bar['about_talends_image']}}}">
+                                            </div>
+                                            @endif
+
+                                        </div>
+
+
+
+                             
+
+                                    </div>
+                                </div>
+
+
+                                <div class="wt-tabscontenttitle">
+                                 <h2>Description</h2>
+                             </div>
+                             <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                 <fieldset>
+                                 <div class="form-group">
+                                 {!! Form::textarea('sidebar_description', $freelancer_side_bar['banner_description'], ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+                                     </div>
+ 
+                                 </fieldset>
+                             </div>
+ 
+
+                             
+                         </div>
+ 
+ 
+                     </div>
+                 </div>
+ 
+                  @endif
+
+
+                  
+                <div class="wt-updatall">
+                    <i class="ti-announcement"></i>
+                    <span>{{{ trans('lang.save_changes_note') }}}</span>
+                    {!! Form::submit('Save', ['class' => 'wt-btn', 'id'=>'submit-service']) !!}
+                </div>
+                {!! form::close(); !!}
 
 
             </div>

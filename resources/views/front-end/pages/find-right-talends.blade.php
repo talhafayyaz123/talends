@@ -89,66 +89,7 @@
                 </div>
                 <div class="col-md-7">
                 <div class="accordion" id="accordionFaq">
-                        <div class="card bg-transparent border-0">
-                            <div class="card-header" id="headingOne">
-                                <h4 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                How Talends Recruiters are different than Staffing agencies? <i class="bi-plus float-right rotate-icon"></i>                                        
-                                </h4>
-                            </div>
-                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionFaq">
-                                <div class="card-body">
-                                Talends recruiters have an access to talents that are already listed within the platform and their background, expertise have been pre-vetted and recognised by many of our platform customers. whereas staffing agencies mostly rely on cv collection from random individuals and it’s a time taking process.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card bg-transparent border-0">
-                            <div class="card-header" id="headingTwo">
-                                <h4 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">                                        
-                                Do i have to pay extra for the service? <i class="bi-plus float-right rotate-icon"></i>                                        
-                                </h4>
-                            </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionFaq">
-                                <div class="card-body">
-                                When Talends recruiters hires a perfect resource for you, they share their hourly or project base rates with you, that is the only charges you’ve to pay and nothing extra.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card bg-transparent border-0">
-                            <div class="card-header" id="headingThree">
-                                <h4 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">                                        
-                                How Talends Recruitment Help my business? <i class="bi-plus float-right rotate-icon"></i>                                        
-                                </h4>
-                            </div>
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionFaq">
-                                <div class="card-body">
-                                You can scale up and down your staff based on your business needs, rather than keeping a resource that will cost you a fortune if not used properly or assigned the tasks, it will also improve the quality of your internal team that they can have immediate support of any kind if needed and they feel secure within the company enviorement.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card bg-transparent border-0">
-                            <div class="card-header" id="headingFour">
-                                <h4 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseTwo">                                        
-                                How Talends Recruitments works? <i class="bi-plus float-right rotate-icon"></i>                                        
-                                </h4>
-                            </div>
-                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionFaq">
-                                <div class="card-body">
-                                You just have to share your project or tasks requirement with our recruiters and they will find the right resources witin the given timeline & budgets.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card bg-transparent border-0">
-                            <div class="card-header" id="headingFive">
-                                <h4 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseTwo">                                        
-                                how talends.com supports in overall process? <i class="bi-plus float-right rotate-icon"></i>                                        
-                                </h4>
-                            </div>
-                            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionFaq">
-                                <div class="card-body">
-                                talends.com support & quality assurance team is always available to make sure the process is smooth and fair for both parties. our team verify all talend.com approved talent put all their passion & experties into your project. for 100% satisfaction our team respond your support enquiry within 1 hr time.
-                                </div>
-                            </div>
-                        </div>
+                {!!  $find_right_talends->freelancer_benefits  ?? '' !!}
                     </div>
                 </div>
             </div>
