@@ -195,7 +195,34 @@ Company Registration
                                                                     <div class="plans-inner">
                                                                         <div class="plans-wrap">
                                                                             <div class="plan">
-                                                                                {!! $why_agency_plan->payment_description ?? '' !!}
+                                                                               
+                                                                            <div class="plan-h">
+<h3>{{  $package[0]->title }}</h3>
+</div>
+<div class="plan-c">
+<p>What You&rsquo;ll Get</p>
+<ul class="price-feature">
+
+@foreach ($monthly_options as $key => $option)
+                                               
+                                                @if ($key == 'duration')
+                                                    <li><span>{{$key}}:  {{ Helper::getPackageDurationList($monthly_options['duration']) }}</span></li>
+                                                @elseif ($key == 'badge')
+                                                    <li><span>{{$key}}: {{ Helper::getBadgeTitle($package[0]->badge_id) }}</span></li>
+                                                @else
+                                                    <li><span>{{$key}}: {{ $option }}</span></li>
+                                                @endif
+
+                                            @endforeach
+
+</ul>
+</div>
+<div class="plan-f">
+<div class="pf-wrap">
+<p>{{ $package[0]->cost ?? '0' }}/month</p>
+<p>Cancel Anytime</p>
+</div>
+</div>
 
                                                                                 <a class="plan-btn t-f company_services choose_plan_background_transparent" id='monthly_plan' onclick="plan_select('monthly')"><strong class="green">Choose</strong></a>
 
@@ -203,7 +230,33 @@ Company Registration
 
                                                                             </div>
                                                                             <div class="plan">
-                                                                                {!! $why_agency_plan->support_description ?? '' !!}
+                                                                            <div class="plan-h">
+                                                                            <h3>{{  $package[1]->title }}</h3>
+</div>
+<div class="plan-c">
+<p>What You&rsquo;ll Get</p>
+<ul class="price-feature">
+
+@foreach ($yearly_options as $key => $option)
+                                               
+                                                @if ($key == 'duration')
+                                                    <li><span>{{$key}}:  {{ Helper::getPackageDurationList($yearly_options['duration']) }}</span></li>
+                                                @elseif ($key == 'badge')
+                                                    <li><span>{{$key}}: {{ Helper::getBadgeTitle($package[1]->badge_id) }}</span></li>
+                                                @else
+                                                    <li><span>{{$key}}: {{ $option }}</span></li>
+                                                @endif
+
+                                            @endforeach
+
+</ul>
+</div>
+<div class="plan-f">
+<div class="pf-wrap">
+<p><strong>${{ $package[1]->cost ?? '0' }}</strong>/month</p>
+<p>Cancel Anytime</p>
+</div>
+</div>
 
                                                                                 <a class="plan-btn t-f company_services choose_plan_background_transparent" id='yearly_plan' onclick="plan_select('yearly')"><strong class="green">Choose</strong></a>
 
@@ -216,10 +269,16 @@ Company Registration
                                                     </section>
 
                                                     <div class="col-md-10">
-                                                    <input type="hidden" name="monthly_amount" id="monthly_amount" value="{{ $why_agency_plan->agencies_benefits ?? '' }}">
-                                                    <input type="hidden" name="yearly_amount" id="yearly_amount" value="{{ $why_agency_plan->government_benefits ?? '' }}">
+                                                    <input type="hidden" name="monthly_amount" id="monthly_amount" value="{{ $package[0]->cost ?? '0' }}">
+                                                    <input type="hidden" name="yearly_amount" id="yearly_amount" value="{{ $package[1]->cost ?? '0' }}">
+
+
+                                                    <input type="hidden" name="monthly_package" id="monthly_package" value="{{ $package[0]->id ?? '0' }}">
+                                                    <input type="hidden" name="yearly_package" id="yearly_package" value="{{ $package[1]->id ?? '0' }}">
+
 
                                                     <input type="hidden" name="payment_amount" id="payment_amount" value="">
+                                                    <input type="hidden" name="package_id" id="package_id" value="">
                                                         <br>
                                                         @php
                                                         $amount=$why_agency_plan->agencies_benefits;
@@ -290,6 +349,8 @@ Company Registration
       if(plan=='monthly'){
           $('#payment_amount').val($('#monthly_amount').val());
 
+          $('#package_id').val($('#monthly_package').val());
+
           $('#monthly_plan').removeClass('choose_plan_background_transparent');
           $('#monthly_plan').addClass('choose_plan_background_green');
           $('#monthly_plan strong').removeClass('green');
@@ -304,7 +365,7 @@ Company Registration
         
       }else{
         $('#payment_amount').val($('#yearly_amount').val());
-
+    $('#package_id').val($('#yearly_package').val());
           // remove monthly plan 
           $('#monthly_plan').addClass('choose_plan_background_transparent');
           $('#monthly_plan').removeClass('choose_plan_background_green');

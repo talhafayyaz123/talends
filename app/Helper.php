@@ -35,7 +35,10 @@ use App\Skill;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Schema;
 use Request;
-
+use App\Profile;
+use App\UserCategorySkills;
+use App\CompanyExpertise;
+use App\CompanyDetail;
 /**
  * Class Helper
  *
@@ -169,7 +172,7 @@ class Helper extends Model
     }
 
 
-    public static function registrationPayment($amount,$user_id){
+    public static function registrationPayment($amount,$user_id,$package_id){
 
     $curl = curl_init();
     curl_setopt_array($curl, array(
@@ -180,7 +183,7 @@ class Helper extends Model
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n \"tokenise\": 2,\n \"show_save_card\": true,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Company Registration Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://development.talends.com/registration/success?user_id=$user_id\",\n    \"return\": \"https://development.talends.com/registration/success?user_id=$user_id\"\n  }",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n \"tokenise\": 2,\n \"show_save_card\": true,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Company Registration Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://localhost/talends/public/registration/success?user_id=$user_id&package_id=$package_id\",\n    \"return\": \"https://localhost/talends/public/registration/success?user_id=$user_id&package_id=$package_id\"\n  }",
     CURLOPT_HTTPHEADER => array(
         "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
         "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
@@ -526,33 +529,33 @@ return $response;
     {
         $list = array(
             '1' => array(
-                'title' => '50$',
-                'search_title' => '50$',
+                'title' => '$50',
+                'search_title' => '$50',
                 'value' => '50',
             ),
             '2' => array(
-                'title' => '100$',
-                'search_title' => '100$',
+                'title' => '$100',
+                'search_title' => '$100',
                 'value' => '100',
             ),
             '3' => array(
-                'title' => '500$',
-                'search_title' => '500$',
+                'title' => '$500',
+                'search_title' => '$500',
                 'value' => '500',
             ),
             '4' => array(
-                'title' => '1000$',
-                'search_title' => '1000$',
+                'title' => '$1000',
+                'search_title' => '$1000',
                 'value' => '1000',
             ),
             '5' => array(
-                'title' => '1500$',
-                'search_title' => '1500$',
+                'title' => '$1500',
+                'search_title' => '$1500',
                 'value' => '1500',
             ),
             '6' => array(
-                'title' => '2500$',
-                'search_title' => '2500$',
+                'title' => '$2500',
+                'search_title' => '$2500',
                 'value' => '2500',
             ),
         );
@@ -1550,7 +1553,7 @@ return $response;
                     '4' => trans('lang.emp_pkg_opt.banner'),
                     '5' => trans('lang.emp_pkg_opt.pvt_cht'),
                 );
-            } elseif ($role == 'freelancer' || $role == 'company' || $role == 'intern') {
+            } elseif ($role == 'freelancer'  || $role == 'intern') {
                 $list = array(
                     '0' => trans('lang.freelancer_pkg_opt.price'),
                     '1' => trans('lang.freelancer_pkg_opt.no_of_credits'),
@@ -1561,6 +1564,26 @@ return $response;
                     '6' => trans('lang.freelancer_pkg_opt.badge'),
                     '7' => trans('lang.freelancer_pkg_opt.banner'),
                     '8' => trans('lang.freelancer_pkg_opt.pvt_cht'),
+                );
+            }elseif($role == 'company'  ){
+                $list = array(
+                    '0' => trans('lang.freelancer_pkg_opt.price'),
+                    '2' => trans('lang.freelancer_pkg_opt.no_of_skills'),
+                    '3' => trans('lang.freelancer_pkg_opt.no_of_services'),
+                    '4' => trans('lang.freelancer_pkg_opt.no_of_featured_services'),
+                    '5' => trans('lang.freelancer_pkg_opt.pkg_duration'),
+                    '6' => trans('lang.freelancer_pkg_opt.badge'),
+                    '7' => trans('lang.freelancer_pkg_opt.banner'),
+                    '8' => trans('lang.freelancer_pkg_opt.pvt_cht'),
+
+                    '9' => 'Access to Talends Lead Management CRM',
+                    '10' => 'Your Own Landing Page with CMS',
+                    '11' => 'Dedicated Support',
+                    '12' => 'Get a boost visibility',
+                    '13' => 'Get qualified leads and opportunities',
+                    '14' => '0% Commission free on signed deals',
+
+
                 );
             }
             return $list;
@@ -5314,6 +5337,53 @@ return $response;
         $data['sectionColor'] = '#ffffff';
         return serialize($data);
     }
+
+
+   public static function getProfileCompleteRatio()
+   {
+       $ratio=30;
+       $user_id=Auth::user()->id;
+       $user_category_skills=UserCategorySkills::where('user_id',$user_id)->count();
+       $company_expertise=CompanyExpertise::where('user_id',$user_id)->first();
+       $profile=Profile::where('user_id',$user_id)->first();
+       $company_detail=CompanyDetail::where('user_id',$user_id)->first();
+
+       if($user_category_skills!=0){
+         $ratio+=5;
+       }
+
+         if($company_expertise){
+            $ratio+=10;
+
+         }
+
+         if($profile->projects){
+            $ratio+=10;
+         }
+
+         if($profile->banner){
+            $ratio+=10;
+         }
+
+         if($profile->avater){
+            $ratio+=10;
+         }
+
+         if($profile->hourly_rate){
+            $ratio+=10;
+         }
+        if($company_detail ){
+        if($company_detail->detail){
+            $ratio+=5;
+        }
+        if($company_detail->portfolio){
+            $ratio+=10;
+        }
+        }
+      return $ratio;
+   }
+
+  
 
     /**
      * Get Seeder Data

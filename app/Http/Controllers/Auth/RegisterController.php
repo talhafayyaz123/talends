@@ -220,6 +220,7 @@ class RegisterController extends Controller
             'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
             'employees' => 'required',
             'role' => 'not_in:admin',
+            'package_id' => 'required',
             'locations' => 'required',
             'agency_language' => 'required',
             'agency_website' => 'required',
@@ -235,7 +236,6 @@ class RegisterController extends Controller
             $validation,$customMessages
         );      
          
-    
         $json = array();
          $user = new User();
 
@@ -314,7 +314,7 @@ class RegisterController extends Controller
 
         } 
 
-        $response=Helper::registrationPayment($request['payment_amount'],$user_id);
+        $response=Helper::registrationPayment($request['payment_amount'],$user_id,$request['package_id']);
         $redirect_url='';
         if(isset(json_decode( $response,true)['redirect_url'])){
         $body=json_decode( $response,true);
@@ -334,11 +334,12 @@ class RegisterController extends Controller
     }
 }
 
-    public function registrationAgainPayment($id)
+    public function registrationAgainPayment($id,$package_id)
     {
+        
         $user_payments=UserPayments::where('user_id',$id)->where('is_success',0)->first();
 
-        $response=Helper::registrationPayment($user_payments['cart_amount'],$id);
+        $response=Helper::registrationPayment($user_payments['cart_amount'],$id,$package_id);
         $redirect_url='';
         if(isset(json_decode( $response,true)['redirect_url'])){
         $body=json_decode( $response,true);

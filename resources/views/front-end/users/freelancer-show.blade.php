@@ -233,6 +233,7 @@ if($user_role=='freelancer'){
                                 <div class="wt-usertitle wt-titlewithselect">
                                     <h2>{{ trans('lang.client_feedback') }}</h2>
                                 </div>
+                                
                                 @if (!empty($reviews) && $reviews->count() > 0)
                                     @foreach ($reviews as $key => $review)
                                         @php
@@ -521,6 +522,186 @@ if($user_role=='freelancer'){
                 </div>
             </div>
         </div>
+        <section class="faq-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <h3>Frequently Asked Questions</h3>
+                    </div>
+                    <div class="col-md-7">
+                    <div class="accordion" id="accordionFaq">
+                            <div class="card bg-transparent border-0">
+                                <div class="card-header" id="headingOne">
+                                    <h4 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        How i can hire?what happens after i hire you? <i class="bi-plus float-right rotate-icon"></i>                                        
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionFaq">
+                                    <div class="card-body">
+                                    i hire you? to hire a Talent first you have to join talends,com as employer. Once you create an account you can hire any talent you see on talends.com.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card bg-transparent border-0">
+                                <div class="card-header" id="headingTwo">
+                                    <h4 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">                                        
+                                    what happens after i hire you? <i class="bi-plus float-right rotate-icon"></i>                                        
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionFaq">
+                                    <div class="card-body">
+                                    once the order is placed, we will discuss everything in details over messages, integrated in your admin panel provided by talends.com.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card bg-transparent border-0">
+                                <div class="card-header" id="headingThree">
+                                    <h4 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">                                        
+                                    What kind of questions are usually asked before start a project? <i class="bi-plus float-right rotate-icon"></i>                                        
+                                    </h4>
+                                </div>
+                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionFaq">
+                                    <div class="card-body">
+                                    A detailed discussion is done related project brief, requirements and questions related to your niche. Having collected this information, our talent do further research and start working
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card bg-transparent border-0">
+                                <div class="card-header" id="headingFour">
+                                    <h4 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseTwo">                                        
+                                    how the project timelines are set? <i class="bi-plus float-right rotate-icon"></i>                                        
+                                    </h4>
+                                </div>
+                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionFaq">
+                                    <div class="card-body">
+                                    project timelines are set by both parties based on their agreed terms & conditions, and we talends.com make sure that our talent respect the timelines and deliver the excellent quality of work. saying that it’s a client responsibility to be fair in timelines and make sure all the required material is properly provided to talent, to avoid any inconvenience.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card bg-transparent border-0">
+                                <div class="card-header" id="headingFive">
+                                    <h4 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseTwo">                                        
+                                    how talends.com supports in overall process? <i class="bi-plus float-right rotate-icon"></i>                                        
+                                    </h4>
+                                </div>
+                                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionFaq">
+                                    <div class="card-body">
+                                    talends.com support & quality assurance team is always available to make sure the process is smooth and fair for both parties. our team verify all talend.com approved talent put all their passion & experties into your project. for 100% satisfaction our team respond your support enquiry within 1 hr time.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="suggested-freelancer">
+            <div class="container-fluid px-md-5">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="mb-4">People Who Viewed This Service Also Viewed</h4>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="d-md-flex text-center text-md-left">
+                            <img src="http://127.0.0.1:8000/uploads/users/14/a.jpg" alt="image" class="img-fluid mb-3" width="100">
+                            <div class="mx-3">
+                                <a href="javascript:;"><i class="fa fa-check-circle"></i> <span class="text-secondary">Alara Tekin</span></a> 
+                                <h4 class="mt-0 mb-3"><a href="javascript:;" class="font-weight-bold">SEO Expert & Consultant</a></h4>
+                                <span class="mr-2"><i class="far fa-money-bill-alt mr-2"></i> $12 / hr</span> |
+                                <span><img src="http://127.0.0.1:8000/uploads/locations/tu.png" alt="Flag"> Fujairah , United Arab Emirates</span>
+                                <a href="javascrip:void(0);" class="d-block"><i class="fa fa-heart"></i> Click to Save</a>
+                            </div>
+                            <div class="text-center">
+                                <span class="text-warning d-block mb-2">
+                                    <i class="bi-star-fill"></i>
+                                    <i class="bi-star-fill"></i>
+                                    <i class="bi-star"></i>
+                                    <i class="bi-star"></i>
+                                    <i class="bi-star"></i>
+                                </span>
+                                <span class="d-block">
+                                    2/5
+                                </span>
+                                <span class="wt-starcontent"><em>(0 Feedbacks)</em></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="d-md-flex text-center text-md-left">
+                            <img src="http://127.0.0.1:8000/uploads/users/14/a.jpg" alt="image" class="img-fluid mb-3" width="100">
+                            <div class="mx-3">
+                                <a href="javascript:;"><i class="fa fa-check-circle"></i> <span class="text-secondary">Alara Tekin</span></a> 
+                                <h4 class="mt-0 mb-3"><a href="javascript:;" class="font-weight-bold">SEO Expert & Consultant</a></h4>
+                                <span class="mr-2"><i class="far fa-money-bill-alt mr-2"></i> $12 / hr</span> |
+                                <span><img src="http://127.0.0.1:8000/uploads/locations/tu.png" alt="Flag"> Fujairah , United Arab Emirates</span>
+                                <a href="javascrip:void(0);" class="d-block"><i class="fa fa-heart"></i> Click to Save</a>
+                            </div>
+                            <div class="text-center">
+                                <span class="text-warning d-block mb-2">
+                                    <i class="bi-star-fill"></i>
+                                    <i class="bi-star-fill"></i>
+                                    <i class="bi-star-fill"></i>
+                                    <i class="bi-star-fill"></i>
+                                    <i class="bi-star"></i>
+                                </span>
+                                <span class="d-block">
+                                    4/5
+                                </span>
+                                <span class="wt-starcontent"><em>(0 Feedbacks)</em></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="how-it-works">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="content-box">
+                            <h4>How it Works</h4>
+                            <h6>Here are the steps to complete your projects:</h6>
+                            <ol>
+                                <li>
+                                    <h5>Requirements</h5>
+                                    <p>We make sure we have everything we need to complete your project successfully.</p>
+                                    <span>This step includes:</span>
+                                    <span>Video Meetup</span>
+                                </li>
+                                <li>
+                                    <h5>Brief</h5>
+                                    <p>You'll fill out a brief document we created so we can learn more about your company and brand. This has a set of questions that the client needs to fill out. </p>
+                                    <span>This step includes:</span>
+                                    <span class="ml-4">Video Meetup</span>
+                                    <span class="ml-4">Your Feedback</span>
+                                </li>
+                                <li>
+                                    <h5>Research - competitive landscape</h5>
+                                    <p>You'll fill out a brief document we created so we can learn more about your company and brand. This has a set of questions that the client needs to fill out. </p>
+                                    <span>This step includes:</span>
+                                    <span class="ml-4">Video Meetup</span>
+                                    <span class="ml-4">Your Feedback</span>
+                                </li>
+                                <li>
+                                    <h5>Concept</h5>
+                                    <p>You'll fill out a brief document we created so we can learn more about your company and brand. This has a set of questions that the client needs to fill out. </p>
+                                    <span>This step includes:</span>
+                                    <span class="ml-4">Video Meetup</span>
+                                    <span class="ml-4">Your Feedback</span>
+                                </li>
+                                <li>
+                                    <h5>Finalization & Delivery</h5>
+                                    <p>You'll fill out a brief document we created so we can learn more about your company and brand. This has a set of questions that the client needs to fill out. </p>
+                                    <span>This step includes:</span>
+                                    <span class="ml-4">Video Meetup</span>
+                                    <span class="ml-4">Your Feedback</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 		<b-modal ref="myModalRef" hide-footer title="Project Status">
             <div class="d-block text-center">
                 {!! Form::open(['url' => '', 'class' =>'wt-formtheme wt-userform', 'id' =>'send-offer-form', '@submit.prevent'=>'submitProjectOffer("'.$profile->user_id.'")'])!!}

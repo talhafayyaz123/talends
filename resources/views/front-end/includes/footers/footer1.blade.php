@@ -4,7 +4,7 @@
 @endphp
 
 
-    1 @php
+    @php
     
         $footer_menus_1=App\Helper::footerMenu1();
         $footer_menus_2=App\Helper::footerMenu2();

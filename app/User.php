@@ -547,7 +547,7 @@ class User extends Authenticatable
               } 
 
 
-           $role_id = Helper::getRoleByUserID($user_id);
+         /*   $role_id = Helper::getRoleByUserID($user_id);
             $package = Package::select('id', 'title', 'cost')->where('role_id', $role_id)->where('trial', 1)->get()->first();
             $trial_invoice = Invoice::select('id')->where('type', 'trial')->get()->first();
             if (!empty($package) && !empty($trial_invoice)) {
@@ -558,7 +558,7 @@ class User extends Authenticatable
                         "created_at" => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now()
                     ]
                 );
-            } 
+            }  */
             return $user_id;
         }
     }

@@ -40,6 +40,18 @@
                             </div>
                         </div>
                      
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                            <div class="wt-insightsitem wt-dashboardbox">
+                               <h2> {{ Auth::user()->profile->company_name }}</h2>
+                                
+                                <div class="wt-insightdetails">
+                                    <div class="wt-title">
+                                        <b>Your Profile is {{Helper::getProfileCompleteRatio()}}% complete.</b>
+                                       Completing your profile is a great way to appeal to customers.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                       
                      
                        <!--  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">

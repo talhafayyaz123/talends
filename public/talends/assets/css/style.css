@@ -1172,8 +1172,30 @@ header .mega_menu_tabs.nav-tabs .nav-link.active {
 
 .nav.nav-tabs.products_tabs {
     justify-content: space-between;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
-
+/* width */
+#product_tabs::-webkit-scrollbar {
+    width: 4px;
+    height:4px;
+  }
+  
+  /* Track */
+  #product_tabs::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  #product_tabs::-webkit-scrollbar-thumb {
+    background: #22b93e; 
+  }
+  
+  /* Handle on hover */
+  #product_tabs::-webkit-scrollbar-thumb:hover {
+    background: #166702; 
+  }
+  
 .blog_card {
     background: #fff;
     box-shadow: 0 0 38px 0 rgb(42 22 139/8%);
@@ -1566,7 +1588,7 @@ section.featured_success_stories_sec .carousel-inner {
 }
 
 section.featured_success_stories_sec .carousel-inner h2 {
-    font-size: 36px;
+    font-size: 30px;
     margin-bottom: 30px;
     font-weight: bold;
 }
@@ -1578,7 +1600,7 @@ section.featured_success_stories_sec .carousel-inner h2 {
     height: 50px;
     opacity: 1;
     border-radius: 50px;
-    top: 30px;
+    top: 50px;
 }
 
 .featured_success_stories_sec .carousel-control-prev {
@@ -1706,7 +1728,20 @@ section.featured_success_stories_sec .carousel-inner h2 {
         align-items: center;
         margin-bottom: 30px;
     }
-
+    .featured_success_stories_sec .carousel-control-prev, .featured_success_stories_sec .carousel-control-next{
+        width: 35px;
+        height: 35px;
+    }
+    .carousel-control-next-icon, .carousel-control-prev-icon{
+        width: 12px;
+        height: 12px;
+    }
+    .featured_success_stories_sec .carousel-control-next{
+        right: 10px;
+    }
+    .featured_success_stories_sec .carousel-control-prev{
+        right:50px;
+    }
     header .navbar .navbar-nav .nav_item_right {
         margin-left: 0;
     }
@@ -1796,11 +1831,13 @@ section.featured_success_stories_sec .carousel-inner h2 {
     .home-banner h1 {
         font-size: 28px;
     }
-
+    .join_community img {
+        margin-top: 0px;
+    }
     .home-banner h4 {
         font-size: 16px;
     }
-
+    
     .theme_slider,
     .theme_slider .carousel-item {
         height: 115vh;

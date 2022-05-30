@@ -159,6 +159,249 @@ class AboutTalendsPage extends Model
         }
     }
 
+
+    public function storeWhyAgencyPlan($request)
+    {
+
+            if (!empty($request)) {
+            
+            $this->page_type = 'why_agency_plan';
+            $this->banner_description = $request['banner_description'];
+            $this->features_text = $request['features_text'];
+            $this->services_description = $request['services_description'];
+            $this->project_description = $request['project_description'];
+            $this->work_description = $request['work_description'];
+            $this->payment_description = $request['payment_description'];
+            $this->support_description = $request['support_description'];
+            $this->freelancer_benefits = $request['freelancer_benefits'];
+            $this->internees_benefits = $request['internees_benefits'];
+
+            $this->agencies_benefits = $request['monthly_plan_price'];
+            $this->government_benefits = $request['yearly_plan_price'];
+
+            
+         if (!empty($request->hasFile('about_talends_image'))) {
+                $about_talends_image = $request->file('about_talends_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
+                $imageName = time().'.'.$about_talends_image->getClientOriginalName();
+                $request->about_talends_image->move($new_path, $imageName);
+                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->about_talends_image = null;
+            }
+
+
+            if (!empty($request->hasFile('talends_project_image'))) {
+                $talends_project_image = $request->file('talends_project_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
+                $imageName = time().'.'.$talends_project_image->getClientOriginalName();
+                $request->talends_project_image->move($new_path, $imageName);
+                $this->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->talends_project_image = null;
+            }
+
+
+            if (!empty($request->hasFile('talends_work_image'))) {
+                $talends_work_image = $request->file('talends_work_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
+                $imageName = time().'.'.$talends_work_image->getClientOriginalName();
+                $request->talends_work_image->move($new_path, $imageName);
+                $this->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->talends_work_image = null;
+            }
+
+
+            
+            if (!empty($request->hasFile('short_term_project_image'))) {
+                $short_term_project_image = $request->file('short_term_project_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
+                $imageName = time().'.'.$short_term_project_image->getClientOriginalName();
+                $request->short_term_project_image->move($new_path, $imageName);
+                $this->short_term_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->short_term_project_image = null;
+            }
+
+
+            if (!empty($request->hasFile('recurring_engagements_image'))) {
+                $recurring_engagements_image = $request->file('recurring_engagements_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
+                $imageName = time().'.'.$recurring_engagements_image->getClientOriginalName();
+                $request->recurring_engagements_image->move($new_path, $imageName);
+                $this->recurring_engagements_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->recurring_engagements_image = null;
+            }
+
+
+            if (!empty($request->hasFile('long_term_work_image'))) {
+                $long_term_work_image = $request->file('long_term_work_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
+                $imageName = time().'.'.$long_term_work_image->getClientOriginalName();
+                $request->long_term_work_image->move($new_path, $imageName);
+                $this->long_term_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->long_term_work_image = null;
+            }
+
+
+
+           
+            $this->save();
+            $json['type'] = 'success';
+            $json['message'] = 'About Talends Record Created';
+            return $json;
+        }
+    }
+
+
+    public function updateWhyAgencyPlan($request, $id)
+    {
+
+        if (!empty($request)) {
+            $about_talends = self::find($id);
+         
+            $about_talends->banner_description = $request['banner_description'];
+            $about_talends->features_text = $request['features_text'];
+            $about_talends->services_description = $request['services_description'];
+            $about_talends->project_description = $request['project_description'];
+            $about_talends->work_description = $request['work_description'];
+            $about_talends->payment_description = $request['payment_description'];
+            $about_talends->support_description = $request['support_description'];
+            $about_talends->freelancer_benefits = $request['freelancer_benefits'];
+            $about_talends->internees_benefits = $request['internees_benefits'];
+
+            $about_talends->agencies_benefits = $request['monthly_plan_price'];
+            $about_talends->government_benefits = $request['yearly_plan_price'];
+                
+
+            if (!empty($request->hasFile('about_talends_image'))) {
+                $about_talends_image = $request->file('about_talends_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_about_talends_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
+                $imageName = time().'.'.$about_talends_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->about_talends_image->move($new_path, $imageName);
+                $about_talends->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $about_talends->about_talends_image = $request->hidden_about_talends_image;
+            }
+
+
+            if (!empty($request->hasFile('talends_project_image'))) {
+                $talends_project_image = $request->file('talends_project_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_talends_project_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_talends_project_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
+                $imageName = time().'.'.$talends_project_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->talends_project_image->move($new_path, $imageName);
+                $about_talends->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $about_talends->talends_project_image = $request->hidden_talends_project_image;
+            }
+
+
+            
+            if (!empty($request->hasFile('short_term_project_image'))) {
+                $short_term_project_image = $request->file('short_term_project_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_short_term_project_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_short_term_project_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
+                $imageName = time().'.'.$short_term_project_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->short_term_project_image->move($new_path, $imageName);
+                $about_talends->short_term_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $about_talends->short_term_project_image = $request->hidden_short_term_project_image;
+            }
+
+            if (!empty($request->hasFile('recurring_engagements_image'))) {
+                $recurring_engagements_image = $request->file('recurring_engagements_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_recurring_engagements_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_recurring_engagements_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
+                $imageName = time().'.'.$recurring_engagements_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->recurring_engagements_image->move($new_path, $imageName);
+                $about_talends->recurring_engagements_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $about_talends->recurring_engagements_image = $request->hidden_recurring_engagements_image;
+            }
+
+
+            if (!empty($request->hasFile('long_term_work_image'))) {
+                $long_term_work_image = $request->file('long_term_work_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_long_term_work_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_long_term_work_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
+                $imageName = time().'.'.$long_term_work_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->long_term_work_image->move($new_path, $imageName);
+                $about_talends->long_term_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $about_talends->long_term_work_image = $request->hidden_long_term_work_image;
+            }
+
+
+            if (!empty($request->hasFile('talends_work_image'))) {
+                $talends_work_image = $request->file('talends_work_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_talends_work_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_talends_work_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
+                $imageName = time().'.'.$talends_work_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->talends_work_image->move($new_path, $imageName);
+                $about_talends->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $about_talends->talends_work_image = $request->hidden_talends_work_image;
+            }
+
+
+            return $about_talends->save();
+        }
+    }
+
+
     public function saveAboutTalends($request)
     {
 
@@ -470,50 +713,25 @@ class AboutTalendsPage extends Model
             if (!empty($request)) {
             
             $this->page_type = 'footer-how-work';
+            
             $this->project_description = $request['title'];
 
-            $this->banner_description = $request['footer_image1_description'];
-            $this->features_text = $request['footer_image2_description'];
-            $this->services_description = $request['footer_image3_description'];
-         
- 
-             if (!empty($request->hasFile('footer_image1'))) {
-                $footer_image1 = $request->file('footer_image1');
-        
-                $new_path = Helper::PublicPath().'/uploads/home-pages/footer';
-                $imageName = time().'.'.$footer_image1->getClientOriginalName();
-                $request->footer_image1->move($new_path, $imageName);
-                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
-
-            } else {
-                $this->about_talends_image = null;
-            }
+            $this->banner_description = $request['inner_text1'];
+            $this->features_text = $request['inner_text2'];
 
 
-            if (!empty($request->hasFile('footer_image2'))) {
-                $footer_image2 = $request->file('footer_image2');
-        
-                $new_path = Helper::PublicPath().'/uploads/home-pages/footer';
-                $imageName = time().'.'.$footer_image2->getClientOriginalName();
-                $request->footer_image2->move($new_path, $imageName);
-                $this->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
-
-            } else {
-                $this->talends_project_image = null;
-            }
+            $this->services_description = $request['inner_text3'];
+            $this->work_description = $request['inner_text4'];
 
 
-            if (!empty($request->hasFile('footer_image3'))) {
-                $footer_image3 = $request->file('footer_image3');
-        
-                $new_path = Helper::PublicPath().'/uploads/home-pages/footer';
-                $imageName = time().'.'.$footer_image3->getClientOriginalName();
-                $request->footer_image3->move($new_path, $imageName);
-                $this->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+            
+            $this->payment_description = $request['inner_text5'];
+            $this->support_description = $request['inner_text6'];
 
-            } else {
-                $this->talends_work_image = null;
-            }
+            
+            $this->freelancer_benefits = $request['inner_text7'];
+            $this->internees_benefits = $request['inner_text8'];
+
 
             $this->save();
             $json['type'] = 'success';
@@ -529,60 +747,81 @@ class AboutTalendsPage extends Model
             $footer_how_work = self::find($id);
             $footer_how_work->project_description = $request['title'];
 
-            $footer_how_work->banner_description = $request['footer_image1_description'];
-            $footer_how_work->features_text = $request['footer_image2_description'];
-            $footer_how_work->services_description = $request['footer_image3_description'];
-          
+            $footer_how_work->banner_description = $request['inner_text1'];
+            $footer_how_work->features_text = $request['inner_text2'];
+
+
+            $footer_how_work->services_description = $request['inner_text3'];
+            $footer_how_work->work_description = $request['inner_text4'];
+
+
             
-            if (!empty($request->hasFile('footer_image1'))) {
-                $footer_image1 = $request->file('footer_image1');
-                if (file_exists(Helper::PublicPath().'/uploads/home-pages/footer' . '/' . $request->hidden_about_talends_image)) {
-                    unlink(Helper::PublicPath().'/uploads/home-pages/footer' . '/' . $request->hidden_about_talends_image);               
+            $footer_how_work->payment_description = $request['inner_text5'];
+            $footer_how_work->support_description = $request['inner_text6'];
+
+            
+            $footer_how_work->freelancer_benefits = $request['inner_text7'];
+            $footer_how_work->internees_benefits = $request['inner_text8'];
+
+            return $footer_how_work->save();
+        }
+    }
+
+
+    public function saveAgencyProfile($request)
+    {
+
+            if (!empty($request)) {
+            
+            $this->page_type = 'agency_profile';
+            
+            $this->banner_description = $request['banner_description'];
+         
+ 
+             if (!empty($request->hasFile('about_talends_image'))) {
+                $about_talends_image = $request->file('about_talends_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/agency_profile';
+                $imageName = time().'.'.$about_talends_image->getClientOriginalName();
+                $request->about_talends_image->move($new_path, $imageName);
+                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->about_talends_image = null;
+            }
+
+            $this->save();
+            $json['type'] = 'success';
+            $json['message'] = 'Agency Profile Record Created';
+            return $json;
+        }
+    }
+
+
+    public function updateAgencyProfile($request, $id)
+    {
+
+        if (!empty($request)) {
+            $footer_how_work = self::find($id);
+         
+            $footer_how_work->banner_description = $request['banner_description'];
+         
+            
+            if (!empty($request->hasFile('about_talends_image'))) {
+                $about_talends_image = $request->file('about_talends_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/agency_profile' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/agency_profile' . '/' . $request->hidden_about_talends_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/uploads/home-pages/footer';
-                $imageName = time().'.'.$footer_image1->getClientOriginalName();
+                $new_path = Helper::PublicPath().'/uploads/home-pages/agency_profile';
+                $imageName = time().'.'.$about_talends_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
-                $request->footer_image1->move($new_path, $imageName);
+                $request->about_talends_image->move($new_path, $imageName);
                 $footer_how_work->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
 
             } else {
                 $footer_how_work->about_talends_image = $request->hidden_about_talends_image;
-            }
-
-
-            if (!empty($request->hasFile('footer_image2'))) {
-                $footer_image2 = $request->file('footer_image2');
-
-                if (file_exists(Helper::PublicPath().'/uploads/home-pages/footer' . '/' . $request->hidden_talends_project_image)) {
-                    unlink(Helper::PublicPath().'/uploads/home-pages/footer' . '/' . $request->hidden_talends_project_image);               
-                }
-        
-                $new_path = Helper::PublicPath().'/uploads/home-pages/footer';
-                $imageName = time().'.'.$footer_image2->getClientOriginalName();
-                $request->footer_image2->move($new_path, $imageName);
-                $footer_how_work->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
-
-            } else {
-                $footer_how_work->talends_project_image = $request->hidden_talends_project_image;
-            }
-
-
-            if (!empty($request->hasFile('footer_image3'))) {
-                $footer_image3 = $request->file('footer_image3');
-
-                if (file_exists(Helper::PublicPath().'/uploads/home-pages/footer' . '/' . $request->hidden_talends_work_image)) {
-                    unlink(Helper::PublicPath().'/uploads/home-pages/footer' . '/' . $request->hidden_talends_work_image);               
-                }
-        
-                $new_path = Helper::PublicPath().'/uploads/home-pages/footer';
-                $imageName = time().'.'.$footer_image3->getClientOriginalName();
-                $request->footer_image3->move($new_path, $imageName);
-                $footer_how_work->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
-
-            } else {
-                $footer_how_work->talends_work_image = $request->hidden_talends_work_image;
             }
 
 
@@ -772,6 +1011,249 @@ class AboutTalendsPage extends Model
 
 
             return $footer_how_work->save();
+        }
+    }
+
+    public function saveFeaturedSuccessStories($request)
+    {
+
+            if (!empty($request)) {
+            
+            $this->page_type = 'featured_success_stories';
+            
+            $this->banner_description = $request['description1'];
+            $this->project_description = $request['description2'];
+            $this->work_description = $request['description3'];
+
+            $this->payment_description = $request['description4'];
+            $this->support_description = $request['description5'];
+            $this->government_benefits = $request['description6'];
+
+         
+
+             if (!empty($request->hasFile('about_talends_image'))) {
+                $about_talends_image = $request->file('about_talends_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
+                $imageName = time().'.'.$about_talends_image->getClientOriginalName();
+                $request->about_talends_image->move($new_path, $imageName);
+                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->about_talends_image = null;
+            }
+
+
+            
+            if (!empty($request->hasFile('talends_project_image'))) {
+                $talends_project_image = $request->file('talends_project_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
+                $imageName = time().'.'.$talends_project_image->getClientOriginalName();
+                $request->talends_project_image->move($new_path, $imageName);
+                $this->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->talends_project_image = null;
+            }
+
+
+            
+            if (!empty($request->hasFile('talends_work_image'))) {
+                $talends_work_image = $request->file('talends_work_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
+                $imageName = time().'.'.$talends_work_image->getClientOriginalName();
+                $request->talends_work_image->move($new_path, $imageName);
+                $this->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->talends_work_image = null;
+            }
+
+
+            
+            if (!empty($request->hasFile('talends_payment_image'))) {
+                $talends_payment_image = $request->file('talends_payment_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
+                $imageName = time().'.'.$talends_payment_image->getClientOriginalName();
+                $request->talends_payment_image->move($new_path, $imageName);
+                $this->talends_payment_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->talends_payment_image = null;
+            }
+
+            
+            if (!empty($request->hasFile('talends_support_image'))) {
+                $talends_support_image = $request->file('talends_support_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
+                $imageName = time().'.'.$talends_support_image->getClientOriginalName();
+                $request->talends_support_image->move($new_path, $imageName);
+                $this->talends_support_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->talends_support_image = null;
+            }
+            
+
+            
+            if (!empty($request->hasFile('short_term_project_image'))) {
+                $short_term_project_image = $request->file('short_term_project_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
+                $imageName = time().'.'.$short_term_project_image->getClientOriginalName();
+                $request->short_term_project_image->move($new_path, $imageName);
+                $this->short_term_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->short_term_project_image = null;
+            }
+             
+
+            $this->save();
+            $json['type'] = 'success';
+            $json['message'] = 'Banner Settings Record Created';
+            return $json;
+        }
+    }
+
+
+    public function updateFeaturedSuccessStories($request, $id)
+    {
+
+        if (!empty($request)) {
+            $success_story = self::find($id);
+
+                    
+        $success_story->banner_description = $request['description1'];
+        $success_story->project_description = $request['description2'];
+        $success_story->work_description = $request['description3'];
+
+        $success_story->payment_description = $request['description4'];
+        $success_story->support_description = $request['description5'];
+        $success_story->government_benefits = $request['description6'];
+         
+            
+            if (!empty($request->hasFile('about_talends_image'))) {
+                $about_talends_image = $request->file('about_talends_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_about_talends_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
+                $imageName = time().'.'.$about_talends_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->about_talends_image->move($new_path, $imageName);
+                $success_story->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $success_story->about_talends_image = $request->hidden_about_talends_image;
+            }
+
+
+
+            
+            if (!empty($request->hasFile('talends_project_image'))) {
+                $talends_project_image = $request->file('talends_project_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_project_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_project_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
+                $imageName = time().'.'.$talends_project_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->talends_project_image->move($new_path, $imageName);
+                $success_story->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $success_story->talends_project_image = $request->hidden_talends_project_image;
+            }
+
+
+            
+            
+            if (!empty($request->hasFile('talends_work_image'))) {
+                $talends_work_image = $request->file('talends_work_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_work_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_work_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
+                $imageName = time().'.'.$talends_work_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->talends_work_image->move($new_path, $imageName);
+                $success_story->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $success_story->talends_work_image = $request->hidden_talends_work_image;
+            }
+
+
+            
+            if (!empty($request->hasFile('talends_payment_image'))) {
+                $talends_payment_image = $request->file('talends_payment_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_payment_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_payment_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
+                $imageName = time().'.'.$talends_payment_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->talends_payment_image->move($new_path, $imageName);
+                $success_story->talends_payment_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $success_story->talends_payment_image = $request->hidden_talends_payment_image;
+            }
+
+
+
+            if (!empty($request->hasFile('talends_support_image'))) {
+                $talends_support_image = $request->file('talends_support_image');
+                if ( $request->hidden_talends_support_image && file_exists(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_support_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_support_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
+                $imageName = time().'.'.$talends_support_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->talends_support_image->move($new_path, $imageName);
+                $success_story->talends_support_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $success_story->talends_support_image = $request->hidden_talends_support_image;
+            }
+
+
+            
+
+            if (!empty($request->hasFile('short_term_project_image'))) {
+                $short_term_project_image = $request->file('short_term_project_image');
+                if ($request->hidden_short_term_project_image && file_exists(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_short_term_project_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_short_term_project_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
+                $imageName = time().'.'.$short_term_project_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->short_term_project_image->move($new_path, $imageName);
+                $success_story->short_term_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $success_story->short_term_project_image = $request->hidden_short_term_project_image;
+            }
+
+
+            return $success_story->save();
         }
     }
 
@@ -1346,6 +1828,63 @@ class AboutTalendsPage extends Model
         }
     }
 
+
+    public function saveFreelancerSideBarSettings($request)
+    {
+
+            if (!empty($request)) {
+
+            if($request->form_type=='update'){
+                self::where('page_type','freelancer_side_bar')->delete();
+            }
+            $this->page_type = 'freelancer_side_bar';
+            $this->banner_description = $request['sidebar_description'];
+
+         
+            if($request->form_type=='add'){
+             if (!empty($request->hasFile('sidebar_image'))) {
+                $sidebar_image = $request->file('sidebar_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/freelancer_sidebar';
+                $imageName = time().'.'.$sidebar_image->getClientOriginalName();
+                $request->sidebar_image->move($new_path, $imageName);
+                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->about_talends_image = null;
+            }
+
+        }else{
+           
+            
+            if (!empty($request->hasFile('sidebar_image'))) {
+                $sidebar_image = $request->file('sidebar_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/freelancer_sidebar' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/freelancer_sidebar' . '/' . $request->hidden_about_talends_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/freelancer_sidebar';
+                $imageName = time().'.'.$sidebar_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->sidebar_image->move($new_path, $imageName);
+                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->about_talends_image = $request->hidden_about_talends_image;
+            }
+
+
+
+        }
+           ////////////////////////////////////////////
+
+            $this->save();
+            $json['type'] = 'success';
+            $json['message'] = 'Freelancer Sidebar  Record Created';
+            return $json;
+        }
+    }
 
 
     public function updatefindRightTalends($request, $id)

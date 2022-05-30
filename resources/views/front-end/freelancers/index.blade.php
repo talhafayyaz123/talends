@@ -32,18 +32,12 @@
 
     <div class="container">
 
-        <div class="row row-eq-height">
-
+        <div class="row">
             <div class="col-md-7 pb-3 align-self-center">
-
                 <h5 class="text-white opcty_5">talents</h5>
-
                 <h2 class="text-white">Find a {{ ucfirst( request()->get('type')) }} <br><span class="theme_color"> You'll love</span></h2>
-
                 <p class="text-white opcty_5">We have professional designers in over 90 design skill sets. Sign up to find the perfect designer for whatever you need</p>
-
             </div>
-
             <div class="col-md-5">
 
                 <img src="{{ asset('talends/assets/img/find-talents/banner.png')}}" class="w-100" alt="">
@@ -62,93 +56,58 @@
 
 @endif
 
-<br><br>
-
-<div id="user_profile">
-
+<section id="user_profile">
     @if (Session::has('payment_message'))
 
-    @php $response = Session::get('payment_message') @endphp
+        @php $response = Session::get('payment_message') @endphp
 
-    <div class="flash_msg">
-
-        <flash_messages :message_class="'{{{$response['code']}}}'" :time='5' :message="'{{{ $response['message'] }}}'" v-cloak></flash_messages>
-
-    </div>
+        <div class="flash_msg">
+            <flash_messages :message_class="'{{{$response['code']}}}'" :time='5' :message="'{{{ $response['message'] }}}'" v-cloak></flash_messages>
+        </div>
 
     @endif
-
-
-
     <div class="wt-haslayout">
-
-        <div class="row">
-
-           
-
-        </div>
-
-      
-
-
-
+        <!-- <div class="row"></div> -->
         <div class="container">
-
             <div class="row">
-
-           
-
-                <div id="" class="wt-haslayout">
-
-               
-
+                <div class="col-12">
                     <div class="filters-container">
-
-                  @include('front-end.freelancers.filters')
-
-                  
-
+                        @include('front-end.freelancers.filters')
                     </div>
-
-                    
-
-                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
-
-                        
-
-                        <div class="wt-userlistingholder wt-userlisting wt-haslayout ">
-
-                            <!-- <div class="wt-userlistingtitle">
-
-                                @if (!empty($users))
-
-                                <span>{{ trans('lang.01') }} {{$users->count()}} of {{\App\User::role('freelancer')->count()}} results @if (!empty($keyword)) for <em>"{{{$keyword}}}"</em> @endif</span>
-
-                                @endif
-
-                            </div> -->
-
-                            <div class="wt-userlistingholder wt-userlisting wt-haslayout freelancer_list">
-
-                            
-
-                                @include('front-end.freelancers.data')
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
                 </div>
+                <!-- <div id="" class="wt-haslayout"> -->
+                <div class="col-md-12 col-lg-7 col-xl-8">
+                    <div class="wt-userlistingholder wt-userlisting wt-haslayout ">
+                        <!-- <div class="wt-userlistingtitle">
 
+                            @if (!empty($users))
+
+                            <span>{{ trans('lang.01') }} {{$users->count()}} of {{\App\User::role('freelancer')->count()}} results @if (!empty($keyword)) for <em>"{{{$keyword}}}"</em> @endif</span>
+
+                            @endif
+
+                        </div> -->
+                        <div class="wt-userlistingholder wt-userlisting wt-haslayout freelancer_list">
+                            @include('front-end.freelancers.data')
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-5 col-xl-4">
+                    <div class="support-content-box d-flex flex-column align-items-center justify-content-between sticky-top mt-4">
+                        <p>
+                            {!! $freelancer_side_bar->banner_description !!}
+                        </p>
+                        <button class="btn btn-success my-5 px-5">Support</button>
+                        @if(isset( $freelancer_side_bar->about_talends_image) )
+                        <img src="{{asset('uploads/home-pages/freelancer_sidebar/'.$freelancer_side_bar->about_talends_image)}}"
+                            class="w-100" alt="">
+                        @endif
+                    </div>
+                </div>
             </div>
-
         </div>
-
     </div>
-
-</div>
+</section>
 
 
 
@@ -376,171 +335,174 @@
 
     });
 
-    var fixadent = $(".filters-container"),
+    // var fixadent = $(".support-content-box"),
 
-        pos = fixadent.offset();
+    //     pos = fixadent.offset();
 
 
 
-    $(document).scroll(function(e) {
+    // $(document).scroll(function(e) {
 
-        e.preventDefault;
+    //     e.preventDefault;
 
-        if ($(this).scrollTop() > (pos.top + 40) && fixadent.css('position') == 'static') {
+    //     if ($(this).scrollTop() > (pos.top + 40) && fixadent.css('position') == 'static') {
 
-            fixadent.addClass('fixed');
+    //         fixadent.addClass('fixed');
 
-        } else {
+    //     } else {
 
-            if ($(this).scrollTop() <= pos.top && fixadent.hasClass('fixed')) {
+    //         if ($(this).scrollTop() <= pos.top && fixadent.hasClass('fixed')) {
 
-                fixadent.removeClass('fixed');
+    //             fixadent.removeClass('fixed');
 
-            }
+    //         }
 
-        };
+    //     };
+
+    // });
+
+
+
+    var values = [];
+
+    $('input[name="category[]"]:checked').each(function() {
+
+        values[values.length] = (this.checked ? $(this).val() : "");
 
     });
 
+    var comma_category = values.join(","); 
 
 
-   var category_id=$('input[name="category"]:checked').val();
 
-   if(category_id){
 
-    
+
+   if(comma_category.length!=0){
 
     $.ajax({
-        url:  "{{ url('/category_sub_categories') }}"+ '/' + category_id,
-           type: 'get',
+        url:  "{{ url('/category_sub_categories/multiple') }}"+ '/' + comma_category,
 
-           dataType: 'json',
+       type: 'get',
 
-           success: function(response){
+       dataType: 'json',
 
-             var len = 0;
+       success: function(response){
 
-             if(response['sub_categories'] != null){
+         var len = 0;
 
-               len = response['sub_categories'].length;
+         if(response['sub_categories'] != null){
 
-             }
+           len = response['sub_categories'].length;
 
-             $(".sub_categories").html('');  
+         }
 
-             const params = new URLSearchParams(window.location.search);
-
-
-
-             if(len > 0){
+         $(".sub_categories").html('');  
 
 
 
-               for(var i=0; i<len; i++){
-
-                 var id = response['sub_categories'][i].sub_category_id;
-
-                 var title = response['sub_categories'][i].title;
-
- 
+         if(len > 0){
 
 
 
-                 var option = "<span class='wt-checkbox'><input id='sub_category-"+id+"' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
+           for(var i=0; i<len; i++){
 
-                   option+="<label for='sub_category-"+id+"'> "+title+" </label></span>" ; 
+             var id = response['sub_categories'][i].sub_category_id;
 
-                   
+             var title = response['sub_categories'][i].title;
 
-                 $(".sub_categories").append(option);  
+             var option = "<span class='wt-checkbox'><input id='sub_category-"+id+"' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
 
-                
+               option+="<label for='sub_category-"+id+"'> "+title+" </label></span>" ; 
 
-               }
+               
 
-             }
+             $(".sub_categories").append(option); 
 
-
+            
 
            }
 
-        });
+         } 
 
 
+
+       }
+
+    });
 
    }
 
 
 
-    $(".freelancer_cat_filter :radio").change(function(){
+    
+   $('.freelancer_category :checkbox').change(function() {
 
-        if( $(this).is(":checked") ){
+var values = [];
 
-            var category_id = $(this).val();
+$('input[name="category[]"]:checked').each(function() {
 
+    values[values.length] = (this.checked ? $(this).val() : "");
 
+});
 
-     $.ajax({
-      
-           url:   "{{ url('/category_sub_categories') }}"+ '/' + category_id,
-
-           type: 'get',
-
-           dataType: 'json',
-
-           success: function(response){
-
-             var len = 0;
-
-             if(response['sub_categories'] != null){
-
-               len = response['sub_categories'].length;
-
-             }
-
-             $(".sub_categories").html('');  
-
-
-
-             if(len > 0){
-
-
-
-               for(var i=0; i<len; i++){
-
-                 var id = response['sub_categories'][i].sub_category_id;
-
-                 var title = response['sub_categories'][i].title;
-
-                                
-
-                 var option = "<span class='wt-checkbox'><input id='sub_category-"+id+"' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
-
-                   option+="<label for='sub_category-"+id+"'> "+title+" </label></span>" ; 
-
-                   
-
-                 $(".sub_categories").append(option);  
-
-                
-
-               }
-
-             }
-
-
-
-           }
-
-        });
+var comma_category = values.join(","); 
 
 
 
 
 
-        }
+$.ajax({
+    url:  "{{ url('/category_sub_categories/multiple') }}"+ '/' + comma_category,
 
-    });
+   type: 'get',
+
+   dataType: 'json',
+
+   success: function(response){
+
+     var len = 0;
+
+     if(response['sub_categories'] != null){
+
+       len = response['sub_categories'].length;
+
+     }
+
+     $(".sub_categories").html('');  
+
+
+
+     if(len > 0){
+
+
+
+       for(var i=0; i<len; i++){
+
+         var id = response['sub_categories'][i].sub_category_id;
+
+         var title = response['sub_categories'][i].title;
+
+         var option = "<span class='wt-checkbox'><input id='sub_category-"+id+"' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
+
+           option+="<label for='sub_category-"+id+"'> "+title+" </label></span>" ; 
+
+           
+
+         $(".sub_categories").append(option); 
+
+        
+
+       }
+
+     } 
+
+
+
+   }
+
+});        
+
+});
 
 
 

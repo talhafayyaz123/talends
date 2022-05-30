@@ -720,6 +720,7 @@ class PublicController extends Controller
         $breadcrumbs_settings = SiteManagement::getMetaValue('show_breadcrumb');
         $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'true';
         $interne_university_collaboration=AboutTalendsPage::where('page_type','interne_university_collaboration')->first();
+        $freelancer_side_bar=AboutTalendsPage::where('page_type','freelancer_side_bar')->first();
 
         if (!empty($_GET['type'])) {
             if ($type == 'employer' || $type == 'freelancer' || $type == 'intern') {
@@ -835,6 +836,7 @@ class PublicController extends Controller
                     return view(
                         'front-end.freelancers.index',
                         compact(
+                            'freelancer_side_bar',
                             'type',
                             'users',
                             'categories',

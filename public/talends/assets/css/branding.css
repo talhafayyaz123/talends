@@ -519,15 +519,11 @@ img {
 .theme_seperator_line.green_line {
     background: #22b93e
 }
-
-
-
-
 .theme_btn {
     position: relative;
     margin: 10px auto;
-    padding: 10px 30px;
-    font-size: 16px;
+    padding: 10px 25px;
+    font-size: 15px;
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
@@ -699,7 +695,6 @@ input.theme_btn:hover {
 .theme_list_labels {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center
 }
 
 .theme_list_labels li {
@@ -714,7 +709,7 @@ input.theme_btn:hover {
     border-radius: 40px;
     font-size: 20px;
     display: block;
-    margin-bottom: 20px
+    margin-bottom: 0
 }
 
 .search_optinos_list {
