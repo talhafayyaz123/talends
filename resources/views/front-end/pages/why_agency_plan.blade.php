@@ -29,9 +29,8 @@ Why Join Agency Plan
             <div class="row">
                 <div class="col-md-6 order-md-2">
                     <div class="content-box">
-                        <h3>Why Dubai & UAE is the most suitable place to expand your business</h3>
-                        <p>Every month, more than 300k people search, compare & hire agencies like yours in Dubai</p>
-                        <!-- {!! $why_agency_plan->features_text ?? '' !!} -->
+                    
+                         {!! $why_agency_plan->features_text ?? '' !!}
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -43,20 +42,33 @@ Why Join Agency Plan
             </div>
         </div>
     </section>
-    <section class="budget-sec">
+    <section class="budget-sec1">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="content-box">
-            {!! $why_agency_plan->features_text ?? '' !!}
+                    {!! $why_agency_plan->project_description ?? '' !!}
                     </div>
                 </div>
                 <div class="col-md-6 text-md-right text-center">
                     <div class="img-box">
                         
-                    @if(isset($why_agency_plan->short_term_project_image) )
-                <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->short_term_project_image)}}" class="img-fluid" alt="">
-                    @endif             
+                    <ul class="tal-features">
+                      
+                        <li>
+                            <div class="t-f">
+                                <div class="ficon-wrap">
+                                    @if(isset($why_agency_plan->short_term_project_image) )
+                                    <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->short_term_project_image)}}" alt="" class="w-100">
+                                    @endif
+                                </div>
+                                <div class="ftitle-wrap">
+                                    <strong>Strengthen your online reputation</strong>
+                                </div>
+                            </div>
+                        </li>
+                      
+                    </ul>            
                 </div>
             </div>
         </div>
