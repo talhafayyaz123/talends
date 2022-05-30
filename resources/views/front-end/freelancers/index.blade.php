@@ -95,7 +95,7 @@
                 <div class="col-md-12 col-lg-5 col-xl-4">
                     <div class="support-content-box d-flex flex-column align-items-center justify-content-between sticky-top mt-4">
                         <p>
-                            {!! $freelancer_side_bar->banner_description !!}
+                            {!! $freelancer_side_bar->banner_description  ?? '' !!}
                         </p>
                         <button class="btn btn-success my-5 px-5">Support</button>
                         @if(isset( $freelancer_side_bar->about_talends_image) )
