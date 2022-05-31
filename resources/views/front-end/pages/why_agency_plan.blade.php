@@ -12,9 +12,7 @@ Why Join Agency Plan
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 text-center pb-5">
-                    <!-- <h2>Get projects from Dubai and Drive Revenue like Never <span>Before</span></h2> -->
-                    <!-- <p>Dubai is known for it’s thriving economy, advanced Technology infrastructure & Luxury. Talends.com is first one of it’s kind premium agencies marketplace that connects world-class agencies to Dubai & UAE.</p> -->
-                   {!! $why_agency_plan->banner_description ?? '' !!}
+                     {!! $why_agency_plan->banner_description ?? '' !!}
                     <a href="{{ route('register') }}" class="btn btn-theme px-4 rounded-pill">Register Your Agency</a>
                 </div>
             </div>
@@ -31,9 +29,8 @@ Why Join Agency Plan
             <div class="row">
                 <div class="col-md-6 order-md-2">
                     <div class="content-box">
-                        <h3>Why Dubai & UAE is the most suitable place to expand your business</h3>
-                        <p>Every month, more than 300k people search, compare & hire agencies like yours in Dubai</p>
-                        <!-- {!! $why_agency_plan->features_text ?? '' !!} -->
+                    
+                         {!! $why_agency_plan->features_text ?? '' !!}
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -45,20 +42,33 @@ Why Join Agency Plan
             </div>
         </div>
     </section>
-    <section class="budget-sec">
+    <section class="budget-sec1">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="content-box">
-                        <!-- <h2>How Talends brings The best for every<span>agency</span></h2> -->
-                        <!-- <p>Your all-in-one marketing and sales solution for your agency much affordable & Generate Leads that are 100 times better than many marketing tools</p> -->
-                        {!! $why_agency_plan->features_text ?? '' !!}
+                    {!! $why_agency_plan->project_description ?? '' !!}
                     </div>
                 </div>
                 <div class="col-md-6 text-md-right text-center">
                     <div class="img-box">
-                        <img src="{{asset('uploads/home-pages/find-right-talends/Group 37323.png')}}" class="img-fluid" alt="">
-                    </div>
+                        
+                    <ul class="tal-features">
+                      
+                        <li>
+                            <div class="t-f">
+                                <div class="ficon-wrap">
+                                    @if(isset($why_agency_plan->short_term_project_image) )
+                                    <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->short_term_project_image)}}" alt="" class="w-100">
+                                    @endif
+                                </div>
+                                <div class="ftitle-wrap">
+                                    <strong>Strengthen your online reputation</strong>
+                                </div>
+                            </div>
+                        </li>
+                      
+                    </ul>            
                 </div>
             </div>
         </div>
@@ -140,7 +150,9 @@ Why Join Agency Plan
         <div class="container">
             <div class="row align-items-end">
                 <div class="col-md-7">
-                    <!--<div class="block-wrap">
+                    <!-- {!! $why_agency_plan->work_description ?? '' !!} -->
+
+                  <!--   <div class="block-wrap">
                         <a href="{{ route('companyRegistraton') }}" class="theme_btn inverse_btn">join talends</a>
                         <p>Support 24/7 <span>+971 52 768 4867</span></p>
                     </div> -->
@@ -173,10 +185,11 @@ Why Join Agency Plan
 
                 </div>
                 <div class="col-md-5">
-                    <!-- <img src="{{asset('uploads/home-pages/why_agency_plan/plan-img.png')}}" class="img-fluid"/> -->
                     @if( isset($why_agency_plan->talends_work_image ))
-                        <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->talends_work_image)}}"/>
-                    @endif
+                    
+                    <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->talends_work_image)}}" >
+                    @endif 
+                </div>
                 </div>
             </div>
     </section>
@@ -326,8 +339,7 @@ Why Join Agency Plan
             </div>
         </div>
     </section>
-    
-    <!--<section class="tal-p-plans">
+    <!-- <section class="tal-p-plans">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -356,7 +368,7 @@ Why Join Agency Plan
                     <h3>Frequently asked questions</h3>
                 </div>
                 <div class="col-md-8">
-                    {!! $why_agency_plan->freelancer_benefits ?? '' !!}
+                {!! $why_agency_plan->freelancer_benefits ?? '' !!}
 
                 </div>
             </div>
@@ -366,7 +378,6 @@ Why Join Agency Plan
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12 theme_bg_dark text-center text-white custom-banner">
-                    <!-- <h2 class="text-white">Your one-in-all platform to increase your Agency Sales in <span class="text-theme">Dubai & UAE</span></h2> -->
                     {!! $why_agency_plan->internees_benefits ?? '' !!}
                     <a href="#" class="btn btn-theme-white rounded-pill px-4">Register your Agecny</a>
                 </div>

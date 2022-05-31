@@ -15,9 +15,7 @@
             <div class="row row-eq-height">
                 <div class="col-md-12 text-center pb-3">
                     <div class="content-box">
-                        <!-- {!!  $find_right_talends->banner_description  ?? '' !!} -->
-                        <h2>Talends Recruiters is your ticket to the best Fit for you</h2>
-                        <p>Our recruiters build your dreams team. They’ll give you a shortlist of pre-vetted, highly-skilled talent who fits your project needs.</p>
+                         {!!  $find_right_talends->banner_description  ?? '' !!}
                         <a href="{{ route('register') }}" class="btn btn-theme rounded-pill px-4">Get Started</a>
                     </div>
 
@@ -25,10 +23,8 @@
             </div>
         </div>
         <div class="container-fluid px-0">
-        <!-- <img src="{{ asset('talends/assets/img/find-talents/MDX.png')}}" class="img-fluid mr-md-0 mr-3 mb-3 mb-md-0" alt=""> -->
-                <img src="{{asset('uploads/home-pages/find-right-talends/1647025531.1644604510.why.png')}}" class="w-100" alt="">
                  @if(isset( $find_right_talends->about_talends_image) )
-                    <!-- <img src="{{asset('uploads/home-pages/find-right-talends/'.$find_right_talends->about_talends_image)}}" class="w-100" alt=""> -->
+                 <img src="{{asset('uploads/home-pages/find-right-talends/'.$find_right_talends->about_talends_image)}}" class="w-100" alt="">
                 @endif
 
         </div>
@@ -38,48 +34,31 @@
             <div class="row">
                 <div class="col-md-6">
                     <ul class="theme_list_labels pl-0">
-                    <li><h4>Hiring Expert on your Side, 24/7</h4></li>
-                    <li><h4>Scale up or down, whenever required</h4></li>
-                    <li><h4>Elimnate Guesswork & build with confidence</h4></li>
+                    {!!  $find_right_talends->services_description  ?? '' !!}
                     </ul>
                 </div>
                 <div class="col-md-6">
                     <div class="content-box">
-                        <h2>Recruitment without costing you nerves.</h2>
-                        <p>Our experienced recruiters make sure to bring best talent from alredy available pool of Talent.</p>
+                    {!!  $find_right_talends->features_text  ?? '' !!}
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <ul class="theme_list_labels">
-                    {!!  $find_right_talends->services_description  ?? '' !!}
-
-                    </ul>
-                </div>
-                <div class="col-md-6">
-
-                {!!  $find_right_talends->features_text  ?? '' !!}
-                </div>
-            </div>
-        </div>
-    </section> -->
+   
     <section class="budget-sec">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="content-box">
-                        <h2>The best <span>for every budget</span></h2>
-                        <p>our recruiters are laser-focused on finding quality talent for you & serves all business equally. Find high-quality talent at every price point hourly, Monthly or project-based pricing</p>
+                    {!!  $find_right_talends->project_description  ?? '' !!}
                     </div>
                 </div>
                 <div class="col-md-6 text-md-right text-center">
                     <div class="img-box">
-                        <img src="{{asset('uploads/home-pages/find-right-talends/Group 37321.png')}}" class="img-fluid" alt="">
+                    @if(isset( $find_right_talends->talends_project_image) )
+            <img src="{{asset('uploads/home-pages/find-right-talends/'.$find_right_talends->talends_project_image)}}" class="img-fluid" alt="">
+            @endif
                     </div>
                 </div>
             </div>
@@ -89,12 +68,14 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 text-md-left text-center">
-                        <img src="{{asset('uploads/home-pages/find-right-talends/'.$find_right_talends->talends_work_image)}}" class="img-fluid" alt="">
+                @if(isset( $find_right_talends->talends_work_image) )
+            <img src="{{asset('uploads/home-pages/find-right-talends/'.$find_right_talends->talends_work_image)}}" class="img-fluid" alt="">
+            @endif
                 </div>
                 <div class="col-md-6">
                     <div class="content-box">
-                        <h2>QUALITY WORK <span>DONE QUICKLY</span></h2>
-                        <p>Find the right freelancer to begin working on your project within minutes</p>
+                    {!!  $find_right_talends->work_description  ?? '' !!}
+
                     </div>
                 </div>
             </div>
@@ -108,66 +89,7 @@
                 </div>
                 <div class="col-md-7">
                 <div class="accordion" id="accordionFaq">
-                        <div class="card bg-transparent border-0">
-                            <div class="card-header" id="headingOne">
-                                <h4 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                How Talends Recruiters are different than Staffing agencies? <i class="bi-plus float-right rotate-icon"></i>                                        
-                                </h4>
-                            </div>
-                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionFaq">
-                                <div class="card-body">
-                                Talends recruiters have an access to talents that are already listed within the platform and their background, expertise have been pre-vetted and recognised by many of our platform customers. whereas staffing agencies mostly rely on cv collection from random individuals and it’s a time taking process.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card bg-transparent border-0">
-                            <div class="card-header" id="headingTwo">
-                                <h4 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">                                        
-                                Do i have to pay extra for the service? <i class="bi-plus float-right rotate-icon"></i>                                        
-                                </h4>
-                            </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionFaq">
-                                <div class="card-body">
-                                When Talends recruiters hires a perfect resource for you, they share their hourly or project base rates with you, that is the only charges you’ve to pay and nothing extra.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card bg-transparent border-0">
-                            <div class="card-header" id="headingThree">
-                                <h4 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">                                        
-                                How Talends Recruitment Help my business? <i class="bi-plus float-right rotate-icon"></i>                                        
-                                </h4>
-                            </div>
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionFaq">
-                                <div class="card-body">
-                                You can scale up and down your staff based on your business needs, rather than keeping a resource that will cost you a fortune if not used properly or assigned the tasks, it will also improve the quality of your internal team that they can have immediate support of any kind if needed and they feel secure within the company enviorement.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card bg-transparent border-0">
-                            <div class="card-header" id="headingFour">
-                                <h4 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseTwo">                                        
-                                How Talends Recruitments works? <i class="bi-plus float-right rotate-icon"></i>                                        
-                                </h4>
-                            </div>
-                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionFaq">
-                                <div class="card-body">
-                                You just have to share your project or tasks requirement with our recruiters and they will find the right resources witin the given timeline & budgets.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card bg-transparent border-0">
-                            <div class="card-header" id="headingFive">
-                                <h4 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseTwo">                                        
-                                how talends.com supports in overall process? <i class="bi-plus float-right rotate-icon"></i>                                        
-                                </h4>
-                            </div>
-                            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionFaq">
-                                <div class="card-body">
-                                talends.com support & quality assurance team is always available to make sure the process is smooth and fair for both parties. our team verify all talend.com approved talent put all their passion & experties into your project. for 100% satisfaction our team respond your support enquiry within 1 hr time.
-                                </div>
-                            </div>
-                        </div>
+                {!!  $find_right_talends->freelancer_benefits  ?? '' !!}
                     </div>
                 </div>
             </div>

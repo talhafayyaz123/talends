@@ -1216,6 +1216,24 @@ a.notif {
 	left: 13px;
 }
 
+.company_registration_form i#togglePassword{
+	position: absolute;
+    right: -8px;
+    top: 79%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    padding: 18px 18px;
+}
+
+.error{
+	color: red;
+    font-size: 20px;
+}
+
+.field_error{
+	border-color: #a94442 !important;
+}
+
 /* Abdul Manan's css */
 /* Agency Page */
 .custom-radio .custom-control-label::before{
@@ -1997,22 +2015,4 @@ a.notif {
 	.talends-plan .plan-content .col-desc{width: auto;}
 	.talends-plan .plan-content .col-plan1{width: auto;}
 	.talends-plan .plan-content .col-plan2{width: auto;}
-}
-
-.company_registration_form i#togglePassword{
-	position: absolute;
-    right: -8px;
-    top: 79%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    padding: 18px 18px;
-}
-
-.error{
-	color: red;
-    font-size: 20px;
-}
-
-.field_error{
-	border-color: #a94442 !important;
 }

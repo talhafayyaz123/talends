@@ -94,9 +94,14 @@
                 </div>
                 <div class="col-md-12 col-lg-5 col-xl-4">
                     <div class="support-content-box d-flex flex-column align-items-center justify-content-between sticky-top mt-4">
-                        <p>our dedictaed team works round the clock to bring exceptional talent, agencies & services. we verify every memeber before they join our talends.com community. our support team response within 1 hr time for any query for 100% satisfacation.</p>
+                        <p>
+                            {!! $freelancer_side_bar->banner_description  ?? '' !!}
+                        </p>
                         <button class="btn btn-success my-5 px-5">Support</button>
-                        <img src="{{ asset('talends/assets/img/find-agency-img.png')}}" class="w-100" alt="">
+                        @if(isset( $freelancer_side_bar->about_talends_image) )
+                        <img src="{{asset('uploads/home-pages/freelancer_sidebar/'.$freelancer_side_bar->about_talends_image)}}"
+                            class="w-100" alt="">
+                        @endif
                     </div>
                 </div>
             </div>
@@ -358,143 +363,146 @@
 
 
 
-   var category_id=$('input[name="category"]:checked').val();
+    var values = [];
 
-   if(category_id){
+    $('input[name="category[]"]:checked').each(function() {
 
-    
+        values[values.length] = (this.checked ? $(this).val() : "");
+
+    });
+
+    var comma_category = values.join(","); 
+
+
+
+
+
+   if(comma_category.length!=0){
 
     $.ajax({
-        url:  "{{ url('/category_sub_categories') }}"+ '/' + category_id,
-           type: 'get',
+        url:  "{{ url('/category_sub_categories/multiple') }}"+ '/' + comma_category,
 
-           dataType: 'json',
+       type: 'get',
 
-           success: function(response){
+       dataType: 'json',
 
-             var len = 0;
+       success: function(response){
 
-             if(response['sub_categories'] != null){
+         var len = 0;
 
-               len = response['sub_categories'].length;
+         if(response['sub_categories'] != null){
 
-             }
+           len = response['sub_categories'].length;
 
-             $(".sub_categories").html('');  
+         }
 
-             const params = new URLSearchParams(window.location.search);
-
-
-
-             if(len > 0){
+         $(".sub_categories").html('');  
 
 
 
-               for(var i=0; i<len; i++){
-
-                 var id = response['sub_categories'][i].sub_category_id;
-
-                 var title = response['sub_categories'][i].title;
-
- 
+         if(len > 0){
 
 
 
-                 var option = "<span class='wt-checkbox'><input id='sub_category-"+id+"' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
+           for(var i=0; i<len; i++){
 
-                   option+="<label for='sub_category-"+id+"'> "+title+" </label></span>" ; 
+             var id = response['sub_categories'][i].sub_category_id;
 
-                   
+             var title = response['sub_categories'][i].title;
 
-                 $(".sub_categories").append(option);  
+             var option = "<span class='wt-checkbox'><input id='sub_category-"+id+"' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
 
-                
+               option+="<label for='sub_category-"+id+"'> "+title+" </label></span>" ; 
 
-               }
+               
 
-             }
+             $(".sub_categories").append(option); 
 
-
+            
 
            }
 
-        });
+         } 
 
 
+
+       }
+
+    });
 
    }
 
 
 
-    $(".freelancer_cat_filter :radio").change(function(){
+    
+   $('.freelancer_category :checkbox').change(function() {
 
-        if( $(this).is(":checked") ){
+var values = [];
 
-            var category_id = $(this).val();
+$('input[name="category[]"]:checked').each(function() {
 
+    values[values.length] = (this.checked ? $(this).val() : "");
 
+});
 
-     $.ajax({
-      
-           url:   "{{ url('/category_sub_categories') }}"+ '/' + category_id,
-
-           type: 'get',
-
-           dataType: 'json',
-
-           success: function(response){
-
-             var len = 0;
-
-             if(response['sub_categories'] != null){
-
-               len = response['sub_categories'].length;
-
-             }
-
-             $(".sub_categories").html('');  
-
-
-
-             if(len > 0){
-
-
-
-               for(var i=0; i<len; i++){
-
-                 var id = response['sub_categories'][i].sub_category_id;
-
-                 var title = response['sub_categories'][i].title;
-
-                                
-
-                 var option = "<span class='wt-checkbox'><input id='sub_category-"+id+"' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
-
-                   option+="<label for='sub_category-"+id+"'> "+title+" </label></span>" ; 
-
-                   
-
-                 $(".sub_categories").append(option);  
-
-                
-
-               }
-
-             }
-
-
-
-           }
-
-        });
+var comma_category = values.join(","); 
 
 
 
 
 
-        }
+$.ajax({
+    url:  "{{ url('/category_sub_categories/multiple') }}"+ '/' + comma_category,
 
-    });
+   type: 'get',
+
+   dataType: 'json',
+
+   success: function(response){
+
+     var len = 0;
+
+     if(response['sub_categories'] != null){
+
+       len = response['sub_categories'].length;
+
+     }
+
+     $(".sub_categories").html('');  
+
+
+
+     if(len > 0){
+
+
+
+       for(var i=0; i<len; i++){
+
+         var id = response['sub_categories'][i].sub_category_id;
+
+         var title = response['sub_categories'][i].title;
+
+         var option = "<span class='wt-checkbox'><input id='sub_category-"+id+"' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
+
+           option+="<label for='sub_category-"+id+"'> "+title+" </label></span>" ; 
+
+           
+
+         $(".sub_categories").append(option); 
+
+        
+
+       }
+
+     } 
+
+
+
+   }
+
+});        
+
+});
 
 
 

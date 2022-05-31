@@ -388,10 +388,12 @@ class HomePagesController extends Controller
         $trusted_by=AboutTalendsPage::where('page_type','trusted_by')->first();
         $interne_university_collaboration=AboutTalendsPage::where('page_type','interne_university_collaboration')->first();
         $featured_success_stories=AboutTalendsPage::where('page_type','featured_success_stories')->first();
+        $freelancer_side_bar=AboutTalendsPage::where('page_type','freelancer_side_bar')->first();
 
+        
      if($type=='banner_settings'){
         return view(
-            'back-end.admin.settings.home_page_settings.banner_settings',compact('banner_settings','find_right_opportunity','trusted_by')
+            'back-end.admin.settings.home_page_settings.banner_settings',compact('freelancer_side_bar','banner_settings','find_right_opportunity','trusted_by')
         );
      }else if($type=='team_demand'){
         return view(
@@ -524,6 +526,32 @@ class HomePagesController extends Controller
         $about_talends->saveTrustedBySettings($request);
         Session::flash('message','Trusted By Banner Saved Successfully');
         return Redirect::back(); 
+    }
+
+        
+    public function storeFreelancerSidebar(Request $request)
+    { 
+        
+        if($request->form_type=='add'){
+            $this->validate(
+                $request, [
+                    'sidebar_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+                    'sidebar_description' => 'required',
+            ]
+            );
+        }else{
+            $this->validate(
+                $request, [
+                    'sidebar_image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+                    'sidebar_description' => 'required',
+            ]
+            );
+        }
+
+        $about_talends = new AboutTalendsPage;
+        $about_talends->saveFreelancerSideBarSettings($request);
+        Session::flash('message','Freelancer Sidebar Saved Successfully');
+        return Redirect::back();
     }
 
     public function storeFooterHowWork(Request $request)

@@ -58,9 +58,17 @@
                                     </button>
                                     <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1">
                                         <div class="row">  
-                                            @foreach($categories as $category)                                  
+                                            @foreach($categories as $category)       
+                                            @php
+                                            $select='';
+
+                                            if( !empty(Request::get('category_id')) && in_array($category->id, explode(',',Request::get('category_id')) ) ){
+
+                                            $select='checked=checked';
+                                            }
+                                        @endphp                           
                                             <div class="col-md-4 mb-3">
-                                                <input type="checkbox"> {{ $category->title }}
+                                                <input type="checkbox" name="category[]" value="{{ $category->id }}" id='category_id' onclick="select_sub_categories(this)" {{$select}}> {{ $category->title }}
                                             </div>
                                             @endforeach
                                         </div>
@@ -72,14 +80,20 @@
                                         Sub Category <i class="bi-chevron-down float-right ml-3"></i>
                                     </button>
                                     <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1">
-                                        <div class="row">  
-                                            @if(isset($sub_categories) && !empty($sub_categories) )
-                                                @foreach($sub_categories as $key =>$value)
+                                        <div class="row category_sub_categories">  
+                                        @if(isset($sub_categories) && !empty($sub_categories) )
+                                    @foreach($sub_categories as $key =>$value)
+                                    @php
+                                            $select='';
+                                            if( !empty(Request::get('sub_category_id')) && in_array( $value->sub_category_id, explode(',',Request::get('sub_category_id')) ) ){
+                                            $select='checked=checked';
+                                            }
+                                        @endphp
                                                 <div class="col-md-4 mb-3">
-                                                    <input type="checkbox"> {{ $value->title }}
+                                                    <input type="checkbox" name="sub_categories[]"  value="{{  $value->sub_category_id }}" {{ $select }} id="freelancerSubCategory"> {{ $value->title }}
                                                 </div>
                                                 @endforeach
-                                            @endif
+                                       @endif
                                         </div>                                        
                                     </div>
                                 </div>
@@ -89,13 +103,19 @@
                                     </button>
                                     <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1">
                                         <div class="row">  
-                                            
-                                                <div class="col-md-4 mb-3">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
-                                                        <label class="custom-control-label" for="customRadio1">$5</label>
-                                                    </div>
-                                                </div>
+                                        @foreach(Helper::getComapnyBudgetList() as $key=>$price )
+                                    @php
+                                        $location_select='';
+                                        if(Request::get('price') && Request::get('price') ==$price['value'] ){
+                                        $location_select='checked=checked';
+                                        }
+                                    @endphp
+                                    <div class="col-md-4 mb-3">
+                                        <input type="radio" name="price" id="price" value="{{$price['value']}}" <?php echo $location_select;  ?>>{{$price['title']}}
+                                    </div>
+
+                                    @endforeach
+                                              
                                         </div>                                        
                                     </div>
                                 </div>
@@ -105,13 +125,21 @@
                                     </button>
                                     <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1">
                                         <div class="row">  
-                                            
-                                                <div class="col-md-4 mb-3">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
-                                                        <label class="custom-control-label" for="customRadio2">Dubai</label>
-                                                    </div>
-                                                </div>
+                                        @foreach($locations as $location)
+                                    @php
+                                        $location_select='';
+                                        if(Request::get('location_id') && Request::get('location_id') ==$location->id ){
+                                            $location_select='checked=checked';
+                                        }
+                                    @endphp
+                                
+                                    <div class="col-md-4 mb-3">
+                                        <input type="radio" id="location_id" name="location_id" value="{{ $location->id }}" <?php echo $location_select;  ?>>
+                                        
+                                        {{ $location->title }}
+                                    </div>
+                                
+                                    @endforeach
                                         </div>                                        
                                     </div>
                                 </div>
@@ -121,13 +149,20 @@
                                     </button>
                                     <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1">
                                         <div class="row">  
-                                            
-                                                <div class="col-md-4 mb-3">
-                                                    <div class="custom-control custom-radio">
-                                                        <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
-                                                        <label class="custom-control-label" for="customRadio3">Less than 10</label>
-                                                    </div>
-                                                </div>
+                                        @foreach (Helper::getEmployeesList() as $key => $employee)
+                                    @php
+                                        $location_select='';
+                                        if(Request::get('employees') && Request::get('employees') ==$employee['value'] ){
+                                        $location_select='selected=selected';
+                                        }
+                                    @endphp
+                                    <div class="col-md-4 mb-3">
+                                    <input type="radio"id="employees" name="employees" value="{{ $employee['value'] }}" <?php echo $location_select;  ?>>
+                                    {{ $employee['title'] }}
+                                </div>
+                                @endforeach
+                                               
+                                                
                                         </div>                                        
                                     </div>
                                 </div>
@@ -273,7 +308,7 @@
 
                                 <p>{{$value->profile->tagline}}</p>
 
-                            </a>
+                            
 
                             <div class="tlb__reviews row">
 
@@ -353,7 +388,7 @@
 
                             <br>
 
-
+                            </a>
 
                             <span class="company_description">Total Team Strength</span>
 
@@ -601,12 +636,13 @@
         e.stopPropagation();
     });
     function select_sub_categories(event) {
+        var array = []
+        var checkboxes = document.querySelectorAll('#category_id:checked')
 
-        let category = $('#category_id').val();
-
-        var comma_category = category.join(",");
-
-
+        for (var i = 0; i < checkboxes.length; i++) {
+        array.push(checkboxes[i].value)
+        }
+        var comma_category = array.join(",");
 
         $.ajax({
 
@@ -625,29 +661,25 @@
                     len = response['sub_categories'].length;
 
                 }
-                $('#freelancerSubCategory').find('option').not(':first').remove();
 
+                $('.category_sub_categories').html('');
 
                 var optionsArray = [];
 
                  if (len > 0) {
 
-
                      for (var i = 0; i < len; i++) {
 
-                         var id = response['sub_categories'][i].sub_category_id;
+                    var id = response['sub_categories'][i].sub_category_id;
 
-                         var title = response['sub_categories'][i].title;
+                    var title = response['sub_categories'][i].title;
 
-                            optionsArray.push({
-                            value: id,
-                            label: title
-                        });
+                    var option = "<div class='col-md-4 mb-3'><input id='freelancerSubCategory' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
 
-                     }
-
-                     $("#freelancerSubCategory").multiselect('dataprovider', optionsArray);
-
+                    option+=" "+title+" </div>" ; 
+                    $(".category_sub_categories").append(option); 
+        
+                }
 
                 }
              
@@ -659,52 +691,57 @@
     }
 
 
+    function getSearchParameters() {
+
+        var prmstr = window.location.search.substr(1);
+
+        var prmarr = prmstr.split("&");
+        return prmarr;
+
+    }
 
     $(document).ready(function() {
 
-        $("#reset_btn").click(function() {
-
-            window.location.href = window.location.origin + '/companies';
-
-        });
-
         $("#filter_btn").click(function() {
+            var category_arr=[];
+            var sub_category_arr=[];
 
+            var price =  $('input[name="price"]:checked').val();
+            price = (typeof price === 'undefined') ? '' : price;
 
+            // category
+            var category_checkboxes = document.querySelectorAll('#category_id:checked')
+            for (var i = 0; i < category_checkboxes.length; i++) {
+                category_arr.push(category_checkboxes[i].value)
+            }
+            var comma_category = category_arr.join(",");
 
+            // sub category
+            var sub_category_checkboxes = document.querySelectorAll('#freelancerSubCategory:checked')
+            for (var i = 0; i < sub_category_checkboxes.length; i++) {
+                sub_category_arr.push(sub_category_checkboxes[i].value)
+            }
+            var comma_sub_category = sub_category_arr.join(",");
+        
+        
             var url = window.location.pathname.split("/");
+        
+            var category_id =comma_category;
+            var location_id = $('input[name="location_id"]:checked').val();
+            location_id = (typeof location_id === 'undefined') ? '' : location_id;
 
 
-
-
-
-            var price = $('#price').val();
-
-            var category_id = $('#category_id').val();
-
-            var location_id = $('#location_id').val();
-
-
-
-            var sub_category_id = $('#freelancerSubCategory').val();
-
-
-
-
-
-            var employees = $('#employees').val();
-
-
+            var sub_category_id =comma_sub_category;
+            var employees =  $('input[name="employees"]:checked').val();
+            employees = (typeof employees === 'undefined') ? '' : employees;
 
             var param_name = getSearchParameters()[0].split("=")[0];
-
-
+        
+        ///
 
             if (param_name && param_name != 'search') {
 
-                var url_employees = getSearchParameters()[0].split("=")[1];
-
-
+            var url_employees = getSearchParameters()[0].split("=")[1];
 
 
 
@@ -724,7 +761,7 @@
 
                     if (!price) {
 
-                        price = url_price
+                        price = url_price;
 
                     }
 
@@ -740,7 +777,7 @@
 
                     if (!category_id) {
 
-                        category_id = url_duration
+                        category_id = url_duration;
 
                     }
 
@@ -748,21 +785,21 @@
 
 
 
-                if (getSearchParameters()[4]) {
+            if (getSearchParameters()[4]) {
 
-                    var url_location = getSearchParameters()[4].split("=")[1];
-
-
-
-                    if (!location_id) {
-
-                        location_id = url_location
-
-                    }
+                var url_location = getSearchParameters()[4].split("=")[1];
 
 
+
+                if (!location_id) {
+
+                    location_id = url_location;
 
                 }
+
+
+
+            }
 
 
 
@@ -774,7 +811,7 @@
 
                     if (!sub_category_id) {
 
-                        sub_category_id = url_sub_category_id
+                        sub_category_id = url_sub_category_id;
 
                     }
 
@@ -783,54 +820,20 @@
                 }
 
 
-                // window.location.href = window.location.origin + '/companies?employees=' + employees + '&filter=filter&price=' + price + '&category_id=' + category_id + '&location_id=' + location_id + '&sub_category_id=' + sub_category_id+ '';
                 window.location.href = {!!json_encode(url('/')) !!} + '/companies?employees=' + employees + '&filter=filter&price=' + price + '&category_id=' + category_id + '&location_id=' + location_id + '&sub_category_id=' + sub_category_id + '';
 
+                } else {
 
-
-            } else {
-
-                // window.location.href = window.location.origin + '/companies?employees=' + employees + '&filter=filter&price=' + price + '&category_id=' + category_id + '&location_id=' + location_id+ '&sub_category_id=' + sub_category_id+ '';
                 window.location.href = {!!json_encode(url('/')) !!} + '/companies?employees=' + employees + '&filter=filter&price=' + price + '&category_id=' + category_id + '&location_id=' + location_id + '&sub_category_id=' + sub_category_id + '';
 
-            }
+                }
 
+            ///
+        
+                });
+            });
+    
 
-
-        });
-
-    });
-
-
-
-    function getSearchParameters() {
-
-        var prmstr = window.location.search.substr(1);
-
-        var prmarr = prmstr.split("&");
-
-
-
-        return prmarr;
-
-    }
-    $(document).ready(function() {
-
-        $('#category_id').multiselect({
-            buttonWidth: '230px',
-            dropRight: true,
-        });
-
-        $('#freelancerSubCategory').multiselect({
-            buttonWidth: '230px',
-            dropRight: true
-
-});
-
-
-    });
 </script>
-
-
 
 @endpush
