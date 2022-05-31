@@ -436,7 +436,7 @@ footer .row .col-md-6:last-child>ul {
 
 }
 
-@media screen and (min-width: 1280px) {
+/* @media screen and (min-width: 1280px) {
     .container {
         max-width: 1280px !important;
     }
@@ -446,7 +446,7 @@ footer .row .col-md-6:last-child>ul {
     .container {
         max-width: 1024px;
     }
-}
+} */
 
 
 @media screen and (min-width:991px) {
@@ -472,7 +472,7 @@ footer .row .col-md-6:last-child>ul {
 
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
     .container {
         padding-left: 30px;
         padding-right: 30px;
@@ -483,7 +483,7 @@ footer .row .col-md-6:last-child>ul {
 .container, .container-sm {
     max-width: 540px;
 }
-}
+} */
 @media screen and (min-width: 360px) {
     .intern_reviews ul li+li {
         padding-left: 4px;
@@ -564,14 +564,14 @@ footer .row .col-md-6:last-child>ul {
     font-size: 14px;
 }
 .freelancer_filters .wt-widgetcontent {
-    position: absolute;
+    /* position: absolute; */
     /* min-width: 230px; */
-    width: 100%;
+    /* width: 100%; */
     /* max-width: 300px; */
-    left: 0;
+    /* left: 0; */
     /* z-index: 2; */
-    height: auto;
-    border-radius: 53px;
+    /* height: auto; */
+    /* border-radius: 53px; */
 }
 
 /* .wt-widgetcontent.interne_widgetcontent {
@@ -802,7 +802,26 @@ a.notif {
 	top: 14px;
 	color: #d71d1d;
   }
-
+/* width */
+#job-filters::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  
+  /* Track */
+#job-filters::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+#job-filters::-webkit-scrollbar-thumb {
+    background: #349F1A; 
+  }
+  
+  /* Handle on hover */
+#job-filters::-webkit-scrollbar-thumb:hover {
+    background: #42C722; 
+  }
 @media screen and (max-width:1366px) {
     .filters-container {
         width: 1280px;
@@ -831,7 +850,7 @@ a.notif {
     }
 
     .freelancer_filters .wt-widgetcontent {
-        position: initial;
+        position: absolute;
         min-width: 0;
     }
 
@@ -1334,15 +1353,30 @@ a.notif {
     display: inline;
     padding: 0 15px;
 }
+
 @media(max-width:630px){
     #hourly-dropdown{
         right: 0;
         left: auto;
     }
 }
+@media(max-width:1100px){
+    .dropdown-50,
+    .dropdown-40{min-width: 30rem;}
+    .wt-userlisting-breadcrumb li{
+        width:100% ;
+        padding: 0;
+    }
+    .wt-userlisting-breadcrumb li+li{
+        border-left: 0;
+    }
+    .wt-userlisting-breadcrumbvtwo li span{
+        line-height: 28px;
+    }
+}
 @media(max-width:768px){
     .dropdown-50,
-    .dropdown-40{min-width: 20rem;}
+    .dropdown-40{min-width: 13rem;}
     .btn-theme,
     .btn-theme-white,
     .btn-outline-theme{
