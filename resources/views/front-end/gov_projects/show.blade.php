@@ -79,7 +79,7 @@
                                     <div class="wt-btnarea"><a href="javascript:void(0);" @click.prevent="check_auth('{{{ url('job/proposal/'.$job->slug) }}}')" class="wt-btn">{{{ trans('lang.send_propsal') }}}</a></div>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 col-xl-8 float-left">
+                            <div class="col-md-12 col-lg-7 col-xl-8">
                                 <div class="wt-projectdetail-holder">
                                     @if (!empty($job->description))
                                         <div class="wt-projectdetail">
@@ -128,7 +128,7 @@
                                 </div>
                             </div>
                         @endif
-                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 col-xl-4 float-left">
+                        <div class="col-md-12 col-lg-5 col-xl-4">
                             @if (file_exists(resource_path('views/extend/front-end/jobs/sidebar/index.blade.php')))
                                 @include('extend.front-end.jobs.sidebar.index')
                             @else

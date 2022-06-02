@@ -111,6 +111,10 @@
                                         }
                                     @endphp
                                     <div class="col-md-4 mb-3">
+                                        <!-- <div class="custom-control custom-radio">
+                                            <input type="radio" id="price" name="price" value="{{$price['value']}}" class="custom-control-input" <?php echo $location_select;  ?>>
+                                            <label class="custom-control-label" for="{{$price['value']}}" <?php echo $location_select;  ?>>{{$price['title']}}</label>
+                                        </div> -->
                                         <input type="radio" name="price" id="price" value="{{$price['value']}}" <?php echo $location_select;  ?>>{{$price['title']}}
                                     </div>
 

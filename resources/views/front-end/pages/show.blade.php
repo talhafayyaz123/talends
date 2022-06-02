@@ -34,9 +34,9 @@
                                     <div class="content_box_wrapper">
                                         <div class="content_box home_page_banner_description">
                                             {!! $banner_settings->banner_description ?? '' !!}
-                                            <a href="{{ route('jobs') }}" class="theme_btn inverse_btn">Find a
+                                            <a href="{{ route('jobs') }}" class="btn btn-theme px-4 rounded-pill">Find a
                                                 Job</a>
-                                            <a href="#" class="theme_btn">Submit a Project</a>
+                                            <a href="#" class="btn btn-outline-theme px-4 rounded-pill">Submit a Project</a>
                                         </div>
                                     </div>
                                 </div>
@@ -127,8 +127,8 @@
 
                     {!! $banner_settings->features_text ?? '' !!}
 
-                    <a href="#" class="theme_btn inverse_btn">I’m an Intern</a>
-                    <a href="#" class="theme_btn ml-md-3">I’m Hiring an Intern</a>
+                    <a href="#" class="btn btn-theme px-4 rounded-pill">I’m an Intern</a>
+                    <a href="#" class="btn btn-theme-white px-4 rounded-pill ml-md-3">I’m Hiring an Intern</a>
                 </div>
                 <div class="col-md-5">
                     @if(isset( $banner_settings->talends_project_image) )
@@ -251,10 +251,10 @@
 
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-sm-6 col-12 text-center">
-                            <a class="theme_btn m-0">Join the community</a>
+                            <a href="javascript:;" class="btn btn-outline-theme px-4 rounded-pill">Join the community</a>
                         </div>
-                        <div class="col-lg-6 col-sm-6 col-12 px-0 text-center">
-                            <p class="mb-0">Support 24/7 <a class="" href="tel:052-768-4867">052-768-4867</a></p>
+                        <div class="col-lg-6 col-sm-6 col-12 px-0 text-center text-md-left">
+                            <p class="mb-0 font-weight-bold">Support 24/7 <a class="ml-3" href="tel:052-768-4867">052-768-4867</a></p>
                         </div>
                     </div>
                 </div>
@@ -272,7 +272,7 @@
                 </div>
                 <div class="col-md-8 order-md-1">
                     {!! $agency_profile->banner_description ?? '' !!}
-                    <a href="{{ route('whyAgencyPlan') }}" class="theme_btn">Create your Agency Profile</a>
+                    <a href="{{ route('whyAgencyPlan') }}" class="btn btn-theme-white px-4 rounded-pill ml-4">Create your Agency Profile</a>
                 </div>
             </div>
         </div>

@@ -536,7 +536,7 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 }
 
 .opportunity_card h3 {
-	font: 24px trajan, sans-serif;
+	font-size: 24px;
 	bottom: unset;
 	top: 0;
 }
@@ -1106,7 +1106,8 @@ a.notif {
 }
 
 .note-section p, .note-row p {
-	font: 28px trajan, sans-serif;
+	font-size: 28px;
+	line-height: 1.2;
 	color: #fff;
 	padding: 1em 5em 0 1em;
 }
@@ -1236,6 +1237,10 @@ a.notif {
 
 /* Abdul Manan's css */
 /* Agency Page */
+.content_box_wrapper h2{
+	line-height: 1;
+	margin-bottom: 30px;
+}
 .custom-radio .custom-control-label::before{
 	border-radius: 3px;
 }
@@ -1246,14 +1251,22 @@ a.notif {
 .text-theme{
 	color: #349F1A;
 }
+.bg-theme{
+	background-color: #349F1A;
+}
+.rounded-16{
+	border-radius: 16px;
+}
 .btn-theme{
     color: #ffffff;
     background-color: #349f1a;
-    border-color: #349f1a;
+    border:1px solid #349f1a;
     font-size: 18px;
+	line-height: 1;
     font-weight: bold;
-    padding: 10px;
+    padding:10px 15px;
     margin-bottom: 0.5rem;
+    text-transform: capitalize;
 }
 .btn-theme:hover{
     color: #ffffff;
@@ -1266,9 +1279,11 @@ a.notif {
     background-color: #ffffff;
     border-color: #ffffff;
     font-size: 18px;
+	line-height: 1;
     font-weight: bold;
-    padding: 10px;
+    padding:10px 15px;
     margin-bottom: 0.5rem;
+    text-transform: capitalize;
 }
 .btn-theme-white:hover{
     color: #349f1a;
@@ -1279,11 +1294,13 @@ a.notif {
 .btn-outline-theme{
     color: #349f1a;
     background-color: transparent;
-    border-color: #349f1a;
+    border:1px solid #349f1a;
     font-size: 18px;
+	line-height: 1;
     font-weight: bold;
-    padding: 10px;
+    padding:10px 15px;
     margin-bottom: 0.5rem;
+    text-transform: capitalize;
 }
 .btn-outline-theme:hover{
     color: #ffffff;
@@ -1700,8 +1717,12 @@ a.notif {
 }
 .theme-list-sec .content-box h2{
 	font-size: 42px;
-	line-height: 1.2;
 	font-weight: bold;
+	line-height: 1;
+	font-weight: bold;
+}
+.theme-list-sec .content-box h2 span{
+	color: #349F1A;
 }
 .budget-sec .content-box{
 	position: relative;
@@ -1728,7 +1749,8 @@ a.notif {
 }
 .budget-sec .content-box h2 {
     font-size: 60px;
-    line-height: 1.2;
+	font-weight: bold;
+    line-height: 1;
     color: #2f2f2f;
     text-transform: capitalize;
 }

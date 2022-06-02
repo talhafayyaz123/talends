@@ -35,14 +35,14 @@
             </div>
         </div>
         <div class="container">
-            <div class="row">
-                <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left">
+            <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="wt-comsingleimg">
                             <figure><img src="{{{ asset(Helper::getUserProfileBanner($user->id)) }}}" alt="{{{ trans('lang.company_banner') }}}"></figure>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 float-left">
+                    <div class="col-md-12 col-lg-5 col-xl-4">
                         <aside id="wt-sidebar" class="wt-sidebar">
                             <div class="wt-proposalsr wt-proposalsrvtwo">
                                 <div class="wt-widgetcontent wt-companysinfo">
@@ -161,7 +161,7 @@
                             </div>
                         </aside>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 float-left">
+                    <div class="col-md-12 col-lg-7 col-xl-8">
                         <div class="wt-userlistingholder wt-haslayout">
                             <div class="wt-comcontent">
                                 <div class="wt-title">

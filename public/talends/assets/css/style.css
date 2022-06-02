@@ -846,6 +846,7 @@ header .menu_browse_box small {
 .community_icons_box p {
     font-size: 14px;
     margin-bottom: 20px;
+    font-weight: 500;
 }
 
 .theme_slider,

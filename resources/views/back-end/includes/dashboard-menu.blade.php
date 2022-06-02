@@ -1,12 +1,12 @@
 @auth
     <div id="wt-sidebarwrapper" class="wt-sidebarwrapper">
-        <div id="wt-btnmenutoggle" class="wt-btnmenutoggle">
+        <!-- <div id="wt-btnmenutoggle" class="wt-btnmenutoggle">
             <span class="menu-icon">
                 <em></em>
                 <em></em>
                 <em></em>
             </span>
-        </div>
+        </div> -->
         @php
             $user = !empty(Auth::user()) ? Auth::user() : '';
             $role = !empty($user) ? $user->getRoleNames()->first() : array();

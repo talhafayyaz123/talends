@@ -71,7 +71,7 @@ header .navbar .navbar-nav {
     flex-wrap: wrap;
     align-content: flex-end;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .navbar-expand-lg .navbar-nav .nav-link.active {
@@ -436,7 +436,7 @@ footer .row .col-md-6:last-child>ul {
 
 }
 
-@media screen and (min-width: 1280px) {
+/* @media screen and (min-width: 1280px) {
     .container {
         max-width: 1280px !important;
     }
@@ -446,7 +446,7 @@ footer .row .col-md-6:last-child>ul {
     .container {
         max-width: 1024px;
     }
-}
+} */
 
 
 @media screen and (min-width:991px) {
@@ -472,7 +472,7 @@ footer .row .col-md-6:last-child>ul {
 
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
     .container {
         padding-left: 30px;
         padding-right: 30px;
@@ -483,7 +483,7 @@ footer .row .col-md-6:last-child>ul {
 .container, .container-sm {
     max-width: 540px;
 }
-}
+} */
 @media screen and (min-width: 360px) {
     .intern_reviews ul li+li {
         padding-left: 4px;
@@ -553,7 +553,6 @@ footer .row .col-md-6:last-child>ul {
 }
 
 .freelancer_filters .wt-widget{
-    /* margin: 0 0 0px !important; */
     padding-top: 0% !important;
 }
 
@@ -563,21 +562,6 @@ footer .row .col-md-6:last-child>ul {
 .freelancer_filters form a {
     font-size: 14px;
 }
-.freelancer_filters .wt-widgetcontent {
-    position: absolute;
-    /* min-width: 230px; */
-    width: 100%;
-    /* max-width: 300px; */
-    left: 0;
-    /* z-index: 2; */
-    height: auto;
-    border-radius: 53px;
-}
-
-/* .wt-widgetcontent.interne_widgetcontent {
-    min-width: 177px !important;
-} */
-
 .freelancer_filters .wt-widgettitle {
     padding: 12px 16px;
     border: 1px solid #bbb8bd;
@@ -802,7 +786,26 @@ a.notif {
 	top: 14px;
 	color: #d71d1d;
   }
-
+/* width */
+#job-filters::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  
+  /* Track */
+#job-filters::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+#job-filters::-webkit-scrollbar-thumb {
+    background: #349F1A; 
+  }
+  
+  /* Handle on hover */
+#job-filters::-webkit-scrollbar-thumb:hover {
+    background: #42C722; 
+  }
 @media screen and (max-width:1366px) {
     .filters-container {
         width: 1280px;
@@ -831,7 +834,7 @@ a.notif {
     }
 
     .freelancer_filters .wt-widgetcontent {
-        position: initial;
+        position: absolute;
         min-width: 0;
     }
 
@@ -891,6 +894,12 @@ a.notif {
 .text-theme{
 	color: #349F1A;
 }
+.bg-theme{
+    background-color: #349f1a;
+}
+.rounded-16{
+	border-radius: 16px;
+}
 .custom-control-input:checked ~ .custom-control-label::before {
     color: #fff;
     border-color: #349f1a;
@@ -901,11 +910,13 @@ a.notif {
 .btn-theme{
     color: #ffffff;
     background-color: #349f1a;
-    border-color: #349f1a;
-    font-size: 20px;
+    border:1px solid #349f1a;
+    font-size: 18px;
+    line-height: 1;
     font-weight: bold;
-    padding: 10px;
+    padding:10px 15px;
     margin-bottom: 0.5rem;
+    text-transform: capitalize;
 }
 .btn-theme:hover{
     color: #ffffff;
@@ -917,10 +928,11 @@ a.notif {
     color: #349f1a;
     background-color: #ffffff;
     border-color: #ffffff;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
-    padding: 10px;
+    padding:10px 15px;
     margin-bottom: 0.5rem;
+    text-transform: capitalize;
 }
 .btn-theme-white:hover{
     color: #349f1a;
@@ -931,11 +943,12 @@ a.notif {
 .btn-outline-theme{
     color: #349f1a;
     background-color: transparent;
-    border-color: #349f1a;
-    font-size: 20px;
+    border:1px solid #349f1a;
+    font-size: 18px;
     font-weight: bold;
-    padding: 10px;
+    padding:10px 15px;
     margin-bottom: 0.5rem;
+    text-transform: capitalize;
 }
 .btn-outline-theme:hover{
     color: #ffffff;
@@ -1334,15 +1347,30 @@ a.notif {
     display: inline;
     padding: 0 15px;
 }
+
 @media(max-width:630px){
     #hourly-dropdown{
         right: 0;
         left: auto;
     }
 }
+@media(max-width:1100px){
+    .dropdown-50,
+    .dropdown-40{min-width: 30rem;}
+    .wt-userlisting-breadcrumb li{
+        width:100% ;
+        padding: 0;
+    }
+    .wt-userlisting-breadcrumb li+li{
+        border-left: 0;
+    }
+    .wt-userlisting-breadcrumbvtwo li span{
+        line-height: 28px;
+    }
+}
 @media(max-width:768px){
     .dropdown-50,
-    .dropdown-40{min-width: 20rem;}
+    .dropdown-40{min-width: 13rem;}
     .btn-theme,
     .btn-theme-white,
     .btn-outline-theme{

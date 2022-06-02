@@ -7,85 +7,162 @@
             </div>
             @php session()->forget('message');  @endphp
         @endif
+        <div class="bg-theme p-4 rounded-16">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="text-white mb-0">Welcome {{ Auth::user()->profile->company_name }}</h1>
+                    <p class="text-white">Wednesday, 01 June 2022</p>
+                </div>
+            </div>
         <div class="row">
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <div class="wt-insightsitemholder">
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                            <div class="wt-insightsitem wt-dashboardbox">
-                                <figure class="wt-userlistingimg">
-                                    {{ Helper::getImages('uploads/settings/icon',$latest_proposals_icon, 'layers') }}
-                                </figure>
-                                <div class="wt-insightdetails">
-                                    <div class="wt-title">
-                                        <h3>Total Leads</h3>
-                                        {{$total_leads}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                            <div class="wt-insightsitem wt-dashboardbox">
-                                <figure class="wt-userlistingimg">
-                                    {{ Helper::getImages('uploads/settings/icon',$latest_proposals_icon, 'layers') }}
-                                </figure>
-                                <div class="wt-insightdetails">
-                                    <div class="wt-title">
-                                        <h3>Unread Leads</h3>
-                                        {{$unread_leads}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                     
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                            <div class="wt-insightsitem wt-dashboardbox">
-                               <h2> {{ Auth::user()->profile->company_name }}</h2>
-                                
-                                <div class="wt-insightdetails">
-                                    <div class="wt-title">
-                                        <b>Your Profile is {{Helper::getProfileCompleteRatio()}}% complete.</b>
-                                       Completing your profile is a great way to appeal to customers.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                      
-                     
-                       <!--  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                            <div class="wt-insightsitem wt-dashboardbox">
-                                <figure class="wt-userlistingimg">
-                                    {{ Helper::getImages('uploads/settings/icon',$latest_pending_balance_icon, 'cart') }}
-                                </figure>
-                                <div class="wt-insightdetails">
-                                    <div class="wt-title">
-                                        <h3>{{ !empty($symbol['symbol']) ? $symbol['symbol'] : '$' }}{{{ Helper::getProposalsBalance(Auth::user()->id, 'hired') }}}</h3>
-                                        <h3>{{ trans('lang.pending_bal') }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
-                            <div class="wt-insightsitem wt-dashboardbox">
-                                <figure class="wt-userlistingimg">
-                                    {{ Helper::getImages('uploads/settings/icon',$latest_current_balance_icon, 'gift') }}
-                                </figure>
-                                <div class="wt-insightdetails">
-                                    <div class="wt-title">
-                                    <h3>{{ !empty($symbol['symbol']) ? $symbol['symbol'] : '$' }}{{{ Helper::getProposalsBalance(Auth::user()->id, 'completed') }}}</h3>
-                                        <h3>{{ trans('lang.curr_bal') }}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                     
+            <div class="col-lg-4 col-md-6">
+                <div class="dwidget-card">
+                    <div class="d-flex mb-4 align-items-center">
+                        {{ Helper::getImages('uploads/settings/icon',$latest_proposals_icon, 'layers') }}
+                        <h4 class="ml-3">{{ Auth::user()->profile->company_name }}</h4>
                     </div>
+                    <p class="mb-0">Your Profile is {{Helper::getProfileCompleteRatio()}}% complete.</p>
+                    <div class="progress mb-5" style="height: 2px;">
+                        <div class="progress-bar" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <p>Completing your profile is a great way to attract more customer</p>
+                    <a href="javascript:;" class="btn btn-link font-weight-bold text-secondary">EDIT PROFILE</a>
+                </div>
+                <div class="dwidget-card" style="min-height:362px;">
+                    <div class="d-flex mb-4 align-items-center">
+                        {{ Helper::getImages('uploads/settings/icon',$latest_proposals_icon, 'layers') }}
+                        <h4 class="ml-3">Help and Advice</h4>
+                    </div>
+                    <p>We response within within very short time</p>
+                    <p class="mb-5">Email : Agencyhelp@talends.com <br/>Call : +971 52 768 4867</p>
+                    <p class="font-weight-bold text-secondary pt-5 mb-0">Open 24 hours a day, 7 days a week</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="dwidget-card">
+                    <div class="d-flex mb-4 align-items-center">
+                        {{ Helper::getImages('uploads/settings/icon',$latest_proposals_icon, 'layers') }}
+                        <h4 class="ml-3">Leads Preferences</h4>
+                    </div>
+                    <p>Services & Skills</p>
+                    <ul>
+                       <li>UI/UX</li> 
+                       <li>SEO</li> 
+                       <li>Mobile App Development</li> 
+                       <li>Website Development</li> 
+                       <li>+1</li> 
+                    </ul>
+                    <p>You’re receiving customers within </p>
+                    <small class="font-weight-bold text-secondary mb-4 d-block"><i class="bi-geo-alt-fill"></i> Dubai, United Arab Emirates</small>
+                    <a href="javascript:;" class="btn btn-link font-weight-bold text-secondary">EDIT PREFERENCES</a>
+                </div>
+                <div class="dwidget-card">
+                    <div class="d-flex mb-4 align-items-center">
+                        {{ Helper::getImages('uploads/settings/icon',$latest_proposals_icon, 'layers') }}
+                        <h4 class="ml-3">Message</h4>
+                    </div>
+                    <p class="mb-5">You’ve 100 Unreaad Messages Please Respond</p>
+                    <a href="javascript:;" class="btn btn-link font-weight-bold text-secondary">EDIT PREFERENCES</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="dwidget-card" style="min-height:688px;">
+                    <div class="d-flex mb-4 align-items-center">
+                        {{ Helper::getImages('uploads/settings/icon',$latest_proposals_icon, 'layers') }}
+                        <h4 class="ml-3">Leads</h4>
+                    </div>
+                    <div class="mb-4">
+                        <h3>{{$total_leads}}</h3>
+                        <p>Total Leads</p>
+                    </div>
+                    <div class="mb-4">
+                        <h3> {{$unread_leads}}</h3>
+                        <p>Unread Leads</p>
+                    </div>
+                    <div class="mb-5">
+                        <h3>59</h3>
+                        <p>Estimated Leads</p>
+                    </div>
+                    <p class="mb-0">We’re sending all new leads to your preferred email address</p>
+                    <a href="javascript:;" class="btn-link font-weight-bold text-secondary d-inline-block mb-5 pb-4">Ali@thefuturedynamics.com</a>
+                    <a href="javascript:;" class="btn-link font-weight-bold text-secondary d-inline-block pt-5 mt-5">EDIT PREFERENCES</a>
                 </div>
             </div>
         </div>
-      <!--   <div class="row">
+        </div>
+        <div class="row">
+            <!-- <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                <div class="wt-insightsitem wt-dashboardbox">
+                    <figure class="wt-userlistingimg">
+                        {{ Helper::getImages('uploads/settings/icon',$latest_proposals_icon, 'layers') }}
+                    </figure>
+                    <div class="wt-insightdetails">
+                        <div class="wt-title">
+                            <h3>Total Leads</h3>
+                            {{$total_leads}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                <div class="wt-insightsitem wt-dashboardbox">
+                    <figure class="wt-userlistingimg">
+                        {{ Helper::getImages('uploads/settings/icon',$latest_proposals_icon, 'layers') }}
+                    </figure>
+                    <div class="wt-insightdetails">
+                        <div class="wt-title">
+                            <h3>Unread Leads</h3>
+                            {{$unread_leads}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                <div class="wt-insightsitem wt-dashboardbox">
+                    <h2> {{ Auth::user()->profile->company_name }}</h2>
+                    
+                    <div class="wt-insightdetails">
+                        <div class="wt-title">
+                            <b>Your Profile is {{Helper::getProfileCompleteRatio()}}% complete.</b>
+                            Completing your profile is a great way to appeal to customers.
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            
+            
+            <!--  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                <div class="wt-insightsitem wt-dashboardbox">
+                    <figure class="wt-userlistingimg">
+                        {{ Helper::getImages('uploads/settings/icon',$latest_pending_balance_icon, 'cart') }}
+                    </figure>
+                    <div class="wt-insightdetails">
+                        <div class="wt-title">
+                            <h3>{{ !empty($symbol['symbol']) ? $symbol['symbol'] : '$' }}{{{ Helper::getProposalsBalance(Auth::user()->id, 'hired') }}}</h3>
+                            <h3>{{ trans('lang.pending_bal') }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                <div class="wt-insightsitem wt-dashboardbox">
+                    <figure class="wt-userlistingimg">
+                        {{ Helper::getImages('uploads/settings/icon',$latest_current_balance_icon, 'gift') }}
+                    </figure>
+                    <div class="wt-insightdetails">
+                        <div class="wt-title">
+                        <h3>{{ !empty($symbol['symbol']) ? $symbol['symbol'] : '$' }}{{{ Helper::getProposalsBalance(Auth::user()->id, 'completed') }}}</h3>
+                            <h3>{{ trans('lang.curr_bal') }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            
+        </div>
+    <!--<div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 float-left">
                 <div class="wt-dashboardbox wt-ongoingproject la-ongoing-projects">
                     <div class="wt-dashboardboxtitle wt-titlewithsearch">

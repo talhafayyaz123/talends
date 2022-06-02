@@ -92,7 +92,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 col-lg-5 col-xl-4">
+                <div class="col-md-12 col-lg-5 col-xl-4 px-5">
                     <div class="support-content-box d-flex flex-column align-items-center justify-content-between sticky-top mt-4">
                         <p>
                             {!! $freelancer_side_bar->banner_description  ?? '' !!}
