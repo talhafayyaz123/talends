@@ -476,6 +476,7 @@
              },
              next: function () {
                  this.step++;
+                
              },
              selectedRole: function (role) {
                 
@@ -501,6 +502,10 @@
                 if($('#last_name').val()){
                     this.last_name=$('#last_name').val();
                 }
+            },
+            setUserRole: function (role) {
+                this.user_type=role;
+                $('#role').val(role);
             },
 
              checkSingleForm: function (error_message) {
@@ -574,7 +579,7 @@
                  var self = this;
                  let register_Form = document.getElementById('register_form');
                  let form_data = new FormData(register_Form);
- 
+                 
                  this.form_step2.password_error = '';
                  this.form_step2.is_password_error = false;
                  this.form_step2.password_confirm_error = '';
@@ -622,15 +627,21 @@
                        self.submitUser('multiple')
                         })
                         .catch(function (error) {
+
                             if (error.response.data.errors.first_name) {
                                 self.form_step1.first_name_error = error.response.data.errors.first_name[0];
                                 self.form_step1.is_first_name_error = true;
                             }
+
+                            if (error.response.data.errors.locations) {
+                                self.form_step2.locations_error = error.response.data.errors.locations[0];
+                                self.form_step2.is_locations_error = true;
+                            }
     
-                            if (error.response.data.errors.user_type) {
+                           /*  if (error.response.data.errors.user_type) {
                                 self.form_step1.user_type_error = error.response.data.errors.user_type[0];
                                 self.form_step1.is_user_type_error = true;
-                            }
+                            } */
     
                             
                             if (error.response.data.errors.last_name) {
@@ -647,10 +658,10 @@
                                 self.form_step2.password_error = 'Your password must be more than 6 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character';
                                 self.form_step2.is_password_error = true;
                             }
-                            if (error.response.data.errors.password_confirmation) {
+                            /* if (error.response.data.errors.password_confirmation) {
                                 self.form_step2.password_confirm_error = error.response.data.errors.password_confirmation[0];
                                 self.form_step2.is_password_confirm_error = true;
-                            }
+                            } */
                             if (error.response.data.errors.termsconditions) {
                                 self.form_step2.termsconditions_error = error.response.data.errors.termsconditions[0];
                                 self.form_step2.is_termsconditions_error = true;
@@ -743,6 +754,7 @@
                                  if (formType == 'single') {
                                      self.loginRegisterUser()
                                  } else if (formType == 'multiple') {
+                                     
                                      self.next();
                                  }
                              }
@@ -770,7 +782,7 @@
                   var form_data = new FormData(document.getElementById("verification_form"));
 
                  var self = this;
-                 axios.post(APP_URL + '/register/verify-user-code', form_data)
+                 axios.post(APP_URL + '/registration/verify-user-code', form_data)
                      .then(function (response) {
                          self.loading = false;
                          if (response.data.type == 'success') {

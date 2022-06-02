@@ -103,6 +103,10 @@ Route::post('user/update/password', 'PublicController@resetUserPassword')->name(
 Route::post('register/login-register-user', 'PublicController@loginUser')->name('loginUser');
 Route::get('register/verify-user-code/{code}', 'PublicController@verifyUserCode');
 
+Route::post('registration/verify-user-code', 'PublicController@verifyUserRegistrationCode');
+
+
+
 Route::post('register/form-step1-custom-errors', 'PublicController@RegisterStep1Validation');
 Route::post('register/form-step2-custom-errors', 'PublicController@RegisterStep2Validation');
 Route::post('register/single-form-custom-errors', 'PublicController@singleFormValidation');

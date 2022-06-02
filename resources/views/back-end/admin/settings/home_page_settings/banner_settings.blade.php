@@ -599,7 +599,7 @@
                   <input type="hidden" value="add" name="form_type">
                  <div class="wt-dashboardbox">
                      <div class="wt-dashboardboxtitle">
-                         <h2>Freelancer Sidebar</h2>
+                         <h2>Freelancer Sidebar/Profile</h2>
                      </div>
                      <div class="wt-dashboardboxcontent">
                          <div class="wt-jobdescription wt-tabsinfo">
@@ -635,6 +635,35 @@
  
                                  </fieldset>
                              </div>
+
+
+                             <div class="wt-tabscontenttitle">
+                                 <h2>For Hiring Frequently Asked Questions</h2>
+                             </div>
+                             <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                 <fieldset>
+                                 <div class="form-group">
+                                 {!! Form::textarea('freelancer_profile_faq', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+
+                                     </div>
+ 
+                                 </fieldset>
+                             </div>
+
+
+
+                             <div class="wt-tabscontenttitle">
+                                 <h2>How It Works</h2>
+                             </div>
+                             <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                 <fieldset>
+                                 <div class="form-group">
+                                 {!! Form::textarea('how_it_works', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+
+                                     </div>
+ 
+                                 </fieldset>
+                             </div>
  
  
 
@@ -650,8 +679,8 @@
 
                   <div class="wt-dashboardbox">
                      <div class="wt-dashboardboxtitle">
-                     <h2>Freelancer Sidebar</h2>
-                     </div>
+                     <h2>Freelancer Sidebar/Profile</h2>
+                                         </div>
                      <div class="wt-dashboardboxcontent">
                          <div class="wt-jobdescription wt-tabsinfo">
                              <div class="wt-tabscontenttitle">
@@ -704,6 +733,33 @@
                                  </fieldset>
                              </div>
  
+
+                             <div class="wt-tabscontenttitle">
+                                 <h2>For Hiring Frequently Asked Questions</h2>
+                             </div>
+                             <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                 <fieldset>
+                                 <div class="form-group">
+                                 {!! Form::textarea('freelancer_profile_faq', $freelancer_side_bar['features_text'], ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+
+                                     </div>
+ 
+                                 </fieldset>
+                             </div>
+
+
+                             <div class="wt-tabscontenttitle">
+                                 <h2>How It Works</h2>
+                             </div>
+                             <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                 <fieldset>
+                                 <div class="form-group">
+                                 {!! Form::textarea('how_it_works', $freelancer_side_bar['project_description'], ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+
+                                     </div>
+ 
+                                 </fieldset>
+                             </div>
 
                              
                          </div>
