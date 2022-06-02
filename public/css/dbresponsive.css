@@ -3,7 +3,7 @@
 		float: left;
 		margin: 20px 0 0;
 	}
-	.wt-wrapper .wt-main { padding-left: 90px; }
+	/* .wt-wrapper .wt-main { padding-left: 90px; } */
 	.wt-wrapper .wt-sidebarwrapper { width: 50px; }
 	.wt-sidebarwrapper .wt-logo{ margin: 0 0 0 60px; }
 	.wt-user{
@@ -68,13 +68,13 @@
 		float: left;
 		margin-top: 0;
 	}
-	.wt-wrapper .wt-sidebarwrapper{padding-top:152px; }
-	.wt-btnmenutoggle{top: 170px;}
+	/* .wt-wrapper .wt-sidebarwrapper{padding-top:152px; } */
+	.wt-btnmenutoggle{top: 17px;}
 	.at-preview-wrap .at-listing-holder > .container {margin-right: 60px;}
 }
 @media (max-width:1536px){
-	.wt-wrapper .wt-sidebarwrapper{padding-top: 76px;}
-	.wt-btnmenutoggle {top: 140px;}
+	/* .wt-wrapper .wt-sidebarwrapper{padding-top: 76px;} */
+	.wt-btnmenutoggle {top: 14px;}
 }
 @media (max-width:1440px){
 	.wt-rcvproposalholder .wt-proposalitem .wt-rightarea{

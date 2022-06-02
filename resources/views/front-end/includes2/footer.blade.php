@@ -143,8 +143,8 @@ $join_community=App\Helper::getJoinCommunity();
         <div class="row align-items-end">
             <div class="col-md-8 pb-3 align-self-center">
                 {!! $join_community->banner_description ?? '' !!}
-                <a href="{{route('findTalends')}}" class="theme_btn">Find A Job</a>
-                <a href="#" class="theme_btn inverse_btn ml-3">Submit A Job</a>
+                <a href="{{route('findTalends')}}" class="btn btn-theme px-4 rounded-pill">Find A Job</a>
+                <a href="#" class="btn btn-theme-white px-4 rounded-pill ml-3">Submit A Job</a>
             </div>
             <div class="col-md-4">
                 @if(isset( $join_community->about_talends_image) )

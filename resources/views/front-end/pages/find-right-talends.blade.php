@@ -223,39 +223,42 @@
     </section>
     <section class="form-sec pb-0">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-4">
-                    <div class="d-flex align-items-center">
-                        <img src="{{asset('uploads/home-pages/find-right-talends/user1.png')}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
-                        <div class="ml-3">
-                            <p class="text-theme mb-0">Head of Sales</p>
-                            <h5 class="text-theme">Amna Ali </h5>
-                            <p class="text-theme">amna@talends.com </p>
+            <div class="row">
+                <div class="col-md-4 bg-theme rounded-16">
+                    <div class="p-4 d-flex justify-content-between flex-column h-100">
+                        <div class="d-flex">
+                            <img src="{{asset('uploads/home-pages/find-right-talends/user1.png')}}" class="img-fluid mb-4 rounded-circle" alt="" width="130">
+                            <div class="ml-3">
+                                <p class="text-white mb-0">Head of Sales</p>
+                                <h5 class="text-white mb-0">Amna Ali </h5>
+                                <p class="text-white opcty_5 small">amna@talends.com </p>
+                            </div>
                         </div>
+                        <h4 class="text-white font-weight-normal">"I’ve helped numerous companies, scale their teams and hire best remote talent. Happy to  make things possible for you too."</h4>
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="content-box">
-                        <h2>Talk to the Expert <span class="text-theme d-md-block">Get your project done or Hire a Team</span></h2>
+                        <h2>Let us help you to hire a team!</h2>
                         <form id="contactForm" method="post" action="">
                             <div class="row">
                                 <div class="col-md-6 mb-4">
-                                    <input type="text" class="form-control form-control-lg" placeholder="First Name" id="inputName">
+                                    <input type="text" class="form-control form-control-lg" placeholder="Name" id="inputName">
                                 </div>
                                 <div class="col-md-6 mb-4">
-                                    <input type="text" class="form-control form-control-lg" placeholder="Last Name" id="inputName">
+                                    <input type="text" class="form-control form-control-lg" placeholder="Company Name (If any)" id="inputName">
                                 </div>
                                 <div class="col-md-6 mb-4">
                                     <input type="email" class="form-control form-control-lg" placeholder="Email" id="inputName">
                                 </div>
                                 <div class="col-md-6 mb-4">
-                                    <input type="text" class="form-control form-control-lg" placeholder="Contact" id="inputName">
+                                    <input type="text" class="form-control form-control-lg" placeholder="Phone Number" id="inputName">
                                 </div>
                                 <div class="col-md-12 mb-4">
-                                    <textarea rows="6" class="form-control form-control-lg">Requirement Brief</textarea>
+                                    <textarea rows="4" class="form-control form-control-lg">Describe your project</textarea>
                                 </div>
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-theme px-5 rounded-pill">Share with a Recruiter</button>
+                                    <button type="submit" class="btn btn-theme px-5 rounded-pill">Let us help you</button>
                                 </div>
                             </div>
                         </form>

@@ -49,7 +49,7 @@ body {
     font-size: 16px;
     color: #434343;
     position: relative;
-    padding-top: 96px;
+    padding-top: 86px;
 }
 
 body h1,
@@ -1977,6 +1977,7 @@ body.wt-login .wt-loginarea {
 
 body.wt-login .wt-userlogedin {
 	display: block;
+	position: relative;
 }
 
 .wt-userlogedin .wt-userimg {
@@ -2013,7 +2014,7 @@ body.wt-login .wt-userlogedin {
 }
 
 .wt-userlogedin:hover .wt-usernav {
-	top: 100%;
+	top: 35px;
 	opacity: 1;
 	visibility: visible;
 }

@@ -71,7 +71,7 @@ header .navbar .navbar-nav {
     flex-wrap: wrap;
     align-content: flex-end;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .navbar-expand-lg .navbar-nav .nav-link.active {
@@ -910,6 +910,12 @@ a.notif {
 .text-theme{
 	color: #349F1A;
 }
+.bg-theme{
+    background-color: #349f1a;
+}
+.rounded-16{
+	border-radius: 16px;
+}
 .custom-control-input:checked ~ .custom-control-label::before {
     color: #fff;
     border-color: #349f1a;
@@ -920,11 +926,13 @@ a.notif {
 .btn-theme{
     color: #ffffff;
     background-color: #349f1a;
-    border-color: #349f1a;
-    font-size: 20px;
+    border:1px solid #349f1a;
+    font-size: 18px;
+    line-height: 1;
     font-weight: bold;
-    padding: 10px;
+    padding:10px 15px;
     margin-bottom: 0.5rem;
+    text-transform: capitalize;
 }
 .btn-theme:hover{
     color: #ffffff;
@@ -936,10 +944,11 @@ a.notif {
     color: #349f1a;
     background-color: #ffffff;
     border-color: #ffffff;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
-    padding: 10px;
+    padding:10px 15px;
     margin-bottom: 0.5rem;
+    text-transform: capitalize;
 }
 .btn-theme-white:hover{
     color: #349f1a;
@@ -950,11 +959,12 @@ a.notif {
 .btn-outline-theme{
     color: #349f1a;
     background-color: transparent;
-    border-color: #349f1a;
-    font-size: 20px;
+    border:1px solid #349f1a;
+    font-size: 18px;
     font-weight: bold;
-    padding: 10px;
+    padding:10px 15px;
     margin-bottom: 0.5rem;
+    text-transform: capitalize;
 }
 .btn-outline-theme:hover{
     color: #ffffff;

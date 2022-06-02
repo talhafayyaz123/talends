@@ -1,10 +1,10 @@
 body{background: #f7f7f7;}
 .wt-main{
 	background: #f7f7f7;
-	padding: 20px 40px 20px 310px;
+	/* padding: 20px 40px 20px 310px; */
 }
 .wt-header{background: #fff;}
-.wt-dbsectionspace{padding: 20px 0;}
+.wt-dbsectionspace{padding:20px;}
 .wt-dashboardnav{
 	width: 100%;
 	float: left;
@@ -12,14 +12,14 @@ body{background: #f7f7f7;}
 .wt-wrapper:before{display: none;}
 .wt-wrapper {overflow: hidden;}
 .wt-sidebarwrapper {
-	top: 0;
-	left: 0;
+	/* top: 0; */
+	/* left: 0; */
 	z-index: 9;
-	width: 270px;
+	width: 50px;
 	height: 100%;
-	position: fixed;
+	position: relative;
 	background: #fff;
-	padding-top: 76px;
+	/* padding-top: 76px; */
 	-webkit-backface-visibility: hidden;
 	   -moz-backface-visibility: hidden;
 		-ms-backface-visibility: hidden;
@@ -136,7 +136,7 @@ body{background: #f7f7f7;}
 	display: block;
 	color: #767676;
 	font-size: 10px;
-	background: transparent;
+	background: transparent !important;
 }
 .wt-navdashboard ul li.menu-item-has-children ul{
 	opacity: 1;
@@ -177,7 +177,7 @@ body{background: #f7f7f7;}
 	line-height: inherit;
 }
 .wt-navdashboard .menu-item-has-children .sub-menu li:hover a{color: #323232;}
-.wt-wrapper.wt-openmenu .wt-main { padding-left: 90px; }
+/* .wt-wrapper.wt-openmenu .wt-main { padding-left: 90px; } */
 .wt-wrapper.wt-openmenu .wt-sidebarwrapper { width: 50px; }
 .wt-openmenu .wt-sidebarwrapper .wt-logo{ margin: 0 0 0 60px; }
 .wt-openmenu .wt-user{
@@ -3638,7 +3638,7 @@ input[type=submit],
 .la-ongoing-projects{margin-bottom: 0;}
 .wt-yourdetails .wt-emptydata-holder,
 .wt-followcompomy .wt-emptydata-holder{padding: 0;}
-.wt-wrapper .wt-contentwrapper .wt-main{min-height: 90vh;}
+.wt-wrapper .wt-contentwrapper .wt-main{min-height: 90vh; display: flex;}
 .seo-meta{
     resize:none;
     height: 234px;
@@ -5965,3 +5965,35 @@ body.rtl .lara-attachment-files .wt-on-off .switch-button-control .switch-button
 }
 .la-footer-setting .wt-userform .wt-settingscontent2 .wt-location .wt-settingscontent{margin: 0;}
 .wt-settingscontent2 .verte__menu-origin{right: 0;}
+/* Abdul Manan css */
+.dwidget-card{
+	background-color: #ffffff;
+	border-radius: 16px;
+	padding: 25px 30px;
+	margin-bottom: 1.5rem;
+}
+.dwidget-card h4{
+	font-weight: bold;
+	font-size: 20px;
+	line-height: 28px;
+}
+.dwidget-card p{
+	font-size: 16px;
+	line-height: 22px;
+	color: #5f5f5f;
+}
+.dwidget-card ul{
+	list-style: none;
+	margin-bottom: 3rem;
+}
+.dwidget-card ul li {
+    display: inline-block;
+    border: 1px solid #349F1A;
+    box-shadow: 0px 2px 11px rgba(69, 65, 164, 0.06), 0px 4px 10px rgba(31, 37, 89, 0.07);
+    border-radius: 7px;
+    padding: 5px 8px;
+    font-size: 12px;
+    color: #170F49;
+    margin: 0 2px 4px;
+    font-weight: bold;
+}

@@ -31,7 +31,7 @@
                         <div class="nav_dropdown" aria-hidden="false" id="dropdown3">
                             <ul class="iconList threeColumns">
                                 <div class="container">
-                                    <div class="row justify-content-center">
+                                    <div class="row">
                                         @if(isset( $header_menus['sub_menu_item2']) && !empty($header_menus['sub_menu_item2']) )
                                         @foreach($header_menus['sub_menu_item2'] as $key =>$category)
 
@@ -66,7 +66,7 @@
                         <div class="nav_dropdown" aria-hidden="false" id="dropdown3">
                             <ul class="iconList threeColumns">
                                 <div class="container">
-                                    <div class="row justify-content-center">
+                                    <div class="row">
                                         @if(isset( $header_menus['sub_menu_item1'] ) && !empty($header_menus['sub_menu_item1']) )
                                         @foreach($header_menus['sub_menu_item1'] as $key =>$category)
 

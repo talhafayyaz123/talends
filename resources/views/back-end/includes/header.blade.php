@@ -36,7 +36,7 @@ $slider = Helper::getPageSlider($page_id);
 @endauth
 
 <header id="wt-header" class="wt-haslayout {{$inner_header}}">
-    <div class="container-lg p-0">
+    <div class="container-fluid">
         <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="{{ asset('talends/assets/img/logo.svg')}}" alt="Dynamics">
@@ -54,7 +54,7 @@ $slider = Helper::getPageSlider($page_id);
             @endphp
             <div class="collapse navbar-collapse admin_header_after_login" id="theme_menu_toggle">
                 <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">{!! ($header_menus['title4'])  ?? '' !!} <i class="fas fa-angle-down"></i></a>
                         <div class="nav_dropdown" aria-hidden="false" id="dropdown3">
                             <ul class="iconList threeColumns">
@@ -129,9 +129,9 @@ $slider = Helper::getPageSlider($page_id);
                     </li>
                     <li class="nav-item  nav_item_right menu_green_cta_box">
                         <a class="nav-link" href="{{ route('government') }}"> {!! ($header_menus['title1'] ) ?? '' !!}</a>
-                    </li>
+                    </li> -->
                     @guest
-                    <li class="nav-item nav_item_right">
+                    <!-- <li class="nav-item nav_item_right">
 
 
                         <div class="wt-loginarea">
@@ -186,9 +186,8 @@ $slider = Helper::getPageSlider($page_id);
 
                         <a class="nav-link joinin-btn" href="{{ route('register') }}">Join Now</a>
 
-                    </li>
+                    </li> -->
                     @endguest
-
 
                     @auth
                     <li class="nav-item">
@@ -208,29 +207,35 @@ $slider = Helper::getPageSlider($page_id);
                         @endphp
                         <div class="wt-userlogedin back-end-header">
                             <figure class="wt-userimg">
-
-                                <img src="{{{ asset(Helper::getImage('uploads/users/' . Auth::user()->id, $profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}">
+                                <img src="{{{ asset(Helper::getImage('uploads/users/' . Auth::user()->id, $profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}"/> 
                             </figure>
                             <div class="wt-username">
                                 <h3>{{{ Helper::getUserName(Auth::user()->id) }}}</h3>
                                 <span>{{{ !empty(Auth::user()->profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Helper::getAuthRoleName() }}}</span>
                             </div>
                             @include('back-end.includes.profile-menu')
-
                         </div>
-
                     </li>
                     @if( $role === 'admin' || $role === 'company' )
-                    <li>
-                  
-                    &nbsp;&nbsp;<div class="wt-username">
-                            <a  class="notif"><span class="num">{{$total_hire_agencies }}</span></a>                            
-
-                        </div></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link position-relative" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-bell text-theme fa-2x"></i>
+                            <span class="badge badge-warning" style="position: absolute; right: -5px; top: 0px;">{{$total_hire_agencies }}</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <div class="wt-username">
+                            <a  class="notif"><span class="num">{{$total_hire_agencies }}</span></a>
+                        </div>
+                    </li> -->
                         @endif
                     @endauth
-
-
                 </ul>
             </div>
         </nav>
