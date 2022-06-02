@@ -537,6 +537,8 @@ class HomePagesController extends Controller
                 $request, [
                     'sidebar_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
                     'sidebar_description' => 'required',
+                    'freelancer_profile_faq' => 'required',
+                    'how_it_works' => 'required',
             ]
             );
         }else{
@@ -544,6 +546,8 @@ class HomePagesController extends Controller
                 $request, [
                     'sidebar_image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
                     'sidebar_description' => 'required',
+                    'freelancer_profile_faq' => 'required',
+                    'how_it_works' => 'required',
             ]
             );
         }

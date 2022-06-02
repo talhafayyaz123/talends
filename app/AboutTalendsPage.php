@@ -1839,6 +1839,8 @@ class AboutTalendsPage extends Model
             }
             $this->page_type = 'freelancer_side_bar';
             $this->banner_description = $request['sidebar_description'];
+            $this->features_text = $request['freelancer_profile_faq'];
+            $this->project_description = $request['how_it_works'];
 
          
             if($request->form_type=='add'){

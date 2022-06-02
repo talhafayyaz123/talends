@@ -133,48 +133,32 @@ class PublicController extends Controller
     public function registerStep1Validation(Request $request)
     {
 
-
-        $role=$request['role'];
+       $role=$request['role'];
         $validation=array();
         if($role=='freelancer'){
+          
             $validation= [
                 'first_name' => 'required',
                 'last_name' => 'required',
                 'email' => 'required|email|unique:users',
-                'user_type' => 'required',
-                'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
-                'termsconditions' => 'required',
-                'role' => 'not_in:admin',
                 'gender' => 'required',
                 'availability' => 'required',
                 'budget' => 'required',
-                
-            ];
-        }if($role=='company'){
-            $validation= [
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'email' => ['required','unique:users', 'email', new checkBusinessEmail],
-
-                'user_type' => 'required',
                 'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
-                'termsconditions' => 'required',
                 'role' => 'not_in:admin',
-               
-                'budget' => 'required',
-                
+                'locations' => 'required',
             ];
-
-        } else{
+        }else{
+            
             $validation= [
                 'first_name' => 'required',
                 'last_name' => 'required',
                 'email' => 'required|email|unique:users',
-                'user_type' => 'required',
                 'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
-                'termsconditions' => 'required',
                 'role' => 'not_in:admin',
-                
+                'availability' => 'required',
+                'locations' => 'required',
+
             ];
         }
         $this->validate(
@@ -314,6 +298,75 @@ class PublicController extends Controller
         }
     }
 
+
+    public function verifyUserRegistrationCode(Request $request)
+    {
+        $json = array();
+        if (Session::has('user_id')) {
+            $id = Session::get('user_id');
+            $email = Session::get('email');
+            $password = Session::get('password');
+            $user = User::find($id);
+            if (!empty($request['code'])) {
+                if ($request['code'] === $user->verification_code) {
+                    $user->user_verified = 1;
+                    $user->verification_code = null;
+                    $user->save();
+                    $json['type'] = 'success';
+                    //send mail
+                    if (!empty(config('mail.username')) && !empty(config('mail.password'))) {
+                        $email_params = array();
+                        $template = DB::table('email_types')->select('id')->where('email_type', 'new_user')->get()->first();
+                        if (!empty($template->id)) {
+                            $template_data = EmailTemplate::getEmailTemplateByID($template->id);
+                            $email_params['name'] = Helper::getUserName($id);
+                            $email_params['email'] = $email;
+                            $email_params['password'] = $password;
+                           /*  Mail::to($email)
+                                ->send(
+                                    new GeneralEmailMailable(
+                                        'new_user',
+                                        $template_data,
+                                        $email_params
+                                    )
+                                ); */
+                        }
+                        $admin_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_registration')->get()->first();
+                        if (!empty($template->id)) {
+                            $template_data = EmailTemplate::getEmailTemplateByID($admin_template->id);
+                            $email_params['name'] = Helper::getUserName($id);
+                            $email_params['email'] = $email;
+                            $email_params['link'] = url('profile/' . $user->slug);
+                           /*  Mail::to(config('mail.username'))
+                                ->send(
+                                    new AdminEmailMailable(
+                                        'admin_email_registration',
+                                        $template_data,
+                                        $email_params
+                                    )
+                                ); */
+                        }
+                    }
+                    session()->forget('password');
+                    session()->forget('email');
+                    return $json;
+                } else {
+                    $json['type'] = 'error';
+                    $json['message'] = trans('lang.invalid_verify_code');
+                    return $json;
+                }
+            } else {
+                $json['type'] = 'error';
+                $json['message'] = trans('lang.verify_code');
+                return $json;
+            }
+        } else {
+            $json['type'] = 'error';
+            $json['message'] = trans('lang.session_expire');
+            return $json;
+        }
+    }
+
     /**
      * Download file.
      *
@@ -357,6 +410,39 @@ class PublicController extends Controller
                 abort(404);
             }
             $skills = $user->skills()->get();
+
+            $role=$user->getRoleNames()->first();
+
+            $user_by_role =  User::role($role)->select('id')->get()->pluck('id')->toArray();
+
+            $similar_users = !empty($user_by_role) ? User::whereIn('id', $user_by_role)->where('is_disabled', 'false') : array();
+                           
+            $new_sills=$skills->pluck('id')->all();
+
+           
+                if (!empty($new_sills)  &&  isset($new_sills) ) {
+                    
+                    $similar_skills = Skill::whereIn('id', $new_sills)->get();
+                    
+               foreach ($similar_skills as $key => $skill) {
+                    if (!empty($skill->freelancers[$key]->id)) {
+                            $user_id[] = $skill->freelancers[$key]->id;
+                        }
+                    }
+                
+                   $similar_users->whereIn('id', $user_id);
+                
+                }
+
+                $similar_users->where('id','!=',$user->id);
+
+                $similar_users = $similar_users->orderByRaw('-badge_id DESC')->orderBy('expiry_date', 'DESC');
+
+                $similar_users = $similar_users->paginate(8)->setPath('');
+            
+            
+            
+
             $job = Job::where('user_id', $user->id)->get();
             $profile = Profile::all()->where('user_id', $user->id)->first();
             $reasons = Helper::getReportReasons();
@@ -400,6 +486,10 @@ class PublicController extends Controller
                 $average_rating_count = !empty($feedbacks) ? $reviews->sum('avg_rating')/$feedbacks : 0;
                 $show_earnings = !empty($settings) && !empty($settings[0]['show_earnings']) ? $settings[0]['show_earnings'] : true;
                 $user_role=$user->getRoleNames()->first();
+              
+                $freelancer_side_bar=AboutTalendsPage::where('page_type','freelancer_side_bar')->first();
+                
+              
                 if (file_exists(resource_path('views/extend/front-end/users/freelancer-show.blade.php'))) {
                     return View(
                         'extend.front-end.users.freelancer-show',
@@ -445,6 +535,8 @@ class PublicController extends Controller
                     return View(
                         'front-end.users.freelancer-show',
                         compact(
+                            'freelancer_side_bar',
+                            'similar_users',
                             'user_role',
                             'show_earnings',
                             'average_rating_count',
