@@ -553,7 +553,6 @@ footer .row .col-md-6:last-child>ul {
 }
 
 .freelancer_filters .wt-widget{
-    /* margin: 0 0 0px !important; */
     padding-top: 0% !important;
 }
 
@@ -563,21 +562,6 @@ footer .row .col-md-6:last-child>ul {
 .freelancer_filters form a {
     font-size: 14px;
 }
-.freelancer_filters .wt-widgetcontent {
-    /* position: absolute; */
-    /* min-width: 230px; */
-    /* width: 100%; */
-    /* max-width: 300px; */
-    /* left: 0; */
-    /* z-index: 2; */
-    /* height: auto; */
-    /* border-radius: 53px; */
-}
-
-/* .wt-widgetcontent.interne_widgetcontent {
-    min-width: 177px !important;
-} */
-
 .freelancer_filters .wt-widgettitle {
     padding: 12px 16px;
     border: 1px solid #bbb8bd;
