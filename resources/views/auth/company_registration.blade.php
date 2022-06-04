@@ -9,310 +9,230 @@ Company Registration
 
 <div id="pages-list">
     <div class="container">
-        <div class="row row-eq-height">
-            <div class="col-md-7 align-self-center">
-
-                <div class="row row-eq-height">
-                    <div class="col-md-12 text-center pb-3">
-                        <h2 class=""><span class="theme_color already_member"> <a href="{{route('login')}}">Already a member?</a> </span></h2>
-
-                    </div>
-                </div>
-
-
-                <section>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-7">
-                                <h2 style="font-size: 36px;">Ready to get <br>customers from <span class="theme_color"> Dubai & UAE</span></h2>
-                            </div>
-                            <div class="col-md-5">
-                                <p>We need you to help us with some basic <br>information for your account creation. Here<br> are our terms and conditins. Please read them <br>carefully. We are GDRP compliiant.</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <hr class="company_registration_separator">
-                <section>
-                    <div class="container-fluid">
-                        <div class="row justify-content-center">
-                            <div class="">
-                                <div class="card">
-                                @if ($errors->any())
+        <div class="d-flex align-items-center min-vh-100">
+            <div class="w-100 d-block bg-white shadow-lg rounded my-5 mx-auto">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="stepper-container">
+                            @if ($errors->any())
                                 @foreach ($errors->all() as $error)
                                     <div class="error">{{$error}}</div>
                                 @endforeach
                             @endif
-                                    <form id="msform" class="company_registration_form" method="post" action="{{ route('userRegister')  }}">
-                                    @csrf  
-                                    <!-- progressbar -->
-                                        <ul id="progressbar">
-                                            <li class="active"><strong>1</strong></li>
-                                            <li><strong>2</strong></li>
-                                            <li><strong>3</strong></li>
-                                            <li><strong>4</strong></li>
-                                        </ul>
-                                        <div class="progress">
-                                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                            <form id="msform" class="company_registration_form" method="post" action="{{ route('userRegister')  }}">
+                                @csrf  
+                                <!-- progressbar -->
+                                <ul id="progressbar">
+                                    <li class="active"><span>1</span></li>
+                                    <li><span>2</span></li>
+                                    <li><span>3</span></li>
+                                    <li><span>4</span></li>
+                                </ul>
+                                <!-- <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div> -->
+                                <!-- fieldsets -->
+                                <fieldset>
+                                    <div class="form-card">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <h2 class="fs-title">Lets Get Start:</h2>
+                                            </div>
                                         </div>
-                                        <br>
-                                        <!-- fieldsets -->
-                                        <fieldset>
-                                            <div class="form-card">
-                                                <div class="row">
-                                                    <div class="col-7">
-                                                        <h2 class="fs-title">Lets Start:</h2>
-                                                    </div>
-                                                    <div class="col-5">
-                                                    </div>
-                                                </div>
-                                                <label class="fieldlabels">Agency Name: *</label>
-                                                <input type="text" name="company_name"  id="company_name" placeholder="Agency Name" value="{{ old('company_name') }}" />
-                                                <label class="fieldlabels">Email: *</label>
-                                                <input type="email" name="email" placeholder="Email" id='email' value="{{ old('email') }}"/>
-                                                <label class="fieldlabels">Phone Number: *</label>
-                                                <input type="text" name="phone_number" id="phone_number" placeholder="Phone Number" value="{{ old('phone_number') }}" />
-                                                <label class="fieldlabels">Number of Talends: *</label>
+                                        <div class="row">
+                                            <div class="col-xl-6 col-lg-6 mb-3">
+                                                <label class="fieldlabels">Agency Name <sup class="text-danger">*</sup> </label>
+                                                <input type="text" name="company_name" class="form-control"  id="company_name" placeholder="Agency Name" value="{{ old('company_name') }}" />
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 mb-3">
+                                                <label class="fieldlabels">Email <span class="text-danger">*</span></label>
+                                                <input type="email" name="email" placeholder="Email" class="form-control" id='email' value="{{ old('email') }}"/>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 mb-3">
+                                                <label class="fieldlabels">Phone Number <span class="text-danger">*</span></label>
+                                                <input type="text" name="phone_number" class="form-control" id="phone_number" placeholder="Phone Number" value="{{ old('phone_number') }}" />
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 mb-3">
+                                                <label class="fieldlabels">Number of Talends <span class="text-danger">*</span></label>
                                                 <select name="employees" id='employees' class="form-control">
                                                     <option value="">Select Total Team Strength</option>
                                                     @foreach ($employees as $key => $employee)
                                                     <option value="{{{$employee['value']}}}">{{{$employee['title']}}}</option>
                                                     @endforeach
                                                 </select>
-
-                                                <label class="fieldlabels">Password: *</label>
-
-                                                <input id="register_password" type="password" class="form-control" name="password" id="password" placeholder="{{{ trans('lang.ph_pass') }}}">
-                                                
-                                                <i class="fa fa-eye"  id="togglePassword"  onclick="toggePassword()"></i>
-
-
-                                                <input type="hidden" name="role" value="company" />
-
                                             </div>
-                                            <input type="button" name="next" class="next action-button" value="Next Step" />
-                                        </fieldset>
-                                        <fieldset>
-                                            <div class="form-card">
-                                                <div class="row">
-                                                    <div class="col-7">
-                                                        <h2 class="fs-title">Lets Start:</h2>
-                                                    </div>
-                                                    <div class="col-5">
-                                                    </div>
-                                                </div>
-
-
-                                                <label class="fieldlabels">Location: *</label>
+                                            <div class="col-xl-6 col-lg-6 mb-3">
+                                                <label class="fieldlabels">Password <span class="text-danger">*</span></label>
+                                                <input id="register_password" type="password" class="form-control" name="password" id="password" placeholder="{{{ trans('lang.ph_pass') }}}">
+                                                <i class="fa fa-eye"  id="togglePassword"  onclick="toggePassword()"></i>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="role" value="company" />
+                                    </div>
+                                    <input type="button" name="next" class="next action-button" value="Next" />
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="fs-title">Lets Start:</h2>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-6 col-lg-6 mb-4">
+                                                <label class="fieldlabels">Location <span class="text-danger">*</span></label>
                                                 {!! Form::select('locations', $locations, null, array('class'=>'form-control locations','placeholder' => trans('lang.select_locations'))) !!}
-                                                <br>
-
-
-                                                <label class="fieldlabels">Agency Language: *</label>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 mb-4">
+                                                <label class="fieldlabels">Agency Language <span class="text-danger">*</span></label>
                                                 <select name="agency_language" id='agency_language' class="form-control" style="display: inline !important;">
                                                     <option value="">Select Language</option>
                                                     @foreach ($languages as $key => $language)
                                                     <option value="{{{$language['id']}}}">{{{$language['title']}}}</option>
                                                     @endforeach
                                                 </select>
-
-
-
-                                                <label class="fieldlabels">Agency Website.: *</label>
-                                                <input type="text" name="agency_website" placeholder="Agency Website" value="{{ old('agency_website') }}"/>
-
-
-                                                <br>
-                                                <label class="fieldlabels">Budget Range.: *</label>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 mb-4">
+                                                <label class="fieldlabels">Agency Website <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" name="agency_website" placeholder="Agency Website" value="{{ old('agency_website') }}"/>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 mb-4">
+                                                <label class="fieldlabels">Budget Range <span class="text-danger">*</span></label>
                                                 <select name="budget" id='budget' class="form-control">
                                                     <option value="">Select Price</option>
                                                     @foreach ($company_bedget as $key => $budget)
                                                     <option value="{{{$budget['value']}}}">{{{$budget['title']}}}</option>
                                                     @endforeach
                                                 </select>
-
-
                                             </div>
-                                            <input type="button" name="next" class="next action-button" value="Next Step" />
-                                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                                        </fieldset>
-                                        <fieldset>
-                                            <div class="form-card">
-                                                <div class="row">
-                                                    <div class="col-8">
-                                                        <h2 class="fs-title">Our Services:</h2>
-                                                        <h2 class="steps">Please select one or multiple services your agency provides</h2>
-
-                                                    </div>
-                                                    <div class="col-8">
-                                                    </div>
-                                                </div>
-
-                                                <input type="hidden" name="categories[]" id='categories' value="[]"></input>
-
-                                                <div class="row">
-                                                    @foreach($categories as $category)
-
-                                                    <div class="col-md-4 pb-sm-3">
-                                                        <a onclick="select_service({{ $category->id }})">
-                                                            <div class="t-f company_services" id='company_service_{{ $category->id }}'>
-                                                                <div class="ficon-wrap">
-                                                                </div>
-                                                                <div class="ftitle-wrap">
-                                                                    <strong>{{ $category->title }}</strong>
-                                                                </div>
+                                        </div>
+                                    </div>
+                                    <input type="button" name="next" class="next action-button" value="Next" />
+                                    <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="fs-title mb-0">Our Services:</h2>
+                                                <p class="mb-5">Please select one or multiple services your agency provides</p>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="categories[]" id='categories' value="[]"></input>
+                                        <div class="row">
+                                            @foreach($categories as $category)
+                                                <div class="col-md-4 pb-sm-3">
+                                                    <a onclick="select_service({{ $category->id }})">
+                                                        <div class="t-f company_services" id='company_service_{{ $category->id }}'>
+                                                            <div class="ficon-wrap">
                                                             </div>
-                                                        </a>
-                                                    </div>
-
-
-                                                    @endforeach
-                                                </div>
-
-                                            </div>
-                                            <input type="button" name="next" class="next action-button" value="Next Step" />
-                                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                                        </fieldset>
-                                        <fieldset>
-
-                                            <div class="form-card">
-                                                <div class="row">
-                                                    <div class="col-8">
-                                                        <h2 class="fs-title">Lets Pay:</h2>
-                                                        <h2 class="steps">Almost there! Pay an affordable amount to Grow your Business</h2>
-
-                                                    </div>
-                                                    <div class="col-8">
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="row">
-                                                    <section class="tal-p-plans">
-                                                        <div class="container">
-                                                            <div class="row">
-                                                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                                                    <div class="plans-inner">
-                                                                        <div class="plans-wrap">
-                                                                            <div class="plan">
-                                                                               
-                                                                            <div class="plan-h">
-<h3>{{  $package[0]->title }}</h3>
-</div>
-<div class="plan-c">
-<p>What You&rsquo;ll Get</p>
-<ul class="price-feature">
-
-@foreach ($monthly_options as $key => $option)
-                                               
-                                                @if ($key == 'duration')
-                                                    <li><span>{{$key}}:  {{ Helper::getPackageDurationList($monthly_options['duration']) }}</span></li>
-                                                @elseif ($key == 'badge')
-                                                    <li><span>{{$key}}: {{ Helper::getBadgeTitle($package[0]->badge_id) }}</span></li>
-                                                @else
-                                                    <li><span>{{$key}}: {{ $option }}</span></li>
-                                                @endif
-
-                                            @endforeach
-
-</ul>
-</div>
-<div class="plan-f">
-<div class="pf-wrap">
-<p>{{ $package[0]->cost ?? '0' }}/month</p>
-<p>Cancel Anytime</p>
-</div>
-</div>
-
-                                                                                <a class="plan-btn t-f company_services choose_plan_background_transparent" id='monthly_plan' onclick="plan_select('monthly')"><strong class="green">Choose</strong></a>
-
-
-
-                                                                            </div>
-                                                                            <div class="plan">
-                                                                            <div class="plan-h">
-                                                                            <h3>{{  $package[1]->title }}</h3>
-</div>
-<div class="plan-c">
-<p>What You&rsquo;ll Get</p>
-<ul class="price-feature">
-
-@foreach ($yearly_options as $key => $option)
-                                               
-                                                @if ($key == 'duration')
-                                                    <li><span>{{$key}}:  {{ Helper::getPackageDurationList($yearly_options['duration']) }}</span></li>
-                                                @elseif ($key == 'badge')
-                                                    <li><span>{{$key}}: {{ Helper::getBadgeTitle($package[1]->badge_id) }}</span></li>
-                                                @else
-                                                    <li><span>{{$key}}: {{ $option }}</span></li>
-                                                @endif
-
-                                            @endforeach
-
-</ul>
-</div>
-<div class="plan-f">
-<div class="pf-wrap">
-<p><strong>${{ $package[1]->cost ?? '0' }}</strong>/month</p>
-<p>Cancel Anytime</p>
-</div>
-</div>
-
-                                                                                <a class="plan-btn t-f company_services choose_plan_background_transparent" id='yearly_plan' onclick="plan_select('yearly')"><strong class="green">Choose</strong></a>
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
+                                                            <div class="ftitle-wrap">
+                                                                <strong>{{ $category->title }}</strong>
                                                             </div>
                                                         </div>
-                                                    </section>
+                                                    </a>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <input type="button" name="next" class="next action-button" value="Next" />
+                                    <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="fs-title mb-0">Lets Pay:</h2>
+                                                <p>Almost there! Pay an affordable amount to Grow your Business</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 mb-4">
+                                                <div class="plans-inner">
+                                                    <div class="plans-wrap">
+                                                        <div class="plan">
+                                                            <div class="plan-h">
+                                                                <h3>{{  $package[0]->title }}</h3>
+                                                            </div>
+                                                            <div class="plan-c">
+                                                                <p>What You&rsquo;ll Get</p>
+                                                                <ul class="price-feature">
+                                                                    @foreach ($monthly_options as $key => $option)
+                                                                        @if ($key == 'duration')
+                                                                            <li><span>{{$key}}:  {{ Helper::getPackageDurationList($monthly_options['duration']) }}</span></li>
+                                                                        @elseif ($key == 'badge')
+                                                                            <li><span>{{$key}}: {{ Helper::getBadgeTitle($package[0]->badge_id) }}</span></li>
+                                                                        @else
+                                                                            <li><span>{{$key}}: {{ $option }}</span></li>
+                                                                        @endif
+                                                                    @endforeach
 
-                                                    <div class="col-md-10">
-                                                    <input type="hidden" name="monthly_amount" id="monthly_amount" value="{{ $package[0]->cost ?? '0' }}">
-                                                    <input type="hidden" name="yearly_amount" id="yearly_amount" value="{{ $package[1]->cost ?? '0' }}">
-
-
-                                                    <input type="hidden" name="monthly_package" id="monthly_package" value="{{ $package[0]->id ?? '0' }}">
-                                                    <input type="hidden" name="yearly_package" id="yearly_package" value="{{ $package[1]->id ?? '0' }}">
-
-
-                                                    <input type="hidden" name="payment_amount" id="payment_amount" value="">
-                                                    <input type="hidden" name="package_id" id="package_id" value="">
-                                                        <br>
-                                                        @php
-                                                        $amount=$why_agency_plan->agencies_benefits;
-                                                        @endphp
-
-                                                        <button id='register_pay_btn' class="nav-link menu_green_cta  company_register_pay_now_disable" type="submit">
-                                                        Register and Pay Now
-                                                        </button>
-                                                    
-
+                                                                </ul>
+                                                            </div>
+                                                            <div class="plan-f">
+                                                                <div class="pf-wrap">
+                                                                    <p>{{ $package[0]->cost ?? '0' }}/month</p>
+                                                                    <p>Cancel Anytime</p>
+                                                                </div>
+                                                            </div>
+                                                            <a class="plan-btn t-f company_services choose_plan_background_transparent" id='monthly_plan' onclick="plan_select('monthly')"><strong class="green">Choose</strong></a>
+                                                        </div>
+                                                        <div class="plan">
+                                                            <div class="plan-h">
+                                                                <h3>{{  $package[1]->title }}</h3>
+                                                            </div>
+                                                            <div class="plan-c">
+                                                                <p>What You&rsquo;ll Get</p>
+                                                                <ul class="price-feature">
+                                                                    @foreach ($yearly_options as $key => $option)
+                                                                        @if ($key == 'duration')
+                                                                            <li><span>{{$key}}:  {{ Helper::getPackageDurationList($yearly_options['duration']) }}</span></li>
+                                                                        @elseif ($key == 'badge')
+                                                                            <li><span>{{$key}}: {{ Helper::getBadgeTitle($package[1]->badge_id) }}</span></li>
+                                                                        @else
+                                                                            <li><span>{{$key}}: {{ $option }}</span></li>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+                                                            <div class="plan-f">
+                                                                <div class="pf-wrap">
+                                                                    <p><strong>${{ $package[1]->cost ?? '0' }}</strong>/month</p>
+                                                                    <p>Cancel Anytime</p>
+                                                                </div>
+                                                            </div>
+                                                            <a class="plan-btn t-f company_services choose_plan_background_transparent" id='yearly_plan' onclick="plan_select('yearly')"><strong class="green">Choose</strong></a>
+                                                        </div>
                                                     </div>
                                                 </div>
-
-
+                                            </div>  
+                                            <div class="col-md-12 text-center">
+                                                <input type="hidden" name="monthly_amount" id="monthly_amount" value="{{ $package[0]->cost ?? '0' }}">
+                                                <input type="hidden" name="yearly_amount" id="yearly_amount" value="{{ $package[1]->cost ?? '0' }}">
+                                                <input type="hidden" name="monthly_package" id="monthly_package" value="{{ $package[0]->id ?? '0' }}">
+                                                <input type="hidden" name="yearly_package" id="yearly_package" value="{{ $package[1]->id ?? '0' }}">
+                                                <input type="hidden" name="payment_amount" id="payment_amount" value="">
+                                                <input type="hidden" name="package_id" id="package_id" value="">
+                                                @php
+                                                    $amount=$why_agency_plan->agencies_benefits;
+                                                @endphp
                                             </div>
-
-
-                                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-
-
-                                        </fieldset>
-                                    </form>
-                                </div>
-                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                    <button id='register_pay_btn' class="btn btn-theme rounded-pill px-4 company_register_pay_now_disable m-2 float-right py-3" type="submit">
+                                        Register and Pay Now
+                                    </button>
+                                </fieldset>
+                            </form>
                         </div>
                     </div>
-                </section>
-
-
-            </div>
-            <div class="col-md-5 align-self-center">
-                <div class="content_box_wrapper">
-                    <div class="content_box">
-                        <img src="{{ asset('talends/assets/img/Layer12.png')  }}" class="w-100" alt="">
+                    <div class="col-md-4 ml-auto">
+                        <div class="bg-login content_box p-4">
+                            <h3 class="font-weight-bold">Ready to get customers from <span class="theme_color"> Dubai & UAE</span></h3>
+                            <a href="{{route('login')}}" class="d-block mb-5">Already a member?</a>
+                            <!-- <img src="{{ asset('talends/assets/img/Layer12.png')  }}" class="w-100" alt=""> -->
+                        </div>
                     </div>
                 </div>
             </div>

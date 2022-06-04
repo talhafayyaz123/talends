@@ -1,13 +1,17 @@
-#heading {
-	text-transform: uppercase;
-	color: #349f1a;
-	font-weight: normal;
+.stepper-container h2{
+	font-weight: bold;
+	text-align: center;
+	font-size: 48px;
+	line-height: 1.4;
+	margin-bottom: 1rem;
+	color: #349F1A;
 }
 
 #msform {
-    text-align: center;
     position: relative;
     margin-top: 20px;
+    padding: 30px 40px;
+    z-index: 0;
 }
 
 #msform fieldset {
@@ -18,119 +22,105 @@
     width: 100%;
     margin: 0;
     padding-bottom: 20px;
-
-    /*stacking fieldsets above each other*/
     position: relative;
+    text-align: left;
 }
-
-.form-card {
-	text-align: left;
+#msform label{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 14px;
+    color: #170F49;
 }
-
+#msform .form-control{
+    background: #FFFFFF;
+    border: 1px solid #cbf0c0;
+    border-radius: 10px;
+    color: #6F6C90;
+    height: 42px;
+    padding: 7px 50px 7px 20px;
+}
+#msform .form-control:focus{
+	border: 1px solid #349F1A;
+    box-shadow: none;
+    outline: 0;
+}
 /*Hide all except first fieldset*/
 #msform fieldset:not(:first-of-type) {
     display: none;
 }
 
-#msform input, #msform textarea {
-    padding: 8px 15px 8px 15px;
-    border: 1px solid #ccc;
-    border-radius: 0px;
-    margin-bottom: 25px;
-    margin-top: 2px;
-    width: 100%;
-    box-sizing: border-box;
-    font-family: montserrat;
-    color: #2C3E50;
-    background-color: #ECEFF1;
-    font-size: 16px;
-    letter-spacing: 1px;
-}
-
-#msform input:focus, #msform textarea:focus {
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    border: 1px solid #349f1a;
-    outline-width: 0;
-}
-
 /*Next Buttons*/
 #msform .action-button {
-    width: 100px;
     background: #349f1a;
     font-weight: bold;
     color: white;
     border: 0 none;
-    border-radius: 0px;
+    border-radius: 100px;
     cursor: pointer;
-    padding: 10px 5px;
+    padding: 10px 50px;
     margin: 10px 0px 10px 5px;
     float: right;
 }
-
+#msform .action-button:hover, 
+#msform .action-button:focus {background-color: #349f1a;}
 
 /*Previous Buttons*/
 #msform .action-button-previous {
-    width: 100px;
-    background: #349f1a;
+    background: transparent;
     font-weight: bold;
-    color: white;
-    border: 0 none;
-    border-radius: 0px;
+    color: #349f1a;
+	border: 1px solid #349f1a;
+    border-radius: 100px;
     cursor: pointer;
-    padding: 10px 5px;
+    padding: 10px 50px;
     margin: 10px 5px 10px 0px;
     float: left;
 }
-
-/*The background card*/
-.card {
-    z-index: 0;
-    border: none;
-    position: relative;
+#msform .action-button-previous:hover, 
+#msform .action-button-previous:focus {
+    background-color: #349f1a;
+	color: #ffffff;
 }
 
 /*FieldSet headings*/
-.fs-title {
+#msform .fs-title {
     font-size: 25px;
-    color: #349f1a;
-    margin-bottom: 15px;
-    font-weight: normal;
+    color: #170F49;
+    margin-bottom: 50px;
+    font-weight: bold;
     text-align: left;
+    font-size: 24px;
+    line-height: 35px;
 }
-
-.purple-text {
-	color: #349f1a;
-    font-weight: normal;
-}
-
-/*Step Count*/
-.steps {
-	font-size: 25px;
-    color: gray;
-    margin-bottom: 10px;
-    font-weight: normal;
-    text-align: left;
-}
-
-/*Field names*/
-.fieldlabels {
-	color: gray;
-	text-align: left;
+#msform p{
+	font-size: 18px;
+	color: #170F49;
 }
 
 /*Icon progressbar*/
 #progressbar {
     margin-bottom: 30px;
     overflow: hidden;
-    color: lightgrey;
+    border-bottom: 1px solid #e3e4e5;
+    padding-bottom: 30px;
 }
-
-#progressbar .active {
-    color: #349f1a;
+#progressbar .active {color: #349f1a;}
+#progressbar li span{
+    color: #6F6C90;
+    background: #eff0f6;
+    padding: 1rem;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    line-height: 1;
+    font-size: 16px;
+    font-weight: bold;
 }
-
+#progressbar .active span {
+    color: #ffffff;
+    background-color: #349F1A;
+}
 #progressbar li {
     list-style-type: none;
     font-size: 15px;
@@ -139,66 +129,49 @@
     position: relative;
     font-weight: 400;
 }
-
-/*Icons in the ProgressBar*/
-#progressbar #account:before {
-    font-family: FontAwesome;
-    content: "\f13e";
-}
-
-#progressbar #personal:before {
-    font-family: FontAwesome;
-    content: "\f007";
-}
-
-#progressbar #payment:before {
-    font-family: FontAwesome;
-    content: "\f030";
-}
-
-#progressbar #confirm:before {
-    font-family: FontAwesome;
-    content: "\f00c";
-}
-
-/*Icon ProgressBar before any progress*/
-#progressbar li:before {
-    width: 50px;
-    height: 50px;
-    line-height: 45px;
-    display: block;
-    font-size: 20px;
-    color: #ffffff;
-    background: lightgray;
-    border-radius: 50%;
-    margin: 0 auto 10px auto;
-    padding: 2px;
-}
-
 /*ProgressBar connectors*/
-#progressbar li:after {
+#progressbar li::before{
     content: '';
     width: 100%;
-    height: 2px;
-    background: lightgray;
+    height: 6px;
+    background: #eff0f6;
     position: absolute;
-    left: 0;
+    right: 0;
     top: 25px;
     z-index: -1;
 }
-
-/*Color number of the step and the connector before it*/
-#progressbar li.active:before, #progressbar li.active:after {
-    background: #349f1a;
+#progressbar li:nth-child(1)::before{
+    width: 50%;
+    right: 0;
 }
-
-/*Animated Progress Bar*/
-.progress {
-	height: 20px;
+#progressbar li:nth-child(4)::before{
+    width: 50%;
+    left: 0;
 }
-
-.progress-bar {
-	background-color: #349f1a;
+/*ProgressBar connectors*/
+#progressbar li::after {
+    content: '';
+    width: 50%;
+    height: 6px;
+    position: absolute;
+    right: 0px;
+    top: 25px;
+    z-index: -1;
+}
+#progressbar li:nth-child(2).active::after{
+	width: 100%;
+	left: 0;
+}
+#progressbar li:nth-child(3).active::after{
+	left: 0;
+    width: 100%;
+}
+#progressbar li:nth-child(4).active::after{
+	left: 0;
+}
+#progressbar li.active:after {
+    background: #349F1A;
+    color: #ffffff;
 }
 
 /*Fit image in bootstrap div*/
@@ -207,20 +180,17 @@
     object-fit: cover;
 }
 
-.company_services{
-    border: 1px solid #166702;
+.company_services {
+    border: 1px solid #349F1A;
     box-sizing: border-box;
     box-shadow: 0px 2px 11px rgb(69 65 164 / 6%), 0px 4px 10px rgb(31 37 89 / 7%);
-    border-radius: 16px;
-    padding: 1.5em 1em;
-
+    border-radius: 8px;
+    padding: 10px 4px;
+    position: relative;
+    margin: 0px;
+    cursor: pointer;
+    text-align: center;
 }
-
-.company_registration_separator hr {
-    border:none;
-    border-top: dotted 1px;
-  }
-
   .company_register_pay_now_disable{
     pointer-events: none;
     cursor: default;
@@ -249,3 +219,11 @@
     background:transparent;
    }
 
+   .bg-login{
+    background-image: url('/talends/assets/img/auth-bg.png');
+    background-position: right bottom;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+}

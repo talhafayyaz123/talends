@@ -557,7 +557,7 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 .opportunity_card span {
 	display: block;
 	color: #fff;
-	font: 23px trajan, sans-serif;
+	font-size: 22px;
 	position: absolute !important;
 	bottom: 16px;
 	left: 22px;
@@ -715,7 +715,7 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 }
 .plan {
     border: 1px solid #2E6434;
-    padding: 2em 3em;
+    padding: 2rem;
     border-radius: 12px;
 }
 .price-feature > li {
@@ -811,8 +811,8 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 	display: block;
 }
 
-.t-f  .ftitle-wrap strong {
-	font: 20px trajan, sans-serif;
+.t-f  .ftitle-wrap {
+	font-size: 14px;
 	color: #349F1A;
 	text-transform: uppercase;
 }
@@ -1217,13 +1217,12 @@ a.notif {
 	left: 13px;
 }
 
-.company_registration_form i#togglePassword{
-	position: absolute;
-    right: -8px;
-    top: 79%;
+.company_registration_form i#togglePassword {
+    position: absolute;
+    right: 34px;
+    bottom: 3px;
     transform: translateY(-50%);
     cursor: pointer;
-    padding: 18px 18px;
 }
 
 .error{
