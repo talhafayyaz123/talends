@@ -39,6 +39,43 @@
                     <div class="wt-dashboardboxcontent">
                        
 
+                     <div class="wt-jobdescription wt-tabsinfo">
+                            <div class="wt-tabscontenttitle">
+                                <h2>Banner Description</h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                    <div class="form-group">
+                                        {!! Form::textarea('banner_description', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+
+                                    </div>
+
+                                </fieldset>
+
+                                <div class="wt-attachmentsholder">
+                                    <div class="lara-attachment-files">
+                                        <div class="wt-tabscontenttitle">
+                                            <h2>Attachment</h2>
+
+
+                                            <div class="form-group form-group-label">
+                                                <div class="wt-labelgroup">
+                                                    <input type="file" value="" class="" name="banner_image" id='banner_image'>
+
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
                         <div class="wt-jobcategories wt-tabsinfo">
                           
                             <div class="wt-attachmentsholder">

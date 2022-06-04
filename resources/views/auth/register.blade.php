@@ -53,9 +53,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                 <fieldset class="wt-registerformgroup">
 
                                         <div class="form-group">
-                                            <div class="google-signup-wrap">
-                                                <div id="my-signin2"></div>
-                                            </div>
+                                         
 
                                         </div>
                                       
@@ -437,6 +435,11 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                     <button class="btn btn-outline-theme rounded-pill" style="width: 300px;">
                                                         <i class="bi-google mr-2"></i> Signin with google
                                                     </button>
+
+                                                  <!--   <div class="google-signup-wrap">
+                                                <div id="my-signin2"></div>
+                                            </div> -->
+                                                    
                                                 </div>
                                                 <div class="col-12 text-center mb-3">
                                                     Already have an account? 
