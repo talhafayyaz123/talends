@@ -50,25 +50,11 @@ Why Join Agency Plan
                     {!! $why_agency_plan->project_description ?? '' !!}
                     </div>
                 </div>
-                <div class="col-md-6 text-md-right text-center">
-                    <div class="img-box">
-                        
-                    <ul class="tal-features">
-                      
-                        <li>
-                            <div class="t-f">
-                                <div class="ficon-wrap">
-                                    @if(isset($why_agency_plan->short_term_project_image) )
-                                    <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->short_term_project_image)}}" alt="" class="w-100">
-                                    @endif
-                                </div>
-                                <div class="ftitle-wrap">
-                                    <strong>Strengthen your online reputation</strong>
-                                </div>
-                            </div>
-                        </li>
-                      
-                    </ul>            
+                <div class="col-md-6 text-md-right text-center">                    
+                        @if(isset($why_agency_plan->short_term_project_image) )
+                        <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->short_term_project_image)}}" alt="" class="w-100">
+                        @endif
+                                
                 </div>
             </div>
         </div>

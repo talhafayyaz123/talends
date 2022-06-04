@@ -201,7 +201,7 @@
                         <h2>Hire this Agency</h2>
                         <p class="mb-5">Please fill the brief below to get in touch the agency with much better and faster response. Feel free to add as much detail as needed.</p>
                         <form id="agencyform">
-                        <!-- progressbar -->
+                            <!-- progressbar -->
                             <ul id="progressbaragency">
                                 <li class="active" id="account"><span>1</span></li>
                                 <li id="personal"><span>2</span></li>
