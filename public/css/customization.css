@@ -196,10 +196,8 @@ header .navbar-expand-lg .navbar-collapse {
 header .container {
     position: relative;
 }
-
-
 header .navbar-brand {
-    padding: 10px 1px 10px 30px;
+    padding: 10px 0px 0px 0px;
 }
 
 header .navbar .navbar-nav .nav_item_right {

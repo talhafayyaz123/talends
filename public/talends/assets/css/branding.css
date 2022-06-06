@@ -4,11 +4,11 @@
 }
 
 .font_regular {
-    font-family: trajan, sans-serif
+    /* font-family: trajan, sans-serif */
 }
 
 .font_bold {
-    font-family: trajan, sans-serif;
+    /* font-family: trajan, sans-serif; */
     font-weight: 500
 }
 
@@ -1506,7 +1506,7 @@ footer .social-networks li+li {
     background: #fff
 }
 
-@media(min-width:768px) {
+/* @media(min-width:768px) {
     .container {
         padding-left: 30px;
         padding-right: 30px;
@@ -1524,7 +1524,7 @@ footer .social-networks li+li {
     .container {
         max-width: 1280px
     }
-}
+} */
 
 @media(min-width:1536px) {}
 

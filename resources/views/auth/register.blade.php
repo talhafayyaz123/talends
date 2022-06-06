@@ -131,7 +131,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
         <div class="row">
             <div class="col-12">
                 <div class="d-flex align-items-center min-vh-100">
-                    <div class="w-75 d-block bg-white shadow-lg rounded my-5 mx-auto">
+                    <div class="w-100 d-block bg-white shadow-lg rounded my-5 mx-auto py-4">
                         <div class="row">
                             <div class="col-lg-7">
                                 <div class="auth-content" id="registration">
@@ -324,8 +324,8 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
 
                                                 <div v-if='user_type'>
                                                     <div class="entity-form row" style="display:block;">
-                                                        <div class="col-12 mb-3 text-center" style="left: 82px;">
-                                                            <button class="btn btn-theme rounded-pill" type="submit" style="width: 300px;">Create Account</button>
+                                                        <div class="col-12 mb-3 text-center">
+                                                            <button class="btn btn-theme rounded-pill d-inline-block my-3 py-3" type="submit" style="width: 300px;">Create Account</button>
                                                         </div>
                                                         <div class="col-12 mb-3">
                                                             <div class="or-text">
@@ -337,10 +337,10 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                                 <i class="bi-google mr-2"></i> Signin with google
                                                             </button>
                                                         </div>
-                                                        <div class="col-12 text-center mb-3">
+                                                        <!-- <div class="col-12 text-center mb-3">
                                                             Already have an account? 
                                                             <a href="{{  url('login') }}" class="ml-2 btn-link text-success">Sign in</a>
-                                                        </div>
+                                                        </div> -->
                                                         <div class="col-12 text-center mb-3">
                                                             Not a freelancer?
                                                             <a href="{{  url('register') }}" class="ml-2 btn-link text-success">Create Account</a>
@@ -403,11 +403,13 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                 </div>
                             </div> <!-- end col -->
                             <div class="col-lg-5 d-none d-lg-block rounded-right ml-auto">
-                                <div class="bg-login pt-4">
+                                <div class="pt-4">
                                     <h3 id="register-text">Ready to get customers from 
                                         <span class="text-success">Dubai & UAE</span>
                                         <a href="{{route('login')}}" class="d-block mb-5">Already a member?</a>
+                                        
                                     </h3>
+                                    <img src="{{ asset('talends/assets/img/Layer12.png')  }}" class="img-fluid" alt="">
                                 </div>
                             </div>
                         </div> 

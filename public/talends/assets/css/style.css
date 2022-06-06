@@ -168,7 +168,7 @@ header .navbar {
 }
 
 header .navbar-brand {
-    padding: 10px 1px 10px 30px;
+    padding: 10px 0px 0px 0px;
 }
 
 header .navbar-brand img {
