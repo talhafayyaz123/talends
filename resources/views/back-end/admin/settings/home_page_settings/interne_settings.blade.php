@@ -72,6 +72,67 @@
                                     </div>
                                 </div>
 
+
+                                <div class="wt-attachmentsholder">
+                                    <div class="lara-attachment-files">
+                                        <div class="wt-tabscontenttitle">
+                                            <h2>Trusted By</h2>
+
+
+                                            <div class="form-group form-group-label">
+                                                <div class="wt-labelgroup">
+                                                    <input type="file" value="" class="" name="trusted_by_image" id='trusted_by_image'>
+
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="wt-jobdescription wt-tabsinfo">
+                            <div class="wt-tabscontenttitle">
+                                <h2>Banner 2 Description </h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                    <div class="form-group">
+                                        {!! Form::textarea('banner2_description', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+
+                                    </div>
+
+                                </fieldset>
+
+                                <div class="wt-attachmentsholder">
+                                    <div class="lara-attachment-files">
+                                        <div class="wt-tabscontenttitle">
+                                            <h2>Attachment</h2>
+
+
+                                            <div class="form-group form-group-label">
+                                                <div class="wt-labelgroup">
+                                                    <input type="file" value="" class="" name="banner2_image" id='banner2_image'>
+
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                              
+
                             </div>
                         </div>
 
@@ -207,6 +268,8 @@
                  <input type="hidden" value="update" name="form_type" >
                
                  <div class="wt-dashboardbox">
+
+                 
                     <div class="wt-dashboardboxtitle">
                     <h2>Interne University Collaboration</h2>
                     </div>
@@ -214,6 +277,148 @@
                         
 
                         <div class="wt-jobcategories wt-tabsinfo">
+
+                        <div class="wt-jobdescription wt-tabsinfo">
+                            <div class="wt-tabscontenttitle">
+                            <h2>Banner Description</h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                    <div class="form-group">
+                                        {!! Form::textarea('banner_description', e($interne_university_collaboration['freelancer_benefits']), ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+
+                                    </div>
+
+                                </fieldset>
+
+                                <div class="wt-attachmentsholder">
+                                    <div class="lara-attachment-files">
+                                        <div class="wt-tabscontenttitle">
+                                            <h2>Attachment</h2>
+
+
+                                            <div class="form-group form-group-label">
+                                                <div class="wt-labelgroup">
+                                                    <input type="file" value="" class="" name="banner_image" id='banner_image'>
+
+
+                                                </div>
+                                            </div>
+
+
+                                            @if (!empty($interne_university_collaboration['short_term_project_image']))
+                                            @php $image = '/uploads/home-pages/interne_uni_collaboration/'.$interne_university_collaboration['short_term_project_image']; @endphp
+                                            <div class="wt-formtheme wt-userform">
+
+                                                <div class="wt-uploadingbox">
+                                                    <figure><img src="{{{  asset($image)}}}" alt="{{{ trans('lang.profile_photo') }}}"></figure>
+
+                                                </div>
+                                                <input type="hidden" name="hidden_short_term_project_image" id="hidden_short_term_project_image" value="{{{$interne_university_collaboration['short_term_project_image']}}}">
+                                            </div>
+                                            @endif
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                                
+                                <div class="wt-attachmentsholder">
+                                    <div class="lara-attachment-files">
+                                        <div class="wt-tabscontenttitle">
+                                            <h2>Trusted By Banner</h2>
+
+
+                                            <div class="form-group form-group-label">
+                                                <div class="wt-labelgroup">
+                                                    <input type="file" value="" class="" name="trusted_by_image" id='trusted_by_image'>
+
+
+                                                </div>
+                                            </div>
+
+
+                                            @if (!empty($interne_university_collaboration['recurring_engagements_image']))
+                                            @php $image = '/uploads/home-pages/interne_uni_collaboration/'.$interne_university_collaboration['recurring_engagements_image']; @endphp
+                                            <div class="wt-formtheme wt-userform">
+
+                                                <div class="wt-uploadingbox">
+                                                    <figure><img src="{{{  asset($image)}}}" alt="{{{ trans('lang.profile_photo') }}}"></figure>
+
+                                                </div>
+                                                <input type="hidden" name="hidden_recurring_engagements_image" id="hidden_recurring_engagements_image" value="{{{$interne_university_collaboration['recurring_engagements_image']}}}">
+                                            </div>
+                                            @endif
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                            <!--  -->
+                            <div class="wt-jobdescription wt-tabsinfo">
+                            <div class="wt-tabscontenttitle">
+                            <h2>Banner 2 Description</h2>
+                            </div>
+                            <div class="wt-formtheme wt-userform wt-userformvtwo">
+                                <fieldset>
+                                    <div class="form-group">
+                                        {!! Form::textarea('banner2_description', e($interne_university_collaboration['internees_benefits']), ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+
+                                    </div>
+
+                                </fieldset>
+
+                                <div class="wt-attachmentsholder">
+                                    <div class="lara-attachment-files">
+                                        <div class="wt-tabscontenttitle">
+                                            <h2>Attachment</h2>
+
+
+                                            <div class="form-group form-group-label">
+                                                <div class="wt-labelgroup">
+                                                    <input type="file" value="" class="" name="banner2_image" id='banner2_image'>
+
+
+                                                </div>
+                                            </div>
+
+
+                                            @if (!empty($interne_university_collaboration['long_term_work_image']))
+                                            @php $image = '/uploads/home-pages/interne_uni_collaboration/'.$interne_university_collaboration['long_term_work_image']; @endphp
+                                            <div class="wt-formtheme wt-userform">
+
+                                                <div class="wt-uploadingbox">
+                                                    <figure><img src="{{{  asset($image)}}}" alt="{{{ trans('lang.profile_photo') }}}"></figure>
+
+                                                </div>
+                                                <input type="hidden" name="hidden_long_term_work_image" id="hidden_long_term_work_image" value="{{{$interne_university_collaboration['long_term_work_image']}}}">
+                                            </div>
+                                            @endif
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                                
+                             
+
+                            </div>
+                        </div>
+
                           
                             <div class="wt-attachmentsholder">
                                     <div class="lara-attachment-files">
@@ -418,8 +623,7 @@
                 </div>
                 {!! form::close(); !!}
 
- 
-
+                
 
             </div>
         </div>

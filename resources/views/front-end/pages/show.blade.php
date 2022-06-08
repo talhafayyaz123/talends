@@ -240,6 +240,7 @@
         <div class="container">
             <div class="row row-eq-height">
                 <div class="col-lg-6 mb-4">
+                
                     @if(isset( $banner_settings->talends_work_image) )
                     <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->talends_work_image)}}"
                         class="w-100" alt="">

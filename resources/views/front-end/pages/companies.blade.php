@@ -534,69 +534,17 @@
                 <div class="col-12 mb-3">
                     <h2>in-demand services from agencies</h2>
                 </div>
+                @foreach($categories as $category)
                 <div class="col-lg col-md-4 col-sm-6">
                     <div class="content-box">
-                        <img src="{{ asset('talends/assets/img/icons/programming-icon.png')}}" alt="" class="img-fluid mb-3">
-                        <p>Programming & Tech</p>
+                        <img src="{{ asset('uploads/categories/'.$category->image)}}" alt="" class="img-fluid mb-3">
+                        <p>{{ $category->title }}</p>
                     </div>
                 </div>
-                <div class="col-lg col-md-4 col-sm-6">
-                    <div class="content-box">
-                        <img src="{{ asset('talends/assets/img/icons/design-icon.png')}}" alt="" class="img-fluid mb-3">
-                        <p>Design & Graphics</p>
-                    </div>
-                </div>
-                <div class="col-lg col-md-4 col-sm-6">
-                    <div class="content-box">
-                        <img src="{{ asset('talends/assets/img/icons/video-icon.png')}}" alt="" class="img-fluid mb-3">
-                        <p>Video & Animation</p>
-                    </div>
-                </div>
-                <div class="col-lg col-md-4 col-sm-6">
-                    <div class="content-box">
-                        <img src="{{ asset('talends/assets/img/icons/writing-icon.png')}}" alt="" class="img-fluid mb-3">
-                        <p>Content & Writing</p>
-                    </div>
-                </div>
-                <div class="col-lg col-md-4 col-sm-6">
-                    <div class="content-box">
-                        <img src="{{ asset('talends/assets/img/icons/data-icon.png')}}" alt="" class="img-fluid mb-3">
-                        <p>Data</p>
-                    </div>
-                </div>
+                @endforeach
+        
             </div>
-            <div class="row">
-                <div class="col-lg col-md-4 col-sm-6">
-                    <div class="content-box">
-                        <img src="{{ asset('talends/assets/img/icons/programming-icon.png')}}" alt="" class="img-fluid mb-3">
-                        <p>Customer Service center</p>
-                    </div>
-                </div>
-                <div class="col-lg col-md-4 col-sm-6">
-                    <div class="content-box">
-                        <img src="{{ asset('talends/assets/img/icons/programming-icon.png')}}" alt="" class="img-fluid mb-3">
-                        <p>Search Engine Optimization</p>
-                    </div>
-                </div>
-                <div class="col-lg col-md-4 col-sm-6">
-                    <div class="content-box">
-                        <img src="{{ asset('talends/assets/img/icons/marketing-icon.png')}}" alt="" class="img-fluid mb-3">
-                        <p>Search Engine Optimization</p>
-                    </div>
-                </div>
-                <div class="col-lg col-md-4 col-sm-6">
-                    <div class="content-box">
-                        <img src="{{ asset('talends/assets/img/icons/writing-icon.png')}}" alt="" class="img-fluid mb-3">
-                        <p>Content & Writing</p>
-                    </div>
-                </div>
-                <div class="col-lg col-md-4 col-sm-6">
-                    <div class="content-box">
-                        <img src="{{ asset('talends/assets/img/icons/data-icon.png')}}" alt="" class="img-fluid mb-3">
-                        <p>Data</p>
-                    </div>
-                </div>
-            </div>
+           
         </div>
     </section>
     <section class="find_agency pb-0">
@@ -604,14 +552,16 @@
             <div class="row">
                 <div class="col-md-7">
                     <div class="content-box">
-                        <h2>Find the Agency needed to get your business growing.</h2>
-                        <h5>Choose from our Pre-vetted agencies & get your project done faster, Better quality & affordable</h5>
-                        <a href="javascript:void;" class="btn m-1">Register as employer </a>
-                        <a href="javascript:void;" class="btn btn2 m-1">Register as Agency </a>
+                        {!! $agency_need_banner->banner_description ?? ''  !!}
+                        
+                        <a href="{{ route('register')  }}" class="btn m-1">Register as employer </a>
+                        <a href="{{ route('companyRegistraton')  }}" class="btn btn2 m-1">Register as Agency </a>
                     </div>
                 </div>
                 <div class="col-md-5">
-                    <img src="{{asset('/talends/assets/img/find-agency-img.png')}}" class="img-fluid"  alt="Find Agency Image">
+                    @if(isset($agency_need_banner->about_talends_image))
+                    <img src="{{asset('uploads/home-pages/company_need_banner/'.$agency_need_banner->about_talends_image)}}" class="img-fluid"  alt="Find Agency Image">
+                  @endif
                 </div>
             </div>
         </div>

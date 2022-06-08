@@ -159,6 +159,19 @@
 
                                         </div>
 
+
+                                        <div class="wt-jobskills wt-tabsinfo">
+                                            <div class="wt-tabscontenttitle">
+                                                <h2>Description</h2>
+                                            </div>
+
+                                                {!! Form::textarea('expertise['.$counter.'][description][]', $value['description'][0], ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+
+                                        </div>
+
+
+
+
                                         <div class="form-group wt-rightarea">
                                             @if ($unserialize_key == 0 )
                                             <span class="wt-addinfobtn" onclick="add_expertise()"><i class="fa fa-plus"></i></span>
@@ -202,6 +215,16 @@
                                                 <h2>Categories</h2>
                                             </div>
                                                 {!! Form::select('expertise[0][categories][]', $categories, '', array('class' => 'chosen-select', 'multiple', 'data-placeholder' => trans('lang.select_job_cats'))) !!}
+
+                                        </div>
+
+
+                                        <div class="wt-jobskills wt-tabsinfo">
+                                            <div class="wt-tabscontenttitle">
+                                                <h2>Description</h2>
+                                            </div>
+                                            
+                                            {!! Form::textarea('expertise[0][description][]', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
 
                                         </div>
 

@@ -33,8 +33,7 @@ use Illuminate\Support\Facades\Mail;
 use App\EmailTemplate;
 use App\Mail\GeneralEmailMailable;
 use App\Services\PaymentService;
-
-
+use App\UserCategorySkills;
 use function Psy\debug;
 
 class HomeController extends Controller
@@ -573,6 +572,7 @@ class HomeController extends Controller
     $locations = Location::latest()->get();
     $categories = Category::all();
     $featured_success_stories=AboutTalendsPage::where('page_type','featured_success_stories')->first();
+    $agency_need_banner=AboutTalendsPage::where('page_type','agency_need_banner')->first();
         
     $sub_categories='';
     if(!empty($request->get('category_id'))){
@@ -584,7 +584,7 @@ class HomeController extends Controller
 
     }
 
-    return view('front-end.pages.companies',compact('companies','skills','locations','categories','sub_categories','featured_success_stories'));
+    return view('front-end.pages.companies',compact('agency_need_banner','companies','skills','locations','categories','sub_categories','featured_success_stories'));
      }
 
 
@@ -594,7 +594,12 @@ class HomeController extends Controller
         $company_expertise= isset($expertise) ? unserialize($expertise->description)   : '';
         $company_detail=CompanyDetail::where('user_id',$id)->first();
         $profile = Profile::where('user_id', $id)->get()->first();
-        return view('front-end.pages.company_detail',compact('company_expertise','expertise','company_detail','id','profile'));
+        $skills=UserCategorySkills::where('user_id', $id)->get();
+        $categories = Category::all();
+        $company_bedget = Helper::getComapnyBudgetList();
+
+
+        return view('front-end.pages.company_detail',compact('company_bedget','categories','skills','company_expertise','expertise','company_detail','id','profile'));
      }
 
     public function experienceEducation($user_id)

@@ -23,12 +23,12 @@ class CompanyExpertise extends Model
     {
         $json = array();
         $menu = $request['expertise'];
-       
+
        
         if (!empty($menu)) {
 
             foreach ($menu as $key => $value) {
-                if (($value['title'] == null || $value['total_developers'] == null || $value['project_cost'] == null)) {
+                if (($value['title'] == null || $value['total_developers'] == null || $value['project_cost'] == null || $value['description'] == null)) {
                     $json['type'] = 'error';
                     return $json;
                 }

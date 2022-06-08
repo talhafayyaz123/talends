@@ -1,6 +1,7 @@
 
-
+@if($no<6)
 <div class="wrap-search wt-haslayout">
+    
     <div class="form-group">
         <div class="form-group-holder">
             {!! Form::text('expertise['.$no.'][title]', null, ['class' => 'form-control',
@@ -29,6 +30,15 @@
 
         </div>
 
+        <div class="wt-jobskills wt-tabsinfo">
+            <div class="wt-tabscontenttitle">
+                <h2>Description</h2>
+            </div>
+            {!! Form::textarea('expertise['.$no.'][description][]', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+        </div>
+
+
+
         <div class="form-group wt-rightarea">
         <span class="wt-addinfobtn wt-deleteinfo delete-search" >
         <i class="fa fa-trash"></i>
@@ -37,3 +47,4 @@
         </div>
     </div>
 </div>
+@endif

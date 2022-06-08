@@ -20,7 +20,9 @@ class CreateHireAgenciesTable extends Migration
             $table->string('company_name')->nullable();   
             $table->string('email')->nullable();   
             $table->string('phone_number')->nullable();   
-            $table->text('detail')->nullable();   
+            $table->text('detail')->nullable();
+            $table->string('budget')->nullable();   
+   
             $table->integer('is_seen')->default(0);   
             $table->text('questions')->nullable();   
             $table->timestamps();

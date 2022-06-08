@@ -1565,11 +1565,14 @@ class AboutTalendsPage extends Model
     {
 
             if (!empty($request)) {
-                      
+                    
             if($request->form_type=='update'){
                 self::where('page_type','interne_university_collaboration')->delete();
             }
             $this->page_type = 'interne_university_collaboration';
+
+            $this->freelancer_benefits = $request['banner_description'];
+            $this->internees_benefits = $request['banner2_description'];
 
             if($request->form_type=='add'){
              if (!empty($request->hasFile('title1_image'))) {
@@ -1763,9 +1766,118 @@ class AboutTalendsPage extends Model
            }
 
 
-
        }
+
+
+       
+       if($request->form_type=='add'){
+        if (!empty($request->hasFile('banner_image'))) {
+           $banner_image = $request->file('banner_image');
+   
+           $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+           $imageName = time().'.'.$banner_image->getClientOriginalName();
+           $request->banner_image->move($new_path, $imageName);
+           $this->short_term_project_image	 = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+       } else {
+           $this->short_term_project_image	 = null;
+       }
+
+            }else{
+                
+                
+                if (!empty($request->hasFile('banner_image'))) {
+                    $banner_image = $request->file('banner_image');
+                    if ( $request->hidden_short_term_project_image && file_exists(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_short_term_project_image)) {
+                        unlink(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_short_term_project_image);               
+                    }
+            
+                    $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+                    $imageName = time().'.'.$banner_image->getClientOriginalName();
+                    $imageName=str_replace(' ','_',$imageName);
+                    
+                    $request->banner_image->move($new_path, $imageName);
+                    $this->short_term_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+                } else {
+                    $this->short_term_project_image = $request->hidden_short_term_project_image;
+                }
+
+
+            }
            /////////////////////
+           if($request->form_type=='add'){
+            if (!empty($request->hasFile('trusted_by_image'))) {
+               $trusted_by_image = $request->file('trusted_by_image');
+       
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+               $imageName = time().'.'.$trusted_by_image->getClientOriginalName();
+               $request->trusted_by_image->move($new_path, $imageName);
+               $this->recurring_engagements_image	 = filter_var($imageName, FILTER_SANITIZE_STRING);
+    
+           } else {
+               $this->recurring_engagements_image	 = null;
+           }
+    
+                }else{
+                    
+                    
+                    if (!empty($request->hasFile('trusted_by_image'))) {
+                        $trusted_by_image = $request->file('trusted_by_image');
+                        if ( $request->hidden_recurring_engagements_image && file_exists(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_recurring_engagements_image)) {
+                            unlink(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_recurring_engagements_image);               
+                        }
+                
+                        $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+                        $imageName = time().'.'.$trusted_by_image->getClientOriginalName();
+                        $imageName=str_replace(' ','_',$imageName);
+                        
+                        $request->trusted_by_image->move($new_path, $imageName);
+                        $this->recurring_engagements_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+    
+                    } else {
+                        $this->recurring_engagements_image = $request->hidden_recurring_engagements_image;
+                    }
+    
+    
+                }
+           ///////////////////////
+           if($request->form_type=='add'){
+            if (!empty($request->hasFile('banner2_image'))) {
+               $banner2_image = $request->file('banner2_image');
+       
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+               $imageName = time().'.'.$banner2_image->getClientOriginalName();
+               $request->banner2_image->move($new_path, $imageName);
+               $this->long_term_work_image	 = filter_var($imageName, FILTER_SANITIZE_STRING);
+    
+           } else {
+               $this->long_term_work_image	 = null;
+           }
+    
+                }else{
+                    
+                    
+                    if (!empty($request->hasFile('banner2_image'))) {
+                        $banner2_image = $request->file('banner2_image');
+                        if ( $request->hidden_long_term_work_image && file_exists(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_long_term_work_image)) {
+                            unlink(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_long_term_work_image);               
+                        }
+                
+                        $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+                        $imageName = time().'.'.$banner2_image->getClientOriginalName();
+                        $imageName=str_replace(' ','_',$imageName);
+                        
+                        $request->banner2_image->move($new_path, $imageName);
+                        $this->long_term_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+    
+                    } else {
+                        $this->long_term_work_image = $request->hidden_long_term_work_image;
+                    }
+    
+    
+                }
+           /////
             $this->save();
             $json['type'] = 'success';
             $json['message'] = 'Team On Demand Settings Record Created';
@@ -1828,6 +1940,62 @@ class AboutTalendsPage extends Model
         }
     }
 
+    public function storeWhyNeedAgencyBanner($request)
+    {
+
+            if (!empty($request)) {
+
+            if($request->form_type=='update'){
+                self::where('page_type','agency_need_banner')->delete();
+            }
+            $this->page_type = 'agency_need_banner';
+            $this->banner_description = $request['company_banner_description'];
+          
+         
+            if($request->form_type=='add'){
+             if (!empty($request->hasFile('company_banner_image'))) {
+                $company_banner_image = $request->file('company_banner_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/company_need_banner';
+                $imageName = time().'.'.$company_banner_image->getClientOriginalName();
+                $request->company_banner_image->move($new_path, $imageName);
+                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->about_talends_image = null;
+            }
+
+        }else{
+           
+            
+            if (!empty($request->hasFile('company_banner_image'))) {
+                $company_banner_image = $request->file('company_banner_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/company_need_banner' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/company_need_banner' . '/' . $request->hidden_about_talends_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/company_need_banner';
+                $imageName = time().'.'.$company_banner_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->company_banner_image->move($new_path, $imageName);
+                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->about_talends_image = $request->hidden_about_talends_image;
+            }
+
+
+
+        }
+           ////////////////////////////////////////////
+
+            $this->save();
+            $json['type'] = 'success';
+            $json['message'] = 'Freelancer Sidebar  Record Created';
+            return $json;
+        }
+    }
 
     public function saveFreelancerSideBarSettings($request)
     {

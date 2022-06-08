@@ -389,11 +389,12 @@ class HomePagesController extends Controller
         $interne_university_collaboration=AboutTalendsPage::where('page_type','interne_university_collaboration')->first();
         $featured_success_stories=AboutTalendsPage::where('page_type','featured_success_stories')->first();
         $freelancer_side_bar=AboutTalendsPage::where('page_type','freelancer_side_bar')->first();
+        $agency_need_banner=AboutTalendsPage::where('page_type','agency_need_banner')->first();
 
-        
+
      if($type=='banner_settings'){
         return view(
-            'back-end.admin.settings.home_page_settings.banner_settings',compact('freelancer_side_bar','banner_settings','find_right_opportunity','trusted_by')
+            'back-end.admin.settings.home_page_settings.banner_settings',compact('agency_need_banner','freelancer_side_bar','banner_settings','find_right_opportunity','trusted_by')
         );
      }else if($type=='team_demand'){
         return view(
@@ -528,7 +529,32 @@ class HomePagesController extends Controller
         return Redirect::back(); 
     }
 
+     
+    public function storeWhyNeedAgencyBanner(Request $request)
+    { 
         
+        if($request->form_type=='add'){
+            $this->validate(
+                $request, [
+                    'company_banner_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+                    'company_banner_description' => 'required'
+            ]
+            );
+        }else{
+            $this->validate(
+                $request, [
+                    'company_banner_image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+                    'company_banner_description' => 'required',
+            ]
+            );
+        }
+
+        $about_talends = new AboutTalendsPage;
+        $about_talends->storeWhyNeedAgencyBanner($request);
+        Session::flash('message','Company Banner Saved Successfully');
+        return Redirect::back();
+    }
+
     public function storeFreelancerSidebar(Request $request)
     { 
         
@@ -798,6 +824,12 @@ class HomePagesController extends Controller
             'title3_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             'title4_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             'title5_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'banner_description' =>'required',
+            'banner_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'trusted_by_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'banner2_description' =>'required',
+            'banner2_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+
             ]
             );
         }else{
@@ -809,7 +841,11 @@ class HomePagesController extends Controller
             'title3_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             'title4_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             'title5_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
-    
+            'banner_description' =>'required',
+            'banner_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'trusted_by_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'banner2_description' =>'required',
+            'banner2_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             ]
             );
         }

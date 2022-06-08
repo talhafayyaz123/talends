@@ -265,6 +265,8 @@ Route::group(
 
         Route::post('admin/store_freelancer_sidebar', 'HomePagesController@storeFreelancerSidebar');
 
+        Route::post('admin/store_why_need_agency_banner', 'HomePagesController@storeWhyNeedAgencyBanner');
+
 
         Route::post('admin/update-homepage-banner-settings/{id}', 'HomePagesController@updateBannerSettings');
         

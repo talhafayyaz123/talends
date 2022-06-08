@@ -141,6 +141,8 @@ class User extends Authenticatable
         return $this->morphToMany('App\Language', 'langable');
     }
 
+   
+
     /**
      * Get the location that owns the user.
      *
