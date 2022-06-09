@@ -85,61 +85,75 @@
                                </ul>
                         </div>
                         <h3>Latest Portfolio</h3>
+                        @if (!empty($expertise) && !empty($expertise) )
+
                         <section class="featured_success_stories_sec p-0">
                             <div class="container px-md-0">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                                             <div class="carousel-inner">
-                                                <h2>UI / UX</h2>
-                                                <div class="carousel-item active">
+                                        
+                                           
+                                            @if(!empty($expertise->portfolio_detail )  || !empty($expertise->portfolio_image)  )
+
+                                            <div class="carousel-item active">
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <img src="{{asset('/talends/assets/img/internee_bg.png')}}" class="img-fluid w-100" alt="Carousel Image" width="300">
+                                                        @if( isset($expertise->portfolio_image) )
+                                                <img src="{{ asset('uploads/company/'.$expertise->portfolio_image)}}" class="img-fluid w-100" alt="Carousel Image" width="300">
+                                                @endif
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="carousel-content px-4">
-                                                                <p>Are you a website designer? Would you say you have a GREAT eye for design? And consider yourself more of a designer than a developer? Are you a website designer? Would you say you have a GREAT eye for design? And consider yourself more of a designer than a developer?Are you a website designer? Would you say you have a GREAT eye for design? And consider yourself more of a designer than a developer?</p>
-                                                            </div>
+                                                            {!!  $expertise->portfolio_detail  ?? ''  !!}                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                @endif
+
+
+                                                @if(!empty($expertise->portfolio_detail_2 )  || !empty($expertise->portfolio_image_2)  )
+
                                                 <div class="carousel-item">
-                                                <div class="row">
+                                                    <div class="row">
                                                         <div class="col-md-6">
-                                                            <img src="{{asset('/talends/assets/img/find-agency-img.png')}}" class="img-fluid w-100" alt="Carousel Image" width="300">
+                                                        @if( isset($expertise->portfolio_image_2) )
+                                                <img src="{{ asset('uploads/company/'.$expertise->portfolio_image_2)}}" class="img-fluid w-100" alt="Carousel Image" width="300">
+                                                @endif
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="carousel-content px-4">
-                                                                <p>Are you a website designer? Would you say you have a GREAT eye for design? And consider yourself more of a designer than a developer? Are you a website designer? Would you say you have a GREAT eye for design? And consider yourself more of a designer than a developer?Are you a website designer? Would you say you have a GREAT eye for design? And consider yourself more of a designer than a developer?</p>
-                                                            </div>
+                                                            {!!  $expertise->portfolio_detail_2  ?? ''  !!}                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @endif
+
+
+                                                  @if(!empty($expertise->portfolio_detail_3 )  || !empty($expertise->portfolio_image_3)  )
                                                 <div class="carousel-item">
-                                                <div class="row">
+                                                    <div class="row">
                                                         <div class="col-md-6">
-                                                            <img src="{{asset('/talends/assets/img/internee_bg.png')}}" class="img-fluid w-100" alt="Carousel Image" width="300">
+                                                        @if( isset($expertise->portfolio_image_3) )
+                                                <img src="{{ asset('uploads/company/'.$expertise->portfolio_image_3)}}" class="img-fluid w-100" alt="Carousel Image" width="300">
+                                                @endif
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="carousel-content px-4">
-                                                                <p>Are you a website designer? Would you say you have a GREAT eye for design? And consider yourself more of a designer than a developer? Are you a website designer? Would you say you have a GREAT eye for design? And consider yourself more of a designer than a developer?Are you a website designer? Would you say you have a GREAT eye for design? And consider yourself more of a designer than a developer?</p>
-                                                            </div>
+                                                            {!!  $expertise->portfolio_detail_3  ?? ''  !!}                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="carousel-item">
-                                                <div class="row">
-                                                        <div class="col-md-6">
-                                                            <img src="{{asset('/talends/assets/img/find-agency-img.png')}}" class="img-fluid w-100" alt="Carousel Image" width="300">
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="carousel-content px-4">
-                                                                <p>Are you a website designer? Would you say you have a GREAT eye for design? And consider yourself more of a designer than a developer? Are you a website designer? Would you say you have a GREAT eye for design? And consider yourself more of a designer than a developer?Are you a website designer? Would you say you have a GREAT eye for design? And consider yourself more of a designer than a developer?</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+
+                                                @endif
+
+                                           
+                                                    
+                                               
+                                               
+                                              
                                             </div>
                                             <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
                                                 data-slide="prev">
@@ -156,6 +170,8 @@
                                 </div>
                             </div>
                         </section>
+                        @endif
+
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 pr-md-0 mt-md-0 mt-4">
