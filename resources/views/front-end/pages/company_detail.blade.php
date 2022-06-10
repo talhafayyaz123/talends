@@ -18,7 +18,9 @@
                 <div class="col-md-12">
                     
                     <div class="d-md-flex mt-3 mt-md-n2  mb-4">
+                        @if(isset($profile->avater) && !empty($profile->avater) )
                         <img src=" {{ asset('uploads/users/'.$id.'/'.$profile->avater.'') }}" class="img-fluid" alt="Company Image"/>
+                        @endif
                         <div class="ml-md-4 pt-4 px-3">
                             <p class="text-justify">
 
@@ -54,12 +56,12 @@
                 <div class="card bg-transparent border-0">
                                 <div class="card-header" id="heading{{$unserialize_key}}">
                                     <h4 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapse{{$unserialize_key}}" aria-expanded="false" aria-controls="collapseTwo">                                        
-                                    {{ $value['title'] }} <i class="bi-plus float-right rotate-icon"></i>                                        
+                                    {{ $value['title'] ?? '' }} <i class="bi-plus float-right rotate-icon"></i>                                        
                                     </h4>
                                 </div>
                                 <div id="collapse{{$unserialize_key}}" class="collapse" aria-labelledby="heading{{$unserialize_key}}" data-parent="#accordionExpertise">
                                     <div class="card-body">
-                                    {!! $value['description'][0] !!}
+                                    {!! $value['description'][0] ?? '' !!}
                                     </div>
                                 </div>
                             </div>
