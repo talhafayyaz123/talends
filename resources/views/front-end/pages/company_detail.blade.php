@@ -18,7 +18,9 @@
                 <div class="col-md-12">
                     
                     <div class="d-md-flex mt-3 mt-md-n2  mb-4">
+                        @if(isset($profile->avater) && !empty($profile->avater) )
                         <img src=" {{ asset('uploads/users/'.$id.'/'.$profile->avater.'') }}" class="img-fluid" alt="Company Image"/>
+                        @endif
                         <div class="ml-md-4 pt-4 px-3">
                             <p class="text-justify">
 
