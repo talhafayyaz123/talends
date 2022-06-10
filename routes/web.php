@@ -73,6 +73,8 @@ Route::get('company/registration', 'HomeController@companyRegistration')->name('
 Route::post('/registration/success', 'HomeController@companyRegistrationSuccess')->name('companyRegistratonSuccess');
 Route::get('registration/again/payment/{id}/{package_id}', 'Auth\RegisterController@registrationAgainPayment')->name('registrationAgainPayment');
 
+Route::post('store/admin/lead', 'HomePagesController@storeAdminLead')->name('storeAdminLead');
+Route::get('admin/lead/success', 'HomePagesController@adminLeadSuccess')->name('adminLeadSuccess');
 
 
 Route::get('company-detail/{id}', 'HomeController@CompanyDetail')->name('CompanyDetail');

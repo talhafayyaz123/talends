@@ -239,23 +239,29 @@
                 </div>
                 <div class="col-md-8">
                     <div class="content-box">
-                        <h2>Let us help you to hire a team!</h2>
-                        <form id="contactForm" method="post" action="">
+                                <h2>Let us help you to hire a team!</h2>
+                                @if ($errors->any())
+                                @foreach ($errors->all() as $error)
+                                    <div class="error">{{$error}}</div>
+                                @endforeach
+                            @endif
+                        <form id="adminContactForm" method="post" action="{{ route('storeAdminLead') }}">
+                            @csrf
                             <div class="row">
-                                <div class="col-md-6 mb-4">
-                                    <input type="text" class="form-control form-control-lg" placeholder="Name" id="inputName">
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="text" name="full_name"  value="" class="form-control form-control-lg"  placeholder="Name" id="full_name">
                                 </div>
-                                <div class="col-md-6 mb-4">
-                                    <input type="text" class="form-control form-control-lg" placeholder="Company Name (If any)" id="inputName">
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="text" name="company_name" class="form-control form-control-lg" placeholder="Company Name (If any)" id="company_name">
                                 </div>
-                                <div class="col-md-6 mb-4">
-                                    <input type="email" class="form-control form-control-lg" placeholder="Email" id="inputName">
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="email" name="email" class="form-control form-control-lg" placeholder="Email" id="email">
                                 </div>
-                                <div class="col-md-6 mb-4">
-                                    <input type="text" class="form-control form-control-lg" placeholder="Phone Number" id="inputName">
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="text"  name='phone_number' class="form-control form-control-lg" placeholder="Phone Number" id="phone_number">
                                 </div>
-                                <div class="col-md-12 mb-4">
-                                    <textarea rows="4" class="form-control form-control-lg">Describe your project</textarea>
+                                <div class="form-group col-md-12 mb-4">
+                                    <textarea rows="4" name="detail" id='detail' class="form-control form-control-lg">Describe your project</textarea>
                                 </div>
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-theme px-5 rounded-pill">Let us help you</button>
@@ -325,3 +331,45 @@
     </section> -->
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function () {
+    $('#adminContactForm').validate({ 
+        rules: {
+            full_name: {
+                required: true
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            company_name: {
+                required: true,
+                
+            },  phone_number: {
+                required: true,
+                
+            },
+
+            detail: {
+                required: true,
+    
+                
+            },
+        },
+          errorElement: 'span',
+          errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+          },
+          highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+          },
+          unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+          }
+    });
+});
+</script> 
+@endpush

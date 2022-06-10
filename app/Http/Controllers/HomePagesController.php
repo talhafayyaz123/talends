@@ -26,6 +26,8 @@ use App\SiteManagement;
 use Illuminate\Support\Facades\Schema;
 use App\GovernmentPage;
 use App\AboutTalendsPage;
+use Illuminate\Support\Str;
+use App\AdminLeads;
 
 
 /**
@@ -503,6 +505,40 @@ class HomePagesController extends Controller
         return Redirect::back(); 
     }
 
+
+    public function storeAdminLead(Request $request)
+    { 
+        
+        $this->validate(
+        $request, [
+        'email' => 'required',
+        'full_name' => 'required',
+        'company_name' => 'required',
+        'phone_number' => 'required',
+        'detail' => 'required'
+        ]
+        );
+
+        AdminLeads::create(
+           [
+            'lead_uuid' => Str::uuid()->toString(),
+            'email' => $request['email'],
+            'full_name' => $request['full_name'],
+            'company_name' =>$request['company_name'],
+            'phone_number' => $request['phone_number'],
+            'detail' => $request['detail']
+           ]
+
+        );
+        
+        Session::flash('message','Record Saved Successfully');
+       return Redirect::route('adminLeadSuccess'); 
+    }
+
+    
+    public function adminLeadSuccess(){
+        return view('front-end.pages.success-admin-lead');
+    }
 
       
     public function storeTrustedByBanner(Request $request)
