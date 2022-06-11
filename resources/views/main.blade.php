@@ -132,7 +132,7 @@
     
 
 	@stack('stylesheets')
-
+	@stack('owlstyle')
 	
 
 	@if (Auth::user())
@@ -255,6 +255,11 @@
 
 	@yield('bootstrap_script')
     @stack('scripts')
+	<script>
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		});
+	</script>
 
 </body>
 

@@ -7,6 +7,11 @@
 
 @section('content')
 
+@push('owlstyle')
+    <link href="{{ asset('css/prettyPhoto-min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet">
+@endpush
+
 <div id="pages-list">
 
 
@@ -151,72 +156,49 @@
                     <div class="testimonial-content-box">
                         <p class="text-white opcty_5 text-center">Testimonials</p>
                         <h2>We hired <span>they loved</span></h2>
-                        <div id="testimonial-slider" class="carousel slide" data-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <div class="carousel-content">
-                                        <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
-                                        <div class="author-detail text-center">
-                                            <img src="{{asset('uploads/home-pages/find-right-talends/user1.png')}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
-                                            <h5>Dynamics Stream</h5>
-                                            <h6>Dubai, United Arab Emirates</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
-                                        <div class="author-detail text-center">
-                                            <img src="{{asset('uploads/home-pages/find-right-talends/user2.png')}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
-                                            <h5>Dynamics Stream</h5>
-                                            <h6>Dubai, United Arab Emirates</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
-                                        <div class="author-detail text-center">
-                                            <img src="{{asset('uploads/home-pages/find-right-talends/user3.png')}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
-                                            <h5>Dynamics Stream</h5>
-                                            <h6>Dubai, United Arab Emirates</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
-                                        <div class="author-detail text-center">
-                                            <img src="{{asset('uploads/home-pages/find-right-talends/user4.png')}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
-                                            <h5>Dynamics Stream</h5>
-                                            <h6>Dubai, United Arab Emirates</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
-                                        <div class="author-detail text-center">
-                                            <img src="{{asset('uploads/home-pages/find-right-talends/user5.png')}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
-                                            <h5>Dynamics Stream</h5>
-                                            <h6>Dubai, United Arab Emirates</h6>
-                                        </div>
-                                    </div>
+                        <div id="customers-testimonials" class="text-center owl-carousel owl-theme">
+                            <div class="carousel-content">
+                                <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
+                                <div class="author-detail text-center">
+                                    <img src="{{asset('uploads/home-pages/find-right-talends/user1.png')}}" class="img-fluid mb-4" alt="">
+                                    <h5>Dynamics Stream</h5>
+                                    <h6>Dubai, United Arab Emirates</h6>
                                 </div>
                             </div>
-                            <a class="carousel-control-prev" href="#testimonial-slider" role="button"
-                                data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#testimonial-slider" role="button"
-                                data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
+                            <div class="carousel-content">
+                                <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
+                                <div class="author-detail text-center">
+                                    <img src="{{asset('uploads/home-pages/find-right-talends/user2.png')}}" class="img-fluid mb-4" alt="">
+                                    <h5>Dynamics Stream</h5>
+                                    <h6>Dubai, United Arab Emirates</h6>
+                                </div>
+                            </div>
+                            <div class="carousel-content">
+                                <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
+                                <div class="author-detail text-center">
+                                    <img src="{{asset('uploads/home-pages/find-right-talends/user3.png')}}" class="img-fluid mb-4" alt="">
+                                    <h5>Dynamics Stream</h5>
+                                    <h6>Dubai, United Arab Emirates</h6>
+                                </div>
+                            </div>
+                            <div class="carousel-content">
+                                <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
+                                <div class="author-detail text-center">
+                                    <img src="{{asset('uploads/home-pages/find-right-talends/user4.png')}}" class="img-fluid mb-4" alt="">
+                                    <h5>Dynamics Stream</h5>
+                                    <h6>Dubai, United Arab Emirates</h6>
+                                </div>
+                            </div>
+                            <div class="carousel-content">
+                                <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
+                                <div class="author-detail text-center">
+                                    <img src="{{asset('uploads/home-pages/find-right-talends/user5.png')}}" class="img-fluid mb-4" alt="">
+                                    <h5>Dynamics Stream</h5>
+                                    <h6>Dubai, United Arab Emirates</h6>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    
+                    </div>                    
                 </div>
             </div>
         </div>
@@ -325,3 +307,35 @@
     </section> -->
 </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+    <script>
+        $('#customers-testimonials').owlCarousel({
+            loop:true,
+            margin:10,
+            autoplay: false,
+            center: true,
+            smartSpeed: 700,
+            responsiveClass:true,
+            nav:false,
+            dots:false,
+            responsive: {
+                // breakpoint from 0 up
+                0: {
+                    items: 1,
+                    nav:false
+                },
+                // breakpoint from 480 up
+                600: {
+                    items: 2
+                },
+                // breakpoint from 768 up
+                768: {
+                    items: 3
+                }
+            }
+        })
+    </script>
+    
+@endpush

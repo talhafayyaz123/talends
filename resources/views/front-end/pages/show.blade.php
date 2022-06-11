@@ -10,7 +10,6 @@
 @section('description', "$meta_desc")
 
 @section('content')
-
 <div id="pages-list">
 
 
@@ -34,9 +33,9 @@
                                     <div class="content_box_wrapper">
                                         <div class="content_box home_page_banner_description">
                                             {!! $banner_settings->banner_description ?? '' !!}
-                                            <a href="{{ route('jobs') }}" class="btn btn-theme px-4 rounded-pill">Find a
+                                            <a href="{{ route('jobs') }}" class="btn btn-theme px-4 rounded-pill mt-4">Find a
                                                 Job</a>
-                                            <a href="#" class="btn btn-outline-theme px-4 rounded-pill">Submit a Project</a>
+                                            <a href="#" class="btn btn-outline-theme px-4 rounded-pill mt-4">Submit a Project</a>
                                         </div>
                                     </div>
                                 </div>
@@ -127,8 +126,8 @@
 
                     {!! $banner_settings->features_text ?? '' !!}
 
-                    <a href="#" class="btn btn-theme px-4 rounded-pill">I’m an Intern</a>
-                    <a href="#" class="btn btn-theme-white px-4 rounded-pill ml-md-3">I’m Hiring an Intern</a>
+                    <a href="#" class="btn btn-theme px-4 rounded-pill mt-3">I’m an Intern</a>
+                    <a href="#" class="btn btn-theme-white px-4 rounded-pill ml-md-3 mt-4">I’m Hiring an Intern</a>
                 </div>
                 <div class="col-md-5">
                     @if(isset( $banner_settings->talends_project_image) )
@@ -148,7 +147,7 @@
                             <h2>Featured Success Stories</h2>
                             <div class="carousel-item active">
                                 <div class="row fss_box_row fss_red_bg">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4 pri=md-0">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->about_talends_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->about_talends_image)}}"
@@ -156,7 +155,7 @@
                                         @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <div class="fss_box_content">
                                            {!! $featured_success_stories->banner_description ?? '' !!}
                                         </div>
@@ -165,7 +164,7 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="row fss_box_row fss_blue_bg">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->talends_project_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->talends_project_image)}}"
@@ -173,7 +172,7 @@
                                         @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <div class="fss_box_content">
                                         {!! $featured_success_stories->project_description ?? '' !!}
 
@@ -183,7 +182,7 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="row fss_box_row fss_blue_bg">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->talends_work_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->talends_work_image)}}"
@@ -191,7 +190,7 @@
                                         @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <div class="fss_box_content">
                                         {!! $featured_success_stories->work_description ?? '' !!}
 
@@ -201,7 +200,7 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="row fss_box_row fss_blue_bg">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->talends_payment_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->talends_payment_image)}}"
@@ -209,13 +208,9 @@
                                         @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <div class="fss_box_content">
-                                        
-                                        {!! $featured_success_stories->payment_description ?? '' !!}
-
-
-
+                                            {!! $featured_success_stories->payment_description ?? '' !!}
                                         </div>
                                     </div>
                                 </div>
@@ -246,16 +241,17 @@
                     @endif
                 </div>
                 <div class="col-lg-6 pb-3 align-self-center">
-
-                    {!! $banner_settings->services_description ?? '' !!}
-
-                    <div class="row align-items-center">
-                        <div class="col-lg-6 col-sm-6 col-12 text-center">
-                            <a href="javascript:;" class="btn btn-outline-theme px-4 rounded-pill">Join the community</a>
+                    <div class="why-choose">
+                        {!! $banner_settings->services_description ?? '' !!}
+                        <div class="row align-items-center">
+                            <div class="col-lg-6 col-sm-6 col-12 text-center">
+                                <a href="javascript:;" class="btn btn-outline-theme px-4 rounded-pill">Join the community</a>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-12 px-0 text-center text-md-left">
+                                <p class="mb-0 font-weight-bold">Support 24/7 <a class="ml-3" href="tel:052-768-4867">052-768-4867</a></p>
+                            </div>
                         </div>
-                        <div class="col-lg-6 col-sm-6 col-12 px-0 text-center text-md-left">
-                            <p class="mb-0 font-weight-bold">Support 24/7 <a class="ml-3" href="tel:052-768-4867">052-768-4867</a></p>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -272,7 +268,7 @@
                 </div>
                 <div class="col-md-8 order-md-1">
                     {!! $agency_profile->banner_description ?? '' !!}
-                    <a href="{{ route('whyAgencyPlan') }}" class="btn btn-theme-white px-4 rounded-pill ml-4">Create your Agency Profile</a>
+                    <a href="{{ route('whyAgencyPlan') }}" class="btn btn-theme-white px-4 rounded-pill ml-4 mt-4 mb-5">Create your Agency Profile</a>
                 </div>
             </div>
         </div>

@@ -908,10 +908,9 @@ a.notif {
     color: #ffffff;
     background-color: #349f1a;
     border:1px solid #349f1a;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1;
-    font-weight: bold;
-    padding:10px 15px;
+    padding:15px 20px;
     margin-bottom: 0.5rem;
     text-transform: capitalize;
 }
@@ -924,10 +923,10 @@ a.notif {
 .btn-theme-white{
     color: #349f1a;
     background-color: #ffffff;
-    border-color: #ffffff;
-    font-size: 18px;
-    font-weight: bold;
-    padding:10px 15px;
+    border:1px solid #ffffff;
+    font-size: 16px;
+    line-height: 1;
+    padding:15px 20px;
     margin-bottom: 0.5rem;
     text-transform: capitalize;
 }
@@ -941,9 +940,9 @@ a.notif {
     color: #349f1a;
     background-color: transparent;
     border:1px solid #349f1a;
-    font-size: 18px;
-    font-weight: bold;
-    padding:10px 15px;
+    font-size: 16px;
+    line-height: 1;
+    padding:15px 20px;
     margin-bottom: 0.5rem;
     text-transform: capitalize;
 }
@@ -1347,8 +1346,10 @@ a.notif {
 
 @media(max-width:630px){
     #hourly-dropdown{
-        right: 0;
         left: auto;
+    }
+    .freelancer_filters .wt-widgettitle{
+        padding: 12px 10px;
     }
 }
 @media(max-width:1100px){
@@ -1407,3 +1408,37 @@ a.notif {
         line-height: 22px;
     }
 }
+#my-signin3 .abcRioButtonBlue{
+    width:100% !important;
+    background-color: transparent;
+    border:1px solid #349f1a;
+    border-radius: 100px;
+    color: #349f1a;
+}
+.tooltip-link .tooltip-content {
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 3px 7px 0px rgb(0 0 0 / 15%);
+    border: 1px solid #eee;
+    display: none;
+    bottom: 30px;
+    left: 0;
+    width: 280px;
+    transition: all 0.3s;
+    padding: 5px;
+    border-radius: 5px;
+    color: #3e4959;
+    text-align: center;
+}
+.tooltip-link .tooltip-content::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 6px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 10px solid #ffffff;
+}
+.tooltip-link:hover .tooltip-content{display:block;}

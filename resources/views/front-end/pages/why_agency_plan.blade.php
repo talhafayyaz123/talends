@@ -170,7 +170,7 @@ Why Join Agency Plan
                     </div>
 
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-5 text-md-right text-center">
                     @if( isset($why_agency_plan->talends_work_image ))
                     
                     <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->talends_work_image)}}" >
@@ -182,21 +182,22 @@ Why Join Agency Plan
     <div class="talends-plan">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 px-md-0">
+                <div class="col-md-10 mx-auto px-md-0">
                     <div class="plan-content">
                         <div class="table-responsive-lg">
-                            <table class="table table-borderless mb-0">
+                            <table class="table mb-0">
                                 <thead>
                                     <tr>
                                         <th class="col-desc">What You’ll Get PRICE($)</th>
-                                        <th class="bg-light col-plan1 border-right border-success">
+                                        <th class="col-plan1">
                                             <div class="plan-title">                                            
-                                                <h4> <span><img src="{{asset('uploads/home-pages/why_agency_plan/plan-icon.png')}}" alt="Plan Icon" width="30" class="img-fluid mr-2"></span> Monthly Pass </h4>
+                                                <h5> <span><img src="{{asset('uploads/home-pages/why_agency_plan/plan-icon.png')}}" alt="Plan Icon" width="30" class="img-fluid mr-2"></span><b>$45</b> Monthly </h5>
                                             </div>
                                         </th>
-                                        <th class="bg-light col-plan2">
-                                            <div class="plan-title">                                            
-                                                <h4><span><img src="{{asset('uploads/home-pages/why_agency_plan/plan-icon.png')}}" alt="Plan Icon" width="30" class="img-fluid mr-2"></span> Yearly Pass <button class="btn">Save $144</button></h4>
+                                        <th class="col-plan2">
+                                            <div class="plan-title d-flex align-items-center justify-content-center">                                            
+                                                <h5><span><img src="{{asset('uploads/home-pages/why_agency_plan/plan-icon.png')}}" alt="Plan Icon" width="30" class="img-fluid mr-2"></span><b>$45</b> Yearly</h5>
+                                                <button class="btn ml-2">Save $144</button>
                                             </div>
                                         </th>
                                     </tr>
@@ -204,57 +205,50 @@ Why Join Agency Plan
                                 <tbody>
                                     <tr>
                                         <td><i class="bi-check-circle-fill mr-2"></i> Number of Featured Services</td>
-                                        <td class="text-center bg-light border-right border-success">2</td>
-                                        <td class="text-center bg-light">5</td>
+                                        <td class="text-center">2</td>
+                                        <td class="text-center">5</td>
                                     </tr>
                                     <tr>
                                         <td><i class="bi-check-circle-fill mr-2"></i> Number of Skills</td>
-                                        <td class="text-center bg-light border-right border-success">10</td>
-                                        <td class="text-center bg-light">15</td>
+                                        <td class="text-center">10</td>
+                                        <td class="text-center  ">15</td>
                                     </tr>
                                     <tr>
                                         <td><i class="bi-check-circle-fill mr-2"></i> Package duration</td>
-                                        <td class="text-center bg-light border-right border-success">Monthly</td>
-                                        <td class="text-center bg-light">Yearly</td>
+                                        <td class="text-center">Monthly</td>
+                                        <td class="text-center">Yearly</td>
                                     </tr>
                                     <tr>
                                         <td><i class="bi-check-circle-fill mr-2"></i> Certified Member Badge</td>
-                                        <td class="text-center bg-light border-right border-success">Gold</td>
-                                        <td class="text-center bg-light">Bronze</td>
+                                        <td class="text-center">Gold</td>
+                                        <td class="text-center  ">Bronze</td>
                                     </tr>
                                     <tr>
                                         <td><i class="bi-check-circle-fill mr-2"></i> Your own landing page with CMS</td>
-                                        <td class="text-center bg-light border-right border-success"><i class="fa fa-check text-theme"></i></td>
-                                        <td class="text-center bg-light"><i class="fa fa-check text-theme"></i></td>
+                                        <td class="text-center"><i class="fa fa-check text-theme"></i></td>
+                                        <td class="text-center  "><i class="fa fa-check text-theme"></i></td>
                                     </tr>
                                     <tr>
                                         <td><i class="bi-check-circle-fill mr-2"></i> Dedicated Support</td>
-                                        <td class="text-center bg-light border-right border-success"><i class="fa fa-check text-theme"></i></td>
-                                        <td class="text-center bg-light"><i class="fa fa-check text-theme"></i></td>
+                                        <td class="text-center"><i class="fa fa-check text-theme"></i></td>
+                                        <td class="text-center  "><i class="fa fa-check text-theme"></i></td>
                                     </tr>                               
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <td></td>
-                                        <td class="bg-light border-right border-success">
-                                            <div class="plan-actions">
-                                                <div class="d-flex justify-content-between">
-                                                    <p><b>$60</b>/Month</p>
-                                                    <p class="small text-muted">Cancel anytime</p>
-                                                </div>
+                                        <td>
+                                            <div class="plan-actions text-center">
+                                                <p class="small text-muted">Cancel anytime</p>
                                                 <a href="javascript:;" class="btn btn-block py-3">Choose</a>
                                             </div>
                                         </td>
-                                        <td class="bg-light">
-                                            <div class="plan-actions">
-                                                <div class="d-flex justify-content-between">
-                                                    <p><b>$60</b>/Month</p>
-                                                    <p class="small text-muted">Cancel anytime</p>
-                                                </div>
+                                        <td>
+                                            <div class="plan-actions text-center">
+                                                <p class="small text-muted">Cancel anytime</p>
                                                 <a href="javascript:;" class="btn btn-block py-3">Choose</a>
                                             </div>
-                                        </td>
-                                        
+                                        </td>                                        
                                     </tr>
                                 </tfoot>
                             </table>
@@ -365,7 +359,7 @@ Why Join Agency Plan
             <div class="row justify-content-center">
                 <div class="col-md-12 theme_bg_dark text-center text-white custom-banner">
                     {!! $why_agency_plan->internees_benefits ?? '' !!}
-                    <a href="#" class="btn btn-theme-white rounded-pill px-4">Register your Agecny</a>
+                    <a href="#" class="btn btn-theme-white rounded-pill px-4 mt-4">Register your Agency</a>
                 </div>
             </div>
         </div>

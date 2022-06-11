@@ -1014,16 +1014,6 @@ a.notif {
 .company_talends_filter_wrap .multiselect-container .multiselect-all .form-check-label {
 	font-size: 13px;
 }
-
-/* .company_talends_filter > span  select,
-  .company_talends_filter > select,
-  .company_talends_filter >  .filter-btns  button{
-	width: auto;
-    min-width: 168px;
-    padding: 15px 0;
-    position: relative;
-  } */
-
 .company_talends_filter_wrap .custom-select,
 .company_talends_filter>select.form-control,
 .company_talends_filter_wrap .theme_btn.inverse_btn {
@@ -1101,12 +1091,12 @@ a.notif {
 }
 
 .note-section p, .note-row p {
-	font-size: 28px;
-	line-height: 1.2;
-	color: #fff;
-	padding: 1em 5em 0 1em;
+    font-size: 46px;
+    line-height: 1.2;
+    color: #fff;
+    padding: 1em 1em 0 1em;
+    font-family: joan;
 }
-
 .note-section .img-wrap>img {
 	width: 100%;
 	display: block;
@@ -1231,6 +1221,10 @@ a.notif {
 
 /* Abdul Manan's css */
 /* Agency Page */
+.why-choose h2{
+	font-size: 54px;
+	line-height: 1.2;
+}
 .content_box_wrapper h2{
 	line-height: 1;
 	margin-bottom: 30px;
@@ -1255,10 +1249,9 @@ a.notif {
     color: #ffffff;
     background-color: #349f1a;
     border:1px solid #349f1a;
-    font-size: 18px;
-	line-height: 1;
-    font-weight: bold;
-    padding:10px 15px;
+    font-size: 16px;
+    line-height: 1;
+    padding:15px 20px;
     margin-bottom: 0.5rem;
     text-transform: capitalize;
 }
@@ -1271,11 +1264,10 @@ a.notif {
 .btn-theme-white{
     color: #349f1a;
     background-color: #ffffff;
-    border-color: #ffffff;
-    font-size: 18px;
+    border:1px solid #ffffff;
+    font-size: 16px;
 	line-height: 1;
-    font-weight: bold;
-    padding:10px 15px;
+    padding:15px 20px;
     margin-bottom: 0.5rem;
     text-transform: capitalize;
 }
@@ -1289,10 +1281,9 @@ a.notif {
     color: #349f1a;
     background-color: transparent;
     border:1px solid #349f1a;
-    font-size: 18px;
+    font-size: 16px;
 	line-height: 1;
-    font-weight: bold;
-    padding:10px 15px;
+    padding:15px 20px;
     margin-bottom: 0.5rem;
     text-transform: capitalize;
 }
@@ -1301,6 +1292,13 @@ a.notif {
     background-color: #349f1a;
     border-color: #349f1a;
 }
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #349f1a;
+    border-color: #349f1a;
+}
+.page-link{color: #349f1a;}
 .filter-dropdown .btn {
     border: 1px solid #ced4da;
     color: #62676b;
@@ -1320,7 +1318,6 @@ a.notif {
 }
 .demand_services h2{
 	font-style: normal;
-	font-weight: 700;
 	font-size: 20px;
 	line-height: 24px;
 	letter-spacing: -0.03em;
@@ -1407,6 +1404,7 @@ a.notif {
 	line-height: 1.5;
 	font-style: normal;
 	color: #166702;
+	font-family: 'Joan';
 }
 .company-detail-content .accordion{
 	background: #F8FAF7;
@@ -1824,7 +1822,7 @@ a.notif {
 .testimonial-content-box .carousel-content p{
 	position: relative;
 	background-color: #ffffff;
-	padding: 15px;
+	padding: 15px 25px;
 	border-radius: 16px;
 	color: #2f2f2f;
 	line-height: 1.3;
@@ -1849,6 +1847,18 @@ a.notif {
 }
 .testimonial-content-box .carousel-content .author-detail h6{
 	color: rgba(255,255,255,0.6);
+}
+.testimonial-content-box .carousel-content img {
+    width: 100px !important;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+#customers-testimonials .owl-item.active .carousel-content{
+	opacity: 0.5;
+}
+#customers-testimonials .owl-item.active.center .carousel-content{
+	opacity: 1;
 }
 .form-sec .content-box h2{
 	font-size: 36px;
@@ -1944,12 +1954,12 @@ a.notif {
 }
 /* Plans Section */
 .talends-plan{
-	padding: 4rem 0;
+	padding: 1rem 0 4rem;
 }
 .talends-plan .plan-content{
-	border: 3px solid #2E6434;
+	border: 1px solid #349f1a;
 	border-radius: 16px;
-	padding: 30px;
+	padding: 10px;
 }
 .talends-plan .plan-content .col-desc{width: 40%;}
 .talends-plan .plan-content .col-plan1{width: 30%;}
@@ -1963,6 +1973,7 @@ a.notif {
 	border-color: #2E6434;
 	border-radius: 9px;
 	color: #ffffff;
+	padding: 7px 10px;
 }
 .talends-plan .plan-content .bg-light {
     background-color: #e1ffd8 !important;
@@ -1970,9 +1981,13 @@ a.notif {
 .talends-plan .plan-content .table td, 
 .talends-plan .plan-content .table th{
 	vertical-align: middle;
+	padding: 0.72rem;
+	border-top: 1px solid #f6fff3;
+}
+.talends-plan .plan-content .table th{
+	border: 0;border-bottom: 1px solid #1f7a08;
 }
 .talends-plan .plan-content .plan-actions{
-	border-top: 1px dashed #dedede;
 	padding-top: 10px;
 }
 @media (max-width:768px) {
@@ -1988,7 +2003,8 @@ a.notif {
 	.stepper-container h2,
 	.plan-banner h2,
 	.plan-theme-list-sec .content-box h3,
-	.flex-plans-sec h3 {
+	.flex-plans-sec h3,
+	.flex-plans-sec h2 {
 		font-size: 32px;
 		line-height: 1.2;
 	}
@@ -1998,6 +2014,7 @@ a.notif {
 	.skill-tags ul{
 		padding: 0;
 	}
+	.t-checklist > li{width: 100%;}
 	.radio-control .custom-control-input{
 		left: 27px;
 	}
@@ -2031,4 +2048,53 @@ a.notif {
 	.talends-plan .plan-content .col-desc{width: auto;}
 	.talends-plan .plan-content .col-plan1{width: auto;}
 	.talends-plan .plan-content .col-plan2{width: auto;}
+}
+.tooltip-link .tooltip-content {
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 3px 7px 0px rgb(0 0 0 / 15%);
+    border: 1px solid #eee;
+    display: none;
+    bottom: 30px;
+    left: 0;
+    width: 280px;
+    transition: all 0.3s;
+    padding: 5px;
+    border-radius: 5px;
+    color: #3e4959;
+	text-align: center;
+}
+.tooltip-link .tooltip-content::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 6px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 10px solid #ffffff;
+}
+.tooltip-link:hover .tooltip-content{display:block;}
+.talend-tabs-container .nav-tabs{
+	border-bottom: 1px solid rgba(255,255,255,0.5);
+}
+.talend-tabs-container .nav-tabs .nav-link {
+    border: 0 !important;
+    background: transparent;
+    color: rgba(255,255,255,0.5);
+}
+.talend-tabs-container .nav-tabs .nav-item.show .nav-link, .talend-tabs-container .nav-tabs .nav-link.active {
+    /* border-bottom: 2px solid #349f1a !important; */
+    color: #ffffff;
+    /* border-color: #349f1a !important; */
+    background: #2d9215;
+    border-radius: 15px 15px 0 0;
+}
+.talend-tabs-container .services_list_box_row{
+	align-items: start;
+}
+.talend-tabs-container .services_list_box{
+	
+	color: rgba(255,255,255,0.5);
 }

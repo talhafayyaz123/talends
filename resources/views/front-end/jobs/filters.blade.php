@@ -33,7 +33,7 @@
             <a  onclick="toogle_price()">    
                 <div class="wt-widgettitle">
                     <span>{{ trans('lang.price_range') }}</span>
-                    <span class="filter_toogle1">  <i class="fa fa-angle-down ml-3" aria-hidden="true"></i></span>
+                    <span class="filter_toogle1 float-right">  <i class="fa fa-angle-down ml-3" aria-hidden="true"></i></span>
                 </div>
             </a>
 
@@ -69,7 +69,7 @@
             <a  onclick="toogle_categories()">  
                 <div class="wt-widgettitle">
                     <span>{{ trans('lang.cats') }}</span>
-                    <span class="filter_toogle1">  <i class="fa fa-angle-down ml-3" aria-hidden="true"></i></span>
+                    <span class="filter_toogle1 float-right">  <i class="fa fa-angle-down ml-3" aria-hidden="true"></i></span>
                 </div>
             </a>
 
@@ -106,7 +106,7 @@
             <a  onclick="toogle_location()">   
                 <div class="wt-widgettitle">
                     <span>{{ trans('lang.locations') }}</span>
-                    <span class="filter_toogle1">   <i class="fa fa-angle-down ml-3" aria-hidden="true"></i></span>
+                    <span class="filter_toogle1 float-right">   <i class="fa fa-angle-down ml-3" aria-hidden="true"></i></span>
                 </div>
             </a>
 
@@ -208,7 +208,7 @@
             <a  onclick="toogle_length()">
                 <div class="wt-widgettitle">
                     <span>{{ trans('lang.project_length') }}</span>
-                    <span class="filter_toogle1">   <i class="fa fa-angle-down ml-3" aria-hidden="true"></i></span>
+                    <span class="filter_toogle1 float-right">   <i class="fa fa-angle-down ml-3" aria-hidden="true"></i></span>
                 </div>
             </a>
 
@@ -249,7 +249,7 @@
             <a  onclick="toogle_language()"> 
                 <div class="wt-widgettitle">
                     <span>{{ trans('lang.langs') }}</span>
-                    <span class="filter_toogle1">  <i class="fa fa-angle-down ml-3" aria-hidden="true"></i></span>
+                    <span class="filter_toogle1 float-right">  <i class="fa fa-angle-down ml-3" aria-hidden="true"></i></span>
                 </div>
             </a>
             <div class="wt-widgetcontent job_language_filter" style="display: none;">
