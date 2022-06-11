@@ -136,6 +136,31 @@ class HomePagesController extends Controller
        
     }
 
+
+    public function findRightTalendsTestimonials()
+    {
+
+         $find_right_talend_testimonials=AboutTalendsPage::where('page_type','find-right-talend_testimonials')->first();
+        
+         if(empty($find_right_talend_testimonials)){
+            return view(
+                'back-end.admin.home-pages.find_right_talend_testimonials.create'
+            );
+    
+         }else{
+            $find_right_talend_testimonials=$find_right_talend_testimonials->toArray();
+        
+            return view(
+                'back-end.admin.home-pages.find_right_talend_testimonials.edit',
+                compact(
+                    'find_right_talend_testimonials'
+                )
+            ); 
+         }
+      
+       
+    }
+
     public function findRightTalends()
     {
 
@@ -323,6 +348,71 @@ class HomePagesController extends Controller
         $about_talends->savesFindRightTalends($request);
         Session::flash('message','About Talends Record Saved Successfully');
         return Redirect::back();
+    }
+
+
+    public function storeRightTalendsTestimonial(Request $request)
+    { 
+        $this->validate(
+            $request, [
+        'testimonial_title_1' => 'required',
+       'testimonial_description_1' => 'required',
+
+       'testimonial_title_2' => 'required',
+       'testimonial_description_2' => 'required',
+
+       'testimonial_title_3' => 'required',
+       'testimonial_description_3' => 'required',
+
+
+       'testimonial_title_4' => 'required',
+       'testimonial_description_4' => 'required',
+
+      
+        'about_talends_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_project_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_work_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_payment_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg'
+            ]
+        );
+       
+        $about_talends = new AboutTalendsPage;
+        $about_talends->storeRightTalendsTestimonial($request);
+        Session::flash('message','About Talends Record Saved Successfully');
+        return Redirect::back(); 
+    }
+
+
+    
+    public function updateRightTalendsTestimonial(Request $request,$id)
+    { 
+        $this->validate(
+            $request, [
+        'testimonial_title_1' => 'required',
+       'testimonial_description_1' => 'required',
+
+       'testimonial_title_2' => 'required',
+       'testimonial_description_2' => 'required',
+
+       'testimonial_title_3' => 'required',
+       'testimonial_description_3' => 'required',
+
+
+       'testimonial_title_4' => 'required',
+       'testimonial_description_4' => 'required',
+
+      
+        'about_talends_image' =>'image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_project_image'=>'image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_work_image'=>'image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_payment_image'=>'image|mimes:jpeg,png,jpg,gif,svg'
+            ]
+        );
+       
+        $about_talends = new AboutTalendsPage;
+        $about_talends->updateRightTalendsTestimonial($request,$id);
+        Session::flash('message','About Talends Record Saved Successfully');
+        return Redirect::back(); 
     }
 
     public function frontFooter($footer_type=''){
