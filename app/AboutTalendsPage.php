@@ -38,6 +38,184 @@ class AboutTalendsPage extends Model
     );
 
 
+    public function storeRightTalendsTestimonial($request)
+    {
+
+            if (!empty($request)) {
+            
+            $this->page_type = 'find-right-talend_testimonials';
+            $this->banner_description = $request['testimonial_title_1'];
+            $this->features_text = $request['testimonial_description_1'];
+            $this->services_description = $request['testimonial_title_2'];
+            $this->project_description = $request['testimonial_description_2'];
+            $this->work_description = $request['testimonial_title_3'];
+            $this->payment_description = $request['testimonial_description_3'];
+            $this->support_description = $request['testimonial_title_4'];
+            $this->freelancer_benefits = $request['testimonial_description_4'];
+
+            
+            
+         if (!empty($request->hasFile('about_talends_image'))) {
+                $about_talends_image = $request->file('about_talends_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial';
+                $imageName = time().'.'.$about_talends_image->getClientOriginalName();
+                $request->about_talends_image->move($new_path, $imageName);
+                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->about_talends_image = null;
+            }
+
+
+            if (!empty($request->hasFile('talends_project_image'))) {
+                $talends_project_image = $request->file('talends_project_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial';
+                $imageName = time().'.'.$talends_project_image->getClientOriginalName();
+                $request->talends_project_image->move($new_path, $imageName);
+                $this->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->talends_project_image = null;
+            }
+
+
+            if (!empty($request->hasFile('talends_work_image'))) {
+                $talends_work_image = $request->file('talends_work_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial';
+                $imageName = time().'.'.$talends_work_image->getClientOriginalName();
+                $request->talends_work_image->move($new_path, $imageName);
+                $this->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->talends_work_image = null;
+            }
+
+
+
+
+            if (!empty($request->hasFile('talends_payment_image'))) {
+                $talends_payment_image = $request->file('talends_payment_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial';
+                $imageName = time().'.'.$talends_payment_image->getClientOriginalName();
+                $request->talends_payment_image->move($new_path, $imageName);
+                $this->talends_payment_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->talends_payment_image = null;
+            }
+
+          
+
+           
+            $this->save();
+            $json['type'] = 'success';
+            $json['message'] = 'About Talends Record Created';
+            return $json;
+        }
+    }
+
+
+    public function updateRightTalendsTestimonial($request, $id)
+    {
+
+        if (!empty($request)) {
+            $about_talends = self::find($id);
+            $about_talends->banner_description = $request['testimonial_title_1'];
+            $about_talends->features_text = $request['testimonial_description_1'];
+            $about_talends->services_description = $request['testimonial_title_2'];
+            $about_talends->project_description = $request['testimonial_description_2'];
+            
+            $about_talends->work_description = $request['testimonial_title_3'];
+            $about_talends->payment_description = $request['testimonial_description_3'];
+            $about_talends->support_description = $request['testimonial_title_4'];
+            $about_talends->freelancer_benefits = $request['testimonial_description_4'];
+                
+
+            if (!empty($request->hasFile('about_talends_image'))) {
+                $about_talends_image = $request->file('about_talends_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial' . '/' . $request->hidden_about_talends_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial';
+                $imageName = time().'.'.$about_talends_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->about_talends_image->move($new_path, $imageName);
+                $about_talends->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $about_talends->about_talends_image = $request->hidden_about_talends_image;
+            }
+
+
+            if (!empty($request->hasFile('talends_project_image'))) {
+                $talends_project_image = $request->file('talends_project_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial' . '/' . $request->hidden_talends_project_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial' . '/' . $request->hidden_talends_project_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial';
+                $imageName = time().'.'.$talends_project_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->talends_project_image->move($new_path, $imageName);
+                $about_talends->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $about_talends->talends_project_image = $request->hidden_talends_project_image;
+            }
+
+
+            
+            if (!empty($request->hasFile('talends_work_image'))) {
+                $talends_work_image = $request->file('talends_work_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial' . '/' . $request->hidden_talends_work_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial' . '/' . $request->hidden_talends_work_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial';
+                $imageName = time().'.'.$talends_work_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->talends_work_image->move($new_path, $imageName);
+                $about_talends->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $about_talends->talends_work_image = $request->hidden_talends_work_image;
+            }
+
+
+            if (!empty($request->hasFile('talends_payment_image'))) {
+                $talends_payment_image = $request->file('talends_payment_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial' . '/' . $request->hidden_talends_payment_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial' . '/' . $request->hidden_talends_payment_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial';
+                $imageName = time().'.'.$talends_payment_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->talends_payment_image->move($new_path, $imageName);
+                $about_talends->talends_payment_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $about_talends->talends_payment_image = $request->hidden_talends_payment_image;
+            }
+
+
+
+
+
+
+            return $about_talends->save();
+        }
+    }
+
     public function savesFindRightTalends($request)
     {
 

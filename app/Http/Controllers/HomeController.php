@@ -302,11 +302,12 @@ class HomeController extends Controller
         $page = array();
         $home = false;
         $find_right_talends=AboutTalendsPage::where('page_type','find-right-talends')->first();
-      
+        $find_right_talend_testimonials=AboutTalendsPage::where('page_type','find-right-talend_testimonials')->first();
+
         $meta_desc = 'Find Right Talends';
         $page['title'] = 'Find Right Talends';
-       
-        return view('front-end.pages.find-right-talends',compact('page','meta_desc','find_right_talends'));
+      
+        return view('front-end.pages.find-right-talends',compact('page','meta_desc','find_right_talends','find_right_talend_testimonials'));
      }
 
 
@@ -573,6 +574,7 @@ class HomeController extends Controller
     $categories = Category::all();
     $featured_success_stories=AboutTalendsPage::where('page_type','featured_success_stories')->first();
     $agency_need_banner=AboutTalendsPage::where('page_type','agency_need_banner')->first();
+    
         
     $sub_categories='';
     if(!empty($request->get('category_id'))){

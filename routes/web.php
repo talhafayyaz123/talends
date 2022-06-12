@@ -345,6 +345,7 @@ Route::group(
        Route::get('admin/pages/why_agency_plan', 'HomePagesController@whyAgencyPlan')->name('adminWhyAgencyPlan');
 
        Route::get('admin/pages/find-right-talends', 'HomePagesController@findRightTalends')->name('findRightTalends');
+       Route::get('admin/pages/find-right-talend_testimonials', 'HomePagesController@findRightTalendsTestimonials')->name('findRightTalendsTestimonials');
        Route::post('admin/save-about-talends', 'HomePagesController@storeTalends');
        Route::post('admin/update-about-talends/{id}', 'HomePagesController@updateTalends');
 
@@ -357,6 +358,9 @@ Route::group(
 
 
        Route::post('admin/save-find-right-talends', 'HomePagesController@storeFindRightTalends');
+
+       Route::post('admin/save-right-talend_testimonial', 'HomePagesController@storeRightTalendsTestimonial');
+       Route::post('admin/update-right-talend_testimonial/{id}', 'HomePagesController@updateRightTalendsTestimonial');
 
         // Pages Routes
         Route::get('admin/pages', 'PageController@index')->name('pages');

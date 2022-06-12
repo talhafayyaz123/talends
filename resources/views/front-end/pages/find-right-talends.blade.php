@@ -153,56 +153,73 @@
                         <h2>We hired <span>they loved</span></h2>
                         <div id="testimonial-slider" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">
+
+                                 @if(isset($find_right_talend_testimonials) && !empty($find_right_talend_testimonials) )
                                 <div class="carousel-item active">
                                     <div class="carousel-content">
-                                        <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
+                                    <p>{{ $find_right_talend_testimonials['banner_description'] ?? ''  }}</p>
+
                                         <div class="author-detail text-center">
-                                            <img src="{{asset('uploads/home-pages/find-right-talends/user1.png')}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
-                                            <h5>Dynamics Stream</h5>
-                                            <h6>Dubai, United Arab Emirates</h6>
+                                            @if(isset($find_right_talend_testimonials['about_talends_image']))
+                                            <img src="{{asset('uploads/home-pages/right-talend_testimonial/'.$find_right_talend_testimonials['about_talends_image'])}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
+                                           @endif
+                                            {!! $find_right_talend_testimonials['features_text'] ?? ''  !!}
+
                                         </div>
                                     </div>
                                 </div>
+
+
                                 <div class="carousel-item">
                                     <div class="carousel-content">
-                                        <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
+                                    <p>{{ $find_right_talend_testimonials['services_description'] ?? ''  }}</p>
+
                                         <div class="author-detail text-center">
-                                            <img src="{{asset('uploads/home-pages/find-right-talends/user2.png')}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
-                                            <h5>Dynamics Stream</h5>
-                                            <h6>Dubai, United Arab Emirates</h6>
+                                            @if(isset($find_right_talend_testimonials['talends_project_image']))
+                                            <img src="{{asset('uploads/home-pages/right-talend_testimonial/'.$find_right_talend_testimonials['talends_project_image'])}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
+                                           @endif
+                                            {!! $find_right_talend_testimonials['project_description'] ?? ''  !!}
+
                                         </div>
                                     </div>
                                 </div>
+
+
                                 <div class="carousel-item">
                                     <div class="carousel-content">
-                                        <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
+                                    <p>{{ $find_right_talend_testimonials['work_description'] ?? ''  }}</p>
+
                                         <div class="author-detail text-center">
-                                            <img src="{{asset('uploads/home-pages/find-right-talends/user3.png')}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
-                                            <h5>Dynamics Stream</h5>
-                                            <h6>Dubai, United Arab Emirates</h6>
+                                            @if(isset($find_right_talend_testimonials['talends_work_image']))
+                                            <img src="{{asset('uploads/home-pages/right-talend_testimonial/'.$find_right_talend_testimonials['talends_work_image'])}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
+                                           @endif
+                                            {!! $find_right_talend_testimonials['payment_description'] ?? ''  !!}
+
                                         </div>
                                     </div>
                                 </div>
+
+
+
+                                
                                 <div class="carousel-item">
                                     <div class="carousel-content">
-                                        <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
+                                    <p>{{ $find_right_talend_testimonials['support_description'] ?? ''  }}</p>
+
                                         <div class="author-detail text-center">
-                                            <img src="{{asset('uploads/home-pages/find-right-talends/user4.png')}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
-                                            <h5>Dynamics Stream</h5>
-                                            <h6>Dubai, United Arab Emirates</h6>
+                                            @if(isset($find_right_talend_testimonials['talends_payment_image']))
+                                            <img src="{{asset('uploads/home-pages/right-talend_testimonial/'.$find_right_talend_testimonials['talends_payment_image'])}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
+                                           @endif
+                                            {!! $find_right_talend_testimonials['freelancer_benefits'] ?? ''  !!}
+
                                         </div>
                                     </div>
                                 </div>
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
-                                        <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
-                                        <div class="author-detail text-center">
-                                            <img src="{{asset('uploads/home-pages/find-right-talends/user5.png')}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
-                                            <h5>Dynamics Stream</h5>
-                                            <h6>Dubai, United Arab Emirates</h6>
-                                        </div>
-                                    </div>
-                                </div>
+                                
+                                @endif
+
+                               
+                                
                             </div>
                             <a class="carousel-control-prev" href="#testimonial-slider" role="button"
                                 data-slide="prev">
