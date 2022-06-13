@@ -2233,6 +2233,34 @@ class UserController extends Controller
         }
     }
 
+
+    public function raiseCompanyDispute($slug)
+    {
+        $breadcrumbs_settings = SiteManagement::getMetaValue('show_breadcrumb');
+        $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'true';
+        $job = Job::where('slug', $slug)->first();
+        $reasons = Arr::pluck(Helper::getReportReasons(), 'title', 'title');
+        if (file_exists(resource_path('views/extend/back-end/freelancer/jobs/dispute.blade.php'))) {
+            return View(
+                'extend.back-end.interne.jobs.dispute',
+                compact(
+                    'job',
+                    'reasons',
+                    'show_breadcrumbs'
+                )
+            );
+        } else {
+            return View(
+                'back-end.company.jobs.dispute',
+                compact(
+                    'job',
+                    'reasons',
+                    'show_breadcrumbs'
+                )
+            );
+        }
+    }
+
     /**
      * Raise dispute
      *

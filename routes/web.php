@@ -495,7 +495,9 @@ Route::group(
         Route::get('company/hiring_requests', 'CompanyController@companyHiringRequests')->name('companyHiringRequests');
         Route::get('company/hiring_request_detail/{id}', 'CompanyController@companyHiringRequestDetail')->name('companyHiringRequestDetail');
 
-        
+        Route::get('company/jobs/{status}', 'CompanyController@showCompanyJobs');
+        Route::get('company/job/{slug}', 'CompanyController@showOnGoingJobDetail')->name('showOnGoingCompanyJobDetail');
+        Route::get('company/dispute/{slug}', 'UserController@raiseCompanyDispute');
 
 
         Route::get('freelancer/profile', 'FreelancerController@index')->name('personalDetail');
