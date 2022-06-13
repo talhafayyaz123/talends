@@ -168,7 +168,7 @@ header .navbar {
 }
 
 header .navbar-brand {
-    padding: 10px 1px 10px 30px;
+    padding: 10px 0px 0px 0px;
 }
 
 header .navbar-brand img {
@@ -1589,9 +1589,9 @@ section.featured_success_stories_sec .carousel-inner {
 }
 
 section.featured_success_stories_sec .carousel-inner h2 {
-    font-size: 30px;
+    font-size: 36px;
     margin-bottom: 30px;
-    font-weight: bold;
+    
 }
 
 .featured_success_stories_sec .carousel-control-prev,
@@ -1639,12 +1639,12 @@ section.featured_success_stories_sec .carousel-inner h2 {
     color: white;
     margin-top: 0;
     margin-bottom: 10px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
 }
 
 .fss_box_row .fss_box_content h4 {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: normal;
 }
 
@@ -1681,12 +1681,12 @@ section.featured_success_stories_sec .carousel-inner h2 {
     line-height: 1;
 
 }
-.how_its_works_box_steps h3{
+.how_its_works_box_steps h3 {
     color: #8BF870;
     font-size: 36px;
     font-weight: bold;
-
-
+    font-family: joan;
+    text-transform: uppercase;
 }
 @media only screen and (max-width: 1280px) {
     header .navbar-brand img {

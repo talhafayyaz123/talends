@@ -7,6 +7,11 @@
 
 @section('content')
 
+@push('owlstyle')
+    <link href="{{ asset('css/prettyPhoto-min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet">
+@endpush
+
 <div id="pages-list">
 
 
@@ -221,19 +226,8 @@
                                
                                 
                             </div>
-                            <a class="carousel-control-prev" href="#testimonial-slider" role="button"
-                                data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#testimonial-slider" role="button"
-                                data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
                         </div>
-                    </div>
-                    
+                    </div>                    
                 </div>
             </div>
         </div>
