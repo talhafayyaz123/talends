@@ -184,6 +184,7 @@ return [
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         App\Providers\AmentotechServiceProvider::class,
         Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
