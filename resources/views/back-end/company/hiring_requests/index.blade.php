@@ -28,7 +28,8 @@
                                 <p class="small text-white mb-2"><i class="fa fa-envelope" aria-hidden="true"></i> {{$request->email}}</p>
                                 <p class="small text-white"><i class="fas fa-phone"></i> {{$request->phone_number}}</p>
                                 @if($role=='admin')
-                                    <a href="{{{ url('admin/hiring_request_detail/'.$request->id) }}}" class="btn-link text-white">View Details</a>
+                                    <!-- <a href="{{{ url('admin/hiring_request_detail/'.$request->id) }}}" class="btn-link text-white">View Details</a> -->
+                                    <a href="javascript:;" id="detailBtn" class="btn-link text-white">View Details</a>
                                 @else
                                     <a href="{{{ url('company/hiring_request_detail/'.$request->id) }}}" class="btn-link text-white">View Details</a>
                                 @endif
@@ -47,6 +48,7 @@
                 @endif
             </div>
             <div class="col-md-8 pt-4">
+                <div class="lead-detail" id="leadDetail" style="display:none ;">
                 <div class="mb-5 px-4">
                     <h4 class="text-white">Majid Al Futtaim</h4>
                     <p class="text-white">Mobile Application Development Additional Details/ Applications - business/ Required: Changes to that App that can do ecommerce</p>
@@ -73,6 +75,7 @@
                             <button class="btn btn-theme-white px-4 rounded-pill">Reject and Share response with Client</button>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -127,3 +130,11 @@
 </div>
 </section>
 @endsection
+
+@push('scripts')
+<script>
+    $("#detailBtn").click(function(){
+        $("#leadDetail").show();
+    });
+</script>
+@endpush
