@@ -27,13 +27,8 @@
                                 <h4 class="text-white">{{$request->company_name}}</h4>
                                 <p class="small text-white mb-2"><i class="fa fa-envelope" aria-hidden="true"></i> {{$request->email}}</p>
                                 <p class="small text-white"><i class="fas fa-phone"></i> {{$request->phone_number}}</p>
-                                @if($role=='admin')
-                                    <!-- <a href="{{{ url('admin/hiring_request_detail/'.$request->id) }}}" class="btn-link text-white">View Details</a> -->
-                                    <a href="javascript:;" id="detailBtn" class="btn-link text-white">View Details</a>
-                                    <a href="javascript:;" id="detailBtn2" class="btn-link text-white">View Details2</a>
-                                @else
-                                    <a href="{{{ url('company/hiring_request_detail/'.$request->id) }}}" class="btn-link text-white">View Details</a>
-                                @endif
+                                <a href="javascript:;" onclick="show_detail({{$request->id}})" id="detailBtn_{{$request->id}}" class="btn-link text-white">View Details</a>
+
                             </div>
                         @endforeach
                     @else
@@ -49,64 +44,70 @@
                 @endif
             </div>
             <div class="col-md-8 pt-4">
-                <div class="lead-detail" id="leadDetail" style="display:none ;">
+
+            @if(!empty($hiring_requests) && $hiring_requests->count() > 0 )
+             
+            @foreach ($hiring_requests as $request)
+
+                <div class="lead-detail" id="leadDetail_{{$request->id}}" style="display:none ;">
                     <div class="mb-5 px-4">
-                        <h4 class="text-white">Majid Al Futtaim</h4>
-                        <p class="text-white">Mobile Application Development Additional Details/ Applications - business/ Required: Changes to that App that can do ecommerce</p>
-                        <h6 class="text-white">Dubai <i class="bi-geo-alt-fill"></i></h6>
+                        <h4 class="text-white">Company Name</h4>
+                        <p class="text-white">{{ $request->company_name }}</p>
+                        <h6 class="text-white">Budget : AED {{ $request->budget }}</h6>
                     </div>
                     <div class="px-4 mb-5">
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="" class="text-white">Phone</label>
-                                <input type="text" class="form-control rounded-pill" placeholder="Phone Number"/>
-                            </div>
+                                <h4 class="text-white">Name</h4>
+                               <span  class="text-white"> {{ $request->full_name }} </span>
+                                </div>
                             <div class="col-md-6">
-                                <label for="" class="text-white">Email</label>
-                                <input type="email" class="form-control rounded-pill" placeholder="Email"/>
-                            </div>
+                                <h4 class="text-white">Email</h4>
+                                <span  class="text-white">  {{ $request->email }} </span>                          
+                             </div>
+                        </div>
+                    </div>
+
+                    <div class="px-4 mb-5">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="text-white">Phone</h4>
+                               <span  class="text-white"> {{ $request->phone_number }} </span>
+                                </div>
+                          
                         </div>
                     </div>
                     <div class="px-4 mb-5">
                         <div class="row">
                             <div class="col-md-12">
-                                <h4 class="text-white">Project Details</h4>
-                                <p class="text-white mb-4">We would like to develope an app We would like to develope an app We would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an app We would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an app We would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an app</p>
+                                <h4 class="text-white">Services</h4>
+                                <div class="skill-tags">
+                            
+                            <ul class="text-white">
+                               @if(!empty($request->detail))
+                               @php
+                                foreach(unserialize($request->detail) as $key=>$value){
+                                    $skill = \App\Skill::where('id', $value)->first()->title;  @endphp 
+                              
+                                    <li>{{ $skill }}</li>
+                                    @php  }
+                               @endphp
+    
+
+
+                                @endif
+                               </ul>
+                        </div>
                                 <button class="btn btn-theme-white px-4 rounded-pill">Accept & Send Messages</button>
                                 <button class="btn btn-theme-white px-4 rounded-pill">Reject and Share response with Client</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="lead-detail" id="leadDetail2" style="display:none ;">
-                    <div class="mb-5 px-4">
-                        <h4 class="text-white">Majid Jeera</h4>
-                        <p class="text-white">Mobile Application Development Additional Details/ Applications - business/ Required: Changes to that App that can do ecommerce</p>
-                        <h6 class="text-white">Dubai <i class="bi-geo-alt-fill"></i></h6>
-                    </div>
-                    <div class="px-4 mb-5">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="" class="text-white">Phone</label>
-                                <input type="text" class="form-control rounded-pill" placeholder="Phone Number"/>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="" class="text-white">Email</label>
-                                <input type="email" class="form-control rounded-pill" placeholder="Email"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="px-4 mb-5">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h4 class="text-white">Project Details</h4>
-                                <p class="text-white mb-4">We would like to develope an app We would like to develope an app We would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an app We would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an app We would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an app</p>
-                                <button class="btn btn-theme-white px-4 rounded-pill">Accept & Send Messages</button>
-                                <button class="btn btn-theme-white px-4 rounded-pill">Reject and Share response with Client</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                @endforeach
+                @endif
+               
             </div>
         </div>
         <!-- <div class="wt-freelancerholder">
@@ -163,12 +164,9 @@
 
 @push('scripts')
 <script>
-    $("#detailBtn").click(function(){
-        $("#leadDetail").show();
-    });
-    $("#detailBtn2").click(function(){
-        $("#leadDetail2").show();
-        $("#leadDetail").hide();
-    });
+  function show_detail(id){
+    $(".lead-detail").hide();
+    $("#leadDetail_"+id).show();
+  }
 </script>
 @endpush

@@ -278,12 +278,14 @@ class CompanyController extends Controller
         $role=Auth::user()->getRoleNames()[0];
            if( $role=='admin'){
             $hiring_requests=HireAgency::all();
-
+          
            }else{
                
             $hiring_requests=HireAgency::where('agency_id',Auth::user()->id)->get();
 
            }
+
+           
         return view(
             'back-end.company.hiring_requests.index',
             compact(
