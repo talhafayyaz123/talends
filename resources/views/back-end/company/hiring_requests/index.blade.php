@@ -30,6 +30,7 @@
                                 @if($role=='admin')
                                     <!-- <a href="{{{ url('admin/hiring_request_detail/'.$request->id) }}}" class="btn-link text-white">View Details</a> -->
                                     <a href="javascript:;" id="detailBtn" class="btn-link text-white">View Details</a>
+                                    <a href="javascript:;" id="detailBtn2" class="btn-link text-white">View Details2</a>
                                 @else
                                     <a href="{{{ url('company/hiring_request_detail/'.$request->id) }}}" class="btn-link text-white">View Details</a>
                                 @endif
@@ -49,33 +50,62 @@
             </div>
             <div class="col-md-8 pt-4">
                 <div class="lead-detail" id="leadDetail" style="display:none ;">
-                <div class="mb-5 px-4">
-                    <h4 class="text-white">Majid Al Futtaim</h4>
-                    <p class="text-white">Mobile Application Development Additional Details/ Applications - business/ Required: Changes to that App that can do ecommerce</p>
-                    <h6 class="text-white">Dubai <i class="bi-geo-alt-fill"></i></h6>
-                </div>
-                <div class="px-4 mb-5">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="" class="text-white">Phone</label>
-                            <input type="text" class="form-control rounded-pill" placeholder="Phone Number"/>
+                    <div class="mb-5 px-4">
+                        <h4 class="text-white">Majid Al Futtaim</h4>
+                        <p class="text-white">Mobile Application Development Additional Details/ Applications - business/ Required: Changes to that App that can do ecommerce</p>
+                        <h6 class="text-white">Dubai <i class="bi-geo-alt-fill"></i></h6>
+                    </div>
+                    <div class="px-4 mb-5">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="" class="text-white">Phone</label>
+                                <input type="text" class="form-control rounded-pill" placeholder="Phone Number"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="" class="text-white">Email</label>
+                                <input type="email" class="form-control rounded-pill" placeholder="Email"/>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <label for="" class="text-white">Email</label>
-                            <input type="email" class="form-control rounded-pill" placeholder="Email"/>
+                    </div>
+                    <div class="px-4 mb-5">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="text-white">Project Details</h4>
+                                <p class="text-white mb-4">We would like to develope an app We would like to develope an app We would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an app We would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an app We would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an app</p>
+                                <button class="btn btn-theme-white px-4 rounded-pill">Accept & Send Messages</button>
+                                <button class="btn btn-theme-white px-4 rounded-pill">Reject and Share response with Client</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="px-4 mb-5">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4 class="text-white">Project Details</h4>
-                            <p class="text-white mb-4">We would like to develope an app We would like to develope an app We would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an app We would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an app We would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an app</p>
-                            <button class="btn btn-theme-white px-4 rounded-pill">Accept & Send Messages</button>
-                            <button class="btn btn-theme-white px-4 rounded-pill">Reject and Share response with Client</button>
+                <div class="lead-detail" id="leadDetail2" style="display:none ;">
+                    <div class="mb-5 px-4">
+                        <h4 class="text-white">Majid Jeera</h4>
+                        <p class="text-white">Mobile Application Development Additional Details/ Applications - business/ Required: Changes to that App that can do ecommerce</p>
+                        <h6 class="text-white">Dubai <i class="bi-geo-alt-fill"></i></h6>
+                    </div>
+                    <div class="px-4 mb-5">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="" class="text-white">Phone</label>
+                                <input type="text" class="form-control rounded-pill" placeholder="Phone Number"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="" class="text-white">Email</label>
+                                <input type="email" class="form-control rounded-pill" placeholder="Email"/>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="px-4 mb-5">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="text-white">Project Details</h4>
+                                <p class="text-white mb-4">We would like to develope an app We would like to develope an app We would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an app We would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an app We would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an appWe would like to develope an app</p>
+                                <button class="btn btn-theme-white px-4 rounded-pill">Accept & Send Messages</button>
+                                <button class="btn btn-theme-white px-4 rounded-pill">Reject and Share response with Client</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -135,6 +165,10 @@
 <script>
     $("#detailBtn").click(function(){
         $("#leadDetail").show();
+    });
+    $("#detailBtn2").click(function(){
+        $("#leadDetail2").show();
+        $("#leadDetail").hide();
     });
 </script>
 @endpush
