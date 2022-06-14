@@ -191,13 +191,17 @@ Why Join Agency Plan
                                         <th class="col-desc">What You’ll Get PRICE($)</th>
                                         <th class="col-plan1">
                                             <div class="plan-title">                                            
-                                                <h5> <span><img src="{{asset('uploads/home-pages/why_agency_plan/plan-icon.png')}}" alt="Plan Icon" width="30" class="img-fluid mr-2"></span><b>$45</b> Monthly </h5>
+                                                <h5> 
+                                                    <!-- <span><img src="{{asset('uploads/home-pages/why_agency_plan/plan-icon.png')}}" alt="Plan Icon" width="30" class="img-fluid mr-2"></span> -->
+                                                <b>${{ $package[0]->cost ?? '0' }}</b> Monthly </h5>
                                             </div>
                                         </th>
                                         <th class="col-plan2">
                                             <div class="plan-title d-flex align-items-center justify-content-center">                                            
-                                                <h5><span><img src="{{asset('uploads/home-pages/why_agency_plan/plan-icon.png')}}" alt="Plan Icon" width="30" class="img-fluid mr-2"></span><b>$45</b> Yearly</h5>
-                                                <button class="btn ml-2">Save $144</button>
+                                                <h5>
+                                                    <!-- <span><img src="{{asset('uploads/home-pages/why_agency_plan/plan-icon.png')}}" alt="Plan Icon" width="30" class="img-fluid mr-2"></span> -->
+                                                    <b>${{ $package[1]->cost ?? '0' }}</b> Yearly</h5>
+                                               
                                             </div>
                                         </th>
                                     </tr>
