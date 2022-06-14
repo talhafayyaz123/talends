@@ -2016,7 +2016,7 @@ body.wt-login .wt-userlogedin {
 }
 
 .wt-userlogedin:hover .wt-usernav {
-	top: 35px;
+	top: 60px;
 	opacity: 1;
 	visibility: visible;
 }

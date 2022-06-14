@@ -35,7 +35,7 @@ $slider = Helper::getPageSlider($page_id);
 {{Helper::displayVerificationWarning()}}
 @endauth
 
-<header id="wt-header" class="wt-haslayout {{$inner_header}}">
+<header id="wt-header" class="wt-haslayout {{$inner_header}} fixed-top border-bottom">
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand" href="{{ route('home') }}">
@@ -190,51 +190,48 @@ $slider = Helper::getPageSlider($page_id);
                     @endguest
 
                     @auth
-                    <li class="nav-item">
+                    
 
                         @php
-                        $user = !empty(Auth::user()) ? Auth::user() : '';
-                        $role = !empty($user) ? $user->getRoleNames()->first() : array();
-                        $profile = \App\User::find(Auth::user()->id)->profile;
-                        $user_image = !empty($profile) ? $profile->avater : '';
-                        $employer_job = \App\Job::select('status')->where('user_id', Auth::user()->id)->first();
-                        $profile_image = !empty($user_image) ? '/uploads/users/'.$user->id.'/'.$user_image : 'images/user-login.png';
-                        $payment_settings = \App\SiteManagement::getMetaValue('commision');
-                        $payment_module = !empty($payment_settings) && !empty($payment_settings[0]['enable_packages']) ? $payment_settings[0]['enable_packages'] : 'true';
-                        $employer_payment_module = !empty($payment_settings) && !empty($payment_settings[0]['employer_package']) ? $payment_settings[0]['employer_package'] : 'true';
-                        $total_hire_agencies = \App\HireAgency::select('is_seen')->where('is_seen', 0)->count();
+                            $user = !empty(Auth::user()) ? Auth::user() : '';
+                            $role = !empty($user) ? $user->getRoleNames()->first() : array();
+                            $profile = \App\User::find(Auth::user()->id)->profile;
+                            $user_image = !empty($profile) ? $profile->avater : '';
+                            $employer_job = \App\Job::select('status')->where('user_id', Auth::user()->id)->first();
+                            $profile_image = !empty($user_image) ? '/uploads/users/'.$user->id.'/'.$user_image : 'images/user-login.png';
+                            $payment_settings = \App\SiteManagement::getMetaValue('commision');
+                            $payment_module = !empty($payment_settings) && !empty($payment_settings[0]['enable_packages']) ? $payment_settings[0]['enable_packages'] : 'true';
+                            $employer_payment_module = !empty($payment_settings) && !empty($payment_settings[0]['employer_package']) ? $payment_settings[0]['employer_package'] : 'true';
+                            $total_hire_agencies = \App\HireAgency::select('is_seen')->where('is_seen', 0)->count();
 
                         @endphp
+                        @if( $role === 'admin' || $role === 'company' )
+                            <li class="nav-item">
+                                <a class="nav-link position-relative" href="javascript:;">
+                                    <i class="fa fa-bell text-theme fa-2x"></i>
+                                    <span class="badge badge-warning" style="position: absolute; right: -5px; top: 0px;">{{$total_hire_agencies }}</span>
+                                </a>
+                            </li>
+                            <!-- <li class="nav-item">
+                                <div class="wt-username">
+                                    <a  class="notif"><span class="num">{{$total_hire_agencies }}</span></a>
+                                </div>
+                            </li> -->
+                        @endif
+                    <li  class="nav-item">
                         <div class="wt-userlogedin back-end-header">
-                            <figure class="wt-userimg">
-                                <img src="{{{ asset(Helper::getImage('uploads/users/' . Auth::user()->id, $profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}"/> 
-                            </figure>
-                            <div class="wt-username">
-                                <h3>{{{ Helper::getUserName(Auth::user()->id) }}}</h3>
-                                <span>{{{ !empty(Auth::user()->profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Helper::getAuthRoleName() }}}</span>
+                            <div class="d-flex align-items-center">
+                                <img src="{{{ asset(Helper::getImage('uploads/users/' . Auth::user()->id, $profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}" width="40px" class="img-fluid rounded-circle"/> 
+                                <div class="ml-2">
+                                    <h5 class="mb-0">{{{ Helper::getUserName(Auth::user()->id) }}} <i class="fa fa-caret-down float-right ml-3 mt-1" style="font-size:20px;"></i></h5>
+                                    <span>{{{ !empty(Auth::user()->profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Helper::getAuthRoleName() }}}</span>
+
+                                </div>
                             </div>
                             @include('back-end.includes.profile-menu')
                         </div>
                     </li>
-                    @if( $role === 'admin' || $role === 'company' )
-                    <li class="nav-item dropdown">
-                        <a class="nav-link position-relative" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-bell text-theme fa-2x"></i>
-                            <span class="badge badge-warning" style="position: absolute; right: -5px; top: 0px;">{{$total_hire_agencies }}</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                    <!-- <li class="nav-item">
-                        <div class="wt-username">
-                            <a  class="notif"><span class="num">{{$total_hire_agencies }}</span></a>
-                        </div>
-                    </li> -->
-                        @endif
+                   
                     @endauth
                 </ul>
             </div>

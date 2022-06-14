@@ -147,7 +147,7 @@
                             <h2>Featured Success Stories</h2>
                             <div class="carousel-item active">
                                 <div class="row fss_box_row fss_red_bg">
-                                    <div class="col-md-4 pri=md-0">
+                                    <div class="col-md-4 pr-md-0 d-none d-md-block">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->about_talends_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->about_talends_image)}}"
@@ -164,7 +164,7 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="row fss_box_row fss_blue_bg">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 pr-md-0 d-none d-md-block">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->talends_project_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->talends_project_image)}}"
@@ -182,7 +182,7 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="row fss_box_row fss_blue_bg">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 pr-md-0 d-none d-md-block">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->talends_work_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->talends_work_image)}}"
@@ -200,7 +200,7 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="row fss_box_row fss_blue_bg">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 pr-md-0 d-none d-md-block">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->talends_payment_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->talends_payment_image)}}"
