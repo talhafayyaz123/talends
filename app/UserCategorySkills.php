@@ -14,4 +14,9 @@ class UserCategorySkills extends Model
         'user_id' ,
         'skill_id',
     );
+
+    public function skill()
+    {
+        return $this->belongsTo('App\Skill');
+    }
 }

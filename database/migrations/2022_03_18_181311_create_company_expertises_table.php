@@ -17,8 +17,23 @@ class CreateCompanyExpertisesTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->longText('description');
+
             $table->longText('portfolio_detail');
             $table->string('portfolio_image');
+
+
+            $table->longText('portfolio_detail_2');
+            $table->string('portfolio_image_2');
+
+
+            $table->longText('portfolio_detail_3');
+            $table->string('portfolio_image_3');
+
+
+            $table->longText('portfolio_detail_4');
+            $table->string('portfolio_image_4');
+
+
             $table->timestamps();
         });
     }

@@ -79,6 +79,70 @@
                                 </div>
 
                             </div>
+
+                            <div class="wt-tabscontenttitle">
+                                <h2>Portfolio Detail 2</h2>
+                            </div>
+
+                            <div class="wrap-search wt-haslayout">
+                                <fieldset>
+                                {!! Form::textarea('portfolio_detail_2', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+
+                                </fieldset>
+
+                                <div class="wt-attachmentsholder">
+                                    <div class="lara-attachment-files">
+                                        <div class="wt-tabscontenttitle">
+                                            <h2>Attachment 2</h2>
+
+                                            <div class="form-group form-group-label">
+                                                <div class="wt-labelgroup">
+                                                    <input type="file" value="" class="" name="portfolio_image_2" id='portfolio_image_2'>
+
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="wt-tabscontenttitle">
+                                <h2>Portfolio Detail 3</h2>
+                            </div>
+
+                            <div class="wrap-search wt-haslayout">
+                                <fieldset>
+                                {!! Form::textarea('portfolio_detail_3', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+
+                                </fieldset>
+
+                                <div class="wt-attachmentsholder">
+                                    <div class="lara-attachment-files">
+                                        <div class="wt-tabscontenttitle">
+                                            <h2>Attachment 3</h2>
+
+                                            <div class="form-group form-group-label">
+                                                <div class="wt-labelgroup">
+                                                    <input type="file" value="" class="" name="portfolio_image_3" id='portfolio_image_3'>
+
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
                         
                             @else
 
@@ -124,6 +188,95 @@
                             </div>
 
 
+                            <div class="wt-tabscontenttitle">
+                                <h2>Portfolio Detail 2</h2>
+                            </div>
+                          
+                            <div class="wrap-search wt-haslayout">
+                                <fieldset>
+                                {!! Form::textarea('portfolio_detail_2', e($company_expertise['portfolio_detail_2']), ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+
+                                </fieldset>
+
+                                <div class="wt-attachmentsholder">
+                                    <div class="lara-attachment-files">
+                                        <div class="wt-tabscontenttitle">
+                                            <h2>Attachment 2</h2>
+
+                                            <div class="form-group form-group-label">
+                                                <div class="wt-labelgroup">
+                                                    <input type="file" value="" class="" name="portfolio_image_2" id='portfolio_image_2'>
+
+
+                                                </div>
+                                            </div>
+
+
+                                            @if (!empty($company_expertise['portfolio_image_2']))
+                                            @php $image = '/uploads/company/'.$company_expertise['portfolio_image_2']; @endphp
+                                            <div class="wt-formtheme wt-userform">
+
+                                                <div class="wt-uploadingbox">
+                                                    <figure><img src="{{{  asset($image)}}}" alt="{{{ trans('lang.profile_photo') }}}"></figure>
+
+                                                </div>
+                                                <input type="hidden" name="hidden_portfolio_image_2" id="hidden_portfolio_image_2" value="{{{$company_expertise['portfolio_image_2']}}}">
+                                            </div>
+                                            @endif
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="wt-tabscontenttitle">
+                                <h2>Portfolio Detail 3</h2>
+                            </div>
+                          
+                            <div class="wrap-search wt-haslayout">
+                                <fieldset>
+                                {!! Form::textarea('portfolio_detail_3', e($company_expertise['portfolio_detail_3']), ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+
+                                </fieldset>
+
+                                <div class="wt-attachmentsholder">
+                                    <div class="lara-attachment-files">
+                                        <div class="wt-tabscontenttitle">
+                                            <h2>Attachment 3</h2>
+
+                                            <div class="form-group form-group-label">
+                                                <div class="wt-labelgroup">
+                                                    <input type="file" value="" class="" name="portfolio_image_3" id='portfolio_image_3'>
+
+
+                                                </div>
+                                            </div>
+
+
+                                            @if (!empty($company_expertise['portfolio_image_3']))
+                                            @php $image = '/uploads/company/'.$company_expertise['portfolio_image_3']; @endphp
+                                            <div class="wt-formtheme wt-userform">
+
+                                                <div class="wt-uploadingbox">
+                                                    <figure><img src="{{{  asset($image)}}}" alt="{{{ trans('lang.profile_photo') }}}"></figure>
+
+                                                </div>
+                                                <input type="hidden" name="hidden_portfolio_image_3" id="hidden_portfolio_image_3" value="{{{$company_expertise['portfolio_image_3']}}}">
+                                            </div>
+                                            @endif
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
                             @endif
 
 
@@ -158,6 +311,19 @@
                                                 {!! Form::select('expertise['.$counter.'][categories][]', $categories, $value['categories'], array('class' => 'chosen-select', 'multiple', 'data-placeholder' => trans('lang.select_job_cats'))) !!}
 
                                         </div>
+
+
+                                        <div class="wt-jobskills wt-tabsinfo">
+                                            <div class="wt-tabscontenttitle">
+                                                <h2>Description</h2>
+                                            </div>
+
+                                                {!! Form::textarea('expertise['.$counter.'][description][]', $value['description'][0], ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+
+                                        </div>
+
+
+
 
                                         <div class="form-group wt-rightarea">
                                             @if ($unserialize_key == 0 )
@@ -202,6 +368,16 @@
                                                 <h2>Categories</h2>
                                             </div>
                                                 {!! Form::select('expertise[0][categories][]', $categories, '', array('class' => 'chosen-select', 'multiple', 'data-placeholder' => trans('lang.select_job_cats'))) !!}
+
+                                        </div>
+
+
+                                        <div class="wt-jobskills wt-tabsinfo">
+                                            <div class="wt-tabscontenttitle">
+                                                <h2>Description</h2>
+                                            </div>
+                                            
+                                            {!! Form::textarea('expertise[0][description][]', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
 
                                         </div>
 

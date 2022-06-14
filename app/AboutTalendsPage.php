@@ -38,6 +38,184 @@ class AboutTalendsPage extends Model
     );
 
 
+    public function storeRightTalendsTestimonial($request)
+    {
+
+            if (!empty($request)) {
+            
+            $this->page_type = 'find-right-talend_testimonials';
+            $this->banner_description = $request['testimonial_title_1'];
+            $this->features_text = $request['testimonial_description_1'];
+            $this->services_description = $request['testimonial_title_2'];
+            $this->project_description = $request['testimonial_description_2'];
+            $this->work_description = $request['testimonial_title_3'];
+            $this->payment_description = $request['testimonial_description_3'];
+            $this->support_description = $request['testimonial_title_4'];
+            $this->freelancer_benefits = $request['testimonial_description_4'];
+
+            
+            
+         if (!empty($request->hasFile('about_talends_image'))) {
+                $about_talends_image = $request->file('about_talends_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial';
+                $imageName = time().'.'.$about_talends_image->getClientOriginalName();
+                $request->about_talends_image->move($new_path, $imageName);
+                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->about_talends_image = null;
+            }
+
+
+            if (!empty($request->hasFile('talends_project_image'))) {
+                $talends_project_image = $request->file('talends_project_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial';
+                $imageName = time().'.'.$talends_project_image->getClientOriginalName();
+                $request->talends_project_image->move($new_path, $imageName);
+                $this->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->talends_project_image = null;
+            }
+
+
+            if (!empty($request->hasFile('talends_work_image'))) {
+                $talends_work_image = $request->file('talends_work_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial';
+                $imageName = time().'.'.$talends_work_image->getClientOriginalName();
+                $request->talends_work_image->move($new_path, $imageName);
+                $this->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->talends_work_image = null;
+            }
+
+
+
+
+            if (!empty($request->hasFile('talends_payment_image'))) {
+                $talends_payment_image = $request->file('talends_payment_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial';
+                $imageName = time().'.'.$talends_payment_image->getClientOriginalName();
+                $request->talends_payment_image->move($new_path, $imageName);
+                $this->talends_payment_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->talends_payment_image = null;
+            }
+
+          
+
+           
+            $this->save();
+            $json['type'] = 'success';
+            $json['message'] = 'About Talends Record Created';
+            return $json;
+        }
+    }
+
+
+    public function updateRightTalendsTestimonial($request, $id)
+    {
+
+        if (!empty($request)) {
+            $about_talends = self::find($id);
+            $about_talends->banner_description = $request['testimonial_title_1'];
+            $about_talends->features_text = $request['testimonial_description_1'];
+            $about_talends->services_description = $request['testimonial_title_2'];
+            $about_talends->project_description = $request['testimonial_description_2'];
+            
+            $about_talends->work_description = $request['testimonial_title_3'];
+            $about_talends->payment_description = $request['testimonial_description_3'];
+            $about_talends->support_description = $request['testimonial_title_4'];
+            $about_talends->freelancer_benefits = $request['testimonial_description_4'];
+                
+
+            if (!empty($request->hasFile('about_talends_image'))) {
+                $about_talends_image = $request->file('about_talends_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial' . '/' . $request->hidden_about_talends_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial';
+                $imageName = time().'.'.$about_talends_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->about_talends_image->move($new_path, $imageName);
+                $about_talends->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $about_talends->about_talends_image = $request->hidden_about_talends_image;
+            }
+
+
+            if (!empty($request->hasFile('talends_project_image'))) {
+                $talends_project_image = $request->file('talends_project_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial' . '/' . $request->hidden_talends_project_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial' . '/' . $request->hidden_talends_project_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial';
+                $imageName = time().'.'.$talends_project_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->talends_project_image->move($new_path, $imageName);
+                $about_talends->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $about_talends->talends_project_image = $request->hidden_talends_project_image;
+            }
+
+
+            
+            if (!empty($request->hasFile('talends_work_image'))) {
+                $talends_work_image = $request->file('talends_work_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial' . '/' . $request->hidden_talends_work_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial' . '/' . $request->hidden_talends_work_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial';
+                $imageName = time().'.'.$talends_work_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->talends_work_image->move($new_path, $imageName);
+                $about_talends->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $about_talends->talends_work_image = $request->hidden_talends_work_image;
+            }
+
+
+            if (!empty($request->hasFile('talends_payment_image'))) {
+                $talends_payment_image = $request->file('talends_payment_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial' . '/' . $request->hidden_talends_payment_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial' . '/' . $request->hidden_talends_payment_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/right-talend_testimonial';
+                $imageName = time().'.'.$talends_payment_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->talends_payment_image->move($new_path, $imageName);
+                $about_talends->talends_payment_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $about_talends->talends_payment_image = $request->hidden_talends_payment_image;
+            }
+
+
+
+
+
+
+            return $about_talends->save();
+        }
+    }
+
     public function savesFindRightTalends($request)
     {
 
@@ -58,7 +236,7 @@ class AboutTalendsPage extends Model
          if (!empty($request->hasFile('about_talends_image'))) {
                 $about_talends_image = $request->file('about_talends_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/find-right-talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/find-right-talends';
                 $imageName = time().'.'.$about_talends_image->getClientOriginalName();
                 $request->about_talends_image->move($new_path, $imageName);
                 $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -71,7 +249,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_project_image'))) {
                 $talends_project_image = $request->file('talends_project_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/find-right-talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/find-right-talends';
                 $imageName = time().'.'.$talends_project_image->getClientOriginalName();
                 $request->talends_project_image->move($new_path, $imageName);
                 $this->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -84,7 +262,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_work_image'))) {
                 $talends_work_image = $request->file('talends_work_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/find-right-talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/find-right-talends';
                 $imageName = time().'.'.$talends_work_image->getClientOriginalName();
                 $request->talends_work_image->move($new_path, $imageName);
                 $this->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -99,7 +277,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_support_image'))) {
                 $talends_support_image = $request->file('talends_support_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/find-right-talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/find-right-talends';
                 $imageName = time().'.'.$talends_support_image->getClientOriginalName();
                 $request->talends_support_image->move($new_path, $imageName);
                 $this->talends_support_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -112,7 +290,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('short_term_project_image'))) {
                 $short_term_project_image = $request->file('short_term_project_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/find-right-talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/find-right-talends';
                 $imageName = time().'.'.$short_term_project_image->getClientOriginalName();
                 $request->short_term_project_image->move($new_path, $imageName);
                 $this->short_term_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -125,7 +303,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('recurring_engagements_image'))) {
                 $recurring_engagements_image = $request->file('recurring_engagements_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/find-right-talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/find-right-talends';
                 $imageName = time().'.'.$recurring_engagements_image->getClientOriginalName();
                 $request->recurring_engagements_image->move($new_path, $imageName);
                 $this->recurring_engagements_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -139,7 +317,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('long_term_work_image'))) {
                 $long_term_work_image = $request->file('long_term_work_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/find-right-talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/find-right-talends';
                 $imageName = time().'.'.$long_term_work_image->getClientOriginalName();
                 $request->long_term_work_image->move($new_path, $imageName);
                 $this->long_term_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -183,7 +361,7 @@ class AboutTalendsPage extends Model
          if (!empty($request->hasFile('about_talends_image'))) {
                 $about_talends_image = $request->file('about_talends_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
                 $imageName = time().'.'.$about_talends_image->getClientOriginalName();
                 $request->about_talends_image->move($new_path, $imageName);
                 $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -196,7 +374,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_project_image'))) {
                 $talends_project_image = $request->file('talends_project_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
                 $imageName = time().'.'.$talends_project_image->getClientOriginalName();
                 $request->talends_project_image->move($new_path, $imageName);
                 $this->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -209,7 +387,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_work_image'))) {
                 $talends_work_image = $request->file('talends_work_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
                 $imageName = time().'.'.$talends_work_image->getClientOriginalName();
                 $request->talends_work_image->move($new_path, $imageName);
                 $this->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -223,7 +401,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('short_term_project_image'))) {
                 $short_term_project_image = $request->file('short_term_project_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
                 $imageName = time().'.'.$short_term_project_image->getClientOriginalName();
                 $request->short_term_project_image->move($new_path, $imageName);
                 $this->short_term_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -236,7 +414,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('recurring_engagements_image'))) {
                 $recurring_engagements_image = $request->file('recurring_engagements_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
                 $imageName = time().'.'.$recurring_engagements_image->getClientOriginalName();
                 $request->recurring_engagements_image->move($new_path, $imageName);
                 $this->recurring_engagements_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -249,7 +427,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('long_term_work_image'))) {
                 $long_term_work_image = $request->file('long_term_work_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
                 $imageName = time().'.'.$long_term_work_image->getClientOriginalName();
                 $request->long_term_work_image->move($new_path, $imageName);
                 $this->long_term_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -291,11 +469,11 @@ class AboutTalendsPage extends Model
 
             if (!empty($request->hasFile('about_talends_image'))) {
                 $about_talends_image = $request->file('about_talends_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_about_talends_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_about_talends_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_about_talends_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
                 $imageName = time().'.'.$about_talends_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -309,11 +487,11 @@ class AboutTalendsPage extends Model
 
             if (!empty($request->hasFile('talends_project_image'))) {
                 $talends_project_image = $request->file('talends_project_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_talends_project_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_talends_project_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_talends_project_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_talends_project_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
                 $imageName = time().'.'.$talends_project_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -328,11 +506,11 @@ class AboutTalendsPage extends Model
             
             if (!empty($request->hasFile('short_term_project_image'))) {
                 $short_term_project_image = $request->file('short_term_project_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_short_term_project_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_short_term_project_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_short_term_project_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_short_term_project_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
                 $imageName = time().'.'.$short_term_project_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -345,11 +523,11 @@ class AboutTalendsPage extends Model
 
             if (!empty($request->hasFile('recurring_engagements_image'))) {
                 $recurring_engagements_image = $request->file('recurring_engagements_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_recurring_engagements_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_recurring_engagements_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_recurring_engagements_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_recurring_engagements_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
                 $imageName = time().'.'.$recurring_engagements_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -363,11 +541,11 @@ class AboutTalendsPage extends Model
 
             if (!empty($request->hasFile('long_term_work_image'))) {
                 $long_term_work_image = $request->file('long_term_work_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_long_term_work_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_long_term_work_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_long_term_work_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_long_term_work_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
                 $imageName = time().'.'.$long_term_work_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -381,11 +559,11 @@ class AboutTalendsPage extends Model
 
             if (!empty($request->hasFile('talends_work_image'))) {
                 $talends_work_image = $request->file('talends_work_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_talends_work_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_talends_work_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_talends_work_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/why_agency_plan' . '/' . $request->hidden_talends_work_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/why_agency_plan';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/why_agency_plan';
                 $imageName = time().'.'.$talends_work_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -427,7 +605,7 @@ class AboutTalendsPage extends Model
          if (!empty($request->hasFile('about_talends_image'))) {
                 $about_talends_image = $request->file('about_talends_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/about_talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/about_talends';
                 $imageName = time().'.'.$about_talends_image->getClientOriginalName();
                 $request->about_talends_image->move($new_path, $imageName);
                 $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -440,7 +618,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_project_image'))) {
                 $talends_project_image = $request->file('talends_project_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/about_talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/about_talends';
                 $imageName = time().'.'.$talends_project_image->getClientOriginalName();
                 $request->talends_project_image->move($new_path, $imageName);
                 $this->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -453,7 +631,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_work_image'))) {
                 $talends_work_image = $request->file('talends_work_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/about_talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/about_talends';
                 $imageName = time().'.'.$talends_work_image->getClientOriginalName();
                 $request->talends_work_image->move($new_path, $imageName);
                 $this->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -467,7 +645,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_payment_image'))) {
                 $talends_payment_image = $request->file('talends_payment_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/about_talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/about_talends';
                 $imageName = time().'.'.$talends_payment_image->getClientOriginalName();
                 $request->talends_payment_image->move($new_path, $imageName);
                 $this->talends_payment_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -480,7 +658,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_support_image'))) {
                 $talends_support_image = $request->file('talends_support_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/about_talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/about_talends';
                 $imageName = time().'.'.$talends_support_image->getClientOriginalName();
                 $request->talends_support_image->move($new_path, $imageName);
                 $this->talends_support_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -493,7 +671,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('short_term_project_image'))) {
                 $short_term_project_image = $request->file('short_term_project_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/about_talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/about_talends';
                 $imageName = time().'.'.$short_term_project_image->getClientOriginalName();
                 $request->short_term_project_image->move($new_path, $imageName);
                 $this->short_term_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -506,7 +684,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('recurring_engagements_image'))) {
                 $recurring_engagements_image = $request->file('recurring_engagements_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/about_talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/about_talends';
                 $imageName = time().'.'.$recurring_engagements_image->getClientOriginalName();
                 $request->recurring_engagements_image->move($new_path, $imageName);
                 $this->recurring_engagements_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -520,7 +698,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('long_term_work_image'))) {
                 $long_term_work_image = $request->file('long_term_work_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/about_talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/about_talends';
                 $imageName = time().'.'.$long_term_work_image->getClientOriginalName();
                 $request->long_term_work_image->move($new_path, $imageName);
                 $this->long_term_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -563,11 +741,11 @@ class AboutTalendsPage extends Model
 
             if (!empty($request->hasFile('about_talends_image'))) {
                 $about_talends_image = $request->file('about_talends_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/about_talends' . '/' . $request->hidden_about_talends_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/about_talends' . '/' . $request->hidden_about_talends_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/about_talends' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/about_talends' . '/' . $request->hidden_about_talends_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/about_talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/about_talends';
                 $imageName = time().'.'.$about_talends_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -582,11 +760,11 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_project_image'))) {
                 $talends_project_image = $request->file('talends_project_image');
 
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/about_talends' . '/' . $request->hidden_talends_project_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/about_talends' . '/' . $request->hidden_talends_project_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/about_talends' . '/' . $request->hidden_talends_project_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/about_talends' . '/' . $request->hidden_talends_project_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/about_talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/about_talends';
                 $imageName = time().'.'.$talends_project_image->getClientOriginalName();
                 $request->talends_project_image->move($new_path, $imageName);
                 $about_talends->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -599,11 +777,11 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_work_image'))) {
                 $talends_work_image = $request->file('talends_work_image');
 
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/about_talends' . '/' . $request->hidden_talends_work_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/about_talends' . '/' . $request->hidden_talends_work_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/about_talends' . '/' . $request->hidden_talends_work_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/about_talends' . '/' . $request->hidden_talends_work_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/about_talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/about_talends';
                 $imageName = time().'.'.$talends_work_image->getClientOriginalName();
                 $request->talends_work_image->move($new_path, $imageName);
                 $about_talends->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -617,11 +795,11 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_payment_image'))) {
                 $talends_payment_image = $request->file('talends_payment_image');
 
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/about_talends' . '/' . $request->hidden_talends_payment_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/about_talends' . '/' . $request->hidden_talends_payment_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/about_talends' . '/' . $request->hidden_talends_payment_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/about_talends' . '/' . $request->hidden_talends_payment_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/about_talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/about_talends';
                 $imageName = time().'.'.$talends_payment_image->getClientOriginalName();
                 $request->talends_payment_image->move($new_path, $imageName);
                 $about_talends->talends_payment_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -634,11 +812,11 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_support_image'))) {
                 $talends_support_image = $request->file('talends_support_image');
 
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/about_talends' . '/' . $request->hidden_talends_support_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/about_talends' . '/' . $request->hidden_talends_support_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/about_talends' . '/' . $request->hidden_talends_support_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/about_talends' . '/' . $request->hidden_talends_support_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/about_talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/about_talends';
                 $imageName = time().'.'.$talends_support_image->getClientOriginalName();
                 $request->talends_support_image->move($new_path, $imageName);
                 $about_talends->talends_support_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -651,11 +829,11 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('short_term_project_image'))) {
                 $short_term_project_image = $request->file('short_term_project_image');
 
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/about_talends' . '/' . $request->hidden_short_term_project_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/about_talends' . '/' . $request->hidden_short_term_project_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/about_talends' . '/' . $request->hidden_short_term_project_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/about_talends' . '/' . $request->hidden_short_term_project_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/about_talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/about_talends';
                 $imageName = time().'.'.$short_term_project_image->getClientOriginalName();
                 $request->short_term_project_image->move($new_path, $imageName);
                 $about_talends->short_term_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -668,11 +846,11 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('recurring_engagements_image'))) {
                 $recurring_engagements_image = $request->file('recurring_engagements_image');
 
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/about_talends' . '/' . $request->hidden_recurring_engagements_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/about_talends' . '/' . $request->hidden_recurring_engagements_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/about_talends' . '/' . $request->hidden_recurring_engagements_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/about_talends' . '/' . $request->hidden_recurring_engagements_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/about_talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/about_talends';
                 $imageName = time().'.'.$recurring_engagements_image->getClientOriginalName();
                 $request->recurring_engagements_image->move($new_path, $imageName);
                 $about_talends->recurring_engagements_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -687,11 +865,11 @@ class AboutTalendsPage extends Model
                 $long_term_work_image = $request->file('long_term_work_image');
 
 
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/about_talends' . '/' . $request->hidden_long_term_work_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/about_talends' . '/' . $request->hidden_long_term_work_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/about_talends' . '/' . $request->hidden_long_term_work_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/about_talends' . '/' . $request->hidden_long_term_work_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/about_talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/about_talends';
                 $imageName = time().'.'.$long_term_work_image->getClientOriginalName();
                 $request->long_term_work_image->move($new_path, $imageName);
                 $about_talends->long_term_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -781,7 +959,7 @@ class AboutTalendsPage extends Model
              if (!empty($request->hasFile('about_talends_image'))) {
                 $about_talends_image = $request->file('about_talends_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/agency_profile';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/agency_profile';
                 $imageName = time().'.'.$about_talends_image->getClientOriginalName();
                 $request->about_talends_image->move($new_path, $imageName);
                 $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -809,11 +987,11 @@ class AboutTalendsPage extends Model
             
             if (!empty($request->hasFile('about_talends_image'))) {
                 $about_talends_image = $request->file('about_talends_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/agency_profile' . '/' . $request->hidden_about_talends_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/agency_profile' . '/' . $request->hidden_about_talends_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/agency_profile' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/agency_profile' . '/' . $request->hidden_about_talends_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/agency_profile';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/agency_profile';
                 $imageName = time().'.'.$about_talends_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -842,7 +1020,7 @@ class AboutTalendsPage extends Model
              if (!empty($request->hasFile('about_talends_image'))) {
                 $about_talends_image = $request->file('about_talends_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/footer';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/footer';
                 $imageName = time().'.'.$about_talends_image->getClientOriginalName();
                 $request->about_talends_image->move($new_path, $imageName);
                 $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -870,11 +1048,11 @@ class AboutTalendsPage extends Model
             
             if (!empty($request->hasFile('about_talends_image'))) {
                 $about_talends_image = $request->file('about_talends_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/footer' . '/' . $request->hidden_about_talends_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/footer' . '/' . $request->hidden_about_talends_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/footer' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/footer' . '/' . $request->hidden_about_talends_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/footer';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/footer';
                 $imageName = time().'.'.$about_talends_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -905,7 +1083,7 @@ class AboutTalendsPage extends Model
              if (!empty($request->hasFile('banner_image'))) {
                 $banner_image = $request->file('banner_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                 $imageName = time().'.'.$banner_image->getClientOriginalName();
                 $request->banner_image->move($new_path, $imageName);
                 $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -918,7 +1096,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('internship_image'))) {
                 $internship_image = $request->file('internship_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                 $imageName = time().'.'.$internship_image->getClientOriginalName();
                 $request->internship_image->move($new_path, $imageName);
                 $this->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -931,7 +1109,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('internship_detail_image'))) {
                 $internship_detail_image = $request->file('internship_detail_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                 $imageName = time().'.'.$internship_detail_image->getClientOriginalName();
                 $request->internship_detail_image->move($new_path, $imageName);
                 $this->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -960,11 +1138,11 @@ class AboutTalendsPage extends Model
             
             if (!empty($request->hasFile('banner_image'))) {
                 $banner_image = $request->file('banner_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_about_talends_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_about_talends_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_about_talends_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                 $imageName = time().'.'.$banner_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -979,11 +1157,11 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('internship_image'))) {
                 $internship_image = $request->file('internship_image');
 
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_talends_project_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_talends_project_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_talends_project_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_talends_project_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                 $imageName = time().'.'.$internship_image->getClientOriginalName();
                 $request->internship_image->move($new_path, $imageName);
                 $footer_how_work->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -996,11 +1174,11 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('internship_detail_image'))) {
                 $internship_detail_image = $request->file('internship_detail_image');
 
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_internship_detail_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_internship_detail_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_internship_detail_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_internship_detail_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                 $imageName = time().'.'.$internship_detail_image->getClientOriginalName();
                 $request->internship_detail_image->move($new_path, $imageName);
                 $footer_how_work->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1034,7 +1212,7 @@ class AboutTalendsPage extends Model
              if (!empty($request->hasFile('about_talends_image'))) {
                 $about_talends_image = $request->file('about_talends_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/success_stories';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
                 $imageName = time().'.'.$about_talends_image->getClientOriginalName();
                 $request->about_talends_image->move($new_path, $imageName);
                 $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1048,7 +1226,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_project_image'))) {
                 $talends_project_image = $request->file('talends_project_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/success_stories';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
                 $imageName = time().'.'.$talends_project_image->getClientOriginalName();
                 $request->talends_project_image->move($new_path, $imageName);
                 $this->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1062,7 +1240,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_work_image'))) {
                 $talends_work_image = $request->file('talends_work_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/success_stories';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
                 $imageName = time().'.'.$talends_work_image->getClientOriginalName();
                 $request->talends_work_image->move($new_path, $imageName);
                 $this->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1076,7 +1254,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_payment_image'))) {
                 $talends_payment_image = $request->file('talends_payment_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/success_stories';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
                 $imageName = time().'.'.$talends_payment_image->getClientOriginalName();
                 $request->talends_payment_image->move($new_path, $imageName);
                 $this->talends_payment_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1089,7 +1267,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_support_image'))) {
                 $talends_support_image = $request->file('talends_support_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/success_stories';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
                 $imageName = time().'.'.$talends_support_image->getClientOriginalName();
                 $request->talends_support_image->move($new_path, $imageName);
                 $this->talends_support_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1103,7 +1281,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('short_term_project_image'))) {
                 $short_term_project_image = $request->file('short_term_project_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/success_stories';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
                 $imageName = time().'.'.$short_term_project_image->getClientOriginalName();
                 $request->short_term_project_image->move($new_path, $imageName);
                 $this->short_term_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1139,11 +1317,11 @@ class AboutTalendsPage extends Model
             
             if (!empty($request->hasFile('about_talends_image'))) {
                 $about_talends_image = $request->file('about_talends_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/success_stories' . '/' . $request->hidden_about_talends_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/success_stories' . '/' . $request->hidden_about_talends_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_about_talends_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/success_stories';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
                 $imageName = time().'.'.$about_talends_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -1159,11 +1337,11 @@ class AboutTalendsPage extends Model
             
             if (!empty($request->hasFile('talends_project_image'))) {
                 $talends_project_image = $request->file('talends_project_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_project_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_project_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_project_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_project_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/success_stories';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
                 $imageName = time().'.'.$talends_project_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -1179,11 +1357,11 @@ class AboutTalendsPage extends Model
             
             if (!empty($request->hasFile('talends_work_image'))) {
                 $talends_work_image = $request->file('talends_work_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_work_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_work_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_work_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_work_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/success_stories';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
                 $imageName = time().'.'.$talends_work_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -1198,11 +1376,11 @@ class AboutTalendsPage extends Model
             
             if (!empty($request->hasFile('talends_payment_image'))) {
                 $talends_payment_image = $request->file('talends_payment_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_payment_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_payment_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_payment_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_payment_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/success_stories';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
                 $imageName = time().'.'.$talends_payment_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -1217,11 +1395,11 @@ class AboutTalendsPage extends Model
 
             if (!empty($request->hasFile('talends_support_image'))) {
                 $talends_support_image = $request->file('talends_support_image');
-                if ( $request->hidden_talends_support_image && file_exists(Helper::PublicPath().'/public/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_support_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_support_image);               
+                if ( $request->hidden_talends_support_image && file_exists(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_support_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_talends_support_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/success_stories';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
                 $imageName = time().'.'.$talends_support_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -1237,11 +1415,11 @@ class AboutTalendsPage extends Model
 
             if (!empty($request->hasFile('short_term_project_image'))) {
                 $short_term_project_image = $request->file('short_term_project_image');
-                if ($request->hidden_short_term_project_image && file_exists(Helper::PublicPath().'/public/uploads/home-pages/success_stories' . '/' . $request->hidden_short_term_project_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/success_stories' . '/' . $request->hidden_short_term_project_image);               
+                if ($request->hidden_short_term_project_image && file_exists(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_short_term_project_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/success_stories' . '/' . $request->hidden_short_term_project_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/success_stories';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/success_stories';
                 $imageName = time().'.'.$short_term_project_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -1301,7 +1479,7 @@ class AboutTalendsPage extends Model
              if (!empty($request->hasFile('banner_image'))) {
                 $banner_image = $request->file('banner_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                 $imageName = time().'.'.$banner_image->getClientOriginalName();
                 $request->banner_image->move($new_path, $imageName);
                 $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1315,11 +1493,11 @@ class AboutTalendsPage extends Model
             
             if (!empty($request->hasFile('banner_image'))) {
                 $banner_image = $request->file('banner_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_about_talends_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_about_talends_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_about_talends_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                 $imageName = time().'.'.$banner_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -1363,7 +1541,7 @@ class AboutTalendsPage extends Model
              if (!empty($request->hasFile('title1_image'))) {
                 $title1_image = $request->file('title1_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                 $imageName = time().'.'.$title1_image->getClientOriginalName();
                 $request->title1_image->move($new_path, $imageName);
                 $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1377,11 +1555,11 @@ class AboutTalendsPage extends Model
             
             if (!empty($request->hasFile('title1_image'))) {
                 $title1_image = $request->file('title1_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_title1_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_title1_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_title1_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_title1_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                 $imageName = time().'.'.$title1_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -1401,7 +1579,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('title2_image'))) {
                $title2_image = $request->file('title2_image');
        
-               $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+               $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                $imageName = time().'.'.$title2_image->getClientOriginalName();
                $request->title2_image->move($new_path, $imageName);
                $this->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1415,11 +1593,11 @@ class AboutTalendsPage extends Model
            
            if (!empty($request->hasFile('title2_image'))) {
                $title2_image = $request->file('title2_image');
-               if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_title2_image)) {
-                   unlink(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_title2_image);               
+               if (file_exists(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_title2_image)) {
+                   unlink(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_title2_image);               
                }
        
-               $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+               $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                $imageName = time().'.'.$title2_image->getClientOriginalName();
                $imageName=str_replace(' ','_',$imageName);
              
@@ -1441,7 +1619,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('title3_image'))) {
                $title3_image = $request->file('title3_image');
        
-               $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+               $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                $imageName = time().'.'.$title3_image->getClientOriginalName();
                $request->title3_image->move($new_path, $imageName);
                $this->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1455,11 +1633,11 @@ class AboutTalendsPage extends Model
            
            if (!empty($request->hasFile('title3_image'))) {
                $title3_image = $request->file('title3_image');
-               if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_title3_image)) {
-                   unlink(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_title3_image);               
+               if (file_exists(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_title3_image)) {
+                   unlink(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_title3_image);               
                }
        
-               $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+               $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                $imageName = time().'.'.$title3_image->getClientOriginalName();
                $imageName=str_replace(' ','_',$imageName);
              
@@ -1479,7 +1657,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('title4_image'))) {
                $title4_image = $request->file('title4_image');
        
-               $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+               $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                $imageName = time().'.'.$title4_image->getClientOriginalName();
                $request->title4_image->move($new_path, $imageName);
                $this->talends_payment_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1493,11 +1671,11 @@ class AboutTalendsPage extends Model
            
            if (!empty($request->hasFile('title4_image'))) {
                $title4_image = $request->file('title4_image');
-               if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_title4_image)) {
-                   unlink(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_title4_image);               
+               if (file_exists(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_title4_image)) {
+                   unlink(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_title4_image);               
                }
        
-               $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+               $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                $imageName = time().'.'.$title4_image->getClientOriginalName();
                $imageName=str_replace(' ','_',$imageName);
              
@@ -1521,7 +1699,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('title5_image'))) {
                $title5_image = $request->file('title5_image');
        
-               $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+               $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                $imageName = time().'.'.$title5_image->getClientOriginalName();
                $request->title5_image->move($new_path, $imageName);
                $this->talends_support_image	 = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1535,11 +1713,11 @@ class AboutTalendsPage extends Model
            
            if (!empty($request->hasFile('title5_image'))) {
                $title5_image = $request->file('title5_image');
-               if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_title5_image)) {
-                   unlink(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_title5_image);               
+               if (file_exists(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_title5_image)) {
+                   unlink(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_title5_image);               
                }
        
-               $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+               $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                $imageName = time().'.'.$title5_image->getClientOriginalName();
                $imageName=str_replace(' ','_',$imageName);
              
@@ -1565,17 +1743,20 @@ class AboutTalendsPage extends Model
     {
 
             if (!empty($request)) {
-                      
+                    
             if($request->form_type=='update'){
                 self::where('page_type','interne_university_collaboration')->delete();
             }
             $this->page_type = 'interne_university_collaboration';
 
+            $this->freelancer_benefits = $request['banner_description'];
+            $this->internees_benefits = $request['banner2_description'];
+
             if($request->form_type=='add'){
              if (!empty($request->hasFile('title1_image'))) {
                 $title1_image = $request->file('title1_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
                 $imageName = time().'.'.$title1_image->getClientOriginalName();
                 $request->title1_image->move($new_path, $imageName);
                 $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1589,11 +1770,11 @@ class AboutTalendsPage extends Model
             
             if (!empty($request->hasFile('title1_image'))) {
                 $title1_image = $request->file('title1_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title1_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title1_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title1_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title1_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
                 $imageName = time().'.'.$title1_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -1613,7 +1794,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('title2_image'))) {
                $title2_image = $request->file('title2_image');
        
-               $new_path = Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration';
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
                $imageName = time().'.'.$title2_image->getClientOriginalName();
                $request->title2_image->move($new_path, $imageName);
                $this->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1627,11 +1808,11 @@ class AboutTalendsPage extends Model
            
            if (!empty($request->hasFile('title2_image'))) {
                $title2_image = $request->file('title2_image');
-               if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title2_image)) {
-                   unlink(Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title2_image);               
+               if (file_exists(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title2_image)) {
+                   unlink(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title2_image);               
                }
        
-               $new_path = Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration';
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
                $imageName = time().'.'.$title2_image->getClientOriginalName();
                $imageName=str_replace(' ','_',$imageName);
              
@@ -1653,7 +1834,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('title3_image'))) {
                $title3_image = $request->file('title3_image');
        
-               $new_path = Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration';
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
                $imageName = time().'.'.$title3_image->getClientOriginalName();
                $request->title3_image->move($new_path, $imageName);
                $this->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1667,11 +1848,11 @@ class AboutTalendsPage extends Model
            
            if (!empty($request->hasFile('title3_image'))) {
                $title3_image = $request->file('title3_image');
-               if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title3_image)) {
-                   unlink(Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title3_image);               
+               if (file_exists(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title3_image)) {
+                   unlink(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title3_image);               
                }
        
-               $new_path = Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration';
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
                $imageName = time().'.'.$title3_image->getClientOriginalName();
                $imageName=str_replace(' ','_',$imageName);
              
@@ -1691,7 +1872,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('title4_image'))) {
                $title4_image = $request->file('title4_image');
        
-               $new_path = Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration';
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
                $imageName = time().'.'.$title4_image->getClientOriginalName();
                $request->title4_image->move($new_path, $imageName);
                $this->talends_payment_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1705,11 +1886,11 @@ class AboutTalendsPage extends Model
            
            if (!empty($request->hasFile('title4_image'))) {
                $title4_image = $request->file('title4_image');
-               if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title4_image)) {
-                   unlink(Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title4_image);               
+               if (file_exists(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title4_image)) {
+                   unlink(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title4_image);               
                }
        
-               $new_path = Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration';
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
                $imageName = time().'.'.$title4_image->getClientOriginalName();
                $imageName=str_replace(' ','_',$imageName);
              
@@ -1733,7 +1914,7 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('title5_image'))) {
                $title5_image = $request->file('title5_image');
        
-               $new_path = Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration';
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
                $imageName = time().'.'.$title5_image->getClientOriginalName();
                $request->title5_image->move($new_path, $imageName);
                $this->talends_support_image	 = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1747,11 +1928,11 @@ class AboutTalendsPage extends Model
            
            if (!empty($request->hasFile('title5_image'))) {
                $title5_image = $request->file('title5_image');
-               if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title5_image)) {
-                   unlink(Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title5_image);               
+               if (file_exists(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title5_image)) {
+                   unlink(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_title5_image);               
                }
        
-               $new_path = Helper::PublicPath().'/public/uploads/home-pages/interne_uni_collaboration';
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
                $imageName = time().'.'.$title5_image->getClientOriginalName();
                $imageName=str_replace(' ','_',$imageName);
              
@@ -1763,9 +1944,118 @@ class AboutTalendsPage extends Model
            }
 
 
-
        }
+
+
+       
+       if($request->form_type=='add'){
+        if (!empty($request->hasFile('banner_image'))) {
+           $banner_image = $request->file('banner_image');
+   
+           $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+           $imageName = time().'.'.$banner_image->getClientOriginalName();
+           $request->banner_image->move($new_path, $imageName);
+           $this->short_term_project_image	 = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+       } else {
+           $this->short_term_project_image	 = null;
+       }
+
+            }else{
+                
+                
+                if (!empty($request->hasFile('banner_image'))) {
+                    $banner_image = $request->file('banner_image');
+                    if ( $request->hidden_short_term_project_image && file_exists(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_short_term_project_image)) {
+                        unlink(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_short_term_project_image);               
+                    }
+            
+                    $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+                    $imageName = time().'.'.$banner_image->getClientOriginalName();
+                    $imageName=str_replace(' ','_',$imageName);
+                    
+                    $request->banner_image->move($new_path, $imageName);
+                    $this->short_term_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+                } else {
+                    $this->short_term_project_image = $request->hidden_short_term_project_image;
+                }
+
+
+            }
            /////////////////////
+           if($request->form_type=='add'){
+            if (!empty($request->hasFile('trusted_by_image'))) {
+               $trusted_by_image = $request->file('trusted_by_image');
+       
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+               $imageName = time().'.'.$trusted_by_image->getClientOriginalName();
+               $request->trusted_by_image->move($new_path, $imageName);
+               $this->recurring_engagements_image	 = filter_var($imageName, FILTER_SANITIZE_STRING);
+    
+           } else {
+               $this->recurring_engagements_image	 = null;
+           }
+    
+                }else{
+                    
+                    
+                    if (!empty($request->hasFile('trusted_by_image'))) {
+                        $trusted_by_image = $request->file('trusted_by_image');
+                        if ( $request->hidden_recurring_engagements_image && file_exists(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_recurring_engagements_image)) {
+                            unlink(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_recurring_engagements_image);               
+                        }
+                
+                        $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+                        $imageName = time().'.'.$trusted_by_image->getClientOriginalName();
+                        $imageName=str_replace(' ','_',$imageName);
+                        
+                        $request->trusted_by_image->move($new_path, $imageName);
+                        $this->recurring_engagements_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+    
+                    } else {
+                        $this->recurring_engagements_image = $request->hidden_recurring_engagements_image;
+                    }
+    
+    
+                }
+           ///////////////////////
+           if($request->form_type=='add'){
+            if (!empty($request->hasFile('banner2_image'))) {
+               $banner2_image = $request->file('banner2_image');
+       
+               $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+               $imageName = time().'.'.$banner2_image->getClientOriginalName();
+               $request->banner2_image->move($new_path, $imageName);
+               $this->long_term_work_image	 = filter_var($imageName, FILTER_SANITIZE_STRING);
+    
+           } else {
+               $this->long_term_work_image	 = null;
+           }
+    
+                }else{
+                    
+                    
+                    if (!empty($request->hasFile('banner2_image'))) {
+                        $banner2_image = $request->file('banner2_image');
+                        if ( $request->hidden_long_term_work_image && file_exists(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_long_term_work_image)) {
+                            unlink(Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration' . '/' . $request->hidden_long_term_work_image);               
+                        }
+                
+                        $new_path = Helper::PublicPath().'/uploads/home-pages/interne_uni_collaboration';
+                        $imageName = time().'.'.$banner2_image->getClientOriginalName();
+                        $imageName=str_replace(' ','_',$imageName);
+                        
+                        $request->banner2_image->move($new_path, $imageName);
+                        $this->long_term_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+    
+                    } else {
+                        $this->long_term_work_image = $request->hidden_long_term_work_image;
+                    }
+    
+    
+                }
+           /////
             $this->save();
             $json['type'] = 'success';
             $json['message'] = 'Team On Demand Settings Record Created';
@@ -1787,7 +2077,7 @@ class AboutTalendsPage extends Model
              if (!empty($request->hasFile('trusted_by_image'))) {
                 $trusted_by_image = $request->file('trusted_by_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                 $imageName = time().'.'.$trusted_by_image->getClientOriginalName();
                 $request->trusted_by_image->move($new_path, $imageName);
                 $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1801,11 +2091,11 @@ class AboutTalendsPage extends Model
             
             if (!empty($request->hasFile('trusted_by_image'))) {
                 $trusted_by_image = $request->file('trusted_by_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_about_talends_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/banners' . '/' . $request->hidden_about_talends_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_about_talends_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/banners';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
                 $imageName = time().'.'.$trusted_by_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -1828,6 +2118,62 @@ class AboutTalendsPage extends Model
         }
     }
 
+    public function storeWhyNeedAgencyBanner($request)
+    {
+
+            if (!empty($request)) {
+
+            if($request->form_type=='update'){
+                self::where('page_type','agency_need_banner')->delete();
+            }
+            $this->page_type = 'agency_need_banner';
+            $this->banner_description = $request['company_banner_description'];
+          
+         
+            if($request->form_type=='add'){
+             if (!empty($request->hasFile('company_banner_image'))) {
+                $company_banner_image = $request->file('company_banner_image');
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/company_need_banner';
+                $imageName = time().'.'.$company_banner_image->getClientOriginalName();
+                $request->company_banner_image->move($new_path, $imageName);
+                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->about_talends_image = null;
+            }
+
+        }else{
+           
+            
+            if (!empty($request->hasFile('company_banner_image'))) {
+                $company_banner_image = $request->file('company_banner_image');
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/company_need_banner' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/company_need_banner' . '/' . $request->hidden_about_talends_image);               
+                }
+        
+                $new_path = Helper::PublicPath().'/uploads/home-pages/company_need_banner';
+                $imageName = time().'.'.$company_banner_image->getClientOriginalName();
+                $imageName=str_replace(' ','_',$imageName);
+              
+                $request->company_banner_image->move($new_path, $imageName);
+                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+            } else {
+                $this->about_talends_image = $request->hidden_about_talends_image;
+            }
+
+
+
+        }
+           ////////////////////////////////////////////
+
+            $this->save();
+            $json['type'] = 'success';
+            $json['message'] = 'Freelancer Sidebar  Record Created';
+            return $json;
+        }
+    }
 
     public function saveFreelancerSideBarSettings($request)
     {
@@ -1847,7 +2193,7 @@ class AboutTalendsPage extends Model
              if (!empty($request->hasFile('sidebar_image'))) {
                 $sidebar_image = $request->file('sidebar_image');
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/freelancer_sidebar';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/freelancer_sidebar';
                 $imageName = time().'.'.$sidebar_image->getClientOriginalName();
                 $request->sidebar_image->move($new_path, $imageName);
                 $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1861,11 +2207,11 @@ class AboutTalendsPage extends Model
             
             if (!empty($request->hasFile('sidebar_image'))) {
                 $sidebar_image = $request->file('sidebar_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/freelancer_sidebar' . '/' . $request->hidden_about_talends_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/freelancer_sidebar' . '/' . $request->hidden_about_talends_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/freelancer_sidebar' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/freelancer_sidebar' . '/' . $request->hidden_about_talends_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/freelancer_sidebar';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/freelancer_sidebar';
                 $imageName = time().'.'.$sidebar_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -1907,11 +2253,11 @@ class AboutTalendsPage extends Model
 
             if (!empty($request->hasFile('about_talends_image'))) {
                 $about_talends_image = $request->file('about_talends_image');
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/find-right-talends' . '/' . $request->hidden_about_talends_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/find-right-talends' . '/' . $request->hidden_about_talends_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/find-right-talends' . '/' . $request->hidden_about_talends_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/find-right-talends' . '/' . $request->hidden_about_talends_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/find-right-talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/find-right-talends';
                 $imageName = time().'.'.$about_talends_image->getClientOriginalName();
                 $imageName=str_replace(' ','_',$imageName);
               
@@ -1926,11 +2272,11 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_project_image'))) {
                 $talends_project_image = $request->file('talends_project_image');
 
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/find-right-talends' . '/' . $request->hidden_talends_project_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/find-right-talends' . '/' . $request->hidden_talends_project_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/find-right-talends' . '/' . $request->hidden_talends_project_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/find-right-talends' . '/' . $request->hidden_talends_project_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/find-right-talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/find-right-talends';
                 $imageName = time().'.'.$talends_project_image->getClientOriginalName();
                 $request->talends_project_image->move($new_path, $imageName);
                 $about_talends->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1943,11 +2289,11 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_work_image'))) {
                 $talends_work_image = $request->file('talends_work_image');
 
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/find-right-talends' . '/' . $request->hidden_talends_work_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/find-right-talends' . '/' . $request->hidden_talends_work_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/find-right-talends' . '/' . $request->hidden_talends_work_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/find-right-talends' . '/' . $request->hidden_talends_work_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/find-right-talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/find-right-talends';
                 $imageName = time().'.'.$talends_work_image->getClientOriginalName();
                 $request->talends_work_image->move($new_path, $imageName);
                 $about_talends->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1962,11 +2308,11 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('talends_support_image'))) {
                 $talends_support_image = $request->file('talends_support_image');
 
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/find-right-talends' . '/' . $request->hidden_talends_support_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/find-right-talends' . '/' . $request->hidden_talends_support_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/find-right-talends' . '/' . $request->hidden_talends_support_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/find-right-talends' . '/' . $request->hidden_talends_support_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/find-right-talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/find-right-talends';
                 $imageName = time().'.'.$talends_support_image->getClientOriginalName();
                 $request->talends_support_image->move($new_path, $imageName);
                 $about_talends->talends_support_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1979,11 +2325,11 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('short_term_project_image'))) {
                 $short_term_project_image = $request->file('short_term_project_image');
 
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/find-right-talends' . '/' . $request->hidden_short_term_project_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/find-right-talends' . '/' . $request->hidden_short_term_project_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/find-right-talends' . '/' . $request->hidden_short_term_project_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/find-right-talends' . '/' . $request->hidden_short_term_project_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/find-right-talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/find-right-talends';
                 $imageName = time().'.'.$short_term_project_image->getClientOriginalName();
                 $request->short_term_project_image->move($new_path, $imageName);
                 $about_talends->short_term_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -1996,11 +2342,11 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('recurring_engagements_image'))) {
                 $recurring_engagements_image = $request->file('recurring_engagements_image');
 
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/find-right-talends' . '/' . $request->hidden_recurring_engagements_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/find-right-talends' . '/' . $request->hidden_recurring_engagements_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/find-right-talends' . '/' . $request->hidden_recurring_engagements_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/find-right-talends' . '/' . $request->hidden_recurring_engagements_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/find-right-talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/find-right-talends';
                 $imageName = time().'.'.$recurring_engagements_image->getClientOriginalName();
                 $request->recurring_engagements_image->move($new_path, $imageName);
                 $about_talends->recurring_engagements_image = filter_var($imageName, FILTER_SANITIZE_STRING);
@@ -2015,11 +2361,11 @@ class AboutTalendsPage extends Model
                 $long_term_work_image = $request->file('long_term_work_image');
 
 
-                if (file_exists(Helper::PublicPath().'/public/uploads/home-pages/find-right-talends' . '/' . $request->hidden_long_term_work_image)) {
-                    unlink(Helper::PublicPath().'/public/uploads/home-pages/find-right-talends' . '/' . $request->hidden_long_term_work_image);               
+                if (file_exists(Helper::PublicPath().'/uploads/home-pages/find-right-talends' . '/' . $request->hidden_long_term_work_image)) {
+                    unlink(Helper::PublicPath().'/uploads/home-pages/find-right-talends' . '/' . $request->hidden_long_term_work_image);               
                 }
         
-                $new_path = Helper::PublicPath().'/public/uploads/home-pages/find-right-talends';
+                $new_path = Helper::PublicPath().'/uploads/home-pages/find-right-talends';
                 $imageName = time().'.'.$long_term_work_image->getClientOriginalName();
                 $request->long_term_work_image->move($new_path, $imageName);
                 $about_talends->long_term_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);

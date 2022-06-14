@@ -19,16 +19,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-5 order-md-2 text-center">
-                    <img src="{{ asset('talends/assets/img/find-talents/banner2.png')}}" class="img-fluid mb-4 mb-md-0" alt="Intern Image">
+                @if(isset( $interne_university_collaboration->short_term_project_image) )
+                            <img src="{{asset('uploads/home-pages/interne_uni_collaboration/'.$interne_university_collaboration->short_term_project_image)}}" class="img-fluid mb-4 mb-md-0" alt="Intern Image">
+                @endif
                 </div>
                 <div class="col-md-7 pb-3 align-self-center">
                     <div class="intern-banner-content mb-4 mb-md-0">
-                        <!-- <h5 class="text-white opcty_5">talents</h5> -->
-                        <h3>Creating largest Interns network in Dubai</h3>
-                        <!-- <h2 class="text-white">Find a {{  ucfirst( request()->get('type')) }} <br><span class="theme_color"> You'll love</span></h2> -->
-                        <p>Post your job, connect with Interns and pay for the work — all on Talends.com</p>
-                        <!-- <p class="text-white opcty_5">We have professional designers in over 90 design skill sets. Sign up to find the perfect designer for whatever you need</p> -->
-                    </div>
+                       {!! $interne_university_collaboration->freelancer_benefits ?? ''  !!}
+                        </div>
                 </div>
                 
             </div>
@@ -40,7 +38,9 @@
                 <div class="col-md-12">
                     <div class="trustedby_box_intern text-center">
                         <p>Trusted by:</p>
-                        <img src="{{ asset('talends/assets/img/find-talents/banner-logos.svg')}}" class="img-fluid" alt="Logos">
+                        @if(isset( $interne_university_collaboration->recurring_engagements_image) )
+                            <img src="{{asset('uploads/home-pages/interne_uni_collaboration/'.$interne_university_collaboration->recurring_engagements_image)}}" class="img-fluid" alt="Logos">
+                @endif
                     </div>
                 </div>
             </div>
@@ -206,14 +206,15 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="content-box text-center text-md-left">
-                        <h2>Connect Business <span>with Emerging Interns</span></h2>
-                        <p>New generation brings new vision. They’re eager to make positive impact on your business, Your future is bright and so is their’s.</p>
-                        <button type="button" class="btn btn-theme rounded-pill px-5">Register as Employer</button>
-                        <button type="button" class="btn btn-outline-theme rounded-pill px-5">Register as Intern</button>
+                        {!!  $interne_university_collaboration->internees_benefits ?? ''  !!}
+                        <a href="{{ route('register') }}"  class="btn btn-theme rounded-pill px-5">Register as Employer</a>
+                        <a href="{{ route('register') }}"  class="btn btn-outline-theme rounded-pill px-5">Register as Intern</a>
                     </div>
                 </div>
                 <div class="col-md-6 text-center text-md-right">
-                    <img src="{{ asset('talends/assets/img/find-talents/connect-img.png')}}" class="img-fluid" alt="Connect image">
+                @if(isset( $interne_university_collaboration->long_term_work_image) )
+                            <img src="{{asset('uploads/home-pages/interne_uni_collaboration/'.$interne_university_collaboration->long_term_work_image)}}" class="img-fluid" alt="Connect image">>
+                @endif
                 </div>
             </div>
         </div>

@@ -53,9 +53,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                 <fieldset class="wt-registerformgroup">
 
                                         <div class="form-group">
-                                            <div class="google-signup-wrap">
-                                                <div id="my-signin2"></div>
-                                            </div>
+                                         
 
                                         </div>
                                       
@@ -362,6 +360,11 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                             <div class="wt-registerhead">
                                                 <div class="wt-title">
                                                     <h3>{{{ $reg_three_title }}}</h3>
+
+                                                  <!--   <div class="google-signup-wrap">
+                                                <div id="my-signin2"></div>
+                                            </div> -->
+                                                    
                                                 </div>
                                                 <div class="wt-description">
                                                     <p>{{{ $reg_three_subtitle }}}</p>

@@ -19,6 +19,7 @@ class HireAgency extends Model
         'phone_number',
         'detail',
         'questions',
-        'is_seen'
+        'is_seen',
+        'budget'
     );
 }

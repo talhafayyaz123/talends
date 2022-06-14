@@ -70,7 +70,6 @@ class Profile extends Model
         return $this->belongsTo('App\User');
     }
 
-
     /**
      * Store Profile in database
      *
@@ -559,4 +558,6 @@ class Profile extends Model
         $profile->payout_settings  = serialize($payouts);
         $profile->save();
     }
+
+ 
 }

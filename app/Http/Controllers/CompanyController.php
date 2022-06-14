@@ -236,15 +236,16 @@ class CompanyController extends Controller
     public function storeHireAgency(Request $request,$id)
     {
 
+       
          $this->validate(
             $request,
             [
                 'full_name' => 'required',
                 'company_name' => 'required',
                 'email' => 'required',
-              'phone_number' => 'required',
-                'description' => 'required',
-                'question.*' => 'required',
+                 'phone_number' => 'required',
+                'budget' => 'required',
+                'services.*' => 'required',
           ]
 
         );
@@ -253,7 +254,8 @@ class CompanyController extends Controller
         $company_name=$request['company_name'];
         $email=$request['email'];
         $mobile_number=$request['phone_number'];
-        $description=$request['description'];
+        $budget=$request['budget'];
+        $services=$request['services'];
         
         HireAgency::create([
         'agency_id'=>  $id,
@@ -261,9 +263,9 @@ class CompanyController extends Controller
         'company_name'=> $company_name,
         'email'=>  $email,
         'phone_number'=>  $mobile_number,
-        'detail'=>  $description,
+        'detail'=>  !empty($services) ? serialize($services) : '',
         'is_seen'=>0,
-        'questions'=> !empty($request['question']) ? serialize($request['question']) : '',
+        'budget'=> $budget,
         ]);
 
         Session::flash('message', 'Response has been saved');

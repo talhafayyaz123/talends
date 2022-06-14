@@ -117,6 +117,7 @@
 
 	<link rel="stylesheet" href="{{ asset('bootstrap-multiselect.css') }}" type="text/css">
 	<script type="text/javascript" src="{{ asset('bootstrap-multiselect.js') }}"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
 
 	@if(Helper::getTextDirection() == 'rtl')

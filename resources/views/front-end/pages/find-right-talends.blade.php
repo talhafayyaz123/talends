@@ -93,8 +93,8 @@
                     <h3>Frequently Asked Questions</h3>
                 </div>
                 <div class="col-md-7">
-                <div class="accordion" id="accordionFaq">
-                {!!  $find_right_talends->freelancer_benefits  ?? '' !!}
+                    <div class="accordion" id="accordionFaq">
+                        {!!  $find_right_talends->freelancer_benefits  ?? '' !!}
                     </div>
                 </div>
             </div>
@@ -157,49 +157,47 @@
                         <p class="text-white opcty_5 text-center">Testimonials</p>
                         <h2>We hired <span>they loved</span></h2>
                         <div id="customers-testimonials" class="text-center owl-carousel owl-theme">
-                            <div class="carousel-content">
-                                <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
-                                <div class="author-detail text-center">
-                                    <img src="{{asset('uploads/home-pages/find-right-talends/user1.png')}}" class="img-fluid mb-4" alt="">
-                                    <h5>Dynamics Stream</h5>
-                                    <h6>Dubai, United Arab Emirates</h6>
+                            @if(isset($find_right_talend_testimonials) && !empty($find_right_talend_testimonials) )
+                                <div class="carousel-content">
+                                    <p>{{ $find_right_talend_testimonials['banner_description'] ?? ''  }}</p>
+                                    <div class="author-detail text-center">
+                                        @if(isset($find_right_talend_testimonials['about_talends_image']))
+                                            <img src="{{asset('uploads/home-pages/right-talend_testimonial/'.$find_right_talend_testimonials['about_talends_image'])}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
+                                        @endif
+                                        {!! $find_right_talend_testimonials['features_text'] ?? ''  !!}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="carousel-content">
-                                <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
-                                <div class="author-detail text-center">
-                                    <img src="{{asset('uploads/home-pages/find-right-talends/user2.png')}}" class="img-fluid mb-4" alt="">
-                                    <h5>Dynamics Stream</h5>
-                                    <h6>Dubai, United Arab Emirates</h6>
+                                <div class="carousel-content">
+                                    <p>{{ $find_right_talend_testimonials['services_description'] ?? ''  }}</p>
+                                    <div class="author-detail text-center">
+                                        @if(isset($find_right_talend_testimonials['talends_project_image']))
+                                            <img src="{{asset('uploads/home-pages/right-talend_testimonial/'.$find_right_talend_testimonials['talends_project_image'])}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
+                                        @endif
+                                        {!! $find_right_talend_testimonials['project_description'] ?? ''  !!}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="carousel-content">
-                                <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
-                                <div class="author-detail text-center">
-                                    <img src="{{asset('uploads/home-pages/find-right-talends/user3.png')}}" class="img-fluid mb-4" alt="">
-                                    <h5>Dynamics Stream</h5>
-                                    <h6>Dubai, United Arab Emirates</h6>
+                                <div class="carousel-content">
+                                    <p>{{ $find_right_talend_testimonials['work_description'] ?? ''  }}</p>
+                                    <div class="author-detail text-center">
+                                        @if(isset($find_right_talend_testimonials['talends_work_image']))
+                                            <img src="{{asset('uploads/home-pages/right-talend_testimonial/'.$find_right_talend_testimonials['talends_work_image'])}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
+                                        @endif
+                                        {!! $find_right_talend_testimonials['payment_description'] ?? ''  !!}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="carousel-content">
-                                <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
-                                <div class="author-detail text-center">
-                                    <img src="{{asset('uploads/home-pages/find-right-talends/user4.png')}}" class="img-fluid mb-4" alt="">
-                                    <h5>Dynamics Stream</h5>
-                                    <h6>Dubai, United Arab Emirates</h6>
+                                <div class="carousel-content">
+                                    <p>{{ $find_right_talend_testimonials['support_description'] ?? ''  }}</p>
+                                    <div class="author-detail text-center">
+                                        @if(isset($find_right_talend_testimonials['talends_payment_image']))
+                                            <img src="{{asset('uploads/home-pages/right-talend_testimonial/'.$find_right_talend_testimonials['talends_payment_image'])}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
+                                        @endif
+                                        {!! $find_right_talend_testimonials['freelancer_benefits'] ?? ''  !!}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="carousel-content">
-                                <p>Talends has helped me by exposing me to fields of work and regions of the world that would be out of my reach otherwise. By developing my technological skills across a wide variety of industries, I've become better at what I do.</p>
-                                <div class="author-detail text-center">
-                                    <img src="{{asset('uploads/home-pages/find-right-talends/user5.png')}}" class="img-fluid mb-4" alt="">
-                                    <h5>Dynamics Stream</h5>
-                                    <h6>Dubai, United Arab Emirates</h6>
-                                </div>
-                            </div>
+                            @endif
                         </div>
-                    </div>                    
-                </div>
+                    </div>
+                </div>                            
             </div>
         </div>
     </section>
@@ -221,23 +219,29 @@
                 </div>
                 <div class="col-md-8">
                     <div class="content-box">
-                        <h2>Let us help you to hire a team!</h2>
-                        <form id="contactForm" method="post" action="">
+                                <h2>Let us help you to hire a team!</h2>
+                                @if ($errors->any())
+                                @foreach ($errors->all() as $error)
+                                    <div class="error">{{$error}}</div>
+                                @endforeach
+                            @endif
+                        <form id="adminContactForm" method="post" action="{{ route('storeAdminLead') }}">
+                            @csrf
                             <div class="row">
-                                <div class="col-md-6 mb-4">
-                                    <input type="text" class="form-control form-control-lg" placeholder="Name" id="inputName">
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="text" name="full_name"  value="" class="form-control form-control-lg"  placeholder="Name" id="full_name">
                                 </div>
-                                <div class="col-md-6 mb-4">
-                                    <input type="text" class="form-control form-control-lg" placeholder="Company Name (If any)" id="inputName">
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="text" name="company_name" class="form-control form-control-lg" placeholder="Company Name (If any)" id="company_name">
                                 </div>
-                                <div class="col-md-6 mb-4">
-                                    <input type="email" class="form-control form-control-lg" placeholder="Email" id="inputName">
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="email" name="email" class="form-control form-control-lg" placeholder="Email" id="email">
                                 </div>
-                                <div class="col-md-6 mb-4">
-                                    <input type="text" class="form-control form-control-lg" placeholder="Phone Number" id="inputName">
+                                <div class="form-group col-md-6 mb-4">
+                                    <input type="text"  name='phone_number' class="form-control form-control-lg" placeholder="Phone Number" id="phone_number">
                                 </div>
-                                <div class="col-md-12 mb-4">
-                                    <textarea rows="4" class="form-control form-control-lg">Describe your project</textarea>
+                                <div class="form-group col-md-12 mb-4">
+                                    <textarea rows="4" name="detail" id='detail' class="form-control form-control-lg">Describe your project</textarea>
                                 </div>
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-theme px-5 rounded-pill">Let us help you</button>
@@ -335,7 +339,46 @@
                     items: 3
                 }
             }
-        })
+        });
     </script>
     
+    <script>
+    $(document).ready(function () {
+    $('#adminContactForm').validate({ 
+        rules: {
+            full_name: {
+                required: true
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            company_name: {
+                required: true,
+                
+            },  phone_number: {
+                required: true,
+                
+            },
+
+            detail: {
+                required: true,
+    
+                
+            },
+        },
+          errorElement: 'span',
+          errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+          },
+          highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+          },
+          unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+          }
+    });
+});
+</script> 
 @endpush

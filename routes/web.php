@@ -73,6 +73,8 @@ Route::get('company/registration', 'HomeController@companyRegistration')->name('
 Route::post('/registration/success', 'HomeController@companyRegistrationSuccess')->name('companyRegistratonSuccess');
 Route::get('registration/again/payment/{id}/{package_id}', 'Auth\RegisterController@registrationAgainPayment')->name('registrationAgainPayment');
 
+Route::post('store/admin/lead', 'HomePagesController@storeAdminLead')->name('storeAdminLead');
+Route::get('admin/lead/success', 'HomePagesController@adminLeadSuccess')->name('adminLeadSuccess');
 
 
 Route::get('company-detail/{id}', 'HomeController@CompanyDetail')->name('CompanyDetail');
@@ -265,6 +267,8 @@ Route::group(
 
         Route::post('admin/store_freelancer_sidebar', 'HomePagesController@storeFreelancerSidebar');
 
+        Route::post('admin/store_why_need_agency_banner', 'HomePagesController@storeWhyNeedAgencyBanner');
+
 
         Route::post('admin/update-homepage-banner-settings/{id}', 'HomePagesController@updateBannerSettings');
         
@@ -341,6 +345,7 @@ Route::group(
        Route::get('admin/pages/why_agency_plan', 'HomePagesController@whyAgencyPlan')->name('adminWhyAgencyPlan');
 
        Route::get('admin/pages/find-right-talends', 'HomePagesController@findRightTalends')->name('findRightTalends');
+       Route::get('admin/pages/find-right-talend_testimonials', 'HomePagesController@findRightTalendsTestimonials')->name('findRightTalendsTestimonials');
        Route::post('admin/save-about-talends', 'HomePagesController@storeTalends');
        Route::post('admin/update-about-talends/{id}', 'HomePagesController@updateTalends');
 
@@ -353,6 +358,9 @@ Route::group(
 
 
        Route::post('admin/save-find-right-talends', 'HomePagesController@storeFindRightTalends');
+
+       Route::post('admin/save-right-talend_testimonial', 'HomePagesController@storeRightTalendsTestimonial');
+       Route::post('admin/update-right-talend_testimonial/{id}', 'HomePagesController@updateRightTalendsTestimonial');
 
         // Pages Routes
         Route::get('admin/pages', 'PageController@index')->name('pages');

@@ -26,6 +26,8 @@ use App\SiteManagement;
 use Illuminate\Support\Facades\Schema;
 use App\GovernmentPage;
 use App\AboutTalendsPage;
+use Illuminate\Support\Str;
+use App\AdminLeads;
 
 
 /**
@@ -127,6 +129,31 @@ class HomePagesController extends Controller
                 'back-end.admin.home-pages.why_agency_plan.edit',
                 compact(
                     'why_agency_plan'
+                )
+            ); 
+         }
+      
+       
+    }
+
+
+    public function findRightTalendsTestimonials()
+    {
+
+         $find_right_talend_testimonials=AboutTalendsPage::where('page_type','find-right-talend_testimonials')->first();
+        
+         if(empty($find_right_talend_testimonials)){
+            return view(
+                'back-end.admin.home-pages.find_right_talend_testimonials.create'
+            );
+    
+         }else{
+            $find_right_talend_testimonials=$find_right_talend_testimonials->toArray();
+        
+            return view(
+                'back-end.admin.home-pages.find_right_talend_testimonials.edit',
+                compact(
+                    'find_right_talend_testimonials'
                 )
             ); 
          }
@@ -323,6 +350,71 @@ class HomePagesController extends Controller
         return Redirect::back();
     }
 
+
+    public function storeRightTalendsTestimonial(Request $request)
+    { 
+        $this->validate(
+            $request, [
+        'testimonial_title_1' => 'required',
+       'testimonial_description_1' => 'required',
+
+       'testimonial_title_2' => 'required',
+       'testimonial_description_2' => 'required',
+
+       'testimonial_title_3' => 'required',
+       'testimonial_description_3' => 'required',
+
+
+       'testimonial_title_4' => 'required',
+       'testimonial_description_4' => 'required',
+
+      
+        'about_talends_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_project_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_work_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_payment_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg'
+            ]
+        );
+       
+        $about_talends = new AboutTalendsPage;
+        $about_talends->storeRightTalendsTestimonial($request);
+        Session::flash('message','About Talends Record Saved Successfully');
+        return Redirect::back(); 
+    }
+
+
+    
+    public function updateRightTalendsTestimonial(Request $request,$id)
+    { 
+        $this->validate(
+            $request, [
+        'testimonial_title_1' => 'required',
+       'testimonial_description_1' => 'required',
+
+       'testimonial_title_2' => 'required',
+       'testimonial_description_2' => 'required',
+
+       'testimonial_title_3' => 'required',
+       'testimonial_description_3' => 'required',
+
+
+       'testimonial_title_4' => 'required',
+       'testimonial_description_4' => 'required',
+
+      
+        'about_talends_image' =>'image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_project_image'=>'image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_work_image'=>'image|mimes:jpeg,png,jpg,gif,svg',
+        'talends_payment_image'=>'image|mimes:jpeg,png,jpg,gif,svg'
+            ]
+        );
+       
+        $about_talends = new AboutTalendsPage;
+        $about_talends->updateRightTalendsTestimonial($request,$id);
+        Session::flash('message','About Talends Record Saved Successfully');
+        return Redirect::back(); 
+    }
+
     public function frontFooter($footer_type=''){
        
         $footer_how_work=AboutTalendsPage::where('page_type','footer-how-work')->first();
@@ -389,11 +481,12 @@ class HomePagesController extends Controller
         $interne_university_collaboration=AboutTalendsPage::where('page_type','interne_university_collaboration')->first();
         $featured_success_stories=AboutTalendsPage::where('page_type','featured_success_stories')->first();
         $freelancer_side_bar=AboutTalendsPage::where('page_type','freelancer_side_bar')->first();
+        $agency_need_banner=AboutTalendsPage::where('page_type','agency_need_banner')->first();
 
-        
+
      if($type=='banner_settings'){
         return view(
-            'back-end.admin.settings.home_page_settings.banner_settings',compact('freelancer_side_bar','banner_settings','find_right_opportunity','trusted_by')
+            'back-end.admin.settings.home_page_settings.banner_settings',compact('agency_need_banner','freelancer_side_bar','banner_settings','find_right_opportunity','trusted_by')
         );
      }else if($type=='team_demand'){
         return view(
@@ -503,6 +596,40 @@ class HomePagesController extends Controller
     }
 
 
+    public function storeAdminLead(Request $request)
+    { 
+        
+        $this->validate(
+        $request, [
+        'email' => 'required',
+        'full_name' => 'required',
+        'company_name' => 'required',
+        'phone_number' => 'required',
+        'detail' => 'required'
+        ]
+        );
+
+        AdminLeads::create(
+           [
+            'lead_uuid' => Str::uuid()->toString(),
+            'email' => $request['email'],
+            'full_name' => $request['full_name'],
+            'company_name' =>$request['company_name'],
+            'phone_number' => $request['phone_number'],
+            'detail' => $request['detail']
+           ]
+
+        );
+        
+        Session::flash('message','Record Saved Successfully');
+       return Redirect::route('adminLeadSuccess'); 
+    }
+
+    
+    public function adminLeadSuccess(){
+        return view('front-end.pages.success-admin-lead');
+    }
+
       
     public function storeTrustedByBanner(Request $request)
     { 
@@ -528,7 +655,32 @@ class HomePagesController extends Controller
         return Redirect::back(); 
     }
 
+     
+    public function storeWhyNeedAgencyBanner(Request $request)
+    { 
         
+        if($request->form_type=='add'){
+            $this->validate(
+                $request, [
+                    'company_banner_image'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+                    'company_banner_description' => 'required'
+            ]
+            );
+        }else{
+            $this->validate(
+                $request, [
+                    'company_banner_image'=>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+                    'company_banner_description' => 'required',
+            ]
+            );
+        }
+
+        $about_talends = new AboutTalendsPage;
+        $about_talends->storeWhyNeedAgencyBanner($request);
+        Session::flash('message','Company Banner Saved Successfully');
+        return Redirect::back();
+    }
+
     public function storeFreelancerSidebar(Request $request)
     { 
         
@@ -798,6 +950,12 @@ class HomePagesController extends Controller
             'title3_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             'title4_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             'title5_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'banner_description' =>'required',
+            'banner_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'trusted_by_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'banner2_description' =>'required',
+            'banner2_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+
             ]
             );
         }else{
@@ -809,7 +967,11 @@ class HomePagesController extends Controller
             'title3_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             'title4_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             'title5_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
-    
+            'banner_description' =>'required',
+            'banner_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'trusted_by_image' =>'image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'banner2_description' =>'required',
+            'banner2_image' =>'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
             ]
             );
         }
