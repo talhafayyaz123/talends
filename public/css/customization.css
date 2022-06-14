@@ -1442,3 +1442,7 @@ a.notif {
     border-top: 10px solid #ffffff;
 }
 .tooltip-link:hover .tooltip-content{display:block;}
+.leads-list-container{
+    height: 100vh;
+    overflow: auto;
+}

@@ -83,14 +83,11 @@
                             </div>
                            
                         </div>
-
-
                         <div class="wt-projecthistory">
                             <div class="wt-tabscontenttitle">
                                 <label>What type of business is this for?</label>
                                 {!! $questions[0]['question3'] ?? '' !!}
                             </div>
-                           
                         </div>
 
 

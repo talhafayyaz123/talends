@@ -2,6 +2,8 @@ body{background: #f7f7f7;}
 .wt-main{
 	background: #f7f7f7;
 	/* padding: 20px 40px 20px 310px; */
+	margin-left: 270px;
+	width: auto;
 }
 .wt-header{background: #fff;}
 .wt-dbsectionspace{padding:20px;}
@@ -12,12 +14,12 @@ body{background: #f7f7f7;}
 .wt-wrapper:before{display: none;}
 .wt-wrapper {overflow: hidden;}
 .wt-sidebarwrapper {
-	/* top: 0; */
-	/* left: 0; */
+	top: 75px;
+	left: 0;
 	z-index: 9;
 	width: 50px;
 	height: 100%;
-	position: relative;
+	position: fixed;
 	background: #fff;
 	/* padding-top: 76px; */
 	-webkit-backface-visibility: hidden;
