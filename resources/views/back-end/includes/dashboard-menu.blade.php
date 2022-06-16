@@ -168,6 +168,8 @@
 
                                 <li><hr><a href="{{{ route('findRightTalends') }}}">Let Us Find Right Talends</a></li>
                                 <li><hr><a href="{{{ route('findRightTalendsTestimonials') }}}">Find Right Talends Testimonials</a></li>
+                                <li><hr><a href="{{{ route('adminPrivacyPolicy') }}}">Privacy Policy</a></li>
+
 
                             </ul>
                         </li>

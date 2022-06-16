@@ -143,12 +143,13 @@ $join_community=App\Helper::getJoinCommunity();
         <div class="row align-items-end">
             <div class="col-md-8 pb-3 align-self-center">
                 {!! $join_community->banner_description ?? '' !!}
-                <a href="{{route('findTalends')}}" class="btn btn-theme px-4 rounded-pill">Find A Job</a>
-                <a href="#" class="btn btn-theme-white px-4 rounded-pill ml-md-3">Submit A Job</a>
+                <a href="{{url('search-results?type=job')}}" class="btn btn-theme px-4 rounded-pill">Find A Job</a>
+                <a href="{{ route('login') }}" class="btn btn-theme-white px-4 rounded-pill ml-md-3">Submit A Job</a>
             </div>
             <div class="col-md-4">
                 @if(isset( $join_community->about_talends_image) )
-                <img src="{{asset('/talends/assets/img/join_talend_new.png')}}" class="w-100"
+            
+                <img src="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="w-100"
                     alt="">
                 @endif
             </div>
@@ -212,13 +213,13 @@ $footer_menus_4=App\Helper::footerMenu4();
         </div>
         <div class="row footer_bottom">
             <div class="col-md-6">
-                <p>© 2021 All Rights Reserved. </p>
+                <p>© 2022 All Rights Reserved. &nbsp;&nbsp;&nbsp; <a href="{{ route('privacyPolicy') }}"> Privacy Policy </a>  </p>
             </div>
-            <div class="col-md-6">
+           <!--  <div class="col-md-6">
                 <ul class="list-inline mb-0">
                     <li class="px-2"> <a href="javascript:;" target="_self">Privacy Policy</a> </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </div>
 </footer>

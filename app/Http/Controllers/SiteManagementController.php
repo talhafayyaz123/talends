@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Redirect;
 use Hash;
 use Auth;
 use DB;
+use App\Category;
+use App\CompanyExpertise;
 use App\Helper;
 use App\Profile;
 use Session;
@@ -847,6 +849,61 @@ class SiteManagementController extends Controller
         }
     }
 
+    
+    public function companyExpertise(){
+        $categories = Category::pluck('title','id');
+
+        $privacy_policy = !empty(SiteManagement::getMetaValue('privacy_policy')) ? SiteManagement::getMetaValue('privacy_policy') : array();
+    
+      
+        return view('back-end.admin.home-pages.privacy_policy.index',compact('privacy_policy','categories'));
+    }
+
+
+      
+    public function addMorePrivacyPolicy($no){
+        $categories = Category::pluck('title','id');
+
+        return view("back-end.admin.home-pages.privacy_policy.add_privacy_policy",compact('categories','no'));
+
+    }
+    
+    public function storePrivacyPolicy(Request $request)
+    {
+
+         $this->validate(
+            $request,
+            [
+                'privacy.*.title' => 'required',
+                'privacy.*.description' => 'required',
+          ]
+
+        );
+ 
+       $json = array();
+        if (!empty($request)) {
+          
+
+            $search_menu = SiteManagement::savePrivacyPolicy($request);
+           
+            if ($search_menu['type'] == "success") {
+                                
+                Session::flash('message','Privacy Policy Saved Successfully');
+                return Redirect::back();
+
+            } else {
+               
+                Session::flash('message',trans('lang.all_required'));
+                return Redirect::back();
+
+            }
+        }  
+        
+
+       
+
+
+    }
     /**
      * Store theme color settings
      *
