@@ -61,7 +61,6 @@ Route::get('why-talends', 'HomeController@whyTalends')->name('whyTalends');
 
 Route::get('find-right-talends', 'HomeController@FindRightTalends')->name('FindRightTalends');
 
-
 Route::get('government', 'HomeController@government')->name('government');
 Route::get('browse-jobs', 'HomeController@browseJobs')->name('browseJobs');
 Route::get('find-talends', 'HomeController@findTalents')->name('findTalends');
