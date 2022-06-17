@@ -460,16 +460,14 @@
                     <h2>in-demand services from agencies</h2>
                 </div>
                 @foreach($categories as $category)
-                <div class="col-lg col-md-4 col-sm-6">
-                    <div class="content-box">
-                        <img src="{{ asset('uploads/categories/'.$category->image)}}" alt="" class="img-fluid mb-3">
-                        <p>{{ $category->title }}</p>
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="content-box">
+                            <img src="{{ asset('uploads/categories/'.$category->image)}}" alt="" class="img-fluid mb-3">
+                            <p>{{ $category->title }}</p>
+                        </div>
                     </div>
-                </div>
-                @endforeach
-        
-            </div>
-           
+                @endforeach        
+            </div>           
         </div>
     </section>
     <section class="find_agency pb-0">

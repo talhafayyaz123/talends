@@ -1290,6 +1290,7 @@ img.blog_detail_img {
 
 .join_community h2 {
     font-size: 50px;
+    margin-bottom: 1.5rem;
 }
 
 .talend_img_card {
@@ -1601,7 +1602,7 @@ section.featured_success_stories_sec .carousel-inner h2 {
     height: 50px;
     opacity: 1;
     border-radius: 50px;
-    top: 50px;
+    top: 40px;
 }
 
 .featured_success_stories_sec .carousel-control-prev {
@@ -1620,9 +1621,9 @@ section.featured_success_stories_sec .carousel-inner h2 {
 
 .fss_box_row .fss_box,
 .fss_box_row .fss_box_content {
-    padding: 40px;
+    padding: 20px 30px;
     height: 100%;
-    min-height: 480px;
+    min-height: 360px;
     display: flex;
     border-radius: 20px;
     flex-direction: column;
@@ -1660,8 +1661,9 @@ section.featured_success_stories_sec .carousel-inner h2 {
 
 .how_it_works_sec .row {
     background: #166702;
-    padding: 40px 30px;
+    padding: 20px 30px;
     border-radius: 10px;
+    
 }
 .how_its_works_box_steps{
     text-align: center;
@@ -1670,12 +1672,12 @@ section.featured_success_stories_sec .carousel-inner h2 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    min-height: 320px;
+    min-height: 150px;
 }
 .how_its_works_box_steps h2{
     opacity: 20%;
     position: absolute;
-    font-size: 300px;
+    font-size: 220px;
     font-weight: bold;
     color: white;
     line-height: 1;
@@ -1683,8 +1685,7 @@ section.featured_success_stories_sec .carousel-inner h2 {
 }
 .how_its_works_box_steps h3 {
     color: #8BF870;
-    font-size: 36px;
-    font-weight: bold;
+    font-size: 30px;
     font-family: joan;
     text-transform: uppercase;
 }

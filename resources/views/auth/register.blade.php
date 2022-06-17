@@ -50,9 +50,9 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
         <div class="row">
             <div class="col-12">
                 <div class="d-flex align-items-center min-vh-100">
-                    <div class="w-100 d-block bg-white shadow-lg rounded my-5 mx-auto py-4">
+                    <div class="w-100 d-block bg-white shadow-lg rounded my-5 mx-auto pt-4">
                         <div class="row">
-                            <div class="col-lg-7">
+                            <div class="col-lg-7 mx-auto">
                                 <div class="auth-content" id="registration">
                                     <!--<div class="preloader-section" v-if="loading" v-cloak>
                                         <div class="preloader-holder">
@@ -62,9 +62,9 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                     <div class="wt-haslayout">
                                         <form method="POST" action="{{{ url('register/form-step1-custom-errors') }}}" class="wt-formtheme wt-formregister tb-registration" @submit.prevent="checkStep1" id="register_form" novalidate>
                                             @csrf
-                                            <div class="row pb-5 mb-4" id="entityType">
+                                            <div class="row" id="entityType">
                                                 <div class="col-12 mb-5">
-                                                    <h3 class="mb-5">Ready to get customers <br/>from <span class="text-theme">Dubai & UAE</span></h3>
+                                                    <h3 class="mb-4">Ready to get customers <br/>from <span class="text-theme">Dubai & UAE</span></h3>
                                                 </div>
                                                 @if(!empty($roles))
                                                     @foreach ($roles as $key => $role)
@@ -84,7 +84,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                                     @elseif($role['role_type'] === 'intern')
                                                                         <label class="custom-control-label" for="intern">
                                                                             <input type="radio" id="intern" name="intern" value="intern" class="custom-control-input" v-on:change="setUserRole('intern')" v-model="user_type">
-                                                                            <img src="{{ asset('talends/assets/img/icons/intern.png')}}" class="rounded-circle img-fluid mr-3" width="40"/>Interne
+                                                                            <img src="{{ asset('talends/assets/img/icons/intern.png')}}" class="rounded-circle img-fluid mr-3" width="40"/>Intern
                                                                         </label>
                                                                     @elseif($role['role_type'] === 'company')
                                                                         <a href="{{ url('company/registration')  }}">
@@ -242,7 +242,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                                     <strong v-cloak>@{{form_step2.specialization_error}}</strong>
                                                                 </span>
                                                         </div>
-                                                        <div class="col-lg-12 mb-3" v-if='user_type== "intern" '>
+                                                        <div class="col-lg-6 mb-3" v-if='user_type== "intern" '>
                                                             <select name="availability" id='availability' class="form-control" v-bind:class="{ 'is-invalid': form_step2.is_availability_error }">
                                                                 <option value="">Select Availability</option>
                                                                 <option value="remote">Remote</option>
@@ -285,7 +285,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                             <a href="{{  url('register') }}" class="ml-2 btn-link text-success">Create Account</a>
                                                         </div>
                                                         <div class="col-12 text-center mb-3">
-                                                            <p class="small">By creating an account, you agree to the Pangea's 
+                                                            <p class="small">By creating an account, you agree to the Talends.com 
                                                                 <a href="javascript:;" class="btn-link text-success">Terms of Service</a> and 
                                                                 <a href="javascript:;" class="btn-link text-success">Privacy Policy</a>.
                                                             </p>
@@ -346,7 +346,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                     </div>
                                 </div>
                             </div> <!-- end col -->
-                            <div class="col-lg-5 d-none d-lg-block rounded-right ml-auto">
+                            <div class="col-lg-4 d-none d-lg-block rounded-right ml-auto">
                                 <div class="pt-4">
                                     <h3 id="register-text">Ready to get customers from 
                                         <span class="text-success">Dubai & UAE</span>
