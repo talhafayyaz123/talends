@@ -1,10 +1,10 @@
 @php
 $footer_how_work=App\Helper::getfooterHowWork();
 @endphp
-<section class="how_it_works_sec">
+<section class="how_it_works_sec pt-0">
     <div class="container py-5">
         <div class="row">
-            <div class="col-md-12 pb-5 text-center">
+            <div class="col-md-12 pb-4 text-center">
                 <h2 class="text-white opcty_5"> {!! $footer_how_work->project_description ?? '' !!}</h2>
             </div>
             <div class="col-lg-3 col-md-6 mb-2">
@@ -210,12 +210,23 @@ $footer_menus_4=App\Helper::footerMenu4();
                 </ul>
             </div>
         </div>
-        <div class="row footer_bottom">
+        <div class="row footer_bottom align-items-end">
             <div class="col-md-6">
-                <p>© 2021 All Rights Reserved. </p>
+                <ul class="list-inline">
+                    <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-facebook-square fa-2x"></i></a> </li>
+                    <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-twitter-square fa-2x"></i></a> </li>
+                    <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-linkedin-square fa-2x"></i></a> </li>
+                    <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-instagram fa-2x"></i></a> </li>
+                    <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-youtube-square fa-2x"></i></a> </li>
+                    <li class="px-1"> <a href="javascript:;" target="_self"><i class="bi-tiktok fa-2x"></i></a> </li>
+                </ul>
+                <p class="mb-0">Talends.com ©2022 All Rights Reserved. </p>
+                <p class="small">Dubai, United Arab Emirates</p>
             </div>
             <div class="col-md-6">
                 <ul class="list-inline mb-0">
+                    <li class="px-2"> <a href="javascript:;" target="_self">Site Map</a> </li>
+                    <li class="px-2"> <a href="javascript:;" target="_self">Term & conditions</a> </li>
                     <li class="px-2"> <a href="javascript:;" target="_self">Privacy Policy</a> </li>
                 </ul>
             </div>

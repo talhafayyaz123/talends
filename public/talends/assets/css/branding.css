@@ -1005,7 +1005,8 @@ footer .col-md-6 a,
 footer .col-md-6 p {
     margin-bottom: 0;
     font-size: 14px;
-    color: #6d7a6a
+    line-height: 14px;
+    color: #97af92
 }
 
 footer ul li {
@@ -1013,7 +1014,7 @@ footer ul li {
 }
 
 footer ul li a {
-    color: #6d7a6a
+    color: #97af92
 }
 
 .copyright_sec {

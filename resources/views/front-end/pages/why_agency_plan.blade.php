@@ -29,32 +29,38 @@ Why Join Agency Plan
             <div class="row">
                 <div class="col-md-6 order-md-2">
                     <div class="content-box">
-                    
                          {!! $why_agency_plan->features_text ?? '' !!}
                     </div>
                 </div>
                 <div class="col-md-6">
                     <ul class="theme_list_labels">
                         {!! $why_agency_plan->services_description ?? '' !!}
-
                     </ul>
                 </div>
             </div>
         </div>
     </section>
-    <section class="budget-sec1">
+    <section class="budget-sec">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <div class="content-box">
-                    {!! $why_agency_plan->project_description ?? '' !!}
+                        {!! $why_agency_plan->project_description ?? '' !!}
                     </div>
                 </div>
-                <div class="col-md-6 text-md-right text-center">                    
-                        @if(isset($why_agency_plan->short_term_project_image) )
-                        <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->short_term_project_image)}}" alt="" class="w-100">
-                        @endif
-                                
+                <div class="col-md-4 ml-auto">
+                    <div class="text-box">
+                        <h5>Strengthen Your Online Reputation</h5>
+                    </div>
+                    <div class="text-box">
+                        <h5>Boost your online visibility</h5>
+                    </div>
+                    <div class="text-box">
+                        <h5>Leads generation on auto pilot</h5>
+                    </div>
+                        <!-- @if(isset($why_agency_plan->short_term_project_image) )
+                            <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->short_term_project_image)}}" alt="" class="w-100">
+                        @endif     -->
                 </div>
             </div>
         </div>
@@ -117,10 +123,10 @@ Why Join Agency Plan
     <section class="trustedby_sec">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-3">
-                    agencies trusted us increased their revenue’s
+                <div class="col-md-5">
+                    Agencies trusted us increased their revenue’s
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-7">
                     <div class="trustedby_box">
                         @if(isset($why_agency_plan->long_term_work_image) )
                         <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->long_term_work_image)}}" alt="" class="w-100">
@@ -136,48 +142,21 @@ Why Join Agency Plan
         <div class="container">
             <div class="row align-items-end">
                 <div class="col-md-7">
-                    <!-- {!! $why_agency_plan->work_description ?? '' !!} -->
-
-                  <!--   <div class="block-wrap">
-                        <a href="{{ route('companyRegistraton') }}" class="theme_btn inverse_btn">join talends</a>
-                        <p>Support 24/7 <span>+971 52 768 4867</span></p>
-                    </div> -->
                     <div class="content-box">
                         {!! $why_agency_plan->work_description ?? '' !!}
-                        <!-- <h3>Our Flexible & Affordable <span>plans</span></h3> -->
-                        <!-- <h6>“You grow we Grow”</h6> -->
-                        <!-- <ul class="my-5">
-                            <div class="row p-0">
-                                <div class="col-md-6">
-                                    <li>Get a certified member badge</li>
-                                    <li>Get qualified Leads & opportunities</li>
-                                    <li>0% commission fee on signed deals</li>
-                                    <li>Dedicated Support</li>
-                                </div>
-                                <div class="col-md-6">
-                                    <li>Get a certified member badge</li>
-                                    <li>Get qualified Leads & opportunities</li>
-                                    <li>0% commission fee on signed deals</li>
-                                    <li>Dedicated Support</li>
-                                </div>
-                            </div>                            
-                        </ul> -->
-                        <div class="mb-5">
+                        <div class="mt-5 mb-3">
                             <a href="{{ route('register') }}" class="rounded-pill px-4 btn mb-2">Talk to an Advisor</a>
                             <span class="ml-md-4 mb-2">Support 24/7 <a href="tel:+971 52 768 4867" class="phone-number ml-2">+971 52 768 4867</a></span>
                         </div>                        
-                        
                     </div>
-
                 </div>
                 <div class="col-md-5 text-md-right text-center">
                     @if( isset($why_agency_plan->talends_work_image ))
-                    
-                    <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->talends_work_image)}}" >
+                        <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->talends_work_image)}}" >
                     @endif 
                 </div>
-                </div>
             </div>
+        </div>
     </section>
     <div class="talends-plan">
         <div class="container">
@@ -191,12 +170,12 @@ Why Join Agency Plan
                                         <th class="col-desc">What You’ll Get PRICE($)</th>
                                         <th class="col-plan1">
                                             <div class="plan-title">                                            
-                                                <h5> <span><img src="{{asset('uploads/home-pages/why_agency_plan/plan-icon.png')}}" alt="Plan Icon" width="30" class="img-fluid mr-2"></span><b>$45</b> Monthly </h5>
+                                                <h5><b>$45</b> Monthly </h5>
                                             </div>
                                         </th>
                                         <th class="col-plan2">
                                             <div class="plan-title d-flex align-items-center justify-content-center">                                            
-                                                <h5><span><img src="{{asset('uploads/home-pages/why_agency_plan/plan-icon.png')}}" alt="Plan Icon" width="30" class="img-fluid mr-2"></span><b>$45</b> Yearly</h5>
+                                                <h5><b>$45</b> Yearly</h5>
                                                 <button class="btn ml-2">Save $144</button>
                                             </div>
                                         </th>
@@ -239,13 +218,11 @@ Why Join Agency Plan
                                         <td></td>
                                         <td>
                                             <div class="plan-actions text-center">
-                                                <p class="small text-muted">Cancel anytime</p>
                                                 <a href="javascript:;" class="btn btn-block py-3">Choose</a>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="plan-actions text-center">
-                                                <p class="small text-muted">Cancel anytime</p>
                                                 <a href="javascript:;" class="btn btn-block py-3">Choose</a>
                                             </div>
                                         </td>                                        

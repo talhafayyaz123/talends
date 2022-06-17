@@ -28,8 +28,8 @@
                 <div class="carousel-item active">
                     <div class="carousel-caption">
                         <div class="container">
-                            <div class="row row-eq-height">
-                                <div class="col-md-8 col-lg-6 align-self-center">
+                            <div class="row align-items-center">
+                                <div class="col-md-8 col-lg-6">
                                     <div class="content_box_wrapper">
                                         <div class="content_box home_page_banner_description">
                                             {!! $banner_settings->banner_description ?? '' !!}
@@ -39,7 +39,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-lg-6 align-self-center">
+                                <div class="col-md-4 col-lg-6">
                                     <div class="content_box_wrapper">
                                         <div class="content_box">
                                             @if(isset( $banner_settings->about_talends_image) )
@@ -269,7 +269,7 @@
                 </div>
                 <div class="col-md-8 order-md-1">
                     {!! $agency_profile->banner_description ?? '' !!}
-                    <a href="{{ route('whyAgencyPlan') }}" class="btn btn-theme-white px-4 rounded-pill ml-4 mt-4 mb-5">Create your Agency Profile</a>
+                    <a href="{{ route('whyAgencyPlan') }}" class="btn btn-theme-white px-4 rounded-pill ml-4 mt-4 mb-3">Create your Agency Profile</a>
                 </div>
             </div>
         </div>

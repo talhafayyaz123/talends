@@ -86,25 +86,24 @@
                                 @endif
                                </ul>
                         </div>
-                        <h3>Latest Portfolio</h3>
+                        <!-- <h3>Latest Portfolio</h3> -->
                         @if (!empty($expertise) && !empty($expertise) )
 
-                        <section class="featured_success_stories_sec p-0">
+                        <section class="featured_success_stories_sec p-md-0">
                             <div class="container px-md-0">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                                             <div class="carousel-inner">
-                                        
-                                           
+                                            <h2 class="mb-0">Latest Portfolio</h2>
                                             @if(!empty($expertise->portfolio_detail )  || !empty($expertise->portfolio_image)  )
 
                                             <div class="carousel-item active">
-                                                    <div class="row">
+                                                    <div class="row mt-4">
                                                         <div class="col-md-6">
                                                         @if( isset($expertise->portfolio_image) )
-                                                <img src="{{ asset('uploads/company/'.$expertise->portfolio_image)}}" class="img-fluid w-100" alt="Carousel Image" width="300">
-                                                @endif
+                                                            <img src="{{ asset('uploads/company/'.$expertise->portfolio_image)}}" class="img-fluid w-100" alt="Carousel Image" width="300">
+                                                        @endif
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="carousel-content px-4">
@@ -112,18 +111,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 @endif
-
-
                                                 @if(!empty($expertise->portfolio_detail_2 )  || !empty($expertise->portfolio_image_2)  )
-
                                                 <div class="carousel-item">
-                                                    <div class="row">
+                                                    <div class="row mt-4">
                                                         <div class="col-md-6">
                                                         @if( isset($expertise->portfolio_image_2) )
-                                                <img src="{{ asset('uploads/company/'.$expertise->portfolio_image_2)}}" class="img-fluid w-100" alt="Carousel Image" width="300">
-                                                @endif
+                                                            <img src="{{ asset('uploads/company/'.$expertise->portfolio_image_2)}}" class="img-fluid w-100" alt="Carousel Image" width="300">
+                                                        @endif
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="carousel-content px-4">
@@ -132,15 +127,13 @@
                                                     </div>
                                                 </div>
                                                 @endif
-
-
-                                                  @if(!empty($expertise->portfolio_detail_3 )  || !empty($expertise->portfolio_image_3)  )
+                                                @if(!empty($expertise->portfolio_detail_3 )  || !empty($expertise->portfolio_image_3)  )
                                                 <div class="carousel-item">
-                                                    <div class="row">
+                                                    <div class="row mt-4">
                                                         <div class="col-md-6">
                                                         @if( isset($expertise->portfolio_image_3) )
-                                                <img src="{{ asset('uploads/company/'.$expertise->portfolio_image_3)}}" class="img-fluid w-100" alt="Carousel Image" width="300">
-                                                @endif
+                                                            <img src="{{ asset('uploads/company/'.$expertise->portfolio_image_3)}}" class="img-fluid w-100" alt="Carousel Image" width="300">
+                                                        @endif
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="carousel-content px-4">
@@ -148,14 +141,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 @endif
-
-                                           
-                                                    
-                                               
-                                               
-                                              
                                             </div>
                                             <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
                                                 data-slide="prev">
