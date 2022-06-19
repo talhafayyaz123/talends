@@ -2012,6 +2012,7 @@ a.notif {
 .talends-plan .plan-content .plan-actions{
 	padding-top: 10px;
 }
+
 @media (max-width:768px) {
 	.company-detail-content .accordion{
 		padding: 10px 0;

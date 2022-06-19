@@ -142,7 +142,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div id="carouselExampleControls" class="carousel slide" data-interval="false">
                         <div class="carousel-inner">
                             <h2>Featured Success Stories</h2>
                             <div class="carousel-item active">

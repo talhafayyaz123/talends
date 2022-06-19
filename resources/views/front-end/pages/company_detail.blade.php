@@ -93,7 +93,7 @@
                             <div class="container px-md-0">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                        <div id="carouselExampleControls" class="carousel slide" data-interval="false">
                                             <div class="carousel-inner">
                                             <h2 class="mb-0">Latest Portfolio</h2>
                                             @if(!empty($expertise->portfolio_detail )  || !empty($expertise->portfolio_image)  )
@@ -184,9 +184,18 @@
                         <p><b>{{ \Carbon\Carbon::parse($company_detail->membership_date)->format('Y') ?? '' }}</b></p>
                         @endif
                         <p class="mb-0 mt-4">Client Focus</p>
-                        <p><b>{!! $profile->company_type   ?? '' !!}</b></p>
-                        <!-- <p class="mb-0 mt-4">Language</p>
-                        <p><b>Russian English</b></p> -->
+                         @if(isset($profile->company_type) && !empty($profile->company_type) )
+                         @foreach(explode(',',$profile->company_type ) as $value)
+                         @if($value=='large_enterprises')
+                        <p><b>Large Enterprises</b></p>
+                        @elseif($value=='small_medium_enterprises')
+                        <p><b>Small & Mid</b></p>
+                        @else
+                        <p><b>Startup</b></p>
+                          @endif
+
+                        @endforeach
+                        @endif
                     </div>
                 </div>
             </div>

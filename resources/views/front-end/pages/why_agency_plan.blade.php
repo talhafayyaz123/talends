@@ -217,21 +217,7 @@ Why Join Agency Plan
                                         <td class="text-center  "><i class="fa fa-check text-theme"></i></td>
                                     </tr>                               
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <div class="plan-actions text-center">
-                                                <a href="javascript:;" class="btn btn-block py-3">Choose</a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="plan-actions text-center">
-                                                <a href="javascript:;" class="btn btn-block py-3">Choose</a>
-                                            </div>
-                                        </td>                                        
-                                    </tr>
-                                </tfoot>
+                                
                             </table>
                         </div>
                     </div>

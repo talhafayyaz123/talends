@@ -3,7 +3,7 @@
 @php
 $employees = Helper::getEmployeesList();
 $company_bedget = Helper::getComapnyBudgetList();
-$freelancer_bedget = Helper::getFreelancerBudgetList();
+$freelancer_budget = Helper::getFreelancerBudgetList();
 $skills_categories = Helper::getSkillsCategories();
 $categories = Helper::getCategories();
 
@@ -32,7 +32,8 @@ $breadcrumbs_settings = \App\SiteManagement::getMetaValue('show_breadcrumb');
 $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'true';
 @endphp
 @php $breadcrumbs = Breadcrumbs::generate('registerPage'); @endphp
-@if (file_exists(resource_path('views/extend/front-end/includes/inner-banner.blade.php')))
+
+<!-- @if (file_exists(resource_path('views/extend/front-end/includes/inner-banner.blade.php')))
 @include('extend.front-end.includes.inner-banner',
 ['title' => trans('lang.join_for_free'), 'inner_banner' => $reg_form_banner, 'path' => 'uploads/settings/home/', 'show_banner' => $show_reg_form_banner ]
 )
@@ -40,7 +41,8 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
 @include('front-end.includes.inner-banner',
 ['title' => trans('lang.join_for_free'), 'inner_banner' => $reg_form_banner, 'path' => 'uploads/settings/home/', 'show_banner' => $show_reg_form_banner ]
 )
-@endif
+@endif -->
+
     <style>
         .entity-form,
         #register-text{display: none;}
@@ -172,12 +174,8 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                         </div>
                                                         <div class="col-lg-6 mb-3" v-if='user_type== "freelancer" '>
                                                             <div class="form-group">
-                                                                <select name="budget" id='budget' class="form-control" v-bind:class="{ 'is-invalid': form_step2.is_budget_error }">
-                                                                    <option value="">Select Price</option>
-                                                                    @foreach ($freelancer_bedget as $key => $budget)
-                                                                    <option value="{{{$budget['value']}}}">{{{$budget['title']}}}</option>
-                                                                    @endforeach
-                                                                </select>
+                                                            <input id="budget" type="text" class="form-control" value="" name="budget" placeholder="Hourly Rate (AED)" v-bind:class="{ 'is-invalid': form_step2.is_budget_error }">
+
                                                                 <span class="help-block" v-if="form_step2.budget_error">
                                                                     <strong v-cloak>@{{form_step2.budget_error}}</strong>
                                                                 </span>
@@ -212,31 +210,14 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                         <!-- internee -->
 
                                                         <div class="col-lg-6 mb-3" v-if='user_type== "intern" '>
-                                                            <select name="budget" id='budget' class="form-control" v-bind:class="{ 'is-invalid': form_step2.is_budget_error }">>
-                                                                    <option value="">Select Price</option>
-                                                                @foreach ($company_bedget as $key => $budget)
-                                                                    <option value="{{{$budget['value']}}}">{{{$budget['title']}}}</option>
-                                                                @endforeach
-                                                            </select>
+                                                        <input id="budget" type="text" class="form-control" value="" name="budget" placeholder="Hourly Rate (AED)" v-bind:class="{ 'is-invalid': form_step2.is_budget_error }">
+
                                                             <span class="help-block" v-if="form_step2.budget_error">
                                                                     <strong v-cloak>@{{form_step2.budget_error}}</strong>
                                                                 </span>
-
-
-                                                        </div>                                                
-                                                        <div class="col-lg-12 mb-3" v-if='user_type== "intern" '>
-                                                            <input class="form-control" id="university" type="text" name="university" value="" placeholder="University" v-bind:class="{ 'is-invalid': form_step2.is_university_error }">
-                                                            <span class="help-block" v-if="form_step2.university_error">
-                                                                    <strong v-cloak>@{{form_step2.university_error}}</strong>
-                                                                </span>
-                                                        </div>
-                                                        <div class="col-lg-12 mb-3" v-if='user_type== "intern" '>
-                                                            <input class="form-control" id="grade" type="text" name="grade" value=""  placeholder="Degree" v-bind:class="{ 'is-invalid': form_step2.is_grade_error }">
-                                                            <span class="help-block" v-if="form_step2.grade_error">
-                                                                    <strong v-cloak>@{{form_step2.grade_error}}</strong>
-                                                                </span>
-                                                        </div>
-                                                        <div class="col-lg-12 mb-3" v-if='user_type== "intern" '>
+                                                        </div>    
+                                                        
+                                                        <div class="col-lg-6 mb-3" v-if='user_type== "intern" '>
                                                             <input class="form-control" id="specialization" type="text" name="specialization" value="" placeholder="specialization" v-bind:class="{ 'is-invalid': form_step2.is_specialization_error }">
                                                             <span class="help-block" v-if="form_step2.specialization_error">
                                                                     <strong v-cloak>@{{form_step2.specialization_error}}</strong>
@@ -252,6 +233,21 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                                 <strong v-cloak>@{{form_step2.availability_error}}</strong>
                                                             </span>
                                                         </div>
+
+
+                                                        <div class="col-lg-12 mb-3" v-if='user_type== "intern" '>
+                                                            <input class="form-control" id="university" type="text" name="university" value="" placeholder="University" v-bind:class="{ 'is-invalid': form_step2.is_university_error }">
+                                                            <span class="help-block" v-if="form_step2.university_error">
+                                                                    <strong v-cloak>@{{form_step2.university_error}}</strong>
+                                                                </span>
+                                                        </div>
+                                                        <div class="col-lg-12 mb-3" v-if='user_type== "intern" '>
+                                                            <input class="form-control" id="grade" type="text" name="grade" value=""  placeholder="Degree" v-bind:class="{ 'is-invalid': form_step2.is_grade_error }">
+                                                            <span class="help-block" v-if="form_step2.grade_error">
+                                                                    <strong v-cloak>@{{form_step2.grade_error}}</strong>
+                                                                </span>
+                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                                 <div class="entity-form freelancer mytab" id="freelancer">

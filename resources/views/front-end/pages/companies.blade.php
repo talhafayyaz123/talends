@@ -363,7 +363,7 @@
         <div class="container px-md-0">
             <div class="row">
                 <div class="col-md-12">
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div id="carouselExampleControls" class="carousel slide" data-interval="false">
                         <div class="carousel-inner">
                             <h2>Successful project delivered by Agencies</h2>
                             <div class="carousel-item active">
@@ -456,17 +456,19 @@
     <section class="demand_services">
         <div class="container px-md-0">
             <div class="row">
-                <div class="col-12 mb-3">
+                <div class="col-12">
                     <h2>in-demand services from agencies</h2>
                 </div>
+                <div class="row">
                 @foreach($categories as $category)
-                    <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="col-lg-3" style="max-width: 20% !important;">
                         <div class="content-box">
                             <img src="{{ asset('uploads/categories/'.$category->image)}}" alt="" class="img-fluid mb-3">
                             <p>{{ $category->title }}</p>
                         </div>
                     </div>
-                @endforeach        
+                @endforeach  
+                </div>      
             </div>           
         </div>
     </section>
