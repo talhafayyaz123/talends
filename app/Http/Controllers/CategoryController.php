@@ -120,6 +120,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $server_verification = Helper::worketicIsDemoSite();
+         
         if (!empty($server_verification)) {
             Session::flash('error', $server_verification);
             return Redirect::back();
@@ -128,8 +129,7 @@ class CategoryController extends Controller
             $request, [
                 'category_title'    => 'required',
                 'parent_category'    => 'required',
-                'category_title'    => 'required',
-                'sub_category'    => 'required',
+                'category_abstract'    => 'required',
             ]
         );
 

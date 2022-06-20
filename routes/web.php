@@ -61,7 +61,6 @@ Route::get('why-talends', 'HomeController@whyTalends')->name('whyTalends');
 
 Route::get('find-right-talends', 'HomeController@FindRightTalends')->name('FindRightTalends');
 
-
 Route::get('government', 'HomeController@government')->name('government');
 Route::get('browse-jobs', 'HomeController@browseJobs')->name('browseJobs');
 Route::get('find-talends', 'HomeController@findTalents')->name('findTalends');
@@ -349,6 +348,11 @@ Route::group(
        Route::post('admin/save-about-talends', 'HomePagesController@storeTalends');
        Route::post('admin/update-about-talends/{id}', 'HomePagesController@updateTalends');
 
+       Route::get('admin/privacy/policy', 'SiteManagementController@companyExpertise')->name('adminPrivacyPolicy');
+       Route::get('admin/add_more-privacy_policy/{no}', 'SiteManagementController@addMorePrivacyPolicy')->name('addMorePrivacyPolicy');
+
+       Route::post('admin/privacy-policy', 'SiteManagementController@storePrivacyPolicy')->name('storePrivacyPolicy');
+
      
        Route::post('admin/save-why-agency-plan', 'HomePagesController@storeWhyAgencyPlan');
         Route::post('admin/update-why-agency-plan/{id}', 'HomePagesController@updateWhyAgencyPlan');
@@ -495,7 +499,9 @@ Route::group(
         Route::get('company/hiring_requests', 'CompanyController@companyHiringRequests')->name('companyHiringRequests');
         Route::get('company/hiring_request_detail/{id}', 'CompanyController@companyHiringRequestDetail')->name('companyHiringRequestDetail');
 
-        
+        Route::get('company/jobs/{status}', 'CompanyController@showCompanyJobs');
+        Route::get('company/job/{slug}', 'CompanyController@showOnGoingJobDetail')->name('showOnGoingCompanyJobDetail');
+        Route::get('company/dispute/{slug}', 'UserController@raiseCompanyDispute');
 
 
         Route::get('freelancer/profile', 'FreelancerController@index')->name('personalDetail');
@@ -583,6 +589,7 @@ Route::group(
 Route::get('hire/agency/{id}', 'CompanyController@hireAgencyForm')->name('hireAgencyForm');
 Route::post('store/hire/agency/{id}', 'CompanyController@storeHireAgency')->name('storeHireAgency');
 Route::get('success/hire/agency/{id}', 'CompanyController@successHireAgencyForm')->name('successHireAgency');
+Route::get('privacy/policy', 'PublicController@privacyPolicy')->name('privacyPolicy');
 
 
 

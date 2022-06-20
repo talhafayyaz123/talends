@@ -529,34 +529,34 @@ return $response;
     {
         $list = array(
             '1' => array(
-                'title' => 'AED 50',
-                'search_title' => 'AED 50',
-                'value' => '50',
-            ),
-            '2' => array(
-                'title' => 'AED 100',
-                'search_title' => 'AED 100',
-                'value' => '100',
-            ),
-            '3' => array(
                 'title' => 'AED 500',
                 'search_title' => 'AED 500',
                 'value' => '500',
             ),
+            '2' => array(
+                'title' => 'AED 5000',
+                'search_title' => 'AED 5000',
+                'value' => '5000',
+            ),
+            '3' => array(
+                'title' => 'AED 10000',
+                'search_title' => 'AED 10000',
+                'value' => '500',
+            ),
             '4' => array(
-                'title' => 'AED 1000',
-                'search_title' => 'AED 1000',
-                'value' => '1000',
+                'title' => 'AED 25000',
+                'search_title' => 'AED 25000',
+                'value' => '25000',
             ),
             '5' => array(
-                'title' => 'AED 1500',
-                'search_title' => 'AED 1500',
-                'value' => '1500',
+                'title' => 'AED 50000',
+                'search_title' => 'AED 50000',
+                'value' => '5000',
             ),
             '6' => array(
-                'title' => 'AED 2500',
-                'search_title' => 'AED 2500',
-                'value' => '2500',
+                'title' => 'AED 100000',
+                'search_title' => 'AED 100000',
+                'value' => '100000',
             ),
         );
         return $list;
@@ -566,19 +566,19 @@ return $response;
     {
         $list = array(
             '1' => array(
-                'title' => '$50',
-                'search_title' => '$50',
+                'title' => 'AED 50',
+                'search_title' => 'AED 50',
                 'value' => '50',
             ),
             '2' => array(
-                'title' => '$100',
-                'search_title' => '$100',
-                'value' => '100',
+                'title' => 'AED 25',
+                'search_title' => 'AED 25',
+                'value' => '25',
             ),
             '3' => array(
-                'title' => '$500+',
-                'search_title' => '$500+',
-                'value' => '500+',
+                'title' => 'AED 50+',
+                'search_title' => 'AED 50+',
+                'value' => '50+',
             ),
         );
         return $list;

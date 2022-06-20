@@ -143,12 +143,13 @@ $join_community=App\Helper::getJoinCommunity();
         <div class="row align-items-end">
             <div class="col-md-8 pb-3 align-self-center">
                 {!! $join_community->banner_description ?? '' !!}
-                <a href="{{route('findTalends')}}" class="btn btn-theme px-4 rounded-pill">Find A Job</a>
-                <a href="#" class="btn btn-theme-white px-4 rounded-pill ml-md-3">Submit A Job</a>
+                <a href="{{url('search-results?type=job')}}" class="btn btn-theme px-4 rounded-pill">Find A Job</a>
+                <a href="{{ route('login') }}" class="btn btn-theme-white px-4 rounded-pill ml-md-3">Submit A Job</a>
             </div>
             <div class="col-md-4">
                 @if(isset( $join_community->about_talends_image) )
-                <img src="{{asset('/talends/assets/img/join_talend_new.png')}}" class="w-100"
+            
+                <img src="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="w-100"
                     alt="">
                 @endif
             </div>
@@ -220,16 +221,16 @@ $footer_menus_4=App\Helper::footerMenu4();
                     <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-youtube-square fa-2x"></i></a> </li>
                     <li class="px-1"> <a href="javascript:;" target="_self"><i class="bi-tiktok fa-2x"></i></a> </li>
                 </ul>
-                <p class="mb-0">Talends.com ©2022 All Rights Reserved. </p>
+                <p class="mb-0">Talends.com ©2022 All Rights Reserved. &nbsp;&nbsp;&nbsp; <a href="{{ route('privacyPolicy') }}"> Privacy Policy </a> </p>
                 <p class="small">Dubai, United Arab Emirates</p>
             </div>
-            <div class="col-md-6">
+           <!--  <div class="col-md-6">
                 <ul class="list-inline mb-0">
                     <li class="px-2"> <a href="javascript:;" target="_self">Site Map</a> </li>
                     <li class="px-2"> <a href="javascript:;" target="_self">Term & conditions</a> </li>
                     <li class="px-2"> <a href="javascript:;" target="_self">Privacy Policy</a> </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </div>
 </footer>

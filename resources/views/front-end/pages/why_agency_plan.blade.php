@@ -13,7 +13,7 @@ Why Join Agency Plan
             <div class="row justify-content-center">
                 <div class="col-md-8 text-center pb-5">
                      {!! $why_agency_plan->banner_description ?? '' !!}
-                    <a href="{{ route('register') }}" class="btn btn-theme px-4 rounded-pill">Register Your Agency</a>
+                    <a href="{{ route('companyRegistraton') }}" class="btn btn-theme px-4 rounded-pill">Register Your Agency</a>
                 </div>
             </div>
         </div>
@@ -145,7 +145,7 @@ Why Join Agency Plan
                     <div class="content-box">
                         {!! $why_agency_plan->work_description ?? '' !!}
                         <div class="mt-5 mb-3">
-                            <a href="{{ route('register') }}" class="rounded-pill px-4 btn mb-2">Talk to an Advisor</a>
+                            <a href="{{ route('FindRightTalends') }}" class="rounded-pill px-4 btn mb-2">Talk to an Advisor</a>
                             <span class="ml-md-4 mb-2">Support 24/7 <a href="tel:+971 52 768 4867" class="phone-number ml-2">+971 52 768 4867</a></span>
                         </div>                        
                     </div>
@@ -170,13 +170,17 @@ Why Join Agency Plan
                                         <th class="col-desc">What You’ll Get PRICE($)</th>
                                         <th class="col-plan1">
                                             <div class="plan-title">                                            
-                                                <h5><b>$45</b> Monthly </h5>
+                                                <h5> 
+                                                    <!-- <span><img src="{{asset('uploads/home-pages/why_agency_plan/plan-icon.png')}}" alt="Plan Icon" width="30" class="img-fluid mr-2"></span> -->
+                                                <b>${{ $package[0]->cost ?? '0' }}</b> Monthly </h5>
                                             </div>
                                         </th>
                                         <th class="col-plan2">
                                             <div class="plan-title d-flex align-items-center justify-content-center">                                            
-                                                <h5><b>$45</b> Yearly</h5>
-                                                <button class="btn ml-2">Save $144</button>
+                                                <h5>
+                                                    <!-- <span><img src="{{asset('uploads/home-pages/why_agency_plan/plan-icon.png')}}" alt="Plan Icon" width="30" class="img-fluid mr-2"></span> -->
+                                                    <b>${{ $package[1]->cost ?? '0' }}</b> Yearly</h5>
+                                               
                                             </div>
                                         </th>
                                     </tr>
@@ -213,21 +217,7 @@ Why Join Agency Plan
                                         <td class="text-center  "><i class="fa fa-check text-theme"></i></td>
                                     </tr>                               
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td></td>
-                                        <td>
-                                            <div class="plan-actions text-center">
-                                                <a href="javascript:;" class="btn btn-block py-3">Choose</a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="plan-actions text-center">
-                                                <a href="javascript:;" class="btn btn-block py-3">Choose</a>
-                                            </div>
-                                        </td>                                        
-                                    </tr>
-                                </tfoot>
+                                
                             </table>
                         </div>
                     </div>
@@ -296,47 +286,13 @@ Why Join Agency Plan
             </div>
         </div>
     </section>
-    <!-- <section class="tal-p-plans">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="plans-inner">
-                        <div class="plans-wrap">
-                            <div class="plan">
-                                {!! $why_agency_plan->payment_description ?? '' !!}
-
-                                <a class="plan-btn" href="{{url("company/registration",['plan'=>'monthly' ])}}">Choose</a>
-
-                            </div>
-                            <div class="plan">
-                                {!! $why_agency_plan->support_description ?? '' !!}
-                                <a class="plan-btn" href="{{url("company/registration",['plan'=>'yearly' ])}}">Choose</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-    <!-- <section class="tal-faq">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h3>Frequently asked questions</h3>
-                </div>
-                <div class="col-md-8">
-                {!! $why_agency_plan->freelancer_benefits ?? '' !!}
-
-                </div>
-            </div>
-        </div>
-    </section> -->
+   
     <div class="banner-sec">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12 theme_bg_dark text-center text-white custom-banner">
                     {!! $why_agency_plan->internees_benefits ?? '' !!}
-                    <a href="#" class="btn btn-theme-white rounded-pill px-4 mt-4">Register your Agency</a>
+                    <a href="{{ route('companyRegistraton') }}" class="btn btn-theme-white rounded-pill px-4 mt-4">Register your Agency</a>
                 </div>
             </div>
         </div>

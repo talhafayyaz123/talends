@@ -159,49 +159,6 @@
 
         </div>
 
-        <!-- <div class="wt-widget wt-effectiveholder">
-
-        <a  onclick="toogle_skill()"> <div class="wt-widgettitle">
-
-                <span>{{ trans('lang.skills') }}</span>
-
-                <span class="filter_toogle">  <i class="fa fa-angle-down" aria-hidden="true"></i></span>
-
-
-
-            </div></a>
-
-            <div class="wt-widgetcontent job_skill_filter" style="display: none;">
-
-                <fieldset>
-
-                    @if (!empty($skills))
-
-                        <div class="wt-checkboxholder wt-verticalscrollbar">
-
-                            @foreach ($skills as $key => $skill)
-
-                                @php $checked = (!empty($_GET['skills']) && in_array($skill->slug, $_GET['skills'])) ? 'checked' : '' @endphp
-
-                                <span class="wt-checkbox">
-
-                                    <input id="skill-{{{ $key }}}" type="checkbox" name="skills[]" value="{{{$skill->slug}}}" {{$checked}} >
-
-                                    <label for="skill-{{{ $key }}}">{{{ $skill->title }}}</label>
-
-                                </span>
-
-                            @endforeach
-
-                        </div>
-
-                    @endif
-
-                </fieldset>
-
-            </div>
-
-        </div> -->
 
         <div class="wt-widget wt-effectiveholder">
 

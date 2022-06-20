@@ -44,7 +44,7 @@
                 <div class="row">
                     <div class="col-md-6">
                     {!!  $about_talends->project_description ?? '' !!} 
-                        <a href="{{ route('browseJobs') }}" class="theme_btn inverse_btn">See other projects</a>
+                        <a href="{{ url('search-results?type=job') }}" class="theme_btn inverse_btn">See other projects</a>
                     </div>
                     <div class="col-md-6">
                     @if( isset($about_talends->talends_project_image))
@@ -75,7 +75,7 @@
                     <div class="col-md-6">
                     {!!  $about_talends->payment_description ?? '' !!} 
 
-                        <a href="{{ route('findTalends') }}" class="theme_btn inverse_btn">Find a freelancer</a>
+                        <a href="{{ url('search-results?type=freelancer') }}" class="theme_btn inverse_btn">Find a freelancer</a>
                     </div>
                     <div class="col-md-6">
                     @if( isset($about_talends->talends_payment_image))
@@ -151,18 +151,7 @@
                             </div>
                         </div>
                     </div>
-                        <!-- <div class="talend_categorylist_box">
-                            <h4>Freelancers</h4>                            
-                        </div>
-                        <div class="talend_categorylist_box">
-                            <h4>Internees’s</h4>                            
-                        </div>
-                        <div class="talend_categorylist_box">
-                            <h4>Companies/Agencies</h4>                            
-                        </div>
-                        <div class="talend_categorylist_box">
-                            <h4>Goverment</h4>
-                        </div> -->
+                      
                     </div>
                 </div>
             </div>

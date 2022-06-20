@@ -55,7 +55,7 @@ Company Registration
                                             </div>
                                             <div class="col-xl-6 col-lg-6 mb-3">
                                                 <label class="fieldlabels">Email <span class="text-danger">*</span></label>
-                                                <input type="email" name="email" placeholder="Email" class="form-control" id='email' value="{{ old('email') }}"/>
+                                                <input type="email" name="email" placeholder="Only Business Email" class="form-control" id='email' value="{{ old('email') }}"/>
                                             </div>
                                             <div class="col-xl-6 col-lg-6 mb-3">
                                                 <label class="fieldlabels">Phone Number <span class="text-danger">*</span></label>
@@ -107,7 +107,7 @@ Company Registration
                                             <div class="col-xl-6 col-lg-6 mb-4">
                                                 <label class="fieldlabels">Agency Language <span class="text-danger">*</span></label>
                                                 <select name="agency_language" id='agency_language' class="form-control" style="display: inline !important;">
-                                                    <option value="">Select Language</option>
+                                                    <option value="">Select Native Language</option>
                                                     @foreach ($languages as $key => $language)
                                                     <option value="{{{$language['id']}}}">{{{$language['title']}}}</option>
                                                     @endforeach
@@ -118,10 +118,10 @@ Company Registration
                                                 <input type="text" class="form-control" name="agency_website" placeholder="Agency Website" value="{{ old('agency_website') }}"/>
                                             </div>
                                             <div class="col-xl-6 col-lg-6 mb-4">
-                                                <label class="fieldlabels">Budget Range <span class="text-danger">*</span></label>
+                                                <label class="fieldlabels">Select Budget Range <span class="text-danger">*</span></label>
                                                 <select name="budget" id='budget' class="form-control">
-                                                    <option value="">Select Price</option>
-                                                    @foreach ($company_bedget as $key => $budget)
+                                                <option value="">Your Average Project Budget</option> 
+                                                @foreach ($company_bedget as $key => $budget)
                                                     <option value="{{{$budget['value']}}}">{{{$budget['title']}}}</option>
                                                     @endforeach
                                                 </select>
@@ -176,6 +176,7 @@ Company Registration
                                                                 <ul class="price-feature">
                                                                     <li style="padding: 10px 0px; border-bottom:1px solid #349f1a;font-weight:bold;color: #9a9797;">Choos Your Plan</li>
                                                                     @foreach ($monthly_options as $key => $option)
+                                                                    
                                                                         @if ($key == 'duration')
                                                                             <li><i class="fa fa-check-circle mr-2"></i><span>{{$key}}: </span></li>
                                                                         @elseif ($key == 'badge')
@@ -192,13 +193,28 @@ Company Registration
                                                                 <ul class="price-feature">
                                                                     <li class="text-center" style="padding: 10px 4px;border-bottom: 1px solid #349f1a;color: #9a9797; font-weight: bold;">${{ $package[0]->cost ?? '0' }} Monthly</li>
                                                                     @foreach ($monthly_options as $key => $option)
+                                                                    
                                                                         @if ($key == 'duration')
                                                                             <li class="text-center"><span>{{ Helper::getPackageDurationList($monthly_options['duration']) }}</span></li>
                                                                         @elseif ($key == 'badge')
                                                                             <li class="text-center"><span>{{ Helper::getBadgeTitle($package[0]->badge_id) }}</span></li>
                                                                         @else
-                                                                            <li class="text-center"><span> {{ $option }}</span></li>
-                                                                        @endif
+                                                                        
+                                                                        @if($option=='true')
+                                                                          <li class="text-center"><i class="fa fa-check"></i></li>
+
+                                                                          @elseif($option=='false')
+                                                                          <li class="text-center"><i class="fa fa-times" aria-hidden="true"></i></li>
+
+                                                                          @else
+                                                                          <li class="text-center"><span> {{ $option }}</span></li>
+
+
+                                                                          @endif
+
+                                                                         
+                                                                        
+                                                                            @endif
                                                                     @endforeach
                                                                 </ul>
                                                             </div>
@@ -214,7 +230,17 @@ Company Registration
                                                                         @elseif ($key == 'badge')
                                                                             <li class="text-center"><span> {{ Helper::getBadgeTitle($package[1]->badge_id) }}</span></li>
                                                                         @else
-                                                                            <li class="text-center"><span> {{ $option }}</span></li>
+                                                                        @if($option=='true')
+                                                                          <li class="text-center"><i class="fa fa-check"></i></li>
+
+                                                                          @elseif($option=='false')
+                                                                          <li class="text-center"><i class="fa fa-times" aria-hidden="true"></i></li>
+
+                                                                          @else
+                                                                          <li class="text-center"><span> {{ $option }}</span></li>
+
+
+                                                                          @endif
                                                                         @endif
                                                                     @endforeach
                                                                 </ul>

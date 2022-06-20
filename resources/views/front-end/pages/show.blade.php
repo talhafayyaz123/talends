@@ -33,9 +33,10 @@
                                     <div class="content_box_wrapper">
                                         <div class="content_box home_page_banner_description">
                                             {!! $banner_settings->banner_description ?? '' !!}
-                                            <a href="{{ route('jobs') }}" class="btn btn-theme px-4 rounded-pill mt-4">Find a
+                                            <a href="{{ url('search-results?type=job') }}" class="btn btn-theme px-4 rounded-pill mt-4">Find a
                                                 Job</a>
-                                            <a href="#" class="btn btn-outline-theme px-4 rounded-pill mt-4 ml-0">Submit a Project</a>
+                                            <!-- <a href="#" class="btn btn-outline-theme px-4 rounded-pill mt-4 ml-0">Submit a Project</a> -->
+                                            <a href="{{ route('companyRegistraton') }}" class="btn btn-outline-theme px-4 rounded-pill mt-4 ml-0">Register Agency</a>
                                         </div>
                                     </div>
                                 </div>
@@ -82,7 +83,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <a href="{{ route('findTalends') }}">
+                    <a href="{{ url('search-results?type=freelancer') }}">
                         <div class="talend_img_card opportunity_card">
 
 
@@ -106,7 +107,7 @@
                     </a>
                 </div>
                 <div class="col-md-4">
-                    <a href="{{ route('whyTalends') }}">
+                    <a href="{{ route('FindRightTalends') }}">
                         <div class="talend_img_card opportunity_card">
                             <h3> {{$find_right_opportunity->services_description ?? '' }} </h3>
                             <!-- <span class="tal-readmore">Read More</span> -->
@@ -126,7 +127,7 @@
 
                     {!! $banner_settings->features_text ?? '' !!}
 
-                    <a href="#" class="btn btn-theme px-4 rounded-pill mt-3">I’m an Intern</a>
+                    <a href="{{ route('register') }}" class="btn btn-theme px-4 rounded-pill mt-3">I’m an Intern</a>
                     <a href="#" class="btn btn-theme-white px-4 rounded-pill ml-md-3 mt-4">I’m Hiring an Intern</a>
                 </div>
                 <div class="col-md-5">
@@ -142,7 +143,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div id="carouselExampleControls" class="carousel slide" data-interval="false">
                         <div class="carousel-inner">
                             <h2>Featured Success Stories</h2>
                             <div class="carousel-item active">
@@ -246,7 +247,7 @@
                         {!! $banner_settings->services_description ?? '' !!}
                         <div class="row align-items-center">
                             <div class="col-lg-6 col-sm-6 col-12 text-center">
-                                <a href="javascript:;" class="btn btn-outline-theme px-4 rounded-pill">Join the community</a>
+                                <a href="{{ route('register') }}" class="btn btn-outline-theme px-4 rounded-pill">Join the community</a>
                             </div>
                             <div class="col-lg-6 col-sm-6 col-12 px-0 text-center text-md-left">
                                 <p class="mb-0 font-weight-bold">Support 24/7 <a class="ml-3" href="tel:052-768-4867">052-768-4867</a></p>

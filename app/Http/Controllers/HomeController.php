@@ -208,7 +208,12 @@ class HomeController extends Controller
 
      public function whyAgencyPlan(){
         $why_agency_plan=AboutTalendsPage::where('page_type','why_agency_plan')->first();
-        return view('front-end.pages.why_agency_plan',compact('why_agency_plan'));
+        $package=Package::where('role_id',4)->where('trial','!=',1)->orderBy('id','asc')->take(2)->get();
+
+        $monthly_options = !empty($package[0]->options) ? unserialize($package[0]->options) : array();
+        $yearly_options = !empty($package[1]->options) ? unserialize($package[1]->options) : array();
+    
+        return view('front-end.pages.why_agency_plan',compact('yearly_options','monthly_options','package','why_agency_plan'));
      }
 
      public function companyRegistration(){

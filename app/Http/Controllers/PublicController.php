@@ -148,6 +148,23 @@ class PublicController extends Controller
                 'role' => 'not_in:admin',
                 'locations' => 'required',
             ];
+        }elseif($role=='employer'){
+
+            $validation= [
+
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+                'role' => 'not_in:admin',
+                'availability' => 'required',
+                'locations' => 'required',
+                'employees' => 'required',
+                'department' => 'required',
+            ];
+            
+
+
         }else{
             
             $validation= [
@@ -158,7 +175,10 @@ class PublicController extends Controller
                 'role' => 'not_in:admin',
                 'availability' => 'required',
                 'locations' => 'required',
-
+                'budget' => 'required',
+                'university' => 'required',
+                'grade' => 'required',
+                'specialization' => 'required',
             ];
         }
         $this->validate(
@@ -1478,4 +1498,13 @@ class PublicController extends Controller
 		$price_range = !empty($general_settings) && !empty($general_settings[0]['price_range']) ? $general_settings[0]['price_range'] : 1000;
         return $price_range;
     }
+
+    public function privacyPolicy()
+    {
+        $json = array();
+        $privacy_policy = !empty(SiteManagement::getMetaValue('privacy_policy')) ? SiteManagement::getMetaValue('privacy_policy') : array();
+        return View('front-end.pages.privacy_policy',compact('privacy_policy'));
+
+    }
+    
 }

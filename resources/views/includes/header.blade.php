@@ -129,6 +129,7 @@
         </style>
     @endpush
     @if (!empty($page_header))
+   
         @if ($page_header == 'style1')
             @if (file_exists(resource_path('views/extend/includes/headers/header1.blade.php'))) 
                 @include('extend.includes.headers.header1', ['page_order' => $page_order])

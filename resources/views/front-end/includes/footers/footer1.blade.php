@@ -61,13 +61,13 @@
             </div>
             <div class="row footer_bottom">
                 <div class="col-md-6">
-                    <p>© 2021 All Rights Reserved. </p>
+                <p>© 2022 All Rights Reserved. &nbsp;&nbsp;&nbsp; <a href="{{ route('privacyPolicy') }}"> Privacy Policy </a>  </p>
                 </div>
-                <div class="col-md-6">
+               <!--  <div class="col-md-6">
                     <ul class="list-inline mb-0">
                         <li class="px-2"> <a href="javascript:;" target="_self">Privacy Policy</a> </li>
                     </ul>
-                </div>
+                </div> -->
             </div>
         </div>
     </footer>

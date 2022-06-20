@@ -4,6 +4,7 @@
         <div class="wt-dashboardbox">
             <div class="wt-dashboardboxtitle">
                 <h2>{{ trans('lang.completed_jobs') }}</h2>
+                
             </div>
             <div class="wt-dashboardboxcontent wt-jobdetailsholder">
                 <div class="wt-freelancerholder">
@@ -57,7 +58,7 @@
                                         <div class="wt-rightarea">
                                             <div class="wt-btnarea">
                                                 <span> {{ trans('lang.project_completed') }}</span>
-                                                <a href="{{{ url('freelancer/job/'.$job->slug) }}}" class="wt-btn">{{ trans('lang.view_detail') }}</a>
+                                                <a href="{{{ url('company/job/'.$job->slug) }}}" class="wt-btn">{{ trans('lang.view_detail') }}</a>
                                             </div>
                                         </div>
                                     </div>

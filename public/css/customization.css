@@ -805,6 +805,10 @@ a.notif {
 #job-filters::-webkit-scrollbar-thumb:hover {
     background: #42C722; 
   }
+
+  .help-block{
+	font-size: 10px !important;
+}
 @media screen and (max-width:1366px) {
     .filters-container {
         width: 1280px;

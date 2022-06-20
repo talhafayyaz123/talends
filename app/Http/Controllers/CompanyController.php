@@ -278,12 +278,14 @@ class CompanyController extends Controller
         $role=Auth::user()->getRoleNames()[0];
            if( $role=='admin'){
             $hiring_requests=HireAgency::all();
-
+          
            }else{
                
             $hiring_requests=HireAgency::where('agency_id',Auth::user()->id)->get();
 
            }
+
+           
         return view(
             'back-end.company.hiring_requests.index',
             compact(
@@ -894,7 +896,7 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showFreelancerJobs($status)
+    public function showCompanyJobs($status)
     {
         $ongoing_jobs = array();
         $freelancer_id = Auth::user()->id;
@@ -907,7 +909,7 @@ class CompanyController extends Controller
             if (!empty($status) && $status === 'hired') {
                 if (file_exists(resource_path('views/extend/back-end/freelancer/jobs/ongoing.blade.php'))) {
                     return view(
-                        'extend.back-end.freelancer.jobs.ongoing',
+                        'extend.back-end.company.jobs.ongoing',
                         compact(
                             'ongoing_jobs',
                             'symbol'
@@ -915,7 +917,7 @@ class CompanyController extends Controller
                     );
                 } else {
                     return view(
-                        'back-end.freelancer.jobs.ongoing',
+                        'back-end.company.jobs.ongoing',
                         compact(
                             'ongoing_jobs',
                             'symbol'
@@ -925,7 +927,7 @@ class CompanyController extends Controller
             } elseif (!empty($status) && $status === 'completed') {
                 if (file_exists(resource_path('views/extend/back-end/freelancer/jobs/completed.blade.php'))) {
                     return view(
-                        'extend.back-end.freelancer.jobs.completed',
+                        'extend.back-end.company.jobs.completed',
                         compact(
                             'completed_jobs',
                             'symbol'
@@ -933,7 +935,7 @@ class CompanyController extends Controller
                     );
                 } else {
                     return view(
-                        'back-end.freelancer.jobs.completed',
+                        'back-end.company.jobs.completed',
                         compact(
                             'completed_jobs',
                             'symbol'
@@ -943,7 +945,7 @@ class CompanyController extends Controller
             } elseif (!empty($status) && $status === 'cancelled') {
                 if (file_exists(resource_path('views/extend/back-end/freelancer/jobs/cancelled.blade.php'))) {
                     return view(
-                        'extend.back-end.freelancer.jobs.cancelled',
+                        'extend.back-end.company.jobs.cancelled',
                         compact(
                             'cancelled_jobs',
                             'symbol'
@@ -951,7 +953,7 @@ class CompanyController extends Controller
                     );
                 } else {
                     return view(
-                        'back-end.freelancer.jobs.cancelled',
+                        'back-end.company.jobs.cancelled',
                         compact(
                             'cancelled_jobs',
                             'symbol'
@@ -1009,7 +1011,7 @@ class CompanyController extends Controller
                 );
             } else {
                 return view(
-                    'back-end.freelancer.jobs.show',
+                    'back-end.company.jobs.show',
                     compact(
                         'job',
                         'employer_name',

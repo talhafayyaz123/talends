@@ -78,15 +78,7 @@
                 <!-- <div id="" class="wt-haslayout"> -->
                 <div class="col-md-12 col-lg-7 col-xl-8">
                     <div class="wt-userlistingholder wt-userlisting wt-haslayout ">
-                        <!-- <div class="wt-userlistingtitle">
-
-                            @if (!empty($users))
-
-                            <span>{{ trans('lang.01') }} {{$users->count()}} of {{\App\User::role('freelancer')->count()}} results @if (!empty($keyword)) for <em>"{{{$keyword}}}"</em> @endif</span>
-
-                            @endif
-
-                        </div> -->
+                       
                         <div class="wt-userlistingholder wt-userlisting wt-haslayout freelancer_list">
                             @include('front-end.freelancers.data')
                         </div>

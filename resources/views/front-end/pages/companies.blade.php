@@ -174,74 +174,6 @@
                                 </div>
                             </div>
 
-                            <!-- <select name="category[]" class="talent_select form-control " id="category_id" multiple onchange=select_sub_categories(this)>
-                                <option value="">Select Category</option>
-                                    @foreach($categories as $category)
-                                        @php
-                                            $select='';
-
-                                            if( !empty(Request::get('category_id')) && in_array($category->id, explode(',',Request::get('category_id')) ) ){
-
-                                            $select='selected=selected';
-                                            }
-                                        @endphp
-                                        <option value="{{ $category->id }}" {{ $select}}>{{ $category->title }}</option>
-                                    @endforeach
-                            </select> -->
-
-                            <!-- <select name="sub_categories[]" multiple id="freelancerSubCategory" class="talent_select form-control" onchange='select_cat_skills(this)'>
-                                <option value="">Select Sub Categories</option>
-                                @if(isset($sub_categories) && !empty($sub_categories) )
-                                    @foreach($sub_categories as $key =>$value)
-                                        @php
-                                            $select='';
-                                            if( !empty(Request::get('sub_category_id')) && in_array( $value->sub_category_id, explode(',',Request::get('sub_category_id')) ) ){
-                                            $select='selected=selected';
-                                            }
-                                        @endphp
-                                        <option value="{{  $value->sub_category_id }}" {{ $select }}>{{ $value->title }}</option>
-                                    @endforeach
-                                @endif
-                            </select> -->
-
-                            <!-- <select name="price" class="form-control" id="price">
-                                <option value="">Price</option>
-                                @foreach(Helper::getComapnyBudgetList() as $key=>$price )
-                                    @php
-                                        $location_select='';
-                                        if(Request::get('price') && Request::get('price') ==$price['value'] ){
-                                        $location_select='selected=selected';
-                                        }
-                                    @endphp
-                                <option value="{{$price['value']}}" <?php echo $location_select;  ?>>{{$price['title']}}</option>
-                                @endforeach
-                            </select> -->
-
-                            <!-- <select class="form-control" id="location_id" name="location_id" style="width: 174px;">
-                                <option value="">Location</option>
-                                @foreach($locations as $location):
-                                    @php
-                                        $location_select='';
-                                        if(Request::get('location_id') && Request::get('location_id') ==$location->id ){
-                                        $location_select='selected=selected';
-                                        }
-                                    @endphp
-                                    <option value="{{ $location->id }}" <?php echo $location_select;  ?>>{{ $location->title }}</option>
-                                @endforeach
-                            </select> -->
-
-                            <!-- <select class="form-control" id="employees" name="employees" style="width: 174px;">
-                                <option value="">Team Strength</option>
-                                @foreach (Helper::getEmployeesList() as $key => $employee)
-                                    @php
-                                        $location_select='';
-                                        if(Request::get('employees') && Request::get('employees') ==$employee['value'] ){
-                                        $location_select='selected=selected';
-                                        }
-                                    @endphp
-                                    <option value="{{ $employee['value'] }}" <?php echo $location_select;  ?>>{{ $employee['title'] }}</option>
-                                @endforeach
-                            </select> -->
 
                             
                         </div>
@@ -423,7 +355,7 @@
         <div class="container px-md-0">
             <div class="row">
                 <div class="col-md-12">
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div id="carouselExampleControls" class="carousel slide" data-interval="false">
                         <div class="carousel-inner">
                             <h2>Successful project delivered by Agencies</h2>
                             <div class="carousel-item active">
@@ -516,9 +448,10 @@
     <section class="demand_services">
         <div class="container px-md-0">
             <div class="row">
-                <div class="col-12 mb-3">
+                <div class="col-12">
                     <h2>in-demand services from agencies</h2>
                 </div>
+                <div class="row">
                 @foreach($categories as $category)
                     <div class="col-lg-20 col-md-4 col-sm-6">
                         <div class="content-box">
@@ -526,7 +459,8 @@
                             <p><a href="javascript:;">{{ $category->title }}</a></p>
                         </div>
                     </div>
-                @endforeach        
+                @endforeach  
+                </div>      
             </div>           
         </div>
     </section>

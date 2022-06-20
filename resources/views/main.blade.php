@@ -33,9 +33,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-
-
-
     <meta property="og:title" content="Talends" />
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -52,7 +49,7 @@
 
     <meta name="twitter:image"  />
 
-
+	
 
 	<link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png')}}">
 
