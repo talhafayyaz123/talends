@@ -59,20 +59,19 @@
                                     <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1">
                                         <div class="row">  
                                             @foreach($categories as $category)       
-                                            @php
-                                            $select='';
+                                                @php
+                                                    $select='';
 
-                                            if( !empty(Request::get('category_id')) && in_array($category->id, explode(',',Request::get('category_id')) ) ){
+                                                    if( !empty(Request::get('category_id')) && in_array($category->id, explode(',',Request::get('category_id')) ) ){
 
-                                            $select='checked=checked';
-                                            }
-                                        @endphp                           
+                                                    $select='checked=checked';
+                                                    }
+                                                @endphp                           
                                             <div class="col-md-4 mb-3">
                                                 <input type="checkbox" name="category[]" value="{{ $category->id }}" id='category_id' onclick="select_sub_categories(this)" {{$select}}> {{ $category->title }}
                                             </div>
                                             @endforeach
                                         </div>
-                                        
                                     </div>
                                 </div>
                                 <div class="dropdown position-static filter-dropdown">
@@ -396,16 +395,9 @@
                             <br>
 
                             </a>
-
                             <span class="company_description">Total Team Strength</span>
 
                             <br>{{ $value->profile->no_of_employees ?? "0" }}
-
-
-
-
-
-
 
                         </div>
 
@@ -436,7 +428,7 @@
                             <h2>Successful project delivered by Agencies</h2>
                             <div class="carousel-item active">
                                 <div class="row fss_box_row fss_red_bg">
-                                    <div class="col-md-4 pri=md-0">
+                                    <div class="col-md-4 pr-md-0 d-none d-md-block">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->about_talends_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->about_talends_image)}}"
@@ -453,7 +445,7 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="row fss_box_row fss_blue_bg">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 pr-md-0 d-none d-md-block">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->talends_project_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->talends_project_image)}}"
@@ -471,7 +463,7 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="row fss_box_row fss_blue_bg">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 pr-md-0 d-none d-md-block">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->talends_work_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->talends_work_image)}}"
@@ -489,7 +481,7 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="row fss_box_row fss_blue_bg">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 pr-md-0 d-none d-md-block">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->talends_payment_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->talends_payment_image)}}"
@@ -528,10 +520,10 @@
                     <h2>in-demand services from agencies</h2>
                 </div>
                 @foreach($categories as $category)
-                    <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="col-lg-20 col-md-4 col-sm-6">
                         <div class="content-box">
                             <img src="{{ asset('uploads/categories/'.$category->image)}}" alt="" class="img-fluid mb-3">
-                            <p>{{ $category->title }}</p>
+                            <p><a href="javascript:;">{{ $category->title }}</a></p>
                         </div>
                     </div>
                 @endforeach        

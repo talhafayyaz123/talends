@@ -1545,6 +1545,10 @@ footer .social-networks li+li {
     .owl-carousel .owl-nav .owl-prev {
         left: -15px
     }
+    section {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
     .social-networks a {
         margin: auto
     }

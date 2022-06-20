@@ -861,7 +861,7 @@ a.notif {
 @media screen and (max-width:360px) {
     .freelancer_filters .wt-widget {
         width: auto;
-        min-width: 200px;
+        min-width: 145px;
         
     }
     
@@ -1352,7 +1352,7 @@ a.notif {
         left: auto;
     }
     .freelancer_filters .wt-widgettitle{
-        padding: 12px 10px;
+        padding: 12px 5px;
     }
 }
 @media(max-width:1100px){

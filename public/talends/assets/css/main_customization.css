@@ -1056,7 +1056,7 @@ a.notif {
 
 
 @media screen and (max-width:499px) {
-
+	
 	.mega_menu_tabs.nav-tabs .nav-link {
 		font-size: 12px;
 	}
@@ -1226,6 +1226,18 @@ a.notif {
 
 /* Abdul Manan's css */
 /* Agency Page */
+.col-20{
+	position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+@media (min-width:992px) {
+	.col-lg-20 {
+		flex: 0 0 20%;
+		max-width: 20%;
+	}
+}
 .why-choose h2{
 	font-size: 54px;
 	line-height: 1.2;
@@ -1341,7 +1353,7 @@ a.notif {
 	text-transform: capitalize;
 }
 .find_agency{overflow: visible;}
-.find_agency .row{
+.find_agency .container{
 	background: #CDDBC9;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 10px;
@@ -2013,6 +2025,16 @@ a.notif {
 	padding-top: 10px;
 }
 @media (max-width:768px) {
+	
+	.content_box_wrapper h2{
+		font-size: 46px;
+	}
+	.why-choose h2{
+		font-size: 32px;;
+	}
+	.note-section p, .note-row p{
+		font-size: 30px;
+	}
 	.company-detail-content .accordion{
 		padding: 10px 0;
 	}
@@ -2021,6 +2043,17 @@ a.notif {
 	}
 	.find_agency img {
 		margin-top: 0px;
+	}
+	.theme-list-sec .content-box h2{
+		font-size:30px;
+	}
+	.budget-sec .content-box h2{
+		font-size: 42px;
+	}
+	.testimonial-content-box h2 {
+		font-size: 42px;
+		line-height: 42px;
+		margin-bottom: 1.5rem;
 	}
 	.stepper-container h2,
 	.plan-banner h2,
@@ -2070,6 +2103,7 @@ a.notif {
 	.talends-plan .plan-content .col-desc{width: auto;}
 	.talends-plan .plan-content .col-plan1{width: auto;}
 	.talends-plan .plan-content .col-plan2{width: auto;}
+	.budget-sec .text-box h5{font-size: 14px;}
 }
 .tooltip-link .tooltip-content {
     position: absolute;
