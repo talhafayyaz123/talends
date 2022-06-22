@@ -97,7 +97,7 @@
                 <button class="btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     {{ trans('lang.location') }} <i class="bi-chevron-down float-right ml-3"></i>
                 </button>
-                <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1">
+                <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1" style="height: 300px;overflow-y:auto;">
                 @if (!empty($locations))
                     <div class="row">  
                     @foreach ($locations as $location)
@@ -255,7 +255,7 @@
                 <button class="btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     {{ trans('lang.langs') }} <i class="bi-chevron-down float-right ml-3"></i>
                 </button>
-                <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1">
+                <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1" style="height: 300px;overflow-y:auto;">
                     @if (!empty($languages))
                         <div class="row">  
                             @foreach ($languages as $language)

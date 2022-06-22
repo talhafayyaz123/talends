@@ -208,7 +208,7 @@
                 <div class="col-12">
                     @auth
                       
-                    @if(Auth::user()->getRoleNames()[0]=='employer')
+                    @if(Auth::user()->getRoleNames()[0]=='admin')
                     <div class="stepper-container">
                         <h2>Hire this Agency</h2>
                         <p class="mb-5">Please fill the brief below to get in touch the agency with much better and faster response. Feel free to add as much detail as needed.</p>
@@ -327,45 +327,38 @@
                                             <div class="credential-tabs">
                                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                                     <li class="nav-item">
-                                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Login</a>
+                                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Log In As Employer</a>
                                                     </li>
                                                     <li class="nav-item">
-                                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Signup as Employer</a>
+                                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Sign Up As Employer</a>
                                                     </li>
                                                 </ul>
                                                 <div class="tab-content py-4" id="myTabContent">
                                                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                                         <div class="row">
-                                                            <div class="col-md-6 mb-4">      
-                                                                <label>Account Type</label>
-                                                                <select name="role" id="role" class="form-control">
-                                                                    <option value="">Employer</option>
-                                                                    <option value="">Freelancer</option>
-                                                                    <option value="">Intern</option>
-                                                                    <option value="">Company</option>
-                                                                </select>
-                                                            </div>
                                                             <div class="col-md-6 mb-4">
                                                                 <label>Email</label>
-                                                                <input id="email" type="email" placeholder="Email" class="form-control" name="email" value="">
+                                                                <input id="email" type="email" placeholder="Business Email" class="form-control" name="email" value="">
                                                             </div>
                                                             <div class="col-md-6 mb-4">
                                                                 <label>Password</label>
                                                                 <input id="" type="password" placeholder="********" class="form-control" name="">
                                                             </div>
-                                                            <div class="col-md-6 mb-4">
-                                                                <a href="{{ route('password.request') }}" class="btn btn-link text-theme mt-5"> Forget Password</a>
-                                                            </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-5">   
-                                                                <button class="btn btn-theme rounded-pill px-5 btn-block">Sign in</button>
+                                                                <button class="btn btn-theme rounded-pill px-5 btn-block">Log In</button>
                                                             </div>
                                                             <div class="col-md-2 pt-2 text-center">
                                                                 <p>OR</p>
                                                             </div>
                                                             <div class="col-md-5">
-                                                                <button class="btn btn-outline-theme px-5 rounded-pill btn-block">Signin With Google</button>
+                                                                <button class="btn btn-outline-theme px-5 rounded-pill btn-block">Log In With Google</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">                                                            
+                                                            <div class="col-md-6 mb-4">
+                                                                <a href="{{ route('password.request') }}" class="btn btn-link text-theme"> Forgot Password?</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -408,13 +401,13 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-5">   
-                                                                <button class="btn btn-theme rounded-pill px-5 btn-block">Sign up</button>
+                                                                <button class="btn btn-theme rounded-pill px-5 btn-block">Sign Up</button>
                                                             </div>
                                                             <div class="col-md-2 pt-2 text-center">
                                                                 <p>OR</p>
                                                             </div>
                                                             <div class="col-md-5">
-                                                                <button class="btn btn-outline-theme px-5 rounded-pill btn-block">Signup With Google</button>
+                                                                <button class="btn btn-outline-theme px-5 rounded-pill btn-block">Sign Up With Google</button>
                                                             </div>
                                                         </div> 
                                                     </div>
@@ -425,13 +418,13 @@
                                     <div class="row">
                                         <div class="col-md-8 mx-auto text-center">
                                             <img src="{{ asset('talends/assets/img/icons/success-icon.png')}}" class="img-fluid mb-4"/>
-                                            <h3 class="fs-title text-center mb-3">Submit you request:</h3>
-                                            <p>Please review all the information you previously typed in the past steps, and if all is okay, submit your message to receive a response as soon as possible.</p>
-                                            <input type="submit" name="next" class="btn btn-theme rounded-pill px-4  m-2  py-3" value="Submit"/>
+                                            <!-- <h3 class="fs-title text-center mb-3">Submit you request:</h3> -->
+                                            <p>Please submit your enquiry as employer, or if required review all the information you previously provided. Agencies typically respond within 24 Hours. </p>
                                         </div>
                                     </div>
                                 </div>
-                                
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
+                                <input type="submit" name="next" class="next action-button" value="Submit Your Enquiry"/>
                             </fieldset>
                             {!! form::close(); !!}
 
