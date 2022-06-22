@@ -1210,7 +1210,7 @@ a.notif {
 .company_registration_form i#togglePassword {
     position: absolute;
     right: 34px;
-    bottom: 3px;
+    bottom: 47px;
     transform: translateY(-50%);
     cursor: pointer;
 }

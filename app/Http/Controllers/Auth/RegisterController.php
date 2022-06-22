@@ -217,7 +217,7 @@ class RegisterController extends Controller
             'company_name' => 'required',
             'email' => ['required','unique:users', 'email', new checkBusinessEmail],
             'phone_number' => 'required',
-            'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+            'password' => 'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
             'employees' => 'required',
             'role' => 'not_in:admin',
             'package_id' => 'required',
@@ -235,7 +235,8 @@ class RegisterController extends Controller
             
             $validation,$customMessages
         );      
-         
+        
+        
         $json = array();
          $user = new User();
 

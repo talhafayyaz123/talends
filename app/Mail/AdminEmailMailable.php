@@ -73,6 +73,10 @@ class AdminEmailMailable extends Mailable
             $email_message = $this->prepareAdminEmailDisputeRaised($this->email_params);
         } elseif ($this->type == 'admin_new_order_received') {
             $email_message = $this->prepareAdminNewOrder($this->email_params);
+        } elseif ($this->type == 'lead_rejected') {
+            $email_message = $this->prepareLeadRejected($this->email_params);
+        }elseif ($this->type == 'lead_accepted') {
+            $email_message = $this->prepareLeadAccepted($this->email_params);
         }
         $message = $this->from($from_email, $from_email_id)
             ->subject($subject)->view('emails.index')
@@ -520,7 +524,7 @@ class AdminEmailMailable extends Mailable
         $user_name = $name;
         $order = $order_id;
         $signature = EmailHelper::getSignature();
-        $app_content = $this->template['content'];
+        $app_content = $this->template->content;
 
         $email_content_default =    "hi Admin,
                                     User %name% has made the payment against the order #%order_id%. Please confirm and update the order status. 
@@ -532,6 +536,56 @@ class AdminEmailMailable extends Mailable
         }
         $app_content = str_replace("%name%", $user_name, $app_content);
         $app_content = str_replace("%order_id%", $order, $app_content);
+        $app_content = str_replace("%signature%", $signature, $app_content);
+
+        $body = "";
+        $body .= EmailHelper::getEmailHeader();
+        $body .= $app_content;
+        $body .= EmailHelper::getEmailFooter();
+        return $body;
+    }
+
+    public function prepareLeadRejected($email_params)
+    {
+        extract($email_params);
+        $user_name = $name;
+        $signature = EmailHelper::getSignature();
+        $app_content = $this->template->content;
+
+        $email_content_default =    "Hi, %employer_name% ,
+       We're so glad to receive your enquiry. Unfortunately, due to high volume of leads we're unable currently unable to work on your project.
+       %signature%,";
+        //set default contents
+        if (empty($app_content)) {
+            $app_content = $email_content_default;
+        }
+        $app_content = str_replace("%employer_name%", $user_name, $app_content);
+        $app_content = str_replace("%signature%", $signature, $app_content);
+
+        $body = "";
+        $body .= EmailHelper::getEmailHeader();
+        $body .= $app_content;
+        $body .= EmailHelper::getEmailFooter();
+        return $body;
+    }
+
+    public function prepareLeadAccepted($email_params)
+    {
+        extract($email_params);
+        $user_name = $name;
+        $signature = EmailHelper::getSignature();
+        $app_content = $this->template->content;
+
+        $email_content_default =    "Hi, %employer_name% ,
+
+        Thank you for your enquiry, we would love to work on your project. Let's discuss further details.
+        
+        %signature%,";
+        //set default contents
+        if (empty($app_content)) {
+            $app_content = $email_content_default;
+        }
+        $app_content = str_replace("%employer_name%", $user_name, $app_content);
         $app_content = str_replace("%signature%", $signature, $app_content);
 
         $body = "";

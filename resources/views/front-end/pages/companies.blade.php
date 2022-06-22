@@ -243,7 +243,7 @@
 
 
 
-                                <h3>{{ $value->FullName }}</h3>
+                                <h3>{{ $value->profile->company_name }}</h3>
 
                                 <p>{{$value->profile->tagline}}</p>
 
@@ -460,10 +460,11 @@
                     <h2>in-demand services from agencies</h2>
                 </div>
                 <div class="row">
-                @foreach($categories as $category)
+                @foreach($agency_services as $category)
+        
                     <div class="col-lg-3" style="max-width: 20% !important;">
                         <div class="content-box">
-                            <img src="{{ asset('uploads/categories/'.$category->image)}}" alt="" class="img-fluid mb-3">
+                            <img src="{{ asset('uploads/agency_services/'.$category->image)}}" alt="" class="img-fluid mb-3">
                             <p>{{ $category->title }}</p>
                         </div>
                     </div>

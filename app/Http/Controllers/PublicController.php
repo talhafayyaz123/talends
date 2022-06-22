@@ -187,6 +187,20 @@ class PublicController extends Controller
         );
     }
 
+    public function CompanyRegisterValidation(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'email' => ['required','unique:users', 'email', new checkBusinessEmail],
+            'password' => 'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+        ]);
+        
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
+        return response()->json(['success'=>'Record is successfully added']);
+
+    }
     /**
      * Step2 Registeration Validation
      *
@@ -284,14 +298,14 @@ class PublicController extends Controller
                             $email_params['name'] = Helper::getUserName($id);
                             $email_params['email'] = $email;
                             $email_params['link'] = url('profile/' . $user->slug);
-                           /*  Mail::to(config('mail.username'))
+                             Mail::to(config('mail.username'))
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_registration',
                                         $template_data,
                                         $email_params
                                     )
-                                ); */
+                                );
                         }
                     }
 
@@ -1504,6 +1518,14 @@ class PublicController extends Controller
         $json = array();
         $privacy_policy = !empty(SiteManagement::getMetaValue('privacy_policy')) ? SiteManagement::getMetaValue('privacy_policy') : array();
         return View('front-end.pages.privacy_policy',compact('privacy_policy'));
+
+    }
+
+    public function userAgreement()
+    {
+        $json = array();
+        $user_agreement = !empty(SiteManagement::getMetaValue('user_agreement')) ? SiteManagement::getMetaValue('user_agreement') : array();
+        return View('front-end.pages.user_agreement',compact('user_agreement'));
 
     }
     

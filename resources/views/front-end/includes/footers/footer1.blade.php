@@ -61,7 +61,7 @@
             </div>
             <div class="row footer_bottom">
                 <div class="col-md-6">
-                <p>© 2022 All Rights Reserved. &nbsp;&nbsp;&nbsp; <a href="{{ route('privacyPolicy') }}"> Privacy Policy </a>  </p>
+                <p>© 2022 All Rights Reserved. &nbsp;&nbsp;&nbsp; <a href="{{ route('privacyPolicy') }}"> Privacy Policy </a> &nbsp;&nbsp;&nbsp; <a href="{{ route('Agreement') }}"> User Agreement </a>  </p>
                 </div>
                <!--  <div class="col-md-6">
                     <ul class="list-inline mb-0">

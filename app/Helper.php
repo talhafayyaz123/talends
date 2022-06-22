@@ -620,6 +620,15 @@ return $response;
         }
     }
 
+    public static function getAgencyServiceImage($image)
+    {
+        if (!empty($image)) {
+            return '/uploads/agency_services/' . $image;
+        } else {
+            return 'uploads/agency_services/img-09.png';
+        }
+    }
+
     /**
      * Get Article Category image
      *
