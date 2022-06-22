@@ -7,7 +7,21 @@
 @push('stylesheets')
 
 <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet">
-
+<style>
+    .custom-control-input {
+        position: absolute;
+        left: 9px;
+        z-index: 1;
+    }
+    .custom-check .custom-control-label::after {
+        content: "\f00c";
+        font-family: fontawesome;
+        color: white;
+        font-size: 8px;
+        top: 6px;
+        left: -20px;
+    }
+</style>
 @endpush
 
 @section('title'){{ $f_list_meta_title }} @stop
@@ -68,10 +82,10 @@
     @endif
     <div class="wt-haslayout">
         <!-- <div class="row"></div> -->
-        <div class="container">
+        <div class="container-lg">
             <div class="row">
                 <div class="col-12">
-                    <div class="filters-container">
+                    <div class="filters-content-box">
                         @include('front-end.freelancers.filters')
                     </div>
                 </div>
@@ -110,7 +124,10 @@
 
 
 <script type="text/javascript">
-  
+    $(document).on('click', '.allow-focus', function (e) {
+        
+        e.stopPropagation();
+    });
 
     var page = 1;
 
@@ -403,9 +420,9 @@
 
              var title = response['sub_categories'][i].title;
 
-             var option = "<span class='wt-checkbox'><input id='sub_category-"+id+"' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
+             var option = "<div class='col-md-4 mb-3'><div class='custom-control custom-check'><input class='custom-control-input' id='sub_category-"+id+"' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
 
-               option+="<label for='sub_category-"+id+"'> "+title+" </label></span>" ; 
+               option+="<label class='custom-control-label' for='sub_category-"+id+"'> "+title+" </label></div></div>" ; 
 
                
 
@@ -475,9 +492,9 @@ $.ajax({
 
          var title = response['sub_categories'][i].title;
 
-         var option = "<span class='wt-checkbox'><input id='sub_category-"+id+"' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
+         var option = "<div class='col-md-4 mb-3'><div class='custom-control custom-check'><input class='custom-control-input' id='sub_category-"+id+"' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
 
-           option+="<label for='sub_category-"+id+"'> "+title+" </label></span>" ; 
+           option+="<label class='custom-control-label' for='sub_category-"+id+"'> "+title+" </label></div></div>" ; 
 
            
 

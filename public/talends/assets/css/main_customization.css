@@ -2,6 +2,9 @@
     body{
 		font: 16px/1.5 'Montserrat', sans-serif;
 	}
+	h1,h2,h3,h4,h5,h6{
+		font-family: 'Joan';
+	}
 .wt-headerelevenb .wt-userlogedin {
 	margin-left: 26px;
 }
@@ -1056,7 +1059,7 @@ a.notif {
 
 
 @media screen and (max-width:499px) {
-
+	
 	.mega_menu_tabs.nav-tabs .nav-link {
 		font-size: 12px;
 	}
@@ -1096,11 +1099,13 @@ a.notif {
 }
 
 .note-section p, .note-row p {
-    font-size: 46px;
-    line-height: 1.2;
+    font-size: 48px;
+    line-height: 1.1;
     color: #fff;
     padding: 2rem 1rem 20px 24px;
     font-family: joan;
+    font-weight: bold;
+    font-style: italic;
 }
 .note-section .img-wrap>img {
 	width: 100%;
@@ -1226,9 +1231,23 @@ a.notif {
 
 /* Abdul Manan's css */
 /* Agency Page */
+.col-20{
+	position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+@media (min-width:992px) {
+	.col-lg-20 {
+		flex: 0 0 20%;
+		max-width: 20%;
+	}
+}
 .why-choose h2{
 	font-size: 54px;
 	line-height: 1.2;
+	font-weight: bold;
+    font-style: italic;
 }
 .content_box_wrapper h2{
 	line-height: 1;
@@ -1309,18 +1328,19 @@ a.notif {
     border: 1px solid #ced4da;
     color: #62676b;
     border-radius: 5px;
-    padding: 14px 15px;
+    padding: 12px 10px;
     margin-right: 5px;
     font-weight: normal;
     text-transform: capitalize;
     font-size: 13px;
     font-family: montserrat;
 }
-.filter-dropdown .dropdown.show{
-	z-index: 1050;
+.filter-dropdown .dropdown-menu.show{
+	z-index: 1150;
 }
 .filter-dropdown .dropdown-menu.show label{
 	display: inline-block;
+	font-size: 13px;
 }
 .demand_services h2{
 	font-style: normal;
@@ -1341,7 +1361,7 @@ a.notif {
 	text-transform: capitalize;
 }
 .find_agency{overflow: visible;}
-.find_agency .row{
+.find_agency .container{
 	background: #CDDBC9;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 10px;
@@ -2014,6 +2034,16 @@ a.notif {
 }
 
 @media (max-width:768px) {
+	
+	.content_box_wrapper h2{
+		font-size: 46px;
+	}
+	.why-choose h2{
+		font-size: 32px;;
+	}
+	.note-section p, .note-row p{
+		font-size: 30px;
+	}
 	.company-detail-content .accordion{
 		padding: 10px 0;
 	}
@@ -2022,6 +2052,17 @@ a.notif {
 	}
 	.find_agency img {
 		margin-top: 0px;
+	}
+	.theme-list-sec .content-box h2{
+		font-size:30px;
+	}
+	.budget-sec .content-box h2{
+		font-size: 42px;
+	}
+	.testimonial-content-box h2 {
+		font-size: 42px;
+		line-height: 42px;
+		margin-bottom: 1.5rem;
 	}
 	.stepper-container h2,
 	.plan-banner h2,
@@ -2071,6 +2112,7 @@ a.notif {
 	.talends-plan .plan-content .col-desc{width: auto;}
 	.talends-plan .plan-content .col-plan1{width: auto;}
 	.talends-plan .plan-content .col-plan2{width: auto;}
+	.budget-sec .text-box h5{font-size: 14px;}
 }
 .tooltip-link .tooltip-content {
     position: absolute;
@@ -2120,4 +2162,14 @@ a.notif {
 .talend-tabs-container .services_list_box{
 	
 	color: rgba(255,255,255,0.5);
+}
+
+footer .list-inline a i {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    padding: 6px;
+    text-align: center;
+    line-height: 18px;
 }

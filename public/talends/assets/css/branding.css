@@ -1005,7 +1005,7 @@ footer .col-md-6 a,
 footer .col-md-6 p {
     margin-bottom: 0;
     font-size: 14px;
-    line-height: 14px;
+    line-height: 16px;
     color: #97af92
 }
 
@@ -1544,6 +1544,10 @@ footer .social-networks li+li {
     }
     .owl-carousel .owl-nav .owl-prev {
         left: -15px
+    }
+    section {
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
     .social-networks a {
         margin: auto

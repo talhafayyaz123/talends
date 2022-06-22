@@ -1979,11 +1979,14 @@ section.featured_success_stories_sec .carousel-inner h2 {
     .goverment_banner h2 {
         font-size: 24px;
     }
+    section.featured_success_stories_sec .carousel-inner{
+        padding:20px 20px;
+    }
     section.featured_success_stories_sec .carousel-inner h2 {
         font-size: 24px;
         margin-bottom: 30px;
         font-weight: bold;
-        max-width: calc(100% - 100px);
+        max-width: calc(100% - 65px);
     }
     .fss_box_row .col-md-6{
         margin-bottom: 20px;

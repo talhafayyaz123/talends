@@ -19,11 +19,11 @@
 
     <section class="home-banner p-0">
         <div id="theme_slider" class="theme_slider carousel slide carousel-fade" data-ride="carousel">
-            <ol class="carousel-indicators">
+            <!-- <ol class="carousel-indicators">
                 <li data-target="#theme_slider" data-slide-to="0" class="active"></li>
                 <li data-target="#theme_slider" data-slide-to="1"></li>
                 <li data-target="#theme_slider" data-slide-to="2"></li>
-            </ol>
+            </ol> -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="carousel-caption">
@@ -35,7 +35,8 @@
                                             {!! $banner_settings->banner_description ?? '' !!}
                                             <a href="{{ url('search-results?type=job') }}" class="btn btn-theme px-4 rounded-pill mt-4">Find a
                                                 Job</a>
-                                            <a href="{{ route('companyRegistraton') }}" class="btn btn-outline-theme px-4 rounded-pill mt-4">Register Agency</a>
+                                            <!-- <a href="#" class="btn btn-outline-theme px-4 rounded-pill mt-4 ml-0">Submit a Project</a> -->
+                                            <a href="{{ route('companyRegistraton') }}" class="btn btn-outline-theme px-4 rounded-pill mt-4 ml-0">Register Agency</a>
                                         </div>
                                     </div>
                                 </div>
@@ -505,7 +506,6 @@
 
                 <div class="col-md-4">
                     <div class="talend_img_card why_organization_choose_box">
-
                         <h3>{!! $why_choose_talends->features_text ?? '' !!} </h3>
                     </div>
                 </div>
