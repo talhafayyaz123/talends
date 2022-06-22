@@ -221,7 +221,7 @@ $footer_menus_4=App\Helper::footerMenu4();
                     <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-youtube"></i></a> </li>
                     <li class="px-1"> <a href="javascript:;" target="_self"><i class="bi-tiktok"></i></a> </li>
                 </ul>
-                <p class="mb-0">Talends.com ©2022 All Rights Reserved. &nbsp;&nbsp;&nbsp; <a href="{{ route('privacyPolicy') }}"> Privacy Policy </a>  &nbsp;&nbsp;&nbsp; <a href="{{ route('Agreement') }}"> User Agreement </a> </p>
+                <p class="mb-0">Talends.com ©2022 All Rights Reserved.</p>
                 <p class="small">Dubai, United Arab Emirates</p>
             </div>
             <div class="col-md-6">
