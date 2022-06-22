@@ -59,15 +59,26 @@
                     </ul>
                 </div>
             </div>
-            <div class="row footer_bottom">
+            <div class="row footer_bottom align-items-end">
                 <div class="col-md-6">
-                <p>© 2022 All Rights Reserved. &nbsp;&nbsp;&nbsp; <a href="{{ route('privacyPolicy') }}"> Privacy Policy </a>  </p>
-                </div>
-               <!--  <div class="col-md-6">
-                    <ul class="list-inline mb-0">
-                        <li class="px-2"> <a href="javascript:;" target="_self">Privacy Policy</a> </li>
+                    <ul class="list-inline mb-2">
+                        <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-facebook"></i></a> </li>
+                        <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-twitter"></i></a> </li>
+                        <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-linkedin"></i></a> </li>
+                        <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-instagram"></i></a> </li>
+                        <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-youtube"></i></a> </li>
+                        <li class="px-1"> <a href="javascript:;" target="_self"><i class="bi-tiktok"></i></a> </li>
                     </ul>
-                </div> -->
+                    <p class="mb-0">Talends.com ©2022 All Rights Reserved.</p>
+                    <p class="small">Dubai, United Arab Emirates</p>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-inline mb-0">
+                        <li class="px-2"> <a href="javascript:;" target="_self">Site Map</a> </li>
+                        <li class="px-2"> <a href="javascript:;" target="_self">Term & Conditions</a> </li>
+                        <li class="px-2"> <a href="{{ route('privacyPolicy') }}" target="_self">Privacy Policy</a> </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </footer>
