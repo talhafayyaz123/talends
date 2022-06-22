@@ -208,7 +208,7 @@
                 <div class="col-12">
                     @auth
                       
-                    @if(Auth::user()->getRoleNames()[0]=='admin')
+                    @if(Auth::user()->getRoleNames()[0]=='employer')
                     <div class="stepper-container">
                         <h2>Hire this Agency</h2>
                         <p class="mb-5">Please fill the brief below to get in touch the agency with much better and faster response. Feel free to add as much detail as needed.</p>
@@ -324,118 +324,112 @@
                                 <div class="form-card">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="">
+                                            <div class="credential-tabs">
                                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                                    <li class="nav-item" role="presentation">
-                                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Login</a>
+                                                    <li class="nav-item">
+                                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Login</a>
                                                     </li>
-                                                    <li class="nav-item" role="presentation">
-                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Signup as Employer</a>
+                                                    <li class="nav-item">
+                                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Signup as Employer</a>
                                                     </li>
                                                 </ul>
                                                 <div class="tab-content py-4" id="myTabContent">
                                                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                                         <div class="row">
-                                                                <div class="col-md-6 mb-3">      
-                                                                    <label>Account Type</label>
-                                                                    <select name="role" id="role" class="form-control">
-                                                                        <option value="">Employer</option>
-                                                                        <option value="">Freelancer</option>
-                                                                        <option value="">Intern</option>
-                                                                        <option value="">Company</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-6 mb-3">
-                                                                    <label>Email</label>
-                                                                    <input id="email" type="email" placeholder="Email" class="form-control" name="email" value="">
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <label>Password</label>
-                                                                    <input id="password" type="password" placeholder="********" class="form-control" name="password">
-                                                                </div>
-                                                                <div class="col-md-12">   
-                                                                    <div class="form-group mb-3 text-center">
-                                                                        <button class="btn btn-theme rounded-pill px-5 btn-block">Sign in</button>
-                                                                    </div>
-                                                                    <div class="form-group mb-3">
-                                                                        <div class="or-text">
-                                                                            <p>or</p>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group mb-3 text-center">
-                                                                        <div id="my-signin3"></div>
-                                                                        <span class="error gmail_error" style="display: none;">Google account is not recognized for Google Sign-In on Talends. Please make sure you are using the same account that you have previously linked.</span>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <a href="{{ route('password.request') }}" class="btn btn-link"> Forget Password</a>
-                                                                        Join Talends <a href="{{ route('register')  }}" class="text-theme">Register Here</a>
-                                                                    </div>
-                                                                </div>
+                                                            <div class="col-md-6 mb-4">      
+                                                                <label>Account Type</label>
+                                                                <select name="role" id="role" class="form-control">
+                                                                    <option value="">Employer</option>
+                                                                    <option value="">Freelancer</option>
+                                                                    <option value="">Intern</option>
+                                                                    <option value="">Company</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 mb-4">
+                                                                <label>Email</label>
+                                                                <input id="email" type="email" placeholder="Email" class="form-control" name="email" value="">
+                                                            </div>
+                                                            <div class="col-md-6 mb-4">
+                                                                <label>Password</label>
+                                                                <input id="" type="password" placeholder="********" class="form-control" name="">
+                                                            </div>
+                                                            <div class="col-md-6 mb-4">
+                                                                <a href="{{ route('password.request') }}" class="btn btn-link text-theme mt-5"> Forget Password</a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-5">   
+                                                                <button class="btn btn-theme rounded-pill px-5 btn-block">Sign in</button>
+                                                            </div>
+                                                            <div class="col-md-2 pt-2 text-center">
+                                                                <p>OR</p>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <button class="btn btn-outline-theme px-5 rounded-pill btn-block">Signin With Google</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                                         <div class="row">
-                                                            <div class="col-md-6 mb-3">
+                                                            <div class="col-md-6 mb-4">
                                                                 <label for="">First Name</label>
                                                                 <input type="text" class="form-control" placeholder="First Name">
                                                             </div>
-                                                            <div class="col-md-6 mb-3">
+                                                            <div class="col-md-6 mb-4">
                                                                 <label for="">Last Name</label>
                                                                 <input type="text" class="form-control" placeholder="Last Name">
                                                             </div>
-                                                            <div class="col-md-6 mb-3">
+                                                            <div class="col-md-6 mb-4">
                                                                 <label for="">Email</label>
                                                                 <input type="email" class="form-control" placeholder="Email">
                                                             </div>
-                                                            <div class="col-md-6 mb-3">
+                                                            <div class="col-md-6 mb-4">
                                                                 <label for="">Password</label>
                                                                 <input type="password" class="form-control" placeholder="Password">
                                                             </div>
-                                                            <div class="col-md-6 mb-3">
-                                                                <label for="">Select Department</label>
+                                                            <div class="col-md-6 mb-4">
+                                                                <label for="">Select Location</label>
                                                                 <select name="" id="" class="form-control">
-                                                                    <option value="">Select Department</option>
+                                                                    <option value="">Select Location</option>
                                                                 </select>
                                                             </div>
-                                                            <div class="col-md-6 mb-3">
+                                                            <div class="col-md-6 mb-4">
+                                                                <label for="">Select Department</label>
+                                                                <select name="" id="" class="form-control">
+                                                                    <option value="">Select Employees</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 mb-4">
                                                                 <label for="">Select No. of Employees</label>
                                                                 <select name="" id="" class="form-control">
                                                                     <option value="">Select Employees</option>
                                                                 </select>
                                                             </div>
-                                                            <div class="col-md-12">   
-                                                                <div class="form-group mb-3 text-center">
-                                                                    <button class="btn btn-theme rounded-pill px-5 btn-block">Sign in</button>
-                                                                </div>
-                                                                <div class="form-group mb-3">
-                                                                    <div class="or-text">
-                                                                        <p>or</p>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group mb-3 text-center">
-                                                                    <div id="my-signin3"></div>
-                                                                    <span class="error gmail_error" style="display: none;">Google account is not recognized for Google Sign-In on Talends. Please make sure you are using the same account that you have previously linked.</span>
-                                                                </div>
-                                                                <div class="mb-3">
-                                                                    <a href="{{ route('password.request') }}" class="btn btn-link"> Forget Password</a>
-                                                                    Join Talends <a href="{{ route('register')  }}" class="text-theme">Register Here</a>
-                                                                </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-5">   
+                                                                <button class="btn btn-theme rounded-pill px-5 btn-block">Sign up</button>
                                                             </div>
-                                                          </div>  
+                                                            <div class="col-md-2 pt-2 text-center">
+                                                                <p>OR</p>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <button class="btn btn-outline-theme px-5 rounded-pill btn-block">Signup With Google</button>
+                                                            </div>
+                                                        </div> 
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <div class="row">
+                                    <div class="row">
                                         <div class="col-md-8 mx-auto text-center">
                                             <img src="{{ asset('talends/assets/img/icons/success-icon.png')}}" class="img-fluid mb-4"/>
                                             <h3 class="fs-title text-center mb-3">Submit you request:</h3>
                                             <p>Please review all the information you previously typed in the past steps, and if all is okay, submit your message to receive a response as soon as possible.</p>
                                             <input type="submit" name="next" class="btn btn-theme rounded-pill px-4  m-2  py-3" value="Submit"/>
                                         </div>
-                                    </div> -->
+                                    </div>
                                 </div>
                                 
                             </fieldset>
@@ -452,6 +446,27 @@
 
 </div>
 <script>
+    function renderButton() {
+
+        gapi.signin2.render('my-signin3', {
+
+            'scope': 'profile email',
+
+            'width': 510,
+
+            'height': 45,
+
+            'longtitle': true,
+
+            'theme': 'dark',
+
+            'onsuccess': onSuccess,
+
+            'onfailure': onFailure
+
+        });
+
+    }
     function readMoreFunction() {
         
         var dots = document.getElementById("dots");

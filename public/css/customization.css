@@ -304,7 +304,7 @@ footer ul li {
 }
 
 footer ul li a {
-    color: #6d7a6a !important;
+    color: #b6cbb1 !important;
 }
 
 footer .col-md-6 a,
@@ -1457,4 +1457,13 @@ a.notif {
 .leads-list-container{
     height: 100vh;
     overflow: auto;
+}
+footer .list-inline a i {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    padding: 6px;
+    text-align: center;
+    line-height: 18px;
 }
