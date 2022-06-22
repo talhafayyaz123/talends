@@ -506,7 +506,6 @@
 
                 <div class="col-md-4">
                     <div class="talend_img_card why_organization_choose_box">
-
                         <h3>{!! $why_choose_talends->features_text ?? '' !!} </h3>
                     </div>
                 </div>

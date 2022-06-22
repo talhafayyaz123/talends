@@ -111,9 +111,9 @@
             @endif
 
             <figure class="wt-userlistingimg">
-
-                <img src="{{{ asset(Helper::getImageWithSize('uploads/users/'.$freelancer->id, $freelancer->profile->avater, 'listing')) }}}" alt="{{ trans('lang.img') }}">
-
+                <a href="{{{ url('profile/'.$freelancer->slug) }}}">
+                    <img src="{{{ asset(Helper::getImageWithSize('uploads/users/'.$freelancer->id, $freelancer->profile->avater, 'listing')) }}}" alt="{{ trans('lang.img') }}">
+                </a>
             </figure>
 
             <div class="wt-userlistingcontent">
@@ -224,7 +224,8 @@
 
                     @foreach($skills as $skill)
 
-                        <a href="{{{url('search-results?type=job&skills%5B%5D='.$skill->slug)}}}">{{{ $skill->title }}}</a>
+                        <!-- <a href="{{{url('search-results?type=job&skills%5B%5D='.$skill->slug)}}}">{{{ $skill->title }}}</a> -->
+                        <a href="javascript:;" class="btn disabled">{{{ $skill->title }}}</a>
 
                     @endforeach
 

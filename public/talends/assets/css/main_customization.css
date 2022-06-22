@@ -2,6 +2,9 @@
     body{
 		font: 16px/1.5 'Montserrat', sans-serif;
 	}
+	h1,h2,h3,h4,h5,h6{
+		font-family: 'Joan';
+	}
 .wt-headerelevenb .wt-userlogedin {
 	margin-left: 26px;
 }
@@ -1096,11 +1099,13 @@ a.notif {
 }
 
 .note-section p, .note-row p {
-    font-size: 46px;
-    line-height: 1.2;
+    font-size: 48px;
+    line-height: 1.1;
     color: #fff;
     padding: 2rem 1rem 20px 24px;
     font-family: joan;
+    font-weight: bold;
+    font-style: italic;
 }
 .note-section .img-wrap>img {
 	width: 100%;
@@ -1241,6 +1246,8 @@ a.notif {
 .why-choose h2{
 	font-size: 54px;
 	line-height: 1.2;
+	font-weight: bold;
+    font-style: italic;
 }
 .content_box_wrapper h2{
 	line-height: 1;
@@ -1321,18 +1328,19 @@ a.notif {
     border: 1px solid #ced4da;
     color: #62676b;
     border-radius: 5px;
-    padding: 14px 15px;
+    padding: 12px 10px;
     margin-right: 5px;
     font-weight: normal;
     text-transform: capitalize;
     font-size: 13px;
     font-family: montserrat;
 }
-.filter-dropdown .dropdown.show{
-	z-index: 1050;
+.filter-dropdown .dropdown-menu.show{
+	z-index: 1150;
 }
 .filter-dropdown .dropdown-menu.show label{
 	display: inline-block;
+	font-size: 13px;
 }
 .demand_services h2{
 	font-style: normal;
@@ -2154,4 +2162,14 @@ a.notif {
 .talend-tabs-container .services_list_box{
 	
 	color: rgba(255,255,255,0.5);
+}
+
+footer .list-inline a i {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    padding: 6px;
+    text-align: center;
+    line-height: 18px;
 }
