@@ -2,7 +2,7 @@
 @section('content')
 <section class="w-100 py-3">
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-    <div class="bg-theme rounded-16 mb-4">
+    <div class="bg-white rounded-16 mb-4">
         <div class="row">
             <div class="col-md-12">
                 <div class="bg-dark text-white p-3">
@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 border-right pr-0">
+            <div class="col-md-4 border-right pr-0" style="background-color: rgb(252,252,252);">
                 <div class="leads-list-container">
                     @if(!empty($hiring_requests) && $hiring_requests->count() > 0 )
                         @foreach ($hiring_requests as $request)
