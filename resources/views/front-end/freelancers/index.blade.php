@@ -85,7 +85,7 @@
         <div class="container-lg">
             <div class="row">
                 <div class="col-12">
-                    <div class="filters-content-box">
+                    <div class="filters-content-box position-relative">
                         @include('front-end.freelancers.filters')
                     </div>
                 </div>
