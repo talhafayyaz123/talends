@@ -7,7 +7,23 @@
 @section('title'){{ $job_list_meta_title }} @stop
 
 @section('description', $job_list_meta_desc)
-
+@push('stylesheets')
+    <style>
+    .custom-control-input {
+        position: absolute;
+        left: 9px;
+        z-index: 1;
+    }
+    .custom-check .custom-control-label::after {
+        content: "\f00c";
+        font-family: fontawesome;
+        color: white;
+        font-size: 8px;
+        top: 6px;
+        left: -20px;
+    }
+</style>
+@endpush
 @section('content')
 
     @php $breadcrumbs = Breadcrumbs::generate('searchResults'); @endphp
@@ -54,10 +70,10 @@
         @endif
 
         <div class="wt-haslayout">
-            <div class="container">
+            <div class="container-lg">
                 <div class="row">
                         <div class="col-12">
-                            <div class="filters-container" id="job-filters">
+                            <div class="filters-content-box position-relative" id="job-filters">
                                 @include('front-end.jobs.filters')
                             </div>
                         </div>
@@ -84,7 +100,9 @@
 
     <script>
 
-
+        $(document).on('click', '.allow-focus', function (e) { 
+            e.stopPropagation();
+        });
 
     function toogle_price(){
 
