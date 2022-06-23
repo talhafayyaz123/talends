@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-12">
                     <h1 class="text-white mb-0">Welcome {{ Auth::user()->profile->company_name }}</h1>
-                    <p class="text-white">Wednesday, 01 June 2022</p>
+                    <p class="text-white">{{ date('d-M-Y',time()) }}</p>
                 </div>
             </div>
         <div class="row">
@@ -26,7 +26,7 @@
                         <div class="progress-bar" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <p>Completing your profile is a great way to attract more customer</p>
-                    <a href="javascript:;" class="btn btn-link font-weight-bold text-secondary">EDIT PROFILE</a>
+                    <a href="{{  route('companyProfile') }}" class="btn btn-link font-weight-bold text-secondary">EDIT PROFILE</a>
                 </div>
                 <div class="dwidget-card" style="min-height:362px;">
                     <div class="d-flex mb-4 align-items-center">
@@ -46,15 +46,16 @@
                     </div>
                     <p>Services & Skills</p>
                     <ul>
-                       <li>UI/UX</li> 
-                       <li>SEO</li> 
-                       <li>Mobile App Development</li> 
-                       <li>Website Development</li> 
-                       <li>+1</li> 
+                                    @if(isset($skills))
+                @foreach($skills as $skill)
+                <li>{{$skill->skill->title}}</li>
+                @endforeach
+                @endif
+
                     </ul>
                     <p>You’re receiving customers within </p>
-                    <small class="font-weight-bold text-secondary mb-4 d-block"><i class="bi-geo-alt-fill"></i> Dubai, United Arab Emirates</small>
-                    <a href="javascript:;" class="btn btn-link font-weight-bold text-secondary">EDIT PREFERENCES</a>
+                    <small class="font-weight-bold text-secondary mb-4 d-block"><i class="bi-geo-alt-fill"></i> {{ Auth::user()->location->title ?? '' }}</small>
+                    <a href="{{  route('companyProfile') }}" class="btn btn-link font-weight-bold text-secondary">Edit Settings</a>
                 </div>
                 <div class="dwidget-card">
                     <div class="d-flex mb-4 align-items-center">
@@ -62,7 +63,7 @@
                         <h4 class="ml-3">Message</h4>
                     </div>
                     <p class="mb-5">You’ve 100 Unreaad Messages Please Respond</p>
-                    <a href="javascript:;" class="btn btn-link font-weight-bold text-secondary">EDIT PREFERENCES</a>
+                    <!-- <a href="javascript:;" class="btn btn-link font-weight-bold text-secondary">EDIT PREFERENCES</a> -->
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
@@ -79,13 +80,13 @@
                         <h3> {{$unread_leads}}</h3>
                         <p>Unread Leads</p>
                     </div>
-                    <div class="mb-5">
+<!--                     <div class="mb-5">
                         <h3>59</h3>
                         <p>Estimated Leads</p>
-                    </div>
+                    </div> -->
                     <p class="mb-0">We’re sending all new leads to your preferred email address</p>
-                    <a href="javascript:;" class="btn-link font-weight-bold text-secondary d-inline-block mb-5 pb-4">Ali@thefuturedynamics.com</a>
-                    <a href="javascript:;" class="btn-link font-weight-bold text-secondary d-inline-block pt-5 mt-5">EDIT PREFERENCES</a>
+                    <a href="javascript:;" class="btn-link font-weight-bold text-secondary d-inline-block mb-5 pb-4">{{ Auth::user()->email }}</a>
+                    <a href="{{  route('companyHiringRequests') }}" class="btn-link font-weight-bold text-secondary d-inline-block pt-5 mt-5">EDIT PREFERENCES</a>
                 </div>
             </div>
         </div>

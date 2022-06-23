@@ -12,7 +12,9 @@ header {
     top: 0;
     width: 100%;
 }
-
+label {
+    margin-left: 10px;
+}
 header .navbar {
     padding: 0;
     align-items: center;
@@ -803,6 +805,10 @@ a.notif {
 #job-filters::-webkit-scrollbar-thumb:hover {
     background: #42C722; 
   }
+
+  .help-block{
+	font-size: 10px !important;
+}
 @media screen and (max-width:1366px) {
     .filters-container {
         width: 1280px;
@@ -813,7 +819,7 @@ a.notif {
     /* width: 1280px; */
     .filters-container { 
         width: 100%;
-        overflow-x: scroll;
+        /* overflow-x: scroll; */
     }
    
 
@@ -859,7 +865,7 @@ a.notif {
 @media screen and (max-width:360px) {
     .freelancer_filters .wt-widget {
         width: auto;
-        min-width: 200px;
+        min-width: 145px;
         
     }
     
@@ -955,11 +961,12 @@ a.notif {
     border: 1px solid #dedede;
     color: #2f2f2f;
     border-radius: 5px;
-    padding: 12px 15px;
+    padding: 12px 10px;
 	margin-right: 5px;
+    font-size:13px;
 }
-.filter-dropdown .dropdown.show{
-	z-index: 1050;
+.filter-dropdown .dropdown-menu.show{
+	z-index: 1150;
 }
 .filter-dropdown .dropdown-menu.show label{
 	display: inline-block;
@@ -1162,7 +1169,7 @@ a.notif {
 }
 .auth-content h3{
     font-weight: bold;
-    font-size: 28px;
+    font-size: 32px;
     line-height: 1.3;
     font-style: normal;
     margin-bottom: 0;
@@ -1194,10 +1201,11 @@ a.notif {
     border: 1px solid #EFF0F7;
     box-shadow: 0px 2px 6px rgba(19, 18, 66, 0.07);
     border-radius: 12px;
-    padding: 15px 10px 15px 25px;
+    padding: 20px 10px 20px 25px;
     display: block;
     margin-bottom: 1.5rem;
     cursor: pointer;
+    font-size: 20px;
 }
 .entity-box .custom-control-label:hover{
     background-color: #f5f9f5;
@@ -1224,7 +1232,7 @@ a.notif {
     padding-left: 7px;
     padding-right: 7px;
     padding-bottom: 7px;
-    height: 36px !important;
+    height: 42px !important;
     border: solid 1px #cbf0c0;
     font-size: 14px;
     border-radius: 5px;
@@ -1349,7 +1357,7 @@ a.notif {
         left: auto;
     }
     .freelancer_filters .wt-widgettitle{
-        padding: 12px 10px;
+        padding: 12px 5px;
     }
 }
 @media(max-width:1100px){
@@ -1367,6 +1375,10 @@ a.notif {
     }
 }
 @media(max-width:768px){
+    .filter-dropdown .btn {
+        width: 100%;
+        margin-bottom: 5px;
+    }
     .dropdown-50,
     .dropdown-40{min-width: 13rem;}
     .btn-theme,
@@ -1442,3 +1454,7 @@ a.notif {
     border-top: 10px solid #ffffff;
 }
 .tooltip-link:hover .tooltip-content{display:block;}
+.leads-list-container{
+    height: 100vh;
+    overflow: auto;
+}

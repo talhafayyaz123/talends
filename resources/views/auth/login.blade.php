@@ -8,9 +8,11 @@
         <!-- Row -->
         <div class="row h-100">
             <div class="col-md-4 col-lg-5 col-xl-5 d-none d-lg-block text-center auth-left d-lg-flex align-items-center justify-content-center">
-                <div class="mt-5 pt-4 p-2">
+            <a href="{{ route('home') }}"><div class="mt-5 pt-4 p-2">
                     <img src="{{asset('talends/assets/img/logo.png')}}" class="img-fluid d-inline-block" alt="logo" width="220">
+                   
                 </div>
+                </a>
             </div>
             <div class="col-sm-10 col-md-8 col-lg-7 col-xl-7 ml-auto bg-white">
                 <div class="login-auth-content my-md-5">
@@ -84,17 +86,7 @@
                         <div class="form-group mb-3 text-center">
                             <button class="btn btn-theme rounded-pill px-5 btn-block">Sign in</button>
                         </div>
-                        <div class="mb-3">
-                            @if (Route::has('password.request'))
-
-                            <a href="{{ route('password.request') }}" class="btn btn-link"> {{ trans('lang.forget_pass') }}</a>
-
-
-                            </a>
-
-                            @endif
-
-                        </div>
+                       
 
                         <div class="form-group mb-3">
                             <div class="or-text">
@@ -107,9 +99,20 @@
 
                         </div>
                     </form>
-                    <div class="text-center mt-5 ml-0">
-                        <div>Don't have an account? <a href="{{ route('register')  }}" class="text-theme">Register Here</a></div>
-                    </div>
+                    <div class="mb-3">
+                            @if (Route::has('password.request'))
+
+                            <a href="{{ route('password.request') }}" class="btn btn-link"> {{ trans('lang.forget_pass') }}</a>
+
+
+                            
+                            Join Talends <a href="{{ route('register')  }}" class="text-theme">Register Here</a>
+
+
+                            @endif
+
+                        </div>
+                    
                 </div>
             </div>
 

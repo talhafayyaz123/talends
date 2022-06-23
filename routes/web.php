@@ -61,12 +61,12 @@ Route::get('why-talends', 'HomeController@whyTalends')->name('whyTalends');
 
 Route::get('find-right-talends', 'HomeController@FindRightTalends')->name('FindRightTalends');
 
-
 Route::get('government', 'HomeController@government')->name('government');
 Route::get('browse-jobs', 'HomeController@browseJobs')->name('browseJobs');
 Route::get('find-talends', 'HomeController@findTalents')->name('findTalends');
 Route::get('find-interns', 'HomeController@findInterns')->name('findInterns');
 Route::get('companies', 'HomeController@Companies')->name('Companies');
+Route::get('company-service/detail', 'HomeController@CompanyServiceDetail');
 Route::get('why_agency_plan', 'HomeController@whyAgencyPlan')->name('whyAgencyPlan');
 
 Route::get('company/registration', 'HomeController@companyRegistration')->name('companyRegistraton');
@@ -114,6 +114,7 @@ Route::post('register/form-step2-custom-errors', 'PublicController@RegisterStep2
 Route::post('register/single-form-custom-errors', 'PublicController@singleFormValidation');
 Route::get('search-results', 'PublicController@getSearchResult')->name('searchResults');
 Route::post('user/add-wishlist', 'UserController@addWishlist');
+Route::post('agency/register/custom-errors', 'PublicController@CompanyRegisterValidation');
 
 
 Route::get('gamail/login/{email}', 'PublicController@gmailLoginUser')->name('loginUser');
@@ -196,6 +197,18 @@ Route::group(
         Route::post('admin/categories/update-cats/{id}', 'CategoryController@update');
         Route::post('admin/categories/upload-temp-image', 'CategoryController@uploadTempImage');
         Route::post('admin/delete-checked-cats', 'CategoryController@deleteSelected');
+
+
+        Route::get('admin/agency_services', 'CategoryController@agencyServices')->name('agencyServices');
+        Route::post('admin/agency_services/upload-temp-image', 'CategoryController@uploadAgencyServiceTempImage');
+        Route::post('admin/store-agency-service', 'CategoryController@storeAgencyService');
+        Route::post('admin/agency_services/delete-cats', 'CategoryController@destroyAgencyServices');
+        Route::get('admin/agency_services/search', 'CategoryController@agencyServices');
+      
+        Route::post('admin/delete-agency-services-checked-cats', 'CategoryController@deleteAgencyServicesSelected');
+        Route::get('admin/agency-services/edit-cats/{id}', 'CategoryController@editAgencyServices')->name('editAgencyCategories');
+        Route::post('admin/agency-services/update-cats/{id}', 'CategoryController@updateAgencyServices');
+       
 
 
         // Sub Category Routes
@@ -349,6 +362,16 @@ Route::group(
        Route::post('admin/save-about-talends', 'HomePagesController@storeTalends');
        Route::post('admin/update-about-talends/{id}', 'HomePagesController@updateTalends');
 
+       Route::get('admin/privacy/policy', 'SiteManagementController@privacyPolicy')->name('adminPrivacyPolicy');
+       Route::get('admin/add_more-user_agreement/{no}', 'SiteManagementController@addMorePrivacyPolicy')->name('addMorePrivacyPolicy');
+       Route::post('admin/privacy-policy', 'SiteManagementController@storePrivacyPolicy')->name('storePrivacyPolicy');
+
+       //User Agreement
+       Route::get('user/agreement', 'SiteManagementController@userAgreement')->name('userAgreement');
+       Route::get('admin/add_more-user_agreement/{no}', 'SiteManagementController@addMoreUserAgreement')->name('addMoreUserAgreement');
+       Route::post('user-agreement', 'SiteManagementController@storeUserAgreement')->name('userAgreement');
+
+
      
        Route::post('admin/save-why-agency-plan', 'HomePagesController@storeWhyAgencyPlan');
         Route::post('admin/update-why-agency-plan/{id}', 'HomePagesController@updateWhyAgencyPlan');
@@ -495,7 +518,9 @@ Route::group(
         Route::get('company/hiring_requests', 'CompanyController@companyHiringRequests')->name('companyHiringRequests');
         Route::get('company/hiring_request_detail/{id}', 'CompanyController@companyHiringRequestDetail')->name('companyHiringRequestDetail');
 
-        
+        Route::get('company/jobs/{status}', 'CompanyController@showCompanyJobs');
+        Route::get('company/job/{slug}', 'CompanyController@showOnGoingJobDetail')->name('showOnGoingCompanyJobDetail');
+        Route::get('company/dispute/{slug}', 'UserController@raiseCompanyDispute');
 
 
         Route::get('freelancer/profile', 'FreelancerController@index')->name('personalDetail');
@@ -577,12 +602,16 @@ Route::group(
         Route::get('user/get-payout-detail', 'UserController@getPayoutDetail');
         Route::post('user/upload-temp-image/{type?}', 'UserController@uploadTempImage');
         Route::post('user/submit/transection', 'UserController@submitTransection');
+        Route::get('lead/status/{id}/{status}', 'CompanyController@leadStatus')->name('leadStatus');
+
     }
 );
 
 Route::get('hire/agency/{id}', 'CompanyController@hireAgencyForm')->name('hireAgencyForm');
 Route::post('store/hire/agency/{id}', 'CompanyController@storeHireAgency')->name('storeHireAgency');
 Route::get('success/hire/agency/{id}', 'CompanyController@successHireAgencyForm')->name('successHireAgency');
+Route::get('privacy/policy', 'PublicController@privacyPolicy')->name('privacyPolicy');
+Route::get('user/agreement', 'PublicController@userAgreement')->name('Agreement');
 
 
 

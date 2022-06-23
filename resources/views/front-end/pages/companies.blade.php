@@ -9,6 +9,19 @@
         color: #000000;
         opacity: 0.7;
     }
+    .custom-control-input {
+        position: absolute;
+        left: 9px;
+        z-index: 1;
+    }
+    .custom-check .custom-control-label::after {
+        content: "\f00c";
+        font-family: fontawesome;
+        color: white;
+        font-size: 8px;
+        top: 6px;
+        left: -20px;
+    }
 </style>
 @endpush
 
@@ -33,19 +46,12 @@
                     <p class="text-white opcty_5">We have Trusted off-shore companies, making sure they deliver the best of what your dream within a very reasonable amount of money.</p>
 
                 </div>
-
-                <div class="col-md-5">
-
-                </div>
-
             </div>
-
         </div>
-
     </section>
 
     <section class="company_talends_filter_wrap">
-        <div class="container pb-3 border-bottom"> 
+        <div class="container-lg pb-3 border-bottom"> 
             <div class="row">
                 <div class="col-md-12 mb-3">
                     <form class="form-inline_" method="GET">
@@ -59,20 +65,22 @@
                                     <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1">
                                         <div class="row">  
                                             @foreach($categories as $category)       
-                                            @php
-                                            $select='';
+                                                @php
+                                                    $select='';
 
-                                            if( !empty(Request::get('category_id')) && in_array($category->id, explode(',',Request::get('category_id')) ) ){
+                                                    if( !empty(Request::get('category_id')) && in_array($category->id, explode(',',Request::get('category_id')) ) ){
 
-                                            $select='checked=checked';
-                                            }
-                                        @endphp                           
+                                                    $select='checked=checked';
+                                                    }
+                                                @endphp                           
                                             <div class="col-md-4 mb-3">
-                                                <input type="checkbox" name="category[]" value="{{ $category->id }}" id='category_id' onclick="select_sub_categories(this)" {{$select}}> {{ $category->title }}
+                                                <div class="custom-control custom-check">
+                                                    <input type="checkbox" class="custom-control-input" name="category[]" value="{{ $category->id }}" id='category_id' onclick="select_sub_categories(this)" {{$select}}> 
+                                                    <label class="custom-control-label" for="{{$category['value']}}">{{$category['title']}}</label>
+                                                </div>
                                             </div>
                                             @endforeach
                                         </div>
-                                        
                                     </div>
                                 </div>
                                 <div class="dropdown position-static filter-dropdown">
@@ -81,19 +89,23 @@
                                     </button>
                                     <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1">
                                         <div class="row category_sub_categories">  
-                                        @if(isset($sub_categories) && !empty($sub_categories) )
-                                    @foreach($sub_categories as $key =>$value)
-                                    @php
-                                            $select='';
-                                            if( !empty(Request::get('sub_category_id')) && in_array( $value->sub_category_id, explode(',',Request::get('sub_category_id')) ) ){
-                                            $select='checked=checked';
-                                            }
-                                        @endphp
-                                                <div class="col-md-4 mb-3">
-                                                    <input type="checkbox" name="sub_categories[]"  value="{{  $value->sub_category_id }}" {{ $select }} id="freelancerSubCategory"> {{ $value->title }}
-                                                </div>
+                                            @if(isset($sub_categories) && !empty($sub_categories) )
+                                                @foreach($sub_categories as $key =>$value)
+                                                    @php
+                                                        $select='';
+                                                        if( !empty(Request::get('sub_category_id')) && in_array( $value->sub_category_id, explode(',',Request::get('sub_category_id')) ) ){
+                                                        $select='checked=checked';
+                                                        }
+                                                    @endphp
+                                                    <div class="col-md-4 mb-3">
+                                                        <div class="custom-control custom-check">
+                                                            <input type="checkbox" class="custom-control-input" name="sub_categories[]"  value="{{  $value->sub_category_id }}" {{ $select }} id="freelancerSubCategory"> 
+                                                            <!-- {{ $value->title }} -->
+                                                            <label class="custom-control-label" for="{{$value['value']}}">{{$value['title']}}</label>
+                                                        </div>
+                                                    </div>
                                                 @endforeach
-                                       @endif
+                                            @endif
                                         </div>                                        
                                     </div>
                                 </div>
@@ -103,23 +115,21 @@
                                     </button>
                                     <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1">
                                         <div class="row">  
-                                        @foreach(Helper::getComapnyBudgetList() as $key=>$price )
-                                    @php
-                                        $location_select='';
-                                        if(Request::get('price') && Request::get('price') ==$price['value'] ){
-                                        $location_select='checked=checked';
-                                        }
-                                    @endphp
-                                    <div class="col-md-4 mb-3">
-                                        <!-- <div class="custom-control custom-radio">
-                                            <input type="radio" id="price" name="price" value="{{$price['value']}}" class="custom-control-input" <?php echo $location_select;  ?>>
-                                            <label class="custom-control-label" for="{{$price['value']}}" <?php echo $location_select;  ?>>{{$price['title']}}</label>
-                                        </div> -->
-                                        <input type="radio" name="price" id="price" value="{{$price['value']}}" <?php echo $location_select;  ?>>{{$price['title']}}
-                                    </div>
-
-                                    @endforeach
-                                              
+                                            @foreach(Helper::getComapnyBudgetList() as $key=>$price )
+                                                @php
+                                                    $location_select='';
+                                                    if(Request::get('price') && Request::get('price') ==$price['value'] ){
+                                                    $location_select='checked=checked';
+                                                    }
+                                                @endphp
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" id="price" name="price" value="{{$price['value']}}" class="custom-control-input" <?php echo $location_select;  ?>>
+                                                        <label class="custom-control-label" for="{{$price['value']}}" <?php echo $location_select;  ?>>{{$price['title']}}</label>
+                                                    </div>
+                                                    <!-- <input type="radio" name="price" id="price" value="{{$price['value']}}" <?php echo $location_select;  ?>>{{$price['title']}} -->
+                                                </div>
+                                            @endforeach      
                                         </div>                                        
                                     </div>
                                 </div>
@@ -127,23 +137,23 @@
                                     <button class="btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                         Location <i class="bi-chevron-down float-right ml-3"></i>
                                     </button>
-                                    <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1">
+                                    <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1" style="height: 300px;overflow-y:auto;">
                                         <div class="row">  
-                                        @foreach($locations as $location)
-                                    @php
-                                        $location_select='';
-                                        if(Request::get('location_id') && Request::get('location_id') ==$location->id ){
-                                            $location_select='checked=checked';
-                                        }
-                                    @endphp
-                                
-                                    <div class="col-md-4 mb-3">
-                                        <input type="radio" id="location_id" name="location_id" value="{{ $location->id }}" <?php echo $location_select;  ?>>
-                                        
-                                        {{ $location->title }}
-                                    </div>
-                                
-                                    @endforeach
+                                            @foreach($locations as $location)
+                                                @php
+                                                    $location_select='';
+                                                    if(Request::get('location_id') && Request::get('location_id') ==$location->id ){
+                                                        $location_select='checked=checked';
+                                                    }
+                                                @endphp
+                                                <div class="col-md-3 mb-3">
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" id="location_id" class="custom-control-input" name="location_id" value="{{ $location->id }}" <?php echo $location_select;  ?>>
+                                                        <!-- {{ $location->title }} -->
+                                                        <label class="custom-control-label" for="{{$location['value']}}">{{$location['title']}}</label>
+                                                    </div>
+                                                </div>
+                                            @endforeach
                                         </div>                                        
                                     </div>
                                 </div>
@@ -153,20 +163,21 @@
                                     </button>
                                     <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1">
                                         <div class="row">  
-                                        @foreach (Helper::getEmployeesList() as $key => $employee)
-                                    @php
-                                        $location_select='';
-                                        if(Request::get('employees') && Request::get('employees') ==$employee['value'] ){
-                                        $location_select='selected=selected';
-                                        }
-                                    @endphp
-                                    <div class="col-md-4 mb-3">
-                                    <input type="radio"id="employees" name="employees" value="{{ $employee['value'] }}" <?php echo $location_select;  ?>>
-                                    {{ $employee['title'] }}
-                                </div>
-                                @endforeach
-                                               
-                                                
+                                            @foreach (Helper::getEmployeesList() as $key => $employee)
+                                                @php
+                                                    $location_select='';
+                                                    if(Request::get('employees') && Request::get('employees') ==$employee['value'] ){
+                                                    $location_select='selected=selected';
+                                                    }
+                                                @endphp
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio"id="employees" class="custom-control-input" name="employees" value="{{ $employee['value'] }}" <?php echo $location_select;  ?>>
+                                                        <!-- {{ $employee['title'] }} -->
+                                                        <label class="custom-control-label" for="{{$employee['value']}}">{{$employee['title']}}</label>
+                                                    </div>
+                                                </div>
+                                            @endforeach                                                
                                         </div>                                        
                                     </div>
                                 </div>
@@ -174,95 +185,19 @@
                                     <button type='button' class="theme_btn inverse_btn" id='filter_btn'>{{trans('lang.btn_apply_filters')}}</button>
                                 </div>
                             </div>
-
-                            <!-- <select name="category[]" class="talent_select form-control " id="category_id" multiple onchange=select_sub_categories(this)>
-                                <option value="">Select Category</option>
-                                    @foreach($categories as $category)
-                                        @php
-                                            $select='';
-
-                                            if( !empty(Request::get('category_id')) && in_array($category->id, explode(',',Request::get('category_id')) ) ){
-
-                                            $select='selected=selected';
-                                            }
-                                        @endphp
-                                        <option value="{{ $category->id }}" {{ $select}}>{{ $category->title }}</option>
-                                    @endforeach
-                            </select> -->
-
-                            <!-- <select name="sub_categories[]" multiple id="freelancerSubCategory" class="talent_select form-control" onchange='select_cat_skills(this)'>
-                                <option value="">Select Sub Categories</option>
-                                @if(isset($sub_categories) && !empty($sub_categories) )
-                                    @foreach($sub_categories as $key =>$value)
-                                        @php
-                                            $select='';
-                                            if( !empty(Request::get('sub_category_id')) && in_array( $value->sub_category_id, explode(',',Request::get('sub_category_id')) ) ){
-                                            $select='selected=selected';
-                                            }
-                                        @endphp
-                                        <option value="{{  $value->sub_category_id }}" {{ $select }}>{{ $value->title }}</option>
-                                    @endforeach
-                                @endif
-                            </select> -->
-
-                            <!-- <select name="price" class="form-control" id="price">
-                                <option value="">Price</option>
-                                @foreach(Helper::getComapnyBudgetList() as $key=>$price )
-                                    @php
-                                        $location_select='';
-                                        if(Request::get('price') && Request::get('price') ==$price['value'] ){
-                                        $location_select='selected=selected';
-                                        }
-                                    @endphp
-                                <option value="{{$price['value']}}" <?php echo $location_select;  ?>>{{$price['title']}}</option>
-                                @endforeach
-                            </select> -->
-
-                            <!-- <select class="form-control" id="location_id" name="location_id" style="width: 174px;">
-                                <option value="">Location</option>
-                                @foreach($locations as $location):
-                                    @php
-                                        $location_select='';
-                                        if(Request::get('location_id') && Request::get('location_id') ==$location->id ){
-                                        $location_select='selected=selected';
-                                        }
-                                    @endphp
-                                    <option value="{{ $location->id }}" <?php echo $location_select;  ?>>{{ $location->title }}</option>
-                                @endforeach
-                            </select> -->
-
-                            <!-- <select class="form-control" id="employees" name="employees" style="width: 174px;">
-                                <option value="">Team Strength</option>
-                                @foreach (Helper::getEmployeesList() as $key => $employee)
-                                    @php
-                                        $location_select='';
-                                        if(Request::get('employees') && Request::get('employees') ==$employee['value'] ){
-                                        $location_select='selected=selected';
-                                        }
-                                    @endphp
-                                    <option value="{{ $employee['value'] }}" <?php echo $location_select;  ?>>{{ $employee['title'] }}</option>
-                                @endforeach
-                            </select> -->
-
-                            
                         </div>
                     </form>
                 </div>
             </div>
             <div class="row align-items-center">
-
                 <div class="col-xl-3 col-md-7 col-sm-9 col-12 mb-2 text-center">
                     <div class="custom-control custom-switch rounded-pill p-2" style="background-color:#f7f5f5;">
                         <span>
                             <svg viewBox="0 0 16 16" height="16" width="16" class="text-success small" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.735.07a.533.533 0 0 1 .53 0l7.466 4.267A.533.533 0 0 1 16 4.8v.768c0 4.835-3.205 9.083-7.853 10.412a.534.534 0 0 1-.294 0A10.828 10.828 0 0 1 0 5.567V4.8c0-.191.103-.368.269-.463L7.735.07Zm-.192 11.355 4.607-5.759L11.317 5 7.39 9.91 4.608 7.59l-.683.82 3.618 3.015Z" fill="currentColor"></path></svg>
                             Verified by Talends
                         </span>
-                        <!-- <label class="custom-control-label float-right" for="customSwitch1">
-                            <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                        </label> -->
                     </div>
                 </div>
-
                 <div class="col-xl-3 col-md-5 col-sm-3 col-12 mb-2">
                     <a href="javascript:;" class="btn-link position-relative tooltip-link">
                         <span class="mr-2">
@@ -311,7 +246,7 @@
 
 
 
-                                <h3>{{ $value->FullName }}</h3>
+                                <h3>{{ $value->profile->company_name }}</h3>
 
                                 <p>{{$value->profile->tagline}}</p>
 
@@ -396,16 +331,9 @@
                             <br>
 
                             </a>
-
                             <span class="company_description">Total Team Strength</span>
 
                             <br>{{ $value->profile->no_of_employees ?? "0" }}
-
-
-
-
-
-
 
                         </div>
 
@@ -431,12 +359,12 @@
         <div class="container px-md-0">
             <div class="row">
                 <div class="col-md-12">
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div id="carouselExampleControls" class="carousel slide" data-interval="false">
                         <div class="carousel-inner">
                             <h2>Successful project delivered by Agencies</h2>
                             <div class="carousel-item active">
                                 <div class="row fss_box_row fss_red_bg">
-                                    <div class="col-md-4 pri=md-0">
+                                    <div class="col-md-4 pr-md-0 d-none d-md-block">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->about_talends_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->about_talends_image)}}"
@@ -453,7 +381,7 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="row fss_box_row fss_blue_bg">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 pr-md-0 d-none d-md-block">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->talends_project_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->talends_project_image)}}"
@@ -471,7 +399,7 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="row fss_box_row fss_blue_bg">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 pr-md-0 d-none d-md-block">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->talends_work_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->talends_work_image)}}"
@@ -489,7 +417,7 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="row fss_box_row fss_blue_bg">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 pr-md-0 d-none d-md-block">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->talends_payment_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->talends_payment_image)}}"
@@ -524,20 +452,21 @@
     <section class="demand_services">
         <div class="container px-md-0">
             <div class="row">
-                <div class="col-12 mb-3">
+                <div class="col-12">
                     <h2>in-demand services from agencies</h2>
                 </div>
-                @foreach($categories as $category)
-                <div class="col-lg col-md-4 col-sm-6">
-                    <div class="content-box">
-                        <img src="{{ asset('uploads/categories/'.$category->image)}}" alt="" class="img-fluid mb-3">
-                        <p>{{ $category->title }}</p>
-                    </div>
-                </div>
-                @endforeach
+                <div class="row">
+                @foreach($agency_services as $category)
         
-            </div>
-           
+                    <div class="col-lg-3" style="max-width: 20% !important;">
+                        <div class="content-box">
+                            <img src="{{ asset('uploads/agency_services/'.$category->image)}}" alt="" class="img-fluid mb-3">
+                            <p>{{ $category->title }}</p>
+                        </div>
+                    </div>
+                @endforeach  
+                </div>      
+            </div>           
         </div>
     </section>
     <section class="find_agency pb-0">
@@ -564,16 +493,7 @@
 
 @endsection
 
-
-
-
-
-
-
 @push('scripts')
-
-
-
 <script>
     $(".checkbox-menu").on("change", "input[type='checkbox']", function() {
         $(this).closest("li").toggleClass("active", this.checked);
@@ -621,9 +541,9 @@
 
                     var title = response['sub_categories'][i].title;
 
-                    var option = "<div class='col-md-4 mb-3'><input id='freelancerSubCategory' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
-
-                    option+=" "+title+" </div>" ; 
+                    var option = "<div class='col-md-4 mb-3'><div class='custom-control custom-check'><input class='custom-control-input' id='freelancerSubCategory' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
+                     
+                    option+="<label class='custom-control-label' for='{{$value['value']}}'>"+title+" </label></div></div>" ; 
                     $(".category_sub_categories").append(option); 
         
                 }

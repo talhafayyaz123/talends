@@ -86,25 +86,24 @@
                                 @endif
                                </ul>
                         </div>
-                        <h3>Latest Portfolio</h3>
+                        <!-- <h3>Latest Portfolio</h3> -->
                         @if (!empty($expertise) && !empty($expertise) )
 
-                        <section class="featured_success_stories_sec p-0">
+                        <section class="featured_success_stories_sec p-md-0">
                             <div class="container px-md-0">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                        <div id="carouselExampleControls" class="carousel slide" data-interval="false">
                                             <div class="carousel-inner">
-                                        
-                                           
+                                            <h2 class="mb-0">Latest Portfolio</h2>
                                             @if(!empty($expertise->portfolio_detail )  || !empty($expertise->portfolio_image)  )
 
                                             <div class="carousel-item active">
-                                                    <div class="row">
+                                                    <div class="row mt-4">
                                                         <div class="col-md-6">
                                                         @if( isset($expertise->portfolio_image) )
-                                                <img src="{{ asset('uploads/company/'.$expertise->portfolio_image)}}" class="img-fluid w-100" alt="Carousel Image" width="300">
-                                                @endif
+                                                            <img src="{{ asset('uploads/company/'.$expertise->portfolio_image)}}" class="img-fluid w-100" alt="Carousel Image" width="300">
+                                                        @endif
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="carousel-content px-4">
@@ -112,18 +111,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 @endif
-
-
                                                 @if(!empty($expertise->portfolio_detail_2 )  || !empty($expertise->portfolio_image_2)  )
-
                                                 <div class="carousel-item">
-                                                    <div class="row">
+                                                    <div class="row mt-4">
                                                         <div class="col-md-6">
                                                         @if( isset($expertise->portfolio_image_2) )
-                                                <img src="{{ asset('uploads/company/'.$expertise->portfolio_image_2)}}" class="img-fluid w-100" alt="Carousel Image" width="300">
-                                                @endif
+                                                            <img src="{{ asset('uploads/company/'.$expertise->portfolio_image_2)}}" class="img-fluid w-100" alt="Carousel Image" width="300">
+                                                        @endif
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="carousel-content px-4">
@@ -132,15 +127,13 @@
                                                     </div>
                                                 </div>
                                                 @endif
-
-
-                                                  @if(!empty($expertise->portfolio_detail_3 )  || !empty($expertise->portfolio_image_3)  )
+                                                @if(!empty($expertise->portfolio_detail_3 )  || !empty($expertise->portfolio_image_3)  )
                                                 <div class="carousel-item">
-                                                    <div class="row">
+                                                    <div class="row mt-4">
                                                         <div class="col-md-6">
                                                         @if( isset($expertise->portfolio_image_3) )
-                                                <img src="{{ asset('uploads/company/'.$expertise->portfolio_image_3)}}" class="img-fluid w-100" alt="Carousel Image" width="300">
-                                                @endif
+                                                            <img src="{{ asset('uploads/company/'.$expertise->portfolio_image_3)}}" class="img-fluid w-100" alt="Carousel Image" width="300">
+                                                        @endif
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="carousel-content px-4">
@@ -148,14 +141,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 @endif
-
-                                           
-                                                    
-                                               
-                                               
-                                              
                                             </div>
                                             <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
                                                 data-slide="prev">
@@ -198,9 +184,18 @@
                         <p><b>{{ \Carbon\Carbon::parse($company_detail->membership_date)->format('Y') ?? '' }}</b></p>
                         @endif
                         <p class="mb-0 mt-4">Client Focus</p>
-                        <p><b>{!! $profile->company_type   ?? '' !!}</b></p>
-                        <!-- <p class="mb-0 mt-4">Language</p>
-                        <p><b>Russian English</b></p> -->
+                         @if(isset($profile->company_type) && !empty($profile->company_type) )
+                         @foreach(explode(',',$profile->company_type ) as $value)
+                         @if($value=='large_enterprises')
+                        <p><b>Large Enterprises</b></p>
+                        @elseif($value=='small_medium_enterprises')
+                        <p><b>Small & Mid</b></p>
+                        @else
+                        <p><b>Startup</b></p>
+                          @endif
+
+                        @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
@@ -213,18 +208,16 @@
                 <div class="col-12">
                     @auth
                       
-                    @if(Auth::user()->getRoleNames()[0]=='employer')
+                    @if(Auth::user()->getRoleNames()[0]=='admin')
                     <div class="stepper-container">
                         <h2>Hire this Agency</h2>
                         <p class="mb-5">Please fill the brief below to get in touch the agency with much better and faster response. Feel free to add as much detail as needed.</p>
-                    
-
-                        @if ($errors->any())
+                            @if ($errors->any())
                                 @foreach ($errors->all() as $error)
                                     <div class="error">{{$error}}</div>
                                 @endforeach
                             @endif
-                        {!! Form::open(['url' => ('store/hire/agency/'.$id.''), 'class' =>'wt-userform', 'id' => 'agencyform']) !!}
+                            {!! Form::open(['url' => ('store/hire/agency/'.$id.''), 'class' =>'wt-userform', 'id' => 'agencyform']) !!}
 
                             <ul id="progressbaragency">
                                 <li class="active" id="account"><span>1</span></li>
@@ -291,7 +284,7 @@
                                         <div class="col-md-4 mb-4">
                                             <div class="image-checkboxes">
                                                 <input type="checkbox" name="services[]" value="{{ $category->id }}" id="myCheckbox{{ $category->id }}"/>
-                                                <label for="myCheckbox{{ $category->id }}"><img src="{{ asset('uploads/categories/'.$category->image)}}" class="rounded-circle" width="40"/>{{ $category->title }}</label>
+                                                <label for="myCheckbox{{ $category->id }}"><img src="{{ asset('uploads/categories/'.$category->image)}}" class="rounded-circle" width="40"/>{{ $category->title ?? '' }}</label>
                                             </div>
                                         </div>
                                       @endforeach
@@ -330,16 +323,119 @@
                             <fieldset>
                                 <div class="form-card">
                                     <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="">
+                                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Login</a>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Signup as Employer</a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content py-4" id="myTabContent">
+                                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                                        <div class="row">
+                                                                <div class="col-md-6 mb-3">      
+                                                                    <label>Account Type</label>
+                                                                    <select name="role" id="role" class="form-control">
+                                                                        <option value="">Employer</option>
+                                                                        <option value="">Freelancer</option>
+                                                                        <option value="">Intern</option>
+                                                                        <option value="">Company</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-md-6 mb-3">
+                                                                    <label>Email</label>
+                                                                    <input id="email" type="email" placeholder="Email" class="form-control" name="email" value="">
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label>Password</label>
+                                                                    <input id="password" type="password" placeholder="********" class="form-control" name="password">
+                                                                </div>
+                                                                <div class="col-md-12">   
+                                                                    <div class="form-group mb-3 text-center">
+                                                                        <button class="btn btn-theme rounded-pill px-5 btn-block">Sign in</button>
+                                                                    </div>
+                                                                    <div class="form-group mb-3">
+                                                                        <div class="or-text">
+                                                                            <p>or</p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group mb-3 text-center">
+                                                                        <div id="my-signin3"></div>
+                                                                        <span class="error gmail_error" style="display: none;">Google account is not recognized for Google Sign-In on Talends. Please make sure you are using the same account that you have previously linked.</span>
+                                                                    </div>
+                                                                    <div class="mb-3">
+                                                                        <a href="{{ route('password.request') }}" class="btn btn-link"> Forget Password</a>
+                                                                        Join Talends <a href="{{ route('register')  }}" class="text-theme">Register Here</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                                        <div class="row">
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">First Name</label>
+                                                                <input type="text" class="form-control" placeholder="First Name">
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">Last Name</label>
+                                                                <input type="text" class="form-control" placeholder="Last Name">
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">Email</label>
+                                                                <input type="email" class="form-control" placeholder="Email">
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">Password</label>
+                                                                <input type="password" class="form-control" placeholder="Password">
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">Select Department</label>
+                                                                <select name="" id="" class="form-control">
+                                                                    <option value="">Select Department</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <label for="">Select No. of Employees</label>
+                                                                <select name="" id="" class="form-control">
+                                                                    <option value="">Select Employees</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-12">   
+                                                                <div class="form-group mb-3 text-center">
+                                                                    <button class="btn btn-theme rounded-pill px-5 btn-block">Sign in</button>
+                                                                </div>
+                                                                <div class="form-group mb-3">
+                                                                    <div class="or-text">
+                                                                        <p>or</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group mb-3 text-center">
+                                                                    <div id="my-signin3"></div>
+                                                                    <span class="error gmail_error" style="display: none;">Google account is not recognized for Google Sign-In on Talends. Please make sure you are using the same account that you have previously linked.</span>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <a href="{{ route('password.request') }}" class="btn btn-link"> Forget Password</a>
+                                                                    Join Talends <a href="{{ route('register')  }}" class="text-theme">Register Here</a>
+                                                                </div>
+                                                            </div>
+                                                          </div>  
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row">
                                         <div class="col-md-8 mx-auto text-center">
                                             <img src="{{ asset('talends/assets/img/icons/success-icon.png')}}" class="img-fluid mb-4"/>
                                             <h3 class="fs-title text-center mb-3">Submit you request:</h3>
                                             <p>Please review all the information you previously typed in the past steps, and if all is okay, submit your message to receive a response as soon as possible.</p>
-
                                             <input type="submit" name="next" class="btn btn-theme rounded-pill px-4  m-2  py-3" value="Submit"/>
-
-         
-                                             </div>
-                                    </div>
+                                        </div>
+                                    </div> -->
                                 </div>
                                 
                             </fieldset>
@@ -353,190 +449,6 @@
             </div>
         </div>
     </section>
-    <!-- <h3 class="theme_bg_dark text-center text-white container">Overview</h3> -->
-
-    <!-- <section>
-        <div class="container">
-            <div class="row">
-                @if (!empty($company_detail) && !empty($company_detail))
-
-
-                {!! $company_detail->detail ?? '' !!}
-                @endif
-            </div>
-        </div>
-    </section> -->
-
-    <!-- <h3 class="theme_bg_dark text-center text-white container">Expertise</h3> -->
-
-    <!-- <section>
-        <div class="container">
-            <div class="row">
-                @if (!empty($company_expertise) && !empty($company_expertise))
-
-
-                @foreach ($company_expertise as $unserialize_key => $value)
-                <div class="col-md-4 company-block">
-                    <div class="job_list_box description_list">
-                        <h3>{{ $value['title'] }}</h3>
-                        <span>Total Developers</span>
-                        <p class='active_members'>{{ $value['total_developers'] }} Active Members</p>
-
-                        <span>Average Project Cost</span>
-                        <p class="active_members">${{ $value['project_cost'] }}</p>
-
-                        <ul class="job_list_category">
-                            @foreach ($value['categories'] as $key => $category)
-
-                            <li><a>{{ App\Category::find($category)->title }}</a></li>
-                            @endforeach
-
-                        </ul>
-                    </div>
-                </div>
-                @endforeach
-                @else
-
-                <p>Not Found</p>
-                @endif
-            </div>
-        </div>
-    </section> -->
-
-    <!-- <h3 class="theme_bg_dark text-center text-white container">Skills</h3> -->
-
-    @php
-    $user_category_skills = \App\UserCategorySkills::where('user_id', $id)->get();
-    $skills_arr=array();
-    foreach($user_category_skills as $skill)
-    {
-    $skills_arr[]=$skill['skill_id'];
-    }
-
-    if(!empty($skills_arr)){
-    $skills = \App\Skill::whereIn('id', $skills_arr)->get();
-
-    }
-    @endphp
-
-    <!-- <section>
-        <div class="container">
-            <div class="wt-tag wt-widgettag">
-                @if(isset($skills))
-                @foreach($skills as $skill)
-                <a class="skill-item" href="{{{url('search-results?type=job&skills%5B%5D='.$skill->slug)}}}">{{{ $skill->title }}}</a>
-                @endforeach
-                @endif
-            </div>
-        </div>
-    </section> -->
-    <!-- 
-    <h3 class="theme_bg_dark text-center text-white container">latest Portfolio</h3>
-
-    <section>
-        <div class="container">
-            <div class="row">
-                @if (!empty($company_detail) && !empty($company_expertise))
-
-
-                {!! $company_detail->portfolio !!}
-                @endif
-            </div>
-        </div>
-    </section> -->
-    <!-- <h3 class="theme_bg_dark text-center text-white container">Latest Portfolio</h3>
-
-    <section class="">
-        <div class="container">
-            <div class="row row-eq-height">
-                <div class="col-md-6 mb-3">
-                    @if( isset($expertise->portfolio_image) )
-                    <img src="{{ asset('uploads/company/'.$expertise->portfolio_image)}}" class="w-100" alt="">
-                    @endif
-                </div>
-                <div class="col-md-6 pb-3 align-self-center">
-                    <h5>Portfolio</h5>
-                    {!! $expertise->portfolio_detail ?? '' !!}
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="">
-        <div class="container">
-            <div class="row row-eq-height">
-                <div class="col-md-6">
-                    <img src="{{ asset('talends/assets/img/join_community.png') }}" class="w-100" alt="">
-                </div>
-                <div class="col-md-6 pb-3 align-self-center">
-                    <h2> Hiring The Best Is The Most important Job</h2>
-                    <div class="community_icons_box">
-                        <h3> <img src="{{ asset('talends/assets/img/icons/handshake.png') }}" alt="">Pre-vetted Agencies</h3>
-                        <p>We’re a community with a mission to share hand-picked talented people with local organizations.</p>
-                        <h3><img src="{{ asset('talends/assets/img/icons/database-check.png') }}" alt="">Easy Project Management</h3>
-                        <p>Share your project, and we make sure our dedicated project manager picks best resources for your Project.</p>
-                        <h3><img src="{{ asset('talends/assets/img/icons/chat-question.png') }}" alt="">Affordability With Quality </h3>
-                        <p>Our dedicated support team always excited & ready to keep up with your projects.</p>
-                    </div>
-                    <div class="d-flex align-contents-center">
-                    @guest<a href="{{ route('login') }}" class="theme_btn m-0 ">Hire The Agency Now</a>@endguest
-                    @auth
-                      
-                    @if(Auth::user()->getRoleNames()[0]=='employer')
-                     
-                    <a href="{{url("hire/agency",['id'=>$id ])}}" class="theme_btn m-0 ">Hire The Agency Now</a>
-                    @endif
-                    
-                    @endauth
-
-                        <p class="d-flex align-items-center mb-0 ml-4">Contact<a href="tel:+923214757001" class="pl-2">+923214757001</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-
-    <!-- <h3 class="theme_bg_dark text-center text-white container">Latest Update</h3> -->
-
-
-
-    <!--<div class="container">
-            <div class="row row-eq-height">
-                <div class="col-md-8 pb-3 align-self-center">
-                    <div class="job_list_box">
-                        <div class="job_list_head">
-                            <ul>
-                                <li>
-                                    <h4><img src="assets/img/find-talents/user1.png" alt=""> Mohammed Ismail</h4>
-                                </li>
-                                <li>
-                                    <h4>Posted 2 hours ago</h4>
-                                </li>
-                                <li>
-                                    <h4><i class="fas fa-map-marker-alt">&nbsp;</i>Remote</h4>
-                                </li>
-                            </ul>
-                            <ul class="job_price">
-                                <li class="theme_color">$1000-1500</li>
-                            </ul>
-                        </div>
-                        <h4>Wireframing websites, content strategy, Virtual Assistant</h4>
-                        <p>I am a freelance wordpress developer. i have clients that have ideas they need brought to life on their websites but i dont have the time to wireframe and build their ideas for them...</p>
-                        <ul class="job_list_category">
-                            <li><a href="#">Web Design</a></li>
-                            <li><a href="#">Logo Design</a></li>
-                            <li><a href="#">SEO</a></li>
-                            <li><a href="#">Copywriting</a></li>
-                        </ul>
-                    </div>   
-                </div>
-
-                <div class="col-md-4 mb-3">
-                    <img src="{{ 'talends/assets/img/goverment/good_hands.png' }}" class="w-100" alt="">
-                </div>
-                
-            </div>
-        </div> -->
-
 
 </div>
 <script>

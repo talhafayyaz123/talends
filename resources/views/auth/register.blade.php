@@ -3,7 +3,7 @@
 @php
 $employees = Helper::getEmployeesList();
 $company_bedget = Helper::getComapnyBudgetList();
-$freelancer_bedget = Helper::getFreelancerBudgetList();
+$freelancer_budget = Helper::getFreelancerBudgetList();
 $skills_categories = Helper::getSkillsCategories();
 $categories = Helper::getCategories();
 
@@ -32,7 +32,8 @@ $breadcrumbs_settings = \App\SiteManagement::getMetaValue('show_breadcrumb');
 $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'true';
 @endphp
 @php $breadcrumbs = Breadcrumbs::generate('registerPage'); @endphp
-@if (file_exists(resource_path('views/extend/front-end/includes/inner-banner.blade.php')))
+
+<!-- @if (file_exists(resource_path('views/extend/front-end/includes/inner-banner.blade.php')))
 @include('extend.front-end.includes.inner-banner',
 ['title' => trans('lang.join_for_free'), 'inner_banner' => $reg_form_banner, 'path' => 'uploads/settings/home/', 'show_banner' => $show_reg_form_banner ]
 )
@@ -40,86 +41,8 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
 @include('front-end.includes.inner-banner',
 ['title' => trans('lang.join_for_free'), 'inner_banner' => $reg_form_banner, 'path' => 'uploads/settings/home/', 'show_banner' => $show_reg_form_banner ]
 )
-@endif
-      <!--  <div class="container">
-        <div class="row justify-content-md-center">
-            <div class="col-xs-12 col-sm-12 col-md-10 push-md-1 col-lg-8 push-lg-2" id="registration1">
-                
-                <div class="wt-registerformhold">
-                    <div class="wt-registerformmain">
-                        <div class="wt-joinforms">
-                           
+@endif -->
 
-                                <fieldset class="wt-registerformgroup">
-
-                                        <div class="form-group">
-                                         
-
-                                        </div>
-                                      
-                                        <div class="form-group">
-
-                                            <select name="user_type" id='user_type' class="form-control" v-bind:class="{ 'is-invalid': form_step1.is_user_type_error }" v-model="user_type" v-on:change="selectedType()">
-                                                <option value="">Select User Type</option>
-                                                <option value="freelancer">Freelancer</option>
-                                                <option value="employer">Employer</option>
-                                                <option value="company">Company</option>
-                                                <option value="intern">Intern</option>
-
-                                            </select>
-
-                                            <span class="help-block" v-if="form_step1.user_type_error">
-                                                <strong v-cloak>@{{form_step1.user_type_error}}</strong>
-                                            </span>
-                                        </div>
-
-                                        
-                                     
-                                      
-
-
-                                        <fieldset class="wt-formregisterstart" v-if='user_type'>
-
-
-                                            @if(!empty($roles))
-                                            <ul class="wt-accordionhold wt-formaccordionhold accordion">
-                                                @foreach ($roles as $key => $role)
-
-                                                @if (!in_array($role['id'] == 1, $roles))
-
-                                                
-                                                @endif
-                                                @endforeach
-                                            </ul>
-                                            <span class="help-block" v-if="form_step2.role_error">
-                                                <strong v-cloak>@{{form_step2.role_error}}</strong>
-                                            </span>
-                                            @endif
-                                        </fieldset>
-
-
-                                        <div class="form-group">
-                                            <button type="submit" class="wt-btn">{{{ trans('lang.btn_startnow') }}}</button>
-                                        </div>
-                                    
-                                </fieldset>
-                            
-                            
-
-                            
-                        </div>
-                    </div>
-                    <div class="wt-registerformfooter">
-                        <span>{{{ trans('lang.have_account') }}}<a id="wt-lg" href="javascript:void(0);" @click.prevent='scrollTop()'>{{{ trans('lang.btn_login_now') }}}</a></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --> 
-  
- 
-
-    
     <style>
         .entity-form,
         #register-text{display: none;}
@@ -129,9 +52,9 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
         <div class="row">
             <div class="col-12">
                 <div class="d-flex align-items-center min-vh-100">
-                    <div class="w-100 d-block bg-white shadow-lg rounded my-5 mx-auto py-4">
+                    <div class="w-100 d-block bg-white shadow-lg rounded my-5 mx-auto pt-4">
                         <div class="row">
-                            <div class="col-lg-7">
+                            <div class="col-lg-7 mx-auto">
                                 <div class="auth-content" id="registration">
                                     <!--<div class="preloader-section" v-if="loading" v-cloak>
                                         <div class="preloader-holder">
@@ -141,9 +64,9 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                     <div class="wt-haslayout">
                                         <form method="POST" action="{{{ url('register/form-step1-custom-errors') }}}" class="wt-formtheme wt-formregister tb-registration" @submit.prevent="checkStep1" id="register_form" novalidate>
                                             @csrf
-                                            <div class="row pb-5 mb-4" id="entityType">
+                                            <div class="row" id="entityType">
                                                 <div class="col-12 mb-5">
-                                                    <h3 class="mb-5">Ready to get customers <br/>from <span class="text-theme">Dubai & UAE</span></h3>
+                                                    <h3 class="mb-4">Ready to get customers <br/>from <span class="text-theme">Dubai & UAE</span></h3>
                                                 </div>
                                                 @if(!empty($roles))
                                                     @foreach ($roles as $key => $role)
@@ -163,7 +86,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                                     @elseif($role['role_type'] === 'intern')
                                                                         <label class="custom-control-label" for="intern">
                                                                             <input type="radio" id="intern" name="intern" value="intern" class="custom-control-input" v-on:change="setUserRole('intern')" v-model="user_type">
-                                                                            <img src="{{ asset('talends/assets/img/icons/intern.png')}}" class="rounded-circle img-fluid mr-3" width="40"/>Interne
+                                                                            <img src="{{ asset('talends/assets/img/icons/intern.png')}}" class="rounded-circle img-fluid mr-3" width="40"/>Intern
                                                                         </label>
                                                                     @elseif($role['role_type'] === 'company')
                                                                         <a href="{{ url('company/registration')  }}">
@@ -251,12 +174,8 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                         </div>
                                                         <div class="col-lg-6 mb-3" v-if='user_type== "freelancer" '>
                                                             <div class="form-group">
-                                                                <select name="budget" id='budget' class="form-control" v-bind:class="{ 'is-invalid': form_step2.is_budget_error }">
-                                                                    <option value="">Select Price</option>
-                                                                    @foreach ($freelancer_bedget as $key => $budget)
-                                                                    <option value="{{{$budget['value']}}}">{{{$budget['title']}}}</option>
-                                                                    @endforeach
-                                                                </select>
+                                                            <input id="budget" type="text" class="form-control" value="" name="budget" placeholder="Hourly Rate (AED)" v-bind:class="{ 'is-invalid': form_step2.is_budget_error }">
+
                                                                 <span class="help-block" v-if="form_step2.budget_error">
                                                                     <strong v-cloak>@{{form_step2.budget_error}}</strong>
                                                                 </span>
@@ -266,42 +185,45 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
 
                                                         <div class="col-lg-6 mb-3" v-if='user_type== "employer" '>
                                                             @if ($departments->count() > 0)
-                                                                <select name="department" id='department' class="form-control">
+                                                                <select name="department" id='department' class="form-control" v-bind:class="{ 'is-invalid': form_step1.is_department_error }">
                                                                     <option value="">Select {{{ trans('lang.your_department') }}}</option>
                                                                     @foreach ($departments as $key => $department)
                                                                         <option value="{{{$department->id}}}">{{{$department->title}}}</option>
                                                                     @endforeach
                                                                 </select>
+                                                                <span class="help-block" v-if="form_step1.department_error">
+                                                                    <strong v-cloak>@{{form_step1.department_error}}</strong>
+                                                                </span>
                                                             @endif
                                                         </div>
                                                         <div class="col-lg-6 mb-3" v-if='user_type== "employer" '>
-                                                            <select name="employees" id='employees' class="form-control">
+                                                            <select name="employees" id='employees' class="form-control" v-bind:class="{ 'is-invalid': form_step1.is_employee_error }">>
                                                                 <option value="">Select {{{ trans('lang.no_of_employees') }}}</option>
                                                                 @foreach ($employees as $key => $employee)
                                                                     <option value="{{{$employee['value']}}}">{{{$employee['title']}}}</option>
                                                                 @endforeach
                                                             </select>
+                                                            <span class="help-block" v-if="form_step1.employee_error">
+                                                                    <strong v-cloak>@{{form_step1.employee_error}}</strong>
+                                                                </span>
                                                         </div>
                                                         <!-- internee -->
 
                                                         <div class="col-lg-6 mb-3" v-if='user_type== "intern" '>
-                                                            <select name="budget" id='budget' class="form-control">
-                                                                    <option value="">Select Price</option>
-                                                                @foreach ($company_bedget as $key => $budget)
-                                                                    <option value="{{{$budget['value']}}}">{{{$budget['title']}}}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>                                                
-                                                        <div class="col-lg-12 mb-3" v-if='user_type== "intern" '>
-                                                            <input class="form-control" id="university" type="text" name="university" value="" placeholder="University">
+                                                        <input id="budget" type="text" class="form-control" value="" name="budget" placeholder="Hourly Rate (AED)" v-bind:class="{ 'is-invalid': form_step2.is_budget_error }">
+
+                                                            <span class="help-block" v-if="form_step2.budget_error">
+                                                                    <strong v-cloak>@{{form_step2.budget_error}}</strong>
+                                                                </span>
+                                                        </div>    
+                                                        
+                                                        <div class="col-lg-6 mb-3" v-if='user_type== "intern" '>
+                                                            <input class="form-control" id="specialization" type="text" name="specialization" value="" placeholder="specialization" v-bind:class="{ 'is-invalid': form_step2.is_specialization_error }">
+                                                            <span class="help-block" v-if="form_step2.specialization_error">
+                                                                    <strong v-cloak>@{{form_step2.specialization_error}}</strong>
+                                                                </span>
                                                         </div>
-                                                        <div class="col-lg-12 mb-3" v-if='user_type== "intern" '>
-                                                            <input class="form-control" id="grade" type="text" name="grade" value=""  placeholder="Degree">
-                                                        </div>
-                                                        <div class="col-lg-12 mb-3" v-if='user_type== "intern" '>
-                                                            <input class="form-control" id="specialization" type="text" name="specialization" value="" placeholder="specialization">
-                                                        </div>
-                                                        <div class="col-lg-12 mb-3" v-if='user_type== "intern" '>
+                                                        <div class="col-lg-6 mb-3" v-if='user_type== "intern" '>
                                                             <select name="availability" id='availability' class="form-control" v-bind:class="{ 'is-invalid': form_step2.is_availability_error }">
                                                                 <option value="">Select Availability</option>
                                                                 <option value="remote">Remote</option>
@@ -311,6 +233,21 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                                 <strong v-cloak>@{{form_step2.availability_error}}</strong>
                                                             </span>
                                                         </div>
+
+
+                                                        <div class="col-lg-12 mb-3" v-if='user_type== "intern" '>
+                                                            <input class="form-control" id="university" type="text" name="university" value="" placeholder="University" v-bind:class="{ 'is-invalid': form_step2.is_university_error }">
+                                                            <span class="help-block" v-if="form_step2.university_error">
+                                                                    <strong v-cloak>@{{form_step2.university_error}}</strong>
+                                                                </span>
+                                                        </div>
+                                                        <div class="col-lg-12 mb-3" v-if='user_type== "intern" '>
+                                                            <input class="form-control" id="grade" type="text" name="grade" value=""  placeholder="Degree" v-bind:class="{ 'is-invalid': form_step2.is_grade_error }">
+                                                            <span class="help-block" v-if="form_step2.grade_error">
+                                                                    <strong v-cloak>@{{form_step2.grade_error}}</strong>
+                                                                </span>
+                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                                 <div class="entity-form freelancer mytab" id="freelancer">
@@ -344,7 +281,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                             <a href="{{  url('register') }}" class="ml-2 btn-link text-success">Create Account</a>
                                                         </div>
                                                         <div class="col-12 text-center mb-3">
-                                                            <p class="small">By creating an account, you agree to the Pangea's 
+                                                            <p class="small">By creating an account, you agree to the Talends.com 
                                                                 <a href="javascript:;" class="btn-link text-success">Terms of Service</a> and 
                                                                 <a href="javascript:;" class="btn-link text-success">Privacy Policy</a>.
                                                             </p>
@@ -405,7 +342,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                     </div>
                                 </div>
                             </div> <!-- end col -->
-                            <div class="col-lg-5 d-none d-lg-block rounded-right ml-auto">
+                            <div class="col-lg-4 d-none d-lg-block rounded-right ml-auto">
                                 <div class="pt-4">
                                     <h3 id="register-text">Ready to get customers from 
                                         <span class="text-success">Dubai & UAE</span>

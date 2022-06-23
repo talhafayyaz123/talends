@@ -34,6 +34,7 @@ use App\EmailTemplate;
 use App\Mail\GeneralEmailMailable;
 use App\Services\PaymentService;
 use App\UserCategorySkills;
+use App\AgencyServices;
 use function Psy\debug;
 
 class HomeController extends Controller
@@ -208,7 +209,12 @@ class HomeController extends Controller
 
      public function whyAgencyPlan(){
         $why_agency_plan=AboutTalendsPage::where('page_type','why_agency_plan')->first();
-        return view('front-end.pages.why_agency_plan',compact('why_agency_plan'));
+        $package=Package::where('role_id',4)->where('trial','!=',1)->orderBy('id','asc')->take(2)->get();
+
+        $monthly_options = !empty($package[0]->options) ? unserialize($package[0]->options) : array();
+        $yearly_options = !empty($package[1]->options) ? unserialize($package[1]->options) : array();
+    
+        return view('front-end.pages.why_agency_plan',compact('yearly_options','monthly_options','package','why_agency_plan'));
      }
 
      public function companyRegistration(){
@@ -222,8 +228,10 @@ class HomeController extends Controller
 
         $monthly_options = !empty($package[0]->options) ? unserialize($package[0]->options) : array();
         $yearly_options = !empty($package[1]->options) ? unserialize($package[1]->options) : array();
+
+        $package_options = Helper::getPackageOptions('company');
     
-        return view('auth.company_registration',compact('yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
+        return view('auth.company_registration',compact('package_options','yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
      }
 
      public function companyRegistrationSuccess(Request $request){
@@ -526,6 +534,9 @@ class HomeController extends Controller
             )
         );
     }
+    public function CompanyServiceDetail(){
+        return view('front-end.pages.company_service_detail');
+    }
     public function Companies(Request $request){
       
         $filter = $request->input('filter');
@@ -572,6 +583,7 @@ class HomeController extends Controller
     $skills     = Skill::all();
     $locations = Location::latest()->get();
     $categories = Category::all();
+    $agency_services=AgencyServices::all();
     $featured_success_stories=AboutTalendsPage::where('page_type','featured_success_stories')->first();
     $agency_need_banner=AboutTalendsPage::where('page_type','agency_need_banner')->first();
     
@@ -586,7 +598,7 @@ class HomeController extends Controller
 
     }
 
-    return view('front-end.pages.companies',compact('agency_need_banner','companies','skills','locations','categories','sub_categories','featured_success_stories'));
+    return view('front-end.pages.companies',compact('agency_services','agency_need_banner','companies','skills','locations','categories','sub_categories','featured_success_stories'));
      }
 
 

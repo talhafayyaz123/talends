@@ -1,4 +1,12 @@
 <header>
+@if(\Request::route()->getName()=='login')
+    <style>
+        .wt-login{
+            padding-top: 0px  !important; 
+        }
+        </style>
+        @endif
+    @if(\Request::route()->getName()!='login')
     <div class="container-lg p-0">
         <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand" href="{{ route('home') }}">
@@ -213,4 +221,5 @@
             </div>
         </nav>
     </div>
+    @endif
 </header>

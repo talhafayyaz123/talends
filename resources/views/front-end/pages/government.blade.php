@@ -105,7 +105,7 @@
                 <div class="col-md-12 text-center">
                     <h2>Get Register <br> Today <span class="theme_color">for Better <br> Tomorrow</span></h2>
                     <a href="{{ route('register') }}" class="theme_btn inverse_btn">Join Talends</a>
-                    <a href="#" class="theme_btn ml-3">ask Question</a>
+                    <a href="{{ route('FindRightTalends') }}" class="theme_btn ml-3">ask Question</a>
                 </div>
             </div>
         </div>

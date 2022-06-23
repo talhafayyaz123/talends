@@ -575,6 +575,14 @@
                  this.form_step1.is_last_name_error = false;
                  this.form_step1.email_error = '';
                  this.form_step1.is_email_error = false;
+
+                 this.form_step1.employee_error = '';
+                 this.form_step1.is_employee_error = false;
+
+                 this.form_step1.department_error = '';
+                 this.form_step1.is_department_error = false;
+
+
  
                  var self = this;
                  let register_Form = document.getElementById('register_form');
@@ -599,6 +607,18 @@
 
                  this.form_step2.budget_error = '';
                  this.form_step2.is_budget_error = false;
+
+
+                 this.form_step2.university_error = '';
+                 this.form_step2.is_university_error = false;
+
+
+                 this.form_step2.grade_error = '';
+                 this.form_step2.is_grade_error = false;
+
+
+                 this.form_step2.specialization_error = '';
+                 this.form_step2.is_specialization_error = false;
 
                  
                     if($('#user_email').val()){
@@ -638,10 +658,10 @@
                                 self.form_step2.is_locations_error = true;
                             }
     
-                           /*  if (error.response.data.errors.user_type) {
-                                self.form_step1.user_type_error = error.response.data.errors.user_type[0];
-                                self.form_step1.is_user_type_error = true;
-                            } */
+                             if (error.response.data.errors.employees) {
+                                self.form_step1.employee_error = error.response.data.errors.employees[0];
+                                self.form_step1.is_employee_error = true;
+                            } 
     
                             
                             if (error.response.data.errors.last_name) {
@@ -658,10 +678,10 @@
                                 self.form_step2.password_error = 'Your password must be more than 6 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character';
                                 self.form_step2.is_password_error = true;
                             }
-                            /* if (error.response.data.errors.password_confirmation) {
-                                self.form_step2.password_confirm_error = error.response.data.errors.password_confirmation[0];
-                                self.form_step2.is_password_confirm_error = true;
-                            } */
+                             if (error.response.data.errors.department) {
+                                self.form_step1.department_error = error.response.data.errors.department[0];
+                                self.form_step1.is_department_error = true;
+                            } 
                             if (error.response.data.errors.termsconditions) {
                                 self.form_step2.termsconditions_error = error.response.data.errors.termsconditions[0];
                                 self.form_step2.is_termsconditions_error = true;
@@ -686,6 +706,23 @@
                                self.form_step2.budget_error = error.response.data.errors.budget[0];
                                self.form_step2.is_budget_error = true;
                            }
+
+
+                           if (error.response.data.errors.university) {
+                            self.form_step2.university_error = error.response.data.errors.university[0];
+                            self.form_step2.is_university_error = true;
+                        }
+
+
+                        if (error.response.data.errors.grade) {
+                            self.form_step2.grade_error = error.response.data.errors.grade[0];
+                            self.form_step2.is_grade_error = true;
+                        }
+
+                        if (error.response.data.errors.specialization) {
+                            self.form_step2.specialization_error = error.response.data.errors.specialization[0];
+                            self.form_step2.is_specialization_error = true;
+                        }
    
    
     
@@ -1361,7 +1398,48 @@
                          this.$swal.close()
                      }
                  })
-             }
+             },
+             deleteAgencyServicesChecked: function (msg, text) {
+                var deleteIDs = jQuery("#checked-val input:checkbox:checked").map(function () {
+                    return jQuery(this).val();
+                }).get();
+                var self = this;
+                this.$swal({
+                    title: msg,
+                    type: "warning",
+                    customContainerClass: 'hire_popup',
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                    closeOnConfirm: true,
+                    closeOnCancel: true,
+                    showLoaderOnConfirm: true
+                }).then((result) => {
+                    var self = this;
+                    if (result.value) {
+                        axios.post(APP_URL + '/admin/delete-agency-services-checked-cats', {
+                            ids: deleteIDs
+                        })
+                            .then(function (response) {
+                                if (response.data.type == "success") {
+                                    setTimeout(function () {
+                                        self.$swal({
+                                            title: this.title,
+                                            text: text,
+                                            type: "success"
+                                        })
+                                    }, 500);
+                                    window.location.replace(APP_URL + '/admin/agency_services');
+                                } else {
+                                    self.showError(response.data.message);
+                                }
+                            })
+                    } else {
+                        this.$swal.close()
+                    }
+                })
+            }
          }
      });
  }
@@ -2089,7 +2167,9 @@
                  if (auth_user == 1) {
                      this.$refs.myModalRef.show();
                  } else {
-                     jQuery('.wt-loginarea .wt-loginformhold').slideToggle();
+                
+                    window.location.replace(APP_URL + '/login');
+
                  }
              },
              submitProjectOffer: function (id) {

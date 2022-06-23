@@ -16,13 +16,14 @@ class CreateHireAgenciesTable extends Migration
         Schema::create('hire_agency', function (Blueprint $table) {
             $table->id();
             $table->integer('agency_id');
+            $table->integer('employeer_id');
             $table->string('full_name')->nullable();   
             $table->string('company_name')->nullable();   
             $table->string('email')->nullable();   
             $table->string('phone_number')->nullable();   
             $table->text('detail')->nullable();
             $table->string('budget')->nullable();   
-   
+            $table->string('status')->nullable();  
             $table->integer('is_seen')->default(0);   
             $table->text('questions')->nullable();   
             $table->timestamps();

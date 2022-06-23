@@ -13,11 +13,13 @@ class HireAgency extends Model
 
     protected $fillable = array(
         'agency_id',
+        'employeer_id',
         'full_name',
         'company_name',
         'email',
         'phone_number',
         'detail',
+        'status',
         'questions',
         'is_seen',
         'budget'

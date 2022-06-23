@@ -36,7 +36,7 @@ class Category extends Model
      * @var array $fillable
      */
     protected $fillable = array(
-        'title', 'slug', 'abstract'
+        'title', 'slug', 'abstract','parent_category'
     );
 
     /**

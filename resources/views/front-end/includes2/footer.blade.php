@@ -1,10 +1,10 @@
 @php
 $footer_how_work=App\Helper::getfooterHowWork();
 @endphp
-<section class="how_it_works_sec">
+<section class="how_it_works_sec pt-0">
     <div class="container py-5">
         <div class="row">
-            <div class="col-md-12 pb-5 text-center">
+            <div class="col-md-12 pb-4 text-center">
                 <h2 class="text-white opcty_5"> {!! $footer_how_work->project_description ?? '' !!}</h2>
             </div>
             <div class="col-lg-3 col-md-6 mb-2">
@@ -143,12 +143,13 @@ $join_community=App\Helper::getJoinCommunity();
         <div class="row align-items-end">
             <div class="col-md-8 pb-3 align-self-center">
                 {!! $join_community->banner_description ?? '' !!}
-                <a href="{{route('findTalends')}}" class="btn btn-theme px-4 rounded-pill">Find A Job</a>
-                <a href="#" class="btn btn-theme-white px-4 rounded-pill ml-md-3">Submit A Job</a>
+                <a href="{{url('search-results?type=job')}}" class="btn btn-theme px-4 rounded-pill">Find A Job</a>
+                <a href="{{ route('login') }}" class="btn btn-theme-white px-4 rounded-pill ml-md-3">Submit A Job</a>
             </div>
             <div class="col-md-4">
                 @if(isset( $join_community->about_talends_image) )
-                <img src="{{asset('/talends/assets/img/join_talend_new.png')}}" class="w-100"
+            
+                <img src="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="w-100"
                     alt="">
                 @endif
             </div>
@@ -210,13 +211,24 @@ $footer_menus_4=App\Helper::footerMenu4();
                 </ul>
             </div>
         </div>
-        <div class="row footer_bottom">
+        <div class="row footer_bottom align-items-end">
             <div class="col-md-6">
-                <p>© 2021 All Rights Reserved. </p>
+                <ul class="list-inline">
+                    <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-facebook"></i></a> </li>
+                    <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-twitter"></i></a> </li>
+                    <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-linkedin"></i></a> </li>
+                    <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-instagram"></i></a> </li>
+                    <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-youtube"></i></a> </li>
+                    <li class="px-1"> <a href="javascript:;" target="_self"><i class="bi-tiktok"></i></a> </li>
+                </ul>
+                <p class="mb-0">Talends.com ©2022 All Rights Reserved.</p>
+                <p class="small">Dubai, United Arab Emirates</p>
             </div>
             <div class="col-md-6">
                 <ul class="list-inline mb-0">
-                    <li class="px-2"> <a href="javascript:;" target="_self">Privacy Policy</a> </li>
+                    <li class="px-2"> <a href="javascript:;" target="_self">Site Map</a> </li>
+                    <li class="px-2"> <a href="{{ route('Agreement') }}" target="_self">Term & Conditions</a> </li>
+                    <li class="px-2"> <a href="{{ route('privacyPolicy') }}" target="_self">Privacy Policy</a> </li>
                 </ul>
             </div>
         </div>

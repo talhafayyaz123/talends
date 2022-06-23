@@ -448,6 +448,83 @@ class SiteManagement extends Model
             return 'success';
         }
     }
+    public static function savePrivacyPolicy($request)
+    {
+        $json = array();
+        $menu = $request['privacy'];
+
+        if (!empty($menu)) {
+
+            foreach ($menu as $key => $value) {
+                if (($value['title'] == null  || $value['description'] == null)) {
+                    $json['type'] = 'error';
+                    return $json;
+                }
+            }
+            
+            $existing_data = SiteManagement::getMetaValue('privacy_policy');
+        if (!empty($existing_data)) {
+            DB::table('site_managements')->where('meta_key', '=', 'privacy_policy')->delete();
+        }
+
+        DB::table('site_managements')->insert(
+            [
+                'meta_key' => 'privacy_policy', 'meta_value' => serialize($menu),
+                "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+            ]
+        );
+        \Artisan::call('config:cache');
+        \Artisan::call('config:clear');
+        \Artisan::call('cache:clear');
+        \Artisan::call('view:clear');
+
+           
+            $json['type'] = 'success';
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            return $json;
+        }
+    }
+
+    public static function saveUserAgreement($request)
+    {
+        $json = array();
+        $menu = $request['user_agreement'];
+
+        if (!empty($menu)) {
+
+            foreach ($menu as $key => $value) {
+                if (($value['title'] == null  || $value['description'] == null)) {
+                    $json['type'] = 'error';
+                    return $json;
+                }
+            }
+            
+            $existing_data = SiteManagement::getMetaValue('user_agreement');
+        if (!empty($existing_data)) {
+            DB::table('site_managements')->where('meta_key', '=', 'user_agreement')->delete();
+        }
+
+        DB::table('site_managements')->insert(
+            [
+                'meta_key' => 'user_agreement', 'meta_value' => serialize($menu),
+                "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+            ]
+        );
+        \Artisan::call('config:cache');
+        \Artisan::call('config:clear');
+        \Artisan::call('cache:clear');
+        \Artisan::call('view:clear');
+
+           
+            $json['type'] = 'success';
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            return $json;
+        }
+    }
 
     /**
      * Save settings

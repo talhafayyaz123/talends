@@ -44,7 +44,7 @@
                 <div class="row">
                     <div class="col-md-6">
                     {!!  $about_talends->project_description ?? '' !!} 
-                        <a href="{{ route('browseJobs') }}" class="theme_btn inverse_btn">See other projects</a>
+                        <a href="{{ url('search-results?type=job') }}" class="theme_btn inverse_btn">See other projects</a>
                     </div>
                     <div class="col-md-6">
                     @if( isset($about_talends->talends_project_image))
@@ -75,7 +75,7 @@
                     <div class="col-md-6">
                     {!!  $about_talends->payment_description ?? '' !!} 
 
-                        <a href="{{ route('findTalends') }}" class="theme_btn inverse_btn">Find a freelancer</a>
+                        <a href="{{ url('search-results?type=freelancer') }}" class="theme_btn inverse_btn">Find a freelancer</a>
                     </div>
                     <div class="col-md-6">
                     @if( isset($about_talends->talends_payment_image))
@@ -109,7 +109,7 @@
                     </div>
                     <div class="col-md-12">
                         <div class="talend-tabs-container">
-                            <ul class="nav nav-tabs  mb-3 mt-3" id="simpletab" role="tablist">
+                            <ul class="nav nav-tabs nav-fill mb-3 mt-3" id="simpletab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="exam-tab" data-toggle="tab" href="#talendtab" role="tab" aria-controls="talendtab" aria-selected="true">Freelancers</a>
                                 </li>
@@ -151,18 +151,7 @@
                             </div>
                         </div>
                     </div>
-                        <!-- <div class="talend_categorylist_box">
-                            <h4>Freelancers</h4>                            
-                        </div>
-                        <div class="talend_categorylist_box">
-                            <h4>Internees’s</h4>                            
-                        </div>
-                        <div class="talend_categorylist_box">
-                            <h4>Companies/Agencies</h4>                            
-                        </div>
-                        <div class="talend_categorylist_box">
-                            <h4>Goverment</h4>
-                        </div> -->
+                      
                     </div>
                 </div>
             </div>
@@ -173,28 +162,41 @@
                     <div class="col-md-12 text-center py-5">
                         <h2>Hire for any scope of work</h2>
                     </div>
+                    <style>
+                        .bi-check2{
+                            font-size: 30px;
+                        }
+                        .bi-check2::before {
+                            width: 60px;
+                            height: 60px;
+                            background: #349f1a;
+                            border-radius: 50%;
+                            line-height: 60px;
+                        }
+                    </style>
                     <div class="col-md-4 text-center">
                     
-                @if( isset($about_talends->short_term_project_image	))
+                <!-- @if( isset($about_talends->short_term_project_image	))
                 <img src="{{ asset('uploads/home-pages/about_talends/'.$about_talends->short_term_project_image	)}}" class="pb-4" alt="">
-                        @endif
+                        @endif -->
+                        <i class="bi-check2 text-white"></i>
                         <h4 class="mb-2">Short-term projects</h4>
                         <p>Find go-to talent who get your needs</p>
                     </div>
                     <div class="col-md-4 text-center">
-                    @if( isset($about_talends->recurring_engagements_image	))
+                    <!-- @if( isset($about_talends->recurring_engagements_image	))
                 <img src="{{ asset('uploads/home-pages/about_talends/'.$about_talends->recurring_engagements_image	)}}" class="pb-4" alt="">
-                        @endif
-                
+                        @endif -->
+                        <i class="bi-check2 text-white"></i>
                     <h4 class="mb-2">Recurring engagements</h4>
                         <p>Build trusted relationships with skilled professionals</p>
                     </div>
                     <div class="col-md-4 text-center">
                 
-                        @if( isset($about_talends->long_term_work_image	))
+                        <!-- @if( isset($about_talends->long_term_work_image	))
                 <img src="{{ asset('uploads/home-pages/about_talends/'.$about_talends->long_term_work_image	)}}" class="pb-4" alt="">
-                        @endif
-                
+                        @endif -->
+                        <i class="bi-check2 text-white"></i>
                     <h4 class="mb-2">Long-term work</h4>
                         <p>Expand your organization’s capabilitie</p>
                     </div>

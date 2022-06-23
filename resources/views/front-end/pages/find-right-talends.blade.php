@@ -17,7 +17,7 @@
 
     <section class="talend-rec-sec">
         <div class="container">
-            <div class="row row-eq-height">
+            <div class="row">
                 <div class="col-md-12 text-center pb-3">
                     <div class="content-box">
                          {!!  $find_right_talends->banner_description  ?? '' !!}
@@ -37,15 +37,15 @@
     <section class="theme-list-sec">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <ul class="theme_list_labels pl-0">
-                    {!!  $find_right_talends->services_description  ?? '' !!}
-                    </ul>
-                </div>
-                <div class="col-md-6">
+                <div class="col-md-6 order-md-2">
                     <div class="content-box">
                     {!!  $find_right_talends->features_text  ?? '' !!}
                     </div>
+                </div>
+                <div class="col-md-6 order-md-1">
+                    <ul class="theme_list_labels pl-0">
+                    {!!  $find_right_talends->services_description  ?? '' !!}
+                    </ul>
                 </div>
             </div>
         </div>
@@ -54,16 +54,16 @@
     <section class="budget-sec">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div class="content-box">
-                    {!!  $find_right_talends->project_description  ?? '' !!}
-                    </div>
-                </div>
-                <div class="col-md-6 text-md-right text-center">
+                <div class="col-md-6 text-md-right text-center order-md-2">
                     <div class="img-box">
                     @if(isset( $find_right_talends->talends_project_image) )
-            <img src="{{asset('uploads/home-pages/find-right-talends/'.$find_right_talends->talends_project_image)}}" class="img-fluid" alt="">
-            @endif
+                        <img src="{{asset('uploads/home-pages/find-right-talends/'.$find_right_talends->talends_project_image)}}" class="img-fluid" alt="">
+                    @endif
+                    </div>
+                </div>
+                <div class="col-md-6 order-md-1">
+                    <div class="content-box">
+                    {!!  $find_right_talends->project_description  ?? '' !!}
                     </div>
                 </div>
             </div>
@@ -93,8 +93,8 @@
                     <h3>Frequently Asked Questions</h3>
                 </div>
                 <div class="col-md-7">
-                <div class="accordion" id="accordionFaq">
-                {!!  $find_right_talends->freelancer_benefits  ?? '' !!}
+                    <div class="accordion" id="accordionFaq">
+                        {!!  $find_right_talends->freelancer_benefits  ?? '' !!}
                     </div>
                 </div>
             </div>
@@ -163,79 +163,51 @@
                                 <div class="carousel-item active">
                                     <div class="carousel-content">
                                     <p>{{ $find_right_talend_testimonials['banner_description'] ?? ''  }}</p>
-
-                                        <div class="author-detail text-center">
-                                            @if(isset($find_right_talend_testimonials['about_talends_image']))
+                                    <div class="author-detail text-center">
+                                        @if(isset($find_right_talend_testimonials['about_talends_image']))
                                             <img src="{{asset('uploads/home-pages/right-talend_testimonial/'.$find_right_talend_testimonials['about_talends_image'])}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
-                                           @endif
-                                            {!! $find_right_talend_testimonials['features_text'] ?? ''  !!}
-
-                                        </div>
+                                        @endif
+                                        {!! $find_right_talend_testimonials['features_text'] ?? ''  !!}
                                     </div>
                                 </div>
-
-
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
+                                <div class="carousel-content">
                                     <p>{{ $find_right_talend_testimonials['services_description'] ?? ''  }}</p>
-
-                                        <div class="author-detail text-center">
-                                            @if(isset($find_right_talend_testimonials['talends_project_image']))
+                                    <div class="author-detail text-center">
+                                        @if(isset($find_right_talend_testimonials['talends_project_image']))
                                             <img src="{{asset('uploads/home-pages/right-talend_testimonial/'.$find_right_talend_testimonials['talends_project_image'])}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
-                                           @endif
-                                            {!! $find_right_talend_testimonials['project_description'] ?? ''  !!}
-
-                                        </div>
+                                        @endif
+                                        {!! $find_right_talend_testimonials['project_description'] ?? ''  !!}
                                     </div>
                                 </div>
-
-
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
+                                <div class="carousel-content">
                                     <p>{{ $find_right_talend_testimonials['work_description'] ?? ''  }}</p>
-
-                                        <div class="author-detail text-center">
-                                            @if(isset($find_right_talend_testimonials['talends_work_image']))
+                                    <div class="author-detail text-center">
+                                        @if(isset($find_right_talend_testimonials['talends_work_image']))
                                             <img src="{{asset('uploads/home-pages/right-talend_testimonial/'.$find_right_talend_testimonials['talends_work_image'])}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
-                                           @endif
-                                            {!! $find_right_talend_testimonials['payment_description'] ?? ''  !!}
-
-                                        </div>
+                                        @endif
+                                        {!! $find_right_talend_testimonials['payment_description'] ?? ''  !!}
                                     </div>
                                 </div>
-
-
-
-                                
-                                <div class="carousel-item">
-                                    <div class="carousel-content">
+                                <div class="carousel-content">
                                     <p>{{ $find_right_talend_testimonials['support_description'] ?? ''  }}</p>
-
-                                        <div class="author-detail text-center">
-                                            @if(isset($find_right_talend_testimonials['talends_payment_image']))
+                                    <div class="author-detail text-center">
+                                        @if(isset($find_right_talend_testimonials['talends_payment_image']))
                                             <img src="{{asset('uploads/home-pages/right-talend_testimonial/'.$find_right_talend_testimonials['talends_payment_image'])}}" class="img-fluid mb-4 rounded-circle" alt="" width="100">
-                                           @endif
-                                            {!! $find_right_talend_testimonials['freelancer_benefits'] ?? ''  !!}
-
-                                        </div>
+                                        @endif
+                                        {!! $find_right_talend_testimonials['freelancer_benefits'] ?? ''  !!}
                                     </div>
                                 </div>
-                                
-                                @endif
-
-                               
-                                
-                            </div>
+                            @endif
                         </div>
-                    </div>                    
-                </div>
+                    </div>
+                </div>                            
             </div>
         </div>
     </section>
     <section class="form-sec pb-0">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 bg-theme rounded-16">
+                <div class="col-md-4 bg-theme rounded-16 mb-3">
                     <div class="p-4 d-flex justify-content-between flex-column h-100">
                         <div class="d-flex">
                             <img src="{{asset('uploads/home-pages/find-right-talends/user1.png')}}" class="img-fluid mb-4 rounded-circle" alt="" width="130">
@@ -248,7 +220,7 @@
                         <h4 class="text-white font-weight-normal">"I’ve helped numerous companies, scale their teams and hire best remote talent. Happy to  make things possible for you too."</h4>
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8 mb-3">
                     <div class="content-box">
                                 <h2>Let us help you to hire a team!</h2>
                                 @if ($errors->any())
@@ -383,7 +355,6 @@
     });
 });
 </script> 
-    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script>
         $('#customers-testimonials').owlCarousel({
             loop:true,

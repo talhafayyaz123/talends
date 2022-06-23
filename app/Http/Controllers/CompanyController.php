@@ -48,6 +48,11 @@ use App\UserSubCategories;
 use App\UserCategorySkills;
 use App\CompanyDetail;
 use App\HireAgency;
+use App\EmailTemplate;
+use App\Mail\AdminEmailMailable;
+use Illuminate\Support\Facades\Mail;
+
+
 /**
  * Class FreelancerController
  *
@@ -234,9 +239,7 @@ class CompanyController extends Controller
 
 
     public function storeHireAgency(Request $request,$id)
-    {
-
-       
+    {  
          $this->validate(
             $request,
             [
@@ -259,6 +262,7 @@ class CompanyController extends Controller
         
         HireAgency::create([
         'agency_id'=>  $id,
+        'employeer_id'=>Auth::user()->id,
         'full_name'=> $full_name,
         'company_name'=> $company_name,
         'email'=>  $email,
@@ -278,18 +282,90 @@ class CompanyController extends Controller
         $role=Auth::user()->getRoleNames()[0];
            if( $role=='admin'){
             $hiring_requests=HireAgency::all();
-
+          
            }else{
                
             $hiring_requests=HireAgency::where('agency_id',Auth::user()->id)->get();
 
            }
+
+           
         return view(
             'back-end.company.hiring_requests.index',
             compact(
                 'hiring_requests','role'
             )
         );
+    }
+
+    public function leadStatus($lead_id,$status)
+    {
+        $lead=HireAgency::find($lead_id);
+        $author_id=$lead->agency_id;
+        $employeer_id=$lead->employeer_id;
+         $employer=User::find($employeer_id);
+        if($status=='accept'){
+           
+          
+            $body='Thank you for your enquiry, we would love to work on your project. Lets discuss further details.';
+            
+            $user = User::find(intval($author_id));
+            $message=new Message();
+            $message->user()->associate($user);
+            $message->receiver_id = intval($employeer_id);
+            $message->body = filter_var($body, FILTER_SANITIZE_STRING);
+            $message->status = 0;
+            $message->save();
+    
+            // change lead status to accepted
+            $lead->status='accepted';
+            $lead->save();
+
+            $template = DB::table('email_types')->select('id')
+            ->where('email_type', 'lead_accepted')->get()->first();
+    
+            if (!empty($template->id)) {
+                $template_data = EmailTemplate::getEmailTemplateByID($template->id);
+                
+                $email_params['name'] = Helper::getUserName($employeer_id);
+                 Mail::to($employer->email)
+                    ->send(
+                        new AdminEmailMailable(
+                            'lead_accepted',
+                            $template_data,
+                            $email_params
+                        )
+                    ); 
+            }
+
+
+            return redirect()->route('message');
+        }else{
+            $lead->status='rejected';
+            $lead->save();
+
+            $template = DB::table('email_types')->select('id')
+            ->where('email_type', 'lead_rejected')->get()->first();
+    
+            if (!empty($template->id)) {
+                $template_data = EmailTemplate::getEmailTemplateByID($template->id);
+                
+                $email_params['name'] = Helper::getUserName($employeer_id);
+                 Mail::to($employer->email)
+                    ->send(
+                        new AdminEmailMailable(
+                            'lead_rejected',
+                            $template_data,
+                            $email_params
+                        )
+                    ); 
+            }
+
+           
+            return redirect()->back()->withInput();
+        }
+       
+       
     }
 
     public function companyHiringRequestDetail($id){
@@ -894,7 +970,7 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showFreelancerJobs($status)
+    public function showCompanyJobs($status)
     {
         $ongoing_jobs = array();
         $freelancer_id = Auth::user()->id;
@@ -907,7 +983,7 @@ class CompanyController extends Controller
             if (!empty($status) && $status === 'hired') {
                 if (file_exists(resource_path('views/extend/back-end/freelancer/jobs/ongoing.blade.php'))) {
                     return view(
-                        'extend.back-end.freelancer.jobs.ongoing',
+                        'extend.back-end.company.jobs.ongoing',
                         compact(
                             'ongoing_jobs',
                             'symbol'
@@ -915,7 +991,7 @@ class CompanyController extends Controller
                     );
                 } else {
                     return view(
-                        'back-end.freelancer.jobs.ongoing',
+                        'back-end.company.jobs.ongoing',
                         compact(
                             'ongoing_jobs',
                             'symbol'
@@ -925,7 +1001,7 @@ class CompanyController extends Controller
             } elseif (!empty($status) && $status === 'completed') {
                 if (file_exists(resource_path('views/extend/back-end/freelancer/jobs/completed.blade.php'))) {
                     return view(
-                        'extend.back-end.freelancer.jobs.completed',
+                        'extend.back-end.company.jobs.completed',
                         compact(
                             'completed_jobs',
                             'symbol'
@@ -933,7 +1009,7 @@ class CompanyController extends Controller
                     );
                 } else {
                     return view(
-                        'back-end.freelancer.jobs.completed',
+                        'back-end.company.jobs.completed',
                         compact(
                             'completed_jobs',
                             'symbol'
@@ -943,7 +1019,7 @@ class CompanyController extends Controller
             } elseif (!empty($status) && $status === 'cancelled') {
                 if (file_exists(resource_path('views/extend/back-end/freelancer/jobs/cancelled.blade.php'))) {
                     return view(
-                        'extend.back-end.freelancer.jobs.cancelled',
+                        'extend.back-end.company.jobs.cancelled',
                         compact(
                             'cancelled_jobs',
                             'symbol'
@@ -951,7 +1027,7 @@ class CompanyController extends Controller
                     );
                 } else {
                     return view(
-                        'back-end.freelancer.jobs.cancelled',
+                        'back-end.company.jobs.cancelled',
                         compact(
                             'cancelled_jobs',
                             'symbol'
@@ -1009,7 +1085,7 @@ class CompanyController extends Controller
                 );
             } else {
                 return view(
-                    'back-end.freelancer.jobs.show',
+                    'back-end.company.jobs.show',
                     compact(
                         'job',
                         'employer_name',

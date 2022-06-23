@@ -19,27 +19,28 @@
 
     <section class="home-banner p-0">
         <div id="theme_slider" class="theme_slider carousel slide carousel-fade" data-ride="carousel">
-            <ol class="carousel-indicators">
+            <!-- <ol class="carousel-indicators">
                 <li data-target="#theme_slider" data-slide-to="0" class="active"></li>
                 <li data-target="#theme_slider" data-slide-to="1"></li>
                 <li data-target="#theme_slider" data-slide-to="2"></li>
-            </ol>
+            </ol> -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="carousel-caption">
                         <div class="container">
-                            <div class="row row-eq-height">
-                                <div class="col-md-8 col-lg-6 align-self-center">
+                            <div class="row align-items-center">
+                                <div class="col-md-8 col-lg-6">
                                     <div class="content_box_wrapper">
                                         <div class="content_box home_page_banner_description">
                                             {!! $banner_settings->banner_description ?? '' !!}
-                                            <a href="{{ route('jobs') }}" class="btn btn-theme px-4 rounded-pill mt-4">Find a
+                                            <a href="{{ url('search-results?type=job') }}" class="btn btn-theme px-4 rounded-pill mt-4">Find a
                                                 Job</a>
-                                            <a href="#" class="btn btn-outline-theme px-4 rounded-pill mt-4">Submit a Project</a>
+                                            <!-- <a href="#" class="btn btn-outline-theme px-4 rounded-pill mt-4 ml-0">Submit a Project</a> -->
+                                            <a href="{{ route('companyRegistraton') }}" class="btn btn-outline-theme px-4 rounded-pill mt-4 ml-0">Register Agency</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-lg-6 align-self-center">
+                                <div class="col-md-4 col-lg-6">
                                     <div class="content_box_wrapper">
                                         <div class="content_box">
                                             @if(isset( $banner_settings->about_talends_image) )
@@ -82,7 +83,7 @@
                 </div>
 
                 <div class="col-md-4">
-                    <a href="{{ route('findTalends') }}">
+                    <a href="{{ url('search-results?type=freelancer') }}">
                         <div class="talend_img_card opportunity_card">
 
 
@@ -106,7 +107,7 @@
                     </a>
                 </div>
                 <div class="col-md-4">
-                    <a href="{{ route('whyTalends') }}">
+                    <a href="{{ route('FindRightTalends') }}">
                         <div class="talend_img_card opportunity_card">
                             <h3> {{$find_right_opportunity->services_description ?? '' }} </h3>
                             <!-- <span class="tal-readmore">Read More</span> -->
@@ -126,7 +127,7 @@
 
                     {!! $banner_settings->features_text ?? '' !!}
 
-                    <a href="#" class="btn btn-theme px-4 rounded-pill mt-3">I’m an Intern</a>
+                    <a href="{{ route('register') }}" class="btn btn-theme px-4 rounded-pill mt-3">I’m an Intern</a>
                     <a href="#" class="btn btn-theme-white px-4 rounded-pill ml-md-3 mt-4">I’m Hiring an Intern</a>
                 </div>
                 <div class="col-md-5">
@@ -142,12 +143,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div id="carouselExampleControls" class="carousel slide" data-interval="false">
                         <div class="carousel-inner">
                             <h2>Featured Success Stories</h2>
                             <div class="carousel-item active">
                                 <div class="row fss_box_row fss_red_bg">
-                                    <div class="col-md-4 pri=md-0">
+                                    <div class="col-md-4 pr-md-0 d-none d-md-block">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->about_talends_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->about_talends_image)}}"
@@ -164,7 +165,7 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="row fss_box_row fss_blue_bg">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 pr-md-0 d-none d-md-block">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->talends_project_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->talends_project_image)}}"
@@ -182,7 +183,7 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="row fss_box_row fss_blue_bg">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 pr-md-0 d-none d-md-block">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->talends_work_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->talends_work_image)}}"
@@ -200,7 +201,7 @@
                             </div>
                             <div class="carousel-item">
                                 <div class="row fss_box_row fss_blue_bg">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 pr-md-0 d-none d-md-block">
                                         <div class="fss_box">
                                         @if(isset( $featured_success_stories->talends_payment_image) )
                                         <img src="{{asset('uploads/home-pages/success_stories/'.$featured_success_stories->talends_payment_image)}}"
@@ -246,7 +247,7 @@
                         {!! $banner_settings->services_description ?? '' !!}
                         <div class="row align-items-center">
                             <div class="col-lg-6 col-sm-6 col-12 text-center">
-                                <a href="javascript:;" class="btn btn-outline-theme px-4 rounded-pill">Join the community</a>
+                                <a href="{{ route('register') }}" class="btn btn-outline-theme px-4 rounded-pill">Join the community</a>
                             </div>
                             <div class="col-lg-6 col-sm-6 col-12 px-0 text-center text-md-left">
                                 <p class="mb-0 font-weight-bold">Support 24/7 <a class="ml-3" href="tel:052-768-4867">052-768-4867</a></p>
@@ -269,7 +270,7 @@
                 </div>
                 <div class="col-md-8 order-md-1">
                     {!! $agency_profile->banner_description ?? '' !!}
-                    <a href="{{ route('whyAgencyPlan') }}" class="btn btn-theme-white px-4 rounded-pill ml-4 mt-4 mb-5">Create your Agency Profile</a>
+                    <a href="{{ route('whyAgencyPlan') }}" class="btn btn-theme-white px-4 rounded-pill ml-4 mt-4 mb-3">Create your Agency Profile</a>
                 </div>
             </div>
         </div>
@@ -505,7 +506,6 @@
 
                 <div class="col-md-4">
                     <div class="talend_img_card why_organization_choose_box">
-
                         <h3>{!! $why_choose_talends->features_text ?? '' !!} </h3>
                     </div>
                 </div>

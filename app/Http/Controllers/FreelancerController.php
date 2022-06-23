@@ -1029,6 +1029,8 @@ class FreelancerController extends Controller
            
             $unread_leads=HireAgency::where('is_seen',0)->where('agency_id',$freelancer_id)->count();
             $total_leads=HireAgency::where('agency_id',$freelancer_id)->count();
+            $skills=UserCategorySkills::where('user_id', $freelancer_id)->get();
+
             
             if (file_exists(resource_path('views/extend/back-end/freelancer/dashboard.blade.php'))) {
                 return view(
@@ -1064,6 +1066,7 @@ class FreelancerController extends Controller
                 return view(
                     'back-end.freelancer.company_dashboard',
                     compact(
+                        'skills',
                         'total_leads',
                         'unread_leads',
                         'freelancer_id',
