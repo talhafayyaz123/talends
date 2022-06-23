@@ -32,13 +32,13 @@
 
     <div class="container">
 
-        <div class="row">
-            <div class="col-md-7 pb-3 align-self-center">
+        <div class="row align-items-end">
+            <div class="col-lg-7 pb-3">
                 <h5 class="text-white opcty_5">talents</h5>
                 <h2 class="text-white">Find a {{ ucfirst( request()->get('type')) }} <br><span class="theme_color"> You'll love</span></h2>
                 <p class="text-white opcty_5">We have professional designers in over 90 design skill sets. Sign up to find the perfect designer for whatever you need</p>
             </div>
-            <div class="col-md-5">
+            <div class="col-lg-5">
 
                 <img src="{{ asset('talends/assets/img/find-talents/banner.png')}}" class="w-100" alt="">
 
@@ -118,6 +118,7 @@
 
 
 <script type="text/javascript">
+  
 
     var page = 1;
 

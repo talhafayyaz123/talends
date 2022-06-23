@@ -142,7 +142,7 @@ Company Registration
                                     <div class="form-card">
                                         <div class="row">
                                             <div class="col-12">
-                                                <h2 class="fs-title mb-0">Lets Pay:</h2>
+                                                <h2 class="fs-title mb-0">What You'll Get:</h2>
                                                 <p>Almost there! Pay an affordable amount to Grow your Business</p>
                                             </div>
                                         </div>
@@ -150,58 +150,81 @@ Company Registration
                                             <div class="col-md-12 mb-4">
                                                 <div class="plans-inner">
                                                     <div class="plans-wrap">
-                                                        <div class="plan">
-                                                            <div class="plan-h">
+                                                        <div class="plan" style="width:330px;">
+                                                            <!-- <div class="plan-h">
                                                                 <h3>{{  $package[0]->title }}</h3>
-                                                            </div>
+                                                            </div> -->
                                                             <div class="plan-c">
-                                                                <p>What You&rsquo;ll Get</p>
+                                                                <!-- <p>What You'll Get</p> -->
                                                                 <ul class="price-feature">
+                                                                    <li style="padding: 10px 0px; border-bottom:1px solid #349f1a;">Choos Your Plan</li>
                                                                     @foreach ($monthly_options as $key => $option)
                                                                         @if ($key == 'duration')
-                                                                            <li><span>{{$key}}:  {{ Helper::getPackageDurationList($monthly_options['duration']) }}</span></li>
+                                                                            <li><span>{{$key}}: </span></li>
                                                                         @elseif ($key == 'badge')
-                                                                            <li><span>{{$key}}: {{ Helper::getBadgeTitle($package[0]->badge_id) }}</span></li>
+                                                                            <li><span>{{$key}}:</span></li>
                                                                         @else
-                                                                            <li><span>{{$key}}: {{ $option }}</span></li>
+                                                                            <li><span>{{$key}}:</span></li>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        <div class="plan" style="width:140px;">
+                                                            <!-- <div class="plan-h">
+                                                                <h3>{{  $package[0]->title }}</h3>
+                                                            </div> -->
+                                                            <div class="plan-c">
+                                                                <!-- <p>What You'll Get</p> -->
+                                                                <ul class="price-feature">
+                                                                    <li class="text-center" style="padding: 10px 4px;border-bottom: 1px solid #349f1a;color: #9a9797; font-weight: bold;">${{ $package[0]->cost ?? '0' }}/ Monthly</li>
+                                                                    @foreach ($monthly_options as $key => $option)
+                                                                        @if ($key == 'duration')
+                                                                            <li class="text-center text-muted"><span>{{ Helper::getPackageDurationList($monthly_options['duration']) }}</span></li>
+                                                                        @elseif ($key == 'badge')
+                                                                            <li class="text-center text-muted"><span>{{ Helper::getBadgeTitle($package[0]->badge_id) }}</span></li>
+                                                                        @else
+                                                                            <li class="text-center text-muted"><span> {{ $option }}</span></li>
                                                                         @endif
                                                                     @endforeach
 
                                                                 </ul>
                                                             </div>
                                                             <div class="plan-f">
-                                                                <div class="pf-wrap">
-                                                                    <p>{{ $package[0]->cost ?? '0' }}/month</p>
+                                                                <div class="pf-wrap text-center">
+                                                                    <!-- <p><strong>{{ $package[0]->cost ?? '0' }}</strong>/month</p> -->
                                                                     <p>Cancel Anytime</p>
                                                                 </div>
                                                             </div>
-                                                            <a class="plan-btn t-f company_services choose_plan_background_transparent" id='monthly_plan' onclick="plan_select('monthly')"><strong class="green">Choose</strong></a>
+                                                            <a class="plan-btn t-f company_services choose_plan_background_transparent" id='monthly_plan' onclick="plan_select('monthly')"><strong class="green">Select</strong></a>
                                                         </div>
-                                                        <div class="plan">
-                                                            <div class="plan-h">
+                                                        <div class="plan" style="width:140px;">
+                                                            <!-- <div class="plan-h">
                                                                 <h3>{{  $package[1]->title }}</h3>
-                                                            </div>
+                                                            </div> -->
                                                             <div class="plan-c">
-                                                                <p>What You&rsquo;ll Get</p>
+                                                                <!-- <p>What You'll Get</p> -->
+
                                                                 <ul class="price-feature">
+                                                                    <li class="text-center" style="padding: 10px 4px;border-bottom: 1px solid #349f1a;color: #9a9797; font-weight: bold;">${{ $package[1]->cost ?? '0' }}/ Monthly</li>
                                                                     @foreach ($yearly_options as $key => $option)
                                                                         @if ($key == 'duration')
-                                                                            <li><span>{{$key}}:  {{ Helper::getPackageDurationList($yearly_options['duration']) }}</span></li>
+                                                                            <li class="text-center text-muted"><span>  {{ Helper::getPackageDurationList($yearly_options['duration']) }}</span></li>
                                                                         @elseif ($key == 'badge')
-                                                                            <li><span>{{$key}}: {{ Helper::getBadgeTitle($package[1]->badge_id) }}</span></li>
+                                                                            <li class="text-center text-muted"><span> {{ Helper::getBadgeTitle($package[1]->badge_id) }}</span></li>
                                                                         @else
-                                                                            <li><span>{{$key}}: {{ $option }}</span></li>
+                                                                            <li class="text-center text-muted"><span> {{ $option }}</span></li>
                                                                         @endif
                                                                     @endforeach
                                                                 </ul>
                                                             </div>
                                                             <div class="plan-f">
-                                                                <div class="pf-wrap">
-                                                                    <p><strong>${{ $package[1]->cost ?? '0' }}</strong>/month</p>
+                                                                <div class="pf-wrap text-center">
+                                                                    <!-- <p><strong>${{ $package[1]->cost ?? '0' }}</strong>/Yearly</p> -->
                                                                     <p>Cancel Anytime</p>
                                                                 </div>
                                                             </div>
-                                                            <a class="plan-btn t-f company_services choose_plan_background_transparent" id='yearly_plan' onclick="plan_select('yearly')"><strong class="green">Choose</strong></a>
+                                                            <a class="plan-btn t-f company_services choose_plan_background_transparent ml-2" id='yearly_plan' onclick="plan_select('yearly')"><strong class="green">Select</strong></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -221,17 +244,17 @@ Company Registration
                                     </div>
                                     <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                                     <button id='register_pay_btn' class="btn btn-theme rounded-pill px-4 company_register_pay_now_disable m-2 float-right py-3" type="submit">
-                                        Register and Pay Now
+                                        Proceed To Payment
                                     </button>
                                 </fieldset>
                             </form>
                         </div>
                     </div>
                     <div class="col-md-4 ml-auto">
-                        <div class="bg-login content_box p-4">
+                        <div class="content_box pt-4">
                             <h3 class="font-weight-bold">Ready to get customers from <span class="theme_color"> Dubai & UAE</span></h3>
-                            <a href="{{route('login')}}" class="d-block mb-5">Already a member?</a>
-                            <!-- <img src="{{ asset('talends/assets/img/Layer12.png')  }}" class="w-100" alt=""> -->
+                            <a href="{{route('login')}}" class="d-block mb-4">Already a member?</a>
+                            <img src="{{ asset('talends/assets/img/Layer12.png')  }}" class="img-fluid" alt="">
                         </div>
                     </div>
                 </div>
