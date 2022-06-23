@@ -245,10 +245,6 @@
 	<script src="{{ asset('talends/bootstrap/4.4.1/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('talends/assets/js/wow.min.js') }}"></script>
     <script src="{{ asset('talends/assets/js/main.js') }}"></script>
-
-    <script src="{{ asset('talends/assets/js/register.js') }}"></script>
-
-
 	
 
 	@yield('bootstrap_script')

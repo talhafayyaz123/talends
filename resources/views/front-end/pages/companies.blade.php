@@ -243,14 +243,8 @@
                         <div class="tlb__content">
 
                             <a href="{{url("company-detail",['id'=>$value->id ])}}">
-
-
-
-                                <h3>{{ $value->profile->company_name }}</h3>
-
-                                <p>{{$value->profile->tagline}}</p>
-
-                            
+                                
+                                <h3>{{  $value->profile->company_name  }}</h3>                            
 
                             <div class="tlb__reviews row">
 

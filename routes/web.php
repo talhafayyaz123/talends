@@ -115,6 +115,8 @@ Route::post('register/single-form-custom-errors', 'PublicController@singleFormVa
 Route::get('search-results', 'PublicController@getSearchResult')->name('searchResults');
 Route::post('user/add-wishlist', 'UserController@addWishlist');
 Route::post('agency/register/custom-errors', 'PublicController@CompanyRegisterValidation');
+Route::post('hire/agency/login-check', 'PublicController@HireAgencyLoginCheck');
+Route::post('hire/agency/register-validation', 'PublicController@HireAgencyRegisterValidations');
 
 
 Route::get('gamail/login/{email}', 'PublicController@gmailLoginUser')->name('loginUser');
