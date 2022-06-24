@@ -1420,7 +1420,8 @@ footer .social-networks li+li {
     background: #f3f3f3;
     border: solid 1px #d0d0d0 !important;
     display: table-cell;
-    vertical-align: middle
+    vertical-align: middle;
+    white-space: nowrap;
 }
 
 .nav-tabs .nav-item {

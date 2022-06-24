@@ -240,6 +240,7 @@ class CompanyController extends Controller
 
     public function storeHireAgency(Request $request,$id)
     {  
+       
          $this->validate(
             $request,
             [
@@ -280,6 +281,7 @@ class CompanyController extends Controller
     public function companyHiringRequests(){
 
         $role=Auth::user()->getRoleNames()[0];
+      
            if( $role=='admin'){
             $hiring_requests=HireAgency::all();
           
@@ -289,7 +291,7 @@ class CompanyController extends Controller
 
            }
 
-           
+        
         return view(
             'back-end.company.hiring_requests.index',
             compact(

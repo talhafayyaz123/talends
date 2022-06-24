@@ -161,7 +161,7 @@
                                     <button class="btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                         Employees <i class="bi-chevron-down float-right ml-3"></i>
                                     </button>
-                                    <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1">
+                                    <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1" style="height: 300px;overflow-y:auto;">
                                         <div class="row">  
                                             @foreach (Helper::getEmployeesList() as $key => $employee)
                                                 @php
@@ -229,11 +229,7 @@
                         <div class="tlb__img">
 
                             @php
-
-
-
                             $avatar = Helper::getProfileImage( $value->profile->user_id, 'medium-small-');
-
                             @endphp
 
                             <img src="{{{ asset($avatar) }}}" alt="{{ trans('lang.img') }}">
@@ -243,15 +239,9 @@
                         <div class="tlb__content">
 
                             <a href="{{url("company-detail",['id'=>$value->id ])}}">
-
-
-
-                                <h3>{{ $value->profile->company_name }}</h3>
-
-                                <p>{{$value->profile->tagline}}</p>
-
-                            
-
+                             
+                                <h3> {{  substr($value->profile->company_name, 0,30) . '...' }} </h3>                            
+                             
                             <div class="tlb__reviews row">
 
                                 <div class="bh-stars" data-bh-rating="4.5">

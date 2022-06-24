@@ -2,7 +2,7 @@
 @section('content')
 <section class="w-100 py-3">
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-    <div class="bg-theme rounded-16 mb-4">
+    <div class="bg-white rounded-16 mb-4">
         <div class="row">
             <div class="col-md-12">
                 <div class="bg-dark text-white p-3">
@@ -15,19 +15,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 border-right pr-0">
+            <div class="col-md-4 border-right pr-0" style="background-color: rgb(252,252,252);">
                 <div class="leads-list-container">
+                  
                     @if(!empty($hiring_requests) && $hiring_requests->count() > 0 )
+                   
                         @foreach ($hiring_requests as $request)
                             @php
                                 $user = \App\User::where('id', $request->agency_id)->first();
                             @endphp
+                            
                             <div class="border-bottom mb-4 p-4">
-                                <a href="#" class="text-white"><i class="fa fa-check-circle"></i>&nbsp;{{$request->full_name}}</a>
-                                <h4 class="text-white">{{$request->company_name}}</h4>
-                                <p class="small text-white mb-2"><i class="fa fa-envelope" aria-hidden="true"></i> {{$request->email}}</p>
-                                <p class="small text-white"><i class="fas fa-phone"></i> {{$request->phone_number}}</p>
-                                <a href="javascript:;" onclick="show_detail({{$request->id}})" id="detailBtn_{{$request->id}}" class="btn-link text-white">View Details</a>
+                                <a href="#" ><i class="fa fa-check-circle"></i>&nbsp;{{$request->full_name}}</a>
+                                <h4 >{{$request->company_name}}</h4>
+                                <p class="small  mb-2"><i class="fa fa-envelope" aria-hidden="true"></i> {{$request->email}}</p>
+                                <p class="small"><i class="fas fa-phone"></i> {{$request->phone_number}}</p>
+                                <a href="javascript:;" onclick="show_detail({{$request->id}})" id="detailBtn_{{$request->id}}" class="btn-link">View Details</a>
 
                             </div>
                         @endforeach
@@ -51,19 +54,19 @@
 
                 <div class="lead-detail" id="leadDetail_{{$request->id}}" style="display:none ;">
                     <div class="mb-5 px-4">
-                        <h4 class="text-white">Company Name</h4>
-                        <p class="text-white">{{ $request->company_name }}</p>
-                        <h6 class="text-white">Budget : AED {{ $request->budget }}</h6>
+                        <h4 >Company Name</h4>
+                        <p >{{ $request->company_name }}</p>
+                        <h6>Budget : AED {{ $request->budget }}</h6>
                     </div>
                     <div class="px-4 mb-5">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="text-white">Name</h4>
-                               <span  class="text-white"> {{ $request->full_name }} </span>
+                                <h4>Name</h4>
+                               <span  > {{ $request->full_name }} </span>
                                 </div>
                             <div class="col-md-6">
-                                <h4 class="text-white">Email</h4>
-                                <span  class="text-white">  {{ $request->email }} </span>                          
+                                <h4 >Email</h4>
+                                <span>  {{ $request->email }} </span>                          
                              </div>
                         </div>
                     </div>
@@ -71,8 +74,8 @@
                     <div class="px-4 mb-5">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="text-white">Phone</h4>
-                               <span  class="text-white"> {{ $request->phone_number }} </span>
+                                <h4>Phone</h4>
+                               <span> {{ $request->phone_number }} </span>
                                 </div>
                           
                         </div>
@@ -80,10 +83,10 @@
                     <div class="px-4 mb-5">
                         <div class="row">
                             <div class="col-md-12">
-                                <h4 class="text-white">Services</h4>
+                                <h4 >Services</h4>
                                 <div class="skill-tags">
                             
-                            <ul class="text-white">
+                            <ul>
                                @if(!empty($request->detail))
                                @php
                                 foreach(unserialize($request->detail) as $key=>$value){

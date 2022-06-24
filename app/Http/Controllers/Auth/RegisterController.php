@@ -129,7 +129,6 @@ class RegisterController extends Controller
     {
         $json = array();
         $user = new User();
-
         $register_form = SiteManagement::getMetaValue('reg_form_settings');
         $registration_type = !empty($register_form) && !empty($register_form[0]['registration_type']) ? $register_form[0]['registration_type'] : 'multiple';
         $verification_type = !empty($register_form) && !empty($register_form[0]['verification_type']) ? $register_form[0]['verification_type'] : 'admin_verify';
