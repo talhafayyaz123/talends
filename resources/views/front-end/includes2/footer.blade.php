@@ -149,7 +149,7 @@ $join_community=App\Helper::getJoinCommunity();
             <div class="col-md-4">
                 @if(isset( $join_community->about_talends_image) )
             
-                <img src="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="w-100"
+                <img src="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="img-fluid" width="250px"
                     alt="">
                 @endif
             </div>

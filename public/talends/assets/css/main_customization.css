@@ -1243,6 +1243,14 @@ a.notif {
 		max-width: 20%;
 	}
 }
+select.form-control{
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+    background: url("/talends/assets/img/icons/down-arrow.png") no-repeat;
+    background-position: calc(100% - 0.7rem) center !important;
+    background-size: 16px 16px;
+}
 .why-choose h2{
 	font-size: 54px;
 	line-height: 1.2;

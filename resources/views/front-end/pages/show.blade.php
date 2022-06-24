@@ -45,7 +45,7 @@
                                         <div class="content_box">
                                             @if(isset( $banner_settings->about_talends_image) )
                                             <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}"
-                                                class="w-100" alt="">
+                                                class="img-fluid" width="450" alt="">
                                             @endif
                                         </div>
                                     </div>
