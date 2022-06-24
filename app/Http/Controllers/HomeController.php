@@ -36,6 +36,7 @@ use App\Services\PaymentService;
 use App\UserCategorySkills;
 use App\AgencyServices;
 use function Psy\debug;
+use App\Department;
 
 class HomeController extends Controller
 {
@@ -611,9 +612,11 @@ class HomeController extends Controller
         $skills=UserCategorySkills::where('user_id', $id)->get();
         $categories = Category::all();
         $company_bedget = Helper::getComapnyBudgetList();
+        $locations = Location::select('title', 'id')->get()->pluck('title', 'id')->toArray();
+        $departments =Department::all();
+        $employees = Helper::getEmployeesList();
 
-
-        return view('front-end.pages.company_detail',compact('company_bedget','categories','skills','company_expertise','expertise','company_detail','id','profile'));
+        return view('front-end.pages.company_detail',compact('employees','departments','locations','company_bedget','categories','skills','company_expertise','expertise','company_detail','id','profile'));
      }
 
     public function experienceEducation($user_id)

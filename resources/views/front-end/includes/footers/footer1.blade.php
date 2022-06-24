@@ -75,7 +75,7 @@
                 <div class="col-md-6">
                     <ul class="list-inline mb-0">
                         <li class="px-2"> <a href="javascript:;" target="_self">Site Map</a> </li>
-                        <li class="px-2"> <a href="javascript:;" target="_self">Term & Conditions</a> </li>
+                        <li class="px-2"> <a href="{{ route('Agreement') }}" target="_self">Term & Conditions</a> </li>
                         <li class="px-2"> <a href="{{ route('privacyPolicy') }}" target="_self">Privacy Policy</a> </li>
                     </ul>
                 </div>

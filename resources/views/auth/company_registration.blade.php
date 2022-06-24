@@ -286,6 +286,8 @@ Company Registration
 @endsection
 
 @push('scripts')
+<script src="{{ asset('talends/assets/js/register.js') }}"></script>
+
 <script>
     window.categories = [];
 

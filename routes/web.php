@@ -115,6 +115,8 @@ Route::post('register/single-form-custom-errors', 'PublicController@singleFormVa
 Route::get('search-results', 'PublicController@getSearchResult')->name('searchResults');
 Route::post('user/add-wishlist', 'UserController@addWishlist');
 Route::post('agency/register/custom-errors', 'PublicController@CompanyRegisterValidation');
+Route::post('hire/agency/login-check', 'PublicController@HireAgencyLoginCheck');
+Route::post('hire/agency/register-validation', 'PublicController@HireAgencyRegisterValidations');
 
 
 Route::get('gamail/login/{email}', 'PublicController@gmailLoginUser')->name('loginUser');
@@ -367,9 +369,9 @@ Route::group(
        Route::post('admin/privacy-policy', 'SiteManagementController@storePrivacyPolicy')->name('storePrivacyPolicy');
 
        //User Agreement
-       Route::get('user/agreement', 'SiteManagementController@userAgreement')->name('userAgreement');
+       Route::get('admin/user/agreement', 'SiteManagementController@userAgreement')->name('userAgreement');
        Route::get('admin/add_more-user_agreement/{no}', 'SiteManagementController@addMoreUserAgreement')->name('addMoreUserAgreement');
-       Route::post('user-agreement', 'SiteManagementController@storeUserAgreement')->name('userAgreement');
+       Route::post('user-agreement', 'SiteManagementController@storeUserAgreement');
 
 
      
@@ -611,7 +613,7 @@ Route::get('hire/agency/{id}', 'CompanyController@hireAgencyForm')->name('hireAg
 Route::post('store/hire/agency/{id}', 'CompanyController@storeHireAgency')->name('storeHireAgency');
 Route::get('success/hire/agency/{id}', 'CompanyController@successHireAgencyForm')->name('successHireAgency');
 Route::get('privacy/policy', 'PublicController@privacyPolicy')->name('privacyPolicy');
-Route::get('user/agreement', 'PublicController@userAgreement')->name('Agreement');
+Route::get('term/agreement', 'PublicController@userAgreement')->name('Agreement');
 
 
 
