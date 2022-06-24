@@ -36,7 +36,7 @@
                                             <a href="{{ url('search-results?type=job') }}" class="btn btn-theme px-4 rounded-pill mt-4">Find a
                                                 Job</a>
                                             <!-- <a href="#" class="btn btn-outline-theme px-4 rounded-pill mt-4 ml-0">Submit a Project</a> -->
-                                            <a href="{{ route('companyRegistraton') }}" class="btn btn-outline-theme px-4 rounded-pill mt-4 ml-0">Register Agency</a>
+                                            <a href="{{ route('companyRegistraton') }}" class="btn btn-outline-theme px-4 rounded-pill mt-4 ml-md-3">Register Agency</a>
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +127,7 @@
 
                     {!! $banner_settings->features_text ?? '' !!}
 
-                    <a href="{{ route('register') }}" class="btn btn-theme px-4 rounded-pill mt-3">I’m an Intern</a>
+                    <a href="{{ route('register') }}" class="btn btn-theme px-4 rounded-pill mt-4">I’m an Intern</a>
                     <a href="#" class="btn btn-theme-white px-4 rounded-pill ml-md-3 mt-4">I’m Hiring an Intern</a>
                 </div>
                 <div class="col-md-5">

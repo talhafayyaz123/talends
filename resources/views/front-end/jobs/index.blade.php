@@ -22,6 +22,12 @@
         top: 6px;
         left: -20px;
     }
+    .wt-themerangeslider{
+        background: transparent;
+    }
+    .wt-amountbox input{
+        text-align: left;
+    }
 </style>
 @endpush
 @section('content')
