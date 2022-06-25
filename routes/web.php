@@ -665,7 +665,10 @@ Route::get('addmoney/stripe', array('as' => 'addmoney.paywithstripe', 'uses' => 
 Route::post('addmoney/stripe', array('as' => 'addmoney.stripe', 'uses' => 'StripeController@postPaymentWithStripe',));
 
 Route::get('addmoney/paytab/{amount}', array('as' => 'addmoney.paytab', 'uses' => 'PaytabController@paytabCheckout',));
-Route::get('redirect/paytab/{proposal_id}/{user_id}', array('as' => 'redirect.paytab', 'uses' => 'PaytabController@postPaymentWithPaytab',));
+
+//Route::post('/redirect/paytab', array('as' => 'redirect.paytab', 'uses' => 'PaytabController@postPaymentWithPaytab',));
+Route::get('/redirect/paytab', 'PaytabController@postPaymentWithPaytab');
+
 
 
 Route::get('paytab/package/payment/{package_id}', array('as' => 'package-payment.paytab', 'uses' => 'PaytabController@paytabPackageGateway',));

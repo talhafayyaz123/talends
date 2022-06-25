@@ -72,7 +72,7 @@ class Helper extends Model
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://development.talends.com/redirect/paytab/$id/$user->id\",\n    \"return\": \"https://development.talends.com/redirect/paytab/$id/$user->id\"\n  }",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://development.talends.com/redirect/paytab/?package_id=$id&user_id=$user->id\",\n    \"return\": \"https://development.talends.com/redirect/paytab/?package_id=$id&user_id=$user->id\"\n  }",
     CURLOPT_HTTPHEADER => array(
         "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
         "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",

@@ -157,7 +157,7 @@ class PublicController extends Controller
                 'email' => 'required|email|unique:users',
                 'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
                 'role' => 'not_in:admin',
-                'availability' => 'required',
+                //'availability' => 'required',
                 'locations' => 'required',
                 'employees' => 'required',
                 'department' => 'required',
