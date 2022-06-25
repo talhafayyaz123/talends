@@ -84,14 +84,27 @@ $(document).ready(function(){
                       success: function(data){
             
                         if(data.errors){
-                            jQuery('.alert-danger').html('');
+                            jQuery('#password_error').html('');
+                            jQuery('#email_error').html('');
+
+                           jQuery('#password_error').hide();
+                            jQuery('#email_error').hide();
                             jQuery.each(data.errors, function(key, value){
-                                  
-                                jQuery('.alert-danger').show();
+                           
+                                
+                                
                                 if(value=='The password format is invalid.'){
-                                    jQuery('.alert-danger').append('<p>password must be more than 8 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character</p>'); 
+                                    jQuery('#password_error').show();
+                                    jQuery('#password_error').append('<p>password must be more than 8 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character</p>'); 
+                                }else if(value=='The email has already been taken.' || value=='Please use your Business email' )
+                                {
+                                    jQuery('#email_error').show();
+                                    jQuery('#email_error').append('<p>'+value+'</p>'); 
                                 }else{
-                                    jQuery('.alert-danger').append('<p>'+value+'</p>'); 
+                                    
+                                    jQuery('#password_error').show();
+                                    jQuery('#password_error').append('<p>'+value+'</p>'); 
+                                
                                 }
                                
                            });
