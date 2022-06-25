@@ -14,10 +14,9 @@ $(document).ready(function(){
         var phone_number=$('#phone_number').val();
         var employees=$('#employees').val();
         var password=$('#register_password').val();
-
-      
-
-         
+       var country_code=$('.iti__selected-flag').text();
+     
+        
         if(password=='')
         {
             $('#register_password').addClass('field_error');
@@ -99,6 +98,7 @@ $(document).ready(function(){
                          is_error=1;
                         }else{
                             is_error=0
+                            $('#phone_number').val(country_code+phone_number);
                             jQuery('.alert-danger').html('');
                             jQuery('.alert-danger').hide();
                             current_fs = obj.parent();
@@ -138,6 +138,7 @@ $(document).ready(function(){
         
 
         if(current==2){
+            
             var locations=$('.locations').val();
             var agency_language=$('#agency_language').val();
             var agency_website=$('#agency_website').val();
@@ -186,17 +187,23 @@ $(document).ready(function(){
 
          if(current==3){
             var categories= $("#categories").val();
-        
-            if(categories.indexOf(',')=='-1')
+           
+            if(categories.indexOf(',')=='-1' )
             {
                 jQuery('.alert-danger').html('');
                 jQuery('.alert-danger').show();
                 jQuery('.alert-danger').append('<p>Please Select Services</p>'); 
                 is_error=1;
-            }else{
+            }
+             if(categories.length==1){
                 jQuery('.alert-danger').html('');
                 jQuery('.alert-danger').hide();
-            
+                is_error=0;
+            }
+             if(categories.indexOf(',') !='-1'){
+                jQuery('.alert-danger').html('');
+                jQuery('.alert-danger').hide();
+        
             } 
          }
         

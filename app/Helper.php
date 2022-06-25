@@ -534,27 +534,27 @@ return $response;
                 'value' => '500',
             ),
             '2' => array(
-                'title' => 'AED 5000',
+                'title' => 'AED 5,000',
                 'search_title' => 'AED 5000',
                 'value' => '5000',
             ),
             '3' => array(
-                'title' => 'AED 10000',
+                'title' => 'AED 10,000',
                 'search_title' => 'AED 10000',
                 'value' => '500',
             ),
             '4' => array(
-                'title' => 'AED 25000',
+                'title' => 'AED 25,000',
                 'search_title' => 'AED 25000',
                 'value' => '25000',
             ),
             '5' => array(
-                'title' => 'AED 50000',
+                'title' => 'AED 50,000',
                 'search_title' => 'AED 50000',
                 'value' => '5000',
             ),
             '6' => array(
-                'title' => 'AED 100000',
+                'title' => 'AED 1,000,00',
                 'search_title' => 'AED 100000',
                 'value' => '100000',
             ),

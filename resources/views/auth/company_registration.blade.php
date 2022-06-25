@@ -6,6 +6,7 @@ Company Registration
 @section('description', "Company Registration")
 
 @section('content')
+ 
 
 <div id="pages-list">
     <div class="container">
@@ -65,17 +66,17 @@ Company Registration
                                             </div>
                                             <div class="col-xl-6 col-lg-6 mb-3 form-group">
                                                 <label class="fieldlabels">Phone Number <span class="text-danger">*</span></label>
-                                                <div class="input-group" style="border: 1px solid #349f1a; border-radius:10px;position:relative;">
-                                                    <div class="input-group-prepend">
-                                                        <select name="" id="" class="form-control" style="border-radius: 10px 0 0 10px;border: 0;">
+                                                <div class="form-group" style="border: 1px solid #349f1a; border-radius:10px;position:relative;">
+                                                   <!--  <div class="input-group-prepend">
+                                                        <select name="country_code" id="country_code" class="form-control" style="border-radius: 10px 0 0 10px;border: 0;">
                                                             <option value="">+92</option>
                                                             <option value="">+91</option>
                                                             <option value="">+971</option>
                                                             <option value="">+93</option>
                                                         </select>
-                                                    </div>
-                                                    <!-- <hr style="width: 25px;height: 1px; border-top: 1px solid #349f1a; z-index: 9999;position: absolute;left: 80px; transform: rotate(90deg);top: 3px;"/> -->
-                                                    <input type="text" name="phone_number"  class="form-control" id="phone_number" placeholder="Phone Number" value="{{ old('phone_number') }}" style="border-radius:0 10px 10px 0 ;border: 0;"/>
+                                                    </div> -->
+                                                   
+                                                    <input type="tel" name="phone_number"  class="form-control" id="phone_number" placeholder="Phone Number" value="{{ old('phone_number') }}" style="border-radius:0 10px 10px 0 ;border: 0;"/>
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 col-lg-6 mb-3 form-group">
@@ -290,6 +291,18 @@ Company Registration
 
 <script>
     window.categories = [];
+
+   
+
+     var input = document.querySelector("#phone_number");
+    window.intlTelInput(input, {
+        autoHideDialCode: true,
+                dropdownContainer: document.body,
+                formatOnDisplay: true,
+                initialCountry: "auto",
+                separateDialCode: true
+    });
+ 
 
     function select_service(id) {
 
