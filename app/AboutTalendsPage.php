@@ -1068,6 +1068,28 @@ class AboutTalendsPage extends Model
         }
     }
 
+    public function saveFooterSocialContent($request)
+    {
+
+            if (!empty($request)) {
+           self::where('page_type','footer-social-content')->delete();
+
+            $this->page_type = 'footer-social-content';
+            
+            $this->banner_description = $request['facebook_url'];
+            $this->features_text = $request['linkdin_url'];
+            $this->services_description = $request['youtube_url'];
+            $this->project_description = $request['twitter_url'];
+            $this->work_description = $request['instragram_url'];
+            $this->payment_description = $request['tiktok_url'];
+            
+            $this->save();
+            $json['type'] = 'success';
+            $json['message'] = 'Banner Settings Record Created';
+            return $json;
+        }
+    }
+
     public function saveBannerSettings($request)
     {
 
