@@ -29,7 +29,24 @@
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="row align-items-center">
-                                <div class="col-md-8 col-lg-6">
+                                <div class="col-md-4 col-lg-6 order-md-2">
+                                    <div class="content_box_wrapper text-center">
+                                        <div class="content_box">
+                                            @if(isset( $banner_settings->about_talends_image) )
+                                            <picture>
+                                                <source media="(min-width:768px)" srcset="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}" class="img-fluid" alt="Banner Hero Image" width="420"
+                                                >
+                                                <source media="(min-width:465px)" srcset="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}" class="img-fluid" alt="Banner Hero Image" width="300"
+                                                >
+                                                <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}" class="img-fluid" alt="Banner Hero Image" width="150">
+                                            </picture>
+                                            <!-- <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}"
+                                                class="img-fluid" width="450" alt=""> -->
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 col-lg-6 order-md-1">
                                     <div class="content_box_wrapper">
                                         <div class="content_box home_page_banner_description">
                                             {!! $banner_settings->banner_description ?? '' !!}
@@ -37,16 +54,6 @@
                                                 Job</a>
                                             <!-- <a href="#" class="btn btn-outline-theme px-4 rounded-pill mt-4 ml-0">Submit a Project</a> -->
                                             <a href="{{ route('companyRegistraton') }}" class="btn btn-outline-theme px-4 rounded-pill mt-4 ml-md-3">Register Agency</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4 col-lg-6">
-                                    <div class="content_box_wrapper">
-                                        <div class="content_box">
-                                            @if(isset( $banner_settings->about_talends_image) )
-                                            <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}"
-                                                class="img-fluid" width="450" alt="">
-                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +72,7 @@
                         <p>Trusted by:</p>
                         @if(isset( $trusted_by->about_talends_image) )
                         <img src="{{asset('uploads/home-pages/banners/'.$trusted_by->about_talends_image)}}"
-                            class="w-100" alt="">
+                            class="img-fluid" alt="Talend Partner's Image"/>
                         @endif
                     </div>
                 </div>
@@ -238,8 +245,13 @@
                 <div class="col-lg-6 mb-4">
                 
                     @if(isset( $banner_settings->talends_work_image) )
+                        <!-- <picture>
+                            <source media="(min-width:768px)" srcset="{{asset('uploads/home-pages/banners/'.$banner_settings->talends_work_image)}}" class="img-fluid" alt="Banner Hero Image" width="100%"/>
+                            <source media="(min-width:465px)" srcset="{{asset('uploads/home-pages/banners/'.$banner_settings->talends_work_image)}}" class="img-fluid" alt="Banner Hero Image" width="350"/>
+                            <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->talends_work_image)}}" class="img-fluid" alt="Banner Hero Image" width="200"/>
+                        </picture> -->
                     <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->talends_work_image)}}"
-                        class="w-100" alt="">
+                        class="img-fluid" alt="">
                     @endif
                 </div>
                 <div class="col-lg-6 pb-3 align-self-center">
