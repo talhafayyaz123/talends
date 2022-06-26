@@ -148,13 +148,8 @@ $join_community=App\Helper::getJoinCommunity();
             </div>
             <div class="col-md-4 text-center">
                 @if(isset( $join_community->about_talends_image) )
-                <picture>
-                    <source media="(min-width:768px)" srcset="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="img-fluid" width="350"> 
-                    <source media="(min-width:480px)" srcset="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="img-fluid" width="200">
-                    <img src="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" alt="Flowers" class="img-fluid" width="150">
-                </picture>
-                <!-- <img src="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="img-fluid" width="250px"
-                    alt=""> -->
+                <img src="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="img-fluid" width="250px"
+                    alt="">
                 @endif
             </div>
         </div>
@@ -218,7 +213,7 @@ $footer_menus_4=App\Helper::footerMenu4();
         <div class="row footer_bottom align-items-end">
             <div class="col-md-6">
                 <ul class="list-inline">
-                <li class="px-1"> <a href="https://www.facebook.com/Talends-104362175661656" target="_blank"><i class="fa fa-facebook"></i></a> </li>
+                    <li class="px-1"> <a href="https://www.facebook.com/Talends-104362175661656" target="_blank"><i class="fa fa-facebook"></i></a> </li>
                     <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-twitter"></i></a> </li>
                     <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-linkedin"></i></a> </li>
                     <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-instagram"></i></a> </li>

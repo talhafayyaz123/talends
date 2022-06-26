@@ -1622,12 +1622,10 @@ select.form-control{
     line-height: 35px;
 }
 
-div#email_error p {
-    font-size: 13px;
-}
-
+div#email_error p,
 div#password_error p {
-    font-size: 13px;
+    font-size: 12px;
+	margin-bottom: 0;
 }
 
 #agencyform p{

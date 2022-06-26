@@ -31,7 +31,6 @@
                                 <p class="small  mb-2"><i class="fa fa-envelope" aria-hidden="true"></i> {{$request->email}}</p>
                                 <p class="small"><i class="fas fa-phone"></i> {{$request->phone_number}}</p>
                                 <a href="javascript:;" onclick="show_detail({{$request->id}})" id="detailBtn_{{$request->id}}" class="btn-link">View Details</a>
-
                             </div>
                         @endforeach
                     @else
@@ -76,8 +75,7 @@
                             <div class="col-md-6">
                                 <h4>Phone</h4>
                                <span> {{ $request->phone_number }} </span>
-                                </div>
-                          
+                            </div>
                         </div>
                     </div>
                     <div class="px-4 mb-5">
@@ -85,32 +83,25 @@
                             <div class="col-md-12">
                                 <h4 >Services</h4>
                                 <div class="skill-tags">
-                            
-                            <ul>
-                               @if(!empty($request->detail))
-                               @php
-                                foreach(unserialize($request->detail) as $key=>$value){
-                                    $skill = \App\Skill::where('id', $value)->first()->title;  @endphp 
-                              
-                                    <li>{{ $skill }}</li>
-                                    @php  }
-                               @endphp
-    
-
-
+                                    <ul>
+                                        @if(!empty($request->detail))
+                                            @php
+                                                foreach(unserialize($request->detail) as $key=>$value){
+                                                    $skill = \App\Skill::where('id', $value)->first()->title;  @endphp 
+                                                    <li>{{ $skill }}</li>
+                                                    @php  }
+                                            @endphp
+                                        @endif
+                                    </ul>
+                                </div>
+                                @if($request->status=='accepted')
+                                    <a class="btn btn-theme px-4 rounded-pill">Already Accepted</a>
+                                @elseif($request->status=='rejected')
+                                    <a class="btn btn-theme px-4 rounded-pill">Already Rejected</a>
+                                @else
+                                    <a class="btn btn-theme px-4 rounded-pill" href="{{ route('leadStatus',['id'=>$request->id,'status'=>'accept']) }}">Accept & Send Messages</a>
+                                    <a class="btn btn-theme px-4 rounded-pill" href="{{ route('leadStatus',['id'=>$request->id,'status'=>'reject']) }}">Reject and Share response with Client</a>
                                 @endif
-                               </ul>
-                        </div>
-                              @if($request->status=='accepted')
-                              <a class="btn btn-theme-white px-4 rounded-pill">Already Accepted</a>
-
-                              @elseif($request->status=='rejected')
-                              <a class="btn btn-theme-white px-4 rounded-pill">Already Rejected</a>
-                              @else
-                              <a class="btn btn-theme-white px-4 rounded-pill" href="{{ route('leadStatus',['id'=>$request->id,'status'=>'accept']) }}">Accept & Send Messages</a>
-                                <a class="btn btn-theme-white px-4 rounded-pill" href="{{ route('leadStatus',['id'=>$request->id,'status'=>'reject']) }}">Reject and Share response with Client</a>
-                              @endif
-                               
                             </div>
                         </div>
                     </div>

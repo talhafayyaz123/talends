@@ -33,15 +33,7 @@
                                     <div class="content_box_wrapper text-center">
                                         <div class="content_box">
                                             @if(isset( $banner_settings->about_talends_image) )
-                                            <picture>
-                                                <source media="(min-width:768px)" srcset="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}" class="img-fluid" alt="Banner Hero Image" width="420"
-                                                >
-                                                <source media="(min-width:465px)" srcset="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}" class="img-fluid" alt="Banner Hero Image" width="300"
-                                                >
-                                                <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}" class="img-fluid" alt="Banner Hero Image" width="150">
-                                            </picture>
-                                            <!-- <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}"
-                                                class="img-fluid" width="450" alt=""> -->
+                                            <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}" class="img-fluid" width="450" alt="">
                                             @endif
                                         </div>
                                     </div>
@@ -245,13 +237,8 @@
                 <div class="col-lg-6 mb-4">
                 
                     @if(isset( $banner_settings->talends_work_image) )
-                        <!-- <picture>
-                            <source media="(min-width:768px)" srcset="{{asset('uploads/home-pages/banners/'.$banner_settings->talends_work_image)}}" class="img-fluid" alt="Banner Hero Image" width="100%"/>
-                            <source media="(min-width:465px)" srcset="{{asset('uploads/home-pages/banners/'.$banner_settings->talends_work_image)}}" class="img-fluid" alt="Banner Hero Image" width="350"/>
-                            <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->talends_work_image)}}" class="img-fluid" alt="Banner Hero Image" width="200"/>
-                        </picture> -->
                     <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->talends_work_image)}}"
-                        class="img-fluid" alt="">
+                        class="img-fluid w-100" alt="">
                     @endif
                 </div>
                 <div class="col-lg-6 pb-3 align-self-center">

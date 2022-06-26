@@ -56,33 +56,24 @@ Company Registration
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-xl-6 col-lg-6 mb-3 form-group">
+                                            <div class="col-xl-6 col-lg-6 mb-3">
                                                 <label class="fieldlabels">Agency Name <sup class="text-danger">*</sup> </label>
                                                 <input type="text" name="company_name" class="form-control"  id="company_name" placeholder="Agency Name" value="{{ old('company_name') }}" />
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 mb-3 form-group">
-                                                <label class="fieldlabels">Email <span class="text-danger">*</span></label>
+                                            <div class="col-xl-6 col-lg-6 mb-3 position-relative">
+                                                <label class="fieldlabels">Email <sup class="text-danger">*</sup></label>
                                                 <input type="email" name="email" placeholder="Email" class="form-control" id='email' value="{{ old('email') }}"/>
-                                                <div class="alert alert-danger" id='email_error' style="display:none"></div>
+                                                <div class="alert alert-danger alert-dismissible fade show position-absolute" role="alert" id='email_error' style="display:none;z-index:9;"></div>
 
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 mb-3 form-group">
-                                                <label class="fieldlabels">Phone Number <span class="text-danger">*</span></label>
-                                                <div class="form-group" style="border: 1px solid #349f1a; border-radius:10px;position:relative;">
-                                                   <!--  <div class="input-group-prepend">
-                                                        <select name="country_code" id="country_code" class="form-control" style="border-radius: 10px 0 0 10px;border: 0;">
-                                                            <option value="">+92</option>
-                                                            <option value="">+91</option>
-                                                            <option value="">+971</option>
-                                                            <option value="">+93</option>
-                                                        </select>
-                                                    </div> -->
-                                                   
-                                                    <input type="tel" name="phone_number"  class="form-control" id="phone_number" placeholder="Phone Number" value="{{ old('phone_number') }}" style="border-radius:0 10px 10px 0 ;border: 0;"/>
+                                            <div class="col-xl-6 col-lg-6 mb-3">
+                                                <label class="fieldlabels">Phone Number <sup class="text-danger">*</sup></label>
+                                                <div style="border: 1px solid #349f1a; border-radius:10px;position:relative;">                                                   
+                                                    <input type="tel" name="phone_number"  class="form-control" id="phone_number" value="{{ old('phone_number') }}" style="border-radius:0 10px 10px 0 ;border: 0;"/>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 mb-3 form-group">
-                                                <label class="fieldlabels">Number of Talends <span class="text-danger">*</span></label>
+                                            <div class="col-xl-6 col-lg-6 mb-3">
+                                                <label class="fieldlabels">Number of Talends <sup class="text-danger">*</sup></label>
                                                 <select name="employees" id='employees' class="form-control">
                                                     <option value="">Select Total Team Strength</option>
                                                     @foreach ($employees as $key => $employee)
@@ -90,12 +81,12 @@ Company Registration
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 mb-3 form-group">
-                                                <label class="fieldlabels">Password <span class="text-danger">*</span></label>
+                                            <div class="col-xl-6 col-lg-6 mb-3 position-relative">
+                                                <label class="fieldlabels">Password <sup class="text-danger">*</sup></label>
                                                 <input id="register_password" type="password" class="form-control" name="password"  placeholder="{{{ trans('lang.ph_pass') }}}">
                                                  <i class="fa fa-eye"  id="togglePassword"  onclick="toggePassword()"></i>
                                                 <p class="text-secondary" style="line-height:14px;font-size:12px;">Use 8 or more characters with a mix of letters, numbers & symbols</p>
-                                                <div class="alert alert-danger" id='password_error' style="display:none"></div>
+                                                <div class="alert alert-danger position-absolute alert-dismissible fade show" role="alert" id='password_error' style="display:none;z-index:9;"></div>
                                             </div>
                                         </div>
                                         <input type="hidden" name="role" value="company" />

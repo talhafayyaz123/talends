@@ -1313,7 +1313,7 @@ select.form-control{
 	background-color: #e1ffd8;
 }
 .login-auth-content{
-    max-width: 380px;
+    max-width: 400px;
     width: 100%;
     margin: 0 auto;
 }
@@ -1330,6 +1330,7 @@ select.form-control{
 }
 .login-auth-content label{
 	font-weight:600;
+    font-size: 14px;
 }
 .login-auth-content .form-control{
 	height:42px;
