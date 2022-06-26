@@ -190,7 +190,8 @@ class PublicController extends Controller
     public function CompanyRegisterValidation(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'email' => ['required','unique:users', 'email', new checkBusinessEmail],
+            //'email' => ['required','unique:users', 'email', new checkBusinessEmail],
+            'email' => ['required','unique:users'],
             'password' => 'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
         ]);
         
