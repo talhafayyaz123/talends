@@ -133,6 +133,8 @@
 	<script src="{{ asset('js/particles.min.js') }}"></script>
     <script src="{{ asset('js/jquery-ui-min.js') }}"></script>
 	<script src="{{ asset('talends/assets/js/main.js') }}"></script>
+	
+	<script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/22223481.js"></script>
     @stack('scripts')
     <script>		
         jQuery(window).load(function () {
