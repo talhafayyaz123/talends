@@ -62,7 +62,7 @@ Company Registration
                                             </div>
                                             <div class="col-xl-6 col-lg-6 mb-3 form-group">
                                                 <label class="fieldlabels">Email <span class="text-danger">*</span></label>
-                                                <input type="email" name="email" placeholder="Only Business Email" class="form-control" id='email' value="{{ old('email') }}"/>
+                                                <input type="email" name="email" placeholder="Email" class="form-control" id='email' value="{{ old('email') }}"/>
                                                 <div class="alert alert-danger" id='email_error' style="display:none"></div>
 
                                             </div>
