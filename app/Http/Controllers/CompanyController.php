@@ -48,6 +48,11 @@ use App\UserSubCategories;
 use App\UserCategorySkills;
 use App\CompanyDetail;
 use App\HireAgency;
+use App\EmailTemplate;
+use App\Mail\AdminEmailMailable;
+use Illuminate\Support\Facades\Mail;
+
+
 /**
  * Class FreelancerController
  *
@@ -234,8 +239,7 @@ class CompanyController extends Controller
 
 
     public function storeHireAgency(Request $request,$id)
-    {
-
+    {  
        
          $this->validate(
             $request,
@@ -259,6 +263,7 @@ class CompanyController extends Controller
         
         HireAgency::create([
         'agency_id'=>  $id,
+        'employeer_id'=>Auth::user()->id,
         'full_name'=> $full_name,
         'company_name'=> $company_name,
         'email'=>  $email,
@@ -276,6 +281,7 @@ class CompanyController extends Controller
     public function companyHiringRequests(){
 
         $role=Auth::user()->getRoleNames()[0];
+      
            if( $role=='admin'){
             $hiring_requests=HireAgency::all();
           
@@ -285,13 +291,83 @@ class CompanyController extends Controller
 
            }
 
-           
+        
         return view(
             'back-end.company.hiring_requests.index',
             compact(
                 'hiring_requests','role'
             )
         );
+    }
+
+    public function leadStatus($lead_id,$status)
+    {
+        $lead=HireAgency::find($lead_id);
+        $author_id=$lead->agency_id;
+        $employeer_id=$lead->employeer_id;
+         $employer=User::find($employeer_id);
+        if($status=='accept'){
+           
+          
+            $body='Thank you for your enquiry, we would love to work on your project. Lets discuss further details.';
+            
+            $user = User::find(intval($author_id));
+            $message=new Message();
+            $message->user()->associate($user);
+            $message->receiver_id = intval($employeer_id);
+            $message->body = filter_var($body, FILTER_SANITIZE_STRING);
+            $message->status = 0;
+            $message->save();
+    
+            // change lead status to accepted
+            $lead->status='accepted';
+            $lead->save();
+
+            $template = DB::table('email_types')->select('id')
+            ->where('email_type', 'lead_accepted')->get()->first();
+    
+            if (!empty($template->id)) {
+                $template_data = EmailTemplate::getEmailTemplateByID($template->id);
+                
+                $email_params['name'] = Helper::getUserName($employeer_id);
+                 Mail::to($employer->email)
+                    ->send(
+                        new AdminEmailMailable(
+                            'lead_accepted',
+                            $template_data,
+                            $email_params
+                        )
+                    ); 
+            }
+
+            Session::flash('message', 'Thanks for accepting, an automatic confirmation message has sent to Employer from you, he will contact you back soon.');
+            return redirect()->route('message');
+        }else{
+            $lead->status='rejected';
+            $lead->save();
+
+            $template = DB::table('email_types')->select('id')
+            ->where('email_type', 'lead_rejected')->get()->first();
+    
+            if (!empty($template->id)) {
+                $template_data = EmailTemplate::getEmailTemplateByID($template->id);
+                
+                $email_params['name'] = Helper::getUserName($employeer_id);
+                 Mail::to($employer->email)
+                    ->send(
+                        new AdminEmailMailable(
+                            'lead_rejected',
+                            $template_data,
+                            $email_params
+                        )
+                    ); 
+            }
+
+           
+            return redirect()->back()->withInput();
+        }
+       
+       
     }
 
     public function companyHiringRequestDetail($id){

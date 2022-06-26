@@ -117,6 +117,7 @@
                     <ul class="sub-menu">
                         <li><a href="{{{ route('skills') }}}">{{ trans('lang.skills') }}</a></li>
                         <li><a href="{{{ route('categories') }}}">{{ trans('lang.job_cats') }}</a></li>
+                        <li><hr><a href="{{{ route('agencyServices') }}}">Agency Services</a></li>
                         <li><a href="{{{ route('subCategories') }}}">Sub Categories</a></li>
                         <li><a href="{{{ route('departments') }}}">{{ trans('lang.dpts') }}</a></li>
                         <li><a href="{{{ route('languages') }}}">{{ trans('lang.langs') }}</a></li>

@@ -229,11 +229,7 @@
                         <div class="tlb__img">
 
                             @php
-
-
-
                             $avatar = Helper::getProfileImage( $value->profile->user_id, 'medium-small-');
-
                             @endphp
 
                             <img src="{{{ asset($avatar) }}}" alt="{{ trans('lang.img') }}">
@@ -243,15 +239,9 @@
                         <div class="tlb__content">
 
                             <a href="{{url("company-detail",['id'=>$value->id ])}}">
-
-
-
-                                <h3>{{ $value->FullName }}</h3>
-
-                                <p>{{$value->profile->tagline}}</p>
-
-                            
-
+                             
+                                <h3> {{  substr($value->profile->company_name, 0,30) . '...' }} </h3>                            
+                             
                             <div class="tlb__reviews row">
 
                                 <div class="bh-stars" data-bh-rating="4.5">
@@ -456,11 +446,12 @@
                     <h2>in-demand services from agencies</h2>
                 </div>
                 <div class="row">
-                @foreach($categories as $category)
-                    <div class="col-lg-20 col-md-4 col-sm-6">
+                @foreach($agency_services as $category)
+        
+                    <div class="col-lg-3" style="max-width: 20% !important;">
                         <div class="content-box">
-                            <img src="{{ asset('uploads/categories/'.$category->image)}}" alt="" class="img-fluid mb-3">
-                            <p><a href="javascript:;">{{ $category->title }}</a></p>
+                            <img src="{{ asset('uploads/agency_services/'.$category->image)}}" alt="" class="img-fluid mb-3">
+                            <p>{{ $category->title }}</p>
                         </div>
                     </div>
                 @endforeach  
@@ -533,7 +524,7 @@
                 var optionsArray = [];
 
                  if (len > 0) {
-
+                    
                      for (var i = 0; i < len; i++) {
 
                     var id = response['sub_categories'][i].sub_category_id;
@@ -542,7 +533,7 @@
 
                     var option = "<div class='col-md-4 mb-3'><div class='custom-control custom-check'><input class='custom-control-input' id='freelancerSubCategory' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
                      
-                    option+="<label class='custom-control-label' for='{{$value['value']}}'>"+title+" </label></div></div>" ; 
+                    option+="<label class='custom-control-label' for=' "+id+" '>"+title+" </label></div></div>" ; 
                     $(".category_sub_categories").append(option); 
         
                 }

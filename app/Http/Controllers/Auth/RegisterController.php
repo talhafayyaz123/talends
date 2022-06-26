@@ -129,7 +129,6 @@ class RegisterController extends Controller
     {
         $json = array();
         $user = new User();
-
         $register_form = SiteManagement::getMetaValue('reg_form_settings');
         $registration_type = !empty($register_form) && !empty($register_form[0]['registration_type']) ? $register_form[0]['registration_type'] : 'multiple';
         $verification_type = !empty($register_form) && !empty($register_form[0]['verification_type']) ? $register_form[0]['verification_type'] : 'admin_verify';
@@ -217,7 +216,7 @@ class RegisterController extends Controller
             'company_name' => 'required',
             'email' => ['required','unique:users', 'email', new checkBusinessEmail],
             'phone_number' => 'required',
-            'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+            'password' => 'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
             'employees' => 'required',
             'role' => 'not_in:admin',
             'package_id' => 'required',
@@ -235,7 +234,8 @@ class RegisterController extends Controller
             
             $validation,$customMessages
         );      
-         
+        
+        
         $json = array();
          $user = new User();
 

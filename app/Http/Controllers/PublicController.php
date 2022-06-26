@@ -157,7 +157,7 @@ class PublicController extends Controller
                 'email' => 'required|email|unique:users',
                 'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
                 'role' => 'not_in:admin',
-                'availability' => 'required',
+                //'availability' => 'required',
                 'locations' => 'required',
                 'employees' => 'required',
                 'department' => 'required',
@@ -187,6 +187,61 @@ class PublicController extends Controller
         );
     }
 
+    public function CompanyRegisterValidation(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            //'email' => ['required','unique:users', 'email', new checkBusinessEmail],
+            'email' => ['required','unique:users'],
+            'password' => 'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+        ]);
+        
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
+        return response()->json(['success'=>'Record is successfully added']);
+
+    }
+
+    public function HireAgencyLoginCheck(Request $request)
+    {
+
+        $user = User::where('email', $request->email)->first();
+        if($user){
+            $user_role_type = User::getUserRoleType($user->id);
+            $user_role = $user_role_type->role_type;
+          
+           if ($user && Hash::check($request->password, $user->password) && $user_role=='employer') 
+           {
+            session()->put(['user_id' => $user->id]);
+            session()->put(['email' => $user->email]);
+            Auth::login($user);
+            
+            return response()->json(['success'=>'Login Successfully.']);
+
+
+            }else{
+                return response()->json(['errors'=>'Login Credentials not match or User May not Exist With Role (Employer).']);
+            }
+        }else{
+            return response()->json(['errors'=>'Login Credentials not match.']);
+        }
+
+    }
+
+    public function HireAgencyRegisterValidations(Request $request)
+    {
+
+        $user = User::where('email', $request->email)->first();
+        if($user){
+           
+            return response()->json(['errors'=>'User With Email Already Exist.']);
+
+        }else{
+            return response()->json(['success'=>'not Exist.']);
+        }
+
+    }
     /**
      * Step2 Registeration Validation
      *
@@ -284,14 +339,14 @@ class PublicController extends Controller
                             $email_params['name'] = Helper::getUserName($id);
                             $email_params['email'] = $email;
                             $email_params['link'] = url('profile/' . $user->slug);
-                           /*  Mail::to(config('mail.username'))
+                             Mail::to(config('mail.username'))
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_registration',
                                         $template_data,
                                         $email_params
                                     )
-                                ); */
+                                );
                         }
                     }
 
@@ -342,14 +397,14 @@ class PublicController extends Controller
                             $email_params['name'] = Helper::getUserName($id);
                             $email_params['email'] = $email;
                             $email_params['password'] = $password;
-                           /*  Mail::to($email)
+                            Mail::to($email)
                                 ->send(
                                     new GeneralEmailMailable(
                                         'new_user',
                                         $template_data,
                                         $email_params
                                     )
-                                ); */
+                                );  
                         }
                         $admin_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_registration')->get()->first();
                         if (!empty($template->id)) {
@@ -357,18 +412,28 @@ class PublicController extends Controller
                             $email_params['name'] = Helper::getUserName($id);
                             $email_params['email'] = $email;
                             $email_params['link'] = url('profile/' . $user->slug);
-                           /*  Mail::to(config('mail.username'))
+                              Mail::to(config('mail.username'))
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_registration',
                                         $template_data,
                                         $email_params
                                     )
-                                ); */
+                                );  
                         }
                     }
-                    session()->forget('password');
-                    session()->forget('email');
+                   
+                     
+                    if(isset($request['otp_verify']) &&  !empty($request['otp_verify']) ){
+                        session()->put(['user_id' => $user->id]);
+                        session()->put(['email' => $user->email]);
+                        Auth::login($user);
+                        
+                    }else{
+                        session()->forget('password');
+                        session()->forget('email');
+                    }
+
                     return $json;
                 } else {
                     $json['type'] = 'error';
@@ -1504,6 +1569,14 @@ class PublicController extends Controller
         $json = array();
         $privacy_policy = !empty(SiteManagement::getMetaValue('privacy_policy')) ? SiteManagement::getMetaValue('privacy_policy') : array();
         return View('front-end.pages.privacy_policy',compact('privacy_policy'));
+
+    }
+
+    public function userAgreement()
+    {
+        $json = array();
+        $user_agreement = !empty(SiteManagement::getMetaValue('user_agreement')) ? SiteManagement::getMetaValue('user_agreement') : array();
+        return View('front-end.pages.user_agreement',compact('user_agreement'));
 
     }
     

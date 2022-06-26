@@ -169,6 +169,7 @@
                                 <li><hr><a href="{{{ route('findRightTalends') }}}">Let Us Find Right Talends</a></li>
                                 <li><hr><a href="{{{ route('findRightTalendsTestimonials') }}}">Find Right Talends Testimonials</a></li>
                                 <li><hr><a href="{{{ route('adminPrivacyPolicy') }}}">Privacy Policy</a></li>
+                                <li><hr><a href="{{{ route('userAgreement') }}}">user Agreement</a></li>
 
 
                             </ul>
@@ -225,6 +226,7 @@
                             <ul class="sub-menu">
                                 <li><hr><a href="{{{ route('skills') }}}">{{ trans('lang.skills') }}</a></li>
                                 <li><hr><a href="{{{ route('categories') }}}">{{ trans('lang.job_cats') }}</a></li>
+                                <li><hr><a href="{{{ route('agencyServices') }}}">Agency Services</a></li>
                                 <li><hr><a href="{{{ route('departments') }}}">{{ trans('lang.dpts') }}</a></li>
                                 <li><hr><a href="{{{ route('languages') }}}">{{ trans('lang.langs') }}</a></li>
                                 <li><hr><a href="{{{ route('locations') }}}">{{ trans('lang.locations') }}</a></li>

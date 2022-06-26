@@ -6,6 +6,7 @@ Company Registration
 @section('description', "Company Registration")
 
 @section('content')
+ 
 
 <div id="pages-list">
     <div class="container">
@@ -25,9 +26,15 @@ Company Registration
                         <div class="stepper-container">
                             @if ($errors->any())
                                 @foreach ($errors->all() as $error)
-                                    <div class="error">{{$error}}</div>
+                                @if($error=='The password format is invalid.')
+                                <div class="error">Your password must be more than 6 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character.</div>
+                                @else
+                                <div class="error">{{$error}}</div>
+                                @endif
                                 @endforeach
                             @endif
+                            <div class="alert alert-danger" style="display:none"></div>
+
                             <form id="msform" class="company_registration_form" method="post" action="{{ route('userRegister')  }}">
                                 @csrf  
                                 <!-- progressbar -->
@@ -49,30 +56,32 @@ Company Registration
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-xl-6 col-lg-6 mb-3">
+                                            <div class="col-xl-6 col-lg-6 mb-3 form-group">
                                                 <label class="fieldlabels">Agency Name <sup class="text-danger">*</sup> </label>
                                                 <input type="text" name="company_name" class="form-control"  id="company_name" placeholder="Agency Name" value="{{ old('company_name') }}" />
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 mb-3">
+                                            <div class="col-xl-6 col-lg-6 mb-3 form-group">
                                                 <label class="fieldlabels">Email <span class="text-danger">*</span></label>
-                                                <input type="email" name="email" placeholder="Only Business Email" class="form-control" id='email' value="{{ old('email') }}"/>
+                                                <input type="email" name="email" placeholder="Email" class="form-control" id='email' value="{{ old('email') }}"/>
+                                                <div class="alert alert-danger" id='email_error' style="display:none"></div>
+
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 mb-3">
+                                            <div class="col-xl-6 col-lg-6 mb-3 form-group">
                                                 <label class="fieldlabels">Phone Number <span class="text-danger">*</span></label>
-                                                <div class="input-group" style="border: 1px solid #349f1a; border-radius:10px;position:relative;">
-                                                    <div class="input-group-prepend">
-                                                        <select name="" id="" class="form-control" style="border-radius: 10px 0 0 10px;border: 0;">
+                                                <div class="form-group" style="border: 1px solid #349f1a; border-radius:10px;position:relative;">
+                                                   <!--  <div class="input-group-prepend">
+                                                        <select name="country_code" id="country_code" class="form-control" style="border-radius: 10px 0 0 10px;border: 0;">
                                                             <option value="">+92</option>
                                                             <option value="">+91</option>
                                                             <option value="">+971</option>
                                                             <option value="">+93</option>
                                                         </select>
-                                                    </div>
-                                                    <!-- <hr style="width: 25px;height: 1px; border-top: 1px solid #349f1a; z-index: 9999;position: absolute;left: 80px; transform: rotate(90deg);top: 3px;"/> -->
-                                                    <input type="text" name="phone_number" class="form-control" id="phone_number" placeholder="Phone Number" value="{{ old('phone_number') }}" style="border-radius:0 10px 10px 0 ;border: 0;"/>
+                                                    </div> -->
+                                                   
+                                                    <input type="tel" name="phone_number"  class="form-control" id="phone_number" placeholder="Phone Number" value="{{ old('phone_number') }}" style="border-radius:0 10px 10px 0 ;border: 0;"/>
                                                 </div>
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 mb-3">
+                                            <div class="col-xl-6 col-lg-6 mb-3 form-group">
                                                 <label class="fieldlabels">Number of Talends <span class="text-danger">*</span></label>
                                                 <select name="employees" id='employees' class="form-control">
                                                     <option value="">Select Total Team Strength</option>
@@ -81,11 +90,12 @@ Company Registration
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 mb-3">
+                                            <div class="col-xl-6 col-lg-6 mb-3 form-group">
                                                 <label class="fieldlabels">Password <span class="text-danger">*</span></label>
-                                                <input id="register_password" type="password" class="form-control" name="password" id="password" placeholder="{{{ trans('lang.ph_pass') }}}">
-                                                <!-- <i class="fa fa-eye"  id="togglePassword"  onclick="toggePassword()"></i> -->
+                                                <input id="register_password" type="password" class="form-control" name="password"  placeholder="{{{ trans('lang.ph_pass') }}}">
+                                                 <i class="fa fa-eye"  id="togglePassword"  onclick="toggePassword()"></i>
                                                 <p class="text-secondary" style="line-height:14px;font-size:12px;">Use 8 or more characters with a mix of letters, numbers & symbols</p>
+                                                <div class="alert alert-danger" id='password_error' style="display:none"></div>
                                             </div>
                                         </div>
                                         <input type="hidden" name="role" value="company" />
@@ -100,11 +110,11 @@ Company Registration
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-xl-6 col-lg-6 mb-4">
+                                            <div class="col-xl-6 col-lg-6 mb-4 form-group">
                                                 <label class="fieldlabels">Location <span class="text-danger">*</span></label>
                                                 {!! Form::select('locations', $locations, null, array('class'=>'form-control locations','placeholder' => trans('lang.select_locations'))) !!}
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 mb-4">
+                                            <div class="col-xl-6 col-lg-6 mb-4 form-group">
                                                 <label class="fieldlabels">Agency Language <span class="text-danger">*</span></label>
                                                 <select name="agency_language" id='agency_language' class="form-control" style="display: inline !important;">
                                                     <option value="">Select Native Language</option>
@@ -113,11 +123,11 @@ Company Registration
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 mb-4">
+                                            <div class="col-xl-6 col-lg-6 mb-4 form-group">
                                                 <label class="fieldlabels">Agency Website <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" name="agency_website" placeholder="Agency Website" value="{{ old('agency_website') }}"/>
+                                                <input type="text" class="form-control"  id='agency_website' name="agency_website" placeholder="Agency Website" value="{{ old('agency_website') }}"/>
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 mb-4">
+                                            <div class="col-xl-6 col-lg-6 mb-4 form-group">
                                                 <label class="fieldlabels">Select Budget Range <span class="text-danger">*</span></label>
                                                 <select name="budget" id='budget' class="form-control">
                                                 <option value="">Your Average Project Budget</option> 
@@ -175,16 +185,15 @@ Company Registration
                                                             <div class="plan-c">
                                                                 <ul class="price-feature">
                                                                     <li style="padding: 10px 0px; border-bottom:1px solid #349f1a;font-weight:bold;color: #9a9797;">Choos Your Plan</li>
-                                                                    @foreach ($monthly_options as $key => $option)
-                                                                    
-                                                                        @if ($key == 'duration')
-                                                                            <li><i class="fa fa-check-circle mr-2"></i><span>{{$key}}: </span></li>
-                                                                        @elseif ($key == 'badge')
-                                                                            <li><i class="fa fa-check-circle mr-2"></i><span>{{$key}}:</span></li>
-                                                                        @else
-                                                                            <li><i class="fa fa-check-circle mr-2"></i><span>{{$key}}:</span></li>
-                                                                        @endif
-                                                                    @endforeach
+                                                                    @foreach($package_options as $options)
+                                                                    @if ($options != 'Price')
+                                                                    <li >
+                                                                        <i class="fa fa-check-circle mr-2"></i>
+                                                                        <span>{{{$options}}}</span>
+                                                                    </li>
+                                                                    @endif
+                                                                @endforeach
+                                                                
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -281,8 +290,22 @@ Company Registration
 @endsection
 
 @push('scripts')
+<script src="{{ asset('talends/assets/js/register.js') }}"></script>
+
 <script>
     window.categories = [];
+
+   
+
+     var input = document.querySelector("#phone_number");
+    window.intlTelInput(input, {
+        autoHideDialCode: true,
+                dropdownContainer: document.body,
+                formatOnDisplay: true,
+                initialCountry: "auto",
+                separateDialCode: true
+    });
+ 
 
     function select_service(id) {
 
@@ -371,4 +394,8 @@ $.get("https://ipinfo.io/json?token=20e8fc0c5775d3", function(response) {
 }
 
 </script>
+
+
+
+
 @endpush

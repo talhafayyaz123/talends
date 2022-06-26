@@ -731,11 +731,16 @@ class PaytabController extends Controller
 
     {
 
-           $user_id=$request->segment(4);
-                
+        $content=$request->input();
+
+        $id=$content['package_id'];
+     
+        $user_id=$content['user_id'];
+          // $user_id=$request->segment(4);
+        
             $user = User::find($user_id);
 
-           $id=$request->segment(3);
+//           $id=$request->segment(3);
            
            $proposal = Proposal::find($id);
            $amount=$proposal->amount;

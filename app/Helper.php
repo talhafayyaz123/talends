@@ -72,7 +72,7 @@ class Helper extends Model
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://development.talends.com/redirect/paytab/$id/$user->id\",\n    \"return\": \"https://development.talends.com/redirect/paytab/$id/$user->id\"\n  }",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://development.talends.com/redirect/paytab/?package_id=$id&user_id=$user->id\",\n    \"return\": \"https://development.talends.com/redirect/paytab/?package_id=$id&user_id=$user->id\"\n  }",
     CURLOPT_HTTPHEADER => array(
         "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
         "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
@@ -534,27 +534,27 @@ return $response;
                 'value' => '500',
             ),
             '2' => array(
-                'title' => 'AED 5000',
+                'title' => 'AED 5,000',
                 'search_title' => 'AED 5000',
                 'value' => '5000',
             ),
             '3' => array(
-                'title' => 'AED 10000',
+                'title' => 'AED 10,000',
                 'search_title' => 'AED 10000',
                 'value' => '500',
             ),
             '4' => array(
-                'title' => 'AED 25000',
+                'title' => 'AED 25,000',
                 'search_title' => 'AED 25000',
                 'value' => '25000',
             ),
             '5' => array(
-                'title' => 'AED 50000',
+                'title' => 'AED 50,000',
                 'search_title' => 'AED 50000',
                 'value' => '5000',
             ),
             '6' => array(
-                'title' => 'AED 100000',
+                'title' => 'AED 1,000,00',
                 'search_title' => 'AED 100000',
                 'value' => '100000',
             ),
@@ -617,6 +617,15 @@ return $response;
             return '/uploads/categories/' . $image;
         } else {
             return 'uploads/categories/img-09.png';
+        }
+    }
+
+    public static function getAgencyServiceImage($image)
+    {
+        if (!empty($image)) {
+            return '/uploads/agency_services/' . $image;
+        } else {
+            return 'uploads/agency_services/img-09.png';
         }
     }
 

@@ -34,7 +34,9 @@ use App\EmailTemplate;
 use App\Mail\GeneralEmailMailable;
 use App\Services\PaymentService;
 use App\UserCategorySkills;
+use App\AgencyServices;
 use function Psy\debug;
+use App\Department;
 
 class HomeController extends Controller
 {
@@ -227,8 +229,10 @@ class HomeController extends Controller
 
         $monthly_options = !empty($package[0]->options) ? unserialize($package[0]->options) : array();
         $yearly_options = !empty($package[1]->options) ? unserialize($package[1]->options) : array();
+
+        $package_options = Helper::getPackageOptions('company');
     
-        return view('auth.company_registration',compact('yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
+        return view('auth.company_registration',compact('package_options','yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
      }
 
      public function companyRegistrationSuccess(Request $request){
@@ -601,6 +605,7 @@ class HomeController extends Controller
     $skills     = Skill::all();
     $locations = Location::latest()->get();
     $categories = Category::all();
+    $agency_services=AgencyServices::all();
     $featured_success_stories=AboutTalendsPage::where('page_type','featured_success_stories')->first();
     $agency_need_banner=AboutTalendsPage::where('page_type','agency_need_banner')->first();
     
@@ -615,7 +620,7 @@ class HomeController extends Controller
 
     }
 
-    return view('front-end.pages.companies',compact('agency_need_banner','companies','skills','locations','categories','sub_categories','featured_success_stories'));
+    return view('front-end.pages.companies',compact('agency_services','agency_need_banner','companies','skills','locations','categories','sub_categories','featured_success_stories'));
      }
 
 
@@ -628,9 +633,11 @@ class HomeController extends Controller
         $skills=UserCategorySkills::where('user_id', $id)->get();
         $categories = Category::all();
         $company_bedget = Helper::getComapnyBudgetList();
+        $locations = Location::select('title', 'id')->get()->pluck('title', 'id')->toArray();
+        $departments =Department::all();
+        $employees = Helper::getEmployeesList();
 
-
-        return view('front-end.pages.company_detail',compact('company_bedget','categories','skills','company_expertise','expertise','company_detail','id','profile'));
+        return view('front-end.pages.company_detail',compact('employees','departments','locations','company_bedget','categories','skills','company_expertise','expertise','company_detail','id','profile'));
      }
 
     public function experienceEducation($user_id)
