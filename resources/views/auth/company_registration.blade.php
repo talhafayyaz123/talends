@@ -95,7 +95,7 @@ Company Registration
                                             </div>
                                             <div class="col-xl-6 col-lg-6 mb-3 form-group">
                                                 <label class="fieldlabels">Password <span class="text-danger">*</span></label>
-                                                <input id="register_password" type="password" class="form-control" name="password"  placeholder="{{{ trans('lang.ph_pass') }}}">
+                                                <input id="register_password" type="password" class="pr-password form-control" name="password"  placeholder="{{{ trans('lang.ph_pass') }}}">
                                                  <i class="fa fa-eye"  id="togglePassword"  onclick="toggePassword()"></i>
                                                 <p class="text-secondary" style="line-height:14px;font-size:12px;">Use 8 or more characters with a mix of letters, numbers & symbols</p>
                                                 <div class="alert alert-danger" id='password_error' style="display:none"></div>
@@ -303,6 +303,7 @@ Company Registration
 <script src="{{ asset('talends/assets/js/register.js') }}"></script>
 
 <script>
+    
     window.categories = [];
 
     var input = document.querySelector("#phone_number");

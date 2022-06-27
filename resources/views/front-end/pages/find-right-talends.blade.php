@@ -246,6 +246,12 @@
                                 <div class="form-group col-md-12 mb-4">
                                     <textarea rows="4" name="detail" id='detail' class="form-control form-control-lg">Describe your project</textarea>
                                 </div>
+                                <div class="form-group col-md-12 mb-4">
+                                {!! htmlFormSnippet() !!}
+                                        <span class="help-block" style="display: none;">
+                                            <strong class="error"></strong>
+                                        </span>
+                            </div>
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-theme px-5 rounded-pill">Let us help you</button>
                                 </div>
@@ -339,7 +345,7 @@
                 required: true,
     
                 
-            },
+            }
         },
           errorElement: 'span',
           errorPlacement: function (error, element) {

@@ -102,8 +102,8 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                     @endforeach
                                                 @endif
                                             </div>
-                                            <div class="create_account_form"  v-if="step === 1" v-cloak>
-                                                <div v-if='user_type'>
+                                            <div class="create_account_form"  v-show="step === 1" v-cloak>
+                                                <div v-show='user_type'>
                                                     <div class="row">
                                                         <div class="col-lg-6 mb-3">
                                                             <input type="text" name="first_name" id="first_name" class="form-control" placeholder="{{{ trans('lang.ph_first_name') }}}" v-bind:class="{ 'is-invalid': form_step1.is_first_name_error }" v-model="first_name">
@@ -126,7 +126,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                         <div class="col-lg-6 mb-3">
                                                             <fieldset class="wt-registerformgroup">
                                                                 <div class="form-group password-placeholder">
-                                                                    <input id="register_password" type="password" class="form-control" name="password" placeholder="{{{ trans('lang.ph_pass') }}}" v-bind:class="{ 'is-invalid': form_step2.is_password_error }">
+                                                                    <input id="register_password" type="password" class="pr-password form-control" name="password" placeholder="{{{ trans('lang.ph_pass') }}}" v-bind:class="{ 'is-invalid': form_step2.is_password_error }">
                                                                     <span class="help-block" v-if="form_step2.password_error">
                                                                         <strong v-cloak>@{{form_step2.password_error}}</strong>
                                                                     </span>
@@ -372,9 +372,14 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
 
     @push('scripts')
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+  
     <script>
 
-
+$(document).ready(function (){
+    console.log('register_password');
+			$("#register_password").passwordRequirements({});
+		});
             $('input[type="radio"]').click(function(){
                 var inputValue = $(this).attr("value");
                 console.log(inputValue);
@@ -384,7 +389,6 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                 $("#register-text").show();
                 $("#entityType").hide();
             });
-            
     </script>
     <script>
 

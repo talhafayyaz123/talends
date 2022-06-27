@@ -637,7 +637,8 @@ class HomePagesController extends Controller
         'full_name' => 'required',
         'company_name' => 'required',
         'phone_number' => 'required',
-        'detail' => 'required'
+        'detail' => 'required',
+        'g-recaptcha-response' => 'required|recaptcha',
         ]
         );
 
