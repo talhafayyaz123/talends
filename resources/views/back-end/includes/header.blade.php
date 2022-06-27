@@ -202,21 +202,17 @@ $slider = Helper::getPageSlider($page_id);
                             $payment_settings = \App\SiteManagement::getMetaValue('commision');
                             $payment_module = !empty($payment_settings) && !empty($payment_settings[0]['enable_packages']) ? $payment_settings[0]['enable_packages'] : 'true';
                             $employer_payment_module = !empty($payment_settings) && !empty($payment_settings[0]['employer_package']) ? $payment_settings[0]['employer_package'] : 'true';
-                            $total_hire_agencies = \App\HireAgency::select('is_seen')->where('is_seen', 0)->count();
+                            $total_hire_agencies = \App\HireAgency::select('is_seen')->where('agency_id', Auth::user()->id)->where('is_seen', 0)->count();
 
                         @endphp
                         @if( $role === 'admin' || $role === 'company' )
                             <li class="nav-item">
-                                <a class="nav-link position-relative" href="javascript:;">
+                                <a class="nav-link position-relative" href="{{ route('companyHiringRequests') }}">
                                     <i class="fa fa-bell text-theme fa-2x"></i>
                                     <span class="badge badge-warning" style="position: absolute; right: -5px; top: 0px;">{{$total_hire_agencies }}</span>
                                 </a>
                             </li>
-                            <!-- <li class="nav-item">
-                                <div class="wt-username">
-                                    <a  class="notif"><span class="num">{{$total_hire_agencies }}</span></a>
-                                </div>
-                            </li> -->
+                           
                         @endif
                     <li  class="nav-item">
                         <div class="wt-userlogedin back-end-header">

@@ -229,11 +229,7 @@
                         <div class="tlb__img">
 
                             @php
-
-
-
                             $avatar = Helper::getProfileImage( $value->profile->user_id, 'medium-small-');
-
                             @endphp
 
                             <img src="{{{ asset($avatar) }}}" alt="{{ trans('lang.img') }}">
@@ -243,9 +239,9 @@
                         <div class="tlb__content">
 
                             <a href="{{url("company-detail",['id'=>$value->id ])}}">
-                                
-                                <h3>{{  $value->profile->company_name  }}</h3>                            
-
+                             
+                                <h3> {{  substr($value->profile->company_name, 0,30) . '...' }} </h3>                            
+                             
                             <div class="tlb__reviews row">
 
                                 <div class="bh-stars" data-bh-rating="4.5">
@@ -528,7 +524,7 @@
                 var optionsArray = [];
 
                  if (len > 0) {
-
+                    
                      for (var i = 0; i < len; i++) {
 
                     var id = response['sub_categories'][i].sub_category_id;
@@ -537,7 +533,7 @@
 
                     var option = "<div class='col-md-4 mb-3'><div class='custom-control custom-check'><input class='custom-control-input' id='freelancerSubCategory' type='checkbox' name='sub_categories[]' value='"+id+"'  >";
                      
-                    option+="<label class='custom-control-label' for='{{$value['value']}}'>"+title+" </label></div></div>" ; 
+                    option+="<label class='custom-control-label' for=' "+id+" '>"+title+" </label></div></div>" ; 
                     $(".category_sub_categories").append(option); 
         
                 }

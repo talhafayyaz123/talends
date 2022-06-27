@@ -87,12 +87,11 @@
                                                 @endforeach
                                             </ul>
                                             @if (Auth::user()->getRoleNames()[0] != "admin")
-                                                <a class="wt-btn" href="{{url('user/package/checkout/'.$package->id)}}"><span>{{ trans('lang.buy_now') }}</span></a>
-                                                {{-- @if (in_array($package->id, $purchase_packages))
-                                                    <a class="wt-btn" href="{{url('user/package/checkout/'.$package->id)}}"><span>{{ trans('lang.purchased') }}</span></a>
+                                                 @if (in_array($package->id, $purchase_packages))
+                                                    <a class="wt-btn"><span>{{ trans('lang.purchased') }}</span></a>
                                                 @else
                                                     <a class="wt-btn" href="{{url('user/package/checkout/'.$package->id)}}"><span>{{ trans('lang.buy_now') }}</span></a>
-                                                @endif --}}
+                                                @endif 
                                             @endif
                                         </div>
                                     </div>

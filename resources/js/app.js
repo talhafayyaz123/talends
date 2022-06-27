@@ -112,6 +112,7 @@
  Vue.component('slider-skeleton', require('./components/pages/show/skeleton/slider.vue').default);
  // end new page builder
  
+ Vue.component('footer-social_content', require('./components/footerSocialContent.vue').default);
  
  
  

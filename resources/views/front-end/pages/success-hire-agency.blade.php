@@ -84,3 +84,4 @@ $breadcrumbs = Breadcrumbs::generate('hireAgencyForm', $id);
         </div>
     </div>
 </div>
+@endsection

@@ -1,4 +1,6 @@
 @php
+
+
 $footer_how_work=App\Helper::getfooterHowWork();
 @endphp
 <section class="how_it_works_sec pt-0">
@@ -214,12 +216,12 @@ $footer_menus_4=App\Helper::footerMenu4();
         <div class="row footer_bottom align-items-end">
             <div class="col-md-6">
                 <ul class="list-inline">
-                    <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-facebook"></i></a> </li>
-                    <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-twitter"></i></a> </li>
-                    <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-linkedin"></i></a> </li>
-                    <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-instagram"></i></a> </li>
-                    <li class="px-1"> <a href="javascript:;" target="_self"><i class="fa fa-youtube"></i></a> </li>
-                    <li class="px-1"> <a href="javascript:;" target="_self"><i class="bi-tiktok"></i></a> </li>
+                <li class="px-1"> <a href="{{ $footer_social_content['banner_description'] ?? '' }}" target="_blank"><i class="fa fa-facebook"></i></a> </li>
+                    <li class="px-1"> <a href="{{ $footer_social_content['project_description'] ?? '' }}" target="_blank"><i class="fa fa-twitter"></i></a> </li>
+                    <li class="px-1"> <a href="{{ $footer_social_content['features_text'] ?? '' }}" target="_blank"><i class="fa fa-linkedin"></i></a> </li>
+                    <li class="px-1"> <a href="{{ $footer_social_content['work_description'] ?? '' }}" target="_blank"><i class="fa fa-instagram"></i></a> </li>
+                    <li class="px-1"> <a href="{{ $footer_social_content['services_description'] ?? '' }}" target="_blank"><i class="fa fa-youtube"></i></a> </li>
+                    <li class="px-1"> <a href="{{ $footer_social_content['payment_description'] ?? '' }}" target="_blank"><i class="bi-tiktok"></i></a> </li>
                 </ul>
                 <p class="mb-0">Talends.com ©2022 All Rights Reserved.</p>
                 <p class="small">Dubai, United Arab Emirates</p>

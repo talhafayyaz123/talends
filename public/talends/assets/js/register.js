@@ -14,10 +14,9 @@ $(document).ready(function(){
         var phone_number=$('#phone_number').val();
         var employees=$('#employees').val();
         var password=$('#register_password').val();
-
-      
-
-         
+       var country_code=$('.iti__selected-flag').text();
+     
+        
         if(password=='')
         {
             $('#register_password').addClass('field_error');
@@ -85,20 +84,34 @@ $(document).ready(function(){
                       success: function(data){
             
                         if(data.errors){
-                            jQuery('.alert-danger').html('');
+                            jQuery('#password_error').html('');
+                            jQuery('#email_error').html('');
+
+                           jQuery('#password_error').hide();
+                            jQuery('#email_error').hide();
                             jQuery.each(data.errors, function(key, value){
-                                  
-                                jQuery('.alert-danger').show();
+                           
+                                
+                                
                                 if(value=='The password format is invalid.'){
-                                    jQuery('.alert-danger').append('<p>password must be more than 8 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character</p>'); 
+                                    jQuery('#password_error').show();
+                                    jQuery('#password_error').append('<p>password must be more than 8 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character</p>'); 
+                                }else if(value=='The email has already been taken.' || value=='Please use your Business email' )
+                                {
+                                    jQuery('#email_error').show();
+                                    jQuery('#email_error').append('<p>'+value+'</p>'); 
                                 }else{
-                                    jQuery('.alert-danger').append('<p>'+value+'</p>'); 
+                                    
+                                    jQuery('#password_error').show();
+                                    jQuery('#password_error').append('<p>'+value+'</p>'); 
+                                
                                 }
                                
                            });
                          is_error=1;
                         }else{
                             is_error=0
+                            $('#phone_number').val(country_code+phone_number);
                             jQuery('.alert-danger').html('');
                             jQuery('.alert-danger').hide();
                             current_fs = obj.parent();
@@ -138,6 +151,7 @@ $(document).ready(function(){
         
 
         if(current==2){
+            
             var locations=$('.locations').val();
             var agency_language=$('#agency_language').val();
             var agency_website=$('#agency_website').val();
@@ -186,17 +200,23 @@ $(document).ready(function(){
 
          if(current==3){
             var categories= $("#categories").val();
-        
-            if(categories.indexOf(',')=='-1')
+           
+            if(categories.indexOf(',')=='-1' )
             {
                 jQuery('.alert-danger').html('');
                 jQuery('.alert-danger').show();
                 jQuery('.alert-danger').append('<p>Please Select Services</p>'); 
                 is_error=1;
-            }else{
+            }
+             if(categories.length==1){
                 jQuery('.alert-danger').html('');
                 jQuery('.alert-danger').hide();
-            
+                is_error=0;
+            }
+             if(categories.indexOf(',') !='-1'){
+                jQuery('.alert-danger').html('');
+                jQuery('.alert-danger').hide();
+        
             } 
          }
         

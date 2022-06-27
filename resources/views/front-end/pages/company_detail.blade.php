@@ -430,8 +430,6 @@
                                                     <div class="row">
                                                         <div class="col-md-5">
                                                             <a onclick="login()" class="text-white btn btn-theme rounded-pill px-5 btn-block">Log In</a>
-                                                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-
                                                         </div>
                                                        <!--  <div class="col-md-2 pt-2 text-center">
                                                             <p>OR</p>
@@ -495,7 +493,7 @@
                                             <div class="row">
                                                 <div class="col-md-5">
                                                     <a onclick="register()" class="text-white btn btn-theme rounded-pill px-5 btn-block">Sign Up</a>
-                                                    <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                                    
 
                                                 </div>
 
@@ -524,9 +522,12 @@
 
                 </div>
                 <div class="form_submission" style="{{$class2 }}">
-                    <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                  
                     <input type="submit" class="next action-button" value="Submit Your Enquiry" />
                 </div>
+
+
+                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                 </fieldset>
                 {!! form::close(); !!}
 
@@ -936,7 +937,7 @@
 
         current_fs = $(this).parent();
         previous_fs = $(this).parent().prev();
-
+       
         //Remove class active
         $("#progressbaragency li").eq($("fieldset").index(current_fs)).removeClass("active");
 

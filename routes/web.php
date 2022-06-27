@@ -267,6 +267,9 @@ Route::group(
 
         
         Route::get('admin/settings/front-footer/{type}', 'HomePagesController@frontFooter')->name('frontFooter');
+        Route::get('admin/settings/footer/social_content', 'HomePagesController@footerSocialContent')->name('footerSocialContent');
+        Route::post('admin/store/footer_social_content', 'HomePagesController@storeFooterSocialContent');
+
         Route::get('admin/settings/home-page-settings/{type}', 'HomePagesController@HomePageSettings')->name('HomePageSettings');
         Route::post('admin/store-banner_settings', 'HomePagesController@storeBannerSettings');
 
@@ -305,6 +308,7 @@ Route::group(
         
         Route::post('admin/store-footer-menu1/{type}', 'SiteManagementController@storeFooterMenu1');
         Route::post('admin/store-header-menu/{type}', 'SiteManagementController@storeHeaderMenu');
+        
         
 
         // Site Management Routes
@@ -665,7 +669,10 @@ Route::get('addmoney/stripe', array('as' => 'addmoney.paywithstripe', 'uses' => 
 Route::post('addmoney/stripe', array('as' => 'addmoney.stripe', 'uses' => 'StripeController@postPaymentWithStripe',));
 
 Route::get('addmoney/paytab/{amount}', array('as' => 'addmoney.paytab', 'uses' => 'PaytabController@paytabCheckout',));
-Route::get('redirect/paytab/{proposal_id}/{user_id}', array('as' => 'redirect.paytab', 'uses' => 'PaytabController@postPaymentWithPaytab',));
+
+//Route::post('/redirect/paytab', array('as' => 'redirect.paytab', 'uses' => 'PaytabController@postPaymentWithPaytab',));
+Route::get('/redirect/paytab', 'PaytabController@postPaymentWithPaytab');
+
 
 
 Route::get('paytab/package/payment/{package_id}', array('as' => 'package-payment.paytab', 'uses' => 'PaytabController@paytabPackageGateway',));

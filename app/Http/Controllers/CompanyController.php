@@ -340,7 +340,7 @@ class CompanyController extends Controller
                     ); 
             }
 
-
+            Session::flash('message', 'Thanks for accepting, an automatic confirmation message has sent to Employer from you, he will contact you back soon.');
             return redirect()->route('message');
         }else{
             $lead->status='rejected';

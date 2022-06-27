@@ -157,7 +157,7 @@ class PublicController extends Controller
                 'email' => 'required|email|unique:users',
                 'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
                 'role' => 'not_in:admin',
-                'availability' => 'required',
+                //'availability' => 'required',
                 'locations' => 'required',
                 'employees' => 'required',
                 'department' => 'required',
@@ -190,7 +190,8 @@ class PublicController extends Controller
     public function CompanyRegisterValidation(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'email' => ['required','unique:users', 'email', new checkBusinessEmail],
+            //'email' => ['required','unique:users', 'email', new checkBusinessEmail],
+            'email' => ['required','unique:users'],
             'password' => 'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
         ]);
         
@@ -396,14 +397,14 @@ class PublicController extends Controller
                             $email_params['name'] = Helper::getUserName($id);
                             $email_params['email'] = $email;
                             $email_params['password'] = $password;
-                          /*   Mail::to($email)
+                            Mail::to($email)
                                 ->send(
                                     new GeneralEmailMailable(
                                         'new_user',
                                         $template_data,
                                         $email_params
                                     )
-                                );  */
+                                );  
                         }
                         $admin_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_registration')->get()->first();
                         if (!empty($template->id)) {
@@ -411,14 +412,14 @@ class PublicController extends Controller
                             $email_params['name'] = Helper::getUserName($id);
                             $email_params['email'] = $email;
                             $email_params['link'] = url('profile/' . $user->slug);
-                         /*     Mail::to(config('mail.username'))
+                              Mail::to(config('mail.username'))
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_registration',
                                         $template_data,
                                         $email_params
                                     )
-                                );  */
+                                );  
                         }
                     }
                    
