@@ -147,6 +147,7 @@ class PublicController extends Controller
                 'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
                 'role' => 'not_in:admin',
                 'locations' => 'required',
+                'g-recaptcha-response' => 'required|recaptcha',
             ];
         }elseif($role=='employer'){
 
@@ -161,6 +162,7 @@ class PublicController extends Controller
                 'locations' => 'required',
                 'employees' => 'required',
                 'department' => 'required',
+                'g-recaptcha-response' => 'required|recaptcha',
             ];
             
 
@@ -179,6 +181,7 @@ class PublicController extends Controller
                 'university' => 'required',
                 'grade' => 'required',
                 'specialization' => 'required',
+                'g-recaptcha-response' => 'required|recaptcha',
             ];
         }
         $this->validate(

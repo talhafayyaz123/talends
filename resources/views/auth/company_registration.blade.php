@@ -272,6 +272,8 @@ Company Registration
                                             </div>
                                         </div>
                                     </div>
+                                  
+
                                     <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                                     <button id='register_pay_btn' class="btn btn-theme rounded-pill px-4 company_register_pay_now_disable float-right py-3 mt-2" type="submit">
                                         Proceed To Payment

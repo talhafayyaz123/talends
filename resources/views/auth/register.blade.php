@@ -49,6 +49,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
     </style>
     <section class="auth-sec">
     <div class="container">
+       
         <div class="row">
             <div class="col-12">
                 <div class="d-flex align-items-center min-vh-100">
@@ -256,9 +257,17 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                 <div class="entity-form employer mytab" id="employer"></div>
                                         
                                                 <div class="entity-form intern mytab" id="intern"></div>
-
-                                                <div v-if='user_type'>
+                                               
+                                                <div v-show='user_type'>
+                                                   
                                                     <div class="entity-form row" style="display:block;">
+                                                        <div class="col-12 mb-3 text-center" style="padding-left: 27%;" v-bind:class="{ 'is-invalid': form_step2.is_recaptcha_error }">
+                                                            {!! htmlFormSnippet() !!}
+                                                            <span class="help-block" v-if="form_step2.recaptcha_error">
+                                                                <strong v-cloak>@{{form_step2.recaptcha_error}}</strong>
+                                                            </span>
+                                                        </div>
+                                                      
                                                         <div class="col-12 mb-3 text-center">
                                                             <button class="btn btn-theme rounded-pill d-inline-block my-3 py-3" type="submit" style="width: 300px;">Create Account</button>
                                                         </div>
@@ -364,6 +373,8 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
     @push('scripts')
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
     <script>
+
+
             $('input[type="radio"]').click(function(){
                 var inputValue = $(this).attr("value");
                 console.log(inputValue);
@@ -423,6 +434,6 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                     toggleBtn.value = "Show the password";
                 }
             }
-
+   
     </script>
     @endpush
