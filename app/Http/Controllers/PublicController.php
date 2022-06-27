@@ -266,7 +266,21 @@ class PublicController extends Controller
             ]
         );
     }
+    public function registerAgencyCaptchaValidation(Request $request)
+    {
 
+        $validator = \Validator::make($request->all(), [
+            'g-recaptcha-response' => 'required|recaptcha',
+        ]);
+        
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
+        return response()->json(['success'=>'']);
+
+      
+    }
     /**
      * Single Form validation
      *

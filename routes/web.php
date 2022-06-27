@@ -118,6 +118,7 @@ Route::post('agency/register/custom-errors', 'PublicController@CompanyRegisterVa
 Route::post('hire/agency/login-check', 'PublicController@HireAgencyLoginCheck');
 Route::post('hire/agency/register-validation', 'PublicController@HireAgencyRegisterValidations');
 
+Route::post('hire/agency/captcha-validation', 'PublicController@registerAgencyCaptchaValidation');
 
 Route::get('gamail/login/{email}', 'PublicController@gmailLoginUser')->name('loginUser');
 
