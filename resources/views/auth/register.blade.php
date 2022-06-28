@@ -373,12 +373,12 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
     @push('scripts')
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 
-  
+
     <script>
 
 $(document).ready(function (){
     console.log('register_password');
-			$("#register_password").passwordRequirements({});
+			$(".pr-password").passwordRequirements({});
 		});
             $('input[type="radio"]').click(function(){
                 var inputValue = $(this).attr("value");
