@@ -106,7 +106,7 @@
     </script>
 
     <script defer src="{{ asset('talends/bbcc34f546.js') }}" ></script>
-
+	<link href="{{ asset('talends/assets/css/intlTelInput.css')}}" rel="stylesheet"/>
 	<link href="{{ asset('talends/assets/css/main_customization.css') }}" rel="stylesheet">
 
  	<link href="{{ asset('talends/assets/css/register.css') }}" rel="stylesheet">

@@ -11,7 +11,7 @@
             </div>
         @endif
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 float-left">
+            <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="wt-dashboardbox wt-dashboardtabsholder wt-accountsettingholder">
                     <div class="wt-dashboardtabs">
                         <ul class="wt-tabstitle nav navbar-nav">

@@ -1243,6 +1243,14 @@ a.notif {
 		max-width: 20%;
 	}
 }
+select.form-control{
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+    background: url("/talends/assets/img/icons/down-arrow.png") no-repeat;
+    background-position: calc(100% - 0.7rem) center !important;
+    background-size: 16px 16px;
+}
 .why-choose h2{
 	font-size: 54px;
 	line-height: 1.2;
@@ -1270,13 +1278,19 @@ a.notif {
 .rounded-16{
 	border-radius: 16px;
 }
+.carousel-control-next-icon, .carousel-control-prev-icon {
+    width: 15px;
+}
+.featured_success_stories_sec .carousel-control-prev{
+	right: 83px;
+}
 .btn-theme{
     color: #ffffff;
     background-color: #349f1a;
     border:1px solid #349f1a;
     font-size: 16px;
     line-height: 1;
-    padding:15px 20px;
+    padding:12px 20px;
     margin-bottom: 0.5rem;
     text-transform: capitalize;
 }
@@ -1292,7 +1306,7 @@ a.notif {
     border:1px solid #ffffff;
     font-size: 16px;
 	line-height: 1;
-    padding:15px 20px;
+    padding:12px 20px;
     margin-bottom: 0.5rem;
     text-transform: capitalize;
 }
@@ -1308,7 +1322,7 @@ a.notif {
     border:1px solid #349f1a;
     font-size: 16px;
 	line-height: 1;
-    padding:15px 20px;
+    padding:12px 20px;
     margin-bottom: 0.5rem;
     text-transform: capitalize;
 }
@@ -1608,12 +1622,10 @@ a.notif {
     line-height: 35px;
 }
 
-div#email_error p {
-    font-size: 13px;
-}
-
+div#email_error p,
 div#password_error p {
-    font-size: 13px;
+    font-size: 12px;
+	margin-bottom: 0;
 }
 
 #agencyform p{
@@ -2191,3 +2203,22 @@ footer .list-inline a i {
     text-align: center;
     line-height: 18px;
 }
+/* width */
+::-webkit-scrollbar {
+	width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: #166702;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: #2d9215;
+  }

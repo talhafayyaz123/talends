@@ -207,6 +207,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
+                    @auth
+                      
+                    @if(Auth::user()->getRoleNames()[0]=='employer')
 
                     <div class="stepper-container">
                         <h2>Hire this Agency</h2>

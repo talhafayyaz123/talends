@@ -33,8 +33,7 @@ label {
     line-height: 14px;
     color: #170F49;
 }
-#msform .form-control{
-    background: #FFFFFF;
+#msform .form-control{  
     border: 1px solid #cbf0c0;
     border-radius: 10px;
     color: #6F6C90;

@@ -7,7 +7,7 @@
             </div>
         @endif
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+            <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="wt-dashboardbox wt-dashboardtabsholder wt-accountsettingholder">
                     @if (file_exists(resource_path('views/extend/back-end/settings/tabs.blade.php'))) 
                         @include('extend.back-end.settings.tabs')

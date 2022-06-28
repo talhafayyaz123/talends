@@ -14,13 +14,13 @@
                         {!! Form::open(['url' => url('admin/jobs/search'),
                             'method' => 'get', 'class' => 'wt-formtheme wt-formsearch'])
                         !!}
-                        <fieldset>
-                            <div class="form-group">
+                        <div class="input-group mb-2 mr-sm-2">
                                 <input type="text" name="keyword" value="{{{ !empty($_GET['keyword']) ? $_GET['keyword'] : '' }}}"
                                     class="form-control" placeholder="{{{ trans('lang.ph_search_jobs') }}}">
-                                <button type="submit" class="wt-searchgbtn"><i class="lnr lnr-magnifier"></i></button>
+                            <div class="input-group-prepend">
+                                <button type="submit" class="btn btn-theme"><i class="lnr lnr-magnifier"></i></button>
                             </div>
-                        </fieldset>
+                        </div>
                         {!! Form::close() !!}
                     </div>
                     <div class="wt-dashboardboxcontent wt-jobdetailsholder">
