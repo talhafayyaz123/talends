@@ -207,7 +207,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-
                     <div class="stepper-container">
                         <h2>Hire this Agency</h2>
                         <p class="mb-5">Please fill the brief below to get in touch the agency with much better and faster response. Feel free to add as much detail as needed.</p>
