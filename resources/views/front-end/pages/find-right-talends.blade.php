@@ -156,9 +156,12 @@
                     <div class="testimonial-content-box">
                         <p class="text-white opcty_5 text-center">Testimonials</p>
                         <h2>We hired <span>they loved</span></h2>
-                        <div id="customers-testimonials" class="text-center owl-carousel owl-theme">
-                            @if(isset($find_right_talend_testimonials) && !empty($find_right_talend_testimonials) )
-                                <div class="carousel-content">
+                        <div id="testimonial-slider" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+
+                                 @if(isset($find_right_talend_testimonials) && !empty($find_right_talend_testimonials) )
+                                <div class="carousel-item active">
+                                    <div class="carousel-content">
                                     <p>{{ $find_right_talend_testimonials['banner_description'] ?? ''  }}</p>
                                     <div class="author-detail text-center">
                                         @if(isset($find_right_talend_testimonials['about_talends_image']))
@@ -243,6 +246,12 @@
                                 <div class="form-group col-md-12 mb-4">
                                     <textarea rows="4" name="detail" id='detail' class="form-control form-control-lg">Describe your project</textarea>
                                 </div>
+                                <div class="form-group col-md-12 mb-4">
+                                {!! htmlFormSnippet() !!}
+                                        <span class="help-block" style="display: none;">
+                                            <strong class="error"></strong>
+                                        </span>
+                            </div>
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-theme px-5 rounded-pill">Let us help you</button>
                                 </div>
@@ -313,7 +322,45 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+<script>
+    $(document).ready(function () {
+    $('#adminContactForm').validate({ 
+        rules: {
+            full_name: {
+                required: true
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            company_name: {
+                required: true,
+                
+            },  phone_number: {
+                required: true,
+                
+            },
+
+            detail: {
+                required: true,
+    
+                
+            }
+        },
+          errorElement: 'span',
+          errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.form-group').append(error);
+          },
+          highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+          },
+          unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+          }
+    });
+});
+</script> 
     <script>
         $('#customers-testimonials').owlCarousel({
             loop:true,
@@ -339,46 +386,7 @@
                     items: 3
                 }
             }
-        });
+        })
     </script>
     
-    <script>
-    $(document).ready(function () {
-    $('#adminContactForm').validate({ 
-        rules: {
-            full_name: {
-                required: true
-            },
-            email: {
-                required: true,
-                email: true
-            },
-            company_name: {
-                required: true,
-                
-            },  phone_number: {
-                required: true,
-                
-            },
-
-            detail: {
-                required: true,
-    
-                
-            },
-        },
-          errorElement: 'span',
-          errorPlacement: function (error, element) {
-            error.addClass('invalid-feedback');
-            element.closest('.form-group').append(error);
-          },
-          highlight: function (element, errorClass, validClass) {
-            $(element).addClass('is-invalid');
-          },
-          unhighlight: function (element, errorClass, validClass) {
-            $(element).removeClass('is-invalid');
-          }
-    });
-});
-</script> 
 @endpush

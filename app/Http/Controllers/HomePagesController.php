@@ -472,6 +472,27 @@ class HomePagesController extends Controller
 
     }
 
+    public function footerSocialContent(){
+        $footer_social_content=AboutTalendsPage::where('page_type','footer-social-content')->first();
+        if (!empty($footer_social_content)) {
+
+            $json['type'] = 'success';
+    
+           $json['social_content'] = $footer_social_content;
+    
+            return $json;
+    
+        } else {
+    
+            $json['type'] = 'error';
+    
+            $json['message'] = trans('lang.something_wrong');
+    
+            return $json;
+    
+        }
+    }
+
     public function HomePageSettings($type=''){
         $banner_settings=AboutTalendsPage::where('page_type','banner_settings')->first();
         $find_right_opportunity=AboutTalendsPage::where('page_type','find_right_opportunity')->first();
@@ -531,6 +552,17 @@ class HomePagesController extends Controller
         $about_talends->saveBannerSettings($request);
         Session::flash('message','Banner Settings Record Saved Successfully');
         return Redirect::back();
+    }
+
+
+    
+    public function storeFooterSocialContent(Request $request)
+    { 
+       
+        $about_talends = new AboutTalendsPage;
+        $about_talends->saveFooterSocialContent($request);
+        Session::flash('message','Footer Social Content Saved Successfully');
+        return true;
     }
 
 
@@ -605,7 +637,8 @@ class HomePagesController extends Controller
         'full_name' => 'required',
         'company_name' => 'required',
         'phone_number' => 'required',
-        'detail' => 'required'
+        'detail' => 'required',
+        'g-recaptcha-response' => 'required|recaptcha',
         ]
         );
 

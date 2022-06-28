@@ -77,14 +77,19 @@
 
     <link rel="stylesheet" href="{{ asset('talends/bootstrap/4.4.1/css/bootstrap.min.css')}}" >
 
+ 
+<link rel="stylesheet" href="https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/css/intlTelInput.css"/>
 
-
+{!!  ReCaptcha::htmlScriptTagJsApi() !!}
 
 
 
     @stack('sliderStyle')
 
 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<link rel="stylesheet" type="text/css" href="https://www.jqueryscript.net/demo/validate-password-requirements/css/jquery.passwordRequirements.css">
 
 
 
@@ -244,14 +249,18 @@
 	<script src="{{ asset('talends/bootstrap/4.4.1/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('talends/assets/js/wow.min.js') }}"></script>
     <script src="{{ asset('talends/assets/js/main.js') }}"></script>
+    <script src="https://www.jqueryscript.net/demo/validate-password-requirements/js/jquery.passwordRequirements.min.js"></script>
+
 	<script src="https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
 	<script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/22223481.js"></script>
 
 	@yield('bootstrap_script')
     @stack('scripts')
 	<script>
 		$(function () {
-			$('[data-toggle="tooltip"]').tooltip()
+			$("#register_password").passwordRequirements({});
+			$('[data-toggle="tooltip"]').tooltip();
 		});
 	</script>
 

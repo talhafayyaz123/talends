@@ -6,7 +6,8 @@ Company Registration
 @section('description', "Company Registration")
 
 @section('content')
- 
+
+
 
 <div id="pages-list">
     <div class="container">
@@ -34,7 +35,7 @@ Company Registration
                                 @endforeach
                             @endif
                             <div class="alert alert-danger" style="display:none"></div>
-
+                          
                             <form id="msform" class="company_registration_form" method="post" action="{{ route('userRegister')  }}">
                                 @csrf  
                                 <!-- progressbar -->
@@ -44,6 +45,8 @@ Company Registration
                                     <li><span>3</span></li>
                                     <li><span>4</span></li>
                                 </ul>
+
+                             
                                 <!-- <div class="progress">
                                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div> -->
@@ -81,9 +84,9 @@ Company Registration
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 mb-3 position-relative">
-                                                <label class="fieldlabels">Password <sup class="text-danger">*</sup></label>
-                                                <input id="register_password" type="password" class="form-control" name="password"  placeholder="{{{ trans('lang.ph_pass') }}}">
+                                            <div class="col-xl-6 col-lg-6 mb-3 form-group">
+                                                <label class="fieldlabels">Password <span class="text-danger">*</span></label>
+                                                <input id="register_password" type="password" class="pr-password form-control" name="password"  placeholder="{{{ trans('lang.ph_pass') }}}">
                                                  <i class="fa fa-eye"  id="togglePassword"  onclick="toggePassword()"></i>
                                                 <p class="text-secondary" style="line-height:14px;font-size:12px;">Use 8 or more characters with a mix of letters, numbers & symbols</p>
                                                 <div class="alert alert-danger position-absolute alert-dismissible fade show" role="alert" id='password_error' style="display:none;z-index:9;"></div>
@@ -263,8 +266,15 @@ Company Registration
                                             </div>
                                         </div>
                                     </div>
+                                  
+                                    <div class="col-12 mb-3 text-center" >
+                                        {!! htmlFormSnippet() !!}
+                                        <span class="help-block" style="display: none;">
+                                            <strong class="error"></strong>
+                                        </span>
+                                    </div>
                                     <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                                    <button id='register_pay_btn' class="btn btn-theme rounded-pill px-4 company_register_pay_now_disable float-right py-3 mt-2" type="submit">
+                                    <button id='register_pay_btn' class="btn btn-theme rounded-pill px-4 company_register_pay_now_disable float-right py-3 mt-2" type="button" onclick="checkCaptcha()">
                                         Proceed To Payment
                                     </button>
                                 </fieldset>
@@ -284,11 +294,10 @@ Company Registration
 <script src="{{ asset('talends/assets/js/register.js') }}"></script>
 
 <script>
+    
     window.categories = [];
 
-   
-
-     var input = document.querySelector("#phone_number");
+    var input = document.querySelector("#phone_number");
     window.intlTelInput(input, {
         autoHideDialCode: true,
                 dropdownContainer: document.body,
@@ -297,9 +306,29 @@ Company Registration
                 separateDialCode: true
     });
  
+    function checkCaptcha(){
+      
+        var form_data=$('#msform').serialize();
+        $.ajax({
+            type: "POST",
+            url: '/hire/agency/captcha-validation',
+            data: form_data,
+            success: function(response) {
+              
+                if(response.errors){
+                    $('.help-block').show();
+                    $('.help-block strong').html('recaptcha field is required.');
+                   
+                }else{
+                    $('.help-block').hide();
+                    $('#msform').submit();
 
+                }
+           
+            }
+        }); 
+        }
     function select_service(id) {
-
 
         if ($('#company_service_' + id).css("background-color") == "rgb(22, 103, 2)") {
             $('#company_service_' + id).css('background-color', 'transparent');
@@ -359,7 +388,8 @@ Company Registration
 
 $.get("https://ipinfo.io/json?token=20e8fc0c5775d3", function(response) {
     if(response.country=='PK' || response.country=='AE'){
-        $('#register_pay_btn').removeClass('company_register_pay_now_disable');
+      
+         $('#register_pay_btn').removeClass('company_register_pay_now_disable');
   
     }else{
         alert('Only Pakistan And UAE Candidates are allowed to register.');

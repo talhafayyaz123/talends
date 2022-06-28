@@ -514,6 +514,7 @@
                     <div class="row form_submission" style="{{$class2 }}">
 
                         <div class="col-md-8 mx-auto text-center">
+                        
                             <img src="{{ asset('talends/assets/img/icons/success-icon.png')}}" class="img-fluid mb-4" />
 
                             <p>Please submit your enquiry as employer, or if required review all the information you previously provided. Agencies typically respond within 24 Hours. </p>
@@ -525,8 +526,11 @@
 
                 </div>
                 <div class="form_submission" style="{{$class2 }}">
-                  
-                    <input type="submit" class="next action-button" value="Submit Your Enquiry" />
+                {!! htmlFormSnippet() !!}
+                <span class="help-block" style="display: none;">
+                    <strong class="error"></strong>
+                </span>
+                    <input type="button" class="action-button" value="Submit Your Enquiry" onclick="checkCaptcha()"/>
                 </div>
 
 
@@ -543,6 +547,28 @@
 
 </div>
 <script>
+        function checkCaptcha(){
+      
+      var form_data=$('#agencyform').serialize();
+      $.ajax({
+          type: "POST",
+          url: '/hire/agency/captcha-validation',
+          data: form_data,
+          success: function(response) {
+            
+              if(response.errors){
+                  $('.help-block').show();
+                  $('.help-block strong').html('recaptcha field is required.');
+                 
+              }else{
+                  $('.help-block').hide();
+                  $('#agencyform').submit();
+
+              }
+         
+          }
+      }); 
+      }
     function register() {
   
         if ('<?php echo Auth::check(); ?>' != 1) {
