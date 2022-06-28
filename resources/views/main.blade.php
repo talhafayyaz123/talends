@@ -87,8 +87,6 @@
     @stack('sliderStyle')
 
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
 <link rel="stylesheet" type="text/css" href="https://www.jqueryscript.net/demo/validate-password-requirements/css/jquery.passwordRequirements.css">
 
 
@@ -106,7 +104,6 @@
     </script>
 
     <script defer src="{{ asset('talends/bbcc34f546.js') }}" ></script>
-	<link href="{{ asset('talends/assets/css/intlTelInput.css')}}" rel="stylesheet"/>
 	<link href="{{ asset('talends/assets/css/main_customization.css') }}" rel="stylesheet">
 
  	<link href="{{ asset('talends/assets/css/register.css') }}" rel="stylesheet">

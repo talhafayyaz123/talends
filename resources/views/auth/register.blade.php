@@ -376,10 +376,6 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
 
     <script>
 
-$(document).ready(function (){
-    console.log('register_password');
-			$(".pr-password").passwordRequirements({});
-		});
             $('input[type="radio"]').click(function(){
                 var inputValue = $(this).attr("value");
                 console.log(inputValue);
