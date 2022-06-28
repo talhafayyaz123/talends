@@ -175,7 +175,7 @@ return [
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        Biscolab\ReCaptcha\ReCaptchaServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -254,6 +254,5 @@ return [
         'Helper' => App\Helper::class,
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
     ],
 ];

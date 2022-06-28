@@ -126,7 +126,6 @@ Route::post('agency/register/custom-errors', 'PublicController@CompanyRegisterVa
 Route::post('hire/agency/login-check', 'PublicController@HireAgencyLoginCheck');
 Route::post('hire/agency/register-validation', 'PublicController@HireAgencyRegisterValidations');
 
-Route::post('hire/agency/captcha-validation', 'PublicController@registerAgencyCaptchaValidation');
 
 Route::get('gamail/login/{email}', 'PublicController@gmailLoginUser')->name('loginUser');
 
@@ -276,9 +275,6 @@ Route::group(
 
         
         Route::get('admin/settings/front-footer/{type}', 'HomePagesController@frontFooter')->name('frontFooter');
-        Route::get('admin/settings/footer/social_content', 'HomePagesController@footerSocialContent')->name('footerSocialContent');
-        Route::post('admin/store/footer_social_content', 'HomePagesController@storeFooterSocialContent');
-
         Route::get('admin/settings/home-page-settings/{type}', 'HomePagesController@HomePageSettings')->name('HomePageSettings');
         Route::post('admin/store-banner_settings', 'HomePagesController@storeBannerSettings');
 
@@ -317,7 +313,6 @@ Route::group(
         
         Route::post('admin/store-footer-menu1/{type}', 'SiteManagementController@storeFooterMenu1');
         Route::post('admin/store-header-menu/{type}', 'SiteManagementController@storeHeaderMenu');
-        
         
 
         // Site Management Routes

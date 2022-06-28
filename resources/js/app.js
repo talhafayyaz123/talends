@@ -112,7 +112,6 @@
  Vue.component('slider-skeleton', require('./components/pages/show/skeleton/slider.vue').default);
  // end new page builder
  
- Vue.component('footer-social_content', require('./components/footerSocialContent.vue').default);
  
  
  
@@ -621,8 +620,6 @@
                  this.form_step2.specialization_error = '';
                  this.form_step2.is_specialization_error = false;
 
-                 this.form_step2.recaptcha_error = '';
-                 this.form_step2.is_recaptcha_error = false;
                  
                     if($('#user_email').val()){
                         this.user_email=$('#user_email').val();
@@ -726,11 +723,7 @@
                             self.form_step2.specialization_error = error.response.data.errors.specialization[0];
                             self.form_step2.is_specialization_error = true;
                         }
-                        
-                        if (error.response.data.errors[`g-recaptcha-response`]) {
-                            self.form_step2.recaptcha_error = error.response.data.errors[`g-recaptcha-response`][0];
-                            self.form_step2.is_recaptcha_error = true;
-                        }
+   
    
     
                         });

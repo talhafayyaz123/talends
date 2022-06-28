@@ -47,12 +47,6 @@
 	<link href="{{ asset('css/jquery-ui-min.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/linearicons.css') }}" rel="stylesheet">
 
-   {!!  ReCaptcha::htmlScriptTagJsApi() !!}
- 
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-   <link rel="stylesheet" type="text/css" href="https://www.jqueryscript.net/demo/validate-password-requirements/css/jquery.passwordRequirements.css">
-
 
 	@stack('sliderStyle')
 	<link href="{{ asset('css/main.css') }}" rel="stylesheet">
@@ -67,8 +61,6 @@
 	@php echo \App\Typo::setSiteStyling(); @endphp
     <link href="{{ asset('css/transitions.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/customization.css') }}" rel="stylesheet">
-	
-
 	@stack('stylesheets')
 	<script type="text/javascript">
 		var APP_URL = {!! json_encode(url('/')) !!}
@@ -133,7 +125,6 @@
 		</div>
 	</div>
 	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-
 	<script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
 	@yield('bootstrap_script')
 	<script src="{{ asset('js/app.js') }}"></script>
@@ -142,8 +133,7 @@
 	<script src="{{ asset('js/particles.min.js') }}"></script>
     <script src="{{ asset('js/jquery-ui-min.js') }}"></script>
 	<script src="{{ asset('talends/assets/js/main.js') }}"></script>
-	<script src="https://www.jqueryscript.net/demo/validate-password-requirements/js/jquery.passwordRequirements.min.js"></script>
-
+	
 	<script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/22223481.js"></script>
     @stack('scripts')
     <script>		
@@ -151,8 +141,6 @@
             jQuery(".preloader-outer").delay(500).fadeOut();
             jQuery(".pins").delay(500).fadeOut("slow");
         });
-		
     </script>
-	  
 </body>
 </html>

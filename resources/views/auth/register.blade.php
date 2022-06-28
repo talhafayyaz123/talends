@@ -49,7 +49,6 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
     </style>
     <section class="auth-sec">
     <div class="container">
-       
         <div class="row">
             <div class="col-12">
                 <div class="d-flex align-items-center min-vh-100">
@@ -102,8 +101,8 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                     @endforeach
                                                 @endif
                                             </div>
-                                            <div class="create_account_form"  v-show="step === 1" v-cloak>
-                                                <div v-show='user_type'>
+                                            <div class="create_account_form"  v-if="step === 1" v-cloak>
+                                                <div v-if='user_type'>
                                                     <div class="row">
                                                         <div class="col-lg-6 mb-3">
                                                             <input type="text" name="first_name" id="first_name" class="form-control" placeholder="{{{ trans('lang.ph_first_name') }}}" v-bind:class="{ 'is-invalid': form_step1.is_first_name_error }" v-model="first_name">
@@ -126,7 +125,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                         <div class="col-lg-6 mb-3">
                                                             <fieldset class="wt-registerformgroup">
                                                                 <div class="form-group password-placeholder">
-                                                                    <input id="register_password" type="password" class="pr-password form-control" name="password" placeholder="{{{ trans('lang.ph_pass') }}}" v-bind:class="{ 'is-invalid': form_step2.is_password_error }">
+                                                                    <input id="register_password" type="password" class="form-control" name="password" placeholder="{{{ trans('lang.ph_pass') }}}" v-bind:class="{ 'is-invalid': form_step2.is_password_error }">
                                                                     <span class="help-block" v-if="form_step2.password_error">
                                                                         <strong v-cloak>@{{form_step2.password_error}}</strong>
                                                                     </span>
@@ -257,17 +256,9 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                 <div class="entity-form employer mytab" id="employer"></div>
                                         
                                                 <div class="entity-form intern mytab" id="intern"></div>
-                                               
-                                                <div v-show='user_type'>
-                                                   
+
+                                                <div v-if='user_type'>
                                                     <div class="entity-form row" style="display:block;">
-                                                        <div class="col-12 mb-3 text-center" style="padding-left: 27%;" v-bind:class="{ 'is-invalid': form_step2.is_recaptcha_error }">
-                                                            {!! htmlFormSnippet() !!}
-                                                            <span class="help-block" v-if="form_step2.recaptcha_error">
-                                                                <strong v-cloak>@{{form_step2.recaptcha_error}}</strong>
-                                                            </span>
-                                                        </div>
-                                                      
                                                         <div class="col-12 mb-3 text-center">
                                                             <button class="btn btn-theme rounded-pill d-inline-block my-3 py-3" type="submit" style="width: 300px;">Create Account</button>
                                                         </div>
@@ -372,14 +363,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
 
     @push('scripts')
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-
-
     <script>
-
-$(document).ready(function (){
-    console.log('register_password');
-			$(".pr-password").passwordRequirements({});
-		});
             $('input[type="radio"]').click(function(){
                 var inputValue = $(this).attr("value");
                 console.log(inputValue);
@@ -389,6 +373,7 @@ $(document).ready(function (){
                 $("#register-text").show();
                 $("#entityType").hide();
             });
+            
     </script>
     <script>
 
@@ -438,6 +423,6 @@ $(document).ready(function (){
                     toggleBtn.value = "Show the password";
                 }
             }
-   
+
     </script>
     @endpush

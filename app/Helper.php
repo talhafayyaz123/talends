@@ -1650,7 +1650,7 @@ return $response;
             ->first();
         return $role->role_id;
     }
-  
+
     /**
      * Get role name by userID
      *
