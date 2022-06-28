@@ -483,3 +483,23 @@
         </div>
     </div>
 @endauth
+@push('scripts')
+<script>
+    
+     var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+     jQuery('nav ul li a').each(function() {
+      if (this.href === path) {
+       jQuery(this).parent('li').addClass('wt-active');
+      }
+     });
+     jQuery("ul.sub-menu > li > a").each(function () {
+         var currentURL = document.location.href;
+         var thisURL = jQuery(this).attr("href");
+         if (currentURL.indexOf(thisURL) != -1) {
+            jQuery(this).closest('.menu-item-has-children').addClass('wt-open');
+             jQuery(this).closest("ul.sub-menu").css('display', 'block');
+         }
+       });
+    
+</script>
+@endpush

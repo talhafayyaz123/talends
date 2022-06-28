@@ -26,7 +26,7 @@
                         <div class="progress-bar" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <p>Completing your profile is a great way to attract more customer</p>
-                    <a href="{{  route('companyProfile') }}" class="btn btn-link font-weight-bold text-secondary">EDIT PROFILE</a>
+                    <a href="{{  route('companyProfile') }}" class="font-weight-bold text-secondary">EDIT PROFILE</a>
                 </div>
                 <div class="dwidget-card" style="min-height:362px;">
                     <div class="d-flex mb-4 align-items-center">
@@ -40,24 +40,25 @@
             </div>
             <div class="col-lg-4 col-md-6">
                 <div class="dwidget-card">
+                    <div style="height:237px ; overflow-y:auto;">
                     <div class="d-flex mb-4 align-items-center">
                         {{ Helper::getImages('uploads/settings/icon',$latest_proposals_icon, 'layers') }}
                         <h4 class="ml-3">Leads Preferences</h4>
                     </div>
                     <p>Services & Skills</p>
                     <ul>
-                                    @if(isset($skills))
-                @foreach($skills as $skill)
-                <li>{{$skill->skill->title}}</li>
-                @endforeach
-                @endif
-
+                        @if(isset($skills))
+                            @foreach($skills as $skill)
+                                <li>{{$skill->skill->title}}</li>
+                            @endforeach
+                        @endif
                     </ul>
                     <p>You’re receiving customers within </p>
                     <small class="font-weight-bold text-secondary mb-4 d-block"><i class="bi-geo-alt-fill"></i> {{ Auth::user()->location->title ?? '' }}</small>
-                    <a href="{{  route('companyProfile') }}" class="btn btn-link font-weight-bold text-secondary">Edit Settings</a>
+                    <a href="{{  route('companyProfile') }}" class="font-weight-bold text-secondary">Edit Settings</a>
+                    </div>
                 </div>
-                <div class="dwidget-card">
+                <div class="dwidget-card" style="height: 362px; overflow-y: auto;">
                     <div class="d-flex mb-4 align-items-center">
                         {{ Helper::getImages('uploads/settings/icon',$latest_proposals_icon, 'layers') }}
                         <h4 class="ml-3">Message</h4>
@@ -67,7 +68,7 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6">
-                <div class="dwidget-card" style="min-height:688px;">
+                <div class="dwidget-card" style="">
                     <div class="d-flex mb-4 align-items-center">
                         {{ Helper::getImages('uploads/settings/icon',$latest_proposals_icon, 'layers') }}
                         <h4 class="ml-3">Leads</h4>
@@ -84,6 +85,11 @@
                         <h3>59</h3>
                         <p>Estimated Leads</p>
                     </div> -->
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
                     <p class="mb-0">We’re sending all new leads to your preferred email address</p>
                     <a href="javascript:;" class="btn-link font-weight-bold text-secondary d-inline-block mb-5 pb-4">{{ Auth::user()->email }}</a>
                     <a href="{{  route('companyHiringRequests') }}" class="btn-link font-weight-bold text-secondary d-inline-block pt-5 mt-5">EDIT PREFERENCES</a>

@@ -104,6 +104,7 @@ body{background: #f7f7f7;}
 	position: relative;
 	line-height: inherit;
 	list-style-type: none;
+	padding: 0 10px 0 0;
 }
 .wt-navdashboard > ul > li > a {
 	color: #767676;
@@ -114,6 +115,12 @@ body{background: #f7f7f7;}
 .wt-navdashboard > ul > li:hover > a,
 .wt-navdashboard ul li.wt-active > a,
 .wt-navdashboard .menu-item-has-children .sub-menu li.wt-active a{color: #323232;}
+.wt-navdashboard .menu-item-has-children .sub-menu li.wt-active a {
+    color: #fcfcfc;
+    border-radius: 5px;
+    background-color: #349f1a;
+    padding: 0 10px;
+}
 .wt-navdashboard ul li a i,
 .wt-navdashboard ul li a span{
 	float: left;
@@ -121,8 +128,8 @@ body{background: #f7f7f7;}
 }
 .wt-navdashboard ul li.wt-active > a,
 .wt-navdashboard ul li a:focus,
-.wt-navdashboard ul li a:hover,
-.wt-navdashboard ul li.wt-open{background: #fcfcfc;}
+.wt-navdashboard ul li a:hover{background: #4abd2e;color: #f5f7fa;border-radius: 0 50px 50px 0;}
+.wt-navdashboard ul li.wt-open{color: #2f2f2f;background-color: #4abd2e;}
 .wt-navdashboard ul li.wt-open ul li a:focus,
 .wt-navdashboard ul li.wt-open ul li a:active,
 .wt-navdashboard ul li.wt-open ul li a:hover{background: transparent;}
@@ -708,7 +715,7 @@ body{background: #f7f7f7;}
 	position: relative;
 	font:400 16px/20px 'Poppins', Arial, Helvetica, sans-serif;;
 }
-.wt-tabstitle li a.active{background: #349F1A;color: #f3f3f3;}
+.wt-tabstitle li a.active{background: #349F1A;color: #00cc8d;border-radius: 0 50px 50px 0;}
 .wt-tabscontent{
 	float: left;
 	width: 70%;

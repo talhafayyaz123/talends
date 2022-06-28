@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3",
         "barryvdh/laravel-dompdf": "^0.8.4",
+        "biscolab/laravel-recaptcha": "^5.4",
         "cartalyst/stripe-laravel": "^13.0",
         "davejamesmiller/laravel-breadcrumbs": "5.x",
         "doctrine/dbal": "^2.9",
