@@ -150,8 +150,12 @@ $join_community=App\Helper::getJoinCommunity();
             </div>
             <div class="col-md-4 text-center">
                 @if(isset( $join_community->about_talends_image) )
-                <img src="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="img-fluid" width="250px"
-                    alt="">
+                    <picture>
+                        <source media="(min-width:768px)" srcset="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="img-fluid" width="250px">
+                        <source media="(min-width:465px)" srcset="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="img-fluid" width="150px">
+                        <img src="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" alt="Footer Image" class="img-fluid" width="100px">
+                    </picture>
+                <!-- <img src="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="img-fluid" width="250px" alt=""> -->
                 @endif
             </div>
         </div>

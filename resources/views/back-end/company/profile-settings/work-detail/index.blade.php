@@ -92,7 +92,7 @@
 @push('scripts')
     <script>
 
-jQuery('.chosen-select').chosen();
+    jQuery('.chosen-select').chosen();
 
    function select_sub_categories(){
      let category=$('#category_id').val();

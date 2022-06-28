@@ -1648,7 +1648,7 @@ div#password_error p {
     width: 50px;
     height: 50px;
     display: inline-block;
-    line-height: 1;
+    line-height: 32px;
     font-size: 18px;
     font-weight: bold;
 }

@@ -238,6 +238,8 @@ header .navbar .navbar-nav .nav_item_right:first-child {
 .menu_green_cta {
     background: #349f1a;
     border: 1px solid #349f1a !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
 }
 
 .menu_blue_cta {
@@ -261,6 +263,8 @@ header .navbar .navbar-nav .nav_item_right:first-child {
 .menu_green_cta_trans {
     border: solid 1px #349f1a !important;
     color: #349f1a !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
 }
 
 .header_about_btn .side_panel-toggle {
@@ -1853,7 +1857,7 @@ section.featured_success_stories_sec .carousel-inner h2 {
     }
 
     .join_community h2 {
-        font-size: 36px;
+        font-size: 30px;
     }
 
     .trustedby_box p {

@@ -207,9 +207,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    @auth
-                      
-                    @if(Auth::user()->getRoleNames()[0]=='employer')
+                    
 
                     <div class="stepper-container">
                         <h2>Hire this Agency</h2>
@@ -442,72 +440,72 @@
                                                         </div> -->
                                                     </div>
                                                     {{-- <div class="row">                                                            
-                                                <div class="col-md-6 mb-4">
-                                                    <a href="{{ route('password.request') }}" class="btn btn-link text-theme"> Forgot Password?</a>
+                                                        <div class="col-md-6 mb-4">
+                                                            <a href="{{ route('password.request') }}" class="btn btn-link text-theme"> Forgot Password?</a>
+                                                        </div>
+                                                    </div> --}}
                                                 </div>
-                                            </div> --}}
-                                        </div>
-                                        <div class="tab-pane fade employer_register_form" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                            <div class="row">
-                                                <div class="col-md-6 mb-4">
-                                                    <label for="">First Name</label>
-                                                    <input type="text" class="form-control" placeholder="First Name" id='first_name' name='first_name' value="">
-                                                </div>
-                                                <div class="col-md-6 mb-4">
-                                                    <label for="">Last Name</label>
-                                                    <input type="text" class="form-control" placeholder="Last Name" id='last_name' name='last_name' value="">
-                                                </div>
-                                                <div class="col-md-6 mb-4">
-                                                    <label for="">Email</label>
-                                                    <input type="employer_email" class="form-control" placeholder="Email" id='employer_email' name='employer_email' value="">
-                                                </div>
-                                                <div class="col-md-6 mb-4">
-                                                    <label for="">Password</label>
-                                                    <input type="employer_password" class="form-control" placeholder="Password" id='employer_password' name='employer_password' value="">
-                                                </div>
-                                                <div class="col-md-6 mb-4">
-                                                    <label for="">Select Location</label>
-                                                    @if (!empty($locations))
-                                                    {!! Form::select('locations', $locations, null, array('class' => 'form-control locations','placeholder' => trans('lang.select_locations'))) !!}
+                                                <div class="tab-pane fade employer_register_form" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-4">
+                                                            <label for="">First Name</label>
+                                                            <input type="text" class="form-control" placeholder="First Name" id='first_name' name='first_name' value="">
+                                                        </div>
+                                                        <div class="col-md-6 mb-4">
+                                                            <label for="">Last Name</label>
+                                                            <input type="text" class="form-control" placeholder="Last Name" id='last_name' name='last_name' value="">
+                                                        </div>
+                                                        <div class="col-md-6 mb-4">
+                                                            <label for="">Email</label>
+                                                            <input type="employer_email" class="form-control" placeholder="Email" id='employer_email' name='employer_email' value="">
+                                                        </div>
+                                                        <div class="col-md-6 mb-4">
+                                                            <label for="">Password</label>
+                                                            <input type="employer_password" class="form-control" placeholder="Password" id='employer_password' name='employer_password' value="">
+                                                        </div>
+                                                        <div class="col-md-6 mb-4">
+                                                            <label for="">Select Location</label>
+                                                            @if (!empty($locations))
+                                                            {!! Form::select('locations', $locations, null, array('class' => 'form-control locations','placeholder' => trans('lang.select_locations'))) !!}
 
-                                                    @endif
-                                                </div>
-                                                <div class="col-md-6 mb-4">
-                                                    <label for="">Select Department</label>
-                                                    @if ($departments->count() > 0)
-                                                    <select name="department" id='department' class="form-control">
-                                                        <option value="">Select {{{ trans('lang.your_department') }}}</option>
-                                                        @foreach ($departments as $key => $department)
-                                                        <option value="{{{$department->id}}}">{{{$department->title}}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @endif
-                                                </div>
-                                                <div class="col-md-6 mb-4">
-                                                    <label for="">Select No. of Employees</label>
-                                                    <select name="employees" id='employees' class="form-control">
-                                                        <option value="">Select {{{ trans('lang.no_of_employees') }}}</option>
-                                                        @foreach ($employees as $key => $employee)
-                                                        <option value="{{{$employee['value']}}}">{{{$employee['title']}}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-5">
-                                                    <a onclick="register()" class="text-white btn btn-theme rounded-pill px-5 btn-block">Sign Up</a>
-                                                    
+                                                            @endif
+                                                        </div>
+                                                        <div class="col-md-6 mb-4">
+                                                            <label for="">Select Department</label>
+                                                            @if ($departments->count() > 0)
+                                                            <select name="department" id='department' class="form-control">
+                                                                <option value="">Select {{{ trans('lang.your_department') }}}</option>
+                                                                @foreach ($departments as $key => $department)
+                                                                <option value="{{{$department->id}}}">{{{$department->title}}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @endif
+                                                        </div>
+                                                        <div class="col-md-6 mb-4">
+                                                            <label for="">Select No. of Employees</label>
+                                                            <select name="employees" id='employees' class="form-control">
+                                                                <option value="">Select {{{ trans('lang.no_of_employees') }}}</option>
+                                                                @foreach ($employees as $key => $employee)
+                                                                <option value="{{{$employee['value']}}}">{{{$employee['title']}}}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-5">
+                                                            <a onclick="register()" class="text-white btn btn-theme rounded-pill px-5 btn-block">Sign Up</a>
+                                                            
 
-                                                </div>
+                                                        </div>
 
-                                            </div>
-                                        </div>
+                                                    </div>
+                                                </div>
 
                                    
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                    </div>
 
 
                     {{-- <span class="alert alert-success" style="display:none"></span> --}}
