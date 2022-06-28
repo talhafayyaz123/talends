@@ -708,7 +708,7 @@ body{background: #f7f7f7;}
 	position: relative;
 	font:400 16px/20px 'Poppins', Arial, Helvetica, sans-serif;;
 }
-.wt-tabstitle li a.active{background: #349F1A;color: #f3f3f3;}
+.wt-tabstitle li a.active{background: #fff;}
 .wt-tabscontent{
 	float: left;
 	width: 70%;
@@ -1693,7 +1693,7 @@ table.wt-tablecategories tbody tr td figure img{
 }
 .wt-userlistingvtwo{
 	padding: 0 30px;
-	background: #f9f7f9;
+	background: #fafafa;
 }
 .wt-userlistingvtwo:hover{box-shadow: none;}
 .wt-userlistingvtwo .wt-userlistingcontent{
