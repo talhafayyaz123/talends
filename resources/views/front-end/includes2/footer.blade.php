@@ -146,7 +146,7 @@ $join_community=App\Helper::getJoinCommunity();
                 <a href="{{url('search-results?type=job')}}" class="btn btn-theme px-4 rounded-pill">Find A Job</a>
                 <a href="{{ route('login') }}" class="btn btn-theme-white px-4 rounded-pill ml-md-3">Submit A Job</a>
             </div>
-            <div class="col-md-4 text-center">
+            <div class="col-md-4">
                 @if(isset( $join_community->about_talends_image) )
                     <picture>
                         <source media="(min-width:768px)" srcset="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="img-fluid" width="250px">

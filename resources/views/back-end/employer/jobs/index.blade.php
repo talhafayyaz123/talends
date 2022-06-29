@@ -1,7 +1,7 @@
 @extends(file_exists(resource_path('views/extend/back-end/master.blade.php')) ? 'extend.back-end.master' : 'back-end.master')
 @section('content')
 	<div class="wt-haslayout wt-dbsectionspace la-manage-jobs-holder">
-		<div class="manage-jobs">
+		<div class="manage-jobs float-left">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<div class="wt-dashboardbox">

@@ -35,10 +35,10 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         @php
-                            $roles = Spatie\Permission\Models\Role::all()->toArray();
+                        $roles = Spatie\Permission\Models\Role::all()->toArray();
                         @endphp
                         @if(Session::has('error'))
-                            <p class="alert {{ Session::get('alert-class', 'error') }}">{{ Session::get('error') }}</p>
+                        <p class="alert {{ Session::get('alert-class', 'error') }}">{{ Session::get('error') }}</p>
                         @endif
                         <div class="row">
                             <div class="col-md-12 mb-3">
@@ -93,6 +93,11 @@
                                 <div id="my-signin3"></div>
                                 <span class="error gmail_error" style="display: none;">Google account is not recognized for Google Sign-In on Talends. Please make sure you are using the same account that you have previously linked.</span>
                             </div>
+                        </div>
+                        <div class="form-group mb-3 text-center">
+                            <div id="my-signin3"></div>
+                            <span class="error gmail_error" style="display: none;">Google account is not recognized for Google Sign-In on Talends. Please make sure you are using the same account that you have previously linked.</span>
+
                         </div>
                     </form>
                     <div class="mb-3">

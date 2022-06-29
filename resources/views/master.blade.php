@@ -47,7 +47,8 @@
 	<link href="{{ asset('css/jquery-ui-min.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/linearicons.css') }}" rel="stylesheet">
 
-
+   {!!  ReCaptcha::htmlScriptTagJsApi() !!}
+ 
 	@stack('sliderStyle')
 	<link href="{{ asset('css/main.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/custom.css') }}" rel="stylesheet">

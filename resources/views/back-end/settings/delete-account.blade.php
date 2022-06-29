@@ -2,7 +2,7 @@
 @section('content')
     <div class="wt-haslayout wt-delete-account wt-dbsectionspace" id="profile_settings">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
                 @if (Session::has('message'))
                     <div class="flash_msg">
                         <flash_messages :message_class="'success'" :time='5' :message="'{{{ Session::get('message') }}}'" v-cloak></flash_messages>

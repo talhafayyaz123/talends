@@ -1,4 +1,16 @@
 @extends('front-end.master2')
+@push('stylesheets')
+<style>
+    .company_description {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 20px;
+        color: #000000;
+        opacity: 0.7;
+    }
+</style>
+@endpush
 
 @section('content')
 
@@ -33,7 +45,7 @@
                     <h3 class="font-weight-bold mt-0">Effective content writing services are imperative to reach out to untapped demographics</h3>
                 </div>
                 <div class="col-md-8 text-center text-md-left">
-                    <p>Content writing services has increased immensely over the years. More businesses are turning to building a credible online presence. They compete on digital platforms using quality content as a tool. 72% of marketers believe content marketing increases engagement. It generates 3 times more leads than conventional marketing strategies. Content writing services allow businesses to gain traction for their brand and stay ahead of the curve. Consistent content marketing efforts help companies rise above the saturated digital marketplace.</p>
+                    <p>content writing services has increased immensely over the years. More businesses are turning to building a credible online presence. They compete on digital platforms using quality content as a tool. 72% of marketers believe content marketing increases engagement. It generates 3 times more leads than conventional marketing strategies. Content writing services allow businesses to gain traction for their brand and stay ahead of the curve. Consistent content marketing efforts help companies rise above the saturated digital marketplace.</p>
                 </div>
             </div>
         </div>
