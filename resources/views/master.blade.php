@@ -49,11 +49,6 @@
 
    {!!  ReCaptcha::htmlScriptTagJsApi() !!}
  
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-   <link rel="stylesheet" type="text/css" href="https://www.jqueryscript.net/demo/validate-password-requirements/css/jquery.passwordRequirements.css">
-
-
 	@stack('sliderStyle')
 	<link href="{{ asset('css/main.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/custom.css') }}" rel="stylesheet">
@@ -142,7 +137,6 @@
 	<script src="{{ asset('js/particles.min.js') }}"></script>
     <script src="{{ asset('js/jquery-ui-min.js') }}"></script>
 	<script src="{{ asset('talends/assets/js/main.js') }}"></script>
-	<script src="https://www.jqueryscript.net/demo/validate-password-requirements/js/jquery.passwordRequirements.min.js"></script>
 
 	<script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/22223481.js"></script>
     @stack('scripts')

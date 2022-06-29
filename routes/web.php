@@ -75,6 +75,7 @@ Route::get('programming-tech', 'HomeController@programmingTechDetail');
 Route::get('design-graphics', 'HomeController@designGraphicDetail');
 Route::get('video-animation', 'HomeController@videoAnimationDetail');
 Route::get('connect', 'HomeController@connnectTalends');
+Route::get('company-service/detail', 'HomeController@CompanyServiceDetail');
 Route::get('why_agency_plan', 'HomeController@whyAgencyPlan')->name('whyAgencyPlan');
 
 Route::get('company/registration', 'HomeController@companyRegistration')->name('companyRegistraton');

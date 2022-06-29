@@ -4,7 +4,7 @@
     <div class="wt-haslayout wt-dbsectionspace">
         <div class="wt-haslayout wt-reset-pass" id="pass-reset">
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
                     @if (Session::has('error'))
                         <div class="flash_msg float-right">
                             <flash_messages :message_class="'danger'" :time='5' message="{{{ Session::get('error') }}}" v-cloak></flash_messages>

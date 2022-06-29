@@ -536,29 +536,8 @@ class HomeController extends Controller
             )
         );
     }
-    public function contentWrittingDetail(){
-        return view('front-end.pages.content_writting');
-    }
-    public function marketingDetail(){
-        return view('front-end.pages.marketing');
-    }
-    public function seoDetail(){
-        return view('front-end.pages.seo');
-    }
-    public function customerServiceDetail(){
-        return view('front-end.pages.customer_service');
-    }
-    public function dataServiceDetail(){
-        return view('front-end.pages.data_service');
-    }
-    public function programmingTechDetail(){
-        return view('front-end.pages.programming_tech');
-    }
-    public function designGraphicDetail(){
-        return view('front-end.pages.design_graphic');
-    }
-    public function videoAnimationDetail(){
-        return view('front-end.pages.video_animation');
+    public function CompanyServiceDetail(){
+        return view('front-end.pages.company_service_detail');
     }
     public function connnectTalends(){
         return view('front-end.pages.connect');

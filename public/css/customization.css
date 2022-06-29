@@ -908,14 +908,6 @@ a.notif {
     border-color: #349f1a;
     background-color: #349f1a;
 }
-select.form-control{
-    appearance: none;
-    -webkit-appearance: none;
-    position: relative;
-    background: url("/talends/assets/img/icons/down-arrow.png") no-repeat;
-    background-position: calc(100% - 0.7rem) center !important;
-    background-size: 16px 16px;
-}
 .dropdown-50{min-width: 50rem;}
 .dropdown-40{min-width: 40rem;}
 .btn-theme{
@@ -924,7 +916,7 @@ select.form-control{
     border:1px solid #349f1a;
     font-size: 16px;
     line-height: 1;
-    padding:12px 20px;
+    padding:15px 20px;
     margin-bottom: 0.5rem;
     text-transform: capitalize;
 }
@@ -940,7 +932,7 @@ select.form-control{
     border:1px solid #ffffff;
     font-size: 16px;
     line-height: 1;
-    padding:12px 20px;
+    padding:15px 20px;
     margin-bottom: 0.5rem;
     text-transform: capitalize;
 }
@@ -956,7 +948,7 @@ select.form-control{
     border:1px solid #349f1a;
     font-size: 16px;
     line-height: 1;
-    padding:12px 20px;
+    padding:15px 20px;
     margin-bottom: 0.5rem;
     text-transform: capitalize;
 }
@@ -1313,7 +1305,7 @@ select.form-control{
 	background-color: #e1ffd8;
 }
 .login-auth-content{
-    max-width: 400px;
+    max-width: 380px;
     width: 100%;
     margin: 0 auto;
 }
@@ -1330,7 +1322,6 @@ select.form-control{
 }
 .login-auth-content label{
 	font-weight:600;
-    font-size: 14px;
 }
 .login-auth-content .form-control{
 	height:42px;
@@ -1476,23 +1467,3 @@ footer .list-inline a i {
     text-align: center;
     line-height: 18px;
 }
-/* width */
-::-webkit-scrollbar {
-	width: 7px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-	background: #f1f1f1;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-	background: #166702;
-    border-radius: 9px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-	background: #2d9215;
-  }
