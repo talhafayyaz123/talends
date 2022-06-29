@@ -104,16 +104,25 @@ body{background: #f7f7f7;}
 	position: relative;
 	line-height: inherit;
 	list-style-type: none;
+	padding: 0 10px 0 0;
 }
 .wt-navdashboard > ul > li > a {
 	color: #767676;
 	width: 100%;
 	float: left;
 	line-height: inherit;
+	margin-bottom: 7px;
+	font-size:20px;
 }
 .wt-navdashboard > ul > li:hover > a,
 .wt-navdashboard ul li.wt-active > a,
 .wt-navdashboard .menu-item-has-children .sub-menu li.wt-active a{color: #323232;}
+.wt-navdashboard .menu-item-has-children .sub-menu li.wt-active a {
+    color: #fcfcfc;
+    border-radius: 5px;
+    background-color: #349f1a;
+    padding: 0 10px;
+}
 .wt-navdashboard ul li a i,
 .wt-navdashboard ul li a span{
 	float: left;
@@ -121,8 +130,8 @@ body{background: #f7f7f7;}
 }
 .wt-navdashboard ul li.wt-active > a,
 .wt-navdashboard ul li a:focus,
-.wt-navdashboard ul li a:hover,
-.wt-navdashboard ul li.wt-open{background: #fcfcfc;}
+.wt-navdashboard ul li a:hover{background: #4abd2e;color: #f5f7fa;border-radius: 0 50px 50px 0;}
+.wt-navdashboard ul li.wt-open{color: #2f2f2f;}
 .wt-navdashboard ul li.wt-open ul li a:focus,
 .wt-navdashboard ul li.wt-open ul li a:active,
 .wt-navdashboard ul li.wt-open ul li a:hover{background: transparent;}
@@ -259,7 +268,6 @@ body{background: #f7f7f7;}
 .wt-dashboardboxtitle h2{
 	margin: 0;
 	display: block;
-	font-size: 18px;
 	font-weight: 400;
 	line-height: 24px;
 }
@@ -353,9 +361,9 @@ body{background: #f7f7f7;}
 .wt-offersmessages ul li .wt-dashboardscrollbar{
 	float: left;
 	width: 100%;
-	height: 850px;
+	height: 600px;
 }
-.wt-offersmessages ul li:nth-child(2) .wt-dashboardscrollbar{height: 650px;}
+.wt-offersmessages ul li:nth-child(2) .wt-dashboardscrollbar{height: 400px;}
 .wt-offersmessages .wt-formsearch{padding: 20px;background: #fff;}
 .wt-offersmessages .wt-formsearch fieldset .form-group{margin: 0;}
 .wt-offersmessages .wt-ad{
@@ -367,7 +375,7 @@ body{background: #f7f7f7;}
 	position: relative;
 	border-top: 1px solid #f2f2f2;
 }
-.wt-offersmessages .wt-ad.wt-active{background: #fff;}
+.wt-offersmessages .wt-ad.wt-active{background: #f5f5f5;}
 .wt-offersmessages .wt-ad.wt-active:after{height: 100%;}
 .wt-offersmessages .wt-ad figure{
 	margin: 0;
@@ -593,7 +601,7 @@ body{background: #f7f7f7;}
     width: 100%;
     float: left;
     height: 37px;
-    text-align: right;
+    text-align: left;
     border-top:1px solid #ddd;
 }
 .wt-replaybox .form-control {
@@ -708,7 +716,7 @@ body{background: #f7f7f7;}
 	position: relative;
 	font:400 16px/20px 'Poppins', Arial, Helvetica, sans-serif;;
 }
-.wt-tabstitle li a.active{background: #349F1A;color: #f3f3f3;}
+.wt-tabstitle li a.active{background: #349F1A;color: #00cc8d;border-radius: 0 50px 50px 0;}
 .wt-tabscontent{
 	float: left;
 	width: 70%;
@@ -1071,7 +1079,7 @@ body{background: #f7f7f7;}
 	float: left;
 	width: 100%;
 }
-.wt-chatarea-empty{padding: 284px 0;}
+.wt-chatarea-empty{padding: 175px 0;}
 .wt-chatemptyimg img{
 	width: 216px;
 	display: block;
@@ -1693,7 +1701,7 @@ table.wt-tablecategories tbody tr td figure img{
 }
 .wt-userlistingvtwo{
 	padding: 0 30px;
-	background: #f9f7f9;
+	background: #fafafa;
 }
 .wt-userlistingvtwo:hover{box-shadow: none;}
 .wt-userlistingvtwo .wt-userlistingcontent{

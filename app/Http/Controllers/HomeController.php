@@ -560,6 +560,9 @@ class HomeController extends Controller
     public function videoAnimationDetail(){
         return view('front-end.pages.video_animation');
     }
+    public function connectDetail(){
+        return view('front-end.pages.connect');
+    }
     public function Companies(Request $request){
       
         $filter = $request->input('filter');

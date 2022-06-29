@@ -208,7 +208,7 @@ $slider = Helper::getPageSlider($page_id);
                         @if( $role === 'admin' || $role === 'company' )
                             <li class="nav-item">
                                 <a class="nav-link position-relative" href="{{ route('companyHiringRequests') }}">
-                                    <i class="fa fa-bell text-theme fa-2x"></i>
+                                    <i class="fa fa-bell fa-2x"></i>
                                     <span class="badge badge-warning" style="position: absolute; right: -5px; top: 0px;">{{$total_hire_agencies }}</span>
                                 </a>
                             </li>
@@ -219,7 +219,7 @@ $slider = Helper::getPageSlider($page_id);
                             <div class="d-flex align-items-center">
                                 <img src="{{{ asset(Helper::getImage('uploads/users/' . Auth::user()->id, $profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}" width="40px" class="img-fluid rounded-circle"/> 
                                 <div class="ml-2">
-                                    <h5 class="mb-0">{{{ Helper::getUserName(Auth::user()->id) }}} <i class="fa fa-caret-down float-right ml-3 mt-1" style="font-size:20px;"></i></h5>
+                                    <h5 class="mb-0">{{{ Helper::getUserName(Auth::user()->id) }}} <i class="bi-chevron-down float-right ml-3" style="font-size:22px;"></i></h5>
                                     <span>{{{ !empty(Auth::user()->profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Helper::getAuthRoleName() }}}</span>
 
                                 </div>
