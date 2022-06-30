@@ -175,7 +175,6 @@ header .menu_browse_box a {
 
 header .navbar-expand-lg .navbar-collapse {
     justify-content: flex-end;
-    padding-top: 20px !important;
 }
 
 .menu_green_cta_trans,
@@ -198,10 +197,6 @@ header .navbar-expand-lg .navbar-collapse {
 header .container {
     position: relative;
 }
-header .navbar-brand {
-    padding: 10px 0px 0px 0px;
-}
-
 header .navbar .navbar-nav .nav_item_right {
     margin-left: 15px;
 }

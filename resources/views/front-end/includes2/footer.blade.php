@@ -168,8 +168,11 @@ $footer_menus_4=App\Helper::footerMenu4();
 
 <footer>
     <div class="container">
-        <div class="row py-30">
-            <div class="col-md-3">
+        <div class="row">
+            <div class="col-20 col-sm-6 text-center">
+                <img src="{{asset('talends/assets/img/fav/apple-touch-icon-114x114.png')}}" alt="Talends Icon" class="img-fluid" style="width:100px;"/>
+            </div>
+            <div class="col-20 col-sm-6">
                 <h4> {{ $footer_menus_1['title']}} </h4>
                 <ul class="quick-links">
                     @if(!empty($footer_menus_1['menu_items']))
@@ -181,7 +184,7 @@ $footer_menus_4=App\Helper::footerMenu4();
             </div>
 
 
-            <div class="col-md-3">
+            <div class="col-20 col-sm-6">
                 <h4> {{ $footer_menus_2['title']}} </h4>
                 <ul class="quick-links">
                     @if(!empty($footer_menus_2['menu_items']))
@@ -191,7 +194,7 @@ $footer_menus_4=App\Helper::footerMenu4();
                     @endif
                 </ul>
             </div>
-            <div class="col-md-3">
+            <div class="col-20 col-sm-6">
                 <h4> {{ $footer_menus_3['title']}} </h4>
                 <ul class="quick-links">
                     @if(!empty($footer_menus_3['menu_items']))
@@ -201,7 +204,7 @@ $footer_menus_4=App\Helper::footerMenu4();
                     @endif
                 </ul>
             </div>
-            <div class="col-md-3">
+            <div class="col-20 col-sm-6">
                 <h4> {{ $footer_menus_4['title']}} </h4>
                 <ul class="quick-links">
                     @if(!empty($footer_menus_4['menu_items']))

@@ -716,7 +716,7 @@ body{background: #f7f7f7;}
 	position: relative;
 	font:400 16px/20px 'Poppins', Arial, Helvetica, sans-serif;;
 }
-.wt-tabstitle li a.active{background: #349F1A;color: #00cc8d;border-radius: 0 50px 50px 0;}
+.wt-tabstitle li a.active{background: #349F1A;color: #95f03b;border-radius: 0 50px 50px 0;}
 .wt-tabscontent{
 	float: left;
 	width: 70%;
@@ -6005,4 +6005,15 @@ body.rtl .lara-attachment-files .wt-on-off .switch-button-control .switch-button
     color: #170F49;
     margin: 0 2px 4px;
     font-weight: bold;
+}
+.skill-tags ul{
+	padding: 0 40px;
+	margin-bottom: 50px;
+}
+.skill-tags ul li{
+	display: inline-block;
+	padding: 5px 15px;
+	border: 1px solid #e3e4e5;
+	border-radius: 25px;
+	margin:5px;
 }

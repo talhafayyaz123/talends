@@ -563,6 +563,9 @@ class HomeController extends Controller
     public function connectDetail(){
         return view('front-end.pages.connect');
     }
+    public function careersDetail(){
+        return view('front-end.pages.careers');
+    }
     public function Companies(Request $request){
       
         $filter = $request->input('filter');

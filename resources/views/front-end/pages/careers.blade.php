@@ -1,35 +1,26 @@
 @extends('front-end.master2')
-@push('owlstyle')
-    <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet">
-@endpush
+
 @section('content')
-    <section class="connect-slider-box">
+    <section class="career-header-box">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                    <div id="connect-slides" class="owl-carousel owl-theme">
-                        <h2>Salut</h2>
-                        <h2>Hola</h2>
-                        <h2>مرحبا</h2>
-                    </div>
+                <div class="col-md-12">
+                    
+                        <h2>Careers</h2>
+                        <p>Make Something Awesome.</p>
                 </div>
             </div>
         </div>
     </section>
-    <section class="theme_bg_dark">
+    <section>
         <div class="container">
             <div class="row">
-                <div class="col-md-6 order-md-2 mb-4">
-                    <img src="{{ asset('talends/assets/img/connect.webp')}}" class="img-fluid" alt="">
+                <div class="col-md-10">
+                    <h2 class="mb-5">WE ARE ALWAYS LOOKING FOR SOME AWESOME TALENT</h2>
+                    <p class="mb-5">If you are a true believer of making this world a better place by contributing what you do best then we do share the same values. You are always welcome to join us @theFutureDYNAMICS.</p>
+                    <a href="javascript:;" class="btn btn-theme px-5 rounded-pill">Submit Your CV</a>
                 </div>
-                <div class="col-md-6 order-md-1 mb-4">
-                    <h5 class="text-white opcty_5">CONTACT OUR SUPPORT TEAM</h5>
-                    <h1 class="text-white">We’re here 24/7</h1>
-                    <p class="text-white opcty_5">Reach out with your questions, concerns and challenges. Or just to say hi. We’ll be happy to chat and help.</p>
-                    <a href="javascript:;" class="btn btn-theme px-4 rounded-pill">Chat Now</a>
-                    <h4 class="text-white">Call <a href="tel: Call 888-401-4678" class="text-decoration text-white">888-401-4678</a></h4>
-                    <p class="text-white opcty_5">International calling fees may apply</p>
-                </div>
+                
             </div>
         </div>
     </section>
@@ -38,82 +29,46 @@
             <div class="row">
                 <div class="col-md-3 text-center mb-3">
                     <hr class="w-25 mx-auto border-success"/>
-                    <h2 class="font-weight-bold"><i>HELLO</i></h2>
+                    <h2 class="font-weight-bold"><i>Why us?</i></h2>
                 </div>
-                <div class="col-md-9">
-                    <h2 class="mb-5">We're here for you Say hi to theFuture DYNAMICS</h2>
-                    <div class="row">
-                        <div class="col-md-6 mb-5">
-                            <h3 class="font-weight-bold">Become a Client</h3>
-                            <a href="mailto:project@thefuturedynamics.com" class="text-dark">project@thefuturedynamics.com</a>
-                        </div>
-                        <div class="col-md-6 mb-5">
-                            <h3 class="font-weight-bold">Become Agency Partner</h3>
-                            <a href="mailto:partner@thefuturedynamics.com" class="text-dark">partner@thefuturedynamics.com</a>
-                        </div>
-                        <div class="col-md-6 mb-5">
-                            <h3 class="font-weight-bold">Join theFuture DYNAMICS</h3>
-                            <a href="mailto:work@thefuturedynamics.com" class="text-dark">work@thefuturedynamics.com</a>
-                        </div>
-                    </div>
+                <div class="col-md-8 ml-auto">
+                    <h2 class="mb-5">WHAT WOULD THE WORLD BE LIKE IF COMPANIES PUT USER NEEDS FIRST?</h2>
+                    <p>theFuture DYNAMICS was founded in an attempt to answer this question. Two decades later we've demonstrated that industries change and lives are improved when design, technology, and communications come together to solve problems for people. To do this, we've built a company of experts with diverse backgrounds who believe technology should be used to deliver better services and experiences for people. We give them the freedom to make things that matter, working alongside colleagues they respect.</p>
+                    <p class="mb-5">We're a company that prizes entrepreneurialism and embraces constant change. Over the years, five perspectives have come to define the way we work:</p>
                 </div>
                 
             </div>
         </div>
     </section>
-    <section class="theme_bg_dark text-white">
-        <div class="container py-md-5">
-            <div class="row my-md-5">
-                <div class="col-md-4">
-                    <div class="d-flex">
-                        <i class="bi-geo-alt text-theme fa-2x mr-3"></i>
-                        <div>
-                            <h4 class="mt-0 font-weight-bold">Dubai</h4>
-                            <p><i class="bi-phone"></i> +971 52 768 4867</p>
-                            <p><i class="bi-phone"></i> +971 4 332 4444</p>
-                            <p><i class="bi-globe"></i> 1803 The Metropolis Tower DUBAI</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="d-flex">
-                        <i class="bi-geo-alt text-theme fa-2x mr-3"></i>
-                        <div>
-                            <h4 class="mt-0 font-weight-bold">USA</h4>
-                            <p><i class="bi-globe"></i> 2002 S Mason Rd Katy, TX 77450, USA</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="d-flex">
-                        <i class="bi-geo-alt text-theme fa-2x mr-3"></i>
-                        <div>
-                            <h4 class="mt-0 font-weight-bold">Pakistan</h4>
-                            <p><i class="bi-globe"></i> 100-104 PCSIR Community Building, LAHORE</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section style="background-color:#f5f5f5;">
+    <section class="bg-theme text-white">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 mb-4">
-                    <img src="{{ asset('talends/assets/img/connect-us.webp')}}" class="img-fluid" alt="">
+            <div class="row">
+                <div class="col-md-3 text-center mb-3">
+                    <h2 class="font-weight-bold text-white"><i>5 WAYS</i></h2>
                 </div>
-                <div class="col-md-6 ml-auto mb-4 pl-md-5">
-                    <h5>SOCIAL MEDIA</h5>
-                    <h1 class="font-weight-bold">Connect with us</h1>
-                    <ul class="list-inline">
-                        <li class="px-2"> <a href="{{ $footer_social_content['banner_description'] ?? '' }}" target="_blank"><i class="fa fa-facebook fa-2x"></i></a> </li>
-                        <li class="px-2"> <a href="{{ $footer_social_content['project_description'] ?? '' }}" target="_blank"><i class="fa fa-twitter fa-2x"></i></a> </li>
-                        <li class="px-2"> <a href="{{ $footer_social_content['features_text'] ?? '' }}" target="_blank"><i class="fa fa-linkedin fa-2x"></i></a> </li>
-                        <li class="px-2"> <a href="{{ $footer_social_content['work_description'] ?? '' }}" target="_blank"><i class="fa fa-instagram fa-2x"></i></a> </li>
-                        <li class="px-2"> <a href="{{ $footer_social_content['services_description'] ?? '' }}" target="_blank"><i class="fa fa-youtube fa-2x"></i></a> </li>
-                        <li class="px-2"> <a href="{{ $footer_social_content['payment_description'] ?? '' }}" target="_blank"><i class="bi-tiktok fa-2x"></i></a> </li>
-                    </ul>
+                <div class="col-md-8 ml-auto">
+                    <div class="mb-5">
+                        <h3 class="mb-3 mt-0">Be honest</h3>
+                        <p>Don’t be afraid to say what you think. Strong teams are built on different perspectives.</p>
+                    </div>
+                    <div class="mb-5">
+                        <h3 class="mb-3">Embrace the unknown</h3>
+                        <p>The future is uncertain, but you can be ready for it.</p>
+                    </div>
+                    <div class="mb-5">
+                        <h3 class="mb-3">Take chances</h3>
+                        <p>You can’t be right until you know what’s wrong.</p>
+                    </div>
+                    <div class="mb-5">
+                        <h3 class="mb-3">Ideas over egos</h3>
+                        <p>Listen to others and save your energy for what matters.</p>
+                    </div>
+                    <div class="mb-5">
+                        <h3 class="mb-3">Give a shit</h3>
+                        <p>If you don’t care, why should anyone else?</p>
+                    </div>
                 </div>
+                
             </div>
         </div>
     </section>
@@ -207,21 +162,3 @@
         </div>
     </section>
 @endsection
-@push('scripts')
-<script src="{{ asset('js/owl.carousel.min.js') }}"></script>
-<script>
-        $('#connect-slides').owlCarousel({
-            loop:true,
-            margin:10,
-            items:1,
-            autoplay: true,
-            smartSpeed: 700,
-            responsiveClass:true,
-            nav:false,
-            dots:false,
-            animateOut: 'slideOutDown',
-            animateIn: 'slideInDown'
-        })
-    </script>
-    
-@endpush

@@ -541,9 +541,10 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 }
 
 .opportunity_card h3 {
-	font-size: 24px;
-	bottom: unset;
-	top: 0;
+    font-size: 32px;
+    bottom: unset;
+    top: 0;
+    line-height: 1.2;
 }
 
 .opportunity_card {
@@ -1238,7 +1239,7 @@ a.notif {
     padding-left: 15px;
 }
 @media (min-width:992px) {
-	.col-lg-20 {
+	.col-20 {
 		flex: 0 0 20%;
 		max-width: 20%;
 	}
@@ -2202,6 +2203,36 @@ footer .list-inline a i {
     padding: 6px;
     text-align: center;
     line-height: 18px;
+}
+.connect-slider-box{
+	background-image: url(../img/connect.jpg);
+	background-size: cover;
+	background-position: top center;
+	min-height: 100vh;
+	display:flex;
+	align-items: center;
+}
+#connect-slides h2{
+	font-weight: bold;
+	color: #ffffff;
+	font-size: 130px;
+	font-style: italic;
+	margin: 0;
+	font-family: 'montserrat', 'san-serif';
+
+}
+.career-header-box{
+	background-image: url(../img/career.jpg);
+	background-size: cover;
+	background-position: top center;
+	min-height: 100vh;
+	display:flex;
+	align-items: center;
+}
+.career-header-box h2{
+	font-size: 42px;
+	font-weight: bold;
+	margin-bottom: 0;
 }
 /* width */
 ::-webkit-scrollbar {

@@ -17,7 +17,7 @@
                         <div class="wt-personalskillshold tab-pane active fade show" id="wt-skills">
                             <div class="wt-yourdetails">
                                 <div class="wt-tabscontenttitle">
-                                    <h2>{{ trans('lang.saved_jobs') }}</h2>
+                                    <p class="mb-0">{{ trans('lang.saved_jobs') }}</p>
                                 </div>
                                 @if (!empty($saved_jobs))
                                     <div class="wt-dashboradsaveitem">
