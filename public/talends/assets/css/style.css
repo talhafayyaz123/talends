@@ -167,12 +167,9 @@ header .navbar {
     padding-right: 5px;
 }
 
-header .navbar-brand {
-    padding: 10px 0px 0px 0px;
-}
 
 header .navbar-brand img {
-    width: 250px;
+    width: 200px;
 }
 
 header .navbar .navbar-nav {
@@ -182,7 +179,7 @@ header .navbar .navbar-nav {
     flex-wrap: wrap;
     align-content: flex-end;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
 }
 
 header .navbar .navbar-nav .nav_item_right {
@@ -195,7 +192,7 @@ header .nav_dropdown .container {
 
 header .navbar-expand-lg .navbar-collapse {
     justify-content: flex-end;
-    padding-top: 20px;
+    padding-top: 0px;
 }
 
 header .navbar .navbar-nav .nav_item_right:first-child {
@@ -835,6 +832,7 @@ header .menu_browse_box small {
     position: relative;
     font-size: 16px;
     margin-bottom: 10px;
+    margin-top: 0;
 }
 
 .community_icons_box h3 img {

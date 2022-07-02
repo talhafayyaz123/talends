@@ -33,7 +33,12 @@
                                     <div class="content_box_wrapper text-center">
                                         <div class="content_box">
                                             @if(isset( $banner_settings->about_talends_image) )
-                                            <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}" class="img-fluid" width="450" alt="">
+                                                <picture>
+                                                    <source media="(min-width:992px)" srcset="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}" class="img-fluic" width="450">
+                                                    <source media="(min-width:480px)" srcset="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}" class="img-fluic" width="300">
+                                                    <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}" alt="Footer Image" class="img-fluic" width="200">
+                                                </picture>
+                                            <!-- <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}" class="img-fluid" width="450" alt=""> -->
                                             @endif
                                         </div>
                                     </div>
@@ -42,10 +47,10 @@
                                     <div class="content_box_wrapper">
                                         <div class="content_box home_page_banner_description">
                                             {!! $banner_settings->banner_description ?? '' !!}
-                                            <a href="{{ url('search-results?type=job') }}" class="btn btn-theme px-4 rounded-pill mt-4">Find a
+                                            <a href="{{ url('search-results?type=job') }}" class="btn btn-theme px-4 rounded-pill mt-2 mt-md-4">Find a
                                                 Job</a>
                                             <!-- <a href="#" class="btn btn-outline-theme px-4 rounded-pill mt-4 ml-0">Submit a Project</a> -->
-                                            <a href="{{ route('companyRegistraton') }}" class="btn btn-outline-theme px-4 rounded-pill mt-4 ml-md-3">Register Agency</a>
+                                            <a href="{{ route('companyRegistraton') }}" class="btn btn-outline-theme px-4 rounded-pill mt-2 mt-md-4 ml-md-3">Register Agency</a>
                                         </div>
                                     </div>
                                 </div>
@@ -126,8 +131,8 @@
 
                     {!! $banner_settings->features_text ?? '' !!}
 
-                    <a href="{{ route('register') }}" class="btn btn-theme px-4 rounded-pill mt-4">I’m an Intern</a>
-                    <a href="#" class="btn btn-theme-white px-4 rounded-pill ml-md-3 mt-4">I’m Hiring an Intern</a>
+                    <a href="{{ route('register') }}" class="btn btn-theme px-4 rounded-pill mt-2 mt-md-4">I’m an Intern</a>
+                    <a href="#" class="btn btn-theme-white px-4 rounded-pill ml-md-3 mt-2 mt-md-4">I’m Hiring an Intern</a>
                 </div>
                 <div class="col-md-5">
                     @if(isset( $banner_settings->talends_project_image) )

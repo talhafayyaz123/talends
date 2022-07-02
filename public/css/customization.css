@@ -21,7 +21,7 @@ header .navbar {
 }
 
 header .navbar-brand img {
-    width: 250px;
+    width: 200px;
 }
 
 button.navbar-toggle {
@@ -253,6 +253,8 @@ footer h4 {
     color: #fff;
     margin-bottom: 10px;
     font-size: 20px;
+    margin-top: 0;
+    line-height: 1;
 }
 
 .quick-links,
@@ -269,18 +271,23 @@ footer h4 {
 .quick-links li a,
 .contact-list li p,
 .contact-list li a {
-    font-size: 14px;
-    font-weight: 200;
+    font-size: 12px;
+    font-weight: 300;
     line-height: 1.3;
+    position: relative;
+    display: inline-block;
 }
-
-footer .col-md-6,
-footer .col-md-4,
-footer .col-md-3 {
-    margin-bottom: 15px;
-    margin-top: 15px;
+.quick-links a::after {
+    content: "";
+    display: block;
+    width: 0%;
+    height: 1px;
+    background: #fff;
+    transition: width 0.3s;
 }
-
+.quick-links a:hover::after {
+    width: 100%;
+}
 .list-inline {
     padding-left: 0;
     list-style: none;
@@ -889,6 +896,18 @@ a.notif {
     }
 }
 /* Abdul's CSS */
+.col-20{
+	position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+@media (min-width:992px) {
+	.col-20 {
+		flex: 0 0 20%;
+		max-width: 20%;
+	}
+}
 .text-theme{
 	color: #349F1A;
 }

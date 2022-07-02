@@ -207,11 +207,10 @@
 
                     @if( $role === 'admin' || $role === 'company' )
                     <li>
-                  
-                    &nbsp;&nbsp;<div class="wt-username">
-                            <a  class="notif"><span class="num">{{$total_hire_agencies }}</span></a>                            
-
-                        </div></li>
+                        <a href="javascript:;" class="nav-link position-relative">
+                            <i class="fa fa-bell fa-2x"></i> <span class="badge badge-success" style="position: absolute; right: -5px; top: 0px;">{{$total_hire_agencies }}</span>
+                        </a>
+                    </li>
                         @endif
                     
                     @endauth

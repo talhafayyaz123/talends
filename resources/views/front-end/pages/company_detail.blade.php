@@ -277,7 +277,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-
+                                    
                                     @foreach($categories as $category)
 
                                     <div class="col-md-4 mb-4">
@@ -287,7 +287,9 @@
                                         </div>
                                     </div>
                                     @endforeach
-
+                                    <div class="col-md-12 mb-4">
+                                        <textarea name="" class="form-control" id="" rows="3" placeholder=" Describe the project scope and time line" style="border-radius:7px;"></textarea>
+                                    </div>
 
                                 </div>
                             </div>
@@ -401,7 +403,6 @@
                                             </fieldset>
                                 </div>
                             </div>
-
                                 <div class="row register_login" style="{{$class }}">
                                     <div class="col-md-12">
                                         <div class="credential-tabs">
