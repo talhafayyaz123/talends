@@ -67,6 +67,10 @@ Route::get('find-talends', 'HomeController@findTalents')->name('findTalends');
 Route::get('find-interns', 'HomeController@findInterns')->name('findInterns');
 Route::get('companies', 'HomeController@Companies')->name('Companies');
 Route::get('company-service/detail', 'HomeController@CompanyServiceDetail');
+
+
+Route::get('connect', 'HomeController@connectDetail');
+Route::get('careers', 'HomeController@careersDetail');
 Route::get('why_agency_plan', 'HomeController@whyAgencyPlan')->name('whyAgencyPlan');
 
 Route::get('company/registration', 'HomeController@companyRegistration')->name('companyRegistraton');
@@ -78,6 +82,8 @@ Route::get('admin/lead/success', 'HomePagesController@adminLeadSuccess')->name('
 
 
 Route::get('company-detail/{id}', 'HomeController@CompanyDetail')->name('CompanyDetail');
+Route::get('company-service-detail/{id}', 'HomeController@CompanyServiceDetail')->name('CompanyServiceDetail');
+
 Route::get('freelancer/detail/{id}', 'HomeController@FreelancerDetail')->name('FreelancerDetail');
 Route::get('freelancer/experience-education/{id}', 'HomeController@experienceEducation')->name('freelancerExperience');
 Route::get('freelancer/get-freelancer-educations', 'FreelancerController@getFreelancerEducations');

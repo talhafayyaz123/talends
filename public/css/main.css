@@ -52,7 +52,7 @@ body {
     font-size: 16px;
     color: #434343;
     position: relative;
-    padding-top: 86px;
+    padding-top: 54px;
 }
 
 body h1,
@@ -9101,7 +9101,7 @@ select.is-invalid {
 }
 
 .wt-offersmessages .wt-ad.wt-active {
-	background: #fff;
+	background: #f5f5f5;
 }
 
 .wt-offersmessages .wt-ad.wt-active:after {
@@ -9489,9 +9489,9 @@ select.is-invalid {
 	background: rgba(255, 255, 255, 0.8);
 }
 
-.wt-openmsg .wt-offersmessages ul li:nth-child(2) {
+/* .wt-openmsg .wt-offersmessages ul li:nth-child(2) {
 	min-height: 850px;
-}
+} */
 
 .wt-messages-holder .wt-userlogedin .wt-userimg {
 	max-width: 50px;
@@ -16210,9 +16210,9 @@ input:focus,
     position: relative;
     overflow: hidden;
 }
-.wt-companysdetails,.wt-viewjobholder,.wt-articlecontent {
+/* .wt-companysdetails,.wt-viewjobholder,.wt-articlecontent {
 	background: #f8faf7 !important; 
-}
+} */
 
 /* .wt-navigation > ul > li:hover > a{
 	color:  #349f1a !important;

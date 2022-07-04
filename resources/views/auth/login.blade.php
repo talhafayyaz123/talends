@@ -7,15 +7,27 @@
     <div class="container-fluid h-100">
         <!-- Row -->
         <div class="row h-100">
-            <div class="col-md-4 col-lg-5 col-xl-5 d-none d-lg-block text-center auth-left d-lg-flex align-items-center justify-content-center">
-            <a href="{{ route('home') }}"><div class="mt-5 pt-4 p-2">
-                    <img src="{{asset('talends/assets/img/logo.png')}}" class="img-fluid d-inline-block" alt="logo" width="220">
-                   
-                </div>
-                </a>
+            <div class="col-md-4 col-lg-6 col-xl-7 d-none d-lg-block auth-left d-lg-flex flex-column justify-content-between vh-100">
+                
+                    <div class="pl-5 pt-5">
+                    <a href="{{ route('home') }}"><img src="{{asset('talends/assets/img/fav/apple-touch-icon-114x114.png')}}" class="img-fluid d-inline-block mb-4" alt="logo" width="110"></a>
+                        <h2 class="mt-4" style="font-size: 54px; line-height:42px"><i>Let's make everything Possible,</i></h2>
+                        <h2 class="mb-0 text-theme" style="font-size: 54px; line-height:48px"><b><i>Together!</i></b></h2>
+                    </div>
+                    <div class="pl-5 d-flex align-items-center mb-3">
+                        <p class="mb-0 mr-4 text-theme">Become part of Talends social community</p>
+                        <ul class="list-inline">
+                            <li class="px-1"> <a href="https://www.facebook.com/Talends-104362175661656" target="_blank"><i class="fa fa-facebook"></i></a> </li>
+                            <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-twitter"></i></a> </li>
+                            <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-linkedin"></i></a> </li>
+                            <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-instagram"></i></a> </li>
+                            <li class="px-1"> <a href="https://www.youtube.com/channel/UCypgaJCN86fxACsRdOuQiEA" target="_blank"><i class="fa fa-youtube"></i></a> </li>
+                            <li class="px-1"> <a href="https://vt.tiktok.com/ZSd3qRoKF/" target="_blank"><i class="bi-tiktok"></i></a> </li>
+                        </ul>
+                    </div>
             </div>
-            <div class="col-sm-10 col-md-8 col-lg-7 col-xl-7 ml-auto bg-white">
-                <div class="login-auth-content my-md-5">
+            <div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 ml-auto bg-white d-flex justify-content-between flex-column">
+                <div class="login-auth-content my-md-5 my-4">
                     <div class="text-center">
                         <img src="{{asset('talends/assets/img/logo.png')}}" class=" d-lg-none d-inline-block img-fluid my-4" width="130" alt="logo">
                     </div>
@@ -24,73 +36,61 @@
                         @php
                         $roles = Spatie\Permission\Models\Role::all()->toArray();
                         @endphp
-                        <p>Welcome back!</p>
-                        <h2>Login to your account</h2>
                         @if(Session::has('error'))
                         <p class="alert {{ Session::get('alert-class', 'error') }}">{{ Session::get('error') }}</p>
                         @endif
-                        <div class="form-group">
-                            <label>Account Type</label>
-                            <select name="role" id="role" class="form-control">
-                            @if(!empty($roles))
-                            @foreach ($roles as $key => $role)
-                            
-                                    <option value="{{$role['id']}}">{{$role['role_type']}}</option>
-                                
-                            @endforeach
-                            @endif
-                             
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input id="email" type="email" placeholder="{{ trans('lang.email_address') }}" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-
-                            @if ($errors->has('email'))
-
-                            <span class="invalid-feedback" role="alert">
-
-                                <strong class="error">{{ $errors->first('email') }}</strong>
-
-                            </span>
-
-                            @endif
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input id="password" type="password" placeholder="{{ trans('lang.pass') }}" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                            @if ($errors->has('password'))
-
-                            <span class="invalid-feedback" role="alert">
-
-                                <strong class="error">{{ $errors->first('password') }}</strong>
-
-                            </span>
-
-                            @endif
-                        </div>
-
-
-                        <!--   <div class="form-group">
-                          
-                               <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                               <label class="form-check-label" for="remember">
-
-                                {{ trans('lang.remember') }}
-
-                                </label>                   
-                               </div> -->
-
-                        <div class="form-group mb-3 text-center">
-                            <button class="btn btn-theme rounded-pill px-5 btn-block">Sign in</button>
-                        </div>
-                       
-
-                        <div class="form-group mb-3">
-                            <div class="or-text">
-                                <p>or</p>
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label>Account Type</label>
+                                <select name="role" id="role" class="form-control">
+                                    @if(!empty($roles))
+                                        @foreach ($roles as $key => $role)
+                                            <option value="{{$role['id']}}">{{$role['role_type']}}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label>Email</label>
+                                <input id="email" type="email" placeholder="{{ trans('lang.email_address') }}" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                                @if ($errors->has('email'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong class="error">{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label>Password</label>
+                                <input id="password" type="password" placeholder="{{ trans('lang.pass') }}" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                                @if ($errors->has('password'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong class="error">{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <!-- <div class="col-md-6 mb-3">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <label class="custom-control-label" for="remember">{{ trans('lang.remember') }}</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3 pl-md-0">
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" type="checkbox" name="terms" id="terms" >
+                                    <label class="custom-control-label" for="terms">Agree to Terms of Use</label>
+                                </div>
+                            </div> -->
+                            <div class="col-md-12 mb-3 mb-3 text-center">
+                                <button class="btn btn-theme rounded-pill px-5 btn-block">Sign in</button>
+                            </div>
+                            <div class="col-md-12 mb-3 mb-3">
+                                <div class="or-text">
+                                    <p>or</p>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3 mb-3 text-center">
+                                <div id="my-signin3"></div>
+                                <span class="error gmail_error" style="display: none;">Google account is not recognized for Google Sign-In on Talends. Please make sure you are using the same account that you have previously linked.</span>
                             </div>
                         </div>
                         <div class="form-group mb-3 text-center">
@@ -100,19 +100,14 @@
                         </div>
                     </form>
                     <div class="mb-3">
-                            @if (Route::has('password.request'))
-
-                            <a href="{{ route('password.request') }}" class="btn btn-link"> {{ trans('lang.forget_pass') }}</a>
-
-
-                            
-                            Join Talends <a href="{{ route('register')  }}" class="text-theme">Register Here</a>
-
-
-                            @endif
-
-                        </div>
-                    
+                        @if (Route::has('password.request'))
+                            <a href="{{ route('password.request') }}" class="btn btn-link text-theme"> {{ trans('lang.forget_pass') }}</a>
+                            <a href="{{ route('register')  }}" class="text-theme float-right">Join Now</a>
+                        @endif
+                    </div>
+                </div>
+                <div class="text-center">
+                    <p class="small">By clicking Sign In, you agree to our <a href="#" class="text-theme">Terms of service</a> & <a href="#" class="text-theme">Privacy policy</a>.</p>
                 </div>
             </div>
 

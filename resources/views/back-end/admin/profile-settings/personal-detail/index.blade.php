@@ -30,7 +30,7 @@
                             {!! Form::open(['url' => '', 'class' =>'wt-userform', 'id' => 'admin_data', '@submit.prevent' => 'submitAdminProfile']) !!}
                                 <div class="wt-yourdetails wt-tabsinfo">
                                     <div class="wt-tabscontenttitle">
-                                        <h2>{{{ trans('lang.your_details') }}}</h2>
+                                        <p class="mb-0">{{{ trans('lang.your_details') }}}</p>
                                     </div>
                                     <div class="lara-detail-form">
                                         <fieldset>
