@@ -536,8 +536,6 @@ class HomeController extends Controller
             )
         );
     }
-    public function CompanyServiceDetail(){
-        return view('front-end.pages.company_service_detail');
     
    
   
