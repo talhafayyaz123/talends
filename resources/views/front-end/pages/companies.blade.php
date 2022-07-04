@@ -450,8 +450,9 @@
         
                     <div class="col-lg-3" style="max-width: 20% !important;">
                         <div class="content-box">
-                            <img src="{{ asset('uploads/agency_services/'.$category->image)}}" alt="" class="img-fluid mb-3">
+                         <a href="{{url("company-service-detail",['id'=>$category->id ])}}">   <img src="{{ asset('uploads/agency_services/'.$category->image)}}" alt="" class="img-fluid mb-3">
                             <p>{{ $category->title }}</p>
+                         </a>
                         </div>
                     </div>
                 @endforeach  

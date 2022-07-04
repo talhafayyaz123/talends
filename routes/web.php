@@ -66,14 +66,8 @@ Route::get('browse-jobs', 'HomeController@browseJobs')->name('browseJobs');
 Route::get('find-talends', 'HomeController@findTalents')->name('findTalends');
 Route::get('find-interns', 'HomeController@findInterns')->name('findInterns');
 Route::get('companies', 'HomeController@Companies')->name('Companies');
-Route::get('content-writting', 'HomeController@contentWrittingDetail');
-Route::get('marketing', 'HomeController@marketingDetail');
-Route::get('seo', 'HomeController@seoDetail');
-Route::get('customer-service', 'HomeController@customerServiceDetail');
-Route::get('data-service', 'HomeController@dataServiceDetail');
-Route::get('programming-tech', 'HomeController@programmingTechDetail');
-Route::get('design-graphics', 'HomeController@designGraphicDetail');
-Route::get('video-animation', 'HomeController@videoAnimationDetail');
+
+
 Route::get('connect', 'HomeController@connectDetail');
 Route::get('careers', 'HomeController@careersDetail');
 Route::get('why_agency_plan', 'HomeController@whyAgencyPlan')->name('whyAgencyPlan');
@@ -87,6 +81,8 @@ Route::get('admin/lead/success', 'HomePagesController@adminLeadSuccess')->name('
 
 
 Route::get('company-detail/{id}', 'HomeController@CompanyDetail')->name('CompanyDetail');
+Route::get('company-service-detail/{id}', 'HomeController@CompanyServiceDetail')->name('CompanyServiceDetail');
+
 Route::get('freelancer/detail/{id}', 'HomeController@FreelancerDetail')->name('FreelancerDetail');
 Route::get('freelancer/experience-education/{id}', 'HomeController@experienceEducation')->name('freelancerExperience');
 Route::get('freelancer/get-freelancer-educations', 'FreelancerController@getFreelancerEducations');
