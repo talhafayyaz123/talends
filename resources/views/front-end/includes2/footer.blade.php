@@ -143,16 +143,20 @@ $join_community=App\Helper::getJoinCommunity();
 <section class="join_community pb-md-0 pt-4">
     <div class="container">
         <div class="row align-items-end">
-            <div class="col-md-8 pb-3 align-self-center">
+            <div class="col-md-8 col-sm-6 col-9 pb-3 align-self-center">
                 {!! $join_community->banner_description ?? '' !!}
                 <a href="{{url('search-results?type=job')}}" class="btn btn-theme px-4 rounded-pill">Find A Job</a>
                 <a href="{{ route('login') }}" class="btn btn-theme-white px-4 rounded-pill ml-md-3">Submit A Job</a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-6 col-3 text-center">
                 @if(isset( $join_community->about_talends_image) )
-            
-                <img src="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="w-100"
-                    alt="">
+                    <picture>
+                        <source media="(min-width:992px)" srcset="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="img-fluic" width="250">
+                        <source media="(min-width:480px)" srcset="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="img-fluic" width="200">
+                        <img src="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" alt="Footer Image" class="img-fluic" width="100">
+                    </picture>
+                <!-- <img src="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="img-fluid" width="250px"
+                    alt=""> -->
                 @endif
             </div>
         </div>
@@ -169,8 +173,11 @@ $footer_menus_4=App\Helper::footerMenu4();
 
 <footer>
     <div class="container">
-        <div class="row py-30">
-            <div class="col-md-3">
+        <div class="row">
+            <div class="col-20 col-sm-6 text-md-left mb-3">
+                <img src="{{asset('talends/assets/img/fav/apple-touch-icon-114x114.png')}}" alt="Talends Icon" class="img-fluid" style="width:60px;"/>
+            </div>
+            <div class="col-20 col-sm-6">
                 <h4> {{ $footer_menus_1['title']}} </h4>
                 <ul class="quick-links">
                     @if(!empty($footer_menus_1['menu_items']))
@@ -182,7 +189,7 @@ $footer_menus_4=App\Helper::footerMenu4();
             </div>
 
 
-            <div class="col-md-3">
+            <div class="col-20 col-sm-6">
                 <h4> {{ $footer_menus_2['title']}} </h4>
                 <ul class="quick-links">
                     @if(!empty($footer_menus_2['menu_items']))
@@ -192,7 +199,7 @@ $footer_menus_4=App\Helper::footerMenu4();
                     @endif
                 </ul>
             </div>
-            <div class="col-md-3">
+            <div class="col-20 col-sm-6">
                 <h4> {{ $footer_menus_3['title']}} </h4>
                 <ul class="quick-links">
                     @if(!empty($footer_menus_3['menu_items']))
@@ -202,7 +209,7 @@ $footer_menus_4=App\Helper::footerMenu4();
                     @endif
                 </ul>
             </div>
-            <div class="col-md-3">
+            <div class="col-20 col-sm-6">
                 <h4> {{ $footer_menus_4['title']}} </h4>
                 <ul class="quick-links">
                     @if(!empty($footer_menus_4['menu_items']))
@@ -214,7 +221,7 @@ $footer_menus_4=App\Helper::footerMenu4();
             </div>
         </div>
         <div class="row footer_bottom align-items-end">
-            <div class="col-md-6">
+            <div class="col-md-6 mb-3">
                 <ul class="list-inline">
                 <li class="px-1"> <a href="{{ $footer_social_content['banner_description'] ?? '' }}" target="_blank"><i class="fa fa-facebook"></i></a> </li>
                     <li class="px-1"> <a href="{{ $footer_social_content['project_description'] ?? '' }}" target="_blank"><i class="fa fa-twitter"></i></a> </li>
@@ -226,12 +233,15 @@ $footer_menus_4=App\Helper::footerMenu4();
                 <p class="mb-0">Talends.com ©2022 All Rights Reserved.</p>
                 <p class="small">Dubai, United Arab Emirates</p>
             </div>
-            <div class="col-md-6">
-                <ul class="list-inline mb-0">
-                    <li class="px-2"> <a href="javascript:;" target="_self">Site Map</a> </li>
-                    <li class="px-2"> <a href="{{ route('Agreement') }}" target="_self">Term & Conditions</a> </li>
-                    <li class="px-2"> <a href="{{ route('privacyPolicy') }}" target="_self">Privacy Policy</a> </li>
-                </ul>
+            <div class="col-md-6 mb-3">
+                <div class="d-md-flex pl-md-5">
+                    <a href="https://aws.amazon.com/what-is-cloud-computing"><img src="https://d0.awsstatic.com/logos/powered-by-aws-white.png" alt="Powered by AWS Cloud Computing" width="70"></a>
+                    <ul class="list-inline mb-0 ml-auto">
+                        <li class="px-2"> <a href="javascript:;" target="_self">Site Map</a> </li>
+                        <li class="px-2"> <a href="{{ route('Agreement') }}" target="_self">Term & Conditions</a> </li>
+                        <li class="px-2"> <a href="{{ route('privacyPolicy') }}" target="_self">Privacy Policy</a> </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

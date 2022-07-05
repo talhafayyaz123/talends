@@ -26,7 +26,7 @@
                             @endphp
                             
                             <div class="border-bottom mb-4 p-4">
-                                <a href="#" ><i class="fa fa-check-circle"></i>&nbsp;{{$request->full_name}}</a>
+                                <a href="#" ><i class="fa fa-check-circle"></i>{{$request->full_name}}</a>
                                 <h4 >{{$request->company_name}}</h4>
                                 <p class="small  mb-2"><i class="fa fa-envelope" aria-hidden="true"></i> {{$request->email}}</p>
                                 <p class="small"><i class="fas fa-phone"></i> {{$request->phone_number}}</p>
@@ -55,49 +55,51 @@
                 <div class="lead-detail" id="leadDetail_{{$request->id}}" style="display:none ;">
                     <div class="mb-5 px-4">
                         <h4 >Company Name</h4>
-                        <p >{{ $request->company_name }}</p>
-                        <h6>Budget : AED {{ $request->budget }}</h6>
+                        <p class="mb-0">{{ $request->company_name }}</p>
+                        <p class="font-weight-bold">Budget : AED {{ $request->budget }}</p>
                     </div>
                     <div class="px-4 mb-5">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-4">
                                 <h4>Name</h4>
-                               <span  > {{ $request->full_name }} </span>
+                                    <span> {{ $request->full_name }} </span>
                                 </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-4">
                                 <h4 >Email</h4>
                                 <span>  {{ $request->email }} </span>                          
                              </div>
-                        </div>
-                    </div>
-
-                    <div class="px-4 mb-5">
-                        <div class="row">
-                            <div class="col-md-6">
+                             <div class="col-md-6 mb-4">
                                 <h4>Phone</h4>
                                <span> {{ $request->phone_number }} </span>
-                                </div>
-                          
-                        </div>
-                    </div>
-                    <div class="px-4 mb-5">
-                        <div class="row">
-                            <div class="col-md-12">
+                            </div>
+                            <div class="col-md-6 mb-4">
                                 <h4 >Services</h4>
                                 <div class="skill-tags">
-                            
-                            <ul>
-                               @if(!empty($request->detail))
-                               @php
-                                foreach(unserialize($request->detail) as $key=>$value){
-                                    $skill = \App\Skill::where('id', $value)->first()->title;  @endphp 
-                              
-                                    <li>{{ $skill }}</li>
-                                    @php  }
-                               @endphp
-    
+                                    <ul class="px-0">
+                                        @if(!empty($request->detail))
+                                            @php
+                                                foreach(unserialize($request->detail) as $key=>$value){
+                                                    $skill = \App\Skill::where('id', $value)->first()->title;  @endphp 
+                                                    <li>{{ $skill }}</li>
+                                                    @php  }
+                                            @endphp
+                                        @endif
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-
+                    <div class="px-4 mb-t">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @if($request->status=='accepted')
+                                    <a class="btn btn-theme px-4 rounded-pill">Already Accepted</a>
+                                @elseif($request->status=='rejected')
+                                    <a class="btn btn-theme px-4 rounded-pill">Already Rejected</a>
+                                @else
+                                    <a class="btn btn-theme px-4 rounded-pill" href="{{ route('leadStatus',['id'=>$request->id,'status'=>'accept']) }}">Accept & Send Messages</a>
+                                    <a class="btn btn-theme px-4 rounded-pill ml-md-3" href="{{ route('leadStatus',['id'=>$request->id,'status'=>'reject']) }}">Reject and Share response with Client</a>
                                 @endif
                                </ul>
                         </div>

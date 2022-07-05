@@ -24,14 +24,14 @@
                 </figure>
                 <div class="wt-companysinfo">
                     <figure><img src="{{{ asset(Helper::getImageWithSize('uploads/users/'.$user->id, $profile->avater, 'listing')) }}}" alt="{{ trans('lang.profile_photo') }}"></figure>
-                    <div class="wt-title">
+                    <!-- <div class="wt-title">
                         <h2>
                             <a href="{{{ $role != 'admin' ? url($role.'/dashboard') : 'javascript:void()' }}}">
                                 {{{ !empty(Auth::user()) ? Helper::getUserName(Auth::user()->id) : 'No Name' }}}
                             </a>
                         </h2>
                         <span>{{{ !empty(Auth::user()->profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Helper::getAuthRoleName() }}}</span>
-                    </div>
+                    </div> -->
                     
                     @if ($role === 'employer')
                     @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'jobs')
@@ -483,3 +483,23 @@
         </div>
     </div>
 @endauth
+@push('scripts')
+<script>
+    
+     var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+     jQuery('nav ul li a').each(function() {
+      if (this.href === path) {
+       jQuery(this).parent('li').addClass('wt-active');
+      }
+     });
+     jQuery("ul.sub-menu > li > a").each(function () {
+         var currentURL = document.location.href;
+         var thisURL = jQuery(this).attr("href");
+         if (currentURL.indexOf(thisURL) != -1) {
+            jQuery(this).closest('.menu-item-has-children').addClass('wt-open');
+             jQuery(this).closest("ul.sub-menu").css('display', 'block');
+         }
+       });
+    
+</script>
+@endpush

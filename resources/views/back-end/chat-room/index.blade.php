@@ -8,8 +8,8 @@
                         <h2>{{ trans('lang.msgs') }}</h2>
                     </div>
                     @if(Session::has('message'))
-<p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
-@endif
+                        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+                    @endif
                     <message-center 
                         :empty_field="'{{ trans('lang.empty_field') }}'" 
                         :host="'{{!empty($chat_settings['host']) ? $chat_settings['host'] : ''}}'" 

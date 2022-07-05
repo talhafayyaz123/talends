@@ -536,8 +536,14 @@ class HomeController extends Controller
             )
         );
     }
-    public function CompanyServiceDetail(){
-        return view('front-end.pages.company_service_detail');
+   
+  
+    
+    public function connectDetail(){
+        return view('front-end.pages.connect');
+    }
+    public function careersDetail(){
+        return view('front-end.pages.careers');
     }
     public function Companies(Request $request){
       
@@ -618,6 +624,27 @@ class HomeController extends Controller
         $employees = Helper::getEmployeesList();
 
         return view('front-end.pages.company_detail',compact('employees','departments','locations','company_bedget','categories','skills','company_expertise','expertise','company_detail','id','profile'));
+     }
+
+     public function CompanyServiceDetail($id){
+          
+         if($id==1){
+            return view('front-end.pages.programming_tech');
+         }else if($id==2){
+            return view('front-end.pages.content_writting');
+         }else if($id==3){
+            return view('front-end.pages.data_service');
+         }else if($id==4){
+            return view('front-end.pages.customer_service');
+         }else if($id==5){
+            return view('front-end.pages.seo');
+         }else if($id==6){
+            return view('front-end.pages.marketing');
+         }else if($id==7){
+            return view('front-end.pages.design_graphic');
+         }else if($id==8){
+            return view('front-end.pages.video_animation');
+         }
      }
 
     public function experienceEducation($user_id)

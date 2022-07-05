@@ -12,7 +12,7 @@ label {
     margin-left: 10px;
 }
 .wt-userlogedin:hover .wt-usernav {
-	top: 88% !important;
+	top: 60px !important;
 	visibility: visible !important;
 	opacity: 1 !important;
 
@@ -541,9 +541,10 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 }
 
 .opportunity_card h3 {
-	font-size: 24px;
-	bottom: unset;
-	top: 0;
+    font-size: 32px;
+    bottom: unset;
+    top: 0;
+    line-height: 1.2;
 }
 
 .opportunity_card {
@@ -1098,14 +1099,20 @@ a.notif {
 
 }
 
-.note-section p, .note-row p {
-    font-size: 48px;
+.note-section p, .note-row h2{
+    font-size: 34px;
     line-height: 1.1;
     color: #fff;
     padding: 2rem 1rem 20px 24px;
     font-family: joan;
     font-weight: bold;
     font-style: italic;
+}
+.note-section p, .note-row p {
+    font-size: 44px;
+    line-height: 1.1;
+    color: #fff;
+    padding: 1rem 1rem 20px 24px;
 }
 .note-section .img-wrap>img {
 	width: 100%;
@@ -1176,9 +1183,7 @@ a.notif {
 }
 
 .admin_header_after_login {
-	padding-left: 5% !important;
-	padding-top: 10px !important;
-	justify-content: normal !important;
+	padding-top: 0px !important;
 }
 
 .home-banner h4 {
@@ -1238,7 +1243,7 @@ a.notif {
     padding-left: 15px;
 }
 @media (min-width:992px) {
-	.col-lg-20 {
+	.col-20 {
 		flex: 0 0 20%;
 		max-width: 20%;
 	}
@@ -1555,9 +1560,9 @@ a.notif {
     box-shadow: 0px 2px 6px rgba(19, 18, 66, 0.07);
     border-radius: 46px;
     color: #6F6C90;
-    height: 55px;
     border-radius: 50px;
-    padding: 7px 50px 7px 20px;
+    padding: 15px 50px 14px 20px;
+    height: auto;
 }
 #agencyform .form-control:focus{
 	border: 2px solid #349F1A;
@@ -2191,3 +2196,52 @@ footer .list-inline a i {
     text-align: center;
     line-height: 18px;
 }
+.connect-slider-box{
+	background-image: url(../img/connect.jpg);
+	background-size: cover;
+	background-position: top center;
+	min-height: 100vh;
+	display:flex;
+	align-items: center;
+}
+#connect-slides h2{
+	font-weight: bold;
+	color: #ffffff;
+	font-size: 130px;
+	font-style: italic;
+	margin: 0;
+	font-family: 'montserrat', 'san-serif';
+
+}
+.career-header-box{
+	background-image: url(../img/career.jpg);
+	background-size: cover;
+	background-position: top center;
+	min-height: 100vh;
+	display:flex;
+	align-items: center;
+}
+.career-header-box h2{
+	font-size: 42px;
+	font-weight: bold;
+	margin-bottom: 0;
+}
+/* width */
+::-webkit-scrollbar {
+	width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: #166702;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: #2d9215;
+  }
