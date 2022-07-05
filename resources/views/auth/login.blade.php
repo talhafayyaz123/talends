@@ -33,6 +33,9 @@
                     </div>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
+
+                    
+
                         @php
                         $roles = Spatie\Permission\Models\Role::all()->toArray();
                         @endphp
@@ -45,8 +48,16 @@
                                 <select name="role" id="role" class="form-control">
                                     @if(!empty($roles))
                                         @foreach ($roles as $key => $role)
-                                            <option value="{{$role['id']}}">{{$role['role_type']}}</option>
-                                        @endforeach
+                                           @if(Request::get('admin') &&  Request::get('admin')==1 )
+                                         <option value="{{$role['id']}}">{{$role['role_type']}}</option>                 
+                                           @else
+                                           @if (!in_array($role['id'] == 1, $roles))
+                                           <option value="{{$role['id']}}">{{$role['role_type']}}</option>                 
+
+                                           @endif
+
+                                         @endif
+                                            @endforeach
                                     @endif
                                 </select>
                             </div>
