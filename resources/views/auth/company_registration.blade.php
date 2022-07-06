@@ -56,17 +56,17 @@ Company Registration
                                         <div class="row">
                                             <div class="col-xl-6 col-lg-6 mb-3 form-group">
                                                 <label class="fieldlabels">Agency Name <sup class="text-danger">*</sup> </label>
-                                                <input type="text" name="company_name" class="form-control" id="company_name" placeholder="Agency Name" value="{{ old('company_name') }}" />
+                                                <input type="text" autocomplete="off" name="company_name" class="form-control" id="company_name" placeholder="Agency Name" value="{{ old('company_name') }}" />
                                             </div>
                                             <div class="col-xl-6 col-lg-6 mb-3 form-group">
                                                 <label class="fieldlabels">Email <span class="text-danger">*</span></label>
-                                                <input type="email" name="email" placeholder="Email" class="form-control" id='email' value="{{ old('email') }}" />
+                                                <input type="email" autocomplete="off" name="email" placeholder="Email" class="form-control" id='email' value="{{ old('email') }}" />
                                                 <div class="alert alert-danger position-absolute" id='email_error' style="display:none; z-index:9"></div>
 
                                             </div>
                                             <div class="col-xl-6 col-lg-6 mb-3 form-group">
                                                 <label class="fieldlabels">Phone Number <span class="text-danger">*</span></label>
-                                                <div class="form-group" style="border: 1px solid #349f1a; border-radius:10px;position:relative;padding-left:7px;">
+                                                <div class="form-group"  style="border: 1px solid #349f1a; border-radius:10px;position:relative;padding-left:7px;">
                                                     <input type="tel" name="phone_number" class="form-control" id="phone_number" value="{{ old('phone_number') }}" style="border-radius:0 10px 10px 0 ;border: 0;" data-intl-tel-input-id="0" />
                                                 </div>
                                             </div>
@@ -81,7 +81,7 @@ Company Registration
                                             </div>
                                             <div class="col-xl-6 col-lg-6 mb-3 form-group">
                                                 <label class="fieldlabels">Password <span class="text-danger">*</span></label>
-                                                <input id="register_password" type="password" class="pr-password form-control" name="password" placeholder="{{{ trans('lang.ph_pass') }}}">
+                                                <input autocomplete="off" id="register_password" type="password" class="pr-password form-control" name="password" placeholder="{{{ trans('lang.ph_pass') }}}">
                                                 <i class="fa fa-eye" id="togglePassword" onclick="toggePassword()"></i>
                                                 <p class="text-secondary" style="line-height:14px;font-size:12px;">Use 8 or more characters with a mix of letters, numbers & symbols</p>
                                                 <div class="alert alert-danger position-absolute" id='password_error' style="display:none; z-index:9"></div>
@@ -89,7 +89,7 @@ Company Registration
                                         </div>
                                         <input type="hidden" name="role" value="company" />
                                     </div>
-                                    <input type="button" name="next" class="next action-button" value="Next" />
+                                    <input type="button" name="next" class="next action-button step_1_btn"  disabled value="Next" />
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card">
@@ -313,15 +313,6 @@ Company Registration
 
 <script>
     window.categories = [];
-
-    var input = document.querySelector("#phone_number");
-    window.intlTelInput(input, {
-        autoHideDialCode: true,
-        dropdownContainer: document.body,
-        formatOnDisplay: true,
-        initialCountry: "auto",
-        separateDialCode: true
-    });
 
     function checkCaptcha() {
 
