@@ -25,10 +25,7 @@
                         @endif
                         <div class="ml-md-4 pt-4 px-3">
                             <p class="text-justify">
-
-
                                 {!! $company_detail->detail ?? '' !!}
-
                             </p>
                             <p><span class="mr-3"><i class="bi-geo-alt-fill mr-2"></i> {{$profile->user->location->title ?? '' }}</span>
                                 <span class="mr-3"><i class="bi-share-fill mr-2"></i> Share</span>
@@ -48,14 +45,8 @@
                         <!-- <button class="btn btn-link text-success pl-0" onclick="readMoreFunction()" id="myBtn">Read more <i class="bi-caret-down-fill"></i></button>  -->
                         <h3>Expertise</h3>
                         <div class="accordion" id="accordionExpertise">
-
-
                             @if (!empty($company_expertise) && !empty($company_expertise))
-
-
                             @foreach ($company_expertise as $unserialize_key => $value)
-
-
                             <div class="card bg-transparent border-0">
                                 <div class="card-header" id="heading{{$unserialize_key}}">
                                     <h4 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapse{{$unserialize_key}}" aria-expanded="false" aria-controls="collapseTwo">
@@ -70,14 +61,8 @@
                             </div>
                             @endforeach
                             @else
-
                             <p>Not Found</p>
                             @endif
-
-
-
-
-
                         </div>
                         <h3>Skills</h3>
                         <div class="skill-tags">
@@ -207,7 +192,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                
                     <div class="stepper-container">
                         <h2>Hire this Agency</h2>
                         <p class="mb-5">Please fill the brief below to get in touch the agency with much better and faster response. Feel free to add as much detail as needed.</p>
@@ -277,7 +261,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    
+
                                     @foreach($categories as $category)
 
                                     <div class="col-md-4 mb-4">
@@ -341,14 +325,11 @@
                                 @endauth
 
                                 @guest
-                                @php
-                                $class='display:block;';
-                                $class2='display:none;';
-                                @endphp
+                                    @php
+                                    $class='display:block;';
+                                    $class2='display:none;';
+                                    @endphp
                                 @endguest
-
-
-
                                 @php
                                 $register_form = App\SiteManagement::getMetaValue('reg_form_settings');
                                 $reg_three_title = !empty($register_form) && !empty($register_form[0]['step3-title']) ? $register_form[0]['step3-title'] : trans('lang.almost_there');
@@ -356,53 +337,49 @@
 
                                 @endphp
 
-                               
                                 <div id="verify_otp" class="row" style="display: none;">
-                               
-                                <div class="col-md-12">
-                                <div class="alert alert-danger" style="display:none"></div>
-                                <div class="wt-registerhead">
-                                                <div class="wt-title">
-                                                    <h3>{{{ $reg_three_title }}}</h3>                                                    
-                                                </div>
-                                                <div class="wt-description">
-                                                    <p>{{{ $reg_three_subtitle }}}</p>
+
+                                    <div class="col-md-12">
+                                        <div class="alert alert-danger" style="display:none"></div>
+                                        <div class="wt-registerhead">
+                                            <div class="wt-title">
+                                                <h3>{{{ $reg_three_title }}}</h3>
+                                            </div>
+                                            <div class="wt-description">
+                                                <p>{{{ $reg_three_subtitle }}}</p>
+                                            </div>
+                                        </div>
+                                        <fieldset>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <div class="form-group">
+                                                        <label>
+                                                            {{{ trans('lang.verify_code_note') }}}
+                                                            @if (!empty($reg_page))
+                                                            <a target="_blank" href="{{{url($reg_page)}}}">
+                                                                {{{ trans('lang.why_need_code') }}}
+                                                            </a>
+                                                            @else
+                                                            <a href="javascript:void(0)">
+                                                                {{{ trans('lang.why_need_code') }}}
+                                                            </a>
+                                                            @endif
+                                                        </label>
+
+                                                        <input type="text" name="code" id='code' class="form-control" placeholder="{{{ trans('lang.enter_code') }}}">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <fieldset>
-                                            <div class="row">
-                                                        <div class="col-md-5">
-                                                <div class="form-group">
-                                                    <label>
-                                                        {{{ trans('lang.verify_code_note') }}}
-                                                        @if (!empty($reg_page))
-                                                        <a target="_blank" href="{{{url($reg_page)}}}">
-                                                            {{{ trans('lang.why_need_code') }}}
-                                                        </a>
-                                                        @else
-                                                        <a href="javascript:void(0)">
-                                                            {{{ trans('lang.why_need_code') }}}
-                                                        </a>
-                                                        @endif
-                                                    </label>
-                                                    
-                                                    <input type="text" name="code" id='code' class="form-control" placeholder="{{{ trans('lang.enter_code') }}}">
-                                                </div></div></div>
-                                                <div class="form-group wt-btnarea">
-
+                                            <div class="form-group wt-btnarea">
                                                 <div class="row">
-                                                        <div class="col-md-5">
+                                                    <div class="col-md-5">
                                                         <a onclick="verifyCode()" class="text-white btn btn-theme rounded-pill px-5 btn-block">{{{ trans('lang.continue') }}}</a>
-                                                        </div>
-                                                      
                                                     </div>
-
-
-
                                                 </div>
-                                            </fieldset>
+                                            </div>
+                                        </fieldset>
+                                    </div>
                                 </div>
-                            </div>
                                 <div class="row register_login" style="{{$class }}">
                                     <div class="col-md-12">
                                         <div class="credential-tabs">
@@ -432,7 +409,7 @@
                                                         <div class="col-md-5">
                                                             <a onclick="login()" class="text-white btn btn-theme rounded-pill px-5 btn-block">Log In</a>
                                                         </div>
-                                                       <!--  <div class="col-md-2 pt-2 text-center">
+                                                        <!--  <div class="col-md-2 pt-2 text-center">
                                                             <p>OR</p>
                                                         </div>
                                                         <div class="col-md-5">
@@ -494,44 +471,33 @@
                                             <div class="row">
                                                 <div class="col-md-5">
                                                     <a onclick="register()" class="text-white btn btn-theme rounded-pill px-5 btn-block">Sign Up</a>
-                                                    
+
 
                                                 </div>
 
                                             </div>
                                         </div>
 
-                                   
+
                                     </div>
                                 </div>
                             </div>
                     </div>
-
-
                     {{-- <span class="alert alert-success" style="display:none"></span> --}}
                     <div class="row form_submission" style="{{$class2 }}">
-
                         <div class="col-md-8 mx-auto text-center">
-                        
                             <img src="{{ asset('talends/assets/img/icons/success-icon.png')}}" class="img-fluid mb-4" />
-
                             <p>Please submit your enquiry as employer, or if required review all the information you previously provided. Agencies typically respond within 24 Hours. </p>
                         </div>
                     </div>
-
-
-
-
                 </div>
                 <div class="form_submission" style="{{$class2 }}">
-                {!! htmlFormSnippet() !!}
-                <span class="help-block" style="display: none;">
-                    <strong class="error"></strong>
-                </span>
-                    <input type="button" class="action-button" value="Submit Your Enquiry" onclick="checkCaptcha()"/>
+                    {!! htmlFormSnippet() !!}
+                    <span class="help-block" style="display: none;">
+                        <strong class="error"></strong>
+                    </span>
+                    <input type="button" class="action-button" value="Submit Your Enquiry" onclick="checkCaptcha()" />
                 </div>
-
-
                 <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                 </fieldset>
                 {!! form::close(); !!}
@@ -545,30 +511,31 @@
 
 </div>
 <script>
-        function checkCaptcha(){
-      
-      var form_data=$('#agencyform').serialize();
-      $.ajax({
-          type: "POST",
-          url: '/hire/agency/captcha-validation',
-          data: form_data,
-          success: function(response) {
-            
-              if(response.errors){
-                  $('.help-block').show();
-                  $('.help-block strong').html('recaptcha field is required.');
-                 
-              }else{
-                  $('.help-block').hide();
-                  $('#agencyform').submit();
+    function checkCaptcha() {
 
-              }
-         
-          }
-      }); 
-      }
+        var form_data = $('#agencyform').serialize();
+        $.ajax({
+            type: "POST",
+            url: '/hire/agency/captcha-validation',
+            data: form_data,
+            success: function(response) {
+
+                if (response.errors) {
+                    $('.help-block').show();
+                    $('.help-block strong').html('recaptcha field is required.');
+
+                } else {
+                    $('.help-block').hide();
+                    $('#agencyform').submit();
+
+                }
+
+            }
+        });
+    }
+
     function register() {
-  
+
         if ('<?php echo Auth::check(); ?>' != 1) {
             var first_name = $('#first_name').val();
             var last_name = $('#last_name').val();
@@ -666,7 +633,7 @@
                         } else {
                             jQuery('.alert-danger').html('');
                             jQuery('.alert-danger').hide();
-                          
+
                             jQuery.ajax({
 
                                 url: "{{ url('/register') }}",
@@ -687,9 +654,9 @@
                                     if (data.type == 'success') {
                                         jQuery('.alert-danger').html('');
                                         jQuery('.alert-danger').hide();
-                                        
-                                       $('#verify_otp').show();
-                                       $('.register_login').hide();
+
+                                        $('#verify_otp').show();
+                                        $('.register_login').hide();
                                     } else {
                                         jQuery('.alert-danger').html('');
                                         jQuery('.alert-danger').show();
@@ -793,48 +760,47 @@
 
     }
 
-    function verifyCode()
-    {
-        var code=$('#code').val();
-         if(code){
+    function verifyCode() {
+        var code = $('#code').val();
+        if (code) {
             let _token = $('meta[name="csrf-token"]').attr('content');
             jQuery.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                jQuery.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+            });
+            jQuery.ajax({
 
-                    url: "{{ url('/registration/verify-user-code') }}",
-                    method: 'post',
-                    data: {
-                        code: code,
-                        otp_verify:1,
-                        _token: _token
-                    },
-                    success: function(data) {
-                        if (data.type == 'success') {
-                            jQuery('.alert-danger').html('');
-                            jQuery('.alert-danger').hide();
+                url: "{{ url('/registration/verify-user-code') }}",
+                method: 'post',
+                data: {
+                    code: code,
+                    otp_verify: 1,
+                    _token: _token
+                },
+                success: function(data) {
+                    if (data.type == 'success') {
+                        jQuery('.alert-danger').html('');
+                        jQuery('.alert-danger').hide();
 
-                            $('#verify_otp').hide();
-                            $('.form_submission').show();
-        
-                           $('.register_login').hide();
+                        $('#verify_otp').hide();
+                        $('.form_submission').show();
 
-                         } else if (data.type == 'error') {
-                             
-                            jQuery('.alert-danger').html('');
-                            jQuery('.alert-danger').show();
-                            jQuery('.alert-danger').append(data.message);
-     
-                         }
-                      
+                        $('.register_login').hide();
+
+                    } else if (data.type == 'error') {
+
+                        jQuery('.alert-danger').html('');
+                        jQuery('.alert-danger').show();
+                        jQuery('.alert-danger').append(data.message);
 
                     }
 
-                });       
-         }
+
+                }
+
+            });
+        }
     }
 
     function renderButton() {
@@ -964,7 +930,7 @@
 
         current_fs = $(this).parent();
         previous_fs = $(this).parent().prev();
-       
+
         //Remove class active
         $("#progressbaragency li").eq($("fieldset").index(current_fs)).removeClass("active");
 

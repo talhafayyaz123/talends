@@ -69,7 +69,7 @@
                         <p>Trusted by:</p>
                         @if(isset( $trusted_by->about_talends_image) )
                         <img src="{{asset('uploads/home-pages/banners/'.$trusted_by->about_talends_image)}}"
-                            class="img-fluid" alt="Talend Partner's Image"/>
+                            class="w-100" alt="">
                         @endif
                     </div>
                 </div>
@@ -243,7 +243,7 @@
                 
                     @if(isset( $banner_settings->talends_work_image) )
                     <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->talends_work_image)}}"
-                        class="img-fluid w-100" alt="">
+                        class="w-100" alt="">
                     @endif
                 </div>
                 <div class="col-lg-6 pb-3 align-self-center">

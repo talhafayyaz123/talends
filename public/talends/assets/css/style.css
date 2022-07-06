@@ -234,7 +234,6 @@ header .navbar .navbar-nav .nav_item_right:first-child {
 
 .menu_green_cta {
     background: #349f1a;
-    border: 1px solid #349f1a !important;
 }
 
 .menu_blue_cta {
@@ -258,6 +257,8 @@ header .navbar .navbar-nav .nav_item_right:first-child {
 .menu_green_cta_trans {
     border: solid 1px #349f1a !important;
     color: #349f1a !important;
+    text-transform: uppercase;
+    font-size: 13px !important;
 }
 
 .header_about_btn .side_panel-toggle {
@@ -663,8 +664,9 @@ header.sticky_header .navbar a {
 .navbar-expand-lg .navbar-nav .nav-link {
     padding-left: 0;
     padding-right: 0;
-    margin: 0 10px;
+    margin: 0 5px;
     border-bottom: solid transparent;
+    font-size: 14px;
 }
 
 .navbar-expand-lg .navbar-nav .nav-link.active {
@@ -678,7 +680,7 @@ header.sticky_header .navbar a {
     max-height: 60vh;
     position: fixed;
     right: 0;
-    top: 96px;
+    top: 62px;
     transition: transform 0.5s;
     visibility: hidden;
     overflow: hidden;
@@ -1689,12 +1691,8 @@ section.featured_success_stories_sec .carousel-inner h2 {
     text-transform: uppercase;
 }
 @media only screen and (max-width: 1280px) {
-    header .navbar-brand img {
-        width: 220px;
-    }
-
     header .navbar-expand-lg .navbar-collapse {
-        padding-top: 14px;
+        padding-top: 0px;
     }
 
     header .navbar-brand {

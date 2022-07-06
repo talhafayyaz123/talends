@@ -467,8 +467,8 @@
                     <div class="content-box">
                         {!! $agency_need_banner->banner_description ?? ''  !!}
                         
-                        <a href="{{ route('register')  }}" class="btn mt-4">Register as employer </a>
-                        <a href="{{ route('companyRegistraton')  }}" class="btn btn2 mt-4 ml-md-3">Register as Agency </a>
+                        <a href="{{ route('register')  }}" class="btn m-1">Register as employer </a>
+                        <a href="{{ route('companyRegistraton')  }}" class="btn btn2 m-1">Register as Agency </a>
                     </div>
                 </div>
                 <div class="col-md-5">
