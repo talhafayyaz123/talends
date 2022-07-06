@@ -58,68 +58,10 @@ Why Join Agency Plan
                     <div class="text-box">
                         <h5>Leads generation on auto pilot</h5>
                     </div>
-                        <!-- @if(isset($why_agency_plan->short_term_project_image) )
-                            <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->short_term_project_image)}}" alt="" class="w-100">
-                        @endif     -->
                 </div>
             </div>
         </div>
     </section>
-    <!-- <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    {!! $why_agency_plan->project_description ?? '' !!}
-
-                </div>
-                <div class="col-md-6">
-                    <ul class="tal-features">
-                        <li>
-                            <div class="t-f">
-                                <div class="ficon-wrap">
-                                    @if(isset($why_agency_plan->talends_project_image) )
-                                    <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->talends_project_image)}}" alt="" class="w-100">
-                                    @endif
-                                </div>
-                                <div class="ftitle-wrap">
-                                    <strong>Strengthen your online reputation</strong>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="t-f">
-                                <div class="ficon-wrap">
-                                    @if(isset($why_agency_plan->short_term_project_image) )
-                                    <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->short_term_project_image)}}" alt="" class="w-100">
-                                    @endif
-                                </div>
-                                <div class="ftitle-wrap">
-                                    <strong>Strengthen your online reputation</strong>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="t-f">
-                                <div class="ficon-wrap">
-                                    @if(isset($why_agency_plan->recurring_engagements_image) )
-                                    <img src="{{asset('uploads/home-pages/why_agency_plan/'.$why_agency_plan->recurring_engagements_image)}}" alt="" class="w-100">
-                                    @endif
-                                </div>
-                                <div class="ftitle-wrap">
-                                    <strong>Strengthen your online reputation</strong>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    @if( isset($why_agency_plan->talends_project_image))
-                    <img src="{{ asset('uploads/home-pages/about_talends/'.$why_agency_plan->talends_project_image)}}" class="w-100" alt="">
-                    @endif
-                </div>
-            </div>
-        </div>
-    </section> -->
-
-
     <section class="trustedby_sec">
         <div class="container">
             <div class="row justify-content-center">
@@ -136,8 +78,6 @@ Why Join Agency Plan
             </div>
         </div>
     </section>
-
-
     <section class="flex-plans-sec">
         <div class="container">
             <div class="row align-items-end">
@@ -170,17 +110,12 @@ Why Join Agency Plan
                                         <th class="col-desc">What You’ll Get PRICE($)</th>
                                         <th class="col-plan1">
                                             <div class="plan-title">                                            
-                                                <h5> 
-                                                    <!-- <span><img src="{{asset('uploads/home-pages/why_agency_plan/plan-icon.png')}}" alt="Plan Icon" width="30" class="img-fluid mr-2"></span> -->
-                                                <b>${{ $package[0]->cost ?? '0' }}</b> Monthly </h5>
+                                                <h5><b>${{ $package[0]->cost ?? '0' }}</b> Monthly </h5>
                                             </div>
                                         </th>
                                         <th class="col-plan2">
                                             <div class="plan-title d-flex align-items-center justify-content-center">                                            
-                                                <h5>
-                                                    <!-- <span><img src="{{asset('uploads/home-pages/why_agency_plan/plan-icon.png')}}" alt="Plan Icon" width="30" class="img-fluid mr-2"></span> -->
-                                                    <b>${{ $package[1]->cost ?? '0' }}</b> Yearly</h5>
-                                               
+                                                <h5><b>${{ $package[1]->cost ?? '0' }}</b> Yearly</h5>
                                             </div>
                                         </th>
                                     </tr>

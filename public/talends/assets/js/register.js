@@ -95,15 +95,15 @@ $(document).ready(function(){
                                 
                                 if(value=='The password format is invalid.'){
                                     jQuery('#password_error').show();
-                                    jQuery('#password_error').append('<p>password must be more than 8 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character</p>'); 
+                                    jQuery('#password_error').append('<p class="mb-0">password must be more than 8 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character</p>'); 
                                 }else if(value=='The email has already been taken.' || value=='Please use your Business email' )
                                 {
                                     jQuery('#email_error').show();
-                                    jQuery('#email_error').append('<p>'+value+'</p>'); 
+                                    jQuery('#email_error').append('<p class="mb-0">'+value+'</p>'); 
                                 }else{
                                     
                                     jQuery('#password_error').show();
-                                    jQuery('#password_error').append('<p>'+value+'</p>'); 
+                                    jQuery('#password_error').append('<p class="mb-0">'+value+'</p>'); 
                                 
                                 }
                                
