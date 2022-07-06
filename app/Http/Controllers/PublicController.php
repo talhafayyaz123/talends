@@ -341,6 +341,7 @@ class PublicController extends Controller
                             $email_params['name'] = Helper::getUserName($id);
                             $email_params['email'] = $email;
                             $email_params['password'] = $password;
+                            $email_params['role'] =$user->getRoleNames()[0];
                             Mail::to($email)
                                 ->send(
                                     new GeneralEmailMailable(
@@ -414,6 +415,8 @@ class PublicController extends Controller
                             $email_params['name'] = Helper::getUserName($id);
                             $email_params['email'] = $email;
                             $email_params['password'] = $password;
+                            $email_params['role'] =$user->getRoleNames()[0];
+                    
                             Mail::to($email)
                                 ->send(
                                     new GeneralEmailMailable(
@@ -429,7 +432,8 @@ class PublicController extends Controller
                             $email_params['name'] = Helper::getUserName($id);
                             $email_params['email'] = $email;
                             $email_params['link'] = url('profile/' . $user->slug);
-                              Mail::to(config('mail.username'))
+                        
+                              Mail::to('admin@talends.com')
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_registration',
