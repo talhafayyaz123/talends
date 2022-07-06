@@ -121,7 +121,7 @@ class GeneralEmailMailable extends Mailable
     public function build()
 
     {
-
+      $email_from=env('MAIL_FROM_ADDRESS');
         $from_email = EmailHelper::getEmailFrom();
 
         $from_email_id = EmailHelper::getEmailID();
@@ -129,12 +129,37 @@ class GeneralEmailMailable extends Mailable
         $subject = $this->template->subject;
 
         if ($this->type == 'verification_code') {
-
+              
             $email_message = $this->prepareEmailVerificationCode($this->email_params);
+            
+            if( isset($this->email_params['role'])  && $this->email_params['role']=='company'){
+            $email_from='agency@talends.com';
+            }
+
+            if( isset($this->email_params['role'])  && $this->email_params['role']=='employer'){
+                $email_from='client@talends.com';
+            }
+
+
+            if( isset($this->email_params['role'])  && ($this->email_params['role']=='freelancer' ||  $this->email_params['role']=='intern' ) ){
+                $email_from='Talent@talends.com';
+            }
 
         } elseif ($this->type == 'new_user') {
 
             $email_message = $this->prepareEmailNewRegisteredUser($this->email_params);
+
+            if(isset($this->email_params['role'])  && $this->email_params['role']=='company'){
+                $email_from='agency@talends.com';
+            }
+            
+            if( isset($this->email_params['role'])  && $this->email_params['role']=='employer'){
+                $email_from='client@talends.com';
+            }
+
+            if( isset($this->email_params['role'])  && ($this->email_params['role']=='freelancer' ||  $this->email_params['role']=='intern' ) ){
+                $email_from='Talent@talends.com';
+            }
 
         } elseif ($this->type == 'lost_password') {
 
@@ -158,7 +183,8 @@ class GeneralEmailMailable extends Mailable
 
         }
 
-        $message = $this->from(env('MAIL_FROM_ADDRESS'))
+
+        $message = $this->from($email_from)
 
             ->subject($subject)->view('emails.index')
 

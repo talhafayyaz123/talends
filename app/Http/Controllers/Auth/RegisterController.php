@@ -153,6 +153,7 @@ class RegisterController extends Controller
                     $email_params['verification_code'] = $user->verification_code;
                     $email_params['name'] = Helper::getUserName($user->id);
                     $email_params['email'] = $user->email;
+                    $email_params['role'] =$user->getRoleNames()[0];
                     Mail::to($user->email)
                         ->send(
                             new GeneralEmailMailable(
@@ -169,6 +170,7 @@ class RegisterController extends Controller
                     $email_params['name'] = Helper::getUserName($user->id);
                     $email_params['email'] = $user->email;
                     $email_params['password'] = $request['password'];
+                    $email_params['role'] =$user->getRoleNames()[0];
                     Mail::to($user->email)
                         ->send(
                             new GeneralEmailMailable(
@@ -214,7 +216,7 @@ class RegisterController extends Controller
         $validation=array();
         $validation= [
             'company_name' => 'required',
-            'email' => ['required','unique:users', 'email', new checkBusinessEmail],
+            'email' => ['required','unique:users'],
             'phone_number' => 'required',
             'password' => 'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
             'employees' => 'required',
@@ -264,6 +266,8 @@ class RegisterController extends Controller
                     $email_params['verification_code'] = $user->verification_code;
                     $email_params['name'] = Helper::getUserName($user->id);
                     $email_params['email'] = $user->email;
+                    $email_params['role'] = 'company';
+
                     Mail::to($user->email)
                         ->send(
                             new GeneralEmailMailable(
@@ -280,6 +284,7 @@ class RegisterController extends Controller
                     $email_params['name'] = Helper::getUserName($user->id);
                     $email_params['email'] = $user->email;
                     $email_params['password'] = $request['password'];
+                    $email_params['role'] = 'company';
                     Mail::to($user->email)
                         ->send(
                             new GeneralEmailMailable(
@@ -294,6 +299,7 @@ class RegisterController extends Controller
                     $template_data = EmailTemplate::getEmailTemplateByID($admin_template->id);
                     $email_params['name'] = Helper::getUserName($user->id);
                     $email_params['email'] = $user->email;
+                    $email_params['role'] = 'company';
                     $email_params['link'] = url('profile/' . $user->slug);
                     /* Mail::to(config('mail.username'))
                         ->send(
