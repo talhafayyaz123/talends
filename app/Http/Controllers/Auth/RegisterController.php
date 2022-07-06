@@ -184,14 +184,14 @@ class RegisterController extends Controller
                     $email_params['name'] = Helper::getUserName($user->id);
                     $email_params['email'] = $user->email;
                     $email_params['link'] = url('profile/' . $user->slug);
-                    Mail::to(config('mail.username'))
+                   /*  Mail::to(config('mail.username'))
                         ->send(
                             new AdminEmailMailable(
                                 'admin_email_registration',
                                 $template_data,
                                 $email_params
                             )
-                        );
+                        ); */
                 }
                 session()->forget('password');
                 session()->forget('email');
@@ -295,14 +295,14 @@ class RegisterController extends Controller
                     $email_params['name'] = Helper::getUserName($user->id);
                     $email_params['email'] = $user->email;
                     $email_params['link'] = url('profile/' . $user->slug);
-                    Mail::to(config('mail.username'))
+                    /* Mail::to(config('mail.username'))
                         ->send(
                             new AdminEmailMailable(
                                 'admin_email_registration',
                                 $template_data,
                                 $email_params
                             )
-                        );
+                        ); */
                 }
                 session()->forget('password');
                 session()->forget('email');

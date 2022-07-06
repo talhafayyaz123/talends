@@ -816,7 +816,7 @@ class JobController extends Controller
 
                                 $email_params['link'] = url('profile/' . $user->slug);
 
-                                Mail::to(config('mail.username'))
+                               /*  Mail::to(config('mail.username'))
 
                                 ->send(
 
@@ -830,7 +830,7 @@ class JobController extends Controller
 
                                     )
 
-                                );
+                                ); */
 
                                 if (!empty($user->email)) {
 
@@ -902,7 +902,7 @@ class JobController extends Controller
 
                             $email_params['link'] = url('profile/' . $user->slug);
 
-                            Mail::to(config('mail.username'))
+                           /*  Mail::to(config('mail.username'))
 
                             ->send(
 
@@ -916,7 +916,7 @@ class JobController extends Controller
 
                                 )
 
-                            );
+                            ); */
 
                             if (!empty($user->email)) {
 
