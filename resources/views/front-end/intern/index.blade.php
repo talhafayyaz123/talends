@@ -217,13 +217,13 @@
                     <div class="content-box text-center text-md-left">
                         {!!  $interne_university_collaboration->internees_benefits ?? ''  !!}
                         <a href="{{ route('register') }}"  class="btn btn-theme rounded-pill px-5">Register as Employer</a>
-                        <a href="{{ route('register') }}"  class="btn btn-outline-theme rounded-pill px-5">Register as Intern</a>
+                        <a href="{{ route('register') }}"  class="btn btn-outline-theme rounded-pill ml-md-3 px-5">Register as Intern</a>
                     </div>
                 </div>
                 <div class="col-md-6 text-center text-md-right">
-                @if(isset( $interne_university_collaboration->long_term_work_image) )
-                            <img src="{{asset('uploads/home-pages/interne_uni_collaboration/'.$interne_university_collaboration->long_term_work_image)}}" class="img-fluid" alt="Connect image">>
-                @endif
+                    @if(isset( $interne_university_collaboration->long_term_work_image) )
+                        <img src="{{asset('uploads/home-pages/interne_uni_collaboration/'.$interne_university_collaboration->long_term_work_image)}}" class="img-fluid" alt="Connect image">>
+                    @endif
                 </div>
             </div>
         </div>
@@ -258,7 +258,7 @@
 
                         </div>
                         <p>We would love to have more universities on-Board with us, please drop us a message & we will get back.</p>
-                        <button class="btn btn-theme-white rounded-pill px-4">Universities@Talends.com</button>
+                        <button class="btn btn-theme rounded-pill px-4">Universities@Talends.com</button>
                     </div>
                 </div>
             </div>

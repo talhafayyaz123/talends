@@ -1,5 +1,23 @@
+
+    var input = document.querySelector("#phone_number");
+    window.intlTelInput(input, {
+        autoHideDialCode: true,
+        dropdownContainer: document.body,
+        formatOnDisplay: true,
+        initialCountry: "auto",
+        separateDialCode: true
+    });
+
 $(document).ready(function(){
     
+    // change of email check already exist
+    
+
+      $('#email, #register_password').change(function() {
+        email_password_check();
+    });
+    ////////////////////////////////////////////
+
     var current_fs, next_fs, previous_fs; //fieldsets
     var opacity;
     var current = 1;
@@ -95,15 +113,15 @@ $(document).ready(function(){
                                 
                                 if(value=='The password format is invalid.'){
                                     jQuery('#password_error').show();
-                                    jQuery('#password_error').append('<p>password must be more than 8 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character</p>'); 
+                                    jQuery('#password_error').append('<p class="mb-0">password must be more than 8 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character</p>'); 
                                 }else if(value=='The email has already been taken.' || value=='Please use your Business email' )
                                 {
                                     jQuery('#email_error').show();
-                                    jQuery('#email_error').append('<p>'+value+'</p>'); 
+                                    jQuery('#email_error').append('<p class="mb-0">'+value+'</p>'); 
                                 }else{
                                     
                                     jQuery('#password_error').show();
-                                    jQuery('#password_error').append('<p>'+value+'</p>'); 
+                                    jQuery('#password_error').append('<p class="mb-0">'+value+'</p>'); 
                                 
                                 }
                                
@@ -291,3 +309,69 @@ $(document).ready(function(){
     })
         
     });
+
+
+    function email_password_check(){
+        var email=$('#email').val();
+        var register_password=$('#register_password').val();
+    
+       let _token   = $('meta[name="csrf-token"]').attr('content');
+       var obj=$(this);
+             jQuery.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+            });
+             jQuery.ajax({
+              url: "/agency/register/custom-errors",
+                method: 'post',
+                data: {
+                  email:email,
+                  password:register_password,
+                _token: _token
+                },
+                success: function(data){
+       
+                  if(data.errors){
+                      jQuery('#password_error').html('');
+                      jQuery('#email_error').html('');
+       
+                     jQuery('#password_error').hide();
+                      jQuery('#email_error').hide();
+                      jQuery.each(data.errors, function(key, value){
+                     
+                          if(value=='The password format is invalid.'){
+                              jQuery('#password_error').show();
+                              jQuery('#password_error').append('<p class="mb-0">password must be more than 8 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character</p>'); 
+                          }else if(value=='The email has already been taken.' || value=='Please use your Business email' )
+                          {
+                              jQuery('#email_error').show();
+                              jQuery('#email_error').append('<p class="mb-0">'+value+'</p>'); 
+                          }else{
+                              
+                              jQuery('#password_error').show();
+                              jQuery('#password_error').append('<p class="mb-0">'+value+'</p>'); 
+                          
+                          }
+                         
+                     });
+                     $('.step_1_btn').attr('disabled', true);
+                  }else{
+                      is_error=0;
+                      jQuery('#password_error').html('');
+                      jQuery('#email_error').html('');
+       
+                     jQuery('#password_error').hide();
+                      jQuery('#email_error').hide();
+                      $('.step_1_btn').removeAttr('disabled');
+                     
+                }
+                       
+                  }
+                  
+                });
+          
+
+        /////
+
+    }

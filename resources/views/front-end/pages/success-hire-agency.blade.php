@@ -10,18 +10,14 @@ $breadcrumbs = Breadcrumbs::generate('hireAgencyForm', $id);
 @endphp
 
 
-<div class="wt-haslayout wt-innerbannerholder theme_bg_dark">
+<!-- <div class="wt-haslayout wt-innerbannerholder theme_bg_dark">
 
     <div class="container">
         <div class="row justify-content-md-center">
-            <div class="col-xs-12 col-sm-12 col-md-8 push-md-2 col-lg-6 push-lg-3">
+            <div class="col-xs-12 col-sm-12">
                 <div class="wt-innerbannercontent">
                     <div class="wt-title">
-                        <h2>
-                            <font style="vertical-align: inherit;">
-                                <font style="vertical-align: inherit;">{{ $company_work_detail->company_name ?? 'Agency' }}</font>
-                            </font>
-                        </h2>
+                        <h2>{{ $company_work_detail->company_name ?? 'Agency' }}</h2>
                     </div>
                     <ol class="wt-breadcrumb">
                         @foreach ($breadcrumbs as $breadcrumb)
@@ -36,7 +32,7 @@ $breadcrumbs = Breadcrumbs::generate('hireAgencyForm', $id);
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="wt-haslayout">
     <div class="container">
@@ -44,41 +40,25 @@ $breadcrumbs = Breadcrumbs::generate('hireAgencyForm', $id);
             <div class="job-single wt-haslayout">
                 <div id="jobs" class="wt-twocolumns wt-haslayout">
                     @if (Session::has('message'))
-
                     <div class="flash_msg">
-
                         <flash_messages :message_class="'success'" :time='5' :message="'{{{ Session::get('message') }}}'" v-cloak></flash_messages>
-
                     </div>
-
                     @endif
-
                     @if ($errors->any())
-
-                    <ul class="wt-jobalerts">
-
-                        @foreach ($errors->all() as $error)
-
-                        <div class="flash_msg">
-
-                            <flash_messages :message_class="'danger'" :time='10' :message="'{{{ $error }}}'" v-cloak></flash_messages>
-
-                        </div>
-
-                        @endforeach
-
-                    </ul>
-
+                        <ul class="wt-jobalerts">
+                            @foreach ($errors->all() as $error)
+                                <div class="flash_msg">
+                                    <flash_messages :message_class="'danger'" :time='10' :message="'{{{ $error }}}'" v-cloak></flash_messages>
+                                </div>
+                            @endforeach
+                        </ul>
                     @endif
-
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left">
-
-                        <div class="wt-tabscontenttitle">
-                            <h2>Response has been saved.<br>Agency will contact with you soon.<br>Thank You.</h2>
-                        </div>
-
+                    <div class="col-md-8 mx-auto text-center my-5 py-5">
+                        <img src="{{ asset('talends/assets/img/icons/success-icon.png')}}" class="img-fluid mb-4" />
+                        <h1 class="font-weight-bold"><i>Thank You !</i></h1>
+                        <p class="mb-5">Your response has been saved, agency will contact with you soon.</p>
+                        <a href="{{ route('home') }}" class="btn btn-theme px-4 rounded-pill"><i class="bi-arrow-left mr-2"></i> Back to Home</a>
                     </div>
-
                 </div>
             </div>
         </div>

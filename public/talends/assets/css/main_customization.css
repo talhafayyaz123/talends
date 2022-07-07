@@ -2245,3 +2245,7 @@ footer .list-inline a i {
   ::-webkit-scrollbar-thumb:hover {
 	background: #2d9215;
   }
+/* internation directory css*/
+.iti--separate-dial-code .iti__selected-flag {
+    background-color: transparent !important;
+}
