@@ -168,30 +168,6 @@ Company Registration
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 mb-4">
-                                                <div class="plan-content">
-                                                    <div class="table-responsive-lg">
-                                                        <table class="table mb-0">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="col-desc">Choos Your Plan</th>
-                                                                    <th class="col-plan1">
-                                                                        <h5>${{ $package[0]->cost ?? '0' }} Monthly</h5>
-                                                                    </th>
-                                                                    <th class="col-plan2">
-                                                                        <h5>${{ $package[1]->cost ?? '0' }} Yearly</h5>
-                                                                    </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td><i class="bi-check-circle-fill mr-2"></i> Number of Featured Services</td>
-                                                                    <td class="text-center">2</td>
-                                                                    <td class="text-center">5</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
                                                 <div class="plans-inner">
                                                     <div class="plans-wrap">
                                                         <div class="plan plan-list">
