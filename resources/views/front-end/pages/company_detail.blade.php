@@ -272,7 +272,7 @@
                                     </div>
                                     @endforeach
                                     <div class="col-md-12 mb-4">
-                                        <textarea name="" class="form-control" id="" rows="3" placeholder=" Describe the project scope and time line" style="border-radius:7px;"></textarea>
+                                        <textarea name="" class="form-control" id="" rows="3" placeholder=" Please share your project details" style="border-radius:7px;border:2px solid #349F1A;"></textarea>
                                     </div>
 
                                 </div>

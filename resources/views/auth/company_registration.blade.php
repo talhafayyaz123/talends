@@ -64,9 +64,9 @@ Company Registration
                                                 <div class="alert alert-danger position-absolute" id='email_error' style="display:none; z-index:9"></div>
 
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 mb-3 form-group">
+                                            <div class="col-xl-6 col-lg-6 mb-3">
                                                 <label class="fieldlabels">Phone Number <span class="text-danger">*</span></label>
-                                                <div class="form-group"  style="border: 1px solid #349f1a; border-radius:10px;position:relative;padding-left:7px;">
+                                                <div class="" style="border: 1px solid #349f1a; border-radius:10px;position:relative;padding-left:7px;">
                                                     <input type="tel" name="phone_number" class="form-control" id="phone_number" value="{{ old('phone_number') }}" style="border-radius:0 10px 10px 0 ;border: 0;" data-intl-tel-input-id="0" />
                                                 </div>
                                             </div>
@@ -168,30 +168,6 @@ Company Registration
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 mb-4">
-                                                <div class="plan-content">
-                                                    <div class="table-responsive-lg">
-                                                        <table class="table mb-0">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="col-desc">Choos Your Plan</th>
-                                                                    <th class="col-plan1">
-                                                                        <h5>${{ $package[0]->cost ?? '0' }} Monthly</h5>
-                                                                    </th>
-                                                                    <th class="col-plan2">
-                                                                        <h5>${{ $package[1]->cost ?? '0' }} Yearly</h5>
-                                                                    </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td><i class="bi-check-circle-fill mr-2"></i> Number of Featured Services</td>
-                                                                    <td class="text-center">2</td>
-                                                                    <td class="text-center">5</td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
                                                 <div class="plans-inner">
                                                     <div class="plans-wrap">
                                                         <div class="plan plan-list">
