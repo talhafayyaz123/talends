@@ -257,7 +257,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                 <div v-show='user_type'>
                                                    
                                                     <div class="entity-form row" style="display:block;">
-                                                        <div class="col-12 mb-3 text-center" style="padding-left: 27%;" v-bind:class="{ 'is-invalid': form_step2.is_recaptcha_error }">
+                                                        <div class="col-12 mb-3 text-center" style="padding-left: 26%;" v-bind:class="{ 'is-invalid': form_step2.is_recaptcha_error }">
                                                             {!! htmlFormSnippet() !!}
                                                             <span class="help-block" v-if="form_step2.recaptcha_error">
                                                                 <strong v-cloak>@{{form_step2.recaptcha_error}}</strong>
