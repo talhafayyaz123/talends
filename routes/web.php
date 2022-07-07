@@ -66,7 +66,7 @@ Route::get('browse-jobs', 'HomeController@browseJobs')->name('browseJobs');
 Route::get('find-talends', 'HomeController@findTalents')->name('findTalends');
 Route::get('find-interns', 'HomeController@findInterns')->name('findInterns');
 Route::get('companies', 'HomeController@Companies')->name('Companies');
-Route::get('company-service/detail', 'HomeController@CompanyServiceDetail');
+
 
 
 Route::get('connect', 'HomeController@connectDetail');
