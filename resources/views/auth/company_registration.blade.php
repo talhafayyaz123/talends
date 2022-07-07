@@ -64,9 +64,9 @@ Company Registration
                                                 <div class="alert alert-danger position-absolute" id='email_error' style="display:none; z-index:9"></div>
 
                                             </div>
-                                            <div class="col-xl-6 col-lg-6 mb-3 form-group">
+                                            <div class="col-xl-6 col-lg-6 mb-3">
                                                 <label class="fieldlabels">Phone Number <span class="text-danger">*</span></label>
-                                                <div class="form-group" style="border: 1px solid #349f1a; border-radius:10px;position:relative;padding-left:7px;">
+                                                <div class="" style="border: 1px solid #349f1a; border-radius:10px;position:relative;padding-left:7px;">
                                                     <input type="tel" name="phone_number" class="form-control" id="phone_number" value="{{ old('phone_number') }}" style="border-radius:0 10px 10px 0 ;border: 0;" data-intl-tel-input-id="0" />
                                                 </div>
                                             </div>

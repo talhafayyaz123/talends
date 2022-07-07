@@ -188,12 +188,19 @@ header .navbar-expand-lg .navbar-collapse {
     padding-right: 25px !important;
     text-align: center;
     color: #fff !important;
-    border: unset !important;
+    /* border: unset !important; */
 }
 
 .menu_green_cta_trans {
     border: solid 1px #349f1a !important;
     color: #349f1a !important;
+    font-size: 13px !important;
+    line-height:19px;
+}
+.menu_green_cta{
+    border-top: 1px solid #349f1a;
+    border-bottom: 1px solid #349f1a !important;
+    
 }
 
 header .container {
@@ -1483,3 +1490,22 @@ footer .list-inline a i {
     text-align: center;
     line-height: 18px;
 }
+/* width */
+::-webkit-scrollbar {
+	width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: #166702;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: #2d9215;
+  }
