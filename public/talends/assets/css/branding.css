@@ -947,6 +947,7 @@ ul.disc_style {
     line-height: 1.3;
     position:relative;
     display: inline-block;
+    color: #b6cbb1 !important;
 }
 .quick-links a::after {
     content: "";
@@ -988,11 +989,6 @@ footer {
     font-weight: 200;
     font-size: 18px
 }
-
-footer .row {
-    padding: 10px 0
-}
-
 footer h4 {
     color: #fff;
     margin-bottom: 10px;
@@ -1005,12 +1001,12 @@ footer .col-md-6+.col-md-6 {
     text-align: right
 }
 
-footer .col-md-6 a,
-footer .col-md-6 p {
+footer .secondary-footer a,
+footer .secondary-footer p {
     margin-bottom: 0;
-    font-size: 14px;
-    line-height: 16px;
-    color: #97af92
+    font-size: 10px;
+    line-height: 1.3;
+    color: #8aa984
 }
 
 footer ul li {

@@ -3,6 +3,25 @@
 'extend.front-end.master':
 
  'front-end.master', ['body_class' => 'wt-innerbgcolor'] )
+ @push('stylesheets')
+
+<link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet">
+<style>
+    .custom-control-input {
+        position: absolute;
+        left: 9px;
+        z-index: 1;
+    }
+    .custom-check .custom-control-label::after {
+        content: "\f00c";
+        font-family: fontawesome;
+        color: white;
+        font-size: 8px;
+        top: 6px;
+        left: -20px;
+    }
+</style>
+@endpush
 
 @section('title'){{ $job_list_meta_title }} @stop
 
@@ -83,7 +102,9 @@
 
 
     <script>
-
+        $(document).on('click', '.allow-focus', function (e) {
+            e.stopPropagation();
+        });
 
 
     function toogle_price(){
@@ -300,25 +321,25 @@
 
 
 
-    $(document).scroll(function(e) {
+    // $(document).scroll(function(e) {
 
-        e.preventDefault;
+    //     e.preventDefault;
 
-        if ($(this).scrollTop() > (pos.top + 40) && fixadent.css('position') == 'static') {
+    //     if ($(this).scrollTop() > (pos.top + 40) && fixadent.css('position') == 'static') {
 
-            fixadent.addClass('fixed');
+    //         fixadent.addClass('fixed');
 
-        } else {
+    //     } else {
 
-            if ($(this).scrollTop() <= pos.top && fixadent.hasClass('fixed')) {
+    //         if ($(this).scrollTop() <= pos.top && fixadent.hasClass('fixed')) {
 
-                fixadent.removeClass('fixed');
+    //             fixadent.removeClass('fixed');
 
-            }
+    //         }
 
-        };
+    //     };
 
-    });
+    // });
 
     
 

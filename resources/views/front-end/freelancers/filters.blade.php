@@ -1,7 +1,7 @@
 <aside id="wt-sidebar" class="wt-sidebar wt-usersidebar freelancer_filters border-bottom pb-3">
     {!! Form::open(['url' => url('search-results'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch', 'id' => 'wt-formsearch']) !!}
     <input type="hidden" value="{{$type}}" name="type">
-    <div class="d-md-flex w-100 px-md-0 px-3 mb-3">
+    <div class="d-md-flex w-100 px-md-0 px-3 mb-3 flex-row">
         <div class="dropdown position-static filter-dropdown">
             <button class="btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 Category <i class="bi-chevron-down float-right ml-3"></i>
@@ -28,42 +28,6 @@
                 @endif
             </div>
         </div>
-        <!-- <div class="wt-widget wt-effectiveholder">
-            <a  onclick="toogle_category()"> 
-                <div class="wt-widgettitle">
-                    <span>Category</span>  
-                    <span class="filter_toogle1 float-right">   <i class="fa fa-angle-down ml-3" aria-hidden="true"></i></span>
-                </div>
-            </a>
-            <div class="wt-widgetcontent freelancer_skills_filter  freelancer_cat_filter" style="display: none;">
-
-                <fieldset>
-                    @if (!empty($categories))
-                        <div class="wt-checkboxholder wt-verticalscrollbar dropdown-50">
-                            <div class="row">
-                            @foreach ($categories as $key => $category)
-                                @php 
-                                    $checked ='';
-                                    if( !empty($_GET['category'])  && in_array($category->id,$_GET['category']) ){
-                                        $checked ='checked';
-                                    }
-                                @endphp
-                                
-                                    <div class="col-md-4">
-                                        <span class="wt-checkbox freelancer_category">
-                                            <input id="category-{{{ $key }}}" type="checkbox" id="category" name="category[]" value="{{{$category->id}}}" {{$checked }} >
-                                            <label for="category-{{{ $key }}}">{{{ $category->title }}}</label>
-                                        </span>
-                                    </div>
-                            @endforeach
-                            </div>
-                        </div>
-                    @endif
-
-                </fieldset>
-
-            </div>
-        </div> -->
         <div class="dropdown position-static filter-dropdown">
             <button class="btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 Sub Categories <i class="bi-chevron-down float-right ml-3"></i>
@@ -282,12 +246,12 @@
             </div>
         </div> -->
         <div class="filter-btns">
-            {!! Form::submit(trans('lang.btn_apply_filters'), ['class' => 'wt-btn']) !!}
+            {!! Form::submit(trans('lang.btn_apply_filters'), ['class' => 'wt-btn ml-2']) !!}
         </div>
     </div>
     {!! form::close(); !!}
     <div class="row align-items-center">
-        <div class="col-xl-3 col-md-7 col-sm-9 col-12 mb-2 text-center">
+        <div class="col-xl-3 col-md-4 col-sm-9 col-12 mb-2 text-center">
             <div class="custom-control custom-switch rounded-pill p-2" style="background-color:#f7f5f5;">
                 <span>
                     <svg viewBox="0 0 16 16" height="16" width="16" class="text-success small" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.735.07a.533.533 0 0 1 .53 0l7.466 4.267A.533.533 0 0 1 16 4.8v.768c0 4.835-3.205 9.083-7.853 10.412a.534.534 0 0 1-.294 0A10.828 10.828 0 0 1 0 5.567V4.8c0-.191.103-.368.269-.463L7.735.07Zm-.192 11.355 4.607-5.759L11.317 5 7.39 9.91 4.608 7.59l-.683.82 3.618 3.015Z" fill="currentColor"></path></svg>

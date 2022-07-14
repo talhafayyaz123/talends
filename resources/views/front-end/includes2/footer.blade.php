@@ -221,20 +221,22 @@ $footer_menus_4=App\Helper::footerMenu4();
             </div>
         </div>
         <div class="row footer_bottom align-items-end">
-            <div class="col-md-6 mb-3">
-                <ul class="list-inline">
-                <li class="px-1"> <a href="{{ $footer_social_content['banner_description'] ?? '' }}" target="_blank"><i class="fa fa-facebook"></i></a> </li>
-                    <li class="px-1"> <a href="{{ $footer_social_content['project_description'] ?? '' }}" target="_blank"><i class="fa fa-twitter"></i></a> </li>
-                    <li class="px-1"> <a href="{{ $footer_social_content['features_text'] ?? '' }}" target="_blank"><i class="fa fa-linkedin"></i></a> </li>
-                    <li class="px-1"> <a href="{{ $footer_social_content['work_description'] ?? '' }}" target="_blank"><i class="fa fa-instagram"></i></a> </li>
-                    <li class="px-1"> <a href="{{ $footer_social_content['services_description'] ?? '' }}" target="_blank"><i class="fa fa-youtube"></i></a> </li>
-                    <li class="px-1"> <a href="{{ $footer_social_content['payment_description'] ?? '' }}" target="_blank"><i class="bi-tiktok"></i></a> </li>
-                </ul>
-                <p class="mb-0">Talends.com ©2022 All Rights Reserved.</p>
-                <p class="small">Dubai, United Arab Emirates</p>
+            <div class="col-md-7">
+                <div class="secondary-footer">
+                    <ul class="list-inline mb-2">
+                        <li class="px-1"> <a href="https://www.facebook.com/Talends-104362175661656" target="_blank"><i class="fa fa-facebook"></i></a> </li>
+                        <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-twitter"></i></a> </li>
+                        <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-linkedin"></i></a> </li>
+                        <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-instagram"></i></a> </li>
+                        <li class="px-1"> <a href="https://www.youtube.com/channel/UCypgaJCN86fxACsRdOuQiEA" target="_blank"><i class="fa fa-youtube"></i></a> </li>
+                        <li class="px-1"> <a href="https://vt.tiktok.com/ZSd3qRoKF/" target="_blank"><i class="bi-tiktok" style="padding: 6px 7px;"></i></a> </li>    
+                    </ul>
+                    <p class="mb-0">Talends.com ©2022 All Rights Reserved.</p>
+                    <p class="small">Dubai, United Arab Emirates</p>
+                </div>
             </div>
-            <div class="col-md-6 mb-3">
-                <div class="d-md-flex pl-md-5">
+            <div class="col-md-5">
+                <div class="secondary-footer d-md-flex pl-md-4">
                     <a href="https://aws.amazon.com/what-is-cloud-computing"><img src="https://d0.awsstatic.com/logos/powered-by-aws-white.png" alt="Powered by AWS Cloud Computing" width="70"></a>
                     <ul class="list-inline mb-0 ml-auto">
                         <li class="px-2"> <a href="javascript:;" target="_self">Site Map</a> </li>

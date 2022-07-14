@@ -5111,10 +5111,10 @@ body.wt-login .wt-userlogedin {
 }
 
 .wt-themerangeslider {
-	width: 100%;
+	width: 98%;
 	float: left;
 	height: 3px;
-	background: #ddd;
+	background: transparent;
 	border-radius: 0;
 	margin: 10px 0 15px;
 	border: 0 !important;

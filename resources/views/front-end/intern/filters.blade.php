@@ -3,7 +3,7 @@
     {!! Form::open(['url' => url('search-results'), 'method' => 'get', 'class' => 'wt-formtheme wt-formsearch', 'id' => 'wt-formsearch']) !!}
 
         <input type="hidden" value="{{$type}}" name="type">
-        <div class="d-md-flex w-100 px-md-0 px-3 mb-3">
+        <div class="d-md-flex w-100 px-md-0 px-3 mb-3 flex-row">
             <div class="dropdown position-static filter-dropdown">
                 <button class="btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     Category <i class="bi-chevron-down float-right ml-3"></i>
@@ -317,7 +317,7 @@
 
             </div> -->
             <div class="filter-btns">
-                {!! Form::submit(trans('lang.btn_apply_filters'), ['class' => 'wt-btn']) !!}
+                {!! Form::submit(trans('lang.btn_apply_filters'), ['class' => 'wt-btn ml-2']) !!}
             </div>
         </div>
     {!! form::close(); !!}
