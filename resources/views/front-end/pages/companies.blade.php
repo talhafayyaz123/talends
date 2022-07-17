@@ -57,7 +57,7 @@
                     <form class="form-inline_" method="GET">
                         <div class="talent_filters company_talends_filter">
                             <input type="hidden" value='filter' name='filter'>
-                            <div class="d-md-flex w-100 px-md-0 px-3">
+                            <div class="d-md-flex w-100 px-md-0 px-3 flex-row">
                                 <div class="dropdown position-static filter-dropdown">
                                     <button class="btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                         Category <i class="bi-chevron-down float-right ml-3"></i>
@@ -190,7 +190,7 @@
                 </div>
             </div>
             <div class="row align-items-center">
-                <div class="col-xl-3 col-md-7 col-sm-9 col-12 mb-2 text-center">
+                <div class="col-xl-3 col-md-4 col-sm-9 col-12 mb-2 text-center">
                     <div class="custom-control custom-switch rounded-pill p-2" style="background-color:#f7f5f5;">
                         <span>
                             <svg viewBox="0 0 16 16" height="16" width="16" class="text-success small" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.735.07a.533.533 0 0 1 .53 0l7.466 4.267A.533.533 0 0 1 16 4.8v.768c0 4.835-3.205 9.083-7.853 10.412a.534.534 0 0 1-.294 0A10.828 10.828 0 0 1 0 5.567V4.8c0-.191.103-.368.269-.463L7.735.07Zm-.192 11.355 4.607-5.759L11.317 5 7.39 9.91 4.608 7.59l-.683.82 3.618 3.015Z" fill="currentColor"></path></svg>
