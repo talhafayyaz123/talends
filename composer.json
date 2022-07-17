@@ -23,6 +23,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.2",
+        "league/flysystem-aws-s3-v3": "^1.0",
         "madnest/madzipper": "^1.1",
         "mariuzzo/laravel-js-localization": "^1.4",
         "rachidlaasri/laravel-installer": "^4.0",
