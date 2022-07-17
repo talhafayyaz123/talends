@@ -151,12 +151,11 @@ $join_community=App\Helper::getJoinCommunity();
             <div class="col-md-4 col-sm-6 col-3 text-center">
                 @if(isset( $join_community->about_talends_image) )
                     <picture>
-                        <source media="(min-width:992px)" srcset="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="img-fluic" width="250">
-                        <source media="(min-width:480px)" srcset="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="img-fluic" width="200">
-                        <img src="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" alt="Footer Image" class="img-fluic" width="100">
+                        <source media="(min-width:992px)" srcset="{{$join_community->about_talends_image}}" class="img-fluic" width="250">
+                        <source media="(min-width:480px)" srcset="{{$join_community->about_talends_image}}" class="img-fluic" width="200">
+                        <img src="{{$join_community->about_talends_image}}" alt="Footer Image" class="img-fluic" width="100" style='max-height: 212px;'>
                     </picture>
-                <!-- <img src="{{asset('uploads/home-pages/footer/'.$join_community->about_talends_image)}}" class="img-fluid" width="250px"
-                    alt=""> -->
+
                 @endif
             </div>
         </div>

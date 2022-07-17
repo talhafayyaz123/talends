@@ -115,11 +115,10 @@
 
 
                                             @if (!empty($join_community['about_talends_image']))
-                                            @php $image = '/uploads/home-pages/footer/'.$join_community['about_talends_image']; @endphp
                                             <div class="wt-formtheme wt-userform">
 
                                                 <div class="wt-uploadingbox">
-                                                    <figure><img src="{{{  asset($image)}}}" alt="{{{ trans('lang.profile_photo') }}}"></figure>
+                                                    <img src="{{ $join_community['about_talends_image']}}" alt="{{{ trans('lang.profile_photo') }}}">
 
                                                 </div>
                                                 <input type="hidden" name="hidden_about_talends_image" id="hidden_about_talends_image" value="{{{$join_community['about_talends_image']}}}">

@@ -1018,12 +1018,10 @@ class AboutTalendsPage extends Model
          
  
              if (!empty($request->hasFile('about_talends_image'))) {
-                $about_talends_image = $request->file('about_talends_image');
-        
-                $new_path = Helper::PublicPath().'/uploads/home-pages/footer';
-                $imageName = time().'.'.$about_talends_image->getClientOriginalName();
-                $request->about_talends_image->move($new_path, $imageName);
-                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+             
+               $path = Storage::disk('s3')->put('uploads/home-pages/footer', $request->about_talends_image);
+               $path = Storage::disk('s3')->url($path);
+                $this->about_talends_image = filter_var($path, FILTER_SANITIZE_STRING);
 
             } else {
                 $this->about_talends_image = null;
@@ -1048,16 +1046,21 @@ class AboutTalendsPage extends Model
             
             if (!empty($request->hasFile('about_talends_image'))) {
                 $about_talends_image = $request->file('about_talends_image');
-                if (file_exists(Helper::PublicPath().'/uploads/home-pages/footer' . '/' . $request->hidden_about_talends_image)) {
-                    unlink(Helper::PublicPath().'/uploads/home-pages/footer' . '/' . $request->hidden_about_talends_image);               
+
+                if(isset($request->hidden_about_talends_image) && !empty($request->hidden_about_talends_image) ){
+                    $file = explode('/', $request->hidden_about_talends_image)[6];
+                     
+                if(Storage::disk('s3')->exists('uploads/home-pages/footer/'.$file)){
+                  
+                  Storage::disk('s3')->delete('uploads/home-pages/footer/'.$file); 
+                  
+                } 
+
                 }
-        
-                $new_path = Helper::PublicPath().'/uploads/home-pages/footer';
-                $imageName = time().'.'.$about_talends_image->getClientOriginalName();
-                $imageName=str_replace(' ','_',$imageName);
-              
-                $request->about_talends_image->move($new_path, $imageName);
-                $footer_how_work->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+   
+                $path = Storage::disk('s3')->put('uploads/home-pages/footer', $request->about_talends_image);
+                $path = Storage::disk('s3')->url($path);
+                $footer_how_work->about_talends_image = filter_var($path, FILTER_SANITIZE_STRING);
 
             } else {
                 $footer_how_work->about_talends_image = $request->hidden_about_talends_image;
@@ -1104,11 +1107,11 @@ class AboutTalendsPage extends Model
 
              if (!empty($request->hasFile('banner_image'))) {
                 $banner_image = $request->file('banner_image');
+
+                $path = Storage::disk('s3')->put('uploads/home-pages/banners', $request->banner_image);
+                $path = Storage::disk('s3')->url($path);
+                $this->about_talends_image = filter_var($path, FILTER_SANITIZE_STRING);
         
-                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
-                $imageName = time().'.'.$banner_image->getClientOriginalName();
-                $request->banner_image->move($new_path, $imageName);
-                $this->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
 
             } else {
                 $this->about_talends_image = null;
@@ -1117,12 +1120,11 @@ class AboutTalendsPage extends Model
 
             if (!empty($request->hasFile('internship_image'))) {
                 $internship_image = $request->file('internship_image');
-        
-                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
-                $imageName = time().'.'.$internship_image->getClientOriginalName();
-                $request->internship_image->move($new_path, $imageName);
-                $this->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
 
+                $path = Storage::disk('s3')->put('uploads/home-pages/banners', $request->internship_image);
+                $path = Storage::disk('s3')->url($path);
+                $this->talends_project_image = filter_var($path, FILTER_SANITIZE_STRING);
+    
             } else {
                 $this->talends_project_image = null;
             }
@@ -1130,11 +1132,10 @@ class AboutTalendsPage extends Model
 
             if (!empty($request->hasFile('internship_detail_image'))) {
                 $internship_detail_image = $request->file('internship_detail_image');
-        
-                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
-                $imageName = time().'.'.$internship_detail_image->getClientOriginalName();
-                $request->internship_detail_image->move($new_path, $imageName);
-                $this->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+                $path = Storage::disk('s3')->put('uploads/home-pages/banners', $request->internship_detail_image);
+                $path = Storage::disk('s3')->url($path);
+                $this->talends_work_image = filter_var($path, FILTER_SANITIZE_STRING);
 
             } else {
                 $this->talends_work_image = null;
@@ -1160,33 +1161,47 @@ class AboutTalendsPage extends Model
             
             if (!empty($request->hasFile('banner_image'))) {
                 $banner_image = $request->file('banner_image');
-                if (file_exists(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_about_talends_image)) {
-                    unlink(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_about_talends_image);               
+
+                if(isset($request->hidden_about_talends_image) && !empty($request->hidden_about_talends_image) ){
+                    $file = explode('/', $request->hidden_about_talends_image)[6];
+                     
+                if(Storage::disk('s3')->exists('uploads/home-pages/banners/'.$file)){
+                  
+                  Storage::disk('s3')->delete('uploads/home-pages/banners/'.$file); 
+                  
+                } 
+
                 }
-        
-                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
-                $imageName = time().'.'.$banner_image->getClientOriginalName();
-                $imageName=str_replace(' ','_',$imageName);
-              
-                $request->banner_image->move($new_path, $imageName);
-                $footer_how_work->about_talends_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+                $path = Storage::disk('s3')->put('uploads/home-pages/banners', $request->banner_image);
+                $path = Storage::disk('s3')->url($path);
+                $footer_how_work->about_talends_image = filter_var($path, FILTER_SANITIZE_STRING);
 
             } else {
                 $footer_how_work->about_talends_image = $request->hidden_about_talends_image;
             }
 
+            
+
 
             if (!empty($request->hasFile('internship_image'))) {
                 $internship_image = $request->file('internship_image');
 
-                if (file_exists(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_talends_project_image)) {
-                    unlink(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_talends_project_image);               
+
+                if(isset($request->hidden_talends_project_image) && !empty($request->hidden_talends_project_image) ){
+                    $file = explode('/', $request->hidden_talends_project_image)[6];
+                     
+                if(Storage::disk('s3')->exists('uploads/home-pages/banners/'.$file)){
+                  
+                  Storage::disk('s3')->delete('uploads/home-pages/banners/'.$file); 
+                  
+                } 
+
                 }
-        
-                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
-                $imageName = time().'.'.$internship_image->getClientOriginalName();
-                $request->internship_image->move($new_path, $imageName);
-                $footer_how_work->talends_project_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+                $path = Storage::disk('s3')->put('uploads/home-pages/banners', $request->internship_image);
+                $path = Storage::disk('s3')->url($path);
+                $footer_how_work->talends_project_image= filter_var($path, FILTER_SANITIZE_STRING);
 
             } else {
                 $footer_how_work->talends_project_image = $request->hidden_talends_project_image;
@@ -1196,14 +1211,21 @@ class AboutTalendsPage extends Model
             if (!empty($request->hasFile('internship_detail_image'))) {
                 $internship_detail_image = $request->file('internship_detail_image');
 
-                if (file_exists(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_internship_detail_image)) {
-                    unlink(Helper::PublicPath().'/uploads/home-pages/banners' . '/' . $request->hidden_internship_detail_image);               
+                if(isset($request->hidden_internship_detail_image) && !empty($request->hidden_internship_detail_image) ){
+                    $file = explode('/', $request->hidden_internship_detail_image)[6];
+                     
+                if(Storage::disk('s3')->exists('uploads/home-pages/banners/'.$file)){
+                  
+                  Storage::disk('s3')->delete('uploads/home-pages/banners/'.$file); 
+                  
+                } 
+
                 }
-        
-                $new_path = Helper::PublicPath().'/uploads/home-pages/banners';
-                $imageName = time().'.'.$internship_detail_image->getClientOriginalName();
-                $request->internship_detail_image->move($new_path, $imageName);
-                $footer_how_work->talends_work_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+
+                $path = Storage::disk('s3')->put('uploads/home-pages/banners', $request->internship_detail_image);
+                $path = Storage::disk('s3')->url($path);
+                $footer_how_work->talends_work_image= filter_var($path, FILTER_SANITIZE_STRING);
 
             } else {
                 $footer_how_work->talends_work_image = $request->hidden_internship_detail_image;
