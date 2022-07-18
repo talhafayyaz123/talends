@@ -113,12 +113,12 @@
                                                 </div>
                                             </div>
 
-
+                                           
                                             @if (!empty($join_community['about_talends_image']))
                                             <div class="wt-formtheme wt-userform">
 
                                                 <div class="wt-uploadingbox">
-                                                    <img src="{{ $join_community['about_talends_image']}}" alt="{{{ trans('lang.profile_photo') }}}">
+                                                    <img src="{{$aws_s3_path.'/uploads/home-pages/footer/'.$join_community['about_talends_image']}}" alt="{{{ trans('lang.profile_photo') }}}">
 
                                                 </div>
                                                 <input type="hidden" name="hidden_about_talends_image" id="hidden_about_talends_image" value="{{{$join_community['about_talends_image']}}}">

@@ -446,27 +446,28 @@ class HomePagesController extends Controller
 
          $agency_profile=AboutTalendsPage::where('page_type','agency_profile')->first();
 
+         $aws_s3_path='https://'.env('AWS_BUCKET').'.s3.amazonaws.com';
 
          if($footer_type=='how-works'){
             return view(
                 'back-end.admin.settings.front-footer.how-work',
-                compact('footer_how_work')
+                compact('aws_s3_path','footer_how_work')
             );
         }else if($footer_type=='footer_menus'){
             return view(
-                'back-end.admin.settings.front-footer.footer_menus.create',compact('menu_title','menu_title2','menu_title3','menu_title4','unserialize_menu_array','unserialize_menu2_array','unserialize_menu3_array','unserialize_menu4_footer_array'));
+                'back-end.admin.settings.front-footer.footer_menus.create',compact('aws_s3_path','menu_title','menu_title2','menu_title3','menu_title4','unserialize_menu_array','unserialize_menu2_array','unserialize_menu3_array','unserialize_menu4_footer_array'));
         }else if($footer_type=='header_menus'){
             return view(
-                'back-end.admin.settings.front-footer.header_menus.index',compact('header_menu_title1','header_menu_title2','header_menu_title3','unserialize_header_menu3_array','header_menu_title4','unserialize_menu4_array'));
+                'back-end.admin.settings.front-footer.header_menus.index',compact('aws_s3_path','header_menu_title1','header_menu_title2','header_menu_title3','unserialize_header_menu3_array','header_menu_title4','unserialize_menu4_array'));
         }else if($footer_type=='join_community'){
             return view(
                 'back-end.admin.settings.front-footer.join-community',
-                compact('join_community')
+                compact('aws_s3_path','join_community')
             );
         }else if($footer_type=='agency_profile'){
             return view(
                 'back-end.admin.settings.home_page_settings.agency_profile',compact('agency_profile'),
-                compact('agency_profile')
+                compact('aws_s3_path','agency_profile')
             );
         }
 
