@@ -16,7 +16,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Intervention\Image\Facades\Image;
 use File;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 use function Opis\Closure\serialize;
 use function Opis\Closure\unserialize;
 use DB;
@@ -231,43 +231,121 @@ class Profile extends Model
         if (!empty($request['budget'])) {
             $profile->min_budget = ($request['budget']);
         }
+
+        ///////////////////////////////////////////////////////
         $old_path = Helper::PublicPath() . '/uploads/users/temp';
         if (!empty($request['hidden_avater_image'])) {
             $filename = $request['hidden_avater_image'];
+
             if (file_exists($old_path . '/' . $request['hidden_avater_image'])) {
-                $new_path = Helper::PublicPath() . '/uploads/users/' . $user_id;
-                if (!file_exists($new_path)) {
-                    File::makeDirectory($new_path, 0755, true, true);
-                }
-                $filename = time() . '-' . $request['hidden_avater_image'];
-                rename($old_path . '/' . $request['hidden_avater_image'], $new_path . '/' . $filename);
-                rename($old_path . '/small-' . $request['hidden_avater_image'], $new_path . '/small-' . $filename);
-                rename($old_path . '/medium-small-' . $request['hidden_avater_image'], $new_path . '/medium-small-' . $filename);
-                rename($old_path . '/medium-' . $request['hidden_avater_image'], $new_path . '/medium-' . $filename);
+              
+                $filename = $user_id . '-' . $request['hidden_avater_image'];
+                  
+                $s3_path='uploads/users/'. $user_id;
+
+                /// delete previous
+               $profile_avater=$profile->avater;
+               if($profile_avater){
+                if(Storage::disk('s3')->exists($s3_path.'/'.$profile_avater)){
+                    Storage::disk('s3')->delete($s3_path.'/'.$profile_avater);  
+                  }
+
+                  if(Storage::disk('s3')->exists($s3_path.'/small-'.$profile_avater)){
+                    Storage::disk('s3')->delete($s3_path.'/small-'.$profile_avater);  
+                  }
+
+                  if(Storage::disk('s3')->exists($s3_path.'/medium-small-'.$profile_avater)){
+                    Storage::disk('s3')->delete($s3_path.'/medium-small-'.$profile_avater);  
+                  }
+
+                  if(Storage::disk('s3')->exists($s3_path.'/medium-'.$profile_avater)){
+                    Storage::disk('s3')->delete($s3_path.'/medium-'.$profile_avater);  
+                  }
+
+                  if(Storage::disk('s3')->exists($s3_path.'/listing-'.$profile_avater)){
+                    Storage::disk('s3')->delete($s3_path.'/listing-'.$profile_avater);  
+                  }
+               }
+                
+                $contents = file_get_contents($old_path . '/' . $request['hidden_avater_image']);
+                Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                
+                $contents = file_get_contents($old_path . '/small-' . $request['hidden_avater_image']);
+                Storage::disk('s3')->put($s3_path. '/small-' . $filename,$contents  ); 
+                
+                $contents = file_get_contents($old_path . '/medium-small-' . $request['hidden_avater_image']);
+                Storage::disk('s3')->put($s3_path. '/medium-small-' . $filename,$contents  );
+                
+                $contents = file_get_contents($old_path . '/medium-' . $request['hidden_avater_image']);
+                Storage::disk('s3')->put($s3_path. '/medium-' . $filename,$contents  );
+
                 if (file_exists($old_path . '/listing-' . $request['hidden_avater_image'])) {
-                    rename($old_path . '/listing-' . $request['hidden_avater_image'], $new_path . '/listing-' . $filename);
+                    $contents = file_get_contents($old_path . '/listing-' . $request['hidden_avater_image']);
+                    Storage::disk('s3')->put($s3_path. '/listing-' . $filename,$contents  );
+                    unlink($old_path . '/listing-' . $request['hidden_avater_image']);
                 }
+
+                unlink($old_path . '/' . $request['hidden_avater_image']);
+                unlink($old_path . '/small-' . $request['hidden_avater_image']);
+                unlink($old_path . '/medium-small-' . $request['hidden_avater_image']);
+                unlink($old_path . '/medium-' . $request['hidden_avater_image']);
             }
+
+            /////////////////////////////////////////
             $profile->avater = filter_var($filename, FILTER_SANITIZE_STRING);
         } else {
             $profile->avater = null;
         }
+        /////////////////////////////////////////////////
         if (!empty($request['hidden_banner_image'])) {
             $filename = $request['hidden_banner_image'];
             if (file_exists($old_path . '/' . $request['hidden_banner_image'])) {
-                $new_path = Helper::PublicPath() . '/uploads/users/' . $user_id;
-                if (!file_exists($new_path)) {
-                    File::makeDirectory($new_path, 0755, true, true);
-                }
-                $filename = time() . '-' . $request['hidden_banner_image'];
-                rename($old_path . '/' . $request['hidden_banner_image'], $new_path . '/' . $filename);
-                rename($old_path . '/small-' . $request['hidden_banner_image'], $new_path . '/small-' . $filename);
-                rename($old_path . '/medium-' . $request['hidden_banner_image'], $new_path . '/medium-' . $filename);
+
+                $filename =  $user_id . '-' . $request['hidden_banner_image'];
+            
+                $s3_path='uploads/users/'. $user_id;
+
+                /// delete previous
+               $profile_banner=$profile->banner;
+               if($profile_banner){
+                if(Storage::disk('s3')->exists($s3_path.'/'.$profile_banner)){
+                    Storage::disk('s3')->delete($s3_path.'/'.$profile_banner);  
+                  }
+
+                  if(Storage::disk('s3')->exists($s3_path.'/small-'.$profile_banner)){
+                    Storage::disk('s3')->delete($s3_path.'/small-'.$profile_banner);  
+                  }
+
+                 
+
+                  if(Storage::disk('s3')->exists($s3_path.'/medium-'.$profile_banner)){
+                    Storage::disk('s3')->delete($s3_path.'/medium-'.$profile_banner);  
+                  }
+
+                  
+               }
+                
+                $contents = file_get_contents($old_path . '/' . $request['hidden_banner_image']);
+                Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                
+                $contents = file_get_contents($old_path . '/small-' . $request['hidden_banner_image']);
+                Storage::disk('s3')->put($s3_path. '/small-' . $filename,$contents  ); 
+                
+  
+                $contents = file_get_contents($old_path . '/medium-' . $request['hidden_banner_image']);
+                Storage::disk('s3')->put($s3_path. '/medium-' . $filename,$contents  );
+
+                unlink($old_path . '/' . $request['hidden_banner_image']);
+                unlink($old_path . '/small-' . $request['hidden_banner_image']);
+                unlink($old_path . '/medium-' . $request['hidden_banner_image']);
+
             }
             $profile->banner = filter_var($filename, FILTER_SANITIZE_STRING);
         } else {
             $profile->banner = null;
         }
+        /////////////////////////////////////////////////////
+
         $videos = !empty($request['video']) ? $request['video'] : array();
         if (!empty($videos)) {
             foreach ($videos as $key => $video) {

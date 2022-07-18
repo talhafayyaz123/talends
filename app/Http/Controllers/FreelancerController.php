@@ -151,6 +151,7 @@ class FreelancerController extends Controller
           }
       } 
 
+      $aws_s3_path='https://'.env('AWS_BUCKET').'.s3.amazonaws.com';
 
 
         if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/personal-detail/index.blade.php'))) {
@@ -179,6 +180,7 @@ class FreelancerController extends Controller
             return view(
                 'back-end.freelancer.profile-settings.personal-detail.index',
                 compact(
+                    'aws_s3_path',
                     'seleced_cat_skills',
                     'sub_cat_skills',
                     'selced_sub_categories',
