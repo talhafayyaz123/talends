@@ -1921,7 +1921,7 @@ class RestAPIController extends Controller
                 if ($service->seller->count() > 0) {
                     if (!empty($attachments)) {
                         foreach ($attachments as $attachment_key => $attachment) {
-                            $json[$key]['attachment'][$attachment_key]['image'] = asset(Helper::getImageWithSize('uploads/services/'.$service->seller[0]->id, $attachment, 'medium', true));
+                            $json[$key]['attachment'][$attachment_key]['image'] = (Helper::gets3ImageWithSize('uploads/services/'.$service->seller[0]->id, $attachment, 'medium', true));
                         }
                     } else {
                         $json[$key]['attachment'] =array();
@@ -1997,7 +1997,7 @@ class RestAPIController extends Controller
             $json['sales_text'] = trans('lang.sales');
             $json['response_time'] = $response_time->title;
             $json['response_time_text'] = trans('lang.response_time');
-            $json['profile_banner'] = !empty($seller) ? asset(Helper::getUserProfileBanner($seller->id, 'small')) : '';
+            $json['profile_banner'] = !empty($seller) ? (Helper::getUserProfileBanner($seller->id, 'small')) : '';
             $json['profile_image'] = !empty($seller) ? asset(Helper::getProfileImage($seller->id)) : '';
             $json['seller_link'] = !empty($seller) ? url('profile/'.$seller->slug) : '';
             $json['seller_name'] = !empty($seller) ? Helper::getUserName($seller->id) : '';
@@ -2039,7 +2039,7 @@ class RestAPIController extends Controller
             }
             if (!empty($attachments)) {
                 foreach ($attachments as $attachment_key => $attachment) {
-                    $json[$key]['attachment'][$attachment_key]['image'] = asset(Helper::getImageWithSize('uploads/services/'.$service->seller[0]->id, $attachment, 'medium', true));
+                    $json[$key]['attachment'][$attachment_key]['image'] = (Helper::getImageWithSize('uploads/services/'.$service->seller[0]->id, $attachment, 'medium', true));
                 }
             } else {
                 $json[$key]['attachment'] =array();

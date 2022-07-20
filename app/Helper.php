@@ -2050,18 +2050,19 @@ return $response;
     {
         $profile_image = !empty(User::find($user_id)->profile->avater) ? User::find($user_id)->profile->avater : '';
         if (!empty($size)) {
-            if (file_exists(self::publicPath() . '/uploads/users/' . $user_id . '/' . $size . $profile_image)) {
-                return !empty($profile_image) ? '/uploads/users/' . $user_id . '/' . $size . $profile_image : '/images/user.jpg';
-            } else if (file_exists(self::publicPath() . '/uploads/users/' . $user_id . '/' . $profile_image)) {
-                return !empty($profile_image) ? '/uploads/users/' . $user_id . '/' . $profile_image : '/images/user.jpg';
+
+            if (Storage::disk('s3')->exists('uploads/users/' . $user_id . '/' . $size . $profile_image)) {
+                return !empty($profile_image) ? config('app.aws_se_path'). '/' .'uploads/users/' . $user_id . '/' . $size . $profile_image : config('app.aws_se_path'). '/' .'images/user.jpg';
+            } else if (Storage::disk('s3')->exists('uploads/users/' . $user_id . '/' . $profile_image)) {
+                return !empty($profile_image) ? config('app.aws_se_path').'/uploads/users/' . $user_id . '/' . $profile_image : config('app.aws_se_path').'/images/user.jpg';
             } else {
-                return '/images/user.jpg';
+                return config('app.aws_se_path').'/images/user.jpg';
             }
 
-        } else if (file_exists(self::publicPath() . '/uploads/users/' . $user_id . '/' . $profile_image)) {
-            return !empty($profile_image) ? '/uploads/users/' . $user_id . '/' . $profile_image : '/images/user.jpg';
+        } else if (Storage::disk('s3')->exists('uploads/users/' . $user_id . '/' . $profile_image)) {
+            return !empty($profile_image) ? config('app.aws_se_path').'/uploads/users/' . $user_id . '/' . $profile_image : config('app.aws_se_path').'/images/user.jpg';
         } else {
-            return '/images/user.jpg';
+            return config('app.aws_se_path').'/images/user.jpg';
         }
     }
 
@@ -2111,10 +2112,10 @@ return $response;
                     return config('app.aws_se_path'). '/' .$path . '/' . $image;
                 }
             } else {
-                return asset('images/' . $default);
+                return config('app.aws_se_path'). '/' .'images/' . $default;
             }
         } else {
-            return asset('images/' . $default);
+            return config('app.aws_se_path'). '/' .'images/' . $default;
         }
     }
 
@@ -2136,29 +2137,47 @@ return $response;
         $profile_banner = User::find($user_id)->profile->banner;
         if (!empty($profile_banner)) {
             if (!empty($size)) {
-                return '/uploads/users/' . $user_id . '/' . $size . '-' . $profile_banner;
+                
+                if (Storage::disk('s3')->exists('uploads/users/' . $user_id . '/' . $size . '-' . $profile_banner)) {
+                
+                    return config('app.aws_se_path').'/uploads/users/' . $user_id . '/' . $size . '-' . $profile_banner;
+                
+                }else{
+                    return  config('app.aws_se_path').'/images/' . $size . '-e-1110x300.jpg';
+                }
+               
             } else {
-                return '/uploads/users/' . $user_id . '/' . $profile_banner;
+
+                if (Storage::disk('s3')->exists('uploads/users/' . $user_id . '/' . $profile_banner)) {
+                
+                    return config('app.aws_se_path').'/uploads/users/' . $user_id . '/' . $profile_banner;
+                
+                }else{
+                    return config('app.aws_se_path').'/images/e-1110x300.jpg';
+
+                }
+
+
             }
         } elseif ($user->role_type == 'freelancer') {
             if (!empty($size)) {
-                if (file_exists('images/' . $size . '-frbanner-1920x400.jpg')) {
-                    return 'images/' . $size . '-frbanner-1920x400.jpg';
+                if (Storage::disk('s3')->exists('images/' . $size . '-frbanner-1920x400.jpg')) {
+                    return config('app.aws_se_path').'/images/' . $size . '-frbanner-1920x400.jpg';
                 } else {
-                    return 'images/frbanner-1920x400.jpg';
+                    return  config('app.aws_se_path').'/images/frbanner-1920x400.jpg';
                 }
             } else {
-                return 'images/frbanner-1920x400.jpg';
+                return config('app.aws_se_path').'/images/frbanner-1920x400.jpg';
             }
         } elseif ($user->role_type == 'employer') {
             if (!empty($size)) {
-                if (file_exists('images/' . $size . '-e-1110x300.jpg')) {
-                    return 'images/' . $size . '-e-1110x300.jpg';
+                if (Storage::disk('s3')->exists('images/' . $size . '-e-1110x300.jpg')) {
+                    return  config('app.aws_se_path').'/images/' . $size . '-e-1110x300.jpg';
                 } else {
-                    return 'images/e-1110x300.jpg';
+                    return config('app.aws_se_path').'/images/e-1110x300.jpg';
                 }
             } else {
-                return 'images/e-1110x300.jpg';
+                return config('app.aws_se_path').'/images/e-1110x300.jpg';
             }
         }
     }
@@ -4905,17 +4924,17 @@ return $response;
                 } elseif (Storage::disk('s3')->exists($path . '/' . $image)) {
                     return config('app.aws_se_path'). '/' .$path . '/' . $requested_file;
                 } else {
-                return    asset('images/user.jpg');
+                return    config('app.aws_se_path'). '/' .'images/user.jpg';
                 
                 }
             } elseif (Storage::disk('s3')->exists($path . '/' . $image)) {
                 return config('app.aws_se_path'). '/' .$path . '/' . $requested_file;
             } else {
-                return    asset('images/user.jpg');
+                return    config('app.aws_se_path'). '/' .'images/user.jpg';
 
             }
         } else {
-            return    asset('images/user.jpg');
+            return    config('app.aws_se_path'). '/' .'images/user.jpg';
 
         }
     }

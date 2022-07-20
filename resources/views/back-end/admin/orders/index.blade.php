@@ -54,7 +54,7 @@
 													<span class="bt-content">
 														<div class="wt-service-tabel">
 															@if (!empty($attachment) && $order->type == 'service')
-																<figure class="service-feature-image"><img src="{{{asset( Helper::getImageWithSize('uploads/services/'.$service->seller[0]->id, $attachment, 'small' ))}}}" alt="{{{$service['title']}}}"></figure>
+																<figure class="service-feature-image"><img src="{{{( Helper::gets3ImageWithSize('uploads/services/'.$service->seller[0]->id, $attachment, 'small' ))}}}" alt="{{{$service['title']}}}"></figure>
 															@else
 																<figure class="service-feature-image"><img src="{{{asset('images/order-no-image.jpg')}}}" alt="no-image"></figure>
 															@endif

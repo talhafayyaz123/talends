@@ -69,7 +69,7 @@
                                             <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                                                 <div class="wt-companysdetails">
                                                     <figure class="wt-companysimg">
-                                                        <img src="{{{ asset(Helper::getUserProfileBanner($employer->id, 'small')) }}}" alt="Company">
+                                                        <img src="{{{ (Helper::getUserProfileBanner($employer->id, 'small')) }}}" alt="Company">
                                                     </figure>
                                                     <div class="wt-companysinfo">
                                                         <figure><img src="{{{ asset($user_image) }}}" alt="Company"></figure>

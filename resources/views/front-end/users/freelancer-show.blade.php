@@ -185,7 +185,7 @@ $breadcrumbs = Breadcrumbs::generate('showInternProfile', $user->slug);
                                     <div class="wt-freelancers {{{$enable_slider}}}">
                                         @foreach ($attachments as $attachment)
                                         <figure class="item">
-                                            <a href="{{{ url('profile/'.$user->slug) }}}"><img src="{{{ asset(Helper::getImage('uploads/services/'.$user->id, $attachment, 'medium-', 'medium-service.jpg')) }}}" alt="img description" class="item"></a>
+                                            <a href="{{{ url('profile/'.$user->slug) }}}"><img src="{{{ (Helper::getS3Image('uploads/services/'.$user->id, $attachment, 'medium-', 'medium-service.jpg')) }}}" alt="img description" class="item"></a>
                                         </figure>
                                         @endforeach
                                     </div>
@@ -195,7 +195,7 @@ $breadcrumbs = Breadcrumbs::generate('showInternProfile', $user->slug);
                                     @endif
                                     <div class="wt-freelancers-details">
                                         <figure class="wt-freelancers-img">
-                                            <img src="{{ asset(Helper::getProfileImage($user->id)) }}" alt="img description">
+                                            <img src="{{ (Helper::getProfileImage($user->id)) }}" alt="img description">
                                         </figure>
                                         <div class="wt-freelancers-content">
                                             <div class="dc-title">
@@ -250,7 +250,7 @@ $breadcrumbs = Breadcrumbs::generate('showInternProfile', $user->slug);
                             @if (!empty($job->employer) && $job->employer->count() > 0)
                             <div class="wt-userlistinghold wt-userlistingsingle">
                                 <figure class="wt-userlistingimg">
-                                    <img src="{{ asset(Helper::getProfileImage($review->user_id)) }}" alt="{{{ trans('Employer') }}}">
+                                    <img src="{{ (Helper::getProfileImage($review->user_id)) }}" alt="{{{ trans('Employer') }}}">
                                 </figure>
                                 <div class="wt-userlistingcontent">
                                     <div class="wt-contenthead">
@@ -287,7 +287,7 @@ $breadcrumbs = Breadcrumbs::generate('showInternProfile', $user->slug);
                             @if (!empty($service))
                             <div class="wt-userlistinghold wt-userlistingsingle">
                                 <figure class="wt-userlistingimg">
-                                    <img src="{{ asset(Helper::getProfileImage($review->user_id)) }}" alt="{{{ trans('Employer') }}}">
+                                    <img src="{{ (Helper::getProfileImage($review->user_id)) }}" alt="{{{ trans('Employer') }}}">
                                 </figure>
                                 <div class="wt-userlistingcontent">
                                     <div class="wt-contenthead">

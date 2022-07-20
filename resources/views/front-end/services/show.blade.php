@@ -100,7 +100,7 @@
                                         @endphp
                                         <div class="wt-userlistinghold wt-userlistingsingle">
                                                 <figure class="wt-userlistingimg">
-                                                    <img src="{{ asset(Helper::getProfileImage($review->user_id)) }}" alt="{{{ trans('Employer') }}}">
+                                                    <img src="{{ (Helper::getProfileImage($review->user_id)) }}" alt="{{{ trans('Employer') }}}">
                                                 </figure>
                                                 <div class="wt-userlistingcontent">
                                                     <div class="wt-contenthead">

@@ -1,7 +1,7 @@
 <div class="wt-widget la-empinfo-holder">
     <div class="wt-companysdetails">
         <figure class="wt-companysimg">
-            <img src="{{{ asset(Helper::getUserProfileBanner($job->employer->id, 'small')) }}}" alt="{{ trans('lang.profile_img') }}">
+            <img src="{{{ (Helper::getUserProfileBanner($job->employer->id, 'small')) }}}" alt="{{ trans('lang.profile_img') }}">
         </figure>
         <div class="wt-companysinfo">
             <figure><img src="{{{asset(Helper::getProfileImage($job->employer->id))}}}" alt="{{ trans('lang.profile_img') }}"></figure>

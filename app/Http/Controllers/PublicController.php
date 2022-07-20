@@ -1545,7 +1545,7 @@ class PublicController extends Controller
                 $aticle_list[$key]['id'] = $article['id'];
                 $aticle_list[$key]['title'] = $article['title'];
                 $aticle_list[$key]['slug'] = $article['slug'];
-                $aticle_list[$key]['banner'] = asset(Helper::getImage('uploads/articles', $article['banner'], 'small-', 'small-default-article.png'));
+                $aticle_list[$key]['banner'] = (Helper::gets3Image('uploads/articles', $article['banner'], 'small-', 'small-default-article.png'));
                 $aticle_list[$key]['published_date'] = $article['created_at'];
                 $aticle_list[$key]['description'] = $article['description'];
                 $aticle_list[$key]['name'] = Helper::getUserName($article['user_id']);

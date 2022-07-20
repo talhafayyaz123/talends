@@ -39,7 +39,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="wt-comsingleimg">
-                            <figure><img src="{{{ asset(Helper::getUserProfileBanner($user->id)) }}}" alt="{{{ trans('lang.company_banner') }}}"></figure>
+                            <figure><img style="max-height: 265px !important;" src="{{{ (Helper::getUserProfileBanner($user->id)) }}}" alt="{{{ trans('lang.company_banner') }}}"></figure>
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-5 col-xl-4">
@@ -99,7 +99,7 @@
                                                 @if (Helper::getRoleName($role_id) !== 'admin' && $follower->follower <> $user->id)
                                                     <li>
                                                         <a href="{{{url('profile/'.$profile->user->slug)}}}">
-                                                            <span><img src="{{{asset(Helper::getProfileImage($follower->follower))}}}" alt="Follower"></span>
+                                                            <span><img src="{{{(Helper::getProfileImage($follower->follower))}}}" alt="Follower"></span>
                                                             <span>{{{Helper::getUserName($follower->follower)}}}</span>
                                                         </a>
                                                     </li>
