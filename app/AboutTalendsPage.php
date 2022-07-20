@@ -1021,8 +1021,8 @@ class AboutTalendsPage extends Model
              
                $path = Storage::disk('s3')->put('uploads/home-pages/footer', $request->about_talends_image);
                $path = Storage::disk('s3')->url($path);
-                $this->about_talends_image = filter_var($path, FILTER_SANITIZE_STRING);
-
+               $file = explode('/', $path)[6];
+               $this->about_talends_image = filter_var($file, FILTER_SANITIZE_STRING);
             } else {
                 $this->about_talends_image = null;
             }
@@ -1048,7 +1048,7 @@ class AboutTalendsPage extends Model
                 $about_talends_image = $request->file('about_talends_image');
 
                 if(isset($request->hidden_about_talends_image) && !empty($request->hidden_about_talends_image) ){
-                    $file = explode('/', $request->hidden_about_talends_image)[6];
+                    $file = $request->hidden_about_talends_image;
                      
                 if(Storage::disk('s3')->exists('uploads/home-pages/footer/'.$file)){
                   
@@ -1060,7 +1060,8 @@ class AboutTalendsPage extends Model
    
                 $path = Storage::disk('s3')->put('uploads/home-pages/footer', $request->about_talends_image);
                 $path = Storage::disk('s3')->url($path);
-                $footer_how_work->about_talends_image = filter_var($path, FILTER_SANITIZE_STRING);
+                $file = explode('/', $path)[6];
+                $footer_how_work->about_talends_image = filter_var($file, FILTER_SANITIZE_STRING);
 
             } else {
                 $footer_how_work->about_talends_image = $request->hidden_about_talends_image;

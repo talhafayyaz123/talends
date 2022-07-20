@@ -112,12 +112,14 @@ class HomeController extends Controller
                 $featured_success_stories=AboutTalendsPage::where('page_type','featured_success_stories')->first();
                 $agency_profile=AboutTalendsPage::where('page_type','agency_profile')->first();
                 $footer_social_content=AboutTalendsPage::where('page_type','footer-social-content')->first();
+                $aws_s3_path='https://'.env('AWS_BUCKET').'.s3.amazonaws.com';
 
                 $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
                 if (file_exists(resource_path('views/extend/front-end/pages/show.blade.php'))) {
                     return View::make(
                         'extend.front-end.pages.show',
                         compact(
+                            'aws_s3_path',
                             'symbol',
                             'page_header',
                             'page',
