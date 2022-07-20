@@ -267,6 +267,7 @@ class Profile extends Model
                   }
                }
                 
+               sleep(3);
                 $contents = file_get_contents($old_path . '/' . $request['hidden_avater_image']);
                 Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
                 
@@ -324,7 +325,7 @@ class Profile extends Model
 
                   
                }
-                
+                sleep(3);
                 $contents = file_get_contents($old_path . '/' . $request['hidden_banner_image']);
                 Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
                 

@@ -198,7 +198,7 @@ $slider = Helper::getPageSlider($page_id);
                             $profile = \App\User::find(Auth::user()->id)->profile;
                             $user_image = !empty($profile) ? $profile->avater : '';
                             $employer_job = \App\Job::select('status')->where('user_id', Auth::user()->id)->first();
-                            $profile_image = !empty($user_image) ? '/uploads/users/'.$user->id.'/'.$user_image : 'images/user-login.png';
+                            $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/'.$user->id.'/'.$user_image : 'images/user-login.png';
                             $payment_settings = \App\SiteManagement::getMetaValue('commision');
                             $payment_module = !empty($payment_settings) && !empty($payment_settings[0]['enable_packages']) ? $payment_settings[0]['enable_packages'] : 'true';
                             $employer_payment_module = !empty($payment_settings) && !empty($payment_settings[0]['employer_package']) ? $payment_settings[0]['employer_package'] : 'true';
@@ -217,7 +217,7 @@ $slider = Helper::getPageSlider($page_id);
                     <li  class="nav-item">
                         <div class="wt-userlogedin back-end-header">
                             <div class="d-flex align-items-center">
-                                <img src="{{{ asset(Helper::getImage('uploads/users/' . Auth::user()->id, $profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}" width="40px" class="img-fluid rounded-circle"/> 
+                                <img src="{{{ (Helper::gets3Image('uploads/users/' . Auth::user()->id, $profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}" width="40px" class="img-fluid rounded-circle"/> 
                                 <div class="ml-2">
                                     <h5 class="mb-0">{{{ Helper::getUserName(Auth::user()->id) }}} <i class="bi-chevron-down float-right ml-3" style="font-size:22px;"></i></h5>
                                     <span>{{{ !empty(Auth::user()->profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Helper::getAuthRoleName() }}}</span>

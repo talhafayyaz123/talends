@@ -23,7 +23,7 @@
                                             $freelancer_name = \App\Helper::getUserName($accepted_proposal->freelancer_id);
                                             $profile = \App\User::find($accepted_proposal->freelancer_id)->profile;
                                             $user_image = !empty($profile) ? $profile->avater : '';
-                                            $profile_image = !empty($user_image) ? '/uploads/users/'.$accepted_proposal->freelancer_id.'/'.$user_image : 'images/user-login.png';
+                                            $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/'.$accepted_proposal->freelancer_id.'/'.$user_image : 'images/user-login.png';
                                             $verified_user = \App\User::select('user_verified')->where('id', $job->employer->id)->pluck('user_verified')->first();
                                             $project_type  = Helper::getProjectTypeList($job->project_type);
                                         @endphp

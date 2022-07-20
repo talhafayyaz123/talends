@@ -70,7 +70,7 @@
                                         </div>
                                         <div class="wt-rightarea">
                                             <div class="wt-hireduserstatus">
-                                                <figure><img src="{{{ asset($employer_image) }}}" alt="{{ trans('lang.profie_img') }}"></figure>
+                                                <figure><img src="{{{ ($employer_image) }}}" alt="{{ trans('lang.profie_img') }}"></figure>
                                             </div>
                                         </div>
                                     </div>

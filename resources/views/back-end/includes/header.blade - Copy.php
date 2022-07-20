@@ -381,7 +381,7 @@
                                         <div class="wt-userlogedin">
                                             <figure class="wt-userimg">
                                                 {{-- <img src="{{{ asset($profile_image) }}}" alt="{{{ trans('lang.user_avatar') }}}"> --}}
-                                                <img src="{{{ asset(Helper::getImage('uploads/users/' . Auth::user()->id, $profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}">
+                                                <img src="{{{ (Helper::gets3Image('uploads/users/' . Auth::user()->id, $profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}">
                                             </figure>
                                             <div class="wt-username">
                                                 <h3>{{{ Helper::getUserName(Auth::user()->id) }}}</h3>

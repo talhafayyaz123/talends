@@ -96,7 +96,7 @@
                                                 $emp = \App\User::find($employer);
                                                 $profile = \App\User::find($employer)->profile;
                                                 $user_image = !empty($profile) ? $profile->avater : '';
-                                                $profile_image = !empty($user_image) ? '/uploads/users/'.$employer.'/'.$user_image : 'images/user-login.png';
+                                                $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/'.$employer.'/'.$user_image : 'images/user-login.png';
                                                 $user_name = Helper::getUserName($employer);
                                                 $verified_user = \App\User::select('user_verified')->where('id', $emp->id)->pluck('user_verified')->first();
                                             @endphp
@@ -150,7 +150,7 @@
                                             $profile = \App\User::find($freelancer)->profile;
                                             $rating = !empty($profile->rating) ? $profile->rating : 0;
                                             $user_image = !empty($profile) ? $profile->avater : '';
-                                            $profile_image = !empty($user_image) ? '/uploads/users/'.$freelancer.'/'.$user_image : 'images/user.jpg';
+                                            $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/'.$freelancer.'/'.$user_image : 'images/user.jpg';
                                             $user_name = Helper::getUserName($freelancer);
                                             $reviews = \App\Review::where('receiver_id', $freelancer)->count();
                                             $proposal = \App\Proposal::select('job_id')->where('freelancer_id', $user->id)->pluck('job_id')->first();

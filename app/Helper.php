@@ -2095,6 +2095,31 @@ return $response;
         }
     }
 
+
+    
+    public static function gets3Image($path, $image, $size = '', $default = '')
+    {
+
+        if (!empty($path) && !empty($image)) {
+            $file = $path . '/' . $size . $image;
+            
+            if (Storage::disk('s3')->exists($file)) {
+                
+                if (!empty($size)) {
+                    return config('app.aws_se_path'). '/' .$path . '/' . $size . $image;
+                } else {
+                    return config('app.aws_se_path'). '/' .$path . '/' . $image;
+                }
+            } else {
+                return asset('images/' . $default);
+            }
+        } else {
+            return asset('images/' . $default);
+        }
+    }
+
+
+
     /**
      * Get user profile image
      *
@@ -2151,7 +2176,7 @@ return $response;
     public static function getProfileBanner($user_id)
     {
         $banner = User::find($user_id)->profile->banner;
-        return !empty($banner) ? '/uploads/users/' . $user_id . '/' . $banner : 'images/embanner-350x172.jpg';
+        return !empty($banner) ? config('app.aws_se_path').'/uploads/users/' . $user_id . '/' . $banner : 'images/embanner-350x172.jpg';
     }
 
     /**
@@ -4861,6 +4886,37 @@ return $response;
             }
         } else {
             return '/images/user.jpg';
+        }
+    }
+
+    public static function getS3ImageWithSize($path, $image, $size = "", $space_encode = false)
+    {
+        $requested_file = $image;
+        if (!empty($path) && !empty($image)) {
+            if ($space_encode == true) {
+                if ($image == trim($image) && strpos($image, ' ') !== false) {
+                    $requested_file = str_replace(' ', '%20', $image);
+                }
+            }
+            if (!empty($size)) {
+                $file = $path . '/' . $size . '-' . $image;
+                if (Storage::disk('s3')->exists($file)) {
+                    return config('app.aws_se_path'). '/' .$path . '/' . $size . '-' . $requested_file;
+                } elseif (Storage::disk('s3')->exists($path . '/' . $image)) {
+                    return config('app.aws_se_path'). '/' .$path . '/' . $requested_file;
+                } else {
+                return    asset('images/user.jpg');
+                
+                }
+            } elseif (Storage::disk('s3')->exists($path . '/' . $image)) {
+                return config('app.aws_se_path'). '/' .$path . '/' . $requested_file;
+            } else {
+                return    asset('images/user.jpg');
+
+            }
+        } else {
+            return    asset('images/user.jpg');
+
         }
     }
 

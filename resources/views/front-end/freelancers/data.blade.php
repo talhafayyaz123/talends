@@ -12,7 +12,7 @@
 
             $user_image = !empty($freelancer->profile->avater) ?
 
-                            '/uploads/users/'.$freelancer->id.'/'.$freelancer->profile->avater :
+            config('app.aws_se_path').'/uploads/users/'.$freelancer->id.'/'.$freelancer->profile->avater :
 
                             'images/user.jpg';
 
@@ -112,7 +112,7 @@
 
             <figure class="wt-userlistingimg">
                 <a href="{{{ url('profile/'.$freelancer->slug) }}}">
-                    <img src="{{{ asset(Helper::getImageWithSize('uploads/users/'.$freelancer->id, $freelancer->profile->avater, 'listing')) }}}" alt="{{ trans('lang.img') }}">
+                    <img src="{{{ (Helper::getS3ImageWithSize('uploads/users/'.$freelancer->id, $freelancer->profile->avater, 'listing')) }}}" alt="{{ trans('lang.img') }}">
                 </a>
             </figure>
 

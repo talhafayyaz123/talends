@@ -22,7 +22,7 @@
 												$user_name = $job->employer->first_name.' '.$job->employer->last_name;
 												$proposals = \App\Proposal::where('job_id', $job->id)->where('status', '!=', 'cancelled')->get();
 												$employer_img = \App\Profile::select('avater')->where('user_id', $job->employer->id)->first();
-												$image = !empty($employer_img->avater) ? '/uploads/users/'.$job->employer->id.'/'.$employer_img->avater : '';
+												$image = !empty($employer_img->avater) ? config('app.aws_se_path').'/uploads/users/'.$job->employer->id.'/'.$employer_img->avater : '';
 												$verified_user = \App\User::select('user_verified')->where('id', $job->employer->id)->pluck('user_verified')->first();
 												$project_type  = Helper::getProjectTypeList($job->project_type);
 											@endphp
@@ -83,7 +83,7 @@
 																		@php
 																			$profile = \App\User::find($proposal->freelancer_id)->profile;
 																			$user_image = !empty($profile) ? $profile->avater : '';
-																			$profile_image = !empty($user_image) ? '/uploads/users/'.$proposal->freelancer_id.'/'.$user_image : 'images/user-login.png';
+																			$profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/'.$proposal->freelancer_id.'/'.$user_image : 'images/user-login.png';
 																		@endphp
 																		<li><figure><img src="{{{ asset($profile_image) }}}" alt="{{ trans('lang.profile_img') }}" class="mCS_img_loaded"></figure></li>
 																	@endforeach

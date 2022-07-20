@@ -553,7 +553,7 @@ class PublicController extends Controller
             $profile = Profile::all()->where('user_id', $user->id)->first();
             $reasons = Helper::getReportReasons();
             $avatar = Helper::getProfileImage($profile->user_id, 'medium-small-');
-            $banner = !empty($profile->banner) ? '/uploads/users/' . $profile->user_id . '/' . $profile->banner : Helper::getUserProfileBanner($user->id);
+            $banner = !empty($profile->banner) ? config('app.aws_se_path').'/uploads/users/' . $profile->user_id . '/' . $profile->banner : Helper::getUserProfileBanner($user->id);
             $auth_user = Auth::user() ? true : false;
             $user_name = Helper::getUserName($profile->user_id);
             $current_date = Carbon::now()->format('M d, Y');

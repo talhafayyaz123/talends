@@ -150,10 +150,12 @@ class InterneController extends Controller
           }
       } 
 
+      $aws_s3_path='https://'.env('AWS_BUCKET').'.s3.amazonaws.com';
 
         return view(
             'back-end.interne.profile-settings.personal-detail.index',
             compact(
+                'aws_s3_path',
                 'seleced_cat_skills',
                 'sub_cat_skills',
                 'selced_sub_categories',
@@ -850,8 +852,8 @@ class InterneController extends Controller
             $employer_profile = User::find($job->user_id)->profile;
             $employer_avatar = !empty($employer_profile) ? $employer_profile->avater : '';
             $user_image = !empty($profile) ? $profile->avater : '';
-            $profile_image = !empty($user_image) ? '/uploads/users/' . Auth::user()->id . '/' . $user_image : 'images/user-login.png';
-            $employer_image = !empty($employer_avatar) ? '/uploads/users/' . $job->user_id . '/' . $employer_avatar : 'images/user-login.png';
+            $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/' . Auth::user()->id . '/' . $user_image : 'images/user-login.png';
+            $employer_image = !empty($employer_avatar) ? config('app.aws_se_path'). '/uploads/users/' . $job->user_id . '/' . $employer_avatar : 'images/user-login.png';
             $currency   = SiteManagement::getMetaValue('commision');
             $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
             if (file_exists(resource_path('views/extend/back-end/freelancer/jobs/show.blade.php'))) {

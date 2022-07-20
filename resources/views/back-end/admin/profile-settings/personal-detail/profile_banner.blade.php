@@ -4,7 +4,7 @@
     </div>
     <div class="wt-settingscontent">
         @if (!empty($banner)) 
-            @php $image = '/uploads/users/'.Auth::user()->id.'/'.$banner; @endphp
+            @php $image =$aws_s3_path. '/uploads/users/'.Auth::user()->id.'/'.$banner; @endphp
             <div class="wt-formtheme wt-userform">
                 <div v-if="this.uploaded_banner">
                     <upload-image :id="'banner_id'" :img_ref="'banner_ref'" :url="'{{url('admin/upload-temp-image')}}'" :name="'hidden_banner_image'">

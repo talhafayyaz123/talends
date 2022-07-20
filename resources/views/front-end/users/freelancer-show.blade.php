@@ -69,8 +69,9 @@ $breadcrumbs = Breadcrumbs::generate('showInternProfile', $user->slug);
                         <div class="row">
                             <div class="wt-userprofile">
                                 @if (!empty($avatar))
+                                
                                 {{-- <figure><img src="{{{ asset($avatar) }}}" alt="{{{ trans('lang.user_avatar') }}}"></figure> --}}
-                                <figure><img src="{{{ asset(Helper::getImage('uploads/users/' . $profile->user_id,$profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}"></figure>
+                                <figure><img src="{{{ (Helper::gets3Image('uploads/users/' . $profile->user_id,$profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}"></figure>
                                 @endif
                                 <div class="wt-title">
                                     @if (!empty($user_name))
@@ -546,10 +547,9 @@ $breadcrumbs = Breadcrumbs::generate('showInternProfile', $user->slug);
                 {{$freelancer->user_skills }}
 
                 @php
-
                 $user_image = !empty($freelancer->profile->avater) ?
 
-                '/uploads/users/'.$freelancer->id.'/'.$freelancer->profile->avater :
+                config('app.aws_se_path').'/uploads/users/'.$freelancer->id.'/'.$freelancer->profile->avater :
 
                 'images/user.jpg';
 
@@ -648,10 +648,9 @@ $breadcrumbs = Breadcrumbs::generate('showInternProfile', $user->slug);
                         @endif
 
                         @endif
-
                         <figure class="wt-userlistingimg">
 
-                            <img src="{{{ asset(Helper::getImageWithSize('uploads/users/'.$freelancer->id, $freelancer->profile->avater, 'listing')) }}}" alt="{{ trans('lang.img') }}">
+                            <img src="{{{ (Helper::getS3ImageWithSize('uploads/users/'.$freelancer->id, $freelancer->profile->avater, 'listing')) }}}" alt="{{ trans('lang.img') }}">
 
                         </figure>
 

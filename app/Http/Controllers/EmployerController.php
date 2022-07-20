@@ -253,12 +253,14 @@ class EmployerController extends Controller
           }
       } 
 
-        
+      $aws_s3_path='https://'.env('AWS_BUCKET').'.s3.amazonaws.com';
+
         return view(
 
             'back-end.employer.profile-settings.personal-detail.index',
 
             compact(
+                'aws_s3_path',
                 'seleced_cat_skills',
                     'sub_cat_skills',
                 'sub_categories',
@@ -1152,7 +1154,7 @@ class EmployerController extends Controller
 
                 $user_image = !empty($profile) ? $profile->avater : '';
 
-                $profile_image = !empty($user_image) ? '/uploads/users/' . $proposal->freelancer_id . '/' . $user_image : 'images/user-login.png';
+                $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/' . $proposal->freelancer_id . '/' . $user_image : 'images/user-login.png';
 
                 $payout_settings = SiteManagement::getMetaValue('commision');
 
