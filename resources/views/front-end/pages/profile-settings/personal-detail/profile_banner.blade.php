@@ -4,7 +4,7 @@
     </div>
     <div class="wt-settingscontent">
         @if (!empty($banner))
-            @php $image = '/uploads/users/'.$user->id.'/'.$banner; @endphp
+            @php $image = config('app.aws_se_path').'/uploads/users/'.$user->id.'/'.$banner; @endphp
             <div class="wt-formtheme wt-userform">
                 <div v-if="this.uploaded_banner">
                     <upload-image 

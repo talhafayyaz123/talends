@@ -1248,14 +1248,14 @@ class UserController extends Controller
                         $excerpt = str_limit($content, 100);
                         $default_avatar = url('images/user-login.png');
                         $profile_image = !empty($data->avater)
-                            ? '/uploads/users/' . $data->author_id . '/' . $data->avater
+                            ? config('app.aws_se_path').'/uploads/users/' . $data->author_id . '/' . $data->avater
                             : $default_avatar;
                         $messages[$key]['id'] = $data->id;
                         $messages[$key]['author_id'] = $data->author_id;
                         $messages[$key]['proposal_id'] = $data->proposal_id;
                         $messages[$key]['content'] = $content;
                         $messages[$key]['excerpt'] = $excerpt;
-                        $messages[$key]['user_image'] = asset($profile_image);
+                        $messages[$key]['user_image'] = ($profile_image);
                         $messages[$key]['created_at'] = Carbon::parse($data->created_at)->format('d-m-Y');
                         $messages[$key]['notify'] = $data->notify;
                         $messages[$key]['attachments'] = !empty($data->attachments) ? 1 : 0;
@@ -1984,10 +1984,13 @@ class UserController extends Controller
         $avater = !empty($profile->avater) ? $profile->avater : '';
         $tagline = !empty($profile->tagline) ? $profile->tagline : '';
         $description = !empty($profile->description) ? $profile->description : '';
+        $aws_s3_path='https://'.env('AWS_BUCKET').'.s3.amazonaws.com';
+
         if (file_exists(resource_path('views/extend/back-end/admin/profile-settings/personal-detail/index.blade.php'))) {
             return view(
                 'extend.back-end.admin.profile-settings.personal-detail.index',
                 compact(
+                    'aws_s3_path',
                     'banner',
                     'avater',
                     'tagline',
@@ -1998,6 +2001,7 @@ class UserController extends Controller
             return view(
                 'back-end.admin.profile-settings.personal-detail.index',
                 compact(
+                    'aws_s3_path',
                     'banner',
                     'avater',
                     'tagline',

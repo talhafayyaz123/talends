@@ -35,7 +35,7 @@
 												<span class="bt-content">
 													<div class="wt-service-tabel">
 														@if (!empty($service->seller->count() > 0 && $attachment))
-															<figure class="service-feature-image"><img src="{{{asset( Helper::getImageWithSize('uploads/services/'.$service->seller[0]->id, $attachment[0], 'small' ))}}}" alt="{{{$service->title}}}"></figure>
+															<figure class="service-feature-image"><img src="{{{( Helper::gets3ImageWithSize('uploads/services/'.$service->seller[0]->id, $attachment[0], 'small' ))}}}" alt="{{{$service->title}}}"></figure>
 														@endif
 														<div class="wt-freelancers-content">
 															<div class="dc-title">

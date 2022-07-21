@@ -76,7 +76,7 @@
                                                     <div class="wt-freelancers-details">
                                                         @if ($service->seller->count() > 0)
                                                             <figure class="wt-freelancers-img">
-                                                                <img src="{{ asset(Helper::getProfileImage($service->seller[0]->id)) }}" alt="img description">
+                                                                <img src="{{ (Helper::getProfileImage($service->seller[0]->id)) }}" alt="img description">
                                                             </figure>
                                                         @endif
                                                         <div class="wt-freelancers-content">

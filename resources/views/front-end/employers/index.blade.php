@@ -63,13 +63,13 @@
                                             @php
                                                 $verified_user = \App\User::select('user_verified')->where('id', $employer->id)->pluck('user_verified')->first();
                                                 $user_image = !empty($employer->profile->avater) ?
-                                                            '/uploads/users/'.$employer->id.'/'.$employer->profile->avater :
+                                                config('app.aws_se_path'). '/uploads/users/'.$employer->id.'/'.$employer->profile->avater :
                                                             'images/user.jpg';
                                             @endphp
                                             <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                                                 <div class="wt-companysdetails">
                                                     <figure class="wt-companysimg">
-                                                        <img src="{{{ asset(Helper::getUserProfileBanner($employer->id, 'small')) }}}" alt="Company">
+                                                        <img src="{{{ (Helper::getUserProfileBanner($employer->id, 'small')) }}}" alt="Company">
                                                     </figure>
                                                     <div class="wt-companysinfo">
                                                         <figure><img src="{{{ asset($user_image) }}}" alt="Company"></figure>

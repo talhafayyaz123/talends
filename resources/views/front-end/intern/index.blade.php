@@ -96,7 +96,7 @@
                                 @foreach ($users as $key => $freelancer)
                                     @php
                                         $user_image = !empty($freelancer->profile->avater) ?
-                                                        '/uploads/users/'.$freelancer->id.'/'.$freelancer->profile->avater :
+                                        config('app.aws_se_path'). '/uploads/users/'.$freelancer->id.'/'.$freelancer->profile->avater :
                                                         'images/user.jpg';
                                         $flag = !empty($freelancer->location->flag) ? Helper::getLocationFlag($freelancer->location->flag) :
                                                 '/images/img-01.png';
@@ -132,7 +132,7 @@
                                             @endif
                                         @endif
                                         <figure class="wt-userlistingimg">
-                                            <img src="{{{ asset(Helper::getImageWithSize('uploads/users/'.$freelancer->id, $freelancer->profile->avater, 'listing')) }}}" alt="{{ trans('lang.img') }}">
+                                            <img src="{{{ (Helper::gets3ImageWithSize('uploads/users/'.$freelancer->id, $freelancer->profile->avater, 'listing')) }}}" alt="{{ trans('lang.img') }}">
                                         </figure>
                                         <div class="wt-userlistingcontent">
                                             <div class="wt-contenthead">

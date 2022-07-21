@@ -20,10 +20,10 @@
         <div id="wt-verticalscrollbar" class="wt-verticalscrollbar">
             <div class="wt-companysdetails wt-usersidebar">
                 <figure class="wt-companysimg">
-                    <img src="{{{ asset(Helper::getUserProfileBanner($user->id, 'small')) }}}" alt="{{{ trans('lang.profile_banner') }}}">
+                    <img src="{{{ (Helper::getUserProfileBanner($user->id, 'small')) }}}" alt="{{{ trans('lang.profile_banner') }}}">
                 </figure>
                 <div class="wt-companysinfo">
-                    <figure><img src="{{{ asset(Helper::getImageWithSize('uploads/users/'.$user->id, $profile->avater, 'listing')) }}}" alt="{{ trans('lang.profile_photo') }}"></figure>
+                    <figure><img src="{{{ (Helper::gets3ImageWithSize('uploads/users/'.$user->id, $profile->avater, 'listing')) }}}" alt="{{ trans('lang.profile_photo') }}"></figure>
                     <!-- <div class="wt-title">
                         <h2>
                             <a href="{{{ $role != 'admin' ? url($role.'/dashboard') : 'javascript:void()' }}}">

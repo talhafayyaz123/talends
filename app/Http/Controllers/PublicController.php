@@ -553,7 +553,7 @@ class PublicController extends Controller
             $profile = Profile::all()->where('user_id', $user->id)->first();
             $reasons = Helper::getReportReasons();
             $avatar = Helper::getProfileImage($profile->user_id, 'medium-small-');
-            $banner = !empty($profile->banner) ? '/uploads/users/' . $profile->user_id . '/' . $profile->banner : Helper::getUserProfileBanner($user->id);
+            $banner = !empty($profile->banner) ? config('app.aws_se_path').'/uploads/users/' . $profile->user_id . '/' . $profile->banner : Helper::getUserProfileBanner($user->id);
             $auth_user = Auth::user() ? true : false;
             $user_name = Helper::getUserName($profile->user_id);
             $current_date = Carbon::now()->format('M d, Y');
@@ -1545,7 +1545,7 @@ class PublicController extends Controller
                 $aticle_list[$key]['id'] = $article['id'];
                 $aticle_list[$key]['title'] = $article['title'];
                 $aticle_list[$key]['slug'] = $article['slug'];
-                $aticle_list[$key]['banner'] = asset(Helper::getImage('uploads/articles', $article['banner'], 'small-', 'small-default-article.png'));
+                $aticle_list[$key]['banner'] = (Helper::gets3Image('uploads/articles', $article['banner'], 'small-', 'small-default-article.png'));
                 $aticle_list[$key]['published_date'] = $article['created_at'];
                 $aticle_list[$key]['description'] = $article['description'];
                 $aticle_list[$key]['name'] = Helper::getUserName($article['user_id']);

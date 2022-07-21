@@ -69,7 +69,7 @@
                                                         @php
                                                             $profile = \App\User::find($proposal->freelancer_id)->profile;
                                                             $user_image = !empty($profile) ? $profile->avater : '';
-                                                            $profile_image = !empty($user_image) ? '/uploads/users/'.$proposal->freelancer_id.'/'.$user_image : 'images/user-login.png';
+                                                            $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/'.$proposal->freelancer_id.'/'.$user_image : 'images/user-login.png';
                                                         @endphp
                                                         <li><figure><img src="{{{ asset($profile_image) }}}" alt="{{ trans('lang.img') }}" class="mCS_img_loaded"></figure></li>
                                                     @endforeach
@@ -89,7 +89,7 @@
                                         $user = \App\User::find($accepted_proposal->freelancer_id);
                                         $profile = \App\User::find($accepted_proposal->freelancer_id)->profile;
                                         $user_image = !empty($profile) ? $profile->avater : '';
-                                        $profile_image = !empty($user_image) ? '/uploads/users/'.$accepted_proposal->freelancer_id.'/'.$user_image : 'images/user-login.png';
+                                        $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/'.$accepted_proposal->freelancer_id.'/'.$user_image : 'images/user-login.png';
                                         $user_name = Helper::getUserName($user->id);
                                         $feedbacks = \App\Review::select('feedback')->where('receiver_id', $user->id)->count();
                                         $avg_rating = App\Review::where('receiver_id', $user->id)->sum('avg_rating');
@@ -187,7 +187,7 @@
                                                     $user = \App\User::find($proposal->freelancer_id);
                                                     $profile = \App\User::find($proposal->freelancer_id)->profile;
                                                     $user_image = !empty($profile) ? $profile->avater : '';
-                                                    $profile_image = !empty($user_image) ? '/uploads/users/'.$proposal->freelancer_id.'/'.$user_image : 'images/user-login.png';
+                                                    $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/'.$proposal->freelancer_id.'/'.$user_image : 'images/user-login.png';
                                                     $user_name = $user->first_name.' '.$user->last_name;
                                                     $feedbacks = \App\Review::select('feedback')->where('receiver_id', $proposal->freelancer_id)->count();
                                                     $avg_rating = App\Review::where('receiver_id', $proposal->freelancer_id)->sum('avg_rating');

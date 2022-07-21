@@ -144,7 +144,7 @@
                          
                             
                             @endphp
-                            <img src="{{{ asset($avatar) }}}" alt="{{ trans('lang.img') }}">
+                            <img src="{{{ ($avatar) }}}" alt="{{ trans('lang.img') }}">
                         </div>
                         <div class="tlb__content">
                             <div class="row" >

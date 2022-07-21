@@ -71,7 +71,7 @@
                                                     <h4>{{ trans('lang.hired') }}</h4>
                                                     <span>{{{ $freelancer_name }}}</span>
                                                     <ul class="wt-hireduserimgs">
-                                                        <li><figure><img src="{{{ asset($profile_image) }}}" alt="{{ trans('lang.profile_img') }}" class="mCS_img_loaded"></figure></li>
+                                                        <li><img src="{{{ ($profile_image) }}}" alt="{{ trans('lang.profile_img') }}" class="mCS_img_loaded"></li>
                                                     </ul>
                                                 </div>
                                             @elseif ($job->status === 'completed')
@@ -79,7 +79,7 @@
                                                     <h4>{{ trans('lang.completed') }}</h4>
                                                     <span>{{{ $freelancer_name }}}</span>
                                                     <ul class="wt-hireduserimgs">
-                                                        <li><figure><img src="{{{ asset($profile_image) }}}" alt="{{ trans('lang.profile_img') }}" class="mCS_img_loaded"></figure></li>
+                                                        <li><img src="{{{ ($profile_image) }}}" alt="{{ trans('lang.profile_img') }}" class="mCS_img_loaded"></li>
                                                     </ul>
                                                 </div>
                                             @else
@@ -104,7 +104,7 @@
                                 @if (!empty($accepted_proposal))
                                     <div class="wt-userlistinghold wt-featured wt-proposalitem">
                                         <figure class="wt-userlistingimg">
-                                            <img src="{{{ asset($profile_image) }}}" alt="{{ trans('lang.is_featured') }}" class="mCS_img_loaded">
+                                            <img src="{{{ ($profile_image) }}}" alt="{{ trans('lang.is_featured') }}" class="mCS_img_loaded">
                                         </figure>
                                         <div class="wt-proposaldetails">
                                             @if (!empty($freelancer_name))
