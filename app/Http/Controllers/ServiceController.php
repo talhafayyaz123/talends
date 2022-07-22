@@ -681,7 +681,7 @@ class ServiceController extends Controller
                 $freelancer_name = Helper::getUserName($freelancer->id);
                 $profile = User::find($freelancer->id)->profile;
                 $user_image = !empty($profile) ? $profile->avater : '';
-                $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/' . $freelancer->id . '/' . $user_image : 'images/user-login.png';
+                $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/' . $freelancer->id . '/' . $user_image : config('app.aws_se_path'). '/' .'images/user-login.png';
                 $payout_settings = SiteManagement::getMetaValue('commision');
                 $payment_gateway = !empty($payout_settings) && !empty($payout_settings[0]['payment_method']) ? $payout_settings[0]['payment_method'] : null;
                 $currency   = SiteManagement::getMetaValue('commision');

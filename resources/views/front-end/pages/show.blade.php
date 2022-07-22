@@ -17,6 +17,8 @@
     $banner_settings=App\Helper::getBannerSettings();
     @endphp
 
+
+    
     <section class="home-banner p-0">
         <div id="theme_slider" class="theme_slider carousel slide carousel-fade" data-ride="carousel">
             <!-- <ol class="carousel-indicators">

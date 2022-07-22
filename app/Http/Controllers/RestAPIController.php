@@ -263,7 +263,7 @@ class RestAPIController extends Controller
                         foreach ($projects as $project_key => $project) {
                             $freelancer_projects[$project_key]['title'] = !empty($project['project_title']) ? $project['project_title'] : '';
                             $freelancer_projects[$project_key]['url'] = !empty($project['project_url']) ? $project['project_url'] : '';
-                            $freelancer_projects[$project_key]['image']['url'] = !empty($project['project_hidden_image']) ? url('/uploads/users/' . $user['id'] . '/projects/' . $project['project_hidden_image']) : '';
+                            $freelancer_projects[$project_key]['image']['url'] = !empty($project['project_hidden_image']) ? config('app.aws_se_path').'/uploads/users/' . $user['id'] . '/projects/' . $project['project_hidden_image'] : '';
                         }
                         $json[$key]['_projects'] = $freelancer_projects;
                     }
@@ -273,7 +273,7 @@ class RestAPIController extends Controller
                         foreach ($awards as $award_key => $award) {
                             $freelancer_awards[$award_key]['title'] = !empty($award['award_title']) ? $award['award_title'] : '';
                             $freelancer_awards[$award_key]['date'] = !empty($award['award_date']) ? $award['award_date'] : '';
-                            $freelancer_awards[$award_key]['image']['url'] = !empty($award['award_hidden_image']) ? url('/uploads/users/' . $user['id'] . '/awards/' . $award['award_hidden_image']) : '';
+                            $freelancer_awards[$award_key]['image']['url'] = !empty($award['award_hidden_image']) ? config('app.aws_se_path').'/uploads/users/' . $user['id'] . '/awards/' . $award['award_hidden_image'] : '';
                         }
                         $json[$key]['_awards'] = $freelancer_awards;
                     }

@@ -64,7 +64,7 @@
                                                 $verified_user = \App\User::select('user_verified')->where('id', $employer->id)->pluck('user_verified')->first();
                                                 $user_image = !empty($employer->profile->avater) ?
                                                 config('app.aws_se_path'). '/uploads/users/'.$employer->id.'/'.$employer->profile->avater :
-                                                            'images/user.jpg';
+                                                config('app.aws_se_path'). '/' .'images/user.jpg';
                                             @endphp
                                             <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                                                 <div class="wt-companysdetails">

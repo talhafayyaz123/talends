@@ -152,7 +152,7 @@
 
 				'name' => auth()->check() ? auth()->user()->first_name : null,
 
-				'image' => !empty(auth()->user()->profile->avater) ? asset('uploads/users/'.auth()->user()->id .'/'.auth()->user()->profile->avater) : asset('images/user-login.png'),
+				'image' => !empty(auth()->user()->profile->avater) ? config('app.aws_se_path'). '/' .'uploads/users/'.auth()->user()->id .'/'.auth()->user()->profile->avater : config('app.aws_se_path'). '/' .'images/user-login.png',
 
 				'image_name' => !empty(auth()->user()->profile->avater) ? auth()->user()->profile->avater : '',
 

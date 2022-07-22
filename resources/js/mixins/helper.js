@@ -3,6 +3,7 @@ import Vue from 'vue'
 Vue.mixin({
   data () {
     return {
+      Aws_S3_PATH:'https://talends-bucket.s3.amazonaws.com',
       notificationSystem: {
         success: {
           position: 'topRight',

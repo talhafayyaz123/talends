@@ -1154,7 +1154,7 @@ class EmployerController extends Controller
 
                 $user_image = !empty($profile) ? $profile->avater : '';
 
-                $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/' . $proposal->freelancer_id . '/' . $user_image : 'images/user-login.png';
+                $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/' . $proposal->freelancer_id . '/' . $user_image : config('app.aws_se_path'). '/' .'images/user-login.png';
 
                 $payout_settings = SiteManagement::getMetaValue('commision');
 

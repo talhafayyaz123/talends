@@ -449,7 +449,7 @@ $breadcrumbs = Breadcrumbs::generate('showInternProfile', $user->slug);
                                 <div class="wt-particlehold">
                                     @if (!empty($award['award_hidden_image']))
                                     <figure>
-                                        <img src="{{{ asset('uploads/users/'.$profile->user_id.'/awards/'.$award['award_hidden_image']) }}}" alt="{{ trans('lang.img') }}">
+                                        <img src="{{{ config('app.aws_se_path'). '/uploads/users/'.$profile->user_id.'/awards/'.$award['award_hidden_image'] }}}" alt="{{ trans('lang.img') }}">
                                     </figure>
                                     @endif
                                     @if (!empty($award['award_title']))

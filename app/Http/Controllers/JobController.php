@@ -1116,7 +1116,7 @@ class JobController extends Controller
 
             $user_image = !empty($profile) ? $profile->avater : '';
 
-            $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/' . $job->employer->id . '/' . $user_image : 'images/user-login.png';
+            $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/' . $job->employer->id . '/' . $user_image : config('app.aws_se_path'). '/' .'images/user-login.png';
 
             $reasons = Helper::getReportReasons();
 

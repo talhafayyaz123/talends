@@ -721,7 +721,7 @@ class HomeController extends Controller
                 foreach ($projects as $key => $project) {
                     $profile_projects[$key]['project_title'] = !empty($project['project_title']) ? $project['project_title'] : '';
                     $profile_projects[$key]['project_url'] = !empty($project['project_url']) ? $project['project_url'] : '';
-                    $profile_projects[$key]['project_hidden_image'] = !empty($project['project_hidden_image']) ? url('/uploads/users/'.$user_id.'/projects/'.$project['project_hidden_image']) : '';
+                    $profile_projects[$key]['project_hidden_image'] = !empty($project['project_hidden_image']) ? config('app.aws_se_path').'/uploads/users/'.$user_id.'/projects/'.$project['project_hidden_image'] : '';
                     $profile_projects[$key]['project_image'] = !empty($project['project_hidden_image']) ? $project['project_hidden_image'] : '';
                 }
             }
@@ -738,7 +738,7 @@ class HomeController extends Controller
                 foreach ($awards as $key => $award) {
                     $profile_awards[$key]['award_title'] = $award['award_title'];
                     $profile_awards[$key]['award_date'] = $award['award_date'];
-                    $profile_awards[$key]['award_hidden_image'] = url('/uploads/users/'.$user_id.'/awards/'.$award['award_hidden_image']);
+                    $profile_awards[$key]['award_hidden_image'] = config('app.aws_se_path').'/uploads/users/'.$user_id.'/awards/'.$award['award_hidden_image'];
                     $profile_awards[$key]['award_image'] = !empty($award['award_hidden_image']) ? $award['award_hidden_image'] : '';
                 }
             }

@@ -27,7 +27,7 @@
                             <div class="wt-service-tabel wt-jobservice-details">
                                 @if (!empty($freelancer))
                                     @if (!empty($attachment))
-                                        <figure class="service-feature-image"><img src="{{{asset(Helper::getImage('uploads/services/'.$freelancer->id, $attachment[0], 'medium-', 'small-service.jpg'))}}}" alt="{{{$service['title']}}}"></figure>
+                                        <figure class="service-feature-image"><img src="{{{(Helper::gets3Image('uploads/services/'.$freelancer->id, $attachment[0], 'medium-', 'small-service.jpg'))}}}" alt="{{{$service['title']}}}"></figure>
                                     @endif
                                 @endif
                                 <div class="wt-freelancers-content">
@@ -83,7 +83,7 @@
                                             </div>
                                             <div class="wt-rightarea">
                                                 <div class="wt-hireduserstatus">
-                                                    <figure><img src="{{{ asset(Helper::getImage('uploads/users/'.$purchaser->id, $purchaser->profile->avater, 'medium-small-', 'user.jpg')) }}}" alt="{{ trans('lang.profie_img') }}"></figure>
+                                                    <figure><img src="{{{ (Helper::gets3Image('uploads/users/'.$purchaser->id, $purchaser->profile->avater, 'medium-small-', 'user.jpg')) }}}" alt="{{ trans('lang.profie_img') }}"></figure>
                                                 </div>
                                             </div>
                                         </div>
@@ -100,7 +100,7 @@
                                     <div class="wt-jobdetailscontent">
                                         <div class="wt-userlistinghold wt-featured wt-proposalitem">
                                             @if (!empty($freelancer))
-                                                <span class="wt-featuredtag"><img src="{{{ asset('images/featured.png') }}}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style mCS_img_loaded"></span>
+                                                <span class="wt-featuredtag"><img src="{{{ config('app.aws_se_path'). '/' .'images/featured.png' }}}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style mCS_img_loaded"></span>
                                                 <figure class="wt-userlistingimg">
                                                     <img src="{{{Helper::getProfileImage($freelancer->id)}}}" alt="image description">
                                                 </figure>

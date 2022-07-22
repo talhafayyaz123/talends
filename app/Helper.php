@@ -2195,7 +2195,7 @@ return $response;
     public static function getProfileBanner($user_id)
     {
         $banner = User::find($user_id)->profile->banner;
-        return !empty($banner) ? config('app.aws_se_path').'/uploads/users/' . $user_id . '/' . $banner : 'images/embanner-350x172.jpg';
+        return !empty($banner) ? config('app.aws_se_path').'/uploads/users/' . $user_id . '/' . $banner : config('app.aws_se_path'). '/' .'images/embanner-350x172.jpg';
     }
 
     /**
@@ -2262,7 +2262,7 @@ return $response;
      */
     public static function getProjectImage($image, $user_id)
     {
-        return !empty($image) ? '/uploads/users/' . $user_id . '/' . $image : 'images/projects/img-01.jpg';
+        return !empty($image) ? config('app.aws_se_path'). '/' .'uploads/users/' . $user_id . '/' . $image : config('app.aws_se_path'). '/' .'images/projects/img-01.jpg';
     }
 
     /**

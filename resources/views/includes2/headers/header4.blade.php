@@ -69,7 +69,7 @@
                                 $profile = \App\User::find(Auth::user()->id)->profile;
                                 $user_image = !empty($profile) ? $profile->avater : '';
                                 $employer_job = \App\Job::select('status')->where('user_id', Auth::user()->id)->first();
-                                $profile_image = !empty($user_image) ?config('app.aws_se_path'). '/uploads/users/'.$user->id.'/'.$user_image : 'images/user-login.png';
+                                $profile_image = !empty($user_image) ?config('app.aws_se_path'). '/uploads/users/'.$user->id.'/'.$user_image : config('app.aws_se_path'). '/' .'images/user-login.png';
                                 $payment_settings = \App\SiteManagement::getMetaValue('commision');
                                 $payment_module = !empty($payment_settings) && !empty($payment_settings[0]['enable_packages']) ? $payment_settings[0]['enable_packages'] : 'true';
                                 $employer_payment_module = !empty($payment_settings) && !empty($payment_settings[0]['employer_package']) ? $payment_settings[0]['employer_package'] : 'true';

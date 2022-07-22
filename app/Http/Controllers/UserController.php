@@ -1246,7 +1246,7 @@ class UserController extends Controller
                     foreach ($message_data as $key => $data) {
                         $content = $data->content;
                         $excerpt = str_limit($content, 100);
-                        $default_avatar = url('images/user-login.png');
+                        $default_avatar = config('app.aws_se_path'). '/' .'images/user-login.png';
                         $profile_image = !empty($data->avater)
                             ? config('app.aws_se_path').'/uploads/users/' . $data->author_id . '/' . $data->avater
                             : $default_avatar;
