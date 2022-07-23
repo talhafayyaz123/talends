@@ -20,6 +20,7 @@
                                             $duration  =  \App\Helper::getJobDurationList($job->duration);
                                             $user_name = $job->employer->first_name.' '.$job->employer->last_name;
                                             $accepted_proposal = \App\Job::find($job->id)->proposals()->where('status', 'hired')->first();
+                                           
                                             $freelancer_name = \App\Helper::getUserName($accepted_proposal->freelancer_id);
                                             $profile = \App\User::find($accepted_proposal->freelancer_id)->profile;
                                             $user_image = !empty($profile) ? $profile->avater : '';
@@ -59,7 +60,7 @@
                                                                 <li><a href="javascript:void(0);" class="wt-clicksavefolder"><img class="wt-job-icon" src="{{ config('app.aws_se_path'). '/' .'images/job-icons/job-type.png'}}"> {{ trans('lang.type') }} {{{ $project_type }}}</a></li>
                                                             @endif
                                                             @if (!empty($job->duration))
-                                                                <li><span class="wt-dashboradclock"><img class="wt-job-icon" src="{{config('app.aws_se_path'). '/' .'images/job-icons/job-duration.png'}}"> {{ trans('lang.duration') }} {{{ $duration }}}</span></li>
+                                                                <li><span class="wt-dashboradclock"><img class="wt-job-icon" src="{{ config('app.aws_se_path'). '/' .'images/job-icons/job-duration.png'}}"> {{ trans('lang.duration') }} {{{ $duration }}}</span></li>
                                                             @endif
                                                         </ul>
                                                     @endif
@@ -71,7 +72,7 @@
                                                     <div class="wt-hireduserstatus">
                                                         <h4>{{ trans('lang.hired') }}</h4><span>{{{ $freelancer_name }}}</span>
                                                         <ul class="wt-hireduserimgs">
-                                                            <li><figure><img src="{{{ asset($profile_image) }}}" alt="{{{ trans('lang.freelancer') }}}"></figure></li>
+                                                            <li><figure><img src="{{{ ($profile_image) }}}" alt="{{{ trans('lang.freelancer') }}}"></figure></li>
                                                         </ul>
                                                     </div>
                                                 </div>

@@ -28,7 +28,7 @@
                             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left">
                                 <div class="wt-proposalholder">
                                     @if (!empty($job->is_featured) && $job->is_featured === 'true')
-                                        <span class="wt-featuredtag"><img src="{{{ asset('images/featured.png') }}}" alt="{{ trans('lang.img') }}" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                        <span class="wt-featuredtag"><img src="{{{ config('app.aws_se_path'). '/' .'images/featured.png' }}}" alt="{{ trans('lang.img') }}" data-tipso="Plus Member" class="template-content tipso_style"></span>
                                     @endif
                                     @if (
                                         !empty($job->professional_level) ||
@@ -51,7 +51,7 @@
                                                     @if (!empty($job->project_level))
                                                         <li>
                                                             <span>
-                                                                <img class="wt-job-icon" src="{{asset('images/job-icons/job-level.png')}}">
+                                                                <img class="wt-job-icon" src="{{ config('app.aws_se_path'). '/' .'images/job-icons/job-level.png'}}">
                                                                 {{{Helper::getProjectLevel($job->project_level)}}}
                                                             </span>
                                                         </li>
@@ -60,10 +60,10 @@
                                                         <li><span><img src="{{{asset(Helper::getLocationFlag($job->location->flag))}}}" alt="{{ trans('lang.img') }}"> {{{ $job->location->title }}}</span></li>
                                                     @endif
                                                     @if (!empty($job->project_type))
-                                                        <li><span class="wt-clicksavefolder"><img class="wt-job-icon" src="{{asset('images/job-icons/job-type.png')}}"> {{ trans('lang.type') }} {{{$project_type}}}</span></li>
+                                                        <li><span class="wt-clicksavefolder"><img class="wt-job-icon" src="{{config('app.aws_se_path'). '/' .'images/job-icons/job-type.png'}}"> {{ trans('lang.type') }} {{{$project_type}}}</span></li>
                                                     @endif
                                                     @if (!empty($job->duration))
-                                                        <li><span class="wt-dashboradclock"><img class="wt-job-icon" src="{{asset('images/job-icons/job-duration.png')}}"> {{ trans('lang.duration') }} {{{ Helper::getJobDurationList($job->duration) }}}</span></li>
+                                                        <li><span class="wt-dashboradclock"><img class="wt-job-icon" src="{{ config('app.aws_se_path'). '/' .'images/job-icons/job-duration.png'}}"> {{ trans('lang.duration') }} {{{ Helper::getJobDurationList($job->duration) }}}</span></li>
                                                     @endif
                                                     {{-- @if (!empty($job->price))
                                                         <li>

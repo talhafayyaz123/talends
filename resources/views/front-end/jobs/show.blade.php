@@ -48,7 +48,7 @@
                         <div class="col-xl-9 col-lg-9 col-md-8 col-sm-8 mb-3">
                             <div class="position-relative py-4">
                                 @if (!empty($job->is_featured) && $job->is_featured === 'true')
-                                    <span class="wt-featuredtag"><img src="{{{ asset('images/featured.png') }}}" alt="{{ trans('lang.img') }}" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                    <span class="wt-featuredtag"><img src="{{{ config('app.aws_se_path'). '/' .'images/featured.png' }}}" alt="{{ trans('lang.img') }}" data-tipso="Plus Member" class="template-content tipso_style"></span>
                                 @endif
                                 @if (
                                     !empty($job->professional_level) ||
@@ -72,7 +72,7 @@
                                                 @if (!empty($job->project_level))
                                                     <li class="list-group-item p-0 border-0 pr-3">
                                                         <div class="media mb-2 align-items-center">
-                                                            <img src="{{asset('images/job-icons/job-level.png')}}" class="img-fluid mr-2"/>
+                                                            <img src="{{ config('app.aws_se_path'). '/' .'images/job-icons/job-level.png'}}" class="img-fluid mr-2"/>
                                                             <div class="media-body">
                                                                 {{{Helper::getProjectLevel($job->project_level)}}}
                                                             </div>
@@ -92,7 +92,7 @@
                                                 @if (!empty($job->project_type))
                                                     <li class="list-group-item p-0 border-0 pr-3">
                                                         <div class="media mb-2 align-items-center">
-                                                            <img src="{{asset('images/job-icons/job-type.png')}}" class="img-fluid mr-2"/>
+                                                            <img src="{{ config('app.aws_se_path'). '/' .'images/job-icons/job-type.png'}}" class="img-fluid mr-2"/>
                                                             <div class="media-body">
                                                                 {{ trans('lang.type') }} {{{$project_type}}}
                                                             </div>
@@ -102,7 +102,7 @@
                                                 @if (!empty($job->duration))
                                                     <li class="list-group-item p-0 border-0 pr-3">
                                                         <div class="media mb-2 align-items-center">
-                                                            <img src="{{asset('images/job-icons/job-duration.png')}}" class="img-fluid mr-2">
+                                                            <img src="{{ config('app.aws_se_path'). '/' .'images/job-icons/job-duration.png'}}" class="img-fluid mr-2">
                                                             <div class="media-body">
                                                                 {{ trans('lang.duration') }} {{{ Helper::getJobDurationList($job->duration) }}}
                                                             </div>

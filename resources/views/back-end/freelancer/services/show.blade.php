@@ -43,7 +43,7 @@
                             </div>
                             <div class="wt-jobdetailscontent">
                                 <div class="wt-userlistinghold wt-featured wt-proposalitem">
-                                    <span class="wt-featuredtag"><img src="{{{ asset('images/featured.png') }}}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style mCS_img_loaded"></span>
+                                    <span class="wt-featuredtag"><img src="{{{ config('app.aws_se_path'). '/' .'images/featured.png' }}}" alt="img description" data-tipso="Plus Member" class="template-content tipso_style mCS_img_loaded"></span>
                                     <figure class="wt-userlistingimg">
                                         <img src="{{{asset(Helper::getProfileImage($freelancer->id))}}}" alt="image description">
                                     </figure>

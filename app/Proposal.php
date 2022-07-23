@@ -138,17 +138,22 @@ class Proposal extends Model
             if (!empty($request['attachments'])) {
                 $old_path = 'uploads\proposals\temp';
                 $attachments = $request['attachments'];
+                  
                 foreach ($attachments as $key => $attachment) {
                     if (Storage::disk('local')->exists($old_path . '/' . $attachment)) {
+
                         $new_path = 'uploads/proposals/' . $user_id;
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
                         $filename = time() . '-' . $attachment;
-                        Storage::move($old_path . '/' . $attachment, $new_path . '/' . $filename);
+                      // move files to aws s3
+                       $contents =  Storage::disk('local')->get($old_path . '/' . $attachment);
+                       Storage::disk('s3')->put($new_path. '/' . $filename,$contents  );  
+                      
                         $message_attachments[] = $filename;
+                        Storage::disk('local')->delete($old_path . '/' . $attachment);
                     }
                 }
+
+                
             }
             $msg_attachments = !empty($message_attachments) ? serialize($message_attachments) : null;
             DB::table('private_messages')->insert(

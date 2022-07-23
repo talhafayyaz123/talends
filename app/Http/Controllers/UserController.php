@@ -1295,24 +1295,67 @@ class UserController extends Controller
             } elseif ($messages[0]->project_type == 'job') {
                 $project_type = 'proposals';
             }
-            $path = storage_path() . '/app/uploads/' . $project_type . '/' . $messages[0]->author_id;
+
+            $path = storage_path() . '/app/uploads/' . $project_type . '/temp';
             if (!file_exists($path)) {
                 File::makeDirectory($path, 0755, true, true);
             }
             
             $zip = new \Madnest\Madzipper\Madzipper;
-            foreach ($attachments as $attachment) {
-                if (Storage::disk('local')->exists('uploads/' . $project_type . '/' . $messages[0]->author_id . '/' . $attachment)) {
-                    $zip->make($path . '/' . $id . '-attachments.zip')->add($path . '/' . $attachment);
+
+            $exist=Storage::disk('s3')->exists('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip');
+            if(!$exist){
+                foreach ($attachments as $attachment) {
+                    if (Storage::disk('s3')->exists('uploads/' . $project_type . '/'. $messages[0]->author_id.'/' . $attachment)) {
+                       
+                        if (!file_exists($path . '/' . $attachment)) {
+                        $s3_file= Storage::disk('s3')->get('uploads/' . $project_type . '/'. $messages[0]->author_id.'/' . $attachment);
+                        $s3 = Storage::disk('local');
+                        $s3->put('uploads/' . $project_type . '/temp'.'/' . $attachment, $s3_file);
+                        }
+                                           
+                       $zip->make($path . '/' . $id . '-attachments.zip')->add($path . '/' . $attachment);
+                       
+                    }
+                    $zip->close();
+    
                 }
-                $zip->close();
+            }else{
+        
+                if (Storage::disk('s3')->exists('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip')) {
+              
+                    return Storage::disk('s3')->download('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip');
+                    
+                  } else {
+                      Session::flash('error', trans('lang.file_not_found'));
+                      return Redirect::back();
+                  }
             }
-            if (Storage::disk('local')->exists('uploads/' . $project_type . '/' . $messages[0]->author_id . '/' . $id . '-attachments.zip')) {
-                return response()->download(storage_path('app/uploads/' . $project_type . '/' . $messages[0]->author_id . '/' . $id . '-attachments.zip'));
+          
+            if (file_exists($path .'/'. $id . '-attachments.zip')) {
+                $contents = file_get_contents($path .'/'. $id . '-attachments.zip');
+                Storage::disk('s3')->put( 'uploads/' . $project_type . '/'. $messages[0]->author_id.'/' . $id . '-attachments.zip'  , $contents );
+                unlink($path .'/'. $id . '-attachments.zip');
+            }
+
+            if(!$exist){
+            foreach ($attachments as $attachment) {
+                if (file_exists($path .'/'. $attachment)) {
+                    unlink($path .'/'. $attachment);
+                }
+            }
+        }
+          
+            /// download freom s3 bucket  
+            if (Storage::disk('s3')->exists('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip')) {
+              
+              return Storage::disk('s3')->download('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip');
+              
             } else {
                 Session::flash('error', trans('lang.file_not_found'));
                 return Redirect::back();
             }
+
         }
     }
 

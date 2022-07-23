@@ -32,7 +32,7 @@
                                             @endphp
                                             <div class="wt-userlistinghold wt-featured wt-dashboradsaveditems">
                                                 @if (!empty($job->is_featured) && $job->is_featured === 'true')
-                                                    <span class="wt-featuredtag"><img src="{{{ asset('images/featured.png') }}}" alt="{{ trans('lang.img') }}" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                                    <span class="wt-featuredtag"><img src="{{{ config('app.aws_se_path'). '/' .'images/featured.png' }}}" alt="{{ trans('lang.img') }}" data-tipso="Plus Member" class="template-content tipso_style"></span>
                                                 @endif
                                                 <div class="wt-userlistingcontent">
                                                     <div class="wt-contenthead wt-dashboardsavehead">
@@ -165,7 +165,7 @@
                                         @endphp
                                         <div class="wt-userlistinghold {{$featured_class}}">
                                             @if ( !empty($job->is_featured) && $job->is_featured == 'true')
-                                                <span class="wt-featuredtag"><img src="{{{ asset('images/featured.png') }}}" alt="{{{ trans('ph.is_featured') }}}" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                                <span class="wt-featuredtag"><img src="{{{ config('app.aws_se_path'). '/' .'images/featured.png' }}}" alt="{{{ trans('ph.is_featured') }}}" data-tipso="Plus Member" class="template-content tipso_style"></span>
                                             @endif
                                             <figure class="wt-userlistingimg">
                                                 <img src="{{{ ($profile_image) }}}" alt="{{ trans('lang.profile_img') }}">

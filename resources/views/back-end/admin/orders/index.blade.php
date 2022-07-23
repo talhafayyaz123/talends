@@ -25,7 +25,7 @@
 								</thead>
 								<tbody>
 									@foreach ($orders as $order)
-										@php 
+										@php  
 											$is_featured = '';
 											$title = '';
 											$amount = '';
@@ -56,7 +56,7 @@
 															@if (!empty($attachment) && $order->type == 'service')
 																<figure class="service-feature-image"><img src="{{{( Helper::gets3ImageWithSize('uploads/services/'.$service->seller[0]->id, $attachment, 'small' ))}}}" alt="{{{$service['title']}}}"></figure>
 															@else
-																<figure class="service-feature-image"><img src="{{{asset('images/order-no-image.jpg')}}}" alt="no-image"></figure>
+																<figure class="service-feature-image"><img src="{{{ config('app.aws_se_path'). '/' .'images/order-no-image.jpg'  }}}" alt="no-image"></figure>
 															@endif
 															<div class="wt-freelancers-content">
 																<div class="dc-title">

@@ -19,7 +19,7 @@
                                 @endphp
                                 <div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
                                     @if (!empty($job->is_featured) && $job->is_featured === 'true')
-                                        <span class="wt-featuredtag"><img src="{{{ asset('images/featured.png') }}}" alt="{{ trans('lang.is_featured') }}" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                        <span class="wt-featuredtag"><img src="{{{ config('app.aws_se_path'). '/' .'images/featured.png' }}}" alt="{{ trans('lang.is_featured') }}" data-tipso="Plus Member" class="template-content tipso_style"></span>
                                     @endif
                                     <div class="wt-userlistingcontent">
                                         <div class="wt-contenthead">
@@ -47,10 +47,10 @@
                                                         <li><span><img src="{{{asset(App\Helper::getLocationFlag($job->location->flag))}}}" alt="{{{ trans('lang.locations') }}}"> {{{ $job->location->title }}}</span></li>
                                                     @endif
                                                     @if (!empty($job->project_type))
-                                                        <li><a href="javascript:void(0);" class="wt-clicksavefolder"><img class="wt-job-icon" src="{{asset('images/job-icons/job-type.png')}}"> {{ trans('lang.type') }} {{{ $project_type }}}</a></li>
+                                                        <li><a href="javascript:void(0);" class="wt-clicksavefolder"><img class="wt-job-icon" src="{{  config('app.aws_se_path'). '/' .'images/job-icons/job-type.png' }}"> {{ trans('lang.type') }} {{{ $project_type }}}</a></li>
                                                     @endif
                                                     @if (!empty($job->duration) && !is_array($duration))
-                                                        <li><span class="wt-dashboradclock"><img class="wt-job-icon" src="{{asset('images/job-icons/job-duration.png')}}"> {{ trans('lang.duration') }} {{{ $duration }}}</span></li>
+                                                        <li><span class="wt-dashboradclock"><img class="wt-job-icon" src="{{ config('app.aws_se_path'). '/' .'images/job-icons/job-duration.png'  }}"> {{ trans('lang.duration') }} {{{ $duration }}}</span></li>
                                                     @endif
                                                 </ul>
                                             @endif
