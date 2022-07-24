@@ -918,16 +918,73 @@ class UserController extends Controller
     {
         if (!empty($request['attachments'])) {
             $freelancer_id = $request['freelancer_id'];
-            $path = storage_path() . '/app/uploads/proposals/' . $freelancer_id;
-            if (!file_exists($path)) {
-                File::makeDirectory($path, 0755, true, true);
+           
+                //////////////////////////
+                $path = storage_path() . '/app/uploads/proposals/temp';
+                if (!file_exists($path)) {
+                    File::makeDirectory($path, 0755, true, true);
+                }
+                $zip = new \Madnest\Madzipper\Madzipper;
+                $exist=Storage::disk('s3')->exists('uploads/proposals'. '/'. $freelancer_id . '/' . 'attachments.zip');
+                 
+                if(!$exist){
+                    foreach ($request['attachments'] as $attachment) {
+                       
+                        if (Storage::disk('s3')->exists('uploads/proposals/'. $freelancer_id.'/' . $attachment)) {
+                        
+                            if (!file_exists($path . '/' . $attachment)) {
+                            $s3_file= Storage::disk('s3')->get('uploads/proposals'. '/'. $freelancer_id.'/' . $attachment);
+                            $s3 = Storage::disk('local');
+                             
+                            $s3->put('uploads/proposals'. '/temp'.'/' . $attachment, $s3_file);
+                            }
+                                               
+                           $zip->make($path . '/attachments.zip')->add($path . '/' . $attachment); 
+                           
+                        }
+                        $zip->close(); 
+        
+                    }
+                }else{
+            
+                    if (Storage::disk('s3')->exists('uploads/proposals'.'/'. $freelancer_id . '/'.'attachments.zip')) {
+                  
+                        return Storage::disk('s3')->download('uploads/proposals'.'/'. $freelancer_id.'/'.'attachments.zip');
+                        
+                      } else {
+                          Session::flash('error', trans('lang.file_not_found'));
+                          return Redirect::back();
+                      } 
+                }
+                
+            if (file_exists($path .'/'.'attachments.zip')) {
+                $contents = file_get_contents($path .'/'.'attachments.zip');
+                Storage::disk('s3')->put('uploads/proposals'. '/'. $freelancer_id.'/'.'attachments.zip', $contents);
+                unlink($path .'/'.'attachments.zip');
             }
-            $zip = new \Madnest\Madzipper\Madzipper;
-            foreach ($request['attachments'] as $attachment) {
-                $zip->make($path . '/attachments.zip')->add($path . '/' . $attachment);
-                $zip->close();
+
+            if(!$exist){
+                foreach ($request['attachments'] as $attachment) {
+                    if (file_exists($path .'/'. $attachment)) {
+                        unlink($path .'/'. $attachment);
+                    }
+                }
             }
-            return response()->download(storage_path('app/uploads/proposals/' . $freelancer_id . '/attachments.zip'));
+
+            // download freom s3 bucket  
+            if (Storage::disk('s3')->exists('uploads/proposals' . '/'. $freelancer_id . '/' . 'attachments.zip')) {
+              
+                return Storage::disk('s3')->download('uploads/proposals'. '/'. $freelancer_id . '/' . 'attachments.zip');
+                
+              } else {
+                  Session::flash('error', trans('lang.file_not_found'));
+                  return Redirect::back();
+              }
+
+
+
+                //////////////////////////
+
         } else {
             Session::flash('error', trans('lang.files_not_found'));
             return Redirect::back();

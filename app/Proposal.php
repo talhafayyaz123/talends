@@ -79,22 +79,27 @@ class Proposal extends Model
             $this->job()->associate($job);
             $old_path = 'uploads\proposals\temp';
             $proposal_attachments = array();
+
             if (!empty($request['attachments'])) {
 
                 $attachments = $request['attachments'];
                 foreach ($attachments as $key => $attachment) {
                     if (Storage::disk('local')->exists($old_path . '/' . $attachment)) {
+
                         $new_path = 'uploads/proposals/' . $user_id;
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
                         $filename = time() . '-' . $attachment;
-                        Storage::move($old_path . '/' . $attachment, $new_path . '/' . $filename);
+                      // move files to aws s3
+                       $contents =  Storage::disk('local')->get($old_path . '/' . $attachment);
+                       Storage::disk('s3')->put($new_path. '/' . $filename,$contents  );  
+                      
                         $proposal_attachments[] = $filename;
+                        Storage::disk('local')->delete($old_path . '/' . $attachment);
+
                     }
                 }
                 $this->attachments = serialize($proposal_attachments);
             }
+
             $this->save();
             $json['type'] = 'success';
             return $json;

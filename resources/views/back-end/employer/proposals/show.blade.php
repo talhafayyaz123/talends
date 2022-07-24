@@ -147,7 +147,7 @@
                                                     <i class="fa fa-paperclip"></i>
                                                     {!! Form::open(['url' => url('proposal/download-attachments'), 'class' =>'post-job-form wt-haslayout', 'id' => 'download-attachments-form-'.$accepted_proposal->freelancer_id]) !!}
                                                         @foreach ($attachments as $attachment)
-                                                            @if (Storage::disk('local')->exists('uploads/proposals/'.$accepted_proposal->freelancer_id.'/'.$attachment))
+                                                            @if (Storage::disk('s3')->exists('uploads/proposals/'.$accepted_proposal->freelancer_id.'/'.$attachment))
                                                                 {!! Form::hidden('attachments['.$count.']', $attachment, []) !!}
                                                                 @php $count++; @endphp
                                                             @endif

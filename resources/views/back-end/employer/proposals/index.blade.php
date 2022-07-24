@@ -99,6 +99,7 @@
                                         $average_rating_count = !empty($feedbacks) ? $reviews->sum('avg_rating')/$feedbacks : 0;
                                         $completion_time = !empty($accepted_proposal->completion_time) ? \App\Helper::getJobDurationList($accepted_proposal->completion_time) : '';
                                         $p_attachments = !empty($accepted_proposal->attachments) ? unserialize($accepted_proposal->attachments) : '';
+                                        
                                         $badge = Helper::getUserBadge($user->id);
                                         if (!empty($enable_package) && $enable_package === 'true') {
                                             $feature_class = !empty($badge) ? 'wt-featured' : '';
@@ -154,7 +155,7 @@
                                                     @if (!empty($p_attachments))
                                                         {!! Form::open(['url' => url('proposal/download-attachments'), 'class' =>'post-job-form wt-haslayout', 'id' => 'accepted-download-attachments-form-'.$accepted_proposal->id]) !!}
                                                             @foreach ($p_attachments as $attachments)
-                                                                @if (Storage::disk('local')->exists('uploads/proposals/'.$accepted_proposal->freelancer_id.'/'.$attachments))
+                                                                @if (Storage::disk('s3')->exists('uploads/proposals/'.$accepted_proposal->freelancer_id.'/'.$attachments))
                                                                     {!! Form::hidden('attachments['.$count.']', $attachments, []) !!}
                                                                     @php $count++; @endphp
                                                                 @endif
@@ -264,7 +265,7 @@
                                                             @if (!empty($attachments))
                                                                 {!! Form::open(['url' => url('proposal/download-attachments'), 'class' =>'post-job-form wt-haslayout', 'id' => 'download-attachments-form-'.$proposal->id]) !!}
                                                                     @foreach ($attachments as $attachment)
-                                                                        @if (Storage::disk('local')->exists('uploads/proposals/'.$proposal->freelancer_id.'/'.$attachment))
+                                                                        @if (Storage::disk('s3')->exists('uploads/proposals/'.$proposal->freelancer_id.'/'.$attachment))
                                                                             {!! Form::hidden('attachments['.$received_proposal_count.']', $attachment, []) !!}
                                                                             @php $received_proposal_count++; @endphp
                                                                         @endif
