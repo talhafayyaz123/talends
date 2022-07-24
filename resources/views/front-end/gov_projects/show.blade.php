@@ -113,8 +113,8 @@
                                                     <li>
                                                         <span>{{{Helper::formateFileName($attachment)}}}</span>
                                                         <em>
-                                                            @if (Storage::disk('local')->exists('uploads/jobs/'.$job->employer->id.'/'.$attachment))
-                                                                {{ trans('lang.file_size') }} {{{Helper::bytesToHuman(Storage::size('uploads/jobs/'.$job->employer->id.'/'.$attachment))}}}
+                                                            @if (Storage::disk('s3')->exists('uploads/jobs/'.$job->employer->id.'/'.$attachment))
+                                                                {{ trans('lang.file_size') }} {{{Helper::bytesToHuman(Storage::disk('s3')->size('uploads/jobs/'.$job->employer->id.'/'.$attachment))}}}
                                                             @endif
                                                             @if (!empty($attachment) && !empty($job->user_id))
                                                                 <a href="{{route('getfile', ['type'=>'jobs','attachment'=> $attachment,'id'=> $job->user_id])}}"><i class="lnr lnr-download"></i></a>

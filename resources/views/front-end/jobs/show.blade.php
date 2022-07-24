@@ -188,9 +188,9 @@
 
                                                     <em>
 
-                                                        @if (Storage::disk('local')->exists('uploads/jobs/'.$job->employer->id.'/'.$attachment))
+                                                        @if (Storage::disk('s3')->exists('uploads/jobs/'.$job->employer->id.'/'.$attachment))
 
-                                                            {{ trans('lang.file_size') }} {{{Helper::bytesToHuman(Storage::size('uploads/jobs/'.$job->employer->id.'/'.$attachment))}}}
+                                                            {{ trans('lang.file_size') }} {{{Helper::bytesToHuman(Storage::disk('s3')->size('uploads/jobs/'.$job->employer->id.'/'.$attachment))}}}
 
                                                         @endif
 

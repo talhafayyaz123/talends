@@ -488,8 +488,8 @@ class PublicController extends Controller
         $filename = $request->get('attachment');
         $type = $request->get('type');
         if (!empty($type) && !empty($filename) && !empty($id)) {
-            if (Storage::disk('local')->exists('uploads/' . $type . '/' . $id . '/' . $filename)) {
-                return Storage::download('uploads/' . $type . '/' . $id . '/' . $filename);
+            if (Storage::disk('s3')->exists('uploads/' . $type . '/' . $id . '/' . $filename)) {
+                return Storage::disk('s3')->download('uploads/' . $type . '/' . $id . '/' . $filename);
             } else {
                 Session::flash('error', trans('lang.file_not_found'));
                 return Redirect::back();
