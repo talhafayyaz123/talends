@@ -2039,7 +2039,7 @@ class RestAPIController extends Controller
             }
             if (!empty($attachments)) {
                 foreach ($attachments as $attachment_key => $attachment) {
-                    $json[$key]['attachment'][$attachment_key]['image'] = (Helper::getImageWithSize('uploads/services/'.$service->seller[0]->id, $attachment, 'medium', true));
+                    $json[$key]['attachment'][$attachment_key]['image'] = (Helper::gets3ImageWithSize('uploads/services/'.$service->seller[0]->id, $attachment, 'medium', true));
                 }
             } else {
                 $json[$key]['attachment'] =array();

@@ -154,23 +154,48 @@ class Service extends Model
             $service_attachments = array();
             if (!empty($request['attachments'])) {
                 $attachments = $request['attachments'];
+
+              
                 foreach ($attachments as $key => $attachment) {
+
+
                     if (file_exists($old_path . '/' . $attachment)) {
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
-                        $filename = time() . '-' . $attachment;
+
+                     ////////////////////////////////
+                     $s3_path='uploads/services/'. $user_id;
+                     $filename = time() . '-' . $attachment;
+
                         if (!empty($image_size)) {
                             foreach ($image_size as $size) {
-                                rename($old_path . '/' . $size . '-' . $attachment, $new_path . '/' . $size . '-' . $filename);
+                                $contents = file_get_contents($old_path . '/' . $size . '-' . $attachment);
+                                Storage::disk('s3')->put($s3_path . '/' . $size . '-' . $filename,$contents  );  
+                                unlink($old_path . '/' . $size . '-' . $attachment);
+
                             }
-                            rename($old_path . '/' . $attachment, $new_path . '/' . $filename);
+
+                            $contents = file_get_contents($old_path . '/' . $attachment);
+                            Storage::disk('s3')->put($s3_path . '/' . $filename,$contents  );  
+                            unlink($old_path . '/' . $attachment);
+
+
                         } else {
-                            rename($old_path . '/' . $attachment, $new_path . '/' . $filename);
+                          $contents = file_get_contents($old_path . '/' . $attachment);
+                          Storage::disk('s3')->put($s3_path . '/' . $filename,$contents  );  
+                          unlink($old_path . '/' . $attachment);
+
                         }
+
+                       /////////////////////////////////////////////
+
                         $service_attachments[] = $filename;
+
+
                     }
+
+
                 }
+             
+
                 $this->attachments = serialize($service_attachments);
             }
             $this->code = $code;
@@ -275,6 +300,7 @@ class Service extends Model
             $service = self::find($id);
             $random_number = Helper::generateRandomCode(8);
             $user_id = Helper::getServiceSeller($id);
+           
             $location = $request['locations'];
             $service->location()->associate($location);
             if ($service->title != $request['title']) {
@@ -298,19 +324,37 @@ class Service extends Model
                 $attachments = $request['attachments'];
                 foreach ($attachments as $key => $attachment) {
                     if (file_exists($old_path . '/' . $attachment)) {
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
+
+                        $s3_path =  'uploads/services/' . $user_id->user_id;
+
                         $filename = time() . '-' . $attachment;
                         if (!empty($image_size)) {
                             foreach ($image_size as $size) {
-                                rename($old_path . '/' . $size . '-' . $attachment, $new_path . '/' . $size . '-' . $filename);
+
+                                $contents = file_get_contents($old_path . '/' . $size . '-' . $attachment);
+                                Storage::disk('s3')->put($s3_path . '/' . $size . '-' . $filename,$contents  );  
+                                unlink($old_path . '/' . $size . '-' . $attachment);
+
                             }
-                            rename($old_path . '/' . $attachment, $new_path . '/' . $filename);
+
+                            $contents = file_get_contents($old_path . '/' . $attachment);
+                            Storage::disk('s3')->put($s3_path . '/' . $filename,$contents  );  
+                            unlink($old_path . '/' . $attachment);
+
                         } else {
-                            rename($old_path . '/' . $attachment, $new_path . '/' . $filename);
+
+                            $contents = file_get_contents($old_path . '/' . $attachment);
+                            Storage::disk('s3')->put($s3_path . '/' . $filename,$contents  );  
+                            unlink($old_path . '/' . $attachment);
+
                         }
+
+
                         $service_attachments[] = $filename;
+
+
+
+
                     } else {
                         $service_attachments[] = $attachment;
                     }
@@ -349,13 +393,16 @@ class Service extends Model
                 $attachments = $request['attachments'];
                 foreach ($attachments as $key => $attachment) {
                     if (Storage::disk('local')->exists($old_path . '/' . $attachment)) {
-                        $new_path = 'uploads/services/' . $user_id;
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
-                        $filename = time() . '-' . $attachment;
-                        Storage::move($old_path . '/' . $attachment, $new_path . '/' . $filename);
-                        $message_attachments[] = $filename;
+
+                    $new_path = 'uploads/services/' . $user_id;
+                    $filename = time() . '-' . $attachment;
+                    // move files to aws s3
+                    $contents =  Storage::disk('local')->get($old_path . '/' . $attachment);
+                    Storage::disk('s3')->put($new_path. '/' . $filename,$contents  );  
+                    
+                    $message_attachments[] = $filename;
+                    Storage::disk('local')->delete($old_path . '/' . $attachment);
+
                     }
                 }
             }

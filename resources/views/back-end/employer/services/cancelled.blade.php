@@ -57,7 +57,7 @@
 												<span class="bt-content">
 													<div class="wt-userlistingsingle">
 														<figure class="wt-userlistingimg">
-															<img src="{{{asset(Helper::getProfileImage($freelancer->id))}}}" alt="image description">
+															<img src="{{{(Helper::getProfileImage($freelancer->id))}}}" alt="image description">
 														</figure>
 														<div class="wt-userlistingcontent">
 															<div class="wt-contenthead wt-followcomhead">

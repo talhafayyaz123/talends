@@ -34,7 +34,7 @@
 												<span class="bt-content">
 													<div class="wt-service-tabel">
 														@if (!empty($attachment))
-															<figure class="service-feature-image"><img src="{{{asset(Helper::getImage('uploads/services/'.Auth::user()->id, $attachment[0], 'medium-', 'small-service.jpg'))}}}" alt="{{{$service['title']}}}"></figure>
+															<figure class="service-feature-image"><img src="{{{(Helper::gets3Image('uploads/services/'.Auth::user()->id, $attachment[0], 'medium-', 'small-service.jpg'))}}}" alt="{{{$service['title']}}}"></figure>
 														@endif
 														<div class="wt-freelancers-content">
 															<div class="dc-title">
