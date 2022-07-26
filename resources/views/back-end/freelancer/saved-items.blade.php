@@ -80,9 +80,11 @@
                                     @endif
                                 @endif
                             </div>
-                            @if ( method_exists($saved_jobs,'links') )
+                        
+                            @if (isset(  $saved_jobs)  && !empty($saved_jobs) &&  method_exists($saved_jobs,'links') )
                                 {{ $saved_jobs->links('pagination.custom') }}
                             @endif
+                        
                         </div>
                         <div class="wt-educationholder tab-pane fade" id="wt-education">
                             <div class="wt-userexperience wt-followcompomy">
@@ -133,7 +135,7 @@
                                     @endif
                                 @endif
                             </div>
-                            @if ( method_exists($saved_employers,'links') )
+                            @if (  isset(  $saved_employers)  && !empty($saved_employers) && method_exists($saved_employers,'links') )
                                 {{ $saved_employers->links('pagination.custom') }}
                             @endif
                         </div>
@@ -204,7 +206,8 @@
                                     @endif
                                 @endif
                             </div>
-                            @if ( method_exists($saved_freelancers,'links') )
+                          
+                            @if (  isset(  $saved_freelancers)  && !empty($saved_freelancers) && method_exists($saved_freelancers,'links') )
                                 {{ $saved_freelancers->links('pagination.custom') }}
                             @endif
                         </div>
