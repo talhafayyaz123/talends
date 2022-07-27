@@ -627,10 +627,16 @@ return $response;
 
     public static function getAgencyServiceImage($image)
     {
+       
         if (!empty($image)) {
-            return '/uploads/agency_services/' . $image;
+            if(Storage::disk('s3')->exists('uploads/agency_services/' . $image)){
+                return config('app.aws_se_path').'/uploads/agency_services/' . $image;
+            }else{
+                return config('app.aws_se_path').'/uploads/agency_services/img-09.png';
+            }
+            
         } else {
-            return 'uploads/agency_services/img-09.png';
+            return config('app.aws_se_path').'/uploads/agency_services/img-09.png';
         }
     }
 
