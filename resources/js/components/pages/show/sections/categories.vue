@@ -19,7 +19,7 @@
                 <div class="wt-categoryexpl">
                     <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 float-left" v-for="(cat, index) in categoryList" :key="index">
                         <div class="wt-categorycontent">
-                            <figure><img :src="baseUrl+'/uploads/categories/'+ cat.image" :alt="cat.title"></figure>
+                            <figure><img :src="Aws_S3_PATH+'/uploads/categories/'+ cat.image" :alt="cat.title"></figure>
                             <div class="wt-cattitle">
                                 <h3><a :href="baseUrl+'/search-results?type='+ type+'&category%5B%5D='+cat.slug">{{ cat.title }}</a></h3>                            
                             </div>

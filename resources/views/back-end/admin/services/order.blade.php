@@ -54,7 +54,7 @@
 													<span class="bt-content">
 														<div class="wt-service-tabel">
 															@if (!empty($attachment))
-																<figure class="service-feature-image"><img src="{{{asset(Helper::getProfileImage($employer->id))}}}" alt="{{{trans('lang.image')}}}"></figure>
+																<figure class=""><img src="{{{asset(Helper::getProfileImage($employer->id))}}}" alt="{{{trans('lang.image')}}}"></figure>
 															@endif
 															<div class="wt-freelancers-content">
 																<div class="dc-title">

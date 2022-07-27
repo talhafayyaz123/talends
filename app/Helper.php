@@ -598,7 +598,7 @@ return $response;
         if (!empty($image)) {
             return '/uploads/locations/' . $image;
         } else {
-            return 'images/img-09.png';
+            return config('app.aws_se_path').'/images/img-09.png';
         }
     }
 
@@ -614,9 +614,14 @@ return $response;
     public static function getCategoryImage($image)
     {
         if (!empty($image)) {
-            return '/uploads/categories/' . $image;
+            if(Storage::disk('s3')->exists('uploads/categories/' . $image)){
+                return config('app.aws_se_path').'/uploads/categories/' . $image;
+            }else{
+                return config('app.aws_se_path').'/uploads/categories/img-09.png';
+            }
+            
         } else {
-            return 'uploads/categories/img-09.png';
+            return config('app.aws_se_path').'/uploads/categories/img-09.png';
         }
     }
 

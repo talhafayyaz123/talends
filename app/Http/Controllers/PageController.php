@@ -356,7 +356,7 @@ class PageController extends Controller
 
                 }
 
-                $banner = !empty($page_banner) ? Helper::getBannerImage('uploads/pages/'.$page['id'].'/'. $page_banner) : 'images/bannerimg/img-02.jpg';
+                $banner = !empty($page_banner) ? Helper::getBannerImage('uploads/pages/'.$page['id'].'/'. $page_banner) : config('app.aws_se_path'). '/' .'images/bannerimg/img-02.jpg';
 
                 $meta_desc = !empty($page_meta) ? $page_meta : '';
 

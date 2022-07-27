@@ -133,15 +133,32 @@ class Category extends Model
             $old_path = Helper::PublicPath() . '/uploads/categories/temp';
             if (!empty($request['uploaded_image'])) {
                 $filename = $request['uploaded_image'];
+               
                 if (file_exists($old_path . '/' . $request['uploaded_image'])) {
+
+
                     $new_path = Helper::PublicPath().'/uploads/categories/';
-                    if (!file_exists($new_path)) {
-                        File::makeDirectory($new_path, 0755, true, true);
-                    }
+                    $s3_path = 'uploads/categories';
+                    
                     $filename = time() . '-' . $request['uploaded_image'];
-                    rename($old_path . '/' . $request['uploaded_image'], $new_path . '/' . $filename);
-                    rename($old_path . '/small-' . $request['uploaded_image'], $new_path . '/small-' . $filename);
-                    rename($old_path . '/medium-' . $request['uploaded_image'], $new_path . '/medium-' . $filename);
+
+                    $contents = file_get_contents($old_path . '/' . $request['uploaded_image']);
+                    Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+
+
+                    $contents = file_get_contents($old_path . '/small-' . $request['uploaded_image']);
+                    Storage::disk('s3')->put($s3_path. '/small-' . $filename,$contents  );  
+
+
+                    $contents = file_get_contents($old_path . '/medium-' . $request['uploaded_image']);
+                    Storage::disk('s3')->put($s3_path. '/medium-' . $filename,$contents  ); 
+                    
+                    
+                    unlink($old_path . '/' . $request['uploaded_image']);
+                    unlink($old_path . '/small-' . $request['uploaded_image']);
+                    unlink($old_path . '/medium-' . $request['uploaded_image']);
+
+
                 }
                 $this->image = filter_var($filename, FILTER_SANITIZE_STRING);
             } else {
@@ -260,15 +277,53 @@ class Category extends Model
             $old_path = Helper::PublicPath() . '/uploads/categories/temp';
             if (!empty($request['uploaded_image'])) {
                 $filename = $request['uploaded_image'];
+                 
                 if (file_exists($old_path . '/' . $request['uploaded_image'])) {
-                    $new_path = Helper::PublicPath().'/uploads/categories/';
-                    if (!file_exists($new_path)) {
-                        File::makeDirectory($new_path, 0755, true, true);
+                    
+                    if(isset($cats->image) && !empty($cats->image) ){
+                        $file =$cats->image;
+                         
+                    if(Storage::disk('s3')->exists('uploads/categories/'.$file)){
+                      
+                      Storage::disk('s3')->delete('uploads/categories/'.$file); 
+                      
                     }
+                    
+                    if(Storage::disk('s3')->exists('uploads/categories/small-'.$file)){
+                      
+                        Storage::disk('s3')->delete('uploads/categories/small-'.$file); 
+                        
+                    }
+
+                    if(Storage::disk('s3')->exists('uploads/categories/medium-'.$file)){
+                      
+                        Storage::disk('s3')->delete('uploads/categories/medium-'.$file); 
+                        
+                    }
+    
+                    }
+
+                    $s3_path = 'uploads/categories';
+                    
                     $filename = time() . '-' . $request['uploaded_image'];
-                    rename($old_path . '/' . $request['uploaded_image'], $new_path . '/' . $filename);
-                    rename($old_path . '/small-' . $request['uploaded_image'], $new_path . '/small-' . $filename);
-                    rename($old_path . '/medium-' . $request['uploaded_image'], $new_path . '/medium-' . $filename);
+
+                    $contents = file_get_contents($old_path . '/' . $request['uploaded_image']);
+                    Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+
+
+                    $contents = file_get_contents($old_path . '/small-' . $request['uploaded_image']);
+                    Storage::disk('s3')->put($s3_path. '/small-' . $filename,$contents  );  
+
+
+                    $contents = file_get_contents($old_path . '/medium-' . $request['uploaded_image']);
+                    Storage::disk('s3')->put($s3_path. '/medium-' . $filename,$contents  ); 
+                    
+                    
+                    unlink($old_path . '/' . $request['uploaded_image']);
+                    unlink($old_path . '/small-' . $request['uploaded_image']);
+                    unlink($old_path . '/medium-' . $request['uploaded_image']);
+
+
                 }
                 $cats->image = filter_var($filename, FILTER_SANITIZE_STRING);
             } else {

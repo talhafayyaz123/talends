@@ -150,7 +150,7 @@
                                             $profile = \App\User::find($freelancer)->profile;
                                             $rating = !empty($profile->rating) ? $profile->rating : 0;
                                             $user_image = !empty($profile) ? $profile->avater : '';
-                                            $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/'.$freelancer.'/'.$user_image : 'images/user.jpg';
+                                            $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/'.$freelancer.'/'.$user_image : config('app.aws_se_path').'/images/user.jpg';
                                             $user_name = Helper::getUserName($freelancer);
                                             $reviews = \App\Review::where('receiver_id', $freelancer)->count();
                                             $proposal = \App\Proposal::select('job_id')->where('freelancer_id', $user->id)->pluck('job_id')->first();

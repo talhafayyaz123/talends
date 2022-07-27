@@ -267,7 +267,7 @@
                                     <div class="col-md-4 mb-4">
                                         <div class="image-checkboxes">
                                             <input type="checkbox" name="services[]" value="{{ $category->id }}" id="myCheckbox{{ $category->id }}" />
-                                            <label for="myCheckbox{{ $category->id }}"><img src="{{ asset('uploads/categories/'.$category->image)}}" class="rounded-circle" width="40" />{{ $category->title ?? '' }}</label>
+                                            <label for="myCheckbox{{ $category->id }}"><img src="{{ config('app.aws_se_path'). '/' .'uploads/categories/'.$category->image  }}" class="rounded-circle" width="40" />{{ $category->title ?? '' }}</label>
                                         </div>
                                     </div>
                                     @endforeach
