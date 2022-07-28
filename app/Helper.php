@@ -595,10 +595,16 @@ return $response;
      */
     public static function getLocationFlag($image)
     {
+      
         if (!empty($image)) {
-            return '/uploads/locations/' . $image;
+            if(Storage::disk('s3')->exists('uploads/locations/' . $image)){
+                return config('app.aws_se_path').'/uploads/locations/' . $image;
+            }else{
+                return config('app.aws_se_path').'/uploads/locations/img-09.png';
+            }
+            
         } else {
-            return config('app.aws_se_path').'/images/img-09.png';
+            return config('app.aws_se_path').'/uploads/locations/img-09.png';
         }
     }
 
@@ -687,11 +693,20 @@ return $response;
      */
     public static function getBadgeImage($image)
     {
+        
+
         if (!empty($image)) {
-            return '/uploads/badges/' . $image;
+            if(Storage::disk('s3')->exists('uploads/badges/' . $image)){
+                return config('app.aws_se_path').'/uploads/badges/' . $image;
+            }else{
+                return '';
+            }
+            
         } else {
             return '';
         }
+
+
     }
 
     /**
