@@ -540,6 +540,8 @@ class SiteManagement extends Model
             $icons = $request['icons'];
             $old_path = Helper::PublicPath() . '/uploads/settings/temp';
             $new_path = Helper::PublicPath() . '/uploads/settings/icon';
+
+
             foreach ($icons as $key => $icon) {
                 if (!empty($icon[$key])) {
                     if (file_exists($old_path . '/' . $icon[$key])) {
@@ -554,6 +556,9 @@ class SiteManagement extends Model
                     }
                 }
             }
+
+
+            
             $existing_data = SiteManagement::getMetaValue('icons');
             if (!empty($existing_data)) {
                 DB::table('site_managements')->where('meta_key', '=', 'icons')->delete();
@@ -615,23 +620,34 @@ class SiteManagement extends Model
             $old_path = Helper::PublicPath() . '/uploads/settings/temp';
             $new_path = Helper::PublicPath() . '/uploads/settings/footer';
             $filename = $footer_settings['footer_logo'];
-            if (file_exists($old_path . '/' . $footer_settings['footer_logo'])) {
-                if (!file_exists($new_path)) {
-                    File::makeDirectory($new_path, 0755, true, true);
-                }
+         
+         
+             if (file_exists($old_path . '/' . $footer_settings['footer_logo'])) {
+                $s3_path = 'uploads/settings/footer';
                 $filename = time() . '-' . $footer_settings['footer_logo'];
-                rename($old_path . '/' . $footer_settings['footer_logo'], $new_path . '/' . $filename);
+                $contents = file_get_contents($old_path . '/' . $footer_settings['footer_logo']);
+                Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                unlink($old_path . '/' . $footer_settings['footer_logo']);
                 $footer_settings['footer_logo'] = $filename;
-            }
+            } 
+          
+          
             $filename2 = $footer_settings['footer_bg'];
+          
+          
             if (file_exists($old_path . '/' . $footer_settings['footer_bg'])) {
-                if (!file_exists($new_path)) {
-                    File::makeDirectory($new_path, 0755, true, true);
-                }
+                
+                
                 $filename2 = time() . '-' . $footer_settings['footer_bg'];
-                rename($old_path . '/' . $footer_settings['footer_bg'], $new_path . '/' . $filename2);
+                $contents = file_get_contents($old_path . '/' . $footer_settings['footer_bg']);
+                Storage::disk('s3')->put($s3_path. '/' . $filename2,$contents  );  
+                unlink($old_path . '/' . $footer_settings['footer_bg']);
+                
                 $footer_settings['footer_bg'] = $filename2;
             }
+ 
+
+
             // Footer Bg
             $existing_data = SiteManagement::getMetaValue('footer_settings');
             if (!empty($existing_data)) {

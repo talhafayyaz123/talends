@@ -774,11 +774,18 @@ return $response;
      */
     public static function getFooterLogo($image)
     {
+    
         if (!empty($image)) {
-            return '/uploads/settings/footer/' . $image;
+            if(Storage::disk('s3')->exists('uploads/settings/footer/' . $image)){
+                return config('app.aws_se_path').'/uploads/settings/footer/' . $image;
+            }else{
+                return config('app.aws_se_path').'/images/flogo.png';
+            }
+            
         } else {
-            return 'images/flogo.png';
+            return config('app.aws_se_path').'/images/flogo.png';
         }
+
     }
 
     /**
