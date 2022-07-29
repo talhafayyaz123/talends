@@ -514,7 +514,7 @@ export default {
       sliderStyleList: JSON.parse(this.slider_styles),
       baseURL:APP_URL,
       pageData:[],
-      IconPath:APP_URL+'/images/page-builder/',
+      IconPath:this.$Aws_S3_PATH+'/images/page-builder/',
       parentPages: JSON.parse(this.parent_pages),
       appStyleList: JSON.parse(this.app_styles),
       cloneElement:false

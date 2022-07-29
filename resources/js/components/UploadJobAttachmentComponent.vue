@@ -100,8 +100,11 @@ export default {
   },
   mounted: function () {
      parent = document.getElementsByClassName('wt-attachfile')
-     var counter=parent[1].getElementsByTagName("li").length;
+     if(parent[1]){
+var counter=parent[1].getElementsByTagName("li").length;
       this.counter=counter;
+     }
+
 
     jQuery(document).on('click', '.image_upload_anchor', function(e){
       e.preventDefault();

@@ -41,7 +41,7 @@ import Event from '../event.js';
             return {
                 users: true,
                 url:APP_URL,
-                no_record_img: APP_URL+'/images/message-img.png',
+                no_record_img: this.$Aws_S3_PATH+'/images/message-img.png',
                 chat_users:[],
                 id:'',
                 user:'',

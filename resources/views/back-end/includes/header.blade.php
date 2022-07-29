@@ -8,7 +8,7 @@ $settings = array();
 $page_id='';
 $pages = App\Page::all();
 $setting = \App\SiteManagement::getMetaValue('settings');
-$logo = !empty($setting[0]['logo']) ? Helper::getHeaderLogo($setting[0]['logo']) : '/images/logo.png';
+$logo = !empty($setting[0]['logo']) ? Helper::getHeaderLogo($setting[0]['logo']) : config('app.aws_se_path'). '/' .'images/logo.png';
 $inner_header = !empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->uri() != '/' ? 'wt-headervtwo' : '';
 $type = Helper::getAccessType();
 $default_header_styling = \App\SiteManagement::getMetaValue('menu_settings');

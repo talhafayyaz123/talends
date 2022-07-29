@@ -18,7 +18,7 @@
 
             $flag = !empty($freelancer->location->flag) ? Helper::getLocationFlag($freelancer->location->flag) :
 
-                    '/images/img-01.png';
+            config('app.aws_se_path'). '/' . 'images/img-01.png';
 
             $feedbacks = \App\Review::select('feedback')->where('receiver_id', $freelancer->id)->count();
 

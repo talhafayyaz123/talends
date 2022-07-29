@@ -756,10 +756,16 @@ return $response;
      */
     public static function getHeaderLogo($image)
     {
+
         if (!empty($image)) {
-            return '/uploads/settings/general/' . $image;
+            if(Storage::disk('s3')->exists('uploads/settings/general/' . $image)){
+                return config('app.aws_se_path').'/uploads/settings/general/' . $image;
+            }else{
+                return config('app.aws_se_path').'/images/logo.png';
+            }
+            
         } else {
-            return 'images/logo.png';
+            return config('app.aws_se_path').'/images/logo.png';
         }
     }
 
@@ -4898,12 +4904,18 @@ return $response;
     public static function getSiteFavicon()
     {
         $settings = SiteManagement::getMetaValue('settings');
-        $favicon = !empty($settings[0]['favicon']) ? $settings[0]['favicon'] : null;
+        $favicon = !empty($settings[0]['favicon']) ? $settings[0]['favicon'] : null; 
         if (!empty($favicon)) {
-            return '/uploads/settings/general/' . $favicon;
+            if(Storage::disk('s3')->exists('uploads/settings/general/' . $favicon)){
+                return config('app.aws_se_path').'/uploads/settings/general/' . $favicon;
+            }else{
+                return '';
+            }
+            
         } else {
             return '';
         }
+
     }
 
     /**

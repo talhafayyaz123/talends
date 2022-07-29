@@ -1587,18 +1587,25 @@ class UserController extends Controller
                 $invoice->detail = !empty($request['trans_detail']) ? $request['trans_detail'] : '';
                 $old_path = 'uploads\users\temp';
                 $trans_attachments = array();
+                
                 if (!empty($request['attachments'])) {
                     $attachments = $request['attachments'];
                     foreach ($attachments as $key => $attachment) {
+
+
                         if (Storage::disk('local')->exists($old_path . '/' . $attachment)) {
                             $new_path = 'uploads/users/' . Auth::user()->id;
-                            if (!file_exists($new_path)) {
-                                File::makeDirectory($new_path, 0755, true, true);
-                            }
                             $filename = time() . '-' . $attachment;
-                            Storage::move($old_path . '/' . $attachment, $new_path . '/' . $filename);
-                            $trans_attachments[] = $filename;
+                          // move files to aws s3
+                           $contents =  Storage::disk('local')->get($old_path . '/' . $attachment);
+                           Storage::disk('s3')->put($new_path. '/' . $filename,$contents  );
+                           $trans_attachments[] = $filename;
+                            Storage::disk('local')->delete($old_path . '/' . $attachment);
+                            
                         }
+
+
+
                     }
                     $invoice->transection_doc = serialize($trans_attachments);
                 }

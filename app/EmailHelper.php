@@ -133,7 +133,7 @@ class EmailHelper extends Model
         } else {
             $setting = SiteManagement::getMetaValue('settings');
             $logo = !empty($setting) && !empty($setting[0]['logo']) ? $setting[0]['logo'] : '';
-            return !empty($logo) ? url('uploads/settings/general/'.$logo) : url('images/logo.png');
+            return !empty($logo) ? config('app.aws_se_path'). '/' .'uploads/settings/general/'.$logo : config('app.aws_se_path'). '/' .'images/logo.png';
         }
     }
 

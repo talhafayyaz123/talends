@@ -404,24 +404,38 @@ class SiteManagement extends Model
                 }
 
                 if (!empty($setting['logo'])) {
+
                     if (file_exists($old_path . '/' . $setting['logo'])) {
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
+                      
                         $filename = time() . '-' . $setting['logo'];
-                        rename($old_path . '/' . $setting['logo'], $new_path . '/' . $filename);
+                        $s3_path = 'uploads/settings/general';
+                        $contents = file_get_contents($old_path . '/' . $setting['logo']);
+                        Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                        unlink($old_path . '/' . $setting['logo']);
+
                         $settings_array[$key]['logo'] = $filename;
                     } else {
                         $settings_array[$key]['logo'] = $setting['logo'];
                     }
+
+
+
                 }
+
+
+
+
+
                 if (!empty($setting['favicon'])) {
                     if (file_exists($old_path . '/' . $setting['favicon'])) {
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
+                        
                         $filename = time() . '-' . $setting['favicon'];
-                        rename($old_path . '/' . $setting['favicon'], $new_path . '/' . $filename);
+                        $s3_path = 'uploads/settings/general';
+                        $contents = file_get_contents($old_path . '/' . $setting['favicon']);
+                        Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                        unlink($old_path . '/' . $setting['favicon']);
+
+
                         $settings_array[$key]['favicon'] = $filename;
                     } else {
                         $settings_array[$key]['favicon'] = $setting['favicon'];

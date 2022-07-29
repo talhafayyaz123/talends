@@ -29,7 +29,9 @@
      return _.get(window.trans, key, key);
  };
 
- 
+
+ Vue.prototype.$Aws_S3_PATH = 'https://talends-bucket.s3.amazonaws.com'
+
  
  Vue.filter('two_digits', function (value) {
      if (value.toString().length <= 1) {
@@ -4169,6 +4171,7 @@
                      });
              },
              hireFreelancer: function (id, mode) {
+                
                  this.$swal({
                      title: Vue.prototype.trans('lang.want_to_hire'),
                      type: "warning",
@@ -4197,7 +4200,7 @@
                          }
                      } else {
                          this.$swal.close()
-                     }
+                     } 
                  })
              },
              showCoverLetter: function (id) {
@@ -5438,6 +5441,7 @@
                      });
              },
              hireFreelancer: function (id, title, text, mode) {
+                
                  this.$swal({
                      title: title,
                      text: text,
@@ -5451,7 +5455,7 @@
                      closeOnCancel: true,
                      showLoaderOnConfirm: false
                  }).then((result) => {
-                     if (result.value) {
+                      if (result.value) {
                          if (mode == 'false') {
                              var self = this;
                              axios.post(APP_URL + '/user/generate-order/bacs/'+id+'/service')
@@ -5472,7 +5476,7 @@
                          }
                      } else {
                          this.$swal.close()
-                     }
+                     } 
                  })
              },
              serviceStatus: function (id, pivot_id, employer_id, cancel_text, confirm_button, validation_error, popup_title) {

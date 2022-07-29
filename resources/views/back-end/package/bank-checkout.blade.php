@@ -75,6 +75,7 @@
                             </div>
                             <div class="wt-transection-holder">
                                 
+                                
                                 {!! Form::open(['url' => '', 'class' =>'wt-formtheme wt-userform sj-checkouttable', '@submit.prevent' => 'submitTransection("'.$product_id.'")', 'id' => 'trans_form' ])!!}
                                     <fieldset>
                                         <div class="form-group">
