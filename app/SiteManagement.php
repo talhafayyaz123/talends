@@ -109,40 +109,57 @@ class SiteManagement extends Model
                 );
                 if (!empty($email['email_logo'])) {
                     if (file_exists($old_path . '/' . $email['email_logo'])) {
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
+
+                        $s3_path = 'uploads/settings/email';
                         $filename = time() . '-' . $email['email_logo'];
-                        rename($old_path . '/' . $email['email_logo'], $new_path . '/' . $filename);
+                        $contents = file_get_contents($old_path . '/' . $email['email_logo']);
+                        Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                        unlink($old_path . '/' . $email['email_logo']);
                         $email_data_array[$key]['email_logo'] = $filename;
+
                     } else {
                         $email_data_array[$key]['email_logo'] = $email['email_logo'];
                     }
+                    
                 }
+
+
                 if (!empty($email['email_banner'])) {
                     if (file_exists($old_path . '/' . $email['email_banner'])) {
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
+                                            
+                        $s3_path = 'uploads/settings/email';
                         $filename = time() . '-' . $email['email_banner'];
-                        rename($old_path . '/' . $email['email_banner'], $new_path . '/' . $filename);
+                        $contents = file_get_contents($old_path . '/' . $email['email_banner']);
+                        Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                        unlink($old_path . '/' . $email['email_banner']);
+
                         $email_data_array[$key]['email_banner'] = $filename;
                     } else {
                         $email_data_array[$key]['email_banner'] = $email['email_banner'];
                     }
                 }
+
+
                 if (!empty($email['sender_avatar'])) {
                     if (file_exists($old_path . '/' . $email['sender_avatar'])) {
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
+                       
+
+                        $s3_path = 'uploads/settings/email';
                         $filename = time() . '-' . $email['sender_avatar'];
-                        rename($old_path . '/' . $email['sender_avatar'], $new_path . '/' . $filename);
+
+                        $contents = file_get_contents($old_path . '/' . $email['sender_avatar']);
+                        Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                        unlink($old_path . '/' . $email['sender_avatar']);
+
+
                         $email_data_array[$key]['sender_avatar'] = $filename;
                     } else {
                         $email_data_array[$key]['sender_avatar'] = $email['sender_avatar'];
                     }
                 }
+
+
+
             }
             $existing_data = SiteManagement::getMetaValue('email_data');
             if (!empty($existing_data)) {
