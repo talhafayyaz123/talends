@@ -96,7 +96,13 @@
 														</div>
 														@if ($order->invoice->transection_doc)
 															<div class="wt-payment-attachment">
-																<a href="javascript:void(0);"  v-on:click.prevent="downloadAttachment('users', '{{Helper::getUnserializeData($order->invoice->transection_doc)[0]}}', '{{$order->user_id}}')" >{{ trans('lang.attachment') }}</a>
+
+															@if (Storage::disk('s3')->exists('uploads/users/'.$order->user_id.'/'.Helper::getUnserializeData($order->invoice->transection_doc)[0]))
+															
+															<a href="{{{route('getfile', ['type'=>'users','attachment'=>Helper::getUnserializeData($order->invoice->transection_doc)[0],'id'=>$order->user_id])}}}"><i class="lnr lnr-download"></i>{{ trans('lang.attachment') }}</a>
+
+															@endif														
+														
 															</div>
 														@endif
 													</span>
