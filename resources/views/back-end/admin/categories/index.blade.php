@@ -128,7 +128,8 @@
                                                         <label for="wt-check-{{{ $counter }}}"></label>
                                                     </span>
                                                 </td>
-                                                <td data-th="Icon"><span class="bt-content"><figure><img src="{{{ asset(\App\Helper::getCategoryImage($cat->image)) }}}" alt="{{{ $cat->title }}}"></figure></span></td>
+                                                
+                                                <td data-th="Icon"><span class="bt-content"><figure><img src="{{{ (\App\Helper::getCategoryImage($cat->image)) }}}" alt="{{{ $cat->title }}}"></figure></span></td>
                                                 <td>{{{ $cat->parent_category }}}</td>
                                                 <td>{{{ $cat->title }}}</td>
                                                 

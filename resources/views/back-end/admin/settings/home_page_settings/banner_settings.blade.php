@@ -181,7 +181,7 @@
 
 
                                             @if (!empty($banner_settings['about_talends_image']))
-                                            @php $image = '/uploads/home-pages/banners/'.$banner_settings['about_talends_image']; @endphp
+                                            @php $image =$banner_settings['about_talends_image']; @endphp
                                             <div class="wt-formtheme wt-userform">
 
                                                 <div class="wt-uploadingbox">
@@ -230,7 +230,7 @@
 
                                             
                                             @if (!empty($banner_settings['talends_project_image']))
-                                            @php $image = '/uploads/home-pages/banners/'.$banner_settings['talends_project_image']; @endphp
+                                            @php $image = $banner_settings['talends_project_image']; @endphp
                                             <div class="wt-formtheme wt-userform">
 
                                                 <div class="wt-uploadingbox">
@@ -278,7 +278,7 @@
                                             </div>
 
                                             @if (!empty($banner_settings['talends_work_image']))
-                                            @php $image = '/uploads/home-pages/banners/'.$banner_settings['talends_work_image']; @endphp
+                                            @php $image = $banner_settings['talends_work_image']; @endphp
                                             <div class="wt-formtheme wt-userform">
 
                                                 <div class="wt-uploadingbox">

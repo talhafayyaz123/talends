@@ -26,7 +26,7 @@ Vue.mixin({
           timeout: 3000,
           class: 'iziToast-info',
           id: 'info_notify'
-        }
+        },
       }
     }
   },

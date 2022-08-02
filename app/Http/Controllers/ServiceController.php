@@ -247,14 +247,14 @@ class ServiceController extends Controller
                             $email_params['name'] = Helper::getUserName(Auth::user()->id);
                             $email_params['link'] = url('profile/' . $user->slug);
                             $template_data = Helper::getAdminServicePostedEmailContent();
-                           /*  Mail::to(config('mail.username'))
+                             Mail::to(config('mail.username'))
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_new_service_posted',
                                         $template_data,
                                         $email_params
                                     )
-                                ); */
+                                ); 
                         }
                         return $json;
                     } elseif ($service_post['type'] == 'error') {
@@ -288,14 +288,14 @@ class ServiceController extends Controller
                         $email_params['name'] = Helper::getUserName(Auth::user()->id);
                         $email_params['link'] = url('profile/' . $user->slug);
                         $template_data = Helper::getAdminServicePostedEmailContent();
-                        /* Mail::to(config('mail.username'))
+                        Mail::to(config('mail.username'))
                             ->send(
                                 new AdminEmailMailable(
                                     'admin_email_new_service_posted',
                                     $template_data,
                                     $email_params
                                 )
-                            ); */
+                            ); 
                     }
                     return $json;
                 } elseif ($service_post['type'] == 'error') {
@@ -681,7 +681,7 @@ class ServiceController extends Controller
                 $freelancer_name = Helper::getUserName($freelancer->id);
                 $profile = User::find($freelancer->id)->profile;
                 $user_image = !empty($profile) ? $profile->avater : '';
-                $profile_image = !empty($user_image) ? '/uploads/users/' . $freelancer->id . '/' . $user_image : 'images/user-login.png';
+                $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/' . $freelancer->id . '/' . $user_image : config('app.aws_se_path'). '/' .'images/user-login.png';
                 $payout_settings = SiteManagement::getMetaValue('commision');
                 $payment_gateway = !empty($payout_settings) && !empty($payout_settings[0]['payment_method']) ? $payout_settings[0]['payment_method'] : null;
                 $currency   = SiteManagement::getMetaValue('commision');
@@ -843,7 +843,7 @@ class ServiceController extends Controller
                 $service_list[$key]['seller_image'] = !empty($service->seller[0]) ? asset(Helper::getProfileImage($service->seller[0]->id)): '';
                 if (!empty($attachments)) {
                     foreach ($attachments as $attachment_key => $attachment) {
-                        $service_list[$key]['attachments'][$attachment_key] =  !empty($service->seller[0]) ? asset(Helper::getImage('uploads/services/'.$service->seller[0]->id, $attachment, 'medium-', 'medium-service.jpg')) : '';
+                        $service_list[$key]['attachments'][$attachment_key] =  !empty($service->seller[0]) ? (Helper::gets3Image('uploads/services/'.$service->seller[0]->id, $attachment, 'medium-', 'medium-service.jpg')) : '';
                     }
                 }
                 $currency   = SiteManagement::getMetaValue('commision');

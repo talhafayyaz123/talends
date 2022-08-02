@@ -487,8 +487,8 @@ class PublicController extends Controller
         $filename = $request->get('attachment');
         $type = $request->get('type');
         if (!empty($type) && !empty($filename) && !empty($id)) {
-            if (Storage::disk('local')->exists('uploads/' . $type . '/' . $id . '/' . $filename)) {
-                return Storage::download('uploads/' . $type . '/' . $id . '/' . $filename);
+            if (Storage::disk('s3')->exists('uploads/' . $type . '/' . $id . '/' . $filename)) {
+                return Storage::disk('s3')->download('uploads/' . $type . '/' . $id . '/' . $filename);
             } else {
                 Session::flash('error', trans('lang.file_not_found'));
                 return Redirect::back();
@@ -552,7 +552,7 @@ class PublicController extends Controller
             $profile = Profile::all()->where('user_id', $user->id)->first();
             $reasons = Helper::getReportReasons();
             $avatar = Helper::getProfileImage($profile->user_id, 'medium-small-');
-            $banner = !empty($profile->banner) ? '/uploads/users/' . $profile->user_id . '/' . $profile->banner : Helper::getUserProfileBanner($user->id);
+            $banner = !empty($profile->banner) ? config('app.aws_se_path').'/uploads/users/' . $profile->user_id . '/' . $profile->banner : Helper::getUserProfileBanner($user->id);
             $auth_user = Auth::user() ? true : false;
             $user_name = Helper::getUserName($profile->user_id);
             $current_date = Carbon::now()->format('M d, Y');
@@ -1544,7 +1544,7 @@ class PublicController extends Controller
                 $aticle_list[$key]['id'] = $article['id'];
                 $aticle_list[$key]['title'] = $article['title'];
                 $aticle_list[$key]['slug'] = $article['slug'];
-                $aticle_list[$key]['banner'] = asset(Helper::getImage('uploads/articles', $article['banner'], 'small-', 'small-default-article.png'));
+                $aticle_list[$key]['banner'] = (Helper::gets3Image('uploads/articles', $article['banner'], 'small-', 'small-default-article.png'));
                 $aticle_list[$key]['published_date'] = $article['created_at'];
                 $aticle_list[$key]['description'] = $article['description'];
                 $aticle_list[$key]['name'] = Helper::getUserName($article['user_id']);

@@ -12,13 +12,13 @@
 
             $user_image = !empty($freelancer->profile->avater) ?
 
-                            '/uploads/users/'.$freelancer->id.'/'.$freelancer->profile->avater :
+            config('app.aws_se_path').'/uploads/users/'.$freelancer->id.'/'.$freelancer->profile->avater :
 
                             'images/user.jpg';
 
             $flag = !empty($freelancer->location->flag) ? Helper::getLocationFlag($freelancer->location->flag) :
 
-                    '/images/img-01.png';
+            config('app.aws_se_path'). '/' . 'images/img-01.png';
 
             $feedbacks = \App\Review::select('feedback')->where('receiver_id', $freelancer->id)->count();
 
@@ -112,7 +112,7 @@
 
             <figure class="wt-userlistingimg">
                 <a href="{{{ url('profile/'.$freelancer->slug) }}}">
-                    <img src="{{{ asset(Helper::getImageWithSize('uploads/users/'.$freelancer->id, $freelancer->profile->avater, 'listing')) }}}" alt="{{ trans('lang.img') }}">
+                    <img src="{{{ (Helper::getS3ImageWithSize('uploads/users/'.$freelancer->id, $freelancer->profile->avater, 'listing')) }}}" alt="{{ trans('lang.img') }}">
                 </a>
             </figure>
 

@@ -17,6 +17,8 @@
     $banner_settings=App\Helper::getBannerSettings();
     @endphp
 
+
+    
     <section class="home-banner p-0">
         <div id="theme_slider" class="theme_slider carousel slide carousel-fade" data-ride="carousel">
             <!-- <ol class="carousel-indicators">
@@ -34,9 +36,9 @@
                                         <div class="content_box">
                                             @if(isset( $banner_settings->about_talends_image) )
                                                 <picture>
-                                                    <source media="(min-width:992px)" srcset="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}" class="img-fluic" width="450">
-                                                    <source media="(min-width:480px)" srcset="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}" class="img-fluic" width="300">
-                                                    <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}" alt="Footer Image" class="img-fluic" width="200">
+                                                    <source media="(min-width:992px)" srcset="{{$banner_settings->about_talends_image}}" class="img-fluic" width="450">
+                                                    <source media="(min-width:480px)" srcset="{{$banner_settings->about_talends_image}}" class="img-fluic" width="300">
+                                                    <img src="{{$banner_settings->about_talends_image}}" alt="Footer Image" class="img-fluic" width="200">
                                                 </picture>
                                             <!-- <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}" class="img-fluid" width="450" alt=""> -->
                                             @endif
@@ -136,7 +138,7 @@
                 </div>
                 <div class="col-md-5">
                     @if(isset( $banner_settings->talends_project_image) )
-                    <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->talends_project_image)}}"
+                    <img src="{{$banner_settings->talends_project_image}}"
                         class="w-100" alt="">
                     @endif
                 </div>
@@ -242,7 +244,7 @@
                 <div class="col-lg-6 mb-4">
                 
                     @if(isset( $banner_settings->talends_work_image) )
-                    <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->talends_work_image)}}"
+                    <img src="{{$banner_settings->talends_work_image}}"
                         class="w-100" alt="">
                     @endif
                 </div>
@@ -354,7 +356,7 @@
                                             @php
                                             $avatar = Helper::getProfileImage( $profile->user_id, 'medium-small-');
                                             @endphp
-                                            <img src="{{{ asset($avatar) }}}" alt="{{ trans('lang.img') }}">
+                                            <img src="{{{ ($avatar) }}}" alt="{{ trans('lang.img') }}">
 
                                         </div>
                                         <div class="tlb__content">

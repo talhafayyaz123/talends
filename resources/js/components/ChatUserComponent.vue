@@ -1,7 +1,7 @@
 <template>
     <div v-if="notify">
         <div v-for="(user, index) in users" :key="index" @click="startChat(user.id)" class="wt-ad" :class="[active_id===user.id ? 'wt-active' : '' , user.status_class]">
-            <figure v-if="user.image"><img :src="image_path+user.image" :alt="user.image_name"></figure>
+            <figure v-if="user.image"><img :src="user.image" :alt="user.image_name"></figure>
             <div class="wt-adcontent">
                 <p class="mb-0" v-if="user.name">{{user.name}}</p>
                 <span v-if="user.tagline">{{user.tagline}}</span>
@@ -10,7 +10,7 @@
     </div>
     <div v-else>
         <div v-for="(user, index) in users" :key="index" @click="startChat(user.id)" class="wt-ad" :class="[active_id===user.id ? 'wt-active' : '']">
-            <figure v-if="user.image"><img :src="image_path+user.image" :alt="user.image_name"></figure>
+            <figure v-if="user.image"><img :src="user.image" :alt="user.image_name"></figure>
             <div class="wt-adcontent">
                 <p class="mb-0" v-if="user.name">{{user.name}}</p>
                 <span v-if="user.tagline">{{user.tagline}}</span>

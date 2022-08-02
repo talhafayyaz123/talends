@@ -11,7 +11,7 @@
         <ul>
             <li>
                 <div class="wt-templateoption">
-                    <div class="wt-designimg"><img src="{{ asset('images/demo-content/screenshot.jpg') }}" alt="{{ trans('lang.img') }}"></div>
+                    <div class="wt-designimg"><img src="{{ config('app.aws_se_path'). '/' .'images/demo-content/screenshot.jpg' }}" alt="{{ trans('lang.img') }}"></div>
                     <div class="la-designtitle-holder">
                         <div class="wt-designtitle">
                             <span>{{ trans('lang.preview_demo') }}</span>

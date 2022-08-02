@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 use Carbon\Carbon;
+use Storage;
+
 
 class CompanyExpertise extends Model
 {
@@ -41,22 +43,34 @@ class CompanyExpertise extends Model
                 if (!empty($request->hasFile('portfolio_image'))) {
                   
                     $portfolio_image = $request->file('portfolio_image');
-            
-                    $new_path = Helper::PublicPath().'/uploads/company';
-                    $imageName = time().'.'.$portfolio_image->getClientOriginalName();
-                    $request->portfolio_image->move($new_path, $imageName);
-                    $portfolio_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+                    $s3 = \Storage::disk('s3');
+        
+                    $file_name = time().'.'.$portfolio_image->getClientOriginalName();
+        
+                    $s3filePath = 'uploads/company/' . $file_name;
+        
+                    $s3->put($s3filePath, file_get_contents($portfolio_image));
+
+    
+                    $portfolio_image = filter_var($file_name, FILTER_SANITIZE_STRING);
     
                 }
 
                 if (!empty($request->hasFile('portfolio_image_2'))) {
                   
                     $portfolio_image_2 = $request->file('portfolio_image_2');
-            
-                    $new_path = Helper::PublicPath().'/uploads/company';
-                    $imageName = time().'.'.$portfolio_image_2->getClientOriginalName();
-                    $request->portfolio_image_2->move($new_path, $imageName);
-                    $portfolio_image_2 = filter_var($imageName, FILTER_SANITIZE_STRING);
+
+                    
+                    $s3 = \Storage::disk('s3');
+        
+                    $file_name = time().'.'.$portfolio_image_2->getClientOriginalName();
+        
+                    $s3filePath = 'uploads/company/' . $file_name;
+        
+                    $s3->put($s3filePath, file_get_contents($portfolio_image_2));
+
+                    $portfolio_image_2 = filter_var($file_name, FILTER_SANITIZE_STRING);
     
                 }
 
@@ -65,10 +79,16 @@ class CompanyExpertise extends Model
                   
                     $portfolio_image_3 = $request->file('portfolio_image_3');
             
-                    $new_path = Helper::PublicPath().'/uploads/company';
-                    $imageName = time().'.'.$portfolio_image_3->getClientOriginalName();
-                    $request->portfolio_image_3->move($new_path, $imageName);
-                    $portfolio_image_3 = filter_var($imageName, FILTER_SANITIZE_STRING);
+                    $s3 = \Storage::disk('s3');
+                            
+                    $file_name =time().'.'.$portfolio_image_3->getClientOriginalName();
+
+                    $s3filePath = 'uploads/company/' . $file_name;
+
+                    $s3->put($s3filePath, file_get_contents($portfolio_image_3));
+
+
+                    $portfolio_image_3 = filter_var($file_name, FILTER_SANITIZE_STRING);
     
                 }
 
@@ -77,14 +97,29 @@ class CompanyExpertise extends Model
                 if (!empty($request->hasFile('portfolio_image'))) {
                     $portfolio_image = $request->file('portfolio_image');
     
-                    if ($request->hidden_portfolio_image && file_exists(Helper::PublicPath().'/uploads/company' . '/' . $request->hidden_portfolio_image)) {
-                        unlink(Helper::PublicPath().'/uploads/company' . '/' . $request->hidden_portfolio_image);               
+                
+                    if(isset($request->hidden_portfolio_image) && !empty($request->hidden_portfolio_image) ){
+                        $file =$request->hidden_portfolio_image;
+                         
+                    if(Storage::disk('s3')->exists('uploads/company/'.$file)){
+                      
+                      Storage::disk('s3')->delete('uploads/company/'.$file); 
+                      
+                    } 
+    
                     }
+
             
-                    $new_path = Helper::PublicPath().'/uploads/company';
-                    $imageName = time().'.'.$portfolio_image->getClientOriginalName();
-                    $request->portfolio_image->move($new_path, $imageName);
-                    $portfolio_image = filter_var($imageName, FILTER_SANITIZE_STRING);
+                   
+                    $s3 = \Storage::disk('s3');
+        
+                    $file_name = time().'.'.$portfolio_image->getClientOriginalName();
+        
+                    $s3filePath = 'uploads/company/' . $file_name;
+        
+                    $s3->put($s3filePath, file_get_contents($portfolio_image));
+
+                    $portfolio_image = filter_var($file_name, FILTER_SANITIZE_STRING);
     
                 } else {
                     $portfolio_image = $request->hidden_portfolio_image;
@@ -95,14 +130,30 @@ class CompanyExpertise extends Model
                 if (!empty($request->hasFile('portfolio_image_2'))) {
                     $portfolio_image_2 = $request->file('portfolio_image_2');
     
-                    if ($request->hidden_portfolio_image_2 && file_exists(Helper::PublicPath().'/uploads/company' . '/' . $request->hidden_portfolio_image_2)) {
-                        unlink(Helper::PublicPath().'/uploads/company' . '/' . $request->hidden_portfolio_image_2);               
+                
+                    if(isset($request->hidden_portfolio_image_2) && !empty($request->hidden_portfolio_image_2) ){
+                        $file =$request->hidden_portfolio_image_2;
+                         
+                    if(Storage::disk('s3')->exists('uploads/company/'.$file)){
+                      
+                      Storage::disk('s3')->delete('uploads/company/'.$file); 
+                      
+                    } 
+    
                     }
             
-                    $new_path = Helper::PublicPath().'/uploads/company';
-                    $imageName = time().'.'.$portfolio_image_2->getClientOriginalName();
-                    $request->portfolio_image_2->move($new_path, $imageName);
-                    $portfolio_image_2 = filter_var($imageName, FILTER_SANITIZE_STRING);
+                    
+                      
+                    $s3 = \Storage::disk('s3');
+        
+                    $file_name = time().'.'.$portfolio_image_2->getClientOriginalName();
+        
+                    $s3filePath = 'uploads/company/' . $file_name;
+        
+                    $s3->put($s3filePath, file_get_contents($portfolio_image_2));
+
+                    $portfolio_image_2 = filter_var($file_name, FILTER_SANITIZE_STRING);
+                    
     
                 } else {
                     $portfolio_image_2 = $request->hidden_portfolio_image_2;
@@ -113,14 +164,31 @@ class CompanyExpertise extends Model
                 if (!empty($request->hasFile('portfolio_image_3'))) {
                     $portfolio_image_3 = $request->file('portfolio_image_3');
     
-                    if ($request->hidden_portfolio_image_3 && file_exists(Helper::PublicPath().'/uploads/company' . '/' . $request->hidden_portfolio_image_3)) {
-                        unlink(Helper::PublicPath().'/uploads/company' . '/' . $request->hidden_portfolio_image_3);               
+                  
+
+                    if(isset($request->hidden_portfolio_image_3) && !empty($request->hidden_portfolio_image_3) ){
+                        $file =$request->hidden_portfolio_image_3;
+                         
+                    if(Storage::disk('s3')->exists('uploads/company/'.$file)){
+                      
+                      Storage::disk('s3')->delete('uploads/company/'.$file); 
+                      
+                    } 
+    
                     }
             
-                    $new_path = Helper::PublicPath().'/uploads/company';
-                    $imageName = time().'.'.$portfolio_image_3->getClientOriginalName();
-                    $request->portfolio_image_3->move($new_path, $imageName);
-                    $portfolio_image_3 = filter_var($imageName, FILTER_SANITIZE_STRING);
+                    
+                    $s3 = \Storage::disk('s3');
+                            
+                    $file_name =time().'.'.$portfolio_image_3->getClientOriginalName();
+
+                    $s3filePath = 'uploads/company/' . $file_name;
+
+                    $s3->put($s3filePath, file_get_contents($portfolio_image_3));
+
+
+
+                    $portfolio_image_3 = filter_var($file_name, FILTER_SANITIZE_STRING);
     
                 } else {
                     $portfolio_image_3 = $request->hidden_portfolio_image_3;

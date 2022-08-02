@@ -67,6 +67,9 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'aws_se_path' => 'https://'.env('AWS_BUCKET').'.s3.amazonaws.com',
+
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

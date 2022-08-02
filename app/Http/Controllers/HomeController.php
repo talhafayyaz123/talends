@@ -81,7 +81,7 @@ class HomeController extends Controller
                 } else {
                     $show_banner_image = true;
                 }
-                $banner = !empty($page_banner) ? Helper::getBannerImage('uploads/pages/' . $page_banner) : 'images/bannerimg/img-02.jpg';
+                $banner = !empty($page_banner) ? Helper::getBannerImage('uploads/pages/' . $page_banner) : config('app.aws_se_path'). '/' .'images/bannerimg/img-02.jpg';
                 $meta_desc = !empty($page_meta) ? $page_meta : '';
                 
                 $type = Helper::getAccessType() == 'services' ? 'service' : Helper::getAccessType();
@@ -112,12 +112,14 @@ class HomeController extends Controller
                 $featured_success_stories=AboutTalendsPage::where('page_type','featured_success_stories')->first();
                 $agency_profile=AboutTalendsPage::where('page_type','agency_profile')->first();
                 $footer_social_content=AboutTalendsPage::where('page_type','footer-social-content')->first();
-
+                $aws_s3_path='https://'.env('AWS_BUCKET').'.s3.amazonaws.com';
+                    
                 $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
                 if (file_exists(resource_path('views/extend/front-end/pages/show.blade.php'))) {
                     return View::make(
                         'extend.front-end.pages.show',
                         compact(
+                            'aws_s3_path',
                             'symbol',
                             'page_header',
                             'page',
@@ -719,7 +721,7 @@ class HomeController extends Controller
                 foreach ($projects as $key => $project) {
                     $profile_projects[$key]['project_title'] = !empty($project['project_title']) ? $project['project_title'] : '';
                     $profile_projects[$key]['project_url'] = !empty($project['project_url']) ? $project['project_url'] : '';
-                    $profile_projects[$key]['project_hidden_image'] = !empty($project['project_hidden_image']) ? url('/uploads/users/'.$user_id.'/projects/'.$project['project_hidden_image']) : '';
+                    $profile_projects[$key]['project_hidden_image'] = !empty($project['project_hidden_image']) ? config('app.aws_se_path').'/uploads/users/'.$user_id.'/projects/'.$project['project_hidden_image'] : '';
                     $profile_projects[$key]['project_image'] = !empty($project['project_hidden_image']) ? $project['project_hidden_image'] : '';
                 }
             }
@@ -736,7 +738,7 @@ class HomeController extends Controller
                 foreach ($awards as $key => $award) {
                     $profile_awards[$key]['award_title'] = $award['award_title'];
                     $profile_awards[$key]['award_date'] = $award['award_date'];
-                    $profile_awards[$key]['award_hidden_image'] = url('/uploads/users/'.$user_id.'/awards/'.$award['award_hidden_image']);
+                    $profile_awards[$key]['award_hidden_image'] = config('app.aws_se_path').'/uploads/users/'.$user_id.'/awards/'.$award['award_hidden_image'];
                     $profile_awards[$key]['award_image'] = !empty($award['award_hidden_image']) ? $award['award_hidden_image'] : '';
                 }
             }

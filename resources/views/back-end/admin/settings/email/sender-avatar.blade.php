@@ -4,7 +4,7 @@
     </div>
     <div class="wt-settingscontent">
         @if (!empty($sender_avatar)) 
-            @php $image = '/uploads/settings/email/'.$sender_avatar; @endphp
+            @php $image =config('app.aws_se_path'). '/' . 'uploads/settings/email/'.$sender_avatar; @endphp
             <div class="wt-formtheme wt-userform">
                 <div v-if="this.uploaded_avatar">
                     <upload-image 
@@ -16,7 +16,7 @@
                     </upload-image>
                 </div>
                 <div class="wt-uploadingbox" v-else>
-                    <figure><img src="{{{asset($image)}}}" alt="{{{ trans('lang.profile_photo') }}}"></figure>
+                    <figure><img src="{{{($image)}}}" alt="{{{ trans('lang.profile_photo') }}}"></figure>
                     <div class="wt-uploadingbar">
                         <div class="dz-filename">{{{$sender_avatar}}}</div>
                         <em>{{{ trans('lang.file_size') }}}<a href="javascript:void(0);" class="lnr lnr-cross" v-on:click.prevent="removeImage('hidden_avatar')"></a></em>

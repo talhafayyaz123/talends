@@ -33,7 +33,7 @@
                                 <div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
                                     @if (!empty($job->is_featured) && $job->is_featured === 'true')
                                         <span class="wt-featuredtag">
-                                            <img src="{{{ asset('images/featured.png') }}}" alt="{{ trans('lang.is_featured') }}"
+                                            <img src="{{{ config('app.aws_se_path'). '/' .'images/featured.png' }}}" alt="{{ trans('lang.is_featured') }}"
                                                 data-tipso="Plus Member" class="template-content tipso_style">
                                         </span>
                                     @endif
@@ -70,7 +70,7 @@
                                         </div>
                                         <div class="wt-rightarea">
                                             <div class="wt-hireduserstatus">
-                                                <figure><img src="{{{ asset($employer_image) }}}" alt="{{ trans('lang.profie_img') }}"></figure>
+                                                <figure><img src="{{{ ($employer_image) }}}" alt="{{ trans('lang.profie_img') }}"></figure>
                                             </div>
                                         </div>
                                     </div>

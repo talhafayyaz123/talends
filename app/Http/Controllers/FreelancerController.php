@@ -151,6 +151,7 @@ class FreelancerController extends Controller
           }
       } 
 
+      $aws_s3_path='https://'.env('AWS_BUCKET').'.s3.amazonaws.com';
 
 
         if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/personal-detail/index.blade.php'))) {
@@ -179,6 +180,7 @@ class FreelancerController extends Controller
             return view(
                 'back-end.freelancer.profile-settings.personal-detail.index',
                 compact(
+                    'aws_s3_path',
                     'seleced_cat_skills',
                     'sub_cat_skills',
                     'selced_sub_categories',
@@ -666,7 +668,7 @@ class FreelancerController extends Controller
                     foreach ($projects as $key => $project) {
                         $profile_projects[$key]['project_title'] = !empty($project['project_title']) ? $project['project_title'] : '';
                         $profile_projects[$key]['project_url'] = !empty($project['project_url']) ? $project['project_url'] : '';
-                        $profile_projects[$key]['project_hidden_image'] = !empty($project['project_hidden_image']) ? url('/uploads/users/'.$user_id.'/projects/'.$project['project_hidden_image']) : '';
+                        $profile_projects[$key]['project_hidden_image'] = !empty($project['project_hidden_image']) ? config('app.aws_se_path'). '/' .'uploads/users/'.$user_id.'/projects/'.$project['project_hidden_image'] : '';
                         $profile_projects[$key]['project_image'] = !empty($project['project_hidden_image']) ? $project['project_hidden_image'] : '';
                     }
                 }
@@ -702,7 +704,7 @@ class FreelancerController extends Controller
                     foreach ($awards as $key => $award) {
                         $profile_awards[$key]['award_title'] = $award['award_title'];
                         $profile_awards[$key]['award_date'] = $award['award_date'];
-                        $profile_awards[$key]['award_hidden_image'] = url('/uploads/users/'.$user_id.'/awards/'.$award['award_hidden_image']);
+                        $profile_awards[$key]['award_hidden_image'] = config('app.aws_se_path'). '/' .'uploads/users/'.$user_id.'/awards/'.$award['award_hidden_image'];
                         $profile_awards[$key]['award_image'] = !empty($award['award_hidden_image']) ? $award['award_hidden_image'] : '';
                     }
                 }
@@ -821,8 +823,8 @@ class FreelancerController extends Controller
             $employer_profile = User::find($job->user_id)->profile;
             $employer_avatar = !empty($employer_profile) ? $employer_profile->avater : '';
             $user_image = !empty($profile) ? $profile->avater : '';
-            $profile_image = !empty($user_image) ? '/uploads/users/' . Auth::user()->id . '/' . $user_image : 'images/user-login.png';
-            $employer_image = !empty($employer_avatar) ? '/uploads/users/' . $job->user_id . '/' . $employer_avatar : 'images/user-login.png';
+            $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/' . Auth::user()->id . '/' . $user_image : config('app.aws_se_path'). '/' .'images/user-login.png';
+            $employer_image = !empty($employer_avatar) ?  config('app.aws_se_path').'/uploads/users/' . $job->user_id . '/' . $employer_avatar : config('app.aws_se_path'). '/' .'images/user-login.png';
             $currency   = SiteManagement::getMetaValue('commision');
             $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
             if (file_exists(resource_path('views/extend/back-end/freelancer/jobs/show.blade.php'))) {

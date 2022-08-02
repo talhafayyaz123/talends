@@ -60,7 +60,7 @@
                         </div>
                         <div class="wt-proposalholder">
                             @if (!empty($job->is_featured) && $job->is_featured === 'true')
-                                <span class="wt-featuredtag"><img src="{{{ asset('images/featured.png') }}}" alt="{{{ trans('lang.is_featured') }}}" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                <span class="wt-featuredtag"><img src="{{{ config('app.aws_se_path'). '/' .'images/featured.png' }}}" alt="{{{ trans('lang.is_featured') }}}" data-tipso="Plus Member" class="template-content tipso_style"></span>
                             @endif
                             <div class="wt-proposalhead">
                                 @if (!empty($job->title))
@@ -79,10 +79,10 @@
                                     @endif
                                     @if (!empty($job->project_type))
                                         @php $project_type  = Helper::getProjectTypeList($job->project_type); @endphp
-                                        <li><span class="wt-clicksavefolder"><img class="wt-job-icon" src="{{asset('images/job-icons/job-type.png')}}"> {{ trans('lang.type') }} {{{ $project_type }}}</span></li>
+                                        <li><span class="wt-clicksavefolder"><img class="wt-job-icon" src="{{ config('app.aws_se_path'). '/' .'images/job-icons/job-type.png' }}"> {{ trans('lang.type') }} {{{ $project_type }}}</span></li>
                                     @endif
                                     @if (!empty($job->duration))
-                                        <li><span class="wt-dashboradclock"><img class="wt-job-icon" src="{{asset('images/job-icons/job-duration.png')}}"> {{ trans('lang.duration') }} {{{ Helper::getJobDurationList($job->duration) }}}</span></li>
+                                        <li><span class="wt-dashboradclock"><img class="wt-job-icon" src="{{ config('app.aws_se_path'). '/' .'images/job-icons/job-duration.png' }}"> {{ trans('lang.duration') }} {{{ Helper::getJobDurationList($job->duration) }}}</span></li>
                                     @endif
                                 </ul>
                             </div>

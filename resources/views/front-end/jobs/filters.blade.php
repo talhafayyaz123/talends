@@ -27,44 +27,164 @@
                 </div>
             </div>
         </div>
-
-        <div class="wt-widget wt-widgetrange">
-
-            <a  onclick="toogle_price()">    
-                <div class="wt-widgettitle">
-                    <span>{{ trans('lang.price_range') }}</span>
-                    <span class="filter_toogle1 float-right">  <i class="fa fa-angle-down ml-3" aria-hidden="true"></i></span>
-                </div>
-            </a>
-
-            <div class="wt-widgetcontent job_price_filter p-4 shadow rounded dropdown-40" style="display: none;">
-                <div class="wt-formtheme wt-formsearch">
-                    <fieldset>
-                        <div class="wt-amountbox">
-                            <input type="text" :value="'{{ !empty($symbol['symbol']) ? $symbol['symbol'] : '$' }}'+start+'-{{ !empty($symbol['symbol']) ? $symbol['symbol'] : '$' }}'+end" id="wt-consultationfeeamount" readonly="">
-                        </div>
-                        <a-slider 
-                            id="wt-pricerange"
-                            class="wt-productrangeslider wt-themerangeslider"
-                            range
-                            :min="0" 
-                            :max="max_value"
-                            :reverse="reverse"
-                            @change="onChange" 
-                            :default-value="[start, end]"
-                            ref="priceRange"
-                            v-if="show_price_slider"
-                        />
-                    </fieldset>
+        <div class="d-md-flex w-100 px-md-0 px-3 mb-3 flex-row">
+            <div class="dropdown position-static filter-dropdown">
+                <button class="btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    {{ trans('lang.price_range') }} <i class="bi-chevron-down float-right ml-3"></i>
+                </button>
+                <div class="dropdown-menu checkbox-menu allow-focus w-50 top-auto p-3" aria-labelledby="dropdownMenu1">
+                    <div class="wt-amountbox">
+                        <input type="text" :value="'{{ !empty($symbol['symbol']) ? $symbol['symbol'] : '$' }}'+start+'-{{ !empty($symbol['symbol']) ? $symbol['symbol'] : '$' }}'+end" id="wt-consultationfeeamount" readonly="">
+                    </div>
+                    <a-slider 
+                        id="wt-pricerange"
+                        class="wt-productrangeslider wt-themerangeslider"
+                        range
+                        :min="0" 
+                        :max="max_value"
+                        :reverse="reverse"
+                        @change="onChange" 
+                        :default-value="[start, end]"
+                        ref="priceRange"
+                        v-if="show_price_slider"
+                    />
                     <input type="hidden" name="minprice" :value="start">
                     <input type="hidden" name="maxprice" :value="end">
                 </div>
+            </div>
+            <!-- <div class="wt-widget wt-widgetrange">
+                <a  onclick="toogle_price()">    
+                    <div class="wt-widgettitle">
+                        <span>{{ trans('lang.price_range') }}</span>
+                        <span class="filter_toogle1 float-right">  <i class="fa fa-angle-down ml-3" aria-hidden="true"></i></span>
+                    </div>
+                </a>
+                <div class="wt-widgetcontent job_price_filter p-4 shadow rounded dropdown-40" style="display: none;">
+                    <div class="wt-formtheme wt-formsearch">
+                        <fieldset>
+                            <div class="wt-amountbox">
+                                <input type="text" :value="'{{ !empty($symbol['symbol']) ? $symbol['symbol'] : '$' }}'+start+'-{{ !empty($symbol['symbol']) ? $symbol['symbol'] : '$' }}'+end" id="wt-consultationfeeamount" readonly="">
+                            </div>
+                            <a-slider 
+                                id="wt-pricerange"
+                                class="wt-productrangeslider wt-themerangeslider"
+                                range
+                                :min="0" 
+                                :max="max_value"
+                                :reverse="reverse"
+                                @change="onChange" 
+                                :default-value="[start, end]"
+                                ref="priceRange"
+                                v-if="show_price_slider"
+                            />
+                        </fieldset>
+                        <input type="hidden" name="minprice" :value="start">
+                        <input type="hidden" name="maxprice" :value="end">
+                    </div>
 
+                </div>
+
+            </div> -->
+            
+            <div class="dropdown position-static filter-dropdown">
+                <button class="btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    {{ trans('lang.cats') }} <i class="bi-chevron-down float-right ml-3"></i>
+                </button>
+                <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1">
+                    @if (!empty($categories))
+                    <div class="row">  
+                        @foreach ($categories as $category)
+                            @php $checked = ( !empty($_GET['category']) && in_array($category->slug, $_GET['category'] )) ? 'checked' : ''; @endphp
+                            
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="custom-control custom-check freelancer_category">
+                                        <input class="custom-control-input" id="cat-{{{ $category->slug }}}" type="checkbox" name="category[]" value="{{{ $category->slug }}}" {{$checked}} >
+                                        <label class="custom-control-label" for="cat-{{{ $category->slug }}}"> {{{ $category->title }}}</label>
+                                    </div>
+                                </div>
+                        @endforeach
+                    </div>
+                    @endif
+                </div>
             </div>
 
-        </div>
+            <div class="dropdown position-static filter-dropdown">
+                <button class="btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    {{ trans('lang.locations') }} <i class="bi-chevron-down float-right ml-3"></i>
+                </button>
+                <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1" style="height: 300px;overflow-y:auto;">
+                    @if (!empty($locations))
+                        <div class="row">  
+                        @foreach ($locations as $location)
+                            @php 
+                                $checked = '';
+                                if (!empty($_GET['locations'])) {
+                                    if (is_array($_GET['locations']) && in_array($location->slug, $_GET['locations'])) {
+                                        $checked = 'checked';
+                                    } elseif ( $location->slug == $_GET['locations']) {
+                                        $checked = 'checked';     
+                                    }
+                                } 
+                            @endphp
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="custom-control custom-check">
+                                        <input class="custom-control-input" id="location-{{{ $location->slug }}}" type="checkbox" name="locations[]" value="{{{$location->slug}}}" {{$checked}} >
+                                        <label class="custom-control-label" for="location-{{{ $location->slug }}}"> {{{ $location->title }}}</label>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+            </div>
 
-        <div class="wt-widget wt-effectiveholder">
+            <div class="dropdown position-static filter-dropdown">
+                <button class="btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    {{ trans('lang.project_length') }} <i class="bi-chevron-down float-right ml-3"></i>
+                </button>
+                <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1">
+                    @if (!empty($project_length))
+                    <div class="row">  
+                        @foreach ($project_length as $key => $length)
+                            @php $checked = ( !empty($_GET['project_lengths']) && in_array($length, $_GET['project_lengths'])) ? 'checked' : '' @endphp
+                            <div class="col-md-6 col-lg-4 mb-3">
+                                <div class="custom-control custom-check">
+                                    <input class="custom-control-input" id="{{{ $key }}}" type="checkbox" name="project_lengths[]" value="{{{$key}}}" {{$checked}}>
+                                    <label class="custom-control-label" for="{{{ $key }}}">{{{ $length }}}</label>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    @endif
+                </div>
+            </div>
+
+            <div class="dropdown position-static filter-dropdown">
+                <button class="btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    {{ trans('lang.langs') }} <i class="bi-chevron-down float-right ml-3"></i>
+                </button>
+                <div class="dropdown-menu checkbox-menu allow-focus w-100 top-auto p-3" aria-labelledby="dropdownMenu1" style="height: 300px;overflow-y:auto;">
+                    @if (!empty($languages))
+                        <div class="row">  
+                            @foreach ($languages as $language)
+                                @php $checked = ( !empty($_GET['languages']) && in_array($language->slug, $_GET['languages'])) ? 'checked' : '' @endphp
+                                <div class="col-md-6 col-lg-3 mb-3">
+                                    <div class="custom-control custom-check">
+                                        <input class="custom-control-input" id="language-{{{ $language->slug }}}" type="checkbox" name="languages[]" value="{{{$language->slug}}}" {{$checked}} >
+                                        <label class="custom-control-label" for="language-{{{ $language->slug }}}">{{{ $language->title }}}</label>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+            </div>
+
+            <div class="filter-btns">
+                {!! Form::submit(trans('lang.btn_apply_filters'), ['class' => 'wt-btn ml-2']) !!}
+            </div>
+        </div>
+        <!-- <div class="wt-widget wt-effectiveholder">
 
             <a  onclick="toogle_categories()">  
                 <div class="wt-widgettitle">
@@ -85,8 +205,6 @@
                                 @php $checked = ( !empty($_GET['category']) && in_array($category->slug, $_GET['category'] )) ? 'checked' : ''; @endphp
                                 <div class="col-md-6 col-lg-4">
                                     <span class="wt-checkbox">
-                                        <input id="cat-{{{ $category->slug }}}" type="checkbox" name="category[]" value="{{{ $category->slug }}}" {{$checked}} >
-                                        <label for="cat-{{{ $category->slug }}}"> {{{ $category->title }}}</label>
                                     </span>
                                 </div>
                             @endforeach
@@ -99,9 +217,9 @@
 
             </div>
 
-        </div>
+        </div> -->
 
-        <div class="wt-widget wt-effectiveholder">
+        <!-- <div class="wt-widget wt-effectiveholder">
 
             <a  onclick="toogle_location()">   
                 <div class="wt-widgettitle">
@@ -157,10 +275,10 @@
 
             </div>
 
-        </div>
+        </div> -->
 
 
-        <div class="wt-widget wt-effectiveholder">
+        <!-- <div class="wt-widget wt-effectiveholder">
 
             <a  onclick="toogle_length()">
                 <div class="wt-widgettitle">
@@ -199,9 +317,9 @@
 
             </div>
 
-        </div>
+        </div> -->
 
-        <div class="wt-widget wt-effectiveholder">
+        <!-- <div class="wt-widget wt-effectiveholder">
 
             <a  onclick="toogle_language()"> 
                 <div class="wt-widgettitle">
@@ -237,9 +355,9 @@
 
             </div>
 
-        </div>
+        </div> -->
 
-        <div class="wt-widget wt-effectiveholder freelancer_job_find_btn">
+        <!-- <div class="wt-widget wt-effectiveholder freelancer_job_find_btn">
 
             <div class="wt-widgetcontent">
 
@@ -251,7 +369,7 @@
 
             </div>
 
-        </div>
+        </div> -->
 
     {!! Form::close() !!}
 
