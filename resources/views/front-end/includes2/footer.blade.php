@@ -1,6 +1,6 @@
 @php
 
-$aws_s3_path='https://'.env('AWS_BUCKET').'.s3.amazonaws.com';
+$aws_s3_path='https://talends-bucket.s3.amazonaws.com';
 
 $footer_how_work=App\Helper::getfooterHowWork();
 @endphp
