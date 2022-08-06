@@ -86,7 +86,7 @@
                                                             <li><span><i class="fa fa-dollar-sign wt-viewjobdollar"></i>Basic Level</span></li>
                                                        
                                                   
-                                                            <li><span><img src="{{{  ( config('app.aws_se_path'). '/' .'uploads/locations/aus.png'  }}}" alt="{{{ trans('lang.location') }}}"> Dubai</span></li>
+                                                            <li><span><img src="{{{  config('app.aws_se_path'). '/' .'uploads/locations/aus.png'  }}}" alt="{{{ trans('lang.location') }}}"> Dubai</span></li>
                                                     
                                                         <li><span><i class="far fa-folder wt-viewjobfolder"></i>{{{ trans('lang.type') }}} Fixed</span></li>
                                                         <li><span><i class="far fa-clock wt-viewjobclock"></i>Less than a week</span></li>
