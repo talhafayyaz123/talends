@@ -816,7 +816,7 @@ class JobController extends Controller
 
                                 $email_params['link'] = url('profile/' . $user->slug);
 
-                              Mail::to(config('mail.username'))
+                              Mail::to(config('mail.adminmail'))
 
                                 ->send(
 
@@ -902,7 +902,7 @@ class JobController extends Controller
 
                             $email_params['link'] = url('profile/' . $user->slug);
 
-                            Mail::to(config('mail.username'))
+                            Mail::to(config('mail.adminmail'))
 
                             ->send(
 

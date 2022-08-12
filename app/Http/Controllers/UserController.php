@@ -436,14 +436,14 @@ class UserController extends Controller
                     if (!empty($template->id)) {
                         $template_data = EmailTemplate::getEmailTemplateByID($template->id);
                         $email_params['reason'] = $delete_reason;
-                       /*  Mail::to(config('mail.username'))
+                         Mail::to(config('mail.adminmail'))
                             ->send(
                                 new AdminEmailMailable(
                                     'admin_email_delete_account',
                                     $template_data,
                                     $email_params
                                 )
-                            ); */
+                            ); 
                     }
                 }
                 Auth::logout();
@@ -854,14 +854,14 @@ class UserController extends Controller
                         $job_completed_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_job_completed')->get()->first();
                         if (!empty($job_completed_template->id)) {
                             $template_data = EmailTemplate::getEmailTemplateByID($job_completed_template->id);
-                            /* Mail::to(config('mail.username'))
+                             Mail::to(config('mail.adminmail'))
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_job_completed',
                                         $template_data,
                                         $email_params
                                     )
-                                ); */
+                                ); 
                         }
                         $freelancer_job_completed_template = DB::table('email_types')->select('id')->where('email_type', 'freelancer_email_job_completed')->get()->first();
                         if (!empty($freelancer_job_completed_template->id)) {
@@ -1056,14 +1056,14 @@ class UserController extends Controller
                                 $email_params['report_by_link'] = url('profile/' . $user->slug);
                                 $email_params['reported_by'] = Helper::getUserName(Auth::user()->id);
                                 $email_params['message'] = $request['description'];
-                              /*   Mail::to(config('mail.username'))
+                                Mail::to(config('mail.adminmail'))
                                     ->send(
                                         new AdminEmailMailable(
                                             'admin_email_report_project',
                                             $template_data,
                                             $email_params
                                         )
-                                    ); */
+                                    ); 
                             }
                         } else if ($request['report_type'] == 'employer-report') {
                             $report_employer_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_report_employer')->get()->first();
@@ -1075,14 +1075,14 @@ class UserController extends Controller
                                 $email_params['report_by_link'] = url('profile/' . $user->slug);
                                 $email_params['reported_by'] = Helper::getUserName(Auth::user()->id);
                                 $email_params['message'] = $request['description'];
-                                /* Mail::to(config('mail.username'))
+                                 Mail::to(config('mail.adminmail'))
                                     ->send(
                                         new AdminEmailMailable(
                                             'admin_email_report_employer',
                                             $template_data,
                                             $email_params
                                         )
-                                    ); */
+                                    ); 
                             }
                         } else if ($request['report_type'] == 'freelancer-report') {
                             $report_freelancer_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_report_freelancer')->get()->first();
@@ -1094,14 +1094,14 @@ class UserController extends Controller
                                 $email_params['report_by_link'] = url('profile/' . $user->slug);
                                 $email_params['reported_by'] = Helper::getUserName(Auth::user()->id);
                                 $email_params['message'] = $request['description'];
-                                /* Mail::to(config('mail.username'))
+                                 Mail::to(config('mail.adminmail'))
                                     ->send(
                                         new AdminEmailMailable(
                                             'admin_email_report_freelancer',
                                             $template_data,
                                             $email_params
                                         )
-                                    ); */
+                                    ); 
                             }
                         }
                     }
@@ -1135,14 +1135,14 @@ class UserController extends Controller
                             } else {
                                 $template_data = '';
                             }
-                          /*   Mail::to(config('mail.username'))
+                             Mail::to(config('mail.adminmail'))
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_cancel_job',
                                         $template_data,
                                         $email_params
                                     )
-                                ); */
+                                );
                         }
                     }
                 } else if ($request['report_type'] == 'service_cancel') {
@@ -1176,14 +1176,14 @@ class UserController extends Controller
                         } else {
                             $template_data = '';
                         }
-                      /*   Mail::to(config('mail.username'))
+                        Mail::to(config('mail.adminmail'))
                             ->send(
                                 new AdminEmailMailable(
                                     'admin_email_cancel_job',
                                     $template_data,
                                     $email_params
                                 )
-                            ); */
+                            ); 
                     }
                 }
                 if ($request['report_type'] == 'service_cancel') {
@@ -1623,14 +1623,14 @@ class UserController extends Controller
                     $template_data['content'] = !empty($order_settings) && !empty($order_settings['admin_order']['email_content']) ? $order_settings['admin_order']['email_content'] : '';
                     $email_params['name'] = Helper::getUserName(Auth::user()->id);
                     $email_params['order_id'] = $order->id;
-                   /*  Mail::to(config('mail.username'))
+                    Mail::to(config('mail.adminmail'))
                         ->send(
                             new AdminEmailMailable(
                                 'admin_new_order_received',
                                 $template_data,
                                 $email_params
                             )
-                        ); */
+                        );
                 }
                 session()->forget('product_id');
                 session()->forget('product_title');
@@ -2408,14 +2408,14 @@ class UserController extends Controller
                     $email_params['name'] = Helper::getUserName(Auth::user()->id);
                     $email_params['msg'] = $request['description'];
                     $email_params['reason'] = $request['reason'];
-                   /*  Mail::to(config('mail.username'))
+                    Mail::to(config('mail.adminmail'))
                         ->send(
                             new AdminEmailMailable(
                                 'admin_email_dispute_raised',
                                 $template_data,
                                 $email_params
                             )
-                        ); */
+                        ); 
                 }
             }
             return $json;

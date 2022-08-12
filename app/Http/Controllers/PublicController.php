@@ -357,14 +357,14 @@ class PublicController extends Controller
                             $email_params['name'] = Helper::getUserName($id);
                             $email_params['email'] = $email;
                             $email_params['link'] = url('profile/' . $user->slug);
-                             /* Mail::to(config('mail.username'))
+                              Mail::to(config('mail.adminmail'))
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_registration',
                                         $template_data,
                                         $email_params
                                     )
-                                ); */
+                                );
                         }
                     }
 
@@ -432,14 +432,14 @@ class PublicController extends Controller
                             $email_params['name'] = Helper::getUserName($id);
                             $email_params['email'] = $email;
                             $email_params['link'] = url('profile/' . $user->slug);
-                              /* Mail::to(config('mail.username'))
+                               Mail::to(config('mail.adminmail'))
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_registration',
                                         $template_data,
                                         $email_params
                                     )
-                                );  */ 
+                                );   
                         }
                     }
                    

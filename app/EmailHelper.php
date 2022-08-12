@@ -60,7 +60,7 @@ class EmailHelper extends Model
     {
         ob_start();
         $setting = SiteManagement::getMetaValue('footer_settings');
-        $copyright = !empty($setting) && !empty($setting['copyright']) ? $setting['copyright'] : 'Copyright Worketic All Rights Reserved';
+        $copyright = !empty($setting) && !empty($setting['copyright']) ? $setting['copyright'] : 'Copyright Talends All Rights Reserved';
         ?>
         </div>
         </div>
