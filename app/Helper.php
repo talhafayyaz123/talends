@@ -298,6 +298,12 @@ return $response;
     }
 
 
+    public static function getFooterSocialContent(){
+        $footer_social_content=AboutTalendsPage::where('page_type','footer-social-content')->first();
+        return $footer_social_content;
+    }
+
+
     
     
     public static function footerMenu1(){

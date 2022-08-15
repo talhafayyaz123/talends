@@ -1,6 +1,9 @@
 @extends(file_exists(resource_path('views/extend/front-end/master.blade.php')) ? 'extend.front-end.master' : 'front-end.master')
 
 @section('content')
+@php
+            $footer_social_content=App\Helper::getFooterSocialContent();
+        @endphp
 
 <section class="login-auth">
     <!-- Page -->
@@ -17,12 +20,12 @@
                     <div class="pl-5 d-flex align-items-center mb-3">
                         <p class="mb-0 mr-4 text-theme">Become part of Talends social community</p>
                         <ul class="list-inline">
-                            <li class="px-1"> <a href="https://www.facebook.com/Talends-104362175661656" target="_blank"><i class="fa fa-facebook"></i></a> </li>
-                            <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-twitter"></i></a> </li>
-                            <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-linkedin"></i></a> </li>
-                            <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-instagram"></i></a> </li>
-                            <li class="px-1"> <a href="https://www.youtube.com/channel/UCypgaJCN86fxACsRdOuQiEA" target="_blank"><i class="fa fa-youtube"></i></a> </li>
-                            <li class="px-1"> <a href="https://vt.tiktok.com/ZSd3qRoKF/" target="_blank"><i class="bi-tiktok"></i></a> </li>
+                            <li class="px-1"> <a href="{{ $footer_social_content->banner_description ?? ''}}" target="_blank"><i class="fa fa-facebook"></i></a> </li>
+                            <!-- <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-twitter"></i></a> </li> -->
+                            <li class="px-1"> <a href="{{ $footer_social_content->features_text ?? ''}}" target="_blank"><i class="fa fa-linkedin"></i></a> </li>
+                            <li class="px-1"> <a href="{{ $footer_social_content->work_description ?? ''}}" target="_blank"><i class="fa fa-instagram"></i></a> </li>
+                            <li class="px-1"> <a href="{{ $footer_social_content->services_description ?? ''}}" target="_blank"><i class="fa fa-youtube"></i></a> </li>
+                            <li class="px-1"> <a href="{{ $footer_social_content->payment_description ?? ''}}" target="_blank"><i class="bi-tiktok"></i></a> </li>
                         </ul>
                     </div>
             </div>

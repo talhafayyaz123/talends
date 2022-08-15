@@ -168,6 +168,7 @@ $footer_menus_1=App\Helper::footerMenu1();
 $footer_menus_2=App\Helper::footerMenu2();
 $footer_menus_3=App\Helper::footerMenu3();
 $footer_menus_4=App\Helper::footerMenu4();
+$footer_social_content=App\Helper::getFooterSocialContent();
 @endphp
 
 
@@ -224,12 +225,12 @@ $footer_menus_4=App\Helper::footerMenu4();
             <div class="col-md-7">
                 <div class="secondary-footer">
                     <ul class="list-inline mb-2">
-                        <li class="px-1"> <a href="https://www.facebook.com/Talends-104362175661656" target="_blank"><i class="fa fa-facebook"></i></a> </li>
-                        <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-twitter"></i></a> </li>
-                        <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-linkedin"></i></a> </li>
-                        <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-instagram"></i></a> </li>
-                        <li class="px-1"> <a href="https://www.youtube.com/channel/UCypgaJCN86fxACsRdOuQiEA" target="_blank"><i class="fa fa-youtube"></i></a> </li>
-                        <li class="px-1"> <a href="https://vt.tiktok.com/ZSd3qRoKF/" target="_blank"><i class="bi-tiktok" style="padding: 6px 7px;"></i></a> </li>    
+                        <li class="px-1"> <a href="{{ $footer_social_content->banner_description ?? ''}}" target="_blank"><i class="fa fa-facebook"></i></a> </li>
+                        <!-- <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-twitter"></i></a> </li> -->
+                        <li class="px-1"> <a href="{{ $footer_social_content->features_text ?? ''}}" target="_blank"><i class="fa fa-linkedin"></i></a> </li>
+                        <li class="px-1"> <a href="{{ $footer_social_content->work_description ?? ''}}" target="_blank"><i class="fa fa-instagram"></i></a> </li>
+                        <li class="px-1"> <a href="{{ $footer_social_content->services_description ?? ''}}" target="_blank"><i class="fa fa-youtube"></i></a> </li>
+                        <li class="px-1"> <a href="{{ $footer_social_content->payment_description ?? ''}}" target="_blank"><i class="bi-tiktok" style="padding: 6px 7px;"></i></a> </li>    
                     </ul>
                     <p class="mb-0">Talends.com ©2022 All Rights Reserved.</p>
                     <p class="small">Dubai, United Arab Emirates</p>
