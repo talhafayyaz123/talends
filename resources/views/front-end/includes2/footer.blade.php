@@ -183,7 +183,24 @@ $footer_social_content=App\Helper::getFooterSocialContent();
                 <ul class="quick-links">
                     @if(!empty($footer_menus_1['menu_items']))
                     @foreach($footer_menus_1['menu_items'] as $key=>$value)
-                    <li> <a href="javascript:;" target="_self">{{ $value['title']}}</a></li>
+                    <li> 
+
+                
+                    @if($value['url']!='#' && Route::has($value['url']))
+                        <a href="{{ route($value['url'])  }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @elseif($value['url'] !='#')
+                        <a href="{{ url($value['url'])  }}">
+                            {{ $value['title'] }}
+                        </a>
+                        @else
+                        <a href="{{ $value['url'] }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @endif
+                    
+                    </li>
                     @endforeach
                     @endif
                 </ul>
@@ -195,7 +212,22 @@ $footer_social_content=App\Helper::getFooterSocialContent();
                 <ul class="quick-links">
                     @if(!empty($footer_menus_2['menu_items']))
                     @foreach($footer_menus_2['menu_items'] as $key=>$value)
-                    <li> <a href="javascript:;" target="_self">{{ $value['title']}}</a></li>
+                    <li> 
+                    @if($value['url']!='#' && Route::has($value['url']))
+                        <a href="{{ route($value['url'])  }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @elseif($value['url'] !='#')
+                        <a href="{{ url($value['url'])  }}">
+                            {{ $value['title'] }}
+                        </a>
+                        @else
+                        <a href="{{ $value['url'] }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @endif
+                    
+                    </li>
                     @endforeach
                     @endif
                 </ul>
@@ -205,7 +237,22 @@ $footer_social_content=App\Helper::getFooterSocialContent();
                 <ul class="quick-links">
                     @if(!empty($footer_menus_3['menu_items']))
                     @foreach($footer_menus_3['menu_items'] as $key=>$value)
-                    <li> <a href="javascript:;" target="_self">{{ $value['title']}}</a></li>
+                    <li> 
+                    @if($value['url']!='#' && Route::has($value['url']))
+                        <a href="{{ route($value['url'])  }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @elseif($value['url'] !='#')
+                        <a href="{{ url($value['url'])  }}">
+                            {{ $value['title'] }}
+                        </a>
+                        @else
+                        <a href="{{ $value['url'] }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @endif
+                    
+                    </li>
                     @endforeach
                     @endif
                 </ul>
@@ -215,7 +262,21 @@ $footer_social_content=App\Helper::getFooterSocialContent();
                 <ul class="quick-links">
                     @if(!empty($footer_menus_4['menu_items']))
                     @foreach($footer_menus_4['menu_items'] as $key=>$value)
-                    <li> <a href="javascript:;" target="_self">{{ $value['title']}}</a></li>
+                    <li> 
+                    @if($value['url']!='#' && Route::has($value['url']))
+                        <a href="{{ route($value['url'])  }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @elseif($value['url'] !='#')
+                        <a href="{{ url($value['url'])  }}">
+                            {{ $value['title'] }}
+                        </a>
+                        @else
+                        <a href="{{ $value['url'] }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @endif
+                    </li>
                     @endforeach
                     @endif
                 </ul>
