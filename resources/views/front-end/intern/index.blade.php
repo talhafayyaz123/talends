@@ -258,7 +258,7 @@
 
                         </div>
                         <p>We would love to have more universities on-Board with us, please drop us a message & we will get back.</p>
-                        <button class="btn btn-theme rounded-pill px-4">Universities@Talends.com</button>
+                        <button class="btn btn-theme rounded-pill px-4" onclick=" document.location ='mailto:enquiry.talends@gmail.com?subject=Need Discussion' ">Universities@Talends.com</button>
                     </div>
                 </div>
             </div>

@@ -89,7 +89,9 @@ Company Registration
                                         </div>
                                         <input type="hidden" name="role" value="company" />
                                     </div>
+                                    @guest
                                     <input type="button" name="next" class="next action-button step_1_btn"  disabled value="Next" />
+                                    @endguest
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card">
@@ -275,7 +277,7 @@ Company Registration
                             </form>
                         </div>
                     </div>
-
+                  
                 </div>
             </div>
         </div>
