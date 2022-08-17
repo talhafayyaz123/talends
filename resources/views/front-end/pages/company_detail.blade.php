@@ -152,7 +152,7 @@
                     <div class="company-detail-stats">
                         <h5>Talends Activity</h5>
                         <p class="mb-0 mt-4">Hourly Rate</p>
-                        <p><b>${{ $profile->hourly_rate ?? '' }}</b></p>
+                        <p><b>AED {{ $profile->hourly_rate ?? '' }}</b></p>
                         <p class="mb-0 mt-4">Total Jobs</p>
                         <p><b>{{ $company_detail->total_jobs ?? '' }}</b></p>
                         <p class="mb-0 mt-4">Joined Since</p>

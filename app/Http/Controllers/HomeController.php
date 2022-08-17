@@ -234,7 +234,7 @@ class HomeController extends Controller
         $yearly_options = !empty($package[1]->options) ? unserialize($package[1]->options) : array();
 
         $package_options = Helper::getPackageOptions('company');
-    
+      
         return view('auth.company_registration',compact('package_options','yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
      }
 
