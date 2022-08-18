@@ -38,7 +38,7 @@
 
                                         <div class="wt-title">
                                             @if (!empty($payment->user->profile->company_name) && isset($payment->user->profile->company_name) )
-                                            <a href="{{{ url('profile/'.$payment->user->slug) }}}">
+                                            <a target="_blank" href="{{{ url('company-detail/'.$payment->user->id) }}}">
                                                 <i class="fa fa-check-circle"></i>
                                                 &nbsp;{{{ $payment->user->profile->company_name ?? ''}}}</a>
                                             @endif
