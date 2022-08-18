@@ -130,7 +130,7 @@ Route::get('gamail/login/{email}', 'PublicController@gmailLoginUser')->name('log
 
 // Admin Routes
 Route::group(
-    ['middleware' => ['role:admin']],
+    ['middleware' => ['role:admin']  ],
     function () {
         Route::get('admin/conversations/search', 'MessageController@getConversations');
         Route::get('admin/view/conversations', 'MessageController@getConversations')->name('viewConversations');
@@ -141,6 +141,9 @@ Route::group(
         Route::get('admin/hiring_requests', 'CompanyController@companyHiringRequests')->name('adminHiringRequests');
         Route::get('admin/hiring_request_detail/{id}', 'CompanyController@companyHiringRequestDetail')->name('adminHiringRequestDetail');
 
+
+        Route::get('admin/user_payments', 'UserPaymentController@getPayments')->name('userPayments');
+        Route::get('admin/user_payment_detail/{id}', 'UserPaymentController@getPaymentDetail')->name('userPaymentDetail');        
 
         // Article Category Routes
         Route::get('admin/article/categories', 'ArticleCategoryController@index')->name('articleCategories');

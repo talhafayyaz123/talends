@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+
 
 class UserPayments extends Model
 {
@@ -18,5 +20,22 @@ class UserPayments extends Model
         'token',
         'customer_email',
         'expiry_date',
+        'created_at'
     );
+
+    public function userTransactions(){
+        return $this->hasMany(UserTransactions::class,'user_id','user_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');   
+    }
+
+    public function getCreatedAtAttribute($value) {
+        return \Carbon\Carbon::parse($value)->format('d-m-Y');
+    }
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+    ];
 }
