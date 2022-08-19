@@ -20,6 +20,7 @@ class UserPayments extends Model
         'token',
         'customer_email',
         'expiry_date',
+        'is_success',
         'created_at'
     );
 

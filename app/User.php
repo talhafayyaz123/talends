@@ -163,6 +163,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Profile');
     }
 
+    public function user_payment()
+    {
+        return $this->hasOne('App\UserPayments');
+    }
+
     /**
      * Get the payout record associated with the user.
      *

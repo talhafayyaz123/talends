@@ -582,11 +582,15 @@ class HomeController extends Controller
           
               $query->where('location_id',  $request->location_id);
               
-            })->latest()->paginate(6);
+            })->whereHas('user_payment', function ($query) {
+                $query->where('is_success', '=', 1);
+           })->latest()->paginate(6);
   
           } else {
   
-            $companies = User::select('*')->role('company')->latest()->paginate(6);
+            $companies = User::select('*')->role('company')->whereHas('user_payment', function ($query) {
+                $query->where('is_success', '=', 1);
+           })->latest()->paginate(6);
           }
 
         

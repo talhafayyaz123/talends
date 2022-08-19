@@ -11,7 +11,7 @@
             <div class="wt-dashboardbox la-alljob-holder">
                 <div class="wt-dashboardboxtitle wt-titlewithsearch">
                     <h2>Payments Detail   
-                    @if (!empty($user_transections) && $user_transections->count() > 0)
+                    @if (!empty($user_transections) && isset($user_transections[0]->user)  )
                    ({{ $user_transections[0]->user->profile->company_name  ?? '' }}) 
                     @endif
 

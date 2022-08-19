@@ -37,11 +37,16 @@
                                     <div class="wt-contenthead">
 
                                         <div class="wt-title">
-                                            @if (!empty($payment->user->profile->company_name) && isset($payment->user->profile->company_name) )
+                                            @if(isset($payment->user->id))
                                             <a target="_blank" href="{{{ url('company-detail/'.$payment->user->id) }}}">
                                                 <i class="fa fa-check-circle"></i>
-                                                &nbsp;{{{ $payment->user->profile->company_name ?? ''}}}</a>
-                                            @endif
+                                                &nbsp;{{{ $payment->user->profile->company_name ?? 'Company'}}}</a>
+                                           @else
+                                           
+                                           <a  >
+                                                <i class="fa fa-check-circle"></i>
+                                                &nbsp;{{{ $payment->user->profile->company_name ?? 'Company'}}}</a>
+                                           @endif
 
                                             @if (!empty($payment->customer_email))
                                             <h2 style="width: 100% !important;"> {{{ $payment->customer_email }}}</h2>
