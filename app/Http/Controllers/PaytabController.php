@@ -207,7 +207,7 @@ class PaytabController extends Controller
      */
 
      public function postPackagePaymentWithPaytab(Request $request){
-         
+  
         $content=$request->input();
         if(isset($content['package_id'])){
             $package_id=$content['package_id'];
@@ -235,17 +235,18 @@ class PaytabController extends Controller
 
         $respStatus=$content['respStatus'];
 
-      
+
+        $login_user = \App\User::find($user_id);
     
         $settings = SiteManagement::getMetaValue('commision');
-        $currency = !empty($settings[0]['currency']) ? $settings[0]['currency'] : 'USD';
+        $currency = !empty($settings[0]['currency']) ? $settings[0]['currency'] : 'AED';
         $current_year = Carbon::now()->format('Y');
 
-
+          
          $user=User::find($user_id);
         
         $payment_detail =$respStatus;
-
+        
         if ($payment_detail == 'A') {
 
             //$fee = !empty($payment_detail['application_fee_amount']) ? $payment_detail['application_fee_amount'] : 0;
@@ -295,7 +296,7 @@ class PaytabController extends Controller
             $invoice_id = DB::getPdo()->lastInsertId();
                
             if ($type == 'package') {
-
+            
                 $item = DB::table('items')->select('id')->where('subscriber', $user_id)->first();
 
                 if (!empty($item)) {
@@ -313,7 +314,7 @@ class PaytabController extends Controller
                 $item = new Item();
 
             }
-
+            
             $item->invoice_id = filter_var($invoice_id, FILTER_SANITIZE_NUMBER_INT);
 
             $item->product_id = filter_var($product_id, FILTER_SANITIZE_NUMBER_INT);
@@ -337,12 +338,12 @@ class PaytabController extends Controller
                 ->update(['status' => 'completed']);
 
             if ($user_id) {
-
+               
                 if ($product_type == 'package') {
-                     
-                    
+                   
+                
                     if (!empty($product_id)) {
-
+                        
                         $package_item = \App\Item::where('subscriber', $user_id)->first();
 
                         $id = $product_id;
@@ -366,9 +367,9 @@ class PaytabController extends Controller
                         $user->expiry_date = $expiry_date;
 
                         $user->save();
-                        
+                    
                         // send mail
-
+                    
                         if (!empty(config('mail.username')) && !empty(config('mail.password'))) {
 
                             $item = DB::table('items')->where('product_id', $id)->get()->toArray();
@@ -408,12 +409,13 @@ class PaytabController extends Controller
                                     $template = DB::table('email_types')->select('id')->where('email_type', 'employer_email_package_subscribed')->get()->first();
 
                                     if (!empty($template->id)) {
+                                      
 
                                         $template_data = EmailTemplate::getEmailTemplateByID($template->id);
 
                                         $email_params['employer'] = Helper::getUserName($user_id);
 
-                                        $email_params['employer_profile'] = url('profile/' . $user->slug);
+                                        $email_params['employer_profile'] = url('profile/' . $login_user->slug);
 
                                         $email_params['name'] = $package->title;
 
@@ -421,7 +423,7 @@ class PaytabController extends Controller
 
                                         $email_params['expiry_date'] = !empty($expiry_date) ? Carbon::parse($expiry_date)->format('M d, Y') : '';
 
-                                        Mail::to($user->email)
+                                        Mail::to($login_user->email)
 
                                             ->send(
 
@@ -442,8 +444,9 @@ class PaytabController extends Controller
                                 }
 
                             } elseif ($role === 'freelancer' || $role === 'intern') {
-
-                                if (!empty($user->email)) {
+                                
+                                
+                                if (!empty($login_user->email)) {
 
                                     $email_params = array();
 
@@ -455,15 +458,15 @@ class PaytabController extends Controller
 
                                         $email_params['freelancer'] = Helper::getUserName($user_id);
 
-                                        $email_params['freelancer_profile'] = url('profile/' . $user->slug);
+                                        $email_params['freelancer_profile'] = url('profile/' . $login_user->slug);
 
                                         $email_params['name'] = $package->title;
 
                                         $email_params['price'] = $package->cost;
 
                                         $email_params['expiry_date'] = !empty($expiry_date) ? Carbon::parse($expiry_date)->format('M d, Y') : '';
-
-                                        Mail::to($user->email)
+                                    
+                                        Mail::to($login_user->email)
 
                                             ->send(
 
@@ -660,9 +663,16 @@ class PaytabController extends Controller
 
             }
 
+        }else{
+
+            $role = $login_user->getRoleNames()->first();
+            $error=$content['respMessage'];
+            Session::flash('error', 'Credentials Not correct');
+            
+            return redirect($role.'/dashboard?paytab_error=1')->with(['error' => 'Credentials Not correct']);
         }
 
-        
+    
         session()->forget('product_id');
 
         session()->forget('product_title');
@@ -670,11 +680,12 @@ class PaytabController extends Controller
         session()->forget('product_price');
 
         session()->forget('custom_order_id');
-
+        
         
         $user_role=\App\User::find($user_id)->getRoleNames()[0];
+    
           if ($user_role == "employer") {
-
+        
             if ($type == 'project') {
 
                 if ($project_type == 'service') {
@@ -710,7 +721,7 @@ class PaytabController extends Controller
 
             }
 
-        } else if ($user_role == "freelancer" || $user_role == "intern" ) {
+        } else if ($user_role == "freelancer" || $user_role == "intern" || $user_role == "company") {
 
             $json['type'] = 'success';
 
@@ -731,11 +742,11 @@ class PaytabController extends Controller
 
     {
 
-        $content=$request->input();
+           $content=$request->input();
 
-        $id=$content['package_id'];
+           $id=$content['package_id'];
      
-        $user_id=$content['user_id'];
+           $user_id=$content['user_id'];
           // $user_id=$request->segment(4);
         
             $user = User::find($user_id);
@@ -743,8 +754,10 @@ class PaytabController extends Controller
 //           $id=$request->segment(3);
            
            $proposal = Proposal::find($id);
+           $title=$proposal->job->title;
            $amount=$proposal->amount;
-           
+
+        
             $fee =  0;
 
             $invoice = new Invoice();
@@ -763,9 +776,9 @@ class PaytabController extends Controller
 
             $invoice->payer_status = '';
 
-            $invoice->transaction_id = filter_var('777', FILTER_SANITIZE_STRING);
+            $invoice->transaction_id = filter_var('xxxx_xxxx_xxxx', FILTER_SANITIZE_STRING);
 
-            $invoice->invoice_id = filter_var('card_1KhqtFIHTnYkIfFpQZOAAh3C', FILTER_SANITIZE_STRING);
+            $invoice->invoice_id = filter_var('xxx_xxx', FILTER_SANITIZE_STRING);
 
             $invoice->customer_id = filter_var($user->id, FILTER_SANITIZE_STRING);
 
@@ -801,7 +814,7 @@ class PaytabController extends Controller
 
             $item->subscriber = $user->id;
 
-            $item->item_name = filter_var('Silviculture', FILTER_SANITIZE_STRING);
+            $item->item_name = filter_var($title, FILTER_SANITIZE_STRING);
 
             $item->item_price = $amount;
 

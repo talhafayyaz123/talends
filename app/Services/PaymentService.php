@@ -30,6 +30,8 @@ class PaymentService
             
 
             $user=User::find($user_id);
+            $login_user = User::find($user_id);
+
            ///
            $fee=0;
            $invoice = new Invoice();
@@ -175,7 +177,7 @@ class PaymentService
 
                             $email_params['freelancer'] = Helper::getUserName($user_id);
 
-                            $email_params['freelancer_profile'] = url('profile/' . $user->slug);
+                            $email_params['freelancer_profile'] = url('profile/' . $login_user->slug);
 
                             $email_params['name'] = $package->title;
 
@@ -183,7 +185,7 @@ class PaymentService
 
                             $email_params['expiry_date'] = !empty($expiry_date) ? Carbon::parse($expiry_date)->format('M d, Y') : '';
 
-                            Mail::to($user->email)
+                            Mail::to($login_user->email)
 
                                 ->send(
 

@@ -334,14 +334,14 @@ class CompanyController extends Controller
                 $template_data = EmailTemplate::getEmailTemplateByID($template->id);
                 
                 $email_params['name'] = Helper::getUserName($employeer_id);
-              /*    Mail::to($employer->email)
+                 Mail::to($employer->email)
                     ->send(
                         new AdminEmailMailable(
                             'lead_accepted',
                             $template_data,
                             $email_params
                         )
-                    );  */
+                    );
             }
 
             Session::flash('message', 'Thanks for accepting, an automatic confirmation message has sent to Employer from you, he will contact you back soon.');
@@ -357,14 +357,14 @@ class CompanyController extends Controller
                 $template_data = EmailTemplate::getEmailTemplateByID($template->id);
                 
                 $email_params['name'] = Helper::getUserName($employeer_id);
-                /*  Mail::to($employer->email)
+                  Mail::to($employer->email)
                     ->send(
                         new AdminEmailMailable(
                             'lead_rejected',
                             $template_data,
                             $email_params
                         )
-                    );  */
+                    );  
             }
 
            

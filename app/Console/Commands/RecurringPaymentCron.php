@@ -55,6 +55,7 @@ class RecurringPaymentCron extends Command
 
 
      $expiry_date =  $value->expiry_date ;
+     $package_id =  $value->package_id ;
      $reminder_date = Carbon::createFromFormat('Y-m-d',  $expiry_date);
      $reminder_date= $reminder_date->subDay(3); 
      $reminder_date = $reminder_date->format('Y-m-d');
@@ -102,8 +103,15 @@ class RecurringPaymentCron extends Command
           
          if(  $transection_status=='A'){
 
-            $date = Carbon::createFromFormat('Y-m-d',$expiry_date )->addMonth();
-            $expiry_date = $date->format('Y-m-d');
+
+           $package = \App\Package::find($package_id);
+           $option = !empty($package->options) ? unserialize($package->options) : '';
+
+           $expiry = !empty($option) ? Carbon::createFromFormat('Y-m-d',$expiry_date )->addDays($option['duration']) : '';
+               
+           $expiry_date = !empty($expiry) ? Carbon::parse($expiry)->toDateTimeString() : '';
+
+        
             $updated_at = $currentDate;
         
            UserPayments::where('id',$value->id)->update([

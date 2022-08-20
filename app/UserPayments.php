@@ -14,6 +14,7 @@ class UserPayments extends Model
 
     protected $fillable = array(
         'user_id' ,
+        'package_id',
         'tran_ref',
         'cart_id',
         'cart_amount',

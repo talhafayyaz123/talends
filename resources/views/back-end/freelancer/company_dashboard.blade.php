@@ -7,6 +7,26 @@
             </div>
             @php session()->forget('message');  @endphp
         @endif
+
+
+        @if (Session::has('error'))
+            <div class="flash_msg">
+                <flash_messages :message_class="'error'" :time ='5' :message="'{{{ Session::get('error') }}}'" v-cloak></flash_messages>
+            </div>
+            @php session()->forget('error');  @endphp
+        @endif
+
+      
+        
+        @if( Request::get('paytab_error')==1)
+        <div class="flash_msg">
+          <div class="alert alert-info">Payment Credentials not correct.</div>
+
+            </div>
+            @endif
+
+           
+     
         <div class="bg-theme p-4 rounded-16">
             <div class="row">
                 <div class="col-12">

@@ -240,21 +240,20 @@ class HomeController extends Controller
 
      public function companyRegistrationSuccess(Request $request){
 
-       
-      
         $content = $request->input();
     
         $id = $content['user_id'];
+        $tranRef = $content['tranRef'];
+        $package_id = $content['package_id'];
 
-       $package_id = $content['package_id'];
-
-       
+     
+        
         $user_payments=UserPayments::where('user_id',$id)->first();
          
        $transection=Helper::transection_query($user_payments['tran_ref']);
        $transection_status=json_decode($transection,true)['payment_result']['response_status'];
+     
        
-    
         $inner_page = SiteManagement::getMetaValue('why_talends');
         $about_talends=AboutTalendsPage::where('page_type','about_talends')->first();
 
@@ -267,18 +266,26 @@ class HomeController extends Controller
         $page['title'] = $meta_title;
                
         if($transection_status=='A' ){
+           
             // status approved
             $token = $content['token'];
-            $tranRef = $content['tranRef'];
+          
             $customer_email = $content['customerEmail'];
               $cartId=$content['cartId'];
-            
-            $expiry_date = Carbon::now()->addMonth();
-            $expiry_date = $expiry_date->format('Y-m-d H:i:s');
             
              // call service to set package record
              $this->paymentService->purchasePackage($content,$package_id);
 
+             
+                 /// expiry date calculate
+                $package_item = \App\Item::where('subscriber', $id)->first();
+                $package = \App\Package::find($package_id);
+                $option = !empty($package->options) ? unserialize($package->options) : '';
+
+                $expiry = !empty($option) ? $package_item->updated_at->addDays($option['duration']) : '';
+                
+                $expiry_date = !empty($expiry) ? Carbon::parse($expiry)->toDateTimeString() : '';
+              ///
             
             UserPayments::where('user_id',$id)->update(
                 [
@@ -286,7 +293,8 @@ class HomeController extends Controller
                    'token'=>$token,
                    'tran_ref'=>$tranRef,
                    'customer_email'=>$customer_email,
-                   'expiry_date'=>$expiry_date
+                   'expiry_date'=>$expiry_date,
+                   'package_id'=>$package_id
                 ]
       
               );
@@ -298,11 +306,38 @@ class HomeController extends Controller
                'cart_amount'=>$user_payments['cart_amount'],
                'transection_type'=>'sale'
               ]);
+              ///
+              $user=User::find($id);
+              $template = DB::table('email_types')->select('id')
+                    ->where('email_type', 'verification_code')->get()->first();
+                if (!empty($template->id)) {
+                    $template_data = EmailTemplate::getEmailTemplateByID($template->id);
+                    $email_params['verification_code'] = $user->verification_code;
+                    $email_params['name'] = Helper::getUserName($user->id);
+                    $email_params['email'] = $user->email;
+                    $email_params['role'] =$user->getRoleNames()[0];
+                    Mail::to($user->email)
+                        ->send(
+                            new GeneralEmailMailable(
+                                'verification_code',
+                                $template_data,
+                                $email_params
+                            )
+                        );
+                }
 
               session()->put(['user_id' => $id]);
             return view('auth.company_registration_success',compact('page','home','meta_desc','about_talends'));
            
         }else{
+
+            UserPayments::where('user_id',$id)->where('is_success',0)->where('tran_ref',$tranRef)->update(
+                [
+                   'package_id'=>$package_id
+                ]
+      
+              );
+
             return view('auth.company_registration_fail',compact('page','home','meta_desc','about_talends','id','package_id'));
 
         }
