@@ -443,7 +443,7 @@ class PaytabController extends Controller
 
                                 }
 
-                            } elseif ($role === 'freelancer' || $role === 'intern') {
+                            } elseif ($role === 'freelancer' || $role === 'intern' || $role === 'company' ) {
                                 
                                 
                                 if (!empty($login_user->email)) {
