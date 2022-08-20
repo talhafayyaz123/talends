@@ -378,7 +378,7 @@ class PaytabController extends Controller
 
                             $user = User::find($item[0]->subscriber);
 
-                            $role = $user->getRoleNames()->first();
+                            $role = $user->getRoleNames()[0];
 
                             $package_options = unserialize($package->options);
 
