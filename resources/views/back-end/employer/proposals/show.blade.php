@@ -33,7 +33,7 @@
                             <div class="wt-jobdetailscontent">
                                 <div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
                                     @if (!empty($job->is_featured) && $job->is_featured === 'true')
-                                        <span class="wt-featuredtag"><img src="{{{ asset('images/featured.png') }}}" alt="{{ trans('lang.is_featured') }}" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                        <span class="wt-featuredtag"><img src="{{{ config('app.aws_se_path'). '/' .'images/featured.png' }}}" alt="{{ trans('lang.is_featured') }}" data-tipso="Plus Member" class="template-content tipso_style"></span>
                                     @endif
                                     <div class="wt-userlistingcontent">
                                         <div class="wt-contenthead">
@@ -147,7 +147,7 @@
                                                     <i class="fa fa-paperclip"></i>
                                                     {!! Form::open(['url' => url('proposal/download-attachments'), 'class' =>'post-job-form wt-haslayout', 'id' => 'download-attachments-form-'.$accepted_proposal->freelancer_id]) !!}
                                                         @foreach ($attachments as $attachment)
-                                                            @if (Storage::disk('local')->exists('uploads/proposals/'.$accepted_proposal->freelancer_id.'/'.$attachment))
+                                                            @if (Storage::disk('s3')->exists('uploads/proposals/'.$accepted_proposal->freelancer_id.'/'.$attachment))
                                                                 {!! Form::hidden('attachments['.$count.']', $attachment, []) !!}
                                                                 @php $count++; @endphp
                                                             @endif

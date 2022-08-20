@@ -15,6 +15,15 @@ class UserTransactions extends Model
         'tran_ref',
         'cart_id',
         'cart_amount',
-        'transection_type'
+        'transection_type',
+        'created_at'
     );
+    public function user()
+    {
+        return $this->belongsTo('App\User');   
+    }
+
+    public function getCreatedAtAttribute($value) {
+        return \Carbon\Carbon::parse($value)->format('d-m-Y');
+    }
 }

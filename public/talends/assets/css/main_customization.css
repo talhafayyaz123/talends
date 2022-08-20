@@ -2257,3 +2257,8 @@ footer .list-inline a i {
 .iti--separate-dial-code .iti__selected-flag {
     background-color: transparent !important;
 }
+.content_box_wrapper h2 {
+    line-height: 1;
+    margin-bottom: 30px;
+    font-size: 53px;
+}

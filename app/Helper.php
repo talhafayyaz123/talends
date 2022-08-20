@@ -72,7 +72,8 @@ class Helper extends Model
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://localhost/talends/public/redirect/paytab/?package_id=$id&user_id=$user->id\",\n    \"return\": \"https://localhost/talends/public/redirect/paytab/?package_id=$id&user_id=$user->id\"\n  }",
+    
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://talends.com/redirect/paytab/?package_id=$id&user_id=$user->id\",\n    \"return\": \"https://talends.com/redirect/paytab/?package_id=$id&user_id=$user->id\"\n  }",
     CURLOPT_HTTPHEADER => array(
         "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
         "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
@@ -110,7 +111,7 @@ class Helper extends Model
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://localhost/talends/public/redirect/package/paytab?package_id=$id&type=package&user_id=$user->id\",\n    \"return\": \"https://localhost/talends/public/redirect/package/paytab?package_id=$id&type=package&user_id=$user->id\"\n  }",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://talends.com/redirect/package/paytab?package_id=$id&type=package&user_id=$user->id\",\n    \"return\": \"https://talends.com/redirect/package/paytab?package_id=$id&type=package&user_id=$user->id\"\n  }",
     CURLOPT_HTTPHEADER => array(
         "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
         "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
@@ -148,7 +149,7 @@ class Helper extends Model
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://localhost/talends/public/redirect/package/paytab?service_id=$service_id&type=project&user_id=$user->id&service_seller=$service_seller\",\n    \"return\": \"https://localhost/talends/public/redirect/package/paytab?service_id=$service_id&type=project&user_id=$user->id&service_seller=$service_seller\"\n  }",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://talends.com/redirect/package/paytab?service_id=$service_id&type=project&user_id=$user->id&service_seller=$service_seller\",\n    \"return\": \"https://talends.com/redirect/package/paytab?service_id=$service_id&type=project&user_id=$user->id&service_seller=$service_seller\"\n  }",
     CURLOPT_HTTPHEADER => array(
         "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
         "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
@@ -183,7 +184,7 @@ class Helper extends Model
     CURLOPT_TIMEOUT => 30,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n \"tokenise\": 2,\n \"show_save_card\": true,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Company Registration Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://localhost/talends/public/registration/success?user_id=$user_id&package_id=$package_id\",\n    \"return\": \"https://localhost/talends/public/registration/success?user_id=$user_id&package_id=$package_id\"\n  }",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n \"tokenise\": 2,\n \"show_save_card\": true,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Company Registration Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://talends.com/registration/success?user_id=$user_id&package_id=$package_id\",\n    \"return\": \"https://talends.com/registration/success?user_id=$user_id&package_id=$package_id\"\n  }",
     CURLOPT_HTTPHEADER => array(
         "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
         "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
@@ -230,7 +231,7 @@ curl_setopt_array($curl, array(
     "cart_currency": "AED",
     "cart_amount": 100,
     "cart_description": "Company recurring Payment",
-    "callback": "https://localhost/talends/public/registration/success?user_id='.$user_id.'"
+    "callback": "https://talends.com/registration/success?user_id='.$user_id.'"
 }',
   CURLOPT_HTTPHEADER => array(
     'authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6',
@@ -294,6 +295,12 @@ return $response;
     public static function getBannerSettings(){
         $banner_settings=AboutTalendsPage::where('page_type','banner_settings')->first();
         return $banner_settings;
+    }
+
+
+    public static function getFooterSocialContent(){
+        $footer_social_content=AboutTalendsPage::where('page_type','footer-social-content')->first();
+        return $footer_social_content;
     }
 
 
@@ -595,10 +602,16 @@ return $response;
      */
     public static function getLocationFlag($image)
     {
+      
         if (!empty($image)) {
-            return '/uploads/locations/' . $image;
+            if(Storage::disk('s3')->exists('uploads/locations/' . $image)){
+                return config('app.aws_se_path').'/uploads/locations/' . $image;
+            }else{
+                return config('app.aws_se_path').'/uploads/locations/img-09.png';
+            }
+            
         } else {
-            return 'images/img-09.png';
+            return config('app.aws_se_path').'/uploads/locations/img-09.png';
         }
     }
 
@@ -614,18 +627,29 @@ return $response;
     public static function getCategoryImage($image)
     {
         if (!empty($image)) {
-            return '/uploads/categories/' . $image;
+            if(Storage::disk('s3')->exists('uploads/categories/' . $image)){
+                return config('app.aws_se_path').'/uploads/categories/' . $image;
+            }else{
+                return config('app.aws_se_path').'/uploads/categories/img-09.png';
+            }
+            
         } else {
-            return 'uploads/categories/img-09.png';
+            return config('app.aws_se_path').'/uploads/categories/img-09.png';
         }
     }
 
     public static function getAgencyServiceImage($image)
     {
+       
         if (!empty($image)) {
-            return '/uploads/agency_services/' . $image;
+            if(Storage::disk('s3')->exists('uploads/agency_services/' . $image)){
+                return config('app.aws_se_path').'/uploads/agency_services/' . $image;
+            }else{
+                return config('app.aws_se_path').'/uploads/agency_services/img-09.png';
+            }
+            
         } else {
-            return 'uploads/agency_services/img-09.png';
+            return config('app.aws_se_path').'/uploads/agency_services/img-09.png';
         }
     }
 
@@ -676,11 +700,20 @@ return $response;
      */
     public static function getBadgeImage($image)
     {
+        
+
         if (!empty($image)) {
-            return '/uploads/badges/' . $image;
+            if(Storage::disk('s3')->exists('uploads/badges/' . $image)){
+                return config('app.aws_se_path').'/uploads/badges/' . $image;
+            }else{
+                return '';
+            }
+            
         } else {
             return '';
         }
+
+
     }
 
     /**
@@ -730,10 +763,16 @@ return $response;
      */
     public static function getHeaderLogo($image)
     {
+
         if (!empty($image)) {
-            return '/uploads/settings/general/' . $image;
+            if(Storage::disk('s3')->exists('uploads/settings/general/' . $image)){
+                return config('app.aws_se_path').'/uploads/settings/general/' . $image;
+            }else{
+                return config('app.aws_se_path').'/images/logo.png';
+            }
+            
         } else {
-            return 'images/logo.png';
+            return config('app.aws_se_path').'/images/logo.png';
         }
     }
 
@@ -748,11 +787,18 @@ return $response;
      */
     public static function getFooterLogo($image)
     {
+    
         if (!empty($image)) {
-            return '/uploads/settings/footer/' . $image;
+            if(Storage::disk('s3')->exists('uploads/settings/footer/' . $image)){
+                return config('app.aws_se_path').'/uploads/settings/footer/' . $image;
+            }else{
+                return config('app.aws_se_path').'/images/flogo.png';
+            }
+            
         } else {
-            return 'images/flogo.png';
+            return config('app.aws_se_path').'/images/flogo.png';
         }
+
     }
 
     /**
@@ -2195,7 +2241,7 @@ return $response;
     public static function getProfileBanner($user_id)
     {
         $banner = User::find($user_id)->profile->banner;
-        return !empty($banner) ? config('app.aws_se_path').'/uploads/users/' . $user_id . '/' . $banner : 'images/embanner-350x172.jpg';
+        return !empty($banner) ? config('app.aws_se_path').'/uploads/users/' . $user_id . '/' . $banner : config('app.aws_se_path'). '/' .'images/embanner-350x172.jpg';
     }
 
     /**
@@ -2262,7 +2308,7 @@ return $response;
      */
     public static function getProjectImage($image, $user_id)
     {
-        return !empty($image) ? '/uploads/users/' . $user_id . '/' . $image : 'images/projects/img-01.jpg';
+        return !empty($image) ? config('app.aws_se_path'). '/' .'uploads/users/' . $user_id . '/' . $image : config('app.aws_se_path'). '/' .'images/projects/img-01.jpg';
     }
 
     /**
@@ -4865,12 +4911,18 @@ return $response;
     public static function getSiteFavicon()
     {
         $settings = SiteManagement::getMetaValue('settings');
-        $favicon = !empty($settings[0]['favicon']) ? $settings[0]['favicon'] : null;
+        $favicon = !empty($settings[0]['favicon']) ? $settings[0]['favicon'] : null; 
         if (!empty($favicon)) {
-            return '/uploads/settings/general/' . $favicon;
+            if(Storage::disk('s3')->exists('uploads/settings/general/' . $favicon)){
+                return config('app.aws_se_path').'/uploads/settings/general/' . $favicon;
+            }else{
+                return '';
+            }
+            
         } else {
             return '';
         }
+
     }
 
     /**

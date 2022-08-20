@@ -10,6 +10,7 @@
         $footer_menus_2=App\Helper::footerMenu2();
         $footer_menus_3=App\Helper::footerMenu3();
         $footer_menus_4=App\Helper::footerMenu4();
+        $footer_social_content=App\Helper::getFooterSocialContent();
         @endphp
 
 
@@ -24,7 +25,22 @@
                     <ul class="quick-links" id="ftr-links">
                         @if(!empty($footer_menus_1['menu_items']))
                         @foreach($footer_menus_1['menu_items'] as $key=>$value)
-                        <li> <a href="javascript:;" target="_self">{{ $value['title']}}</a></li>
+                        <li>
+                        @if($value['url']!='#' && Route::has($value['url']))
+                        <a href="{{ route($value['url'])  }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @elseif($value['url'] !='#')
+                        <a href="{{ url($value['url'])  }}">
+                            {{ $value['title'] }}
+                        </a>
+                        @else
+                        <a href="{{ $value['url'] }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @endif
+                            
+                            </li>
                        @endforeach
                        @endif
                     </ul>
@@ -36,7 +52,21 @@
                     <ul class="quick-links">
                         @if(!empty($footer_menus_2['menu_items']))
                         @foreach($footer_menus_2['menu_items'] as $key=>$value)
-                        <li> <a href="javascript:;" target="_self">{{ $value['title']}}</a></li>
+                        <li> 
+                        @if($value['url']!='#' && Route::has($value['url']))
+                        <a href="{{ route($value['url'])  }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @elseif($value['url'] !='#')
+                        <a href="{{ url($value['url'])  }}">
+                            {{ $value['title'] }}
+                        </a>
+                        @else
+                        <a href="{{ $value['url'] }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @endif
+                        </li>
                        @endforeach
                        @endif
                     </ul>
@@ -46,7 +76,21 @@
                     <ul class="quick-links">
                         @if(!empty($footer_menus_3['menu_items']))
                         @foreach($footer_menus_3['menu_items'] as $key=>$value)
-                        <li> <a href="javascript:;" target="_self">{{ $value['title']}}</a></li>
+                        <li> 
+                        @if($value['url']!='#' && Route::has($value['url']))
+                        <a href="{{ route($value['url'])  }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @elseif($value['url'] !='#')
+                        <a href="{{ url($value['url'])  }}">
+                            {{ $value['title'] }}
+                        </a>
+                        @else
+                        <a href="{{ $value['url'] }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @endif
+                        </li>
                        @endforeach
                        @endif
                     </ul>
@@ -56,7 +100,21 @@
                     <ul class="quick-links">
                         @if(!empty($footer_menus_4['menu_items']))
                         @foreach($footer_menus_4['menu_items'] as $key=>$value)
-                        <li> <a href="javascript:;" target="_self">{{ $value['title']}}</a></li>
+                        <li> 
+                        @if($value['url']!='#' && Route::has($value['url']))
+                        <a href="{{ route($value['url'])  }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @elseif($value['url'] !='#')
+                        <a href="{{ url($value['url'])  }}">
+                            {{ $value['title'] }}
+                        </a>
+                        @else
+                        <a href="{{ $value['url'] }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @endif
+                        </li>
                        @endforeach
                        @endif
                     </ul>
@@ -65,14 +123,14 @@
             <div class="row footer_bottom align-items-end">
                 <div class="col-md-7">
                     <div class="secondary-footer">
-                        <ul class="list-inline mb-2">
-                            <li class="px-1"> <a href="https://www.facebook.com/Talends-104362175661656" target="_blank"><i class="fa fa-facebook"></i></a> </li>
-                            <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-twitter"></i></a> </li>
-                            <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-linkedin"></i></a> </li>
-                            <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-instagram"></i></a> </li>
-                            <li class="px-1"> <a href="https://www.youtube.com/channel/UCypgaJCN86fxACsRdOuQiEA" target="_blank"><i class="fa fa-youtube"></i></a> </li>
-                            <li class="px-1"> <a href="https://vt.tiktok.com/ZSd3qRoKF/" target="_blank"><i class="bi-tiktok" style="padding: 6px 7px;"></i></a> </li>    
-                        </ul>
+                    <ul class="list-inline mb-2">
+                        <li class="px-1"> <a href="{{ $footer_social_content->banner_description ?? ''}}" target="_blank"><i class="fa fa-facebook"></i></a> </li>
+                        <!-- <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-twitter"></i></a> </li> -->
+                        <li class="px-1"> <a href="{{ $footer_social_content->features_text ?? ''}}" target="_blank"><i class="fa fa-linkedin"></i></a> </li>
+                        <li class="px-1"> <a href="{{ $footer_social_content->work_description ?? ''}}" target="_blank"><i class="fa fa-instagram"></i></a> </li>
+                        <li class="px-1"> <a href="{{ $footer_social_content->services_description ?? ''}}" target="_blank"><i class="fa fa-youtube"></i></a> </li>
+                        <li class="px-1"> <a href="{{ $footer_social_content->payment_description ?? ''}}" target="_blank"><i class="bi-tiktok" style="padding: 6px 7px;"></i></a> </li>    
+                    </ul>
                         <p class="mb-0">Talends.com ©2022 All Rights Reserved.</p>
                         <p class="small">Dubai, United Arab Emirates</p>
                     </div>

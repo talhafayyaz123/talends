@@ -182,7 +182,7 @@
                                 </div>
                                 <div class="form-group wt-inputwithicon {{ $errors->has('cvvNumber') ? ' has-error' : '' }}">
                                     <label>{{ trans('lang.cvc_no') }}</label>
-                                    <img src="{{asset('images/pay-img.png')}}">
+                                    <img src="{{  config('app.aws_se_path'). '/' .'images/pay-img.png'  }}">
                                     <input id="cvvNumber" type="text" class="form-control" name="cvvNumber" value="{{ old('cvvNumber') }}" autofocus>
                                     @if ($errors->has('cvvNumber'))
                                         <span class="help-block">

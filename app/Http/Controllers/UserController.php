@@ -436,14 +436,14 @@ class UserController extends Controller
                     if (!empty($template->id)) {
                         $template_data = EmailTemplate::getEmailTemplateByID($template->id);
                         $email_params['reason'] = $delete_reason;
-                        Mail::to(config('mail.username'))
+                         Mail::to(config('mail.adminmail'))
                             ->send(
                                 new AdminEmailMailable(
                                     'admin_email_delete_account',
                                     $template_data,
                                     $email_params
                                 )
-                            );
+                            ); 
                     }
                 }
                 Auth::logout();
@@ -854,14 +854,14 @@ class UserController extends Controller
                         $job_completed_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_job_completed')->get()->first();
                         if (!empty($job_completed_template->id)) {
                             $template_data = EmailTemplate::getEmailTemplateByID($job_completed_template->id);
-                            Mail::to(config('mail.username'))
+                             Mail::to(config('mail.adminmail'))
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_job_completed',
                                         $template_data,
                                         $email_params
                                     )
-                                );
+                                ); 
                         }
                         $freelancer_job_completed_template = DB::table('email_types')->select('id')->where('email_type', 'freelancer_email_job_completed')->get()->first();
                         if (!empty($freelancer_job_completed_template->id)) {
@@ -918,16 +918,73 @@ class UserController extends Controller
     {
         if (!empty($request['attachments'])) {
             $freelancer_id = $request['freelancer_id'];
-            $path = storage_path() . '/app/uploads/proposals/' . $freelancer_id;
-            if (!file_exists($path)) {
-                File::makeDirectory($path, 0755, true, true);
+           
+                //////////////////////////
+                $path = storage_path() . '/app/uploads/proposals/temp';
+                if (!file_exists($path)) {
+                    File::makeDirectory($path, 0755, true, true);
+                }
+                $zip = new \Madnest\Madzipper\Madzipper;
+                $exist=Storage::disk('s3')->exists('uploads/proposals'. '/'. $freelancer_id . '/' . 'attachments.zip');
+                 
+                if(!$exist){
+                    foreach ($request['attachments'] as $attachment) {
+                       
+                        if (Storage::disk('s3')->exists('uploads/proposals/'. $freelancer_id.'/' . $attachment)) {
+                        
+                            if (!file_exists($path . '/' . $attachment)) {
+                            $s3_file= Storage::disk('s3')->get('uploads/proposals'. '/'. $freelancer_id.'/' . $attachment);
+                            $s3 = Storage::disk('local');
+                             
+                            $s3->put('uploads/proposals'. '/temp'.'/' . $attachment, $s3_file);
+                            }
+                                               
+                           $zip->make($path . '/attachments.zip')->add($path . '/' . $attachment); 
+                           
+                        }
+                        $zip->close(); 
+        
+                    }
+                }else{
+            
+                    if (Storage::disk('s3')->exists('uploads/proposals'.'/'. $freelancer_id . '/'.'attachments.zip')) {
+                  
+                        return Storage::disk('s3')->download('uploads/proposals'.'/'. $freelancer_id.'/'.'attachments.zip');
+                        
+                      } else {
+                          Session::flash('error', trans('lang.file_not_found'));
+                          return Redirect::back();
+                      } 
+                }
+                
+            if (file_exists($path .'/'.'attachments.zip')) {
+                $contents = file_get_contents($path .'/'.'attachments.zip');
+                Storage::disk('s3')->put('uploads/proposals'. '/'. $freelancer_id.'/'.'attachments.zip', $contents);
+                unlink($path .'/'.'attachments.zip');
             }
-            $zip = new \Madnest\Madzipper\Madzipper;
-            foreach ($request['attachments'] as $attachment) {
-                $zip->make($path . '/attachments.zip')->add($path . '/' . $attachment);
-                $zip->close();
+
+            if(!$exist){
+                foreach ($request['attachments'] as $attachment) {
+                    if (file_exists($path .'/'. $attachment)) {
+                        unlink($path .'/'. $attachment);
+                    }
+                }
             }
-            return response()->download(storage_path('app/uploads/proposals/' . $freelancer_id . '/attachments.zip'));
+
+            // download freom s3 bucket  
+            if (Storage::disk('s3')->exists('uploads/proposals' . '/'. $freelancer_id . '/' . 'attachments.zip')) {
+              
+                return Storage::disk('s3')->download('uploads/proposals'. '/'. $freelancer_id . '/' . 'attachments.zip');
+                
+              } else {
+                  Session::flash('error', trans('lang.file_not_found'));
+                  return Redirect::back();
+              }
+
+
+
+                //////////////////////////
+
         } else {
             Session::flash('error', trans('lang.files_not_found'));
             return Redirect::back();
@@ -999,14 +1056,14 @@ class UserController extends Controller
                                 $email_params['report_by_link'] = url('profile/' . $user->slug);
                                 $email_params['reported_by'] = Helper::getUserName(Auth::user()->id);
                                 $email_params['message'] = $request['description'];
-                                Mail::to(config('mail.username'))
+                                Mail::to(config('mail.adminmail'))
                                     ->send(
                                         new AdminEmailMailable(
                                             'admin_email_report_project',
                                             $template_data,
                                             $email_params
                                         )
-                                    );
+                                    ); 
                             }
                         } else if ($request['report_type'] == 'employer-report') {
                             $report_employer_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_report_employer')->get()->first();
@@ -1018,14 +1075,14 @@ class UserController extends Controller
                                 $email_params['report_by_link'] = url('profile/' . $user->slug);
                                 $email_params['reported_by'] = Helper::getUserName(Auth::user()->id);
                                 $email_params['message'] = $request['description'];
-                                Mail::to(config('mail.username'))
+                                 Mail::to(config('mail.adminmail'))
                                     ->send(
                                         new AdminEmailMailable(
                                             'admin_email_report_employer',
                                             $template_data,
                                             $email_params
                                         )
-                                    );
+                                    ); 
                             }
                         } else if ($request['report_type'] == 'freelancer-report') {
                             $report_freelancer_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_report_freelancer')->get()->first();
@@ -1037,14 +1094,14 @@ class UserController extends Controller
                                 $email_params['report_by_link'] = url('profile/' . $user->slug);
                                 $email_params['reported_by'] = Helper::getUserName(Auth::user()->id);
                                 $email_params['message'] = $request['description'];
-                                Mail::to(config('mail.username'))
+                                 Mail::to(config('mail.adminmail'))
                                     ->send(
                                         new AdminEmailMailable(
                                             'admin_email_report_freelancer',
                                             $template_data,
                                             $email_params
                                         )
-                                    );
+                                    ); 
                             }
                         }
                     }
@@ -1078,7 +1135,7 @@ class UserController extends Controller
                             } else {
                                 $template_data = '';
                             }
-                            Mail::to(config('mail.username'))
+                             Mail::to(config('mail.adminmail'))
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_cancel_job',
@@ -1119,14 +1176,14 @@ class UserController extends Controller
                         } else {
                             $template_data = '';
                         }
-                        Mail::to(config('mail.username'))
+                        Mail::to(config('mail.adminmail'))
                             ->send(
                                 new AdminEmailMailable(
                                     'admin_email_cancel_job',
                                     $template_data,
                                     $email_params
                                 )
-                            );
+                            ); 
                     }
                 }
                 if ($request['report_type'] == 'service_cancel') {
@@ -1246,7 +1303,7 @@ class UserController extends Controller
                     foreach ($message_data as $key => $data) {
                         $content = $data->content;
                         $excerpt = str_limit($content, 100);
-                        $default_avatar = url('images/user-login.png');
+                        $default_avatar = config('app.aws_se_path'). '/' .'images/user-login.png';
                         $profile_image = !empty($data->avater)
                             ? config('app.aws_se_path').'/uploads/users/' . $data->author_id . '/' . $data->avater
                             : $default_avatar;
@@ -1295,24 +1352,67 @@ class UserController extends Controller
             } elseif ($messages[0]->project_type == 'job') {
                 $project_type = 'proposals';
             }
-            $path = storage_path() . '/app/uploads/' . $project_type . '/' . $messages[0]->author_id;
+
+            $path = storage_path() . '/app/uploads/' . $project_type . '/temp';
             if (!file_exists($path)) {
                 File::makeDirectory($path, 0755, true, true);
             }
             
             $zip = new \Madnest\Madzipper\Madzipper;
-            foreach ($attachments as $attachment) {
-                if (Storage::disk('local')->exists('uploads/' . $project_type . '/' . $messages[0]->author_id . '/' . $attachment)) {
-                    $zip->make($path . '/' . $id . '-attachments.zip')->add($path . '/' . $attachment);
+
+            $exist=Storage::disk('s3')->exists('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip');
+            if(!$exist){
+                foreach ($attachments as $attachment) {
+                    if (Storage::disk('s3')->exists('uploads/' . $project_type . '/'. $messages[0]->author_id.'/' . $attachment)) {
+                       
+                        if (!file_exists($path . '/' . $attachment)) {
+                        $s3_file= Storage::disk('s3')->get('uploads/' . $project_type . '/'. $messages[0]->author_id.'/' . $attachment);
+                        $s3 = Storage::disk('local');
+                        $s3->put('uploads/' . $project_type . '/temp'.'/' . $attachment, $s3_file);
+                        }
+                                           
+                       $zip->make($path . '/' . $id . '-attachments.zip')->add($path . '/' . $attachment);
+                       
+                    }
+                    $zip->close();
+    
                 }
-                $zip->close();
+            }else{
+        
+                if (Storage::disk('s3')->exists('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip')) {
+              
+                    return Storage::disk('s3')->download('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip');
+                    
+                  } else {
+                      Session::flash('error', trans('lang.file_not_found'));
+                      return Redirect::back();
+                  }
             }
-            if (Storage::disk('local')->exists('uploads/' . $project_type . '/' . $messages[0]->author_id . '/' . $id . '-attachments.zip')) {
-                return response()->download(storage_path('app/uploads/' . $project_type . '/' . $messages[0]->author_id . '/' . $id . '-attachments.zip'));
+          
+            if (file_exists($path .'/'. $id . '-attachments.zip')) {
+                $contents = file_get_contents($path .'/'. $id . '-attachments.zip');
+                Storage::disk('s3')->put( 'uploads/' . $project_type . '/'. $messages[0]->author_id.'/' . $id . '-attachments.zip'  , $contents );
+                unlink($path .'/'. $id . '-attachments.zip');
+            }
+
+            if(!$exist){
+            foreach ($attachments as $attachment) {
+                if (file_exists($path .'/'. $attachment)) {
+                    unlink($path .'/'. $attachment);
+                }
+            }
+        }
+          
+            /// download freom s3 bucket  
+            if (Storage::disk('s3')->exists('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip')) {
+              
+              return Storage::disk('s3')->download('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip');
+              
             } else {
                 Session::flash('error', trans('lang.file_not_found'));
                 return Redirect::back();
             }
+
         }
     }
 
@@ -1487,18 +1587,25 @@ class UserController extends Controller
                 $invoice->detail = !empty($request['trans_detail']) ? $request['trans_detail'] : '';
                 $old_path = 'uploads\users\temp';
                 $trans_attachments = array();
+                
                 if (!empty($request['attachments'])) {
                     $attachments = $request['attachments'];
                     foreach ($attachments as $key => $attachment) {
+
+
                         if (Storage::disk('local')->exists($old_path . '/' . $attachment)) {
                             $new_path = 'uploads/users/' . Auth::user()->id;
-                            if (!file_exists($new_path)) {
-                                File::makeDirectory($new_path, 0755, true, true);
-                            }
                             $filename = time() . '-' . $attachment;
-                            Storage::move($old_path . '/' . $attachment, $new_path . '/' . $filename);
-                            $trans_attachments[] = $filename;
+                          // move files to aws s3
+                           $contents =  Storage::disk('local')->get($old_path . '/' . $attachment);
+                           Storage::disk('s3')->put($new_path. '/' . $filename,$contents  );
+                           $trans_attachments[] = $filename;
+                            Storage::disk('local')->delete($old_path . '/' . $attachment);
+                            
                         }
+
+
+
                     }
                     $invoice->transection_doc = serialize($trans_attachments);
                 }
@@ -1516,7 +1623,7 @@ class UserController extends Controller
                     $template_data['content'] = !empty($order_settings) && !empty($order_settings['admin_order']['email_content']) ? $order_settings['admin_order']['email_content'] : '';
                     $email_params['name'] = Helper::getUserName(Auth::user()->id);
                     $email_params['order_id'] = $order->id;
-                    Mail::to(config('mail.username'))
+                    Mail::to(config('mail.adminmail'))
                         ->send(
                             new AdminEmailMailable(
                                 'admin_new_order_received',
@@ -2301,14 +2408,14 @@ class UserController extends Controller
                     $email_params['name'] = Helper::getUserName(Auth::user()->id);
                     $email_params['msg'] = $request['description'];
                     $email_params['reason'] = $request['reason'];
-                    Mail::to(config('mail.username'))
+                    Mail::to(config('mail.adminmail'))
                         ->send(
                             new AdminEmailMailable(
                                 'admin_email_dispute_raised',
                                 $template_data,
                                 $email_params
                             )
-                        );
+                        ); 
                 }
             }
             return $json;

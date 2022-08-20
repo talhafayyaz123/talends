@@ -109,40 +109,57 @@ class SiteManagement extends Model
                 );
                 if (!empty($email['email_logo'])) {
                     if (file_exists($old_path . '/' . $email['email_logo'])) {
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
+
+                        $s3_path = 'uploads/settings/email';
                         $filename = time() . '-' . $email['email_logo'];
-                        rename($old_path . '/' . $email['email_logo'], $new_path . '/' . $filename);
+                        $contents = file_get_contents($old_path . '/' . $email['email_logo']);
+                        Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                        unlink($old_path . '/' . $email['email_logo']);
                         $email_data_array[$key]['email_logo'] = $filename;
+
                     } else {
                         $email_data_array[$key]['email_logo'] = $email['email_logo'];
                     }
+                    
                 }
+
+
                 if (!empty($email['email_banner'])) {
                     if (file_exists($old_path . '/' . $email['email_banner'])) {
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
+                                            
+                        $s3_path = 'uploads/settings/email';
                         $filename = time() . '-' . $email['email_banner'];
-                        rename($old_path . '/' . $email['email_banner'], $new_path . '/' . $filename);
+                        $contents = file_get_contents($old_path . '/' . $email['email_banner']);
+                        Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                        unlink($old_path . '/' . $email['email_banner']);
+
                         $email_data_array[$key]['email_banner'] = $filename;
                     } else {
                         $email_data_array[$key]['email_banner'] = $email['email_banner'];
                     }
                 }
+
+
                 if (!empty($email['sender_avatar'])) {
                     if (file_exists($old_path . '/' . $email['sender_avatar'])) {
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
+                       
+
+                        $s3_path = 'uploads/settings/email';
                         $filename = time() . '-' . $email['sender_avatar'];
-                        rename($old_path . '/' . $email['sender_avatar'], $new_path . '/' . $filename);
+
+                        $contents = file_get_contents($old_path . '/' . $email['sender_avatar']);
+                        Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                        unlink($old_path . '/' . $email['sender_avatar']);
+
+
                         $email_data_array[$key]['sender_avatar'] = $filename;
                     } else {
                         $email_data_array[$key]['sender_avatar'] = $email['sender_avatar'];
                     }
                 }
+
+
+
             }
             $existing_data = SiteManagement::getMetaValue('email_data');
             if (!empty($existing_data)) {
@@ -387,24 +404,38 @@ class SiteManagement extends Model
                 }
 
                 if (!empty($setting['logo'])) {
+
                     if (file_exists($old_path . '/' . $setting['logo'])) {
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
+                      
                         $filename = time() . '-' . $setting['logo'];
-                        rename($old_path . '/' . $setting['logo'], $new_path . '/' . $filename);
+                        $s3_path = 'uploads/settings/general';
+                        $contents = file_get_contents($old_path . '/' . $setting['logo']);
+                        Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                        unlink($old_path . '/' . $setting['logo']);
+
                         $settings_array[$key]['logo'] = $filename;
                     } else {
                         $settings_array[$key]['logo'] = $setting['logo'];
                     }
+
+
+
                 }
+
+
+
+
+
                 if (!empty($setting['favicon'])) {
                     if (file_exists($old_path . '/' . $setting['favicon'])) {
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
+                        
                         $filename = time() . '-' . $setting['favicon'];
-                        rename($old_path . '/' . $setting['favicon'], $new_path . '/' . $filename);
+                        $s3_path = 'uploads/settings/general';
+                        $contents = file_get_contents($old_path . '/' . $setting['favicon']);
+                        Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                        unlink($old_path . '/' . $setting['favicon']);
+
+
                         $settings_array[$key]['favicon'] = $filename;
                     } else {
                         $settings_array[$key]['favicon'] = $setting['favicon'];
@@ -540,6 +571,8 @@ class SiteManagement extends Model
             $icons = $request['icons'];
             $old_path = Helper::PublicPath() . '/uploads/settings/temp';
             $new_path = Helper::PublicPath() . '/uploads/settings/icon';
+
+
             foreach ($icons as $key => $icon) {
                 if (!empty($icon[$key])) {
                     if (file_exists($old_path . '/' . $icon[$key])) {
@@ -554,6 +587,9 @@ class SiteManagement extends Model
                     }
                 }
             }
+
+
+            
             $existing_data = SiteManagement::getMetaValue('icons');
             if (!empty($existing_data)) {
                 DB::table('site_managements')->where('meta_key', '=', 'icons')->delete();
@@ -615,23 +651,34 @@ class SiteManagement extends Model
             $old_path = Helper::PublicPath() . '/uploads/settings/temp';
             $new_path = Helper::PublicPath() . '/uploads/settings/footer';
             $filename = $footer_settings['footer_logo'];
-            if (file_exists($old_path . '/' . $footer_settings['footer_logo'])) {
-                if (!file_exists($new_path)) {
-                    File::makeDirectory($new_path, 0755, true, true);
-                }
+         
+         
+             if (file_exists($old_path . '/' . $footer_settings['footer_logo'])) {
+                $s3_path = 'uploads/settings/footer';
                 $filename = time() . '-' . $footer_settings['footer_logo'];
-                rename($old_path . '/' . $footer_settings['footer_logo'], $new_path . '/' . $filename);
+                $contents = file_get_contents($old_path . '/' . $footer_settings['footer_logo']);
+                Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                unlink($old_path . '/' . $footer_settings['footer_logo']);
                 $footer_settings['footer_logo'] = $filename;
-            }
+            } 
+          
+          
             $filename2 = $footer_settings['footer_bg'];
+          
+          
             if (file_exists($old_path . '/' . $footer_settings['footer_bg'])) {
-                if (!file_exists($new_path)) {
-                    File::makeDirectory($new_path, 0755, true, true);
-                }
+                
+                
                 $filename2 = time() . '-' . $footer_settings['footer_bg'];
-                rename($old_path . '/' . $footer_settings['footer_bg'], $new_path . '/' . $filename2);
+                $contents = file_get_contents($old_path . '/' . $footer_settings['footer_bg']);
+                Storage::disk('s3')->put($s3_path. '/' . $filename2,$contents  );  
+                unlink($old_path . '/' . $footer_settings['footer_bg']);
+                
                 $footer_settings['footer_bg'] = $filename2;
             }
+ 
+
+
             // Footer Bg
             $existing_data = SiteManagement::getMetaValue('footer_settings');
             if (!empty($existing_data)) {

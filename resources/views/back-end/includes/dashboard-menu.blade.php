@@ -119,6 +119,12 @@
                                 <span>{{ trans('lang.all_jobs') }}</span>
                             </a>
                         </li>
+                        <li>
+                            <a href="{{{ route('userPayments') }}}">
+                                <i class="ti-briefcase"></i>
+                                <span>User Payments</span>
+                            </a>
+                        </li>
                         @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services')
                             <li>
                                 <a href="{{{ route('allServices') }}}">

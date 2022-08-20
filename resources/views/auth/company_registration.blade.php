@@ -89,7 +89,9 @@ Company Registration
                                         </div>
                                         <input type="hidden" name="role" value="company" />
                                     </div>
+                                    @guest
                                     <input type="button" name="next" class="next action-button step_1_btn"  disabled value="Next" />
+                                    @endguest
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-card">
@@ -188,7 +190,7 @@ Company Registration
                                                         <div class="plan">
                                                             <div class="plan-c">
                                                                 <ul class="price-feature">
-                                                                    <li class="text-center" style="padding: 10px 4px;border-bottom: 1px solid #349f1a;color: #9a9797; font-weight: bold;">${{ $package[0]->cost ?? '0' }} Monthly</li>
+                                                                    <li class="text-center" style="padding: 1px 0px;border-bottom: 1px solid #349f1a;color: #9a9797;font-weight: bold;font-size: 14px;">AED {{ $package[0]->cost ?? '0' }} Monthly</li>
                                                                     @foreach ($monthly_options as $key => $option)
 
                                                                     @if ($key == 'duration')
@@ -220,7 +222,7 @@ Company Registration
                                                         <div class="plan">
                                                             <div class="plan-c">
                                                                 <ul class="price-feature">
-                                                                    <li class="text-center" style="padding: 10px 4px;border-bottom: 1px solid #349f1a;color: #9a9797; font-weight: bold;">${{ $package[1]->cost ?? '0' }} Yearly</li>
+                                                                    <li class="text-center" style="padding: 1px 0px;border-bottom: 1px solid #349f1a;color: #9a9797;font-weight: bold;font-size: 14px;">AED {{ $package[1]->cost ?? '0' }} Yearly</li>
                                                                     @foreach ($yearly_options as $key => $option)
                                                                     @if ($key == 'duration')
                                                                     <li class="text-center"><span> {{ Helper::getPackageDurationList($yearly_options['duration']) }}</span></li>
@@ -275,7 +277,7 @@ Company Registration
                             </form>
                         </div>
                     </div>
-
+                  
                 </div>
             </div>
         </div>

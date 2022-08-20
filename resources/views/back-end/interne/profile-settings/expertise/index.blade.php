@@ -104,11 +104,11 @@
 
 
                                             @if (!empty($company_expertise['portfolio_image']))
-                                            @php $image = '/uploads/company/'.$company_expertise['portfolio_image']; @endphp
+                                            @php $image =config('app.aws_se_path'). '/' . 'uploads/company/'.$company_expertise['portfolio_image']; @endphp
                                             <div class="wt-formtheme wt-userform">
 
                                                 <div class="wt-uploadingbox">
-                                                    <figure><img src="{{{  asset($image)}}}" alt="{{{ trans('lang.profile_photo') }}}"></figure>
+                                                    <figure><img src="{{{  ($image)}}}" alt="{{{ trans('lang.profile_photo') }}}"></figure>
 
                                                 </div>
                                                 <input type="hidden" name="hidden_portfolio_image" id="hidden_portfolio_image" value="{{{$company_expertise['portfolio_image']}}}">

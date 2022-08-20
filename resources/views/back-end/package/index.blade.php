@@ -39,7 +39,7 @@
                                         @endif
                                         <div class="wt-packagecontent">
                                             <ul class="wt-packageinfo">
-                                                <li class="wt-packageprice"><span><sup>{{ !empty($symbol['symbol']) ? $symbol['symbol'] : '$' }}</sup>{{{$package->cost}}}<sub>\ {{{ Helper::getPackageDurationList($options['duration']) }}}</sub></span></li>
+                                                <li class="wt-packageprice"><span><sup>{{ !empty($symbol['symbol']) ? $symbol['symbol'] : 'AED' }}</sup>{{{$package->cost}}}<sub>\ {{{ Helper::getPackageDurationList($options['duration']) }}}</sub></span></li>
                                                 @foreach ($options as $key => $option)
                                                 
                                                     @php

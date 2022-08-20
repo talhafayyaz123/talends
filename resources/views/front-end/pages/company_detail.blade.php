@@ -21,7 +21,7 @@
 
                     <div class="d-md-flex mt-3 mt-md-n2  mb-4">
                         @if(isset($profile->avater) && !empty($profile->avater) )
-                        <img src=" {{ asset('uploads/users/'.$id.'/'.$profile->avater.'') }}" class="img-fluid" alt="Company Image" />
+                        <img style="max-height: 122px;" src=" {{ config('app.aws_se_path'). '/' .'uploads/users/'.$id.'/'.$profile->avater.'' }}" class="img-fluid" alt="Company Image" />
                         @endif
                         <div class="ml-md-4 pt-4 px-3">
                             <p class="text-justify">
@@ -90,7 +90,7 @@
                                                     <div class="row mt-4">
                                                         <div class="col-md-6">
                                                             @if( isset($expertise->portfolio_image) )
-                                                            <img src="{{ asset('uploads/company/'.$expertise->portfolio_image)}}" class="img-fluid w-100" alt="Carousel Image" width="300">
+                                                            <img src="{{ config('app.aws_se_path'). '/' .'uploads/company/'.$expertise->portfolio_image}}" class="img-fluid w-100" alt="Carousel Image" width="300">
                                                             @endif
                                                         </div>
                                                         <div class="col-md-6">
@@ -105,7 +105,7 @@
                                                     <div class="row mt-4">
                                                         <div class="col-md-6">
                                                             @if( isset($expertise->portfolio_image_2) )
-                                                            <img src="{{ asset('uploads/company/'.$expertise->portfolio_image_2)}}" class="img-fluid w-100" alt="Carousel Image" width="300">
+                                                            <img src="{{ config('app.aws_se_path'). '/' .'uploads/company/'.$expertise->portfolio_image_2}}" class="img-fluid w-100" alt="Carousel Image" width="300">
                                                             @endif
                                                         </div>
                                                         <div class="col-md-6">
@@ -120,7 +120,7 @@
                                                     <div class="row mt-4">
                                                         <div class="col-md-6">
                                                             @if( isset($expertise->portfolio_image_3) )
-                                                            <img src="{{ asset('uploads/company/'.$expertise->portfolio_image_3)}}" class="img-fluid w-100" alt="Carousel Image" width="300">
+                                                            <img src="{{ config('app.aws_se_path'). '/' .'uploads/company/'.$expertise->portfolio_image_3}}" class="img-fluid w-100" alt="Carousel Image" width="300">
                                                             @endif
                                                         </div>
                                                         <div class="col-md-6">
@@ -152,7 +152,7 @@
                     <div class="company-detail-stats">
                         <h5>Talends Activity</h5>
                         <p class="mb-0 mt-4">Hourly Rate</p>
-                        <p><b>${{ $profile->hourly_rate ?? '' }}</b></p>
+                        <p><b>AED {{ $profile->hourly_rate ?? '' }}</b></p>
                         <p class="mb-0 mt-4">Total Jobs</p>
                         <p><b>{{ $company_detail->total_jobs ?? '' }}</b></p>
                         <p class="mb-0 mt-4">Joined Since</p>
@@ -267,7 +267,7 @@
                                     <div class="col-md-4 mb-4">
                                         <div class="image-checkboxes">
                                             <input type="checkbox" name="services[]" value="{{ $category->id }}" id="myCheckbox{{ $category->id }}" />
-                                            <label for="myCheckbox{{ $category->id }}"><img src="{{ asset('uploads/categories/'.$category->image)}}" class="rounded-circle" width="40" />{{ $category->title ?? '' }}</label>
+                                            <label for="myCheckbox{{ $category->id }}"><img src="{{ config('app.aws_se_path'). '/' .'uploads/categories/'.$category->image  }}" class="rounded-circle" width="40" />{{ $category->title ?? '' }}</label>
                                         </div>
                                     </div>
                                     @endforeach

@@ -23,7 +23,7 @@
                             <div class="wt-jobdetailscontent">
                                 <div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
                                         <span class="wt-featuredtag">
-                                            <img src="{{{ asset('images/featured.png') }}}" alt="{{ trans('lang.is_featured') }}"
+                                            <img src="{{{ config('app.aws_se_path'). '/' .'images/featured.png' }}}" alt="{{ trans('lang.is_featured') }}"
                                                 data-tipso="Plus Member" class="template-content tipso_style">
                                         </span>
                                 

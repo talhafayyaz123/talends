@@ -15,7 +15,7 @@
             $menu_hover_color = !empty($default_header_styling) && !empty($default_header_styling['menu_hover_color']) ? $default_header_styling['menu_hover_color'] : '';
             $color = !empty($default_header_styling) && !empty($default_header_styling['color']) ? $default_header_styling['color'] : '';
             $page_order = !empty($default_header_styling) && !empty($default_header_styling['pages']) ? $default_header_styling['pages'] : array();
-            $logo = !empty($setting[0]['logo']) ? Helper::getHeaderLogo($setting[0]['logo']) : '/images/logo.png';
+            $logo = !empty($setting[0]['logo']) ? Helper::getHeaderLogo($setting[0]['logo']) : config('app.aws_se_path'). '/' .'images/logo.png';
             $inner_header = !empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->uri() != '/' ? 'wt-headervtwo' : '';
             $type = Helper::getAccessType();
             if (!empty(Route::getCurrentRoute()) && Route::getCurrentRoute()->uri() != '/' && Route::getCurrentRoute()->uri() != 'home') {
@@ -229,7 +229,7 @@
                                             $profile = \App\User::find(Auth::user()->id)->profile;
                                             $user_image = !empty($profile) ? $profile->avater : '';
                                             $employer_job = \App\Job::select('status')->where('user_id', Auth::user()->id)->first();
-                                            $profile_image = !empty($user_image) ? config('app.aws_se_path'). '/uploads/users/'.$user->id.'/'.$user_image : 'images/user-login.png';
+                                            $profile_image = !empty($user_image) ? config('app.aws_se_path'). '/uploads/users/'.$user->id.'/'.$user_image : config('app.aws_se_path'). '/' .'images/user-login.png';
                                             $payment_settings = \App\SiteManagement::getMetaValue('commision');
                                             $payment_module = !empty($payment_settings) && !empty($payment_settings[0]['enable_packages']) ? $payment_settings[0]['enable_packages'] : 'true';
                                             $employer_payment_module = !empty($payment_settings) && !empty($payment_settings[0]['employer_package']) ? $payment_settings[0]['employer_package'] : 'true';

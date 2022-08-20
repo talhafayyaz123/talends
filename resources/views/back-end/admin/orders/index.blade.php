@@ -25,7 +25,7 @@
 								</thead>
 								<tbody>
 									@foreach ($orders as $order)
-										@php 
+										@php  
 											$is_featured = '';
 											$title = '';
 											$amount = '';
@@ -56,7 +56,7 @@
 															@if (!empty($attachment) && $order->type == 'service')
 																<figure class="service-feature-image"><img src="{{{( Helper::gets3ImageWithSize('uploads/services/'.$service->seller[0]->id, $attachment, 'small' ))}}}" alt="{{{$service['title']}}}"></figure>
 															@else
-																<figure class="service-feature-image"><img src="{{{asset('images/order-no-image.jpg')}}}" alt="no-image"></figure>
+																<figure class="service-feature-image"><img src="{{{ config('app.aws_se_path'). '/' .'images/order-no-image.jpg'  }}}" alt="no-image"></figure>
 															@endif
 															<div class="wt-freelancers-content">
 																<div class="dc-title">
@@ -96,7 +96,13 @@
 														</div>
 														@if ($order->invoice->transection_doc)
 															<div class="wt-payment-attachment">
-																<a href="javascript:void(0);"  v-on:click.prevent="downloadAttachment('users', '{{Helper::getUnserializeData($order->invoice->transection_doc)[0]}}', '{{$order->user_id}}')" >{{ trans('lang.attachment') }}</a>
+
+															@if (Storage::disk('s3')->exists('uploads/users/'.$order->user_id.'/'.Helper::getUnserializeData($order->invoice->transection_doc)[0]))
+															
+															<a href="{{{route('getfile', ['type'=>'users','attachment'=>Helper::getUnserializeData($order->invoice->transection_doc)[0],'id'=>$order->user_id])}}}"><i class="lnr lnr-download"></i>{{ trans('lang.attachment') }}</a>
+
+															@endif														
+														
 															</div>
 														@endif
 													</span>

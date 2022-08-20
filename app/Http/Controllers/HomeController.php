@@ -81,7 +81,7 @@ class HomeController extends Controller
                 } else {
                     $show_banner_image = true;
                 }
-                $banner = !empty($page_banner) ? Helper::getBannerImage('uploads/pages/' . $page_banner) : 'images/bannerimg/img-02.jpg';
+                $banner = !empty($page_banner) ? Helper::getBannerImage('uploads/pages/' . $page_banner) : config('app.aws_se_path'). '/' .'images/bannerimg/img-02.jpg';
                 $meta_desc = !empty($page_meta) ? $page_meta : '';
                 
                 $type = Helper::getAccessType() == 'services' ? 'service' : Helper::getAccessType();
@@ -234,27 +234,26 @@ class HomeController extends Controller
         $yearly_options = !empty($package[1]->options) ? unserialize($package[1]->options) : array();
 
         $package_options = Helper::getPackageOptions('company');
-    
+      
         return view('auth.company_registration',compact('package_options','yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
      }
 
      public function companyRegistrationSuccess(Request $request){
 
-       
-      
         $content = $request->input();
     
         $id = $content['user_id'];
+        $tranRef = $content['tranRef'];
+        $package_id = $content['package_id'];
 
-       $package_id = $content['package_id'];
-
-       
+     
+        
         $user_payments=UserPayments::where('user_id',$id)->first();
          
        $transection=Helper::transection_query($user_payments['tran_ref']);
        $transection_status=json_decode($transection,true)['payment_result']['response_status'];
+     
        
-    
         $inner_page = SiteManagement::getMetaValue('why_talends');
         $about_talends=AboutTalendsPage::where('page_type','about_talends')->first();
 
@@ -267,18 +266,26 @@ class HomeController extends Controller
         $page['title'] = $meta_title;
                
         if($transection_status=='A' ){
+           
             // status approved
             $token = $content['token'];
-            $tranRef = $content['tranRef'];
+          
             $customer_email = $content['customerEmail'];
               $cartId=$content['cartId'];
-            
-            $expiry_date = Carbon::now()->addMonth();
-            $expiry_date = $expiry_date->format('Y-m-d H:i:s');
             
              // call service to set package record
              $this->paymentService->purchasePackage($content,$package_id);
 
+             
+                 /// expiry date calculate
+                $package_item = \App\Item::where('subscriber', $id)->first();
+                $package = \App\Package::find($package_id);
+                $option = !empty($package->options) ? unserialize($package->options) : '';
+
+                $expiry = !empty($option) ? $package_item->updated_at->addDays($option['duration']) : '';
+                
+                $expiry_date = !empty($expiry) ? Carbon::parse($expiry)->toDateTimeString() : '';
+              ///
             
             UserPayments::where('user_id',$id)->update(
                 [
@@ -286,7 +293,8 @@ class HomeController extends Controller
                    'token'=>$token,
                    'tran_ref'=>$tranRef,
                    'customer_email'=>$customer_email,
-                   'expiry_date'=>$expiry_date
+                   'expiry_date'=>$expiry_date,
+                   'package_id'=>$package_id
                 ]
       
               );
@@ -298,11 +306,38 @@ class HomeController extends Controller
                'cart_amount'=>$user_payments['cart_amount'],
                'transection_type'=>'sale'
               ]);
+              ///
+              $user=User::find($id);
+              $template = DB::table('email_types')->select('id')
+                    ->where('email_type', 'verification_code')->get()->first();
+                if (!empty($template->id)) {
+                    $template_data = EmailTemplate::getEmailTemplateByID($template->id);
+                    $email_params['verification_code'] = $user->verification_code;
+                    $email_params['name'] = Helper::getUserName($user->id);
+                    $email_params['email'] = $user->email;
+                    $email_params['role'] =$user->getRoleNames()[0];
+                    Mail::to($user->email)
+                        ->send(
+                            new GeneralEmailMailable(
+                                'verification_code',
+                                $template_data,
+                                $email_params
+                            )
+                        );
+                }
 
               session()->put(['user_id' => $id]);
             return view('auth.company_registration_success',compact('page','home','meta_desc','about_talends'));
            
         }else{
+
+            UserPayments::where('user_id',$id)->where('is_success',0)->where('tran_ref',$tranRef)->update(
+                [
+                   'package_id'=>$package_id
+                ]
+      
+              );
+
             return view('auth.company_registration_fail',compact('page','home','meta_desc','about_talends','id','package_id'));
 
         }
@@ -582,11 +617,15 @@ class HomeController extends Controller
           
               $query->where('location_id',  $request->location_id);
               
-            })->latest()->paginate(6);
+            })->whereHas('user_payment', function ($query) {
+                $query->where('is_success', '=', 1);
+           })->latest()->paginate(6);
   
           } else {
   
-            $companies = User::select('*')->role('company')->latest()->paginate(6);
+            $companies = User::select('*')->role('company')->whereHas('user_payment', function ($query) {
+                $query->where('is_success', '=', 1);
+           })->latest()->paginate(6);
           }
 
         
@@ -721,7 +760,7 @@ class HomeController extends Controller
                 foreach ($projects as $key => $project) {
                     $profile_projects[$key]['project_title'] = !empty($project['project_title']) ? $project['project_title'] : '';
                     $profile_projects[$key]['project_url'] = !empty($project['project_url']) ? $project['project_url'] : '';
-                    $profile_projects[$key]['project_hidden_image'] = !empty($project['project_hidden_image']) ? url('/uploads/users/'.$user_id.'/projects/'.$project['project_hidden_image']) : '';
+                    $profile_projects[$key]['project_hidden_image'] = !empty($project['project_hidden_image']) ? config('app.aws_se_path').'/uploads/users/'.$user_id.'/projects/'.$project['project_hidden_image'] : '';
                     $profile_projects[$key]['project_image'] = !empty($project['project_hidden_image']) ? $project['project_hidden_image'] : '';
                 }
             }
@@ -738,7 +777,7 @@ class HomeController extends Controller
                 foreach ($awards as $key => $award) {
                     $profile_awards[$key]['award_title'] = $award['award_title'];
                     $profile_awards[$key]['award_date'] = $award['award_date'];
-                    $profile_awards[$key]['award_hidden_image'] = url('/uploads/users/'.$user_id.'/awards/'.$award['award_hidden_image']);
+                    $profile_awards[$key]['award_hidden_image'] = config('app.aws_se_path').'/uploads/users/'.$user_id.'/awards/'.$award['award_hidden_image'];
                     $profile_awards[$key]['award_image'] = !empty($award['award_hidden_image']) ? $award['award_hidden_image'] : '';
                 }
             }

@@ -263,7 +263,7 @@ class RestAPIController extends Controller
                         foreach ($projects as $project_key => $project) {
                             $freelancer_projects[$project_key]['title'] = !empty($project['project_title']) ? $project['project_title'] : '';
                             $freelancer_projects[$project_key]['url'] = !empty($project['project_url']) ? $project['project_url'] : '';
-                            $freelancer_projects[$project_key]['image']['url'] = !empty($project['project_hidden_image']) ? url('/uploads/users/' . $user['id'] . '/projects/' . $project['project_hidden_image']) : '';
+                            $freelancer_projects[$project_key]['image']['url'] = !empty($project['project_hidden_image']) ? config('app.aws_se_path').'/uploads/users/' . $user['id'] . '/projects/' . $project['project_hidden_image'] : '';
                         }
                         $json[$key]['_projects'] = $freelancer_projects;
                     }
@@ -273,7 +273,7 @@ class RestAPIController extends Controller
                         foreach ($awards as $award_key => $award) {
                             $freelancer_awards[$award_key]['title'] = !empty($award['award_title']) ? $award['award_title'] : '';
                             $freelancer_awards[$award_key]['date'] = !empty($award['award_date']) ? $award['award_date'] : '';
-                            $freelancer_awards[$award_key]['image']['url'] = !empty($award['award_hidden_image']) ? url('/uploads/users/' . $user['id'] . '/awards/' . $award['award_hidden_image']) : '';
+                            $freelancer_awards[$award_key]['image']['url'] = !empty($award['award_hidden_image']) ? config('app.aws_se_path').'/uploads/users/' . $user['id'] . '/awards/' . $award['award_hidden_image'] : '';
                         }
                         $json[$key]['_awards'] = $freelancer_awards;
                     }
@@ -1254,14 +1254,14 @@ class RestAPIController extends Controller
                             $email_params['report_by_link'] = url('profile/' . $user->slug);
                             $email_params['reported_by'] = Helper::getUserName($user->id);
                             $email_params['message'] = $request['description'];
-                            Mail::to(config('mail.username'))
+                             Mail::to(config('mail.adminmail'))
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_report_project',
                                         $template_data,
                                         $email_params
                                     )
-                                );
+                                ); 
                         }
                     }
                 }
@@ -1788,14 +1788,14 @@ class RestAPIController extends Controller
                         $email_params['name'] = Helper::getUserName($current_user);
                         $email_params['link'] = url('profile/' . $user->slug);
                         $admin_mail = User::role('admin')->select('email')->pluck('email')->first();
-                        Mail::to(config('mail.username'))
+                         Mail::to(config('mail.adminmail'))
                             ->send(
                                 new AdminEmailMailable(
                                     'admin_email_new_job_posted',
                                     $template_data,
                                     $email_params
                                 )
-                            );
+                            ); 
                         if (!empty($user->email)) {
                             Mail::to($user->email)
                                 ->send(
@@ -2039,7 +2039,7 @@ class RestAPIController extends Controller
             }
             if (!empty($attachments)) {
                 foreach ($attachments as $attachment_key => $attachment) {
-                    $json[$key]['attachment'][$attachment_key]['image'] = (Helper::getImageWithSize('uploads/services/'.$service->seller[0]->id, $attachment, 'medium', true));
+                    $json[$key]['attachment'][$attachment_key]['image'] = (Helper::gets3ImageWithSize('uploads/services/'.$service->seller[0]->id, $attachment, 'medium', true));
                 }
             } else {
                 $json[$key]['attachment'] =array();
@@ -2226,14 +2226,14 @@ class RestAPIController extends Controller
                         $email_params['name'] = Helper::getUserName($current_user);
                         $email_params['link'] = url('profile/' . $user->slug);
                         $template_data = Helper::getAdminServicePostedEmailContent();
-                        Mail::to(config('mail.username'))
+                         Mail::to(config('mail.adminmail'))
                             ->send(
                                 new AdminEmailMailable(
                                     'admin_email_new_service_posted',
                                     $template_data,
                                     $email_params
                                 )
-                            );
+                            ); 
                     }
                     return $json;
                 } elseif ($service_post['type'] == 'error') {
@@ -2267,14 +2267,14 @@ class RestAPIController extends Controller
                     $email_params['name'] = Helper::getUserName($current_user);
                     $email_params['link'] = url('profile/' . $user->slug);
                     $template_data = Helper::getAdminServicePostedEmailContent();
-                    Mail::to(config('mail.username'))
+                     Mail::to(config('mail.adminmail'))
                         ->send(
                             new AdminEmailMailable(
                                 'admin_email_new_service_posted',
                                 $template_data,
                                 $email_params
                             )
-                        );
+                        ); 
                 }
                 return $json;
             } elseif ($service_post['type'] == 'error') {

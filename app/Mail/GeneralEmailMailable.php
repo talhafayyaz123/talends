@@ -142,7 +142,7 @@ class GeneralEmailMailable extends Mailable
 
 
             if( isset($this->email_params['role'])  && ($this->email_params['role']=='freelancer' ||  $this->email_params['role']=='intern' ) ){
-                $email_from='Talent@talends.com';
+                $email_from='Talends@talends.com';
             }
 
         } elseif ($this->type == 'new_user') {
@@ -158,7 +158,7 @@ class GeneralEmailMailable extends Mailable
             }
 
             if( isset($this->email_params['role'])  && ($this->email_params['role']=='freelancer' ||  $this->email_params['role']=='intern' ) ){
-                $email_from='Talent@talends.com';
+                $email_from='Talends@talends.com';
             }
 
         } elseif ($this->type == 'lost_password') {

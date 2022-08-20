@@ -247,12 +247,12 @@
                                         <ul class="wt-appicon">
                                             <li>
                                                 <a href="{{ Helper::getAppSection('android_url') }}">
-                                                    <figure><img src="{{{ asset('images/android.png') }}}" alt="{{{ trans('lang.img') }}}"></figure>
+                                                    <figure><img src="{{{ config('app.aws_se_path'). '/' .'images/android.png' }}}" alt="{{{ trans('lang.img') }}}"></figure>
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="{{  Helper::getAppSection('ios_url') }}">
-                                                    <figure><img src="{{{ asset('images/ios.png') }}}" alt="{{{ trans('lang.img') }}}"></figure>
+                                                    <figure><img src="{{{ config('app.aws_se_path'). '/' .'images/ios.png' }}}" alt="{{{ trans('lang.img') }}}"></figure>
                                                 </a>
                                             </li>
                                         </ul>

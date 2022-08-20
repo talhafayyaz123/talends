@@ -19,6 +19,8 @@ use File;
 use Illuminate\Support\Facades\Storage;
 use function Opis\Closure\serialize;
 use function Opis\Closure\unserialize;
+use function Psy\debug;
+
 use DB;
 use App\User;
 use Auth;
@@ -424,11 +426,15 @@ class Profile extends Model
     {
         $json = array();
         $user = User::find($user_id);
+        $profile =  $this::select('projects','awards')->where('user_id', $user_id)->get()->first();
+ 
         $count = 0;
         $award_counter = 0;
         $request_project = array();
         $request_award = array();
         $old_path = Helper::PublicPath() . '/uploads/users/temp';
+       
+       //////////////////////////
         if (!empty($request['project'])) {
             foreach ($request['project'] as $key => $project) {
                 if ($project['project_title'] == 'Project title here' || $project['project_url'] == 'Project url here') {
@@ -441,14 +447,56 @@ class Profile extends Model
                 if (!empty($project['project_hidden_image'])) {
                     $filename = $project['project_hidden_image'];
                     if (file_exists($old_path . '/' . $project['project_hidden_image'])) {
-                        $new_path = Helper::PublicPath() . '/uploads/users/' . $user_id . '/projects';
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
-                        $filename = time() . $count . '-' . $project['project_hidden_image'];
-                        rename($old_path . '/' . $project['project_hidden_image'], $new_path . '/' . $filename);
-                        rename($old_path . '/small-' . $project['project_hidden_image'], $new_path . '/small-' . $filename);
-                        rename($old_path . '/medium-' . $project['project_hidden_image'], $new_path . '/medium-' . $filename);
+
+                        $filename =  $user_id . $count . '-' . $project['project_hidden_image'];
+
+                        $s3_path='uploads/users/'. $user_id . '/projects';
+
+                        /* if (!empty($profile)) {
+                            $db_projects = !empty($profile->projects) ? Helper::getUnserializeData($profile->projects) : array();
+                            if (!empty($db_projects)) {
+                                foreach ($db_projects as $key => $db_project) {
+                                    $project_hidden_image=$db_project['project_hidden_image'];
+                                   if($project_hidden_image){
+                                    
+                                    if(Storage::disk('s3')->exists($s3_path.'/'.$project_hidden_image)){
+                                        Storage::disk('s3')->delete($s3_path.'/'.$project_hidden_image);  
+                                    }
+
+                                    if(Storage::disk('s3')->exists($s3_path.'/small-'.$project_hidden_image)){
+                                        Storage::disk('s3')->delete($s3_path.'/small-'.$project_hidden_image);  
+                                    }
+
+
+                                    if(Storage::disk('s3')->exists($s3_path.'/medium-'.$project_hidden_image)){
+                                        Storage::disk('s3')->delete($s3_path.'/medium-'.$project_hidden_image);  
+                                    }
+
+
+                                   }
+                                }
+                            }
+                        } */
+
+                      
+                        sleep(5);
+                        $contents = file_get_contents($old_path . '/' . $project['project_hidden_image']);
+                        Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  ); 
+                        
+                        
+                        $contents = file_get_contents($old_path . '/small-' . $project['project_hidden_image']);
+                        Storage::disk('s3')->put($s3_path. '/small-' . $filename,$contents  ); 
+
+                        $contents = file_get_contents($old_path . '/medium-' . $project['project_hidden_image']);
+                        Storage::disk('s3')->put($s3_path. '/medium-' . $filename,$contents  ); 
+
+                        unlink($old_path . '/' . $project['project_hidden_image']);
+                        unlink($old_path . '/small-' . $project['project_hidden_image']);
+                        unlink($old_path . '/medium-' . $project['project_hidden_image']);
+
+                        
+                    ////////////////////////////////////////////////
+                    
                     }
                     $request_project[$count]['project_hidden_image'] = $filename;
                 } else {
@@ -457,7 +505,38 @@ class Profile extends Model
                 $count++;
             }
         }
+
+
+
         if (!empty($request['award'])) {
+            $s3_path='uploads/users/'. $user_id . '/awards';
+/* 
+            $db_awards = !empty($profile->awards) ? Helper::getUnserializeData($profile->awards) : array();
+                        
+            
+                                    if (!empty($db_awards)) {
+                                        foreach ($db_awards as $key => $db_award) {
+                                            $award_hidden_image=$db_award['award_hidden_image'];
+                                           if($award_hidden_image){
+                                            
+                                            if(Storage::disk('s3')->exists($s3_path.'/'.$award_hidden_image)){
+                                                Storage::disk('s3')->delete($s3_path.'/'.$award_hidden_image);  
+                                            }
+            
+                                            if(Storage::disk('s3')->exists($s3_path.'/small-'.$award_hidden_image)){
+                                                Storage::disk('s3')->delete($s3_path.'/small-'.$award_hidden_image);  
+                                            }
+            
+            
+                                            if(Storage::disk('s3')->exists($s3_path.'/medium-'.$award_hidden_image)){
+                                                Storage::disk('s3')->delete($s3_path.'/medium-'.$award_hidden_image);  
+                                            }
+            
+            
+                                           }
+                                        }
+                                    }  */
+
             foreach ($request['award'] as $key => $award) {
                 if ($award['award_title'] == 'Award title here' || $award['award_date'] == 'Select Award date') {
                     $json['type'] = 'error';
@@ -469,14 +548,28 @@ class Profile extends Model
                 if (!empty($award['award_hidden_image'])) {
                     $filename = $award['award_hidden_image'];
                     if (file_exists($old_path . '/' . $award['award_hidden_image'])) {
-                        $new_path = Helper::PublicPath() . '/uploads/users/' . $user_id . '/awards';
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
-                        $filename = time() . $award_counter . '-' . $award['award_hidden_image'];
-                        rename($old_path . '/' . $award['award_hidden_image'], $new_path . '/' . $filename);
-                        rename($old_path . '/small-' . $award['award_hidden_image'], $new_path . '/small-' . $filename);
-                        rename($old_path . '/medium-' . $award['award_hidden_image'], $new_path . '/medium-' . $filename);
+
+                    //////////////////////////////////////////
+
+                    $filename = $user_id . $award_counter . '-' . $award['award_hidden_image'];
+
+
+                    sleep(5);
+                    $contents = file_get_contents($old_path . '/' . $award['award_hidden_image']);
+                    Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  ); 
+
+                    $contents = file_get_contents($old_path . '/small-' . $award['award_hidden_image']);
+                    Storage::disk('s3')->put($s3_path. '/small-' . $filename,$contents  ); 
+
+                    $contents = file_get_contents($old_path . '/medium-' . $award['award_hidden_image']);
+                    Storage::disk('s3')->put($s3_path. '/medium-' . $filename,$contents  ); 
+                    
+            
+                    unlink($old_path . '/' . $award['award_hidden_image']);
+                    unlink($old_path . '/small-' . $award['award_hidden_image']);
+                    unlink($old_path . '/medium-' . $award['award_hidden_image']);
+                    /////////////////////////////////////////
+                   
                     }
                     $request_award[$award_counter]['award_hidden_image'] = $filename;
                 } else {
@@ -485,6 +578,11 @@ class Profile extends Model
                 $award_counter++;
             }
         }
+
+
+
+
+
         $project = !empty($request['project']) ? serialize($request_project) : '';
         $award = !empty($request['award']) ? serialize($request_award) : '';
         $user_profile = $this::select('id')->where('user_id', $user_id)

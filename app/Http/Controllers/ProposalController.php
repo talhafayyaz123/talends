@@ -448,7 +448,7 @@ class ProposalController extends Controller
         $profile = User::find($accepted_proposal->freelancer_id)->profile;
         $attachments = !empty($accepted_proposal->attachments) ? unserialize($accepted_proposal->attachments) : '';
         $user_image = !empty($profile) ? $profile->avater : '';
-        $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/' . $accepted_proposal->freelancer_id . '/' . $user_image : 'images/user-login.png';
+        $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/' . $accepted_proposal->freelancer_id . '/' . $user_image : config('app.aws_se_path').'/images/user-login.png';
         $employer_name = Helper::getUserName($job->user_id);
         $project_status = Helper::getProjectStatus();
         $duration = !empty($job->duration) ? Helper::getJobDurationList($job->duration) : '';

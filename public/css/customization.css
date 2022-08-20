@@ -1025,6 +1025,9 @@ a.notif {
 	background-color: transparent;
 	border: 0;
 }
+header .menu_browse_box a:hover {
+    background-color: #e1ffd8;
+}
 .faq-section .accordion h4{
 	font-weight: bold;
 	font-size: 18px;

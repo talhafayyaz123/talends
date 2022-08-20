@@ -16,7 +16,7 @@
             <div class="row row-eq-height">
                 <div class="col-md-12 text-center pb-3">
                     <h2 class="">Fail</h2>
-                    <p class="w-50 mx-auto">We have not succsefull to create your new account. Please pay first then start enjoying business growth & maximum mature leads from Talends.com.
+                    <p class="w-50 mx-auto">We have not succsefull to create your new account. Please pay first or enter correct card credentials then start enjoying business growth & maximum mature leads from Talends.com.
                          </p>
                     <a href="{{ route('home') }}" class="theme_btn inverse_btn">Close</a>
                     

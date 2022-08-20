@@ -110,12 +110,12 @@ Why Join Agency Plan
                                         <th class="col-desc">What You’ll Get PRICE($)</th>
                                         <th class="col-plan1">
                                             <div class="plan-title">                                            
-                                                <h5><b>${{ $package[0]->cost ?? '0' }}</b> Monthly </h5>
+                                                <h5><b>AED {{ $package[0]->cost ?? '0' }}</b> Monthly </h5>
                                             </div>
                                         </th>
                                         <th class="col-plan2">
                                             <div class="plan-title d-flex align-items-center justify-content-center">                                            
-                                                <h5><b>${{ $package[1]->cost ?? '0' }}</b> Yearly</h5>
+                                                <h5><b>AED {{ $package[1]->cost ?? '0' }}</b> Yearly</h5>
                                             </div>
                                         </th>
                                     </tr>

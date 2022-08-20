@@ -103,7 +103,7 @@
                         <p>
                             {!! $freelancer_side_bar->banner_description  ?? '' !!}
                         </p>
-                        <button class="btn btn-success my-5 px-5">Support</button>
+                        <button class="btn btn-success my-5 px-5" onclick=" document.location = 'mailto:enquiry.talends@gmail.com?subject=Need Support' ">Support</button>
                         @if(isset( $freelancer_side_bar->about_talends_image) )
                         <img src="{{asset('uploads/home-pages/freelancer_sidebar/'.$freelancer_side_bar->about_talends_image)}}"
                             class="w-100" alt="">
@@ -114,16 +114,11 @@
         </div>
     </div>
 </section>
-
-
-
 @push('scripts')
 
 
-
-
-
 <script type="text/javascript">
+    
     $(document).on('click', '.allow-focus', function (e) {
         
         e.stopPropagation();

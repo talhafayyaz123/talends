@@ -209,7 +209,7 @@
                 <div class="col-md-4 bg-theme rounded-16 mb-3">
                     <div class="p-4 d-flex justify-content-between flex-column h-100">
                         <div class="d-flex">
-                            <img src="{{asset('uploads/home-pages/find-right-talends/user1.png')}}" class="img-fluid mb-4 rounded-circle" alt="" width="130">
+                            <img src="{{ asset('talends/assets/img/find-talents/user1.png')}}" class="img-fluid mb-4 rounded-circle" alt="" width="130">
                             <div class="ml-3">
                                 <p class="text-white mb-0">Head of Sales</p>
                                 <h5 class="text-white mb-0">Amna Ali </h5>

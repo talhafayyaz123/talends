@@ -816,7 +816,7 @@ class JobController extends Controller
 
                                 $email_params['link'] = url('profile/' . $user->slug);
 
-                                Mail::to(config('mail.username'))
+                              Mail::to(config('mail.adminmail'))
 
                                 ->send(
 
@@ -902,7 +902,7 @@ class JobController extends Controller
 
                             $email_params['link'] = url('profile/' . $user->slug);
 
-                            Mail::to(config('mail.username'))
+                            Mail::to(config('mail.adminmail'))
 
                             ->send(
 
@@ -916,7 +916,7 @@ class JobController extends Controller
 
                                 )
 
-                            );
+                            ); 
 
                             if (!empty($user->email)) {
 
@@ -1116,7 +1116,7 @@ class JobController extends Controller
 
             $user_image = !empty($profile) ? $profile->avater : '';
 
-            $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/' . $job->employer->id . '/' . $user_image : 'images/user-login.png';
+            $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/' . $job->employer->id . '/' . $user_image : config('app.aws_se_path'). '/' .'images/user-login.png';
 
             $reasons = Helper::getReportReasons();
 
@@ -1576,7 +1576,6 @@ class JobController extends Controller
     public function destroy(Request $request)
 
     {
-
         $server = Helper::worketicIsDemoSiteAjax();
 
         if (!empty($server)) {

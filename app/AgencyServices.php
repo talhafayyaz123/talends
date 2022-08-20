@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Storage;
 
 class AgencyServices extends Model
 {
@@ -24,14 +25,28 @@ class AgencyServices extends Model
             if (!empty($request['uploaded_image'])) {
                 $filename = $request['uploaded_image'];
                 if (file_exists($old_path . '/' . $request['uploaded_image'])) {
-                    $new_path = Helper::PublicPath().'/uploads/agency_services/';
-                    if (!file_exists($new_path)) {
-                        File::makeDirectory($new_path, 0755, true, true);
-                    }
+
+
+                    $s3_path = 'uploads/agency_services';
+                    
                     $filename = time() . '-' . $request['uploaded_image'];
-                    rename($old_path . '/' . $request['uploaded_image'], $new_path . '/' . $filename);
-                    rename($old_path . '/small-' . $request['uploaded_image'], $new_path . '/small-' . $filename);
-                    rename($old_path . '/medium-' . $request['uploaded_image'], $new_path . '/medium-' . $filename);
+
+                    $contents = file_get_contents($old_path . '/' . $request['uploaded_image']);
+                    Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+
+
+                    $contents = file_get_contents($old_path . '/small-' . $request['uploaded_image']);
+                    Storage::disk('s3')->put($s3_path. '/small-' . $filename,$contents  );  
+
+
+                    $contents = file_get_contents($old_path . '/medium-' . $request['uploaded_image']);
+                    Storage::disk('s3')->put($s3_path. '/medium-' . $filename,$contents  ); 
+                    
+                    
+                    unlink($old_path . '/' . $request['uploaded_image']);
+                    unlink($old_path . '/small-' . $request['uploaded_image']);
+                    unlink($old_path . '/medium-' . $request['uploaded_image']);
+
                 }
                 $this->image = filter_var($filename, FILTER_SANITIZE_STRING);
             } else {
@@ -61,13 +76,50 @@ class AgencyServices extends Model
                 $filename = $request['uploaded_image'];
                 if (file_exists($old_path . '/' . $request['uploaded_image'])) {
                     $new_path = Helper::PublicPath().'/uploads/agency_services/';
-                    if (!file_exists($new_path)) {
-                        File::makeDirectory($new_path, 0755, true, true);
-                    }
+                    $s3_path = 'uploads/agency_services';
                     $filename = time() . '-' . $request['uploaded_image'];
-                    rename($old_path . '/' . $request['uploaded_image'], $new_path . '/' . $filename);
-                    rename($old_path . '/small-' . $request['uploaded_image'], $new_path . '/small-' . $filename);
-                    rename($old_path . '/medium-' . $request['uploaded_image'], $new_path . '/medium-' . $filename);
+
+
+                    
+                    if(isset($cats->image) && !empty($cats->image) ){
+                        $file =$cats->image;
+                         
+                    if(Storage::disk('s3')->exists('uploads/agency_services/'.$file)){
+                      
+                      Storage::disk('s3')->delete('uploads/agency_services/'.$file); 
+                      
+                    }
+                    
+                    if(Storage::disk('s3')->exists('uploads/agency_services/small-'.$file)){
+                      
+                        Storage::disk('s3')->delete('uploads/agency_services/small-'.$file); 
+                        
+                    }
+
+                    if(Storage::disk('s3')->exists('uploads/agency_services/medium-'.$file)){
+                      
+                        Storage::disk('s3')->delete('uploads/agency_services/medium-'.$file); 
+                        
+                    }
+    
+                }
+
+                    $contents = file_get_contents($old_path . '/' . $request['uploaded_image']);
+                    Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+
+
+                    $contents = file_get_contents($old_path . '/small-' . $request['uploaded_image']);
+                    Storage::disk('s3')->put($s3_path. '/small-' . $filename,$contents  );  
+
+
+                    $contents = file_get_contents($old_path . '/medium-' . $request['uploaded_image']);
+                    Storage::disk('s3')->put($s3_path. '/medium-' . $filename,$contents  ); 
+                    
+                    
+                    unlink($old_path . '/' . $request['uploaded_image']);
+                    unlink($old_path . '/small-' . $request['uploaded_image']);
+                    unlink($old_path . '/medium-' . $request['uploaded_image']);
+
                 }
                 $cats->image = filter_var($filename, FILTER_SANITIZE_STRING);
             } else {
