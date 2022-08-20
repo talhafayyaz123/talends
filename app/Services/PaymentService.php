@@ -142,7 +142,6 @@ class PaymentService
 
                 $user = User::find($item[0]->subscriber);
 
-                $role = $user->getRoleNames()->first();
 
                 $package_options = unserialize($package->options);
 
