@@ -81,6 +81,7 @@ use App\Service;
 use App\SiteManagement;
 use Cookie;
 use Response;
+use App\UserPayments;
 
 
 /**
@@ -367,6 +368,10 @@ class PaytabController extends Controller
                         $user->expiry_date = $expiry_date;
 
                         $user->save();
+
+
+                        
+                        
                     
                         // send mail
                     
@@ -399,6 +404,21 @@ class PaytabController extends Controller
 
                                 }
 
+                            }
+
+
+                            if($login_user->getRoleNames()[0]=='company'){
+                                $payment = DB::table('user_payments')->select('id')->where('user_id', $user_id)->where('is_success',1)->first();
+    
+                                if (!empty($payment)) {
+                                    $payment_user = \App\User::find($user_id);
+                                    $payment = UserPayments::find($payment->id);
+                                    $payment->package_id = $package->id;
+                                    $payment->expiry_date =$payment_user->expiry_date;
+                                    $payment->cart_amount = $package->cost;
+                                    $payment->save();
+                
+                                }
                             }
 
                              if ($role === 'employer') {
