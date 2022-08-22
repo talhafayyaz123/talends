@@ -184,7 +184,7 @@ class PaymentService
                             $email_params['price'] = $package->cost;
 
                             $email_params['expiry_date'] = !empty($expiry_date) ? Carbon::parse($expiry_date)->format('M d, Y') : '';
-
+/* 
                             Mail::to($login_user->email)
 
                                 ->send(
@@ -199,7 +199,7 @@ class PaymentService
 
                                     )
 
-                                );
+                                ); */
 
                         }
 

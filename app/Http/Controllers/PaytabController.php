@@ -443,7 +443,7 @@ class PaytabController extends Controller
                                         $email_params['price'] = $package->cost;
 
                                         $email_params['expiry_date'] = !empty($expiry_date) ? Carbon::parse($expiry_date)->format('M d, Y') : '';
-
+/* 
                                         Mail::to($login_user->email)
 
                                             ->send(
@@ -458,7 +458,7 @@ class PaytabController extends Controller
 
                                                 )
 
-                                            );
+                                            ); */
 
                                     }
 
@@ -487,7 +487,7 @@ class PaytabController extends Controller
 
                                         $email_params['expiry_date'] = !empty($expiry_date) ? Carbon::parse($expiry_date)->format('M d, Y') : '';
                                     
-                                        Mail::to($login_user->email)
+                                        /* Mail::to($login_user->email)
 
                                             ->send(
 
@@ -501,7 +501,7 @@ class PaytabController extends Controller
 
                                                 )
 
-                                            );
+                                            ); */
 
                                     }
 
@@ -568,7 +568,7 @@ class PaytabController extends Controller
 
                                 $freelancer_data = User::find(intval($freelancer));
 
-                                Mail::to($freelancer_data->email)
+                                /* Mail::to($freelancer_data->email)
 
                                     ->send(
 
@@ -582,7 +582,7 @@ class PaytabController extends Controller
 
                                         )
 
-                                    );
+                                    ); */
 
                                 
 
@@ -656,7 +656,7 @@ class PaytabController extends Controller
 
                                     $email_params['emp_name'] = Helper::getUserName($employer->id);
 
-                                    Mail::to($freelancer->email)
+                                 /*    Mail::to($freelancer->email)
 
                                         ->send(
 
@@ -670,7 +670,7 @@ class PaytabController extends Controller
 
                                             )
 
-                                        );
+                                        ); */
 
                                 }
 
@@ -914,7 +914,7 @@ class PaytabController extends Controller
 
                                     $email_params['emp_name'] = Helper::getUserName($employer->id);
 
-                                    Mail::to($freelancer->email)
+                                   /*  Mail::to($freelancer->email)
 
                                         ->send(
 
@@ -928,7 +928,7 @@ class PaytabController extends Controller
 
                                             )
 
-                                        );
+                                        ); */
 
                                 }
 

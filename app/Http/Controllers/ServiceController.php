@@ -247,14 +247,14 @@ class ServiceController extends Controller
                             $email_params['name'] = Helper::getUserName(Auth::user()->id);
                             $email_params['link'] = url('profile/' . $user->slug);
                             $template_data = Helper::getAdminServicePostedEmailContent();
-                             Mail::to(config('mail.adminmail'))
+                           /*   Mail::to(config('mail.adminmail'))
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_new_service_posted',
                                         $template_data,
                                         $email_params
                                     )
-                                ); 
+                                );  */
                         }
                         return $json;
                     } elseif ($service_post['type'] == 'error') {
@@ -288,14 +288,14 @@ class ServiceController extends Controller
                         $email_params['name'] = Helper::getUserName(Auth::user()->id);
                         $email_params['link'] = url('profile/' . $user->slug);
                         $template_data = Helper::getAdminServicePostedEmailContent();
-                        Mail::to(config('mail.adminmail'))
+                        /* Mail::to(config('mail.adminmail'))
                             ->send(
                                 new AdminEmailMailable(
                                     'admin_email_new_service_posted',
                                     $template_data,
                                     $email_params
                                 )
-                            ); 
+                            );  */
                     }
                     return $json;
                 } elseif ($service_post['type'] == 'error') {
