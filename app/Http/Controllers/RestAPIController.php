@@ -590,7 +590,7 @@ class RestAPIController extends Controller
                                 $email_params['amount'] = $amount;
                                 $email_params['duration'] = Helper::getJobDurationList($duration);
                                 $email_params['message'] = $description;
-                                Mail::to($job->employer->email)
+                                /* Mail::to($job->employer->email)
                                     ->send(
                                         new EmployerEmailMailable(
                                             'employer_email_proposal_received',
@@ -613,7 +613,7 @@ class RestAPIController extends Controller
                                             $template_submit_proposal,
                                             $email_params
                                         )
-                                    );
+                                    ); */
                             }
                         }
                         return Response::json($json, 200);
@@ -1254,14 +1254,14 @@ class RestAPIController extends Controller
                             $email_params['report_by_link'] = url('profile/' . $user->slug);
                             $email_params['reported_by'] = Helper::getUserName($user->id);
                             $email_params['message'] = $request['description'];
-                             Mail::to(config('mail.adminmail'))
+                             /* Mail::to(config('mail.adminmail'))
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_report_project',
                                         $template_data,
                                         $email_params
                                     )
-                                ); 
+                                );  */
                         }
                     }
                 }
@@ -1518,14 +1518,14 @@ class RestAPIController extends Controller
                         $email_params['link'] = url('profile/' . $freelancer->slug);
                         $email_params['name'] = Helper::getUserName($freelancer->id);
                         $email_params['msg'] = $request['desc'];
-                        Mail::to($freelancer->email)
+                       /*  Mail::to($freelancer->email)
                             ->send(
                                 new FreelancerEmailMailable(
                                     'freelancer_email_send_offer',
                                     $template_data,
                                     $email_params
                                 )
-                            );
+                            ); */
                     }
                 }
                 return Response::json($json, 200);
@@ -1572,14 +1572,14 @@ class RestAPIController extends Controller
                 $email_params['email'] = $request['email'];
                 $email_params['link'] = url('user/password/reset/' . $verification_code);
                 $email_params['name'] = Helper::getUserName($user->id);
-                Mail::to($request['email'])
+               /*  Mail::to($request['email'])
                     ->send(
                         new GeneralEmailMailable(
                             'lost_password',
                             $template_data,
                             $email_params
                         )
-                    );
+                    ); */
                 $json['type'] = 'success';
                 $json['message'] = trans('lang.email_sent');
                 return Response::json($json, 200);
@@ -1788,23 +1788,23 @@ class RestAPIController extends Controller
                         $email_params['name'] = Helper::getUserName($current_user);
                         $email_params['link'] = url('profile/' . $user->slug);
                         $admin_mail = User::role('admin')->select('email')->pluck('email')->first();
-                         Mail::to(config('mail.adminmail'))
+                        /*  Mail::to(config('mail.adminmail'))
                             ->send(
                                 new AdminEmailMailable(
                                     'admin_email_new_job_posted',
                                     $template_data,
                                     $email_params
                                 )
-                            ); 
+                            ); */ 
                         if (!empty($user->email)) {
-                            Mail::to($user->email)
+                           /*  Mail::to($user->email)
                                 ->send(
                                     new EmployerEmailMailable(
                                         'employer_email_new_job_posted',
                                         $template_data_employer,
                                         $email_params
                                     )
-                                );
+                                ); */
                         }
                     }
                 }
@@ -2107,14 +2107,14 @@ class RestAPIController extends Controller
                 $email_params['verification_code'] = $user->verification_code;
                 $email_params['name'] = Helper::getUserName($user->id);
                 $email_params['email'] = $user->email;
-                Mail::to($user->email)
+               /*  Mail::to($user->email)
                     ->send(
                         new GeneralEmailMailable(
                             'verification_code',
                             $template_data,
                             $email_params
                         )
-                    );
+                    ); */
             }
         }
         $id = $user_id;
@@ -2226,14 +2226,14 @@ class RestAPIController extends Controller
                         $email_params['name'] = Helper::getUserName($current_user);
                         $email_params['link'] = url('profile/' . $user->slug);
                         $template_data = Helper::getAdminServicePostedEmailContent();
-                         Mail::to(config('mail.adminmail'))
+                       /*   Mail::to(config('mail.adminmail'))
                             ->send(
                                 new AdminEmailMailable(
                                     'admin_email_new_service_posted',
                                     $template_data,
                                     $email_params
                                 )
-                            ); 
+                            ); */ 
                     }
                     return $json;
                 } elseif ($service_post['type'] == 'error') {
@@ -2267,14 +2267,14 @@ class RestAPIController extends Controller
                     $email_params['name'] = Helper::getUserName($current_user);
                     $email_params['link'] = url('profile/' . $user->slug);
                     $template_data = Helper::getAdminServicePostedEmailContent();
-                     Mail::to(config('mail.adminmail'))
+                    /*  Mail::to(config('mail.adminmail'))
                         ->send(
                             new AdminEmailMailable(
                                 'admin_email_new_service_posted',
                                 $template_data,
                                 $email_params
                             )
-                        ); 
+                        ); */ 
                 }
                 return $json;
             } elseif ($service_post['type'] == 'error') {
