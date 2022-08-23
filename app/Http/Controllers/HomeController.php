@@ -330,6 +330,7 @@ class HomeController extends Controller
             return view('auth.company_registration_success',compact('page','home','meta_desc','about_talends'));
            
         }else{
+            $package=Package::find($package_id);
 
             UserPayments::where('user_id',$id)->where('is_success',0)->where('tran_ref',$tranRef)->update(
                 [
@@ -338,12 +339,12 @@ class HomeController extends Controller
       
               );
 
-            return view('auth.company_registration_fail',compact('page','home','meta_desc','about_talends','id','package_id'));
+            return view('auth.company_registration_fail',compact('page','home','meta_desc','about_talends','id','package_id','package'));
 
         }
 
      }
-
+     
      public function FindRightTalends(){
         $page_header = '';
         $page = array();

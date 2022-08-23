@@ -17,7 +17,8 @@
                 <div class="col-md-12 text-center pb-3">
                     <h2 class="">Fail</h2>
                     <p class="w-50 mx-auto">We have not succsefull to create your new account. Please pay first or enter correct card credentials then start enjoying business growth & maximum mature leads from Talends.com.
-                         </p>
+                  <br>  Payment Amount : AED {{ $package->cost  }}       
+                </p>
                     <a href="{{ route('home') }}" class="theme_btn inverse_btn">Close</a>
                     
                     <a href="{{url("registration/again/payment",['id'=>$id,'package_id'=>$package_id ])}}" class="theme_btn inverse_btn">Again Payment</a>

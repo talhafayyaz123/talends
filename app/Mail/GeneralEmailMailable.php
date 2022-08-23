@@ -33,7 +33,6 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\EmailHelper;
-
 use App\SiteManagement;
 
 
@@ -181,8 +180,11 @@ class GeneralEmailMailable extends Mailable
 
             $email_message = $this->prepareEmailPaymentReminder($this->email_params);
 
+        }elseif($this->type == 'registration_payment'){
+            $email_message = $this->prepareRegistrationPayment($this->email_params);
+            $email_from='agency@talends.com';
+        
         }
-
 
         $message = $this->from($email_from)
 
@@ -728,7 +730,66 @@ class GeneralEmailMailable extends Mailable
 
     }
 
+    public function prepareRegistrationPayment($email_params){
+        
+        extract($email_params);
+        
 
+        $company_name = $user_name;
+
+        $payment_url= $payment_url;
+
+        $title = $name;
+
+        $price = $price;
+       
+      $signature = EmailHelper::getSignature();
+           
+        $app_content = $this->template->content;
+
+  
+        $email_content_default =    "Hi, %company_name% ,
+
+        You are registered on Talends.com as a Company and did not pay the amount.
+    
+        Cost :  %cost%,
+        
+        Package Name:  %package_name%,
+        
+        You can do payment via this link : %payment_url%
+        
+        Then then grow and increase your business with Talends.com.        
+         
+        %signature%,";
+
+        //set default contents
+
+        if (empty($app_content)) {
+
+            $app_content = $email_content_default;
+
+        }
+
+        $app_content = str_replace("%company_name%", $company_name, $app_content);
+
+        $app_content = str_replace("%cost%", $price, $app_content);
+
+        $app_content = str_replace("%payment_url%", $payment_url, $app_content);
+        $app_content = str_replace("%package_name%", $title, $app_content);
+
+        $app_content = str_replace("%signature%", $signature, $app_content);
+
+
+        $body = "";
+
+        $body .= EmailHelper::getEmailHeader();
+
+        $body .= $app_content;
+
+        $body .= EmailHelper::getEmailFooter();
+
+        return $body;
+    }
     public function prepareEmailPaymentReminder($email_params)
 
     {
