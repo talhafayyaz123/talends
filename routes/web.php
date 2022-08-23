@@ -76,6 +76,7 @@ Route::get('company/registration', 'HomeController@companyRegistration')->name('
 Route::post('/registration/success', 'HomeController@companyRegistrationSuccess')->name('companyRegistratonSuccess');
 Route::get('registration/again/payment/{id}/{package_id}', 'Auth\RegisterController@registrationAgainPayment')->name('registrationAgainPayment');
 
+
 Route::post('store/admin/lead', 'HomePagesController@storeAdminLead')->name('storeAdminLead');
 Route::get('admin/lead/success', 'HomePagesController@adminLeadSuccess')->name('adminLeadSuccess');
 
@@ -112,6 +113,7 @@ Route::get('register/verify-user-code/{code}', 'PublicController@verifyUserCode'
 
 Route::post('registration/verify-user-code', 'PublicController@verifyUserRegistrationCode');
 
+Route::get('admin/again/registration/payment/{package_id}/{user_id}', 'UserPaymentController@againRegistrationPayment')->name('againRegistrationPayment');
 
 
 Route::post('register/form-step1-custom-errors', 'PublicController@RegisterStep1Validation');
@@ -143,7 +145,9 @@ Route::group(
 
 
         Route::get('admin/user_payments', 'UserPaymentController@getPayments')->name('userPayments');
-        Route::get('admin/user_payment_detail/{id}', 'UserPaymentController@getPaymentDetail')->name('userPaymentDetail');        
+        Route::get('admin/user_payment_detail/{id}', 'UserPaymentController@getPaymentDetail')->name('userPaymentDetail');
+        Route::get('admin/fail/registration/email/{package_id}/{user_id}', 'UserPaymentController@sendFailRegistrationEmail')->name('sendFailRegistrationEmail');
+
 
         // Article Category Routes
         Route::get('admin/article/categories', 'ArticleCategoryController@index')->name('articleCategories');

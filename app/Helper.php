@@ -1573,6 +1573,15 @@ return $response;
         }
     }
 
+    public static function getCompanyName($user_id)
+    {
+        if (!empty($user_id) && !empty(User::find($user_id))) {
+            return User::find($user_id)->profile->company_name;
+        } else {
+            return '';
+        }
+    }
+
     /**
      * Get role name by ID
      *
