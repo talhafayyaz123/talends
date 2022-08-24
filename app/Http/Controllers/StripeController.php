@@ -515,7 +515,7 @@ class StripeController extends Controller
 
                                                 $email_params['expiry_date'] = !empty($expiry_date) ? Carbon::parse($expiry_date)->format('M d, Y') : '';
 
-                                               Mail::to(Auth::user()->email)
+                                           /*     Mail::to(Auth::user()->email)
 
                                                     ->send(
 
@@ -529,7 +529,7 @@ class StripeController extends Controller
 
                                                         )
 
-                                                    ); 
+                                                    ); */ 
 
                                             }
 
@@ -556,7 +556,7 @@ class StripeController extends Controller
                                                 $email_params['price'] = $package->cost;
 
                                                 $email_params['expiry_date'] = !empty($expiry_date) ? Carbon::parse($expiry_date)->format('M d, Y') : '';
-
+/* 
                                                 Mail::to(Auth::user()->email)
 
                                                     ->send(
@@ -571,7 +571,7 @@ class StripeController extends Controller
 
                                                         )
 
-                                                    ); 
+                                                    ); */ 
 
                                             }
 
@@ -639,7 +639,7 @@ class StripeController extends Controller
 
                                         $freelancer_data = User::find(intval($freelancer));
 
-                                        Mail::to($freelancer_data->email)
+                                      /*   Mail::to($freelancer_data->email)
 
                                             ->send(
 
@@ -653,7 +653,7 @@ class StripeController extends Controller
 
                                                 )
 
-                                            ); 
+                                            ); */ 
 
                                     }
 
@@ -725,7 +725,7 @@ class StripeController extends Controller
 
                                             $email_params['emp_name'] = Helper::getUserName($employer->id);
 
-                                            Mail::to($freelancer->email)
+                                         /*    Mail::to($freelancer->email)
 
                                                 ->send(
 
@@ -739,7 +739,7 @@ class StripeController extends Controller
 
                                                     )
 
-                                                ); 
+                                                ); */ 
 
                                         }
 
