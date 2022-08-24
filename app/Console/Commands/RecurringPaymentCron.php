@@ -74,14 +74,14 @@ class RecurringPaymentCron extends Command
                 $email_params['expiry_date'] = $expiry_date;
                 $email_params['amount'] =  $value->cart_amount;
                 $email_params['company_name'] = $user->profile->company_name;
-                /*   Mail::to($user->email)
+                   Mail::to($user->email)
                     ->send(
                         new GeneralEmailMailable(
                             'recurring_payment_reminder',
                             $template_data,
                             $email_params
                         )
-                    ); */  
+                    );   
             }
         
     

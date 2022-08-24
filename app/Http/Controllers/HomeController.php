@@ -316,14 +316,14 @@ class HomeController extends Controller
                     $email_params['name'] = Helper::getUserName($user->id);
                     $email_params['email'] = $user->email;
                     $email_params['role'] =$user->getRoleNames()[0];
-                    /* Mail::to($user->email)
+                     Mail::to($user->email)
                         ->send(
                             new GeneralEmailMailable(
                                 'verification_code',
                                 $template_data,
                                 $email_params
                             )
-                        ); */
+                        );
                 }
 
               session()->put(['user_id' => $id]);
