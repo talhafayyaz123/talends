@@ -186,7 +186,7 @@ class GeneralEmailMailable extends Mailable
         
         }
 
-        $message = $this->from($email_from)
+        $message = $this->from($email_from,$from_email_id)
 
             ->subject($subject)->view('emails.index')
 
