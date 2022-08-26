@@ -45,15 +45,15 @@
                     <div class="row">
                         <div class="col-md-6 mb-5">
                             <h3 class="font-weight-bold">Become a Client</h3>
-                            <a href="mailto:enquiry.talends@gmail.com" class="text-dark">project@talends.com</a>
+                            <a href="mailto:enquiry@talends.com" class="text-dark">project@talends.com</a>
                         </div>
                         <div class="col-md-6 mb-5">
                             <h3 class="font-weight-bold">Become Agency Partner</h3>
-                            <a href="mailto:enquiry.talends@gmail.com" class="text-dark">partner@talends.com</a>
+                            <a href="mailto:enquiry@talends.com" class="text-dark">partner@talends.com</a>
                         </div>
                         <div class="col-md-6 mb-5">
                             <h3 class="font-weight-bold">Join Talends</h3>
-                            <a href="mailto:enquiry.talends@gmail.com" class="text-dark">work@talends.com</a>
+                            <a href="mailto:enquiry@talends.com" class="text-dark">work@talends.com</a>
                         </div>
                     </div>
                 </div>
