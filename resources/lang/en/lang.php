@@ -32,6 +32,9 @@ return [
     'registeration_form_type' => 'Registeration Form Type',
     'user_email_not_verify_admin' => 'Your account is not verified yet. Please contact site administrator to get it verified',
     'user_email_not_verify' => 'Your email is not verified. Please verify your email from account setting',
+    'user_payment_not_verify' => 'Your payment is due. Please clear your payment from account setting in Payment verification section.',
+    'user_payment_not_verify_admin' => 'Your account payment is due yet. Please contact site administrator to to perform again payment.',
+
     'email_verified' => 'Your email address has been verified successfully',
     'invalid_verification_code' => 'Verification Code is not valid',
     'submit' => 'Submit',
@@ -577,6 +580,7 @@ return [
     'manage_account' => 'Manage Account',
     'reset_pass' => 'Reset Password',
     'email_notify' => 'Email Notifications',
+    'payment_notify' => 'Payment Verification',
     'empty_field' => 'Empty field not allow',
     'search_note' => 'If searchable option will be disabled then your profile will not show in the search result. To hide your profile all over the site you can disable your profile temporarily',
     'profile_searchable' => 'Make my profile searchable',

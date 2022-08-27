@@ -33,6 +33,8 @@ $slider = Helper::getPageSlider($page_id);
 
 @auth
 {{Helper::displayVerificationWarning()}}
+
+{{Helper::displayPaymentWarning()}}
 @endauth
 
 <header id="wt-header" class="wt-haslayout {{$inner_header}} fixed-top border-bottom">

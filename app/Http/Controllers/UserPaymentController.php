@@ -61,7 +61,7 @@ class UserPaymentController extends Controller
     
             $email_params['name'] = $package->title;
     
-            $email_params['price'] = $package->cost;
+            $email_params['price'] ='AED '. $package->cost;
             $user=User::find($user_id);
             
              Mail::to($user->email)
@@ -75,7 +75,7 @@ class UserPaymentController extends Controller
         }
 
         Session::flash('message', trans('lang.account_settings_saved'));
-        return Redirect::back();
+        return Redirect::back()->with('payment_email_send', '1');
          
     }
 
@@ -88,10 +88,7 @@ class UserPaymentController extends Controller
         $meta_desc = !empty($inner_page) && !empty($inner_page[0]['desc']) ? $inner_page[0]['desc'] : trans('lang.why-talends-desc');
         $page['title'] = $meta_title;
         $about_talends=AboutTalendsPage::where('page_type','about_talends')->first();
-
         $package=Package::find($package_id);
-
-
         if(Auth::check()){
             Auth::logout();
             return redirect('admin/again/registration/payment/'.$package_id.'/'.$id);

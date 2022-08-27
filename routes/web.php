@@ -146,9 +146,7 @@ Route::group(
 
         Route::get('admin/user_payments', 'UserPaymentController@getPayments')->name('userPayments');
         Route::get('admin/user_payment_detail/{id}', 'UserPaymentController@getPaymentDetail')->name('userPaymentDetail');
-        Route::get('admin/fail/registration/email/{package_id}/{user_id}', 'UserPaymentController@sendFailRegistrationEmail')->name('sendFailRegistrationEmail');
-
-
+        
         // Article Category Routes
         Route::get('admin/article/categories', 'ArticleCategoryController@index')->name('articleCategories');
         Route::get('admin/article/categories/edit-cats/{id}', 'ArticleCategoryController@edit')->name('editArticleCategories');
@@ -583,12 +581,14 @@ Route::group(
 Route::group(
     ['middleware' => ['role:employer|freelancer|admin|company|intern']],
     function () {
+        Route::get('admin/fail/registration/email/{package_id}/{user_id}', 'UserPaymentController@sendFailRegistrationEmail')->name('sendFailRegistrationEmail');
         Route::post('proposal/upload-temp-image', 'ProposalController@uploadTempImage');
         Route::get('job/proposal/{job_slug}', 'ProposalController@createProposal')->name('createProposal');
         Route::get('profile/settings/manage-account', 'UserController@accountSettings')->name('manageAccount');
         Route::get('profile/settings/reset-password', 'UserController@resetPassword')->name('resetPassword');
         Route::post('profile/settings/request-password', 'UserController@requestPassword');
         Route::get('profile/settings/email-notification-settings', 'UserController@emailNotificationSettings')->name('emailNotificationSettings');
+        Route::get('profile/settings/payment-verification', 'UserController@paymentVerificationSettings')->name('paymentVerification');
         Route::post('profile/settings/save-email-settings', 'UserController@saveEmailNotificationSettings');
         Route::post('profile/settings/save-account-settings', 'UserController@saveAccountSettings');
         Route::get('profile/settings/delete-account', 'UserController@deleteAccount')->name('deleteAccount');
