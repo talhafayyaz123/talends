@@ -39,6 +39,8 @@ use App\Profile;
 use App\UserCategorySkills;
 use App\CompanyExpertise;
 use App\CompanyDetail;
+use App\UserPayments;
+
 /**
  * Class Helper
  *
@@ -5946,7 +5948,7 @@ return $response;
         $register_form = SiteManagement::getMetaValue('reg_form_settings');
         $selected_registration_type = !empty($register_form) && !empty($register_form[0]['registration_type']) ? $register_form[0]['registration_type'] : 'multiple';
         $output = "";
-        if (auth()->user()->getRoleNames()->first() != 'admin') {
+        if (auth()->user()->getRoleNames()->first() != 'admin' &&  auth()->user()->getRoleNames()->first() != 'company' ) {
             if (Auth::user()->user_verified == 0 && $selected_registration_type == 'multiple') {
                 $output .= '<div class="wt-jobalertsholder la-email-warning float-right">';
                 $output .= '<ul id="wt-jobalerts">';
@@ -5964,6 +5966,42 @@ return $response;
                 $output .= '<li class="alert alert-danger alert-email alert-dismissible fade show">';
                 $output .= '<span>';
                 $output .= trans('lang.user_email_not_verify_admin');
+                $output .= '</span>';
+                $output .= '<a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="Close"><i class="fa fa-close"></i></a>';
+                $output .= '</li>';
+                $output .= '</ul>';
+                $output .= '</div>';
+            }
+        }
+        echo $output;
+    }
+
+    public static function displayPaymentWarning(){
+        $register_form = SiteManagement::getMetaValue('reg_form_settings');
+        $selected_registration_type = !empty($register_form) && !empty($register_form[0]['registration_type']) ? $register_form[0]['registration_type'] : 'multiple';
+      
+      $output = "";
+        if (auth()->user()->getRoleNames()->first() == 'company') {
+            $company_payment=UserPayments::where('user_id',Auth::user()->id)->first();
+             
+             
+            if ( $company_payment->is_success == 0 && $selected_registration_type == 'multiple') {
+                $output .= '<div class="wt-jobalertsholder  float-right payment_warning" style="position: relative !important;top: 33px !important;">';
+                $output .= '<ul id="wt-jobalerts">';
+                $output .= '<li class="alert alert-danger alert-email alert-dismissible fade show">';
+                $output .= '<span>';
+                $output .= trans('lang.user_payment_not_verify');
+                $output .= '</span>';
+                $output .= '<a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="Close"><i class="fa fa-close"></i></a>';
+                $output .= '</li>';
+                $output .= '</ul>';
+                $output .= '</div>';
+            } else if ( $company_payment->is_success == 0 && $selected_registration_type == 'single') {
+                $output .= '<div class="wt-jobalertsholder  float-right payment_warning" style="position: relative !important;top: 33px !important;">';
+                $output .= '<ul id="wt-jobalerts">';
+                $output .= '<li class="alert alert-danger alert-email alert-dismissible fade show">';
+                $output .= '<span>';
+                $output .= trans('lang.user_payment_not_verify_admin');
                 $output .= '</span>';
                 $output .= '<a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="Close"><i class="fa fa-close"></i></a>';
                 $output .= '</li>';

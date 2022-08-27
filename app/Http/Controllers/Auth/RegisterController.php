@@ -330,6 +330,7 @@ class RegisterController extends Controller
 
        $user_payments=new UserPayments();
        $user_payments->user_id=$user_id;
+       $user_payments->package_id=$request['package_id'];
        $user_payments->tran_ref=$body['tran_ref'];
        $user_payments->cart_id=$body['cart_id'];
        $user_payments->cart_amount=$body['cart_amount'];

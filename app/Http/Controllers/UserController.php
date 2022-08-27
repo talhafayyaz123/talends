@@ -255,6 +255,8 @@ class UserController extends Controller
             return view('back-end.settings.email-notifications', compact('user_email'));
         }
     }
+
+ 
     
     /**
      * Email Verification Settings Form.
@@ -269,6 +271,18 @@ class UserController extends Controller
             return view('extend.back-end.settings.email-verification');
         } else {
             return view('back-end.settings.email-verification');
+        }
+    }
+
+    /**
+     * Get Payment Verification
+     */
+    public function paymentVerificationSettings()
+    {
+        if (file_exists(resource_path('views/extend/back-end/settings/email-verification.blade.php'))) {
+            return view('extend.back-end.settings.email-verification');
+        } else {
+            return view('back-end.settings.payment-verification');
         }
     }
 
