@@ -181,7 +181,8 @@ class RegisterController extends Controller
                         ); 
                 }
                 $admin_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_registration')->get()->first();
-                if (!empty($template->id)) {
+                 
+                if (!empty($admin_template->id)) {
                     $template_data = EmailTemplate::getEmailTemplateByID($admin_template->id);
                     $email_params['name'] = Helper::getUserName($user->id);
                     $email_params['email'] = $user->email;
@@ -295,7 +296,7 @@ class RegisterController extends Controller
                         ); 
                 }
                 $admin_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_registration')->get()->first();
-                if (!empty($template->id)) {
+                if (!empty($admin_template->id)) {
                     $template_data = EmailTemplate::getEmailTemplateByID($admin_template->id);
                     $email_params['name'] = Helper::getUserName($user->id);
                     $email_params['email'] = $user->email;
