@@ -184,6 +184,9 @@ class GeneralEmailMailable extends Mailable
             $email_message = $this->prepareRegistrationPayment($this->email_params);
             $email_from='agency@talends.com';
         
+        }elseif($this->type == 'recurring_payment_complete'){
+            $email_message = $this->prepareRecurringPaymentComplete($this->email_params);
+            $email_from='agency@talends.com';
         }
 
         $message = $this->from($email_from,$from_email_id)
@@ -285,6 +288,64 @@ class GeneralEmailMailable extends Mailable
     }
 
 
+    public function prepareRecurringPaymentComplete($email_params)
+
+    {
+
+        extract($email_params);
+
+        $company_name = $name;
+
+        $expiry_date=$expiry_date;
+        $cost=$amount;
+        $company_name=$company_name;
+        $package_name=$package_name;
+
+        $site_title = EmailHelper::getSiteTitle();
+
+        $signature = EmailHelper::getSignature();
+
+        $app_content = $this->template->content;
+        
+        $email_content_default =    "Hi, %company_name% ,
+
+        Package Name:  %package_name%,
+        
+        Cost :AED  %cost% has been deducted from your account as a Recurring payment.
+        
+        Your next recurring payment date is  %expiry_date%.
+        
+        Thanks for doing your business with Talends.com.
+        
+        %signature%,";
+
+        //set default contents
+
+        if (empty($app_content)) {
+
+            $app_content = $email_content_default;
+
+        }
+
+        $app_content = str_replace("%company_name%", $company_name, $app_content);
+
+        $app_content = str_replace("%package_name%", $package_name, $app_content);
+
+        $app_content = str_replace("%cost%", $cost, $app_content);
+        $app_content = str_replace("%expiry_date%", $expiry_date, $app_content);
+        $app_content = str_replace("%signature%", $signature, $app_content);
+
+        $body = "";
+
+        $body .= EmailHelper::getEmailHeader();
+
+        $body .= $app_content;
+
+        $body .= EmailHelper::getEmailFooter();
+
+        return $body;
+
+    }
 
     /**
 
