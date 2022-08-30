@@ -34,7 +34,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\EmailHelper;
 use App\SiteManagement;
-
+use Illuminate\Mail\Message;
 
 
 /**
@@ -191,8 +191,16 @@ class GeneralEmailMailable extends Mailable
 
         $message = $this->from($email_from,$from_email_id)
 
-            ->subject($subject)->view('emails.index')
+        //X-Custom-Header
+            ->subject($subject)
+            ->view('emails.index')
             ->replyTo('enquiry@talends.com', 'Talends Enquiry')
+            ->withSwiftMessage(function ($message) {
+                $message->getHeaders()
+                    ->addTextHeader('X-Mailer', 'PHP/' . phpversion().'');
+                    $message->getHeaders()
+                    ->addTextHeader('x-mailgun-native-send', 'true');   
+            })
             ->with(
 
                 [

@@ -63,6 +63,12 @@ class EmployerEmailMailable extends Mailable
         $message = $this->from($from_email, $from_email_id)
             ->subject($subject)->view('emails.index')
             ->replyTo('enquiry@talends.com', 'Talends Enquiry')
+            ->withSwiftMessage(function ($message) {
+                $message->getHeaders()
+                    ->addTextHeader('X-Mailer', 'PHP/' . phpversion().'');
+                    $message->getHeaders()
+                    ->addTextHeader('x-mailgun-native-send', 'true');   
+            })
             ->with(
                 [
                     'html' => $email_message,
