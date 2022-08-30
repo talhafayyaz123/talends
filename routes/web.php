@@ -490,7 +490,6 @@ Route::group(
         Route::post('employer/upload-temp-image', 'EmployerController@uploadTempImage');
         Route::post('employer/store-profile-settings', 'EmployerController@storeProfileSettings');
         Route::post('job/post-job', 'JobController@store');
-        Route::post('job/upload-temp-image', 'JobController@uploadTempImage');
         Route::post('user/submit-review', 'UserController@submitReview');
         Route::post('proposal/hire-freelancer', 'ProposalController@hiredFreelencer');
         Route::get('employer/services/{status}', 'EmployerController@showEmployerServices');
@@ -581,6 +580,7 @@ Route::group(
 Route::group(
     ['middleware' => ['role:employer|freelancer|admin|company|intern']],
     function () {
+        Route::post('job/upload-temp-image', 'JobController@uploadTempImage');
         Route::get('admin/fail/registration/email/{package_id}/{user_id}', 'UserPaymentController@sendFailRegistrationEmail')->name('sendFailRegistrationEmail');
         Route::post('proposal/upload-temp-image', 'ProposalController@uploadTempImage');
         Route::get('job/proposal/{job_slug}', 'ProposalController@createProposal')->name('createProposal');
