@@ -4,6 +4,7 @@
 {{ $page['title'] }}
 @stop
 @section('description', "$meta_desc")
+@section('keyword', "$meta_keywords")
 
 @section('content')
 

@@ -36,6 +36,10 @@
                                                     <option value="government">Government</option>
                                                     <option value="why_talends">Why Talends</option>
                                                     <option value="interne">Interne</option>
+                                                    <option value="companies">Companies</option>
+                                                    <option value="find-right-talends">Find Right Talends</option>
+                                                    <option value="government_projects">Government Projects</option>
+                                                    <option value="home">Home</option>
                                                 </select></span>
                                         </div>
 

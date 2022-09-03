@@ -357,10 +357,15 @@ class HomeController extends Controller
         $find_right_talends=AboutTalendsPage::where('page_type','find-right-talends')->first();
         $find_right_talend_testimonials=AboutTalendsPage::where('page_type','find-right-talend_testimonials')->first();
 
-        $meta_desc = 'Find Right Talends';
-        $page['title'] = 'Find Right Talends';
+        $find_right_talends_tags=$this->helper::getPageSeoTitles('find-right-talends');
+        $meta_title = !empty($find_right_talends_tags)  ? $find_right_talends_tags->meta_title : ('Find Right Talends');
+        $meta_desc = !empty($find_right_talends_tags)  ? $find_right_talends_tags->meta_description : ('You can find right talends on Talends.com.');
+        $meta_keywords = !empty($find_right_talends_tags)  ? $find_right_talends_tags->meta_keywords : 'Find Best Freelancers,Help You to Find Right Talends to work.';
+
+        $page['title'] = $meta_title;
+        
       
-        return view('front-end.pages.find-right-talends',compact('page','meta_desc','find_right_talends','find_right_talend_testimonials'));
+        return view('front-end.pages.find-right-talends',compact('page','meta_desc','meta_keywords','find_right_talends','find_right_talend_testimonials'));
      }
 
 
@@ -654,10 +659,20 @@ class HomeController extends Controller
         ->select('title','sub_category_id')
         ->whereIn('category_id',explode(',',$request->get('category_id')))
         ->get();
-
+   
     }
 
-    return view('front-end.pages.companies',compact('agency_services','agency_need_banner','companies','skills','locations','categories','sub_categories','featured_success_stories'));
+    
+    $companies_tags=$this->helper::getPageSeoTitles('companies');
+    
+    $meta_title = !empty($companies_tags)  ? $companies_tags->meta_title : ('Best IT Companies');
+    $meta_desc = !empty($companies_tags)  ? $companies_tags->meta_description : ('Best It Companies in Dubai');
+    $meta_keywords = !empty($companies_tags)  ? $companies_tags->meta_keywords : 'Best Freelance It Companies In Dubai.';
+    $page['title'] = $meta_title;
+    $page['meta_desc'] = $meta_desc;
+    $page['meta_keywords'] = $meta_keywords;
+
+    return view('front-end.pages.companies',compact('agency_services','page','agency_need_banner','companies','skills','locations','categories','sub_categories','featured_success_stories'));
      }
 
 
@@ -673,8 +688,10 @@ class HomeController extends Controller
         $locations = Location::select('title', 'id')->get()->pluck('title', 'id')->toArray();
         $departments =Department::all();
         $employees = Helper::getEmployeesList();
-
-        return view('front-end.pages.company_detail',compact('employees','departments','locations','company_bedget','categories','skills','company_expertise','expertise','company_detail','id','profile'));
+        // seo tags
+        $title=$profile->company_name ?? 'Agency Detail';
+        $description=$profile->description ?? 'An Agency that provide best services to their clients in Dubai.';
+        return view('front-end.pages.company_detail',compact('title','description','employees','departments','locations','company_bedget','categories','skills','company_expertise','expertise','company_detail','id','profile'));
      }
 
      public function CompanyServiceDetail($id){

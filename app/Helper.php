@@ -5989,7 +5989,7 @@ return $response;
             $company_payment=UserPayments::where('user_id',Auth::user()->id)->first();
              
              
-            if ( $company_payment->is_success == 0 && $selected_registration_type == 'multiple') {
+            if ( isset($company_payment->is_success)  &&  $company_payment->is_success == 0 && $selected_registration_type == 'multiple') {
                 $output .= '<div class="wt-jobalertsholder  float-right payment_warning" style="position: relative !important;top: 33px !important;">';
                 $output .= '<ul id="wt-jobalerts">';
                 $output .= '<li class="alert alert-danger alert-email alert-dismissible fade show">';
@@ -6000,7 +6000,7 @@ return $response;
                 $output .= '</li>';
                 $output .= '</ul>';
                 $output .= '</div>';
-            } else if ( $company_payment->is_success == 0 && $selected_registration_type == 'single') {
+            } else if (isset($company_payment->is_success)  && $company_payment->is_success == 0 && $selected_registration_type == 'single') {
                 $output .= '<div class="wt-jobalertsholder  float-right payment_warning" style="position: relative !important;top: 33px !important;">';
                 $output .= '<ul id="wt-jobalerts">';
                 $output .= '<li class="alert alert-danger alert-email alert-dismissible fade show">';

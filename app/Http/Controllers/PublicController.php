@@ -55,6 +55,7 @@ use App\ResponseTime;
 use App\Article;
 use App\AboutTalendsPage;
 use App\Rules\checkBusinessEmail;
+use App\SeoMetaTags;
 
 /**
  * Class PublicController
@@ -1058,14 +1059,20 @@ class PublicController extends Controller
                     
 
                 }elseif ($type === 'intern') {
-                    $f_list_meta_title = !empty($inner_page) && !empty($inner_page[0]['f_list_meta_title']) ? $inner_page[0]['f_list_meta_title'] : trans('lang.freelancer_listing');
-                    $f_list_meta_desc = !empty($inner_page) && !empty($inner_page[0]['f_list_meta_desc']) ? $inner_page[0]['f_list_meta_desc'] : trans('lang.freelancer_meta_desc');
                     $show_f_banner = !empty($inner_page) && !empty($inner_page[0]['show_f_banner']) ? $inner_page[0]['show_f_banner'] : 'true';
                     $f_inner_banner = !empty($inner_page) && !empty($inner_page[0]['f_inner_banner']) ? $inner_page[0]['f_inner_banner'] : null;
                    
+
+                    $interne_tags=Helper::getPageSeoTitles('interne');
+                    $f_list_meta_title = !empty($interne_tags)  ? $interne_tags->meta_title : ('Best IT Interns');
+                    $f_list_meta_desc = !empty($interne_tags)  ? $interne_tags->meta_description : ('Find Best and Intelligent Internes From All Over World.');
+                    $meta_keywords = !empty($interne_tags)  ? $interne_tags->meta_keywords : 'Fresh IT graduates,Internships for  It graduates';
+                
+                
                     return view(
                         'front-end.intern.index',
                         compact(
+                            'meta_keywords',
                             'type',
                             'users',
                             'categories',
@@ -1182,6 +1189,13 @@ class PublicController extends Controller
                     $max_price
                 );
                 $jobs = $results['jobs'];
+
+                $government_projects=Helper::getPageSeoTitles('government_projects');
+    
+                $job_list_meta_title = !empty($government_projects)  ? $government_projects->meta_title : ('Government Projects');
+                $job_list_meta_desc = !empty($government_projects)  ? $government_projects->meta_description : ('Find best Government Projects from Talends.com.');
+                $meta_keywords = !empty($government_projects)  ? $government_projects->meta_keywords : 'Government Projects,Dubai Government It Projects.';
+
                 
                 if (!empty($jobs)) {
                       return view(
@@ -1202,6 +1216,7 @@ class PublicController extends Controller
                                 'symbol',
                                 'job_list_meta_title',
                                 'job_list_meta_desc',
+                                'meta_keywords',
                                 'show_job_banner',
                                 'job_inner_banner',
                                 'show_breadcrumbs'
