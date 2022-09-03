@@ -8,6 +8,7 @@
         @endif
     @stop
 @section('description', "$meta_desc")
+@section('keywords', "$meta_keywords")
 
 @section('content')
         <section class="">

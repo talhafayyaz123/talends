@@ -9,7 +9,8 @@
 
 @endpush
 
-
+@section('title'){{ $title }} @stop
+@section('description', $description)
 @section('content')
 
 <div id="pages-list">

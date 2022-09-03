@@ -23,7 +23,7 @@
                 </li>
             @endif
 
-            @if (Auth::user()->getRoleNames()->first()=='company' && $company_payment->is_success == 0 && $selected_registration_type == 'multiple')
+            @if (Auth::user()->getRoleNames()->first()=='company' &&  isset($company_payment->is_success) &&  $company_payment->is_success == 0 && $selected_registration_type == 'multiple')
                 <li class="nav-item">
                     <a class="{{{ \Request::route()->getName()==='paymentVerification'? 'active': '' }}}" href="{{{ route('paymentVerification') }}}">{{{ trans('lang.payment_notify') }}}</a>
                 </li>

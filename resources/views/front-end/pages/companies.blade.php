@@ -25,6 +25,9 @@
 </style>
 @endpush
 
+@section('title'){{ $page['title'] }} @stop
+@section('description', $page['meta_desc'])
+@section('keywords', $page['meta_keywords'])
 @section('content')
 
 

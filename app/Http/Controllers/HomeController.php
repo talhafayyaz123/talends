@@ -42,9 +42,12 @@ class HomeController extends Controller
 {
 
     protected $paymentService;
-    public function __construct(PaymentService $paymentService)
+    protected $helper;
+
+    public function __construct(PaymentService $paymentService,Helper $helper)
     {
         $this->paymentService = $paymentService;
+        $this->helper=$helper;
     }
     /**
      * Display a listing of the resource.
@@ -64,7 +67,7 @@ class HomeController extends Controller
                 $page = array();
                 $home = true;
                 $page['id'] = $page_data['id'];
-                $page['title'] = $page_data['title'];
+                //$page['title'] = $page_data['title'];
                 $page['slug'] = $page_data['slug'];
                 $page['section_list'] = !empty($page_data['sections']) ? Helper::getUnserializeData($page_data['sections']) : array();
                 $description = $page_data['body'];
@@ -82,8 +85,17 @@ class HomeController extends Controller
                     $show_banner_image = true;
                 }
                 $banner = !empty($page_banner) ? Helper::getBannerImage('uploads/pages/' . $page_banner) : config('app.aws_se_path'). '/' .'images/bannerimg/img-02.jpg';
-                $meta_desc = !empty($page_meta) ? $page_meta : '';
+               // $meta_desc = !empty($page_meta) ? $page_meta : '';
                 
+
+                $home_tags=$this->helper::getPageSeoTitles('home');
+    
+            $meta_title = !empty($home_tags)  ? $home_tags->meta_title : ('Freelance Market Place');
+            $meta_desc = !empty($home_tags)  ? $home_tags->meta_description : ('Best Freelance Market Place in UAE.');
+            $meta_keywords = !empty($home_tags)  ? $home_tags->meta_keywords : 'Freelance market place in UAE.';
+            $page['title'] = $meta_title;
+
+
                 $type = Helper::getAccessType() == 'services' ? 'service' : Helper::getAccessType();
                 $slider_section = '';
                 $slider_style = '';
@@ -146,6 +158,7 @@ class HomeController extends Controller
                     return View::make(
                         'front-end.pages.show',
                         compact(
+                            'meta_keywords',
                             'footer_social_content',
                             'agency_profile',
                             'featured_success_stories',
@@ -197,18 +210,20 @@ class HomeController extends Controller
         exit;
     }
      public function whyTalends(){
-        $inner_page = SiteManagement::getMetaValue('why_talends');
         $about_talends=AboutTalendsPage::where('page_type','about_talends')->first();
+        $why_talends_tags=$this->helper::getPageSeoTitles('why_talends');
 
         $page_header = '';
         $page = array();
         $home = false;
 
-        $meta_title = !empty($inner_page) && !empty($inner_page[0]['title']) ? $inner_page[0]['title'] : trans('lang.why-talends-title');
-        $meta_desc = !empty($inner_page) && !empty($inner_page[0]['desc']) ? $inner_page[0]['desc'] : trans('lang.why-talends-desc');
+        $meta_title = !empty($why_talends_tags)  ? $why_talends_tags->meta_title : trans('lang.why-talends-title');
+        $meta_desc = !empty($why_talends_tags)  ? $why_talends_tags->meta_description : trans('lang.why-talends-desc');
+        $meta_keywords = !empty($why_talends_tags)  ? $why_talends_tags->meta_keywords : 'Why Talends,Why Choose Talends';
         $page['title'] = $meta_title;
+    
        
-        return view('front-end.pages.why-talends',compact('page','home','meta_desc','about_talends'));
+        return view('front-end.pages.why-talends',compact('page','home','meta_desc','meta_keywords','about_talends'));
      }
 
      public function whyAgencyPlan(){
@@ -217,8 +232,16 @@ class HomeController extends Controller
 
         $monthly_options = !empty($package[0]->options) ? unserialize($package[0]->options) : array();
         $yearly_options = !empty($package[1]->options) ? unserialize($package[1]->options) : array();
+
+
+        $why_agency_plan_tags=$this->helper::getPageSeoTitles('why_agency_plan');
     
-        return view('front-end.pages.why_agency_plan',compact('yearly_options','monthly_options','package','why_agency_plan'));
+        $meta_title = !empty($why_agency_plan_tags)  ? $why_agency_plan_tags->meta_title : ('Why Choose Agency Plaans');
+        $meta_desc = !empty($why_agency_plan_tags)  ? $why_agency_plan_tags->meta_description : ('You can choose best agency plans on Talends.com.');
+        $meta_keywords = !empty($why_agency_plan_tags)  ? $why_agency_plan_tags->meta_keywords : 'why need agency plans.';
+    
+    
+        return view('front-end.pages.why_agency_plan',compact('meta_keywords','meta_desc','meta_title','yearly_options','monthly_options','package','why_agency_plan'));
      }
 
      public function companyRegistration(){
@@ -234,8 +257,16 @@ class HomeController extends Controller
         $yearly_options = !empty($package[1]->options) ? unserialize($package[1]->options) : array();
 
         $package_options = Helper::getPackageOptions('company');
+
+        $company_registration_tags=$this->helper::getPageSeoTitles('agency_registration');
+    
+        $meta_title = !empty($company_registration_tags)  ? $company_registration_tags->meta_title : ('Agency Registration');
+        $meta_desc = !empty($company_registration_tags)  ? $company_registration_tags->meta_description : ('Register your agency on Talends.com.');
+        $meta_keywords = !empty($company_registration_tags)  ? $company_registration_tags->meta_keywords : 'Freelance Agency registration.';
+        $page['title'] = $meta_title;
+
       
-        return view('auth.company_registration',compact('package_options','yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
+        return view('auth.company_registration',compact('package_options','page','meta_desc','meta_keywords','yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
      }
 
      public function companyRegistrationSuccess(Request $request){
@@ -352,10 +383,15 @@ class HomeController extends Controller
         $find_right_talends=AboutTalendsPage::where('page_type','find-right-talends')->first();
         $find_right_talend_testimonials=AboutTalendsPage::where('page_type','find-right-talend_testimonials')->first();
 
-        $meta_desc = 'Find Right Talends';
-        $page['title'] = 'Find Right Talends';
+        $find_right_talends_tags=$this->helper::getPageSeoTitles('find-right-talends');
+        $meta_title = !empty($find_right_talends_tags)  ? $find_right_talends_tags->meta_title : ('Find Right Talends');
+        $meta_desc = !empty($find_right_talends_tags)  ? $find_right_talends_tags->meta_description : ('You can find right talends on Talends.com.');
+        $meta_keywords = !empty($find_right_talends_tags)  ? $find_right_talends_tags->meta_keywords : 'Find Best Freelancers,Help You to Find Right Talends to work.';
+
+        $page['title'] = $meta_title;
+        
       
-        return view('front-end.pages.find-right-talends',compact('page','meta_desc','find_right_talends','find_right_talend_testimonials'));
+        return view('front-end.pages.find-right-talends',compact('page','meta_desc','meta_keywords','find_right_talends','find_right_talend_testimonials'));
      }
 
 
@@ -368,10 +404,13 @@ class HomeController extends Controller
         $page = array();
         $home = false;
 
-        $meta_title = !empty($inner_page) && !empty($inner_page[0]['title']) ? $inner_page[0]['title'] : trans('lang.government-title');
-        $meta_desc = !empty($inner_page) && !empty($inner_page[0]['desc']) ? $inner_page[0]['desc'] : trans('lang.government-desc');
+        $government_tags=$this->helper::getPageSeoTitles('government');
+    
+        $meta_title = !empty($government_tags)  ? $government_tags->meta_title : trans('lang.government-title');
+        $meta_desc = !empty($government_tags)  ? $government_tags->meta_description : trans('lang.government-desc');
+        $meta_keywords = !empty($government_tags)  ? $government_tags->meta_keywords : 'Government Projects,Government It Projects';
         $page['title'] = $meta_title;
-        return view('front-end.pages.government',compact('page','home','meta_desc','government'));
+        return view('front-end.pages.government',compact('page','home','meta_desc','meta_keywords','government'));
      }
 
 
@@ -646,10 +685,20 @@ class HomeController extends Controller
         ->select('title','sub_category_id')
         ->whereIn('category_id',explode(',',$request->get('category_id')))
         ->get();
-
+   
     }
 
-    return view('front-end.pages.companies',compact('agency_services','agency_need_banner','companies','skills','locations','categories','sub_categories','featured_success_stories'));
+    
+    $companies_tags=$this->helper::getPageSeoTitles('companies');
+    
+    $meta_title = !empty($companies_tags)  ? $companies_tags->meta_title : ('Best IT Companies');
+    $meta_desc = !empty($companies_tags)  ? $companies_tags->meta_description : ('Best It Companies in Dubai');
+    $meta_keywords = !empty($companies_tags)  ? $companies_tags->meta_keywords : 'Best Freelance It Companies In Dubai.';
+    $page['title'] = $meta_title;
+    $page['meta_desc'] = $meta_desc;
+    $page['meta_keywords'] = $meta_keywords;
+
+    return view('front-end.pages.companies',compact('agency_services','page','agency_need_banner','companies','skills','locations','categories','sub_categories','featured_success_stories'));
      }
 
 
@@ -665,8 +714,10 @@ class HomeController extends Controller
         $locations = Location::select('title', 'id')->get()->pluck('title', 'id')->toArray();
         $departments =Department::all();
         $employees = Helper::getEmployeesList();
-
-        return view('front-end.pages.company_detail',compact('employees','departments','locations','company_bedget','categories','skills','company_expertise','expertise','company_detail','id','profile'));
+        // seo tags
+        $title=$profile->company_name ?? 'Agency Detail';
+        $description=$profile->description ?? 'An Agency that provide best services to their clients in Dubai.';
+        return view('front-end.pages.company_detail',compact('title','description','employees','departments','locations','company_bedget','categories','skills','company_expertise','expertise','company_detail','id','profile'));
      }
 
      public function CompanyServiceDetail($id){

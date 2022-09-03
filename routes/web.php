@@ -146,6 +146,16 @@ Route::group(
 
         Route::get('admin/user_payments', 'UserPaymentController@getPayments')->name('userPayments');
         Route::get('admin/user_payment_detail/{id}', 'UserPaymentController@getPaymentDetail')->name('userPaymentDetail');
+
+        //seo pages crud
+        Route::get('admin/seo_meta_tags', 'SeoMetaTagsController@index');
+        Route::get('admin/meta-tags/edit-tags/{id}', 'SeoMetaTagsController@edit')->name('editMetaTag');
+        Route::post('admin/store-meta-tags', 'SeoMetaTagsController@store');
+        Route::get('admin/seo_meta_tags/search', 'SeoMetaTagsController@index');
+        Route::post('admin/seo_tags/delete-tags', 'SeoMetaTagsController@destroy');
+        Route::post('admin/delete-checked-seo_tags', 'SeoMetaTagsController@deleteSelected');
+        Route::post('admin/seo_tags/update-seo_tags/{id}', 'SeoMetaTagsController@update');
+    
         
         // Article Category Routes
         Route::get('admin/article/categories', 'ArticleCategoryController@index')->name('articleCategories');
