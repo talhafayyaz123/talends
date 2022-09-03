@@ -35,6 +35,7 @@
                                                     <option value="">Page Name</option>
                                                     <option value="government">Government</option>
                                                     <option value="why_talends">Why Talends</option>
+                                                    <option value="interne">Interne</option>
                                                 </select></span>
                                         </div>
 

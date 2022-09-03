@@ -40,7 +40,7 @@ use App\UserCategorySkills;
 use App\CompanyExpertise;
 use App\CompanyDetail;
 use App\UserPayments;
-
+use App\SeoMetaTags;
 /**
  * Class Helper
  *
@@ -98,6 +98,10 @@ class Helper extends Model
     }
     }
     
+    public static function getPageSeoTitles($page_name){
+        $seo_meta_tags=SeoMetaTags::where('meta_page_name',$page_name)->first();
+        return $seo_meta_tags;
+    }
 
     public static function packagePaymentPaytab($amount,$id){
            

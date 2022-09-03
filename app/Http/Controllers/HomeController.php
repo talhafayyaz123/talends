@@ -42,9 +42,12 @@ class HomeController extends Controller
 {
 
     protected $paymentService;
-    public function __construct(PaymentService $paymentService)
+    protected $helper;
+
+    public function __construct(PaymentService $paymentService,Helper $helper)
     {
         $this->paymentService = $paymentService;
+        $this->helper=$helper;
     }
     /**
      * Display a listing of the resource.
@@ -197,18 +200,20 @@ class HomeController extends Controller
         exit;
     }
      public function whyTalends(){
-        $inner_page = SiteManagement::getMetaValue('why_talends');
         $about_talends=AboutTalendsPage::where('page_type','about_talends')->first();
+        $why_talends_tags=$this->helper::getPageSeoTitles('why_talends');
 
         $page_header = '';
         $page = array();
         $home = false;
 
-        $meta_title = !empty($inner_page) && !empty($inner_page[0]['title']) ? $inner_page[0]['title'] : trans('lang.why-talends-title');
-        $meta_desc = !empty($inner_page) && !empty($inner_page[0]['desc']) ? $inner_page[0]['desc'] : trans('lang.why-talends-desc');
+        $meta_title = !empty($why_talends_tags)  ? $why_talends_tags->meta_title : trans('lang.why-talends-title');
+        $meta_desc = !empty($why_talends_tags)  ? $why_talends_tags->meta_description : trans('lang.why-talends-desc');
+        $meta_keywords = !empty($why_talends_tags)  ? $why_talends_tags->meta_keywords : 'Why Talends,Why Choose Talends';
         $page['title'] = $meta_title;
+    
        
-        return view('front-end.pages.why-talends',compact('page','home','meta_desc','about_talends'));
+        return view('front-end.pages.why-talends',compact('page','home','meta_desc','meta_keywords','about_talends'));
      }
 
      public function whyAgencyPlan(){
@@ -368,10 +373,13 @@ class HomeController extends Controller
         $page = array();
         $home = false;
 
-        $meta_title = !empty($inner_page) && !empty($inner_page[0]['title']) ? $inner_page[0]['title'] : trans('lang.government-title');
-        $meta_desc = !empty($inner_page) && !empty($inner_page[0]['desc']) ? $inner_page[0]['desc'] : trans('lang.government-desc');
+        $government_tags=$this->helper::getPageSeoTitles('government');
+    
+        $meta_title = !empty($government_tags)  ? $government_tags->meta_title : trans('lang.government-title');
+        $meta_desc = !empty($government_tags)  ? $government_tags->meta_description : trans('lang.government-desc');
+        $meta_keywords = !empty($government_tags)  ? $government_tags->meta_keywords : 'Government Projects,Government It Projects';
         $page['title'] = $meta_title;
-        return view('front-end.pages.government',compact('page','home','meta_desc','government'));
+        return view('front-end.pages.government',compact('page','home','meta_desc','meta_keywords','government'));
      }
 
 
