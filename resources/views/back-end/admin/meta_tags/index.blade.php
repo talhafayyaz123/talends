@@ -40,6 +40,11 @@
                                                     <option value="find-right-talends">Find Right Talends</option>
                                                     <option value="government_projects">Government Projects</option>
                                                     <option value="home">Home</option>
+                                                    <option value="agency_registration">Agency Registration</option>
+                                                    <option value="why_agency_plan">Why Agency Plan</option>
+                                                    <option value="register">Register</option>
+                                                    <option value="login">Login</option>
+
                                                 </select></span>
                                         </div>
 

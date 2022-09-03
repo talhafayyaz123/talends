@@ -1,9 +1,10 @@
 @extends('front-end.master2')
 
 @section('title')
-Why Join Agency Plan
+{{$meta_title }}
 @stop
-@section('description', " Why Join Agency Plan")
+@section('description', $meta_desc)
+@section('keywords', $meta_keywords)
 
 @section('content')
 

@@ -67,7 +67,7 @@ class HomeController extends Controller
                 $page = array();
                 $home = true;
                 $page['id'] = $page_data['id'];
-                $page['title'] = $page_data['title'];
+                //$page['title'] = $page_data['title'];
                 $page['slug'] = $page_data['slug'];
                 $page['section_list'] = !empty($page_data['sections']) ? Helper::getUnserializeData($page_data['sections']) : array();
                 $description = $page_data['body'];
@@ -85,8 +85,17 @@ class HomeController extends Controller
                     $show_banner_image = true;
                 }
                 $banner = !empty($page_banner) ? Helper::getBannerImage('uploads/pages/' . $page_banner) : config('app.aws_se_path'). '/' .'images/bannerimg/img-02.jpg';
-                $meta_desc = !empty($page_meta) ? $page_meta : '';
+               // $meta_desc = !empty($page_meta) ? $page_meta : '';
                 
+
+                $home_tags=$this->helper::getPageSeoTitles('home');
+    
+            $meta_title = !empty($home_tags)  ? $home_tags->meta_title : ('Freelance Market Place');
+            $meta_desc = !empty($home_tags)  ? $home_tags->meta_description : ('Best Freelance Market Place in UAE.');
+            $meta_keywords = !empty($home_tags)  ? $home_tags->meta_keywords : 'Freelance market place in UAE.';
+            $page['title'] = $meta_title;
+
+
                 $type = Helper::getAccessType() == 'services' ? 'service' : Helper::getAccessType();
                 $slider_section = '';
                 $slider_style = '';
@@ -149,6 +158,7 @@ class HomeController extends Controller
                     return View::make(
                         'front-end.pages.show',
                         compact(
+                            'meta_keywords',
                             'footer_social_content',
                             'agency_profile',
                             'featured_success_stories',
@@ -222,8 +232,16 @@ class HomeController extends Controller
 
         $monthly_options = !empty($package[0]->options) ? unserialize($package[0]->options) : array();
         $yearly_options = !empty($package[1]->options) ? unserialize($package[1]->options) : array();
+
+
+        $why_agency_plan_tags=$this->helper::getPageSeoTitles('why_agency_plan');
     
-        return view('front-end.pages.why_agency_plan',compact('yearly_options','monthly_options','package','why_agency_plan'));
+        $meta_title = !empty($why_agency_plan_tags)  ? $why_agency_plan_tags->meta_title : ('Why Choose Agency Plaans');
+        $meta_desc = !empty($why_agency_plan_tags)  ? $why_agency_plan_tags->meta_description : ('You can choose best agency plans on Talends.com.');
+        $meta_keywords = !empty($why_agency_plan_tags)  ? $why_agency_plan_tags->meta_keywords : 'why need agency plans.';
+    
+    
+        return view('front-end.pages.why_agency_plan',compact('meta_keywords','meta_desc','meta_title','yearly_options','monthly_options','package','why_agency_plan'));
      }
 
      public function companyRegistration(){
@@ -239,8 +257,16 @@ class HomeController extends Controller
         $yearly_options = !empty($package[1]->options) ? unserialize($package[1]->options) : array();
 
         $package_options = Helper::getPackageOptions('company');
+
+        $company_registration_tags=$this->helper::getPageSeoTitles('agency_registration');
+    
+        $meta_title = !empty($company_registration_tags)  ? $company_registration_tags->meta_title : ('Agency Registration');
+        $meta_desc = !empty($company_registration_tags)  ? $company_registration_tags->meta_description : ('Register your agency on Talends.com.');
+        $meta_keywords = !empty($company_registration_tags)  ? $company_registration_tags->meta_keywords : 'Freelance Agency registration.';
+        $page['title'] = $meta_title;
+
       
-        return view('auth.company_registration',compact('package_options','yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
+        return view('auth.company_registration',compact('package_options','page','meta_desc','meta_keywords','yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
      }
 
      public function companyRegistrationSuccess(Request $request){

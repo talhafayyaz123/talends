@@ -3,7 +3,9 @@
 @section('title')
 Company Registration
 @stop
-@section('description', "Company Registration")
+@section('description', $meta_desc)
+@section('keywords', $meta_keywords)
+
 
 @section('content')
 

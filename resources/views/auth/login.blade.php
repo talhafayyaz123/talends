@@ -1,5 +1,9 @@
 @extends(file_exists(resource_path('views/extend/front-end/master.blade.php')) ? 'extend.front-end.master' : 'front-end.master')
+@section('title'){{ $meta_title }} @stop
 
+@section('description', $meta_desc)
+
+@section('keywords', $meta_keywords)
 @section('content')
 @php
             $footer_social_content=App\Helper::getFooterSocialContent();
