@@ -1,8 +1,16 @@
 @extends(file_exists(resource_path('views/extend/front-end/master.blade.php')) ? 'extend.front-end.master' : 'front-end.master')
 
+@if(isset($meta_title))
 @section('title'){{ $meta_title }} @stop
+@endif
+
+@if(isset($meta_desc))
 @section('description', $meta_desc)
+@endif
+
+@if(isset($meta_keywords))
 @section('keywords', $meta_keywords)
+@endif
 
 @section('content')
 @php
