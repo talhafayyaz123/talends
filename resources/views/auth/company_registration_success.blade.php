@@ -16,9 +16,9 @@ Registration Successfull
             <div class="row row-eq-height">
                 <div class="col-md-12 text-center pb-3">
                     <h2 class="">Success</h2>
-                    <p class="w-50 mx-auto">We have succsefuly created your new account. Please pay and start enjoying business growth & maximum mature leads from Talends.com. Once you’re done with payment we will send you an activation mail to the email you provided during registration. It should arrive in a couple of minutes
+                    <p class="w-50 mx-auto">We have successfully created your new account. Please pay and start enjoying business growth & maximum mature leads from Talends.com. Once you’re done with payment we will send you an activation mail to the email you provided during registration. It should arrive in a couple of minutes
                         <br><br><br>
-                        IF the email has not arrived during 30s you can still click the button below to resend it. We guarantee it will come this time!
+                        If the email has not arrived then please check spam/junk folder.
                     </p>
 
                     <form method="POST" action="" class="wt-formtheme wt-formregister" id="verification_form">
