@@ -631,7 +631,7 @@ return [
     'agree_terms' => 'Agree Our Terms And Conditions.',
     'previous' => 'Previous',
     'continue' => 'Continue',
-    'verify_code_note' => 'We have sent verification code on your email.',
+    'verify_code_note' => 'We have sent verification code on your email also please check spam/junk folder.',
     'verify_account' => 'Please verify your account, by clicking on verify button',
     'verify_now' => 'Verify Now',
     'verification_code_img' => 'Verification Code',
