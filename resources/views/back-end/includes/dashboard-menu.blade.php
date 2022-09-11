@@ -119,12 +119,18 @@
                                 <span>{{ trans('lang.all_jobs') }}</span>
                             </a>
                         </li>
+                        <?php  
+                                $payout_settings = App\SiteManagement::getMetaValue('commision');
+                                $payment_gateway = !empty($payout_settings) && !empty($payout_settings[0]['payment_method']) ? $payout_settings[0]['payment_method'] : array();
+                                if( isset($payment_gateway) && in_array('paytab',$payment_gateway)){
+                        ?>
                         <li>
                             <a href="{{{ route('userPayments') }}}">
                                 <i class="ti-briefcase"></i>
                                 <span>User Payments</span>
                             </a>
                         </li>
+                        <?php } ?>
                        
                         @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services')
                             <li>

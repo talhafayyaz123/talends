@@ -237,6 +237,8 @@ $(document).ready(function(){
         
             } 
          }
+
+        
         
         if(is_error==0 && current>1){
             jQuery('.alert-danger').html('');

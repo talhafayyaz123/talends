@@ -1440,6 +1440,7 @@ class UserController extends Controller
     public function checkout($id)
     {
         if (!empty($id)) {
+
             $package_options = Helper::getPackageOptions(Auth::user()->getRoleNames()[0]);
             $package = Package::find($id);
             $stripe_settings = SiteManagement::getMetaValue('stripe_settings');

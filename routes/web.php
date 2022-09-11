@@ -77,6 +77,8 @@ Route::get('company/registration', 'HomeController@companyRegistration')->name('
 Route::post('/registration/success', 'HomeController@companyRegistrationSuccess')->name('companyRegistratonSuccess');
 Route::get('registration/again/payment/{id}/{package_id}', 'Auth\RegisterController@registrationAgainPayment')->name('registrationAgainPayment');
 
+Route::get('stripe/registration/success/{id}', 'HomeController@stripeCompanyRegistrationSuccess')->name('companyRegistratonSuccess');
+
 
 Route::post('store/admin/lead', 'HomePagesController@storeAdminLead')->name('storeAdminLead');
 Route::get('admin/lead/success', 'HomePagesController@adminLeadSuccess')->name('adminLeadSuccess');
@@ -708,6 +710,8 @@ Route::get('paytab/service/payment/{service_id}/{service_seller}', array('as' =>
 Route::post('company/registration', 'Auth\RegisterController@userRegister')->name('userRegister');
 
 Route::get('service/payment-process/{id}', 'ServiceController@employerPaymentProcess');
+
+Route::post('addmoney/stripe/company/register', array('as' => 'addmoney.stripe.register', 'uses' => 'StripeController@userRegisterStripe',));
 
 // Page Builder
 Route::get('get-edit-page/{id}', 'PageController@getEditPageData');

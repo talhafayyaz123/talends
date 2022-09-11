@@ -79,6 +79,8 @@ use App\Message;
 use App\Service;
 
 use App\SiteManagement;
+use App\Mail\GeneralEmailMailable;
+use App\Mail\AdminEmailMailable;
 
 
 
@@ -121,6 +123,696 @@ class StripeController extends Controller
     }
 
 
+    public function userRegisterStripe(Request $request){
+            
+        $settings = SiteManagement::getMetaValue('commision');
+
+        $currency = !empty($settings[0]['currency']) ? $settings[0]['currency'] : 'USD';
+
+      
+       parse_str($request->data, $output);
+       $input = array_except($output, array('_token'));
+       $package=Package::find($input['package_id']);
+ 
+       $validator = \Validator::make(
+        $input, [
+            'company_name' => 'required',
+            'email' => ['required','unique:users'],
+            'phone_number' => 'required',
+            'password' => 'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+            'employees' => 'required',
+            'role' => 'not_in:admin',
+            'package_id' => 'required',
+            'locations' => 'required',
+            'agency_language' => 'required',
+            'agency_website' => 'required',
+            'budget' => 'required',
+            'categories.*' => 'required',
+    ]);
+    
+    if ($validator->fails())
+    {
+        return response()->json(['type'=>'error','message'=>$validator->errors()->all()]);
+    }
+        
+       if(isset($package) && !empty($package) ){
+        $options = unserialize($package->options);
+        $banner = $options['banner_option'] = 1 ? 'ti-check' : 'ti-na';
+        $chat = $options['private_chat'] = 1 ? 'ti-check' : 'ti-na';
+        session()->put(['product_id' => e($package->id)]);
+        session()->put(['product_title' => e($package->title)]);
+        session()->put(['product_price' => e($package->cost)]);
+        session()->put(['type' => 'package']);
+
+
+        $product_id = Session::has('product_id') ? session()->get('product_id') : '';
+
+        $product_title = Session::has('product_title') ? session()->get('product_title') : '';
+
+        $product_price = Session::has('product_price') ? session()->get('product_price') : 0;
+
+        $type = Session::has('type') ? session()->get('type') : '';
+ 
+        if (!empty(env('STRIPE_SECRET'))) {
+          \Artisan::call('optimize:clear');
+ 
+          $stripe = Stripe::make(env('STRIPE_SECRET'));
+           
+      } else {
+ 
+         $json['type'] = 'error';
+ 
+         $json['message'] = trans('lang.empty_stripe_key');
+ 
+         return $json;
+ 
+     
+        }
+     //////
+     
+     try {
+          
+       
+        $token = $stripe->tokens()->create(
+
+  [
+
+      'card' => [
+
+          'number'    => $input['card_no'],
+
+          'exp_month' => $input['ccExpiryMonth'],
+
+          'exp_year'  => $input['ccExpiryYear'],
+
+          'cvc'       =>$input['cvvNumber'],
+
+      ],
+
+  ]
+
+);
+
+if (!isset($token['id'])) {
+
+  // Session::flash('error', 'The Stripe Token was not generated correctly');
+
+  // return Redirect::back();
+
+  $json['type'] = 'error';
+
+  $json['message'] = 'The Stripe Token was not generated correctly';
+
+  return $json;
+
+}
+
+$payment_detail = $stripe->charges()->create(
+
+  [
+
+      'card' => $token['id'],
+
+      'currency' => $currency,
+
+      'amount'   => $product_price,
+
+      'description' => trans('lang.add_in_wallet'),
+
+  ]
+
+);
+
+
+$payment_intent = $stripe->paymentIntents()->create([
+
+  'description' => $product_title,
+
+  'shipping' => [
+
+      'name' => $input['stripe_user_name'],
+
+      'address' => [
+
+          'line1' =>$input['line1'],
+
+          'line2' => $input['line2'],
+
+          'postal_code' =>$input['postal_code'],
+
+          'city' => $input['city'],
+
+          'state' => $input['state'],
+
+          'country' => $input['country'],
+
+      ],
+
+  ],
+
+  'amount' => $product_price,
+
+  'currency' => $currency,
+
+  'payment_method_types' => ['card'],
+
+]);
+
+
+
+$customer = $stripe->customers()->create(
+
+  [
+
+      'name' => $input['stripe_user_name'],
+
+      'email' =>$input['stripe_user_email'],
+
+      'phone' =>$input['stripe_user_phone'],
+
+      'address' => [
+
+          'line1' => $input['line1'],
+
+          'line2' =>$input['line2'] ,
+
+          'postal_code' =>$input['postal_code'],
+
+          'city' =>$input['city'],
+
+          'state' =>$input['state'],
+
+          'country' => $input['country'],
+
+      ],
+
+  ]
+
+);
+
+
+if ($payment_detail['status'] == 'succeeded') {
+
+    $json = array();
+    $user = new User();
+
+
+    $register_form = SiteManagement::getMetaValue('reg_form_settings');
+        $registration_type = !empty($register_form) && !empty($register_form[0]['registration_type']) ? $register_form[0]['registration_type'] : 'multiple';
+        $verification_type = !empty($register_form) && !empty($register_form[0]['verification_type']) ? $register_form[0]['verification_type'] : 'admin_verify';
+        $verification_code = '';
+        if ($registration_type !== 'single' && $verification_type !== 'auto_verify') {
+            $random_number = Helper::generateRandomCode(4);
+            $verification_code = strtoupper($random_number);
+        }
+    
+       $user_id = $user->storeCompanyUser($input, $verification_code, $registration_type, $verification_type);
+ session()->put(['user_id' => $user_id]);
+session()->put(['email' => $input['email']]);
+session()->put(['password' => $input['password']]); 
+if (!empty(config('mail.username')) && !empty(config('mail.password'))) {
+    $email_params = array();
+    
+    if ($registration_type !== 'single' && $verification_type !== 'auto_verify') {
+        $template = DB::table('email_types')->select('id')
+            ->where('email_type', 'verification_code')->get()->first();
+        if (!empty($template->id)) {
+            $template_data = EmailTemplate::getEmailTemplateByID($template->id);
+            $email_params['verification_code'] = $user->verification_code;
+            $email_params['name'] = Helper::getUserName($user->id);
+            $email_params['email'] = $user->email;
+            $email_params['role'] = 'company';
+
+             Mail::to($user->email)
+                ->send(
+                    new GeneralEmailMailable(
+                        'verification_code',
+                        $template_data,
+                        $email_params
+                    )
+                ); 
+        }
+    } else {
+        $template = DB::table('email_types')->select('id')->where('email_type', 'new_user')->get()->first();
+        if (!empty($template->id)) {
+            $template_data = EmailTemplate::getEmailTemplateByID($template->id);
+            $email_params['name'] = Helper::getUserName($user->id);
+            $email_params['email'] = $user->email;
+            $email_params['password'] = $request['password'];
+            $email_params['role'] = 'company';
+             Mail::to($user->email)
+                ->send(
+                    new GeneralEmailMailable(
+                        'new_user',
+                        $template_data,
+                        $email_params
+                    )
+                ); 
+        }
+        $admin_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_registration')->get()->first();
+        if (!empty($admin_template->id)) {
+            $template_data = EmailTemplate::getEmailTemplateByID($admin_template->id);
+            $email_params['name'] = Helper::getUserName($user->id);
+            $email_params['email'] = $user->email;
+            $email_params['role'] = 'company';
+            $email_params['link'] = url('profile/' . $user->slug);
+            Mail::to(config('mail.adminmail'))
+                ->send(
+                    new AdminEmailMailable(
+                        'admin_email_registration',
+                        $template_data,
+                        $email_params
+                    )
+                );  
+        }
+        session()->forget('password');
+        session()->forget('email');
+    }
+} else {
+    $id = Session::get('user_id');
+    $user = User::find($id);
+    Auth::login($user);
+
+}
+
+    
+  $fee = !empty($payment_detail['application_fee_amount']) ? $payment_detail['application_fee_amount'] : 0;
+
+  $invoice = new Invoice();
+
+  $invoice->title = 'Invoice';
+
+  $invoice->price = $product_price;
+
+  $invoice->payer_name = filter_var($customer['name'], FILTER_SANITIZE_STRING);
+
+  $invoice->payer_email = filter_var($customer['email'], FILTER_SANITIZE_EMAIL);
+
+  $invoice->seller_email = 'test@email.com';
+
+  $invoice->currency_code = filter_var($payment_detail['currency'], FILTER_SANITIZE_STRING);
+
+  $invoice->payer_status = '';
+
+  $invoice->transaction_id = filter_var($payment_detail['id'], FILTER_SANITIZE_STRING);
+
+  $invoice->invoice_id = filter_var($payment_detail['source']['id'], FILTER_SANITIZE_STRING);
+
+  $invoice->customer_id = filter_var($customer['id'], FILTER_SANITIZE_STRING);
+
+  $invoice->shipping_amount = 0;
+
+  $invoice->handling_amount = 0;
+
+  $invoice->insurance_amount = 0;
+
+  $invoice->sales_tax = 0;
+
+  $invoice->payment_mode = filter_var('stripe', FILTER_SANITIZE_STRING);
+
+  $invoice->paypal_fee = $fee;
+
+  $invoice->paid = $payment_detail['paid'];
+
+  $product_type = $type;
+
+  $invoice->type = $product_type;
+
+  $invoice->save();
+
+  $invoice_id = DB::getPdo()->lastInsertId();
+
+  if ($type == 'package') {
+
+      $item = DB::table('items')->select('id')->where('subscriber', $user_id)->first();
+
+      if (!empty($item)) {
+
+          $item = Item::find($item->id);
+
+      } else {
+
+          $item = new Item();
+
+      }
+
+  } else {
+
+      $item = new Item();
+
+  }
+
+  $item->invoice_id = filter_var($invoice_id, FILTER_SANITIZE_NUMBER_INT);
+
+  $item->product_id = filter_var($product_id, FILTER_SANITIZE_NUMBER_INT);
+
+  $item->subscriber = $user_id;
+
+  $item->item_name = filter_var($product_title, FILTER_SANITIZE_STRING);
+
+  $item->item_price = $product_price;
+
+  $item->item_qty = filter_var(1, FILTER_SANITIZE_NUMBER_INT);
+
+  $item->save();
+
+  $last_order_id = session()->get('custom_order_id');
+
+  DB::table('orders')
+
+      ->where('id', $last_order_id)
+
+      ->update(['status' => 'completed']);
+
+      $user=User::find($user_id);
+
+  if ($user) {
+
+      if ($product_type == 'package') {
+
+          if (session()->has('product_id')) {
+
+              $package_item = \App\Item::where('subscriber', $user->id)->first();
+
+              $id = session()->get('product_id');
+
+              $package = \App\Package::find($id);
+
+              $option = !empty($package->options) ? unserialize($package->options) : '';
+
+              $expiry = !empty($option) ? $package_item->updated_at->addDays($option['duration']) : '';
+
+              $expiry_date = !empty($expiry) ? Carbon::parse($expiry)->toDateTimeString() : '';
+
+              $user = \App\User::find($user->id);
+
+              if (!empty($package->badge_id) && $package->badge_id != 0) {
+
+                  $user->badge_id = $package->badge_id;
+
+              }
+
+              $user->expiry_date = $expiry_date;
+
+              $user->save();
+
+              // send mail
+
+              if (!empty(config('mail.username')) && !empty(config('mail.password'))) {
+
+                  $item = DB::table('items')->where('product_id', $id)->get()->toArray();
+
+                  $package =  Package::where('id', $item[0]->product_id)->first();
+
+                  $user = User::find($item[0]->subscriber);
+
+                  $role = $user->getRoleNames()->first();
+
+                  $package_options = unserialize($package->options);
+
+                  if (!empty($invoice)) {
+
+                      if ($package_options['duration'] === 'Quarter') {
+
+                          $expiry_date = $invoice->created_at->addDays(4);
+
+                      } elseif ($package_options['duration'] === 'Month') {
+
+                          $expiry_date = $invoice->created_at->addMonths(1);
+
+                      } elseif ($package_options['duration'] === 'Year') {
+
+                          $expiry_date = $invoice->created_at->addYears(1);
+
+                      }
+
+                  }
+
+                
+                    $login_user = User::find($user_id);
+                 
+                      if (!empty($login_user->email)) {
+
+                          $email_params = array();
+
+                          $template = DB::table('email_types')->select('id')->where('email_type', 'freelancer_email_package_subscribed')->get()->first();
+
+                          if (!empty($template->id)) {
+
+                              $template_data = EmailTemplate::getEmailTemplateByID($template->id);
+
+                              $email_params['freelancer'] = Helper::getUserName($user_id);
+
+                              $email_params['freelancer_profile'] = url('profile/' . $login_user->slug);
+
+                              $email_params['name'] = $package->title;
+
+                              $email_params['price'] = $package->cost;
+
+                              $email_params['expiry_date'] = !empty($expiry_date) ? Carbon::parse($expiry_date)->format('M d, Y') : '';
+
+                              Mail::to($login_user->email)
+
+                                  ->send(
+
+                                      new FreelancerEmailMailable(
+
+                                          'freelancer_email_package_subscribed',
+
+                                          $template_data,
+
+                                          $email_params
+
+                                      )
+
+                                  ); 
+
+                          }
+                          $json['type'] = 'success';
+
+                          $json['url'] = url('stripe/registration/success/'.$user_id);
+                        
+                          return $json; 
+                      } 
+
+                  
+
+              }
+
+          }
+
+      } else if ($product_type == 'project') {
+
+          if (session()->has('project_type')) {
+
+              $project_type = session()->get('project_type');
+
+              if ($project_type == 'service') {
+
+                  $id = session()->get('product_id');
+
+                  $freelancer = session()->get('service_seller');
+
+                  $service = Service::find($id);
+
+                  $service->users()->attach($user->id, ['type' => 'employer', 'status' => 'hired', 'seller_id' => $freelancer, 'paid' => 'pending']);
+
+                  $service->save();
+
+                  // send message to freelancer
+
+                  $message = new Message();
+
+                  $user = User::find(intval($user->id));
+
+                  $message->user()->associate($user);
+
+                  $message->receiver_id = intval($freelancer);
+
+                  $message->body = Helper::getUserName($user->id) . ' ' . trans('lang.service_purchase') . ' ' . $service->title;
+
+                  $message->status = 0;
+
+                  $message->save();
+
+                  // send mail
+
+                  if (!empty(config('mail.username')) && !empty(config('mail.password'))) {
+
+                      $email_params = array();
+
+                      $template_data = Helper::getFreelancerNewOrderEmailContent();
+
+                      $email_params['title'] = $service->title;
+
+                      $email_params['service_link'] = url('service/' . $service->slug);
+
+                      $email_params['amount'] = $service->price;
+
+                      $email_params['freelancer_name'] = Helper::getUserName($freelancer);
+
+                      $email_params['employer_profile'] = url('profile/' . $user->slug);
+
+                      $email_params['employer_name'] = Helper::getUserName($user->id);
+
+                      $freelancer_data = User::find(intval($freelancer));
+
+                      Mail::to($freelancer_data->email)
+
+                          ->send(
+
+                              new FreelancerEmailMailable(
+
+                                  'freelancer_email_new_order',
+
+                                  $template_data,
+
+                                  $email_params
+
+                              )
+
+                          ); 
+
+                  }
+
+              }
+
+          } else {
+
+              $id = session()->get('product_id');
+
+              $proposal = Proposal::find($id);
+
+              $proposal->hired = 1;
+
+              $proposal->status = 'hired';
+
+              $proposal->paid = 'pending';
+
+              $proposal->save();
+
+              $job = Job::find($proposal->job->id);
+
+              $job->status = 'hired';
+
+              $job->save();
+
+              // send message to freelancer
+
+              $message = new Message();
+
+              $user = User::find(intval($user->id));
+
+              $message->user()->associate($user);
+
+              $message->receiver_id = intval($proposal->freelancer_id);
+
+              $message->body = trans('lang.hire_for') . ' ' . $job->title . ' ' . trans('lang.project');
+
+              $message->status = 0;
+
+              $message->save();
+
+              // send mail
+
+              if (!empty(config('mail.username')) && !empty(config('mail.password'))) {
+
+                  $freelancer = User::find($proposal->freelancer_id);
+
+                  $employer = User::find($job->user_id);
+
+                  if (!empty($freelancer->email)) {
+
+                      $email_params = array();
+
+                      $template = DB::table('email_types')->select('id')->where('email_type', 'freelancer_email_hire_freelancer')->get()->first();
+
+                      if (!empty($template->id)) {
+
+                          $template_data = EmailTemplate::getEmailTemplateByID($template->id);
+
+                          $email_params['project_title'] = $job->title;
+
+                          $email_params['hired_project_link'] = url('job/' . $job->slug);
+
+                          $email_params['name'] = Helper::getUserName($freelancer->id);
+
+                          $email_params['link'] = url('profile/' . $freelancer->slug);
+
+                          $email_params['employer_profile'] = url('profile/' . $employer->slug);
+
+                          $email_params['emp_name'] = Helper::getUserName($employer->id);
+
+                           Mail::to($freelancer->email)
+
+                              ->send(
+
+                                  new FreelancerEmailMailable(
+
+                                      'freelancer_email_hire_freelancer',
+
+                                      $template_data,
+
+                                      $email_params
+
+                                  )
+
+                              ); 
+
+                      }
+
+                  }
+
+              }
+
+          }
+
+      }
+
+  }
+
+} else {
+
+   $json['type'] = 'error';
+
+  $json['message'] = trans('lang.money_not_add');
+
+  return $json; 
+
+}
+
+} catch (Exception $e) {
+
+ $json['type'] = 'error';
+
+$json['message'] = $e->getMessage();
+
+return $json; 
+
+} catch (\Cartalyst\Stripe\Exception\CardErrorException $e) {
+
+$json['type'] = 'error';
+
+$json['message'] = $e->getMessage();
+
+return $json;
+
+} catch (\Cartalyst\Stripe\Exception\MissingParameterException $e) {
+
+$json['type'] = 'error';
+
+$json['message'] = $e->getMessage();
+
+return $json; 
+
+}
+
+     ////////
+
+       }
+     
+
+    }
 
     /**
 
@@ -515,7 +1207,7 @@ class StripeController extends Controller
 
                                                 $email_params['expiry_date'] = !empty($expiry_date) ? Carbon::parse($expiry_date)->format('M d, Y') : '';
 
-                                           /*     Mail::to(Auth::user()->email)
+                                            Mail::to(Auth::user()->email)
 
                                                     ->send(
 
@@ -529,7 +1221,7 @@ class StripeController extends Controller
 
                                                         )
 
-                                                    ); */ 
+                                                    ); 
 
                                             }
 
@@ -556,7 +1248,7 @@ class StripeController extends Controller
                                                 $email_params['price'] = $package->cost;
 
                                                 $email_params['expiry_date'] = !empty($expiry_date) ? Carbon::parse($expiry_date)->format('M d, Y') : '';
-/* 
+
                                                 Mail::to(Auth::user()->email)
 
                                                     ->send(
@@ -571,7 +1263,7 @@ class StripeController extends Controller
 
                                                         )
 
-                                                    ); */ 
+                                                    ); 
 
                                             }
 
@@ -639,7 +1331,7 @@ class StripeController extends Controller
 
                                         $freelancer_data = User::find(intval($freelancer));
 
-                                      /*   Mail::to($freelancer_data->email)
+                                        Mail::to($freelancer_data->email)
 
                                             ->send(
 
@@ -653,7 +1345,7 @@ class StripeController extends Controller
 
                                                 )
 
-                                            ); */ 
+                                            ); 
 
                                     }
 
@@ -725,7 +1417,7 @@ class StripeController extends Controller
 
                                             $email_params['emp_name'] = Helper::getUserName($employer->id);
 
-                                         /*    Mail::to($freelancer->email)
+                                             Mail::to($freelancer->email)
 
                                                 ->send(
 
@@ -739,7 +1431,7 @@ class StripeController extends Controller
 
                                                     )
 
-                                                ); */ 
+                                                ); 
 
                                         }
 
