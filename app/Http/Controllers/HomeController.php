@@ -265,10 +265,21 @@ class HomeController extends Controller
         $meta_keywords = !empty($company_registration_tags)  ? $company_registration_tags->meta_keywords : 'Freelance Agency registration.';
         $page['title'] = $meta_title;
 
-      
-        return view('auth.company_registration',compact('package_options','page','meta_desc','meta_keywords','yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
+
+        $stripe_settings = SiteManagement::getMetaValue('stripe_settings');
+        $stripe_img = !empty($stripe_settings) ? $stripe_settings[0]['stripe_img'] : '';
+        $payout_settings = SiteManagement::getMetaValue('commision');
+        $payment_gateway = !empty($payout_settings) && !empty($payout_settings[0]['payment_method']) ? $payout_settings[0]['payment_method'] : array();
+        $symbol = !empty($payout_settings) && !empty($payout_settings[0]['currency']) ? Helper::currencyList($payout_settings[0]['currency']) : array();
+            
+    
+        return view('auth.company_registration',compact('symbol','payment_gateway','payout_settings','stripe_img','stripe_settings','package_options','page','meta_desc','meta_keywords','yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
      }
 
+      public function stripeCompanyRegistrationSuccess($id){
+        session()->put(['user_id' => $id]);
+        return view('auth.company_registration_success');
+      }
      public function companyRegistrationSuccess(Request $request){
 
         $content = $request->input();
