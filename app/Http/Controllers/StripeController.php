@@ -963,6 +963,23 @@ return $json;
             
             try {
           
+
+             if(Auth::user()->stripe_customer_id && Auth::user()->stripe_subscription_id){
+                $subscription = $stripe->subscriptions()->find(Auth::user()->stripe_customer_id, Auth::user()->stripe_subscription_id);
+                 if(isset($subscription) && !empty($subscription) ){
+                    
+                  if($subscription['status']!='canceled'){
+                    $stripe->subscriptions()->cancel(Auth::user()->stripe_customer_id, Auth::user()->stripe_subscription_id);
+
+                 }
+                 
+            
+             }
+
+            }
+                
+
+            
                           $token = $stripe->tokens()->create(
 
                     [
@@ -1179,6 +1196,10 @@ return $json;
 
                             if (session()->has('product_id')) {
 
+
+                          
+
+
                                 $package_item = \App\Item::where('subscriber', Auth::user()->id)->first();
 
                                 $id = session()->get('product_id');
@@ -1187,9 +1208,53 @@ return $json;
 
                                 $option = !empty($package->options) ? unserialize($package->options) : '';
 
+
+
                                 $expiry = !empty($option) ? $package_item->updated_at->addDays($option['duration']) : '';
 
                                 $expiry_date = !empty($expiry) ? Carbon::parse($expiry)->toDateTimeString() : '';
+
+                                            //recurring payment
+                                $product = $stripe->products()->create([
+
+                                    'name' => $product_title,
+                                    'description' => 'Packages purchased',
+                                    'id'   =>time().'_'.Auth::user()->id.'_'.$product_id,
+                                ]);
+
+                                $duration='week';
+                                if($option['duration']=='30'){
+                                  $duration='month';
+                                }else if ($option['duration']=='360'){
+                                  $duration='year';
+                                }
+
+                                $price = $stripe->prices()->create([
+           
+                                    'unit_amount' => $product_price,
+                                
+                                    'currency' => $currency,
+                                
+                                    'recurring' => ['interval' => $duration],
+                                
+                                    'product' => $product['id'],
+                                
+                                  ]);
+                               
+
+                                  $subscription = $stripe->subscriptions()->create(
+           
+                                    $customer['id'], 
+                                    [
+                                    'items' => [
+                                
+                                        ['price' => $price['id']],
+                                
+                                    ],
+                                    ]
+                                );
+                                                   
+                            
 
                                 $user = \App\User::find(Auth::user()->id);
 
@@ -1199,6 +1264,12 @@ return $json;
 
                                 }
 
+                                $user->stripe_product_id = $product['id'];
+                                $user->stripe_price_id =  $price['id'];
+                                $user->stripe_customer_id =  $customer['id'];
+                                $user->stripe_subscription_id =  $subscription['id'];
+                                         
+                                 
                                 $user->expiry_date = $expiry_date;
 
                                 $user->save();
