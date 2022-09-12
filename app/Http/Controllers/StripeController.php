@@ -1227,7 +1227,7 @@ return $json;
 
                                         }
 
-                                    } elseif ($role === 'freelancer') {
+                                    } elseif ($role === 'freelancer' || $role=='company') {
 
                                         if (!empty(Auth::user()->email)) {
 
@@ -1542,6 +1542,16 @@ return $json;
 
             return $json;
 
+        }else if (Auth::user()->getRoleNames()[0] == "company"){
+            $json['type'] = 'success';
+
+            $json['message'] = trans('lang.thanks_subscription');
+
+            $json['url'] = url('dashboard/packages/company');
+
+            session()->forget('type');
+
+            return $json;
         }
 
     }
