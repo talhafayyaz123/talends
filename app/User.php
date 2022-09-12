@@ -58,7 +58,7 @@ class User extends Authenticatable
         'first_name', 'last_name', 'slug', 'email', 'password',
         'avatar', 'banner', 'tagline', 'description',
         'location_id', 'verification_code', 'address',
-        'longitude', 'latitude'
+        'longitude', 'latitude','stripe_product_id','stripe_price_id','stripe_customer_id','stripe_subscription_id'
     ];
 
     /**

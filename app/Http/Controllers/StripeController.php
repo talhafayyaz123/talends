@@ -163,7 +163,7 @@ class StripeController extends Controller
         session()->put(['product_title' => e($package->title)]);
         session()->put(['product_price' => e($package->cost)]);
         session()->put(['type' => 'package']);
-
+         
 
         $product_id = Session::has('product_id') ? session()->get('product_id') : '';
 
@@ -236,7 +236,6 @@ $payment_detail = $stripe->charges()->create(
       'currency' => $currency,
 
       'amount'   => $product_price,
-
       'description' => trans('lang.add_in_wallet'),
 
   ]
@@ -309,6 +308,7 @@ $customer = $stripe->customers()->create(
   ]
 
 );
+
 
 
 if ($payment_detail['status'] == 'succeeded') {
@@ -492,6 +492,51 @@ if (!empty(config('mail.username')) && !empty(config('mail.password'))) {
 
           if (session()->has('product_id')) {
 
+           //recurring payment
+            $product = $stripe->products()->create([
+
+                'name' => $product_title,
+                'description' => 'Packages purchased',
+                'id'   =>$user_id.'_'.$product_id,
+              ]);
+            
+            $duration='week';
+              if($options['duration']=='30'){
+                $duration='month';
+              }else if ($options['duration']=='360'){
+                $duration='year';
+              }
+              $price = $stripe->prices()->create([
+            
+                'unit_amount' => $product_price,
+            
+                'currency' => $currency,
+            
+                'recurring' => ['interval' => $duration],
+            
+                'product' => $product['id'],
+            
+              ]);
+            
+            
+            
+            
+            
+             $subscription = $stripe->subscriptions()->create(
+            
+                $customer['id'], 
+                [
+                'items' => [
+            
+                    ['price' => $price['id']],
+            
+                ],
+                ]
+            );
+            
+            //////////////
+            
+
               $package_item = \App\Item::where('subscriber', $user->id)->first();
 
               $id = session()->get('product_id');
@@ -512,6 +557,11 @@ if (!empty(config('mail.username')) && !empty(config('mail.password'))) {
 
               }
 
+              $user->stripe_product_id = $product['id'];
+              $user->stripe_price_id =  $price['id'];
+              $user->stripe_customer_id =  $customer['id'];
+              $user->stripe_subscription_id =  $subscription['id'];
+              
               $user->expiry_date = $expiry_date;
 
               $user->save();
