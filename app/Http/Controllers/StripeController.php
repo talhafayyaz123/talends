@@ -576,8 +576,6 @@ if (!empty(config('mail.username')) && !empty(config('mail.password'))) {
 
                   $user = User::find($item[0]->subscriber);
 
-                  
-
                   $package_options = unserialize($package->options);
 
                   if (!empty($invoice)) {
@@ -962,24 +960,24 @@ return $json;
             }
             
             try {
-          
-
-             if(Auth::user()->stripe_customer_id && Auth::user()->stripe_subscription_id){
-                $subscription = $stripe->subscriptions()->find(Auth::user()->stripe_customer_id, Auth::user()->stripe_subscription_id);
-                 if(isset($subscription) && !empty($subscription) ){
+               
+                if( Auth::user()->getRoleNames()->first()=='company')
+                  {
+                    if(Auth::user()->stripe_customer_id && Auth::user()->stripe_subscription_id){
+                        $subscription = $stripe->subscriptions()->find(Auth::user()->stripe_customer_id, Auth::user()->stripe_subscription_id);
+                         if(isset($subscription) && !empty($subscription) ){
+                            
+                          if($subscription['status']!='canceled'){
+                            $stripe->subscriptions()->cancel(Auth::user()->stripe_customer_id, Auth::user()->stripe_subscription_id);
+        
+                         }
+                         
                     
-                  if($subscription['status']!='canceled'){
-                    $stripe->subscriptions()->cancel(Auth::user()->stripe_customer_id, Auth::user()->stripe_subscription_id);
+                     }
+        
+                    }
+                  }
 
-                 }
-                 
-            
-             }
-
-            }
-                
-
-            
                           $token = $stripe->tokens()->create(
 
                     [
@@ -1214,20 +1212,23 @@ return $json;
 
                                 $expiry_date = !empty($expiry) ? Carbon::parse($expiry)->toDateTimeString() : '';
 
-                                            //recurring payment
-                                $product = $stripe->products()->create([
+                                if( Auth::user()->getRoleNames()->first()=='company'){
+                                    $product = $stripe->products()->create([
 
-                                    'name' => $product_title,
-                                    'description' => 'Packages purchased',
-                                    'id'   =>time().'_'.Auth::user()->id.'_'.$product_id,
-                                ]);
+                                        'name' => $product_title,
+                                        'description' => 'Packages purchased',
+                                        'id'   =>time().'_'.Auth::user()->id.'_'.$product_id,
+                                    ]);
+    
+                                    $duration='week';
+                                    if($option['duration']=='30'){
+                                      $duration='month';
+                                    }else if ($option['duration']=='360'){
+                                      $duration='year';
+                                    }
 
-                                $duration='week';
-                                if($option['duration']=='30'){
-                                  $duration='month';
-                                }else if ($option['duration']=='360'){
-                                  $duration='year';
-                                }
+                                        //recurring payment
+                             
 
                                 $price = $stripe->prices()->create([
            
@@ -1240,7 +1241,7 @@ return $json;
                                     'product' => $product['id'],
                                 
                                   ]);
-                               
+
 
                                   $subscription = $stripe->subscriptions()->create(
            
@@ -1253,6 +1254,13 @@ return $json;
                                     ],
                                     ]
                                 );
+
+
+                                }
+                                        
+                               
+
+                                 
                                                    
                             
 
@@ -1264,10 +1272,14 @@ return $json;
 
                                 }
 
+                                if( Auth::user()->getRoleNames()->first()=='company'){
+
                                 $user->stripe_product_id = $product['id'];
                                 $user->stripe_price_id =  $price['id'];
                                 $user->stripe_customer_id =  $customer['id'];
                                 $user->stripe_subscription_id =  $subscription['id'];
+
+                                }
                                          
                                  
                                 $user->expiry_date = $expiry_date;
