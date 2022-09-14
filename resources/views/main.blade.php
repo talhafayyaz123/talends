@@ -250,7 +250,7 @@
 
 	<script src="https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 
-	<script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/22223481.js"></script>
+	 <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/22223481.js"></script>
 
 	@yield('bootstrap_script')
     @stack('scripts')

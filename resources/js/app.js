@@ -930,7 +930,48 @@
                          this.$swal.close()
                      }
                  })
-             }
+             },
+             deleteSeoMetaTagsChecked: function (msg, text) {
+                var deleteIDs = jQuery("#checked-val input:checkbox:checked").map(function () {
+                    return jQuery(this).val();
+                }).get();
+                var self = this;
+                this.$swal({
+                    title: msg,
+                    type: "warning",
+                    customContainerClass: 'hire_popup',
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Yes",
+                    cancelButtonText: "No",
+                    closeOnConfirm: true,
+                    closeOnCancel: true,
+                    showLoaderOnConfirm: true
+                }).then((result) => {
+                    var self = this;
+                    if (result.value) {
+                        axios.post(APP_URL + '/admin/delete-checked-seo_tags', {
+                            ids: deleteIDs
+                        })
+                            .then(function (response) {
+                                if (response.data.type == "success") {
+                                    setTimeout(function () {
+                                        self.$swal({
+                                            title: this.title,
+                                            text: text,
+                                            type: "success"
+                                        })
+                                    }, 500);
+                                    window.location.replace(APP_URL + '/admin/seo_meta_tags');
+                                } else {
+                                    self.showError(response.data.message);
+                                }
+                            })
+                    } else {
+                        this.$swal.close()
+                    }
+                })
+            }   
          }
      });
  }

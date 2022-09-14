@@ -22,6 +22,7 @@
 
 @section('title'){{ $f_list_meta_title }} @stop
 @section('description', $f_list_meta_desc)
+@section('keywords', $meta_keywords)
 
 @section('content')
     @php $breadcrumbs = Breadcrumbs::generate('searchResults'); @endphp
@@ -258,7 +259,7 @@
 
                         </div>
                         <p>We would love to have more universities on-Board with us, please drop us a message & we will get back.</p>
-                        <button class="btn btn-theme rounded-pill px-4" onclick=" document.location ='mailto:enquiry.talends@gmail.com?subject=Need Discussion' ">Universities@Talends.com</button>
+                        <button class="btn btn-theme rounded-pill px-4" onclick=" document.location ='mailto:enquiry@talends.com?subject=Need Discussion' ">Universities@Talends.com</button>
                     </div>
                 </div>
             </div>

@@ -71,9 +71,6 @@
                                             @endif
 
 
-
-
-
                                         </ul>
                                         @endif
 
@@ -87,6 +84,7 @@
                                         <div class="wt-hireduserstatus">
                                             @if ($payment->is_success == '0' )
                                             <h4>Payment Not Complete</h4>
+                                            <a href="{{{ url('admin/fail/registration/email/'.$payment->package_id.'/'.$payment->user_id) }}}" class="wt-btn">Send Again Payment Email</a>
 
                                             @else
                                             <h4>Payment Complete</h4>

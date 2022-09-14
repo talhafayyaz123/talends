@@ -244,7 +244,7 @@ class ProposalController extends Controller
                                         $email_params['amount'] = $request['amount'];
                                         $email_params['duration'] = Helper::getJobDurationList($request['completion_time']);
                                         $email_params['message'] = $request['description'];
-                                        Mail::to($job->employer->email)
+                                         Mail::to($job->employer->email)
                                             ->send(
                                                 new EmployerEmailMailable(
                                                     'employer_email_proposal_received',
@@ -259,7 +259,7 @@ class ProposalController extends Controller
                                                     $template_submit_proposal,
                                                     $email_params
                                                 )
-                                            );
+                                            ); 
                                     } else {
                                         $json['type'] = 'error';
                                         $json['message'] = trans('lang.something_wrong');
@@ -301,7 +301,7 @@ class ProposalController extends Controller
                                     $email_params['amount'] = $request['amount'];
                                     $email_params['duration'] = Helper::getJobDurationList($request['completion_time']);
                                     $email_params['message'] = $request['description'];
-                                    Mail::to($job->employer->email)
+                                     Mail::to($job->employer->email)
                                         ->send(
                                             new EmployerEmailMailable(
                                                 'employer_email_proposal_received',
@@ -316,7 +316,7 @@ class ProposalController extends Controller
                                                 $template_submit_proposal,
                                                 $email_params
                                             )
-                                        );
+                                        ); 
                                 } else {
                                     $json['type'] = 'error';
                                     $json['message'] = trans('lang.something_wrong');

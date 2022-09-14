@@ -66,6 +66,7 @@ Route::get('browse-jobs', 'HomeController@browseJobs')->name('browseJobs');
 Route::get('find-talends', 'HomeController@findTalents')->name('findTalends');
 Route::get('find-interns', 'HomeController@findInterns')->name('findInterns');
 Route::get('companies', 'HomeController@Companies')->name('Companies');
+Route::get('sitemap.xml', 'SitemapXmlController@index')->name('sitemap.index');
 
 
 Route::get('connect', 'HomeController@connectDetail');
@@ -75,6 +76,9 @@ Route::get('why_agency_plan', 'HomeController@whyAgencyPlan')->name('whyAgencyPl
 Route::get('company/registration', 'HomeController@companyRegistration')->name('companyRegistraton');
 Route::post('/registration/success', 'HomeController@companyRegistrationSuccess')->name('companyRegistratonSuccess');
 Route::get('registration/again/payment/{id}/{package_id}', 'Auth\RegisterController@registrationAgainPayment')->name('registrationAgainPayment');
+
+Route::get('stripe/registration/success/{id}', 'HomeController@stripeCompanyRegistrationSuccess')->name('companyRegistratonSuccess');
+
 
 Route::post('store/admin/lead', 'HomePagesController@storeAdminLead')->name('storeAdminLead');
 Route::get('admin/lead/success', 'HomePagesController@adminLeadSuccess')->name('adminLeadSuccess');
@@ -112,6 +116,7 @@ Route::get('register/verify-user-code/{code}', 'PublicController@verifyUserCode'
 
 Route::post('registration/verify-user-code', 'PublicController@verifyUserRegistrationCode');
 
+Route::get('admin/again/registration/payment/{package_id}/{user_id}', 'UserPaymentController@againRegistrationPayment')->name('againRegistrationPayment');
 
 
 Route::post('register/form-step1-custom-errors', 'PublicController@RegisterStep1Validation');
@@ -143,8 +148,18 @@ Route::group(
 
 
         Route::get('admin/user_payments', 'UserPaymentController@getPayments')->name('userPayments');
-        Route::get('admin/user_payment_detail/{id}', 'UserPaymentController@getPaymentDetail')->name('userPaymentDetail');        
+        Route::get('admin/user_payment_detail/{id}', 'UserPaymentController@getPaymentDetail')->name('userPaymentDetail');
 
+        //seo pages crud
+        Route::get('admin/seo_meta_tags', 'SeoMetaTagsController@index');
+        Route::get('admin/meta-tags/edit-tags/{id}', 'SeoMetaTagsController@edit')->name('editMetaTag');
+        Route::post('admin/store-meta-tags', 'SeoMetaTagsController@store');
+        Route::get('admin/seo_meta_tags/search', 'SeoMetaTagsController@index');
+        Route::post('admin/seo_tags/delete-tags', 'SeoMetaTagsController@destroy');
+        Route::post('admin/delete-checked-seo_tags', 'SeoMetaTagsController@deleteSelected');
+        Route::post('admin/seo_tags/update-seo_tags/{id}', 'SeoMetaTagsController@update');
+    
+        
         // Article Category Routes
         Route::get('admin/article/categories', 'ArticleCategoryController@index')->name('articleCategories');
         Route::get('admin/article/categories/edit-cats/{id}', 'ArticleCategoryController@edit')->name('editArticleCategories');
@@ -488,7 +503,6 @@ Route::group(
         Route::post('employer/upload-temp-image', 'EmployerController@uploadTempImage');
         Route::post('employer/store-profile-settings', 'EmployerController@storeProfileSettings');
         Route::post('job/post-job', 'JobController@store');
-        Route::post('job/upload-temp-image', 'JobController@uploadTempImage');
         Route::post('user/submit-review', 'UserController@submitReview');
         Route::post('proposal/hire-freelancer', 'ProposalController@hiredFreelencer');
         Route::get('employer/services/{status}', 'EmployerController@showEmployerServices');
@@ -579,12 +593,15 @@ Route::group(
 Route::group(
     ['middleware' => ['role:employer|freelancer|admin|company|intern']],
     function () {
+        Route::post('job/upload-temp-image', 'JobController@uploadTempImage');
+        Route::get('admin/fail/registration/email/{package_id}/{user_id}', 'UserPaymentController@sendFailRegistrationEmail')->name('sendFailRegistrationEmail');
         Route::post('proposal/upload-temp-image', 'ProposalController@uploadTempImage');
         Route::get('job/proposal/{job_slug}', 'ProposalController@createProposal')->name('createProposal');
         Route::get('profile/settings/manage-account', 'UserController@accountSettings')->name('manageAccount');
         Route::get('profile/settings/reset-password', 'UserController@resetPassword')->name('resetPassword');
         Route::post('profile/settings/request-password', 'UserController@requestPassword');
         Route::get('profile/settings/email-notification-settings', 'UserController@emailNotificationSettings')->name('emailNotificationSettings');
+        Route::get('profile/settings/payment-verification', 'UserController@paymentVerificationSettings')->name('paymentVerification');
         Route::post('profile/settings/save-email-settings', 'UserController@saveEmailNotificationSettings');
         Route::post('profile/settings/save-account-settings', 'UserController@saveAccountSettings');
         Route::get('profile/settings/delete-account', 'UserController@deleteAccount')->name('deleteAccount');
@@ -693,6 +710,8 @@ Route::get('paytab/service/payment/{service_id}/{service_seller}', array('as' =>
 Route::post('company/registration', 'Auth\RegisterController@userRegister')->name('userRegister');
 
 Route::get('service/payment-process/{id}', 'ServiceController@employerPaymentProcess');
+
+Route::post('addmoney/stripe/company/register', array('as' => 'addmoney.stripe.register', 'uses' => 'StripeController@userRegisterStripe',));
 
 // Page Builder
 Route::get('get-edit-page/{id}', 'PageController@getEditPageData');

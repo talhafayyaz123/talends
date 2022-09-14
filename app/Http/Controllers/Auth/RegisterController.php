@@ -154,14 +154,14 @@ class RegisterController extends Controller
                     $email_params['name'] = Helper::getUserName($user->id);
                     $email_params['email'] = $user->email;
                     $email_params['role'] =$user->getRoleNames()[0];
-                    Mail::to($user->email)
+                     Mail::to($user->email)
                         ->send(
                             new GeneralEmailMailable(
                                 'verification_code',
                                 $template_data,
                                 $email_params
                             )
-                        );
+                        ); 
                 }
             } else {
                 $template = DB::table('email_types')->select('id')->where('email_type', 'new_user')->get()->first();
@@ -178,15 +178,16 @@ class RegisterController extends Controller
                                 $template_data,
                                 $email_params
                             )
-                        );
+                        ); 
                 }
                 $admin_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_registration')->get()->first();
-                if (!empty($template->id)) {
+                 
+                if (!empty($admin_template->id)) {
                     $template_data = EmailTemplate::getEmailTemplateByID($admin_template->id);
                     $email_params['name'] = Helper::getUserName($user->id);
                     $email_params['email'] = $user->email;
                     $email_params['link'] = url('profile/' . $user->slug);
-                     Mail::to(config('mail.adminmail'))
+                      Mail::to(config('mail.adminmail'))
                         ->send(
                             new AdminEmailMailable(
                                 'admin_email_registration',
@@ -268,14 +269,14 @@ class RegisterController extends Controller
                     $email_params['email'] = $user->email;
                     $email_params['role'] = 'company';
 
-                    Mail::to($user->email)
+                     Mail::to($user->email)
                         ->send(
                             new GeneralEmailMailable(
                                 'verification_code',
                                 $template_data,
                                 $email_params
                             )
-                        );
+                        ); 
                 }
             } else {
                 $template = DB::table('email_types')->select('id')->where('email_type', 'new_user')->get()->first();
@@ -285,17 +286,17 @@ class RegisterController extends Controller
                     $email_params['email'] = $user->email;
                     $email_params['password'] = $request['password'];
                     $email_params['role'] = 'company';
-                    Mail::to($user->email)
+                     Mail::to($user->email)
                         ->send(
                             new GeneralEmailMailable(
                                 'new_user',
                                 $template_data,
                                 $email_params
                             )
-                        );
+                        ); 
                 }
                 $admin_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_registration')->get()->first();
-                if (!empty($template->id)) {
+                if (!empty($admin_template->id)) {
                     $template_data = EmailTemplate::getEmailTemplateByID($admin_template->id);
                     $email_params['name'] = Helper::getUserName($user->id);
                     $email_params['email'] = $user->email;
@@ -308,7 +309,7 @@ class RegisterController extends Controller
                                 $template_data,
                                 $email_params
                             )
-                        ); 
+                        );  
                 }
                 session()->forget('password');
                 session()->forget('email');
@@ -330,6 +331,7 @@ class RegisterController extends Controller
 
        $user_payments=new UserPayments();
        $user_payments->user_id=$user_id;
+       $user_payments->package_id=$request['package_id'];
        $user_payments->tran_ref=$body['tran_ref'];
        $user_payments->cart_id=$body['cart_id'];
        $user_payments->cart_amount=$body['cart_amount'];

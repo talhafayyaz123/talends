@@ -81,6 +81,7 @@ use App\Service;
 use App\SiteManagement;
 use Cookie;
 use Response;
+use App\UserPayments;
 
 
 /**
@@ -367,12 +368,16 @@ class PaytabController extends Controller
                         $user->expiry_date = $expiry_date;
 
                         $user->save();
+
+
+                        
+                        
                     
                         // send mail
                     
                         if (!empty(config('mail.username')) && !empty(config('mail.password'))) {
 
-                            $item = DB::table('items')->where('product_id', $id)->get()->toArray();
+                            $item = DB::table('items')->where('product_id', $id)->orderBy('id','desc')->get()->toArray();
 
                             $package =  Package::where('id', $item[0]->product_id)->first();
 
@@ -398,6 +403,21 @@ class PaytabController extends Controller
 
                                 }
 
+                            }
+
+
+                            if($login_user->getRoleNames()[0]=='company'){
+                                $payment = DB::table('user_payments')->select('id')->where('user_id', $user_id)->where('is_success',1)->first();
+    
+                                if (!empty($payment)) {
+                                    $payment_user = \App\User::find($user_id);
+                                    $payment = UserPayments::find($payment->id);
+                                    $payment->package_id = $package->id;
+                                    $payment->expiry_date =$payment_user->expiry_date;
+                                    $payment->cart_amount = $package->cost;
+                                    $payment->save();
+                
+                                }
                             }
 
                              if ($role === 'employer') {
@@ -437,13 +457,13 @@ class PaytabController extends Controller
 
                                                 )
 
-                                            );
+                                            ); 
 
                                     }
 
                                 }
 
-                            } elseif ($role === 'freelancer' || $role === 'intern') {
+                            } elseif ($role === 'freelancer' || $role === 'intern' || $role === 'company' ) {
                                 
                                 
                                 if (!empty($login_user->email)) {
@@ -480,7 +500,7 @@ class PaytabController extends Controller
 
                                                 )
 
-                                            );
+                                            ); 
 
                                     }
 
@@ -547,7 +567,7 @@ class PaytabController extends Controller
 
                                 $freelancer_data = User::find(intval($freelancer));
 
-                                Mail::to($freelancer_data->email)
+                                 Mail::to($freelancer_data->email)
 
                                     ->send(
 
@@ -561,7 +581,7 @@ class PaytabController extends Controller
 
                                         )
 
-                                    );
+                                    ); 
 
                                 
 
@@ -635,7 +655,7 @@ class PaytabController extends Controller
 
                                     $email_params['emp_name'] = Helper::getUserName($employer->id);
 
-                                    Mail::to($freelancer->email)
+                                     Mail::to($freelancer->email)
 
                                         ->send(
 
@@ -649,7 +669,7 @@ class PaytabController extends Controller
 
                                             )
 
-                                        );
+                                        ); 
 
                                 }
 
@@ -893,7 +913,7 @@ class PaytabController extends Controller
 
                                     $email_params['emp_name'] = Helper::getUserName($employer->id);
 
-                                    Mail::to($freelancer->email)
+                                     Mail::to($freelancer->email)
 
                                         ->send(
 
@@ -907,7 +927,7 @@ class PaytabController extends Controller
 
                                             )
 
-                                        );
+                                        ); 
 
                                 }
 

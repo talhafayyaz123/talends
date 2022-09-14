@@ -99,7 +99,7 @@ class EmailHelper extends Model
     public static function getEmailFrom()
     {
         $setting = SiteManagement::getMetaValue('email_data');
-        $email = !empty($setting) && !empty($setting[0]['from_email']) ? $setting[0]['from_email'] : 'admin@talends.com';
+        $email = !empty($setting) && !empty($setting[0]['from_email']) ? $setting[0]['from_email'] : 'talends_admin@talends.com';
         return $email;
     }
 
@@ -113,7 +113,7 @@ class EmailHelper extends Model
     public static function getEmailID()
     {
         $setting = SiteManagement::getMetaValue('email_data');
-        $email_id = !empty($setting) && !empty($setting[0]['from_email_id']) ? $setting[0]['from_email_id'] : 'info@amentotech.com';
+        $email_id = !empty($setting) && !empty($setting[0]['from_email_id']) ? $setting[0]['from_email_id'] : 'Talends.com';
         return $email_id;
     }
 

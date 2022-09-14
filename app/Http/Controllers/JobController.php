@@ -833,7 +833,7 @@ class JobController extends Controller
                                 );
 
                                 if (!empty($user->email)) {
-
+ 
                                     Mail::to($user->email)
 
                                     ->send(
@@ -901,7 +901,7 @@ class JobController extends Controller
                             $email_params['name'] = Helper::getUserName(Auth::user()->id);
 
                             $email_params['link'] = url('profile/' . $user->slug);
-
+ 
                             Mail::to(config('mail.adminmail'))
 
                             ->send(

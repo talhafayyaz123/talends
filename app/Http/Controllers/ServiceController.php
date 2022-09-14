@@ -254,7 +254,7 @@ class ServiceController extends Controller
                                         $template_data,
                                         $email_params
                                     )
-                                ); 
+                                );  
                         }
                         return $json;
                     } elseif ($service_post['type'] == 'error') {
@@ -295,7 +295,7 @@ class ServiceController extends Controller
                                     $template_data,
                                     $email_params
                                 )
-                            ); 
+                            );  
                     }
                     return $json;
                 } elseif ($service_post['type'] == 'error') {

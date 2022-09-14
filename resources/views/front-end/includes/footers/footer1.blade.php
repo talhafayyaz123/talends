@@ -139,7 +139,7 @@
                     <div class="secondary-footer d-md-flex pl-md-4">
                         <a href="https://aws.amazon.com/what-is-cloud-computing"><img src="https://d0.awsstatic.com/logos/powered-by-aws-white.png" alt="Powered by AWS Cloud Computing" width="70"></a>
                         <ul class="list-inline mb-0 ml-auto">
-                            <li class="px-2"> <a href="javascript:;" target="_self">Site Map</a> </li>
+                            <li class="px-2"> <a href="{{ route('sitemap.index') }}" target="_blank">Site Map</a> </li>
                             <li class="px-2"> <a href="{{ route('Agreement') }}" target="_self">Term & Conditions</a> </li>
                             <li class="px-2"> <a href="{{ route('privacyPolicy') }}" target="_self">Privacy Policy</a> </li>
                         </ul>

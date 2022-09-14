@@ -101,8 +101,8 @@
                         <form class="wt-formtheme wt-form-paycard" method="POST" id="stripe-payment-form" role="form" action="" @submit.prevent='submitStripeFrom'>
                             {{ csrf_field() }}
                             <fieldset>
-                                <div class="form-row">
-                                    <div class="form-group col-lg-4 {{ $errors->has('name') ? ' has-error' : '' }}">
+                                <div class="form-row" style="padding-top: 64px;">
+                                    <div  class="form-group col-lg-4 {{ $errors->has('name') ? ' has-error' : '' }}">
                                         <label>{{ trans('lang.name') }}</label>
                                         <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus>
                                         @if ($errors->has('name'))

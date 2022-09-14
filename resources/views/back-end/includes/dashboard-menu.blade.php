@@ -119,12 +119,19 @@
                                 <span>{{ trans('lang.all_jobs') }}</span>
                             </a>
                         </li>
+                        <?php  
+                                $payout_settings = App\SiteManagement::getMetaValue('commision');
+                                $payment_gateway = !empty($payout_settings) && !empty($payout_settings[0]['payment_method']) ? $payout_settings[0]['payment_method'] : array();
+                                if( isset($payment_gateway) && in_array('paytab',$payment_gateway)){
+                        ?>
                         <li>
                             <a href="{{{ route('userPayments') }}}">
                                 <i class="ti-briefcase"></i>
                                 <span>User Payments</span>
                             </a>
                         </li>
+                        <?php } ?>
+                       
                         @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services')
                             <li>
                                 <a href="{{{ route('allServices') }}}">
@@ -233,6 +240,7 @@
                                 <li><hr><a href="{{{ route('skills') }}}">{{ trans('lang.skills') }}</a></li>
                                 <li><hr><a href="{{{ route('categories') }}}">{{ trans('lang.job_cats') }}</a></li>
                                 <li><hr><a href="{{{ route('agencyServices') }}}">Agency Services</a></li>
+                                <li><hr><a href="{{{ url('admin/seo_meta_tags') }}}">Seo Meta Tags</a></li>
                                 <li><hr><a href="{{{ route('departments') }}}">{{ trans('lang.dpts') }}</a></li>
                                 <li><hr><a href="{{{ route('languages') }}}">{{ trans('lang.langs') }}</a></li>
                                 <li><hr><a href="{{{ route('locations') }}}">{{ trans('lang.locations') }}</a></li>
