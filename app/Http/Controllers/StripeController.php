@@ -965,7 +965,8 @@ return $json;
                   {
                     if(Auth::user()->stripe_customer_id && Auth::user()->stripe_subscription_id){
                         $subscription = $stripe->subscriptions()->find(Auth::user()->stripe_customer_id, Auth::user()->stripe_subscription_id);
-                         if(isset($subscription) && !empty($subscription) ){
+                        
+                        if(isset($subscription) && !empty($subscription) ){
                             
                           if($subscription['status']!='canceled'){
                             $stripe->subscriptions()->cancel(Auth::user()->stripe_customer_id, Auth::user()->stripe_subscription_id);

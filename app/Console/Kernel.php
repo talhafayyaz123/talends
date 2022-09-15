@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\RecurringPaymentCron::class,
-
+        Commands\StripeSubscription::class,
     ];
 
     /**
@@ -38,6 +38,11 @@ class Kernel extends ConsoleKernel
         $payment_gateway = !empty($payout_settings) && !empty($payout_settings[0]['payment_method']) ? $payout_settings[0]['payment_method'] : array();
         if( isset($payment_gateway) && in_array('paytab',$payment_gateway)){
             $schedule->command('recurring-payment:cron')
+            ->everyMinute();
+        }
+
+        if( isset($payment_gateway) && in_array('stripe',$payment_gateway)){
+            $schedule->command('stripe-subscription:cron')
             ->everyMinute();
         }
 
