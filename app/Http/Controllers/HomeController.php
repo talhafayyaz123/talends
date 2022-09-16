@@ -272,8 +272,10 @@ class HomeController extends Controller
         $payment_gateway = !empty($payout_settings) && !empty($payout_settings[0]['payment_method']) ? $payout_settings[0]['payment_method'] : array();
         $symbol = !empty($payout_settings) && !empty($payout_settings[0]['currency']) ? Helper::currencyList($payout_settings[0]['currency']) : array();
             
-    
-        return view('auth.company_registration',compact('symbol','payment_gateway','payout_settings','stripe_img','stripe_settings','package_options','page','meta_desc','meta_keywords','yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
+        $settings = SiteManagement::getMetaValue('commision');
+
+        $currency = !empty($settings[0]['currency']) ? $settings[0]['currency'] : 'USD';
+        return view('auth.company_registration',compact('currency','symbol','payment_gateway','payout_settings','stripe_img','stripe_settings','package_options','page','meta_desc','meta_keywords','yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
      }
 
       public function stripeCompanyRegistrationSuccess($id){

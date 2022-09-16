@@ -192,7 +192,7 @@ Company Registration
                                                         <div class="plan">
                                                             <div class="plan-c">
                                                                 <ul class="price-feature">
-                                                                    <li class="text-center" style="padding: 1px 0px;border-bottom: 1px solid #349f1a;color: #9a9797;font-weight: bold;font-size: 14px;">AED {{ $package[0]->cost ?? '0' }} Monthly</li>
+                                                                    <li class="text-center" style="padding: 1px 0px;border-bottom: 1px solid #349f1a;color: #9a9797;font-weight: bold;font-size: 14px;"><?php echo $currency; ?> {{ $package[0]->cost ?? '0' }} Monthly</li>
                                                                     @foreach ($monthly_options as $key => $option)
 
                                                                     @if ($key == 'duration')
@@ -224,7 +224,7 @@ Company Registration
                                                         <div class="plan">
                                                             <div class="plan-c">
                                                                 <ul class="price-feature">
-                                                                    <li class="text-center" style="padding: 1px 0px;border-bottom: 1px solid #349f1a;color: #9a9797;font-weight: bold;font-size: 14px;">AED {{ $package[1]->cost ?? '0' }} Yearly</li>
+                                                                    <li class="text-center" style="padding: 1px 0px;border-bottom: 1px solid #349f1a;color: #9a9797;font-weight: bold;font-size: 14px;"><?php echo $currency; ?>  {{ $package[1]->cost ?? '0' }} Yearly</li>
                                                                     @foreach ($yearly_options as $key => $option)
                                                                     @if ($key == 'duration')
                                                                     <li class="text-center"><span> {{ Helper::getPackageDurationList($yearly_options['duration']) }}</span></li>
