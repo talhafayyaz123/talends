@@ -96,6 +96,9 @@ class PaypalController extends Controller
             } else if (Auth::user()->getRoleNames()[0] == "freelancer") {
                 session()->forget('type');
                 return Redirect::to('dashboard/packages/freelancer');
+            }else if (Auth::user()->getRoleNames()[0] == "company") {
+                session()->forget('type');
+                return Redirect::to('dashboard/packages/company');
             }
         } else {
             abort(404);
@@ -407,17 +410,17 @@ class PaypalController extends Controller
                                     $email_params['name'] = $package->title;
                                     $email_params['price'] = $package->cost;
                                     $email_params['expiry_date'] = !empty($expiry_date) ? Carbon::parse($expiry_date)->format('M d, Y') : '';
-                                   /*   Mail::to(Auth::user()->email)
+                                     Mail::to(Auth::user()->email)
                                         ->send(
                                             new EmployerEmailMailable(
                                                 'employer_email_package_subscribed',
                                                 $template_data,
                                                 $email_params
                                             )
-                                        ); */ 
+                                        );
                                 }
                             }
-                        } elseif ($role === 'freelancer') {
+                        } elseif ($role === 'freelancer' || $role === 'company' ) {
                             if (!empty(Auth::user()->email)) {
                                 $email_params = array();
                                 $template = DB::table('email_types')->select('id')->where('email_type', 'freelancer_email_package_subscribed')->get()->first();
@@ -428,14 +431,14 @@ class PaypalController extends Controller
                                     $email_params['name'] = $package->title;
                                     $email_params['price'] = $package->cost;
                                     $email_params['expiry_date'] = !empty($expiry_date) ? Carbon::parse($expiry_date)->format('M d, Y') : '';
-                                    /*  Mail::to(Auth::user()->email)
+                                     Mail::to(Auth::user()->email)
                                         ->send(
                                             new FreelancerEmailMailable(
                                                 'freelancer_email_package_subscribed',
                                                 $template_data,
                                                 $email_params
                                             )
-                                        ); */ 
+                                        ); 
                                 }
                             }
                         }
@@ -469,14 +472,14 @@ class PaypalController extends Controller
                             $email_params['employer_profile'] = url('profile/' . $user->slug);
                             $email_params['employer_name'] = Helper::getUserName($user->id);
                             $freelancer_data = User::find(intval($freelancer));
-                          /*   Mail::to($freelancer_data->email)
+                            Mail::to($freelancer_data->email)
                                 ->send(
                                     new FreelancerEmailMailable(
                                         'freelancer_email_new_order',
                                         $template_data,
                                         $email_params
                                     )
-                                ); */ 
+                                );  
                         }
                     }
                 } else {
@@ -512,14 +515,14 @@ class PaypalController extends Controller
                                 $email_params['link'] = url('profile/' . $freelancer->slug);
                                 $email_params['employer_profile'] = url('profile/' . $employer->slug);
                                 $email_params['emp_name'] = Helper::getUserName($employer->id);
-                               /*  Mail::to($freelancer->email)
+                                Mail::to($freelancer->email)
                                     ->send(
                                         new FreelancerEmailMailable(
                                             'freelancer_email_hire_freelancer',
                                             $template_data,
                                             $email_params
                                         )
-                                    ); */ 
+                                    ); 
                             }
                         }
                     }
