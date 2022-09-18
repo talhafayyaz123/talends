@@ -282,7 +282,7 @@ Company Registration
                                                 <span><em>{{ trans('lang.pay_amount_via') }}</em> {{ Helper::getPaymentMethodList($gatway)['title']}} {{ trans('lang.pay_gateway') }}</span>
                                         
                                         @elseif ($gatway == "stripe")
-                                        <input checked type="radio" value="stripe" id='payment_method' name="payment_method">
+                                        <input  type="radio" value="stripe" id='payment_method' name="payment_method">
                                                 <i class="fab fa-stripe-s"></i>
                                                 <span><em>{{ trans('lang.pay_amount_via') }}</em> {{ Helper::getPaymentMethodList($gatway)['title']}} {{ trans('lang.pay_gateway') }}</span>
                                         
@@ -298,7 +298,7 @@ Company Registration
                         </div>
                                     </div>
 
-                                    <b-modal size="lg"  id='stripe_register_form'  class="la-pay-stripe hide">
+                                    <b-modal size="lg"  id='stripe_register_form'  class="la-pay-stripe hide" style="display:none;">
                     <template v-slot:modal-title>
                         {{ trans('lang.stripe_payment')}} 
                         <span>{{ trans('lang.stripe_form_note')}}  </span>
@@ -437,10 +437,9 @@ Company Registration
 <script>
     $(document).ready(function () {
    
-
         $('input[type=radio][name=payment_method]').change(function() {
             var payment_method=this.value;
-       if(payment_method=='paytab'){
+       if(payment_method=='paytab' || payment_method=='paypal' ){
         $('#stripe_register_form').hide();
 
        }else if(payment_method=='stripe'){
@@ -455,9 +454,17 @@ Company Registration
     function checkCaptcha() {
 
         var form_data = $('#msform').serialize();
-        var payment_method=$('#payment_method').val();
-        
-        $.ajax({
+        var payment_method=$('#payment_method:checked').val();
+        if(payment_method==undefined){
+            $('.help-block').show();
+            $('.help-block strong').html('Select payment method.');
+            return false;
+        }
+
+        $('.help-block').hide();
+        $('.help-block strong').html('');
+       
+         $.ajax({
             type: "POST",
             url: '/hire/agency/captcha-validation',
             data: form_data,
@@ -477,16 +484,6 @@ Company Registration
                       var ccExpiryMonth=$('#ccExpiryMonth').val();
                       var ccExpiryYear=$('#ccExpiryYear').val();
                       var cvvNumber=$('#cvvNumber').val();
-
-                   /*    var stripe_user_name=$('#stripe_user_name').val();
-                      var line1=$('#line1').val();
-                      var line2=$('#line2').val();
-                      var postal_code=$('#postal_code').val();
-                      var city=$('#city').val();
-                      var state=$('#state').val();
-                      var country=$('#country').val(); */
-
-
 
                       if(card_no=='')
                         {
@@ -573,6 +570,10 @@ Company Registration
                         }
 
 
+                    }else if(payment_method=='paypal'){
+                        var url='<?php  echo url('company/paypal/ec-checkout') ?>';
+                        $('.company_registration_form').attr('action', url).submit();
+                        
                     }
                 
 

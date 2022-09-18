@@ -93,6 +93,11 @@ Route::get('freelancer/get-freelancer-educations', 'FreelancerController@getFree
 Route::get('freelancer/project-awards/{id}', 'HomeController@projectAwardsSettings')->name('freelancerProjectAwards');
 
 
+//company registration paypal
+Route::post('company/paypal/ec-checkout', 'PaypalController@getCompanyExpressCheckout');
+
+
+
 Route::get('articles/{category?}', 'ArticleController@articlesList')->name('articlesList');
 Route::get('article/{slug}', 'ArticleController@showArticle')->name('showArticle');
 Route::get('profile/{slug}', 'PublicController@showUserProfile')->name('showUserProfile');

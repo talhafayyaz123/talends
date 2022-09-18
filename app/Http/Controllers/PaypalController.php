@@ -34,6 +34,9 @@ use App\Mail\EmployerEmailMailable;
 use App\Job;
 use App\Message;
 use App\Service;
+use App\Mail\GeneralEmailMailable;
+use App\Mail\AdminEmailMailable;
+
 
 /**
  * Class PaypalController
@@ -105,6 +108,87 @@ class PaypalController extends Controller
         }
     }
 
+    public function getCompanyExpressCheckout(Request $request)
+    {
+
+        $validation=array();
+        $validation= [
+            'company_name' => 'required',
+            'email' => ['required','unique:users'],
+            'phone_number' => 'required',
+            'password' => 'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+            'employees' => 'required',
+            'role' => 'not_in:admin',
+            'package_id' => 'required',
+            'locations' => 'required',
+            'agency_language' => 'required',
+            'agency_website' => 'required',
+            'budget' => 'required',
+            'categories.*' => 'required',       
+        ];
+        $customMessages = [
+            'password.required' => 'Your password must be more than 6 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character'
+        ];
+        $this->validate(
+            $request,
+            
+            $validation,$customMessages
+        );
+    
+        $settings = SiteManagement::getMetaValue('payment_settings');
+        $payment_mode = !empty($settings) && !empty($settings[0]['enable_sandbox']) ? $settings[0]['enable_sandbox'] : 'false';
+        if ($payment_mode == 'true') {
+            if (empty(env('PAYPAL_SANDBOX_API_USERNAME'))
+                && empty(env('PAYPAL_SANDBOX_API_PASSWORD'))
+                && empty(env('PAYPAL_SANDBOX_API_SECRET'))
+            ) {
+                Session::flash('error', trans('lang.paypal_empty_credentials'));
+                return Redirect::back();
+            }
+        } elseif ($payment_mode == 'false') {
+            if (empty(env('PAYPAL_LIVE_API_USERNAME'))
+                && empty(env('PAYPAL_LIVE_API_PASSWORD'))
+                && empty(env('PAYPAL_LIVE_API_SECRET'))
+            ) {
+                Session::flash('error', trans('lang.paypal_empty_credentials'));
+                return Redirect::back();
+            }
+        }
+
+        $settings = SiteManagement::getMetaValue('commision');
+        $currency = !empty($settings[0]['currency']) ? $settings[0]['currency'] : 'USD';
+        $supportedCurrencies = array_column(Helper::getPaypalSupportedCurrencies(), 'code');
+        
+        if (in_array($currency, $supportedCurrencies)) {
+            
+            //  user register
+
+            ////////////////
+            if (Auth::user()) {
+                //$recurring = ($request->get('mode') === 'recurring') ? true : false;
+                $recurring = false;
+                $success = true;
+                $cart = $this->getCheckoutData($recurring, $success);
+                $payment_detail = array();
+                try {
+                    $response = $this->provider->setCurrency($currency)->setExpressCheckout($cart, $recurring);
+                    if ($response['ACK'] == 'Failure') {
+                        Session::flash('error', $response['L_LONGMESSAGE0']);
+                        return Redirect::back();
+                    }
+                    return redirect($response['paypal_link']);
+                } catch (\Exception $e) {
+                    $invoice = $this->createInvoice($cart, 'Invalid', $payment_detail);
+                    session()->put(['code' => 'danger', 'message' => "Error processing PayPal payment for Order $invoice->id!"]);
+                }
+            } else {
+                abort(404);
+            }
+        } else {
+            Session::flash('error', trans('lang.currency_not_supported_paypal'));
+            return Redirect::back();
+        }
+    }
     /**
      * Get express checkout.
      *
