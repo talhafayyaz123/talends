@@ -46,6 +46,7 @@ Company Registration
                                     <li><span>2</span></li>
                                     <li><span>3</span></li>
                                     <li><span>4</span></li>
+                                    <li><span>5</span></li>
                                 </ul>
                                 <!-- fieldsets -->
                                 <fieldset>
@@ -266,156 +267,170 @@ Company Registration
                                     </div>
 
 
-                          <div class="col-12 mb-3 text-center">
+                        
+                                    <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                   
+                                    <input type="button" name="next" class="next action-button" value="Next" />
+                                </fieldset>
+
+                                <fieldset>
+                                <div class="row">
+                                            <div class="col-12">
+                                                <h2 class="fs-title">Lets Pay:</h2>
+                                            </div>
+                                        </div>
+                                <div class="col-12 mb-3 text-center">
                                       
-                        <div class="sj-checkpaymentmethod">
-                            <div class="sj-title">
-                                <h3>{{ trans('lang.select_pay_method') }}</h3>
-                            </div>
-                            <ul class="sj-paymentmethod">
-                                @foreach ($payment_gateway as $gatway)
-                                    <li>
-                                        @if ($gatway == "paypal")
-                                            
-                                            <input type="radio" value="paypal" id='payment_method' name="payment_method">
-                                                <i class="fa fa-paypal"></i>
-                                                <span><em>{{ trans('lang.pay_amount_via') }}</em> {{ Helper::getPaymentMethodList($gatway)['title']}} {{ trans('lang.pay_gateway') }}</span>
-                                        
-                                        @elseif ($gatway == "stripe")
-                                        <input checked type="radio" value="stripe" id='payment_method' name="payment_method">
-                                                <i class="fab fa-stripe-s"></i>
-                                                <span><em>{{ trans('lang.pay_amount_via') }}</em> {{ Helper::getPaymentMethodList($gatway)['title']}} {{ trans('lang.pay_gateway') }}</span>
-                                        
-                                            @elseif($gatway == "paytab")
-                                            <input type="radio" value="paytab" id='payment_method' name="payment_method">
-                                                    <i class="fa fa-credit-card"></i>
-                                                <span><em>Pay via Cedit Card</em> {{ Helper::getPaymentMethodList($gatway)['title']}} {{ trans('lang.pay_gateway') }}</span>
-                                        
-                                        @endif
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                                    </div>
+                                      <div class="sj-checkpaymentmethod">
+                                          <div class="sj-title">
+                                              <h3>{{ trans('lang.select_pay_method') }}</h3>
+                                          </div>
+                                          <ul class="sj-paymentmethod">
+                                              @foreach ($payment_gateway as $gatway)
+                                                  <li>
+                                                      @if ($gatway == "paypal")
+                                                          
+                                                          <input type="radio" value="paypal" id='payment_method' name="payment_method">
+                                                              <i class="fa fa-paypal"></i>
+                                                              <span><em>{{ trans('lang.pay_amount_via') }}</em> {{ Helper::getPaymentMethodList($gatway)['title']}} {{ trans('lang.pay_gateway') }}</span>
+                                                      
+                                                      @elseif ($gatway == "stripe")
+                                                      <input checked type="radio" value="stripe" id='payment_method' name="payment_method">
+                                                              <i class="fab fa-stripe-s"></i>
+                                                              <span><em>{{ trans('lang.pay_amount_via') }}</em> {{ Helper::getPaymentMethodList($gatway)['title']}} {{ trans('lang.pay_gateway') }}</span>
+                                                      
+                                                          @elseif($gatway == "paytab")
+                                                          <input type="radio" value="paytab" id='payment_method' name="payment_method">
+                                                                  <i class="fa fa-credit-card"></i>
+                                                              <span><em>Pay via Cedit Card</em> {{ Helper::getPaymentMethodList($gatway)['title']}} {{ trans('lang.pay_gateway') }}</span>
+                                                      
+                                                      @endif
+                                                  </li>
+                                              @endforeach
+                                          </ul>
+                                      </div>
+                                                  </div>
+              
+                                                  <b-modal size="lg"  id='stripe_register_form'  class="la-pay-stripe hide">
+                                  <template v-slot:modal-title>
+                                      {{ trans('lang.stripe_payment')}} 
+                                      <span>{{ trans('lang.stripe_form_note')}}  </span>
+                                  </template>
+                                  <div class="d-block text-center">
+                                          <fieldset>
+                                              <div class="form-row" style="padding-top: 64px;">
+                                                  <div class="form-group col-lg-4 {{ $errors->has('name') ? ' has-error' : '' }}">
+                                                      <label>{{ trans('lang.name') }}</label>
+                                                      <input id="stripe_user_name" type="text" class="form-control" name="stripe_user_name" value="{{ old('stripe_user_name') }}" autofocus>
+                                                      @if ($errors->has('stripe_user_name'))
+                                                          <span class="help-block">
+                                                              <strong>{{ $errors->first('stripe_user_name') }}</strong>
+                                                          </span>
+                                                      @endif
+                                                  </div>
+                                                  <div class="form-group col-lg-4 {{ $errors->has('stripe_user_email') ? ' has-error' : '' }}">
+                                                      <label>{{ trans('lang.email') }}</label>
+                                                      <input id="email" type="stripe_user_email" class="form-control" name="stripe_user_email" value="{{ old('stripe_user_email') }}" autofocus>
+                                                      @if ($errors->has('stripe_user_email'))
+                                                          <span class="help-block">
+                                                              <strong>{{ $errors->first('stripe_user_email') }}</strong>
+                                                          </span>
+                                                      @endif
+                                                  </div>
+                                                  <div class="form-group col-lg-4 {{ $errors->has('stripe_user_phone') ? ' has-error' : '' }}">
+                                                      <label>{{ trans('lang.phone') }}</label>
+                                                      <input id="stripe_user_phone" type="number" class="form-control" name="stripe_user_phone" value="{{ old('stripe_user_phone') }}" autofocus>
+                                                      @if ($errors->has('phone'))
+                                                          <span class="help-block">
+                                                              <strong>{{ $errors->first('stripe_user_phone') }}</strong>
+                                                          </span>
+                                                      @endif
+                                                  </div>
+                                              </div>
+                                              <div class="form-group">
+                                                  <label for="inputAddress">{{ trans('lang.address1') }}</label>
+                                                  <input type="text" class="form-control" name="line1" id="inputAddress" placeholder="">
+                                              </div>
+                                              <div class="form-group">
+                                                  <label for="inputAddress2">{{ trans('lang.address2') }}</label>
+                                                  <input type="text" class="form-control" name="line2" id="inputAddress2" placeholder="">
+                                              </div>
+              
+                                              <div class="form-group">
+                                                  <label for="inputAddress2">Country</label>
+                                                  <input type="text" class="form-control" name="country" id="country" placeholder="">
+                                              </div>
+              
+                                              <div class="form-row">
+                                                  <div class="form-group col-lg-6">
+                                                      <label for="inputCity">{{ trans('lang.city') }}</label>
+                                                      <input type="text" class="form-control" name="city" id="inputCity">
+                                                  </div>
+                                                  <div class="form-group col-lg-4">
+                                                      <label for="inputState">{{ trans('lang.state') }}</label>
+                                                      <input type="text" class="form-control" name="state" id="inputState">
+                                                  </div>
+                                                  <div class="form-group col-lg-2">
+                                                  <label for="inputPostal">{{ trans('lang.postal_code') }}</label>
+                                                  <input type="text" class="form-control" name="postal_code" id="inputPostal">
+                                                  </div>
+                                              </div>
+                                              <div class="form-group wt-inputwithicon {{ $errors->has('card_no') ? ' has-error' : '' }}">
+                                                  <label>{{ trans('lang.card_no') }} *</label>
+                                                  <img src="{{!empty($stripe_img) ? asset('uploads/settings/payment/'.$stripe_img) : ''}}">
+                                                  <input id="card_no" type="text" class="form-control" name="card_no" value="{{ old('card_no') }}" autofocus>
+                                                  @if ($errors->has('card_no'))
+                                                      <span class="help-block">
+                                                          <strong>{{ $errors->first('card_no') }}</strong>
+                                                      </span>
+                                                  @endif
+                                              </div>
+                                              <div class="form-group {{ $errors->has('ccExpiryMonth') ? ' has-error' : '' }}">
+                                                  <label>{{ trans('lang.expiry_month') }} *</label>
+                                                  <input id="ccExpiryMonth" type="number" class="form-control" name="ccExpiryMonth" value="{{ old('ccExpiryMonth') }}" min="1" max="12" autofocus>
+                                                  @if ($errors->has('ccExpiryMonth'))
+                                                      <span class="help-block">
+                                                          <strong>{{ $errors->first('ccExpiryMonth') }}</strong>
+                                                      </span>
+                                                  @endif
+                                              </div>
+                                              <div class="form-group {{ $errors->has('ccExpiryYear') ? ' has-error' : '' }}">
+                                                  <label>{{ trans('lang.expiry_year') }}  *(Should be grater than current year 2022)</label>
+                                                  <input id="ccExpiryYear" type="text" class="form-control" name="ccExpiryYear" value="{{ old('ccExpiryYear') }}" autofocus>
+                                                  @if ($errors->has('ccExpiryYear'))
+                                                      <span class="help-block">
+                                                          <strong>{{ $errors->first('ccExpiryYear') }}</strong>
+                                                      </span>
+                                                  @endif
+                                              </div>
+                                              <div class="form-group wt-inputwithicon {{ $errors->has('cvvNumber') ? ' has-error' : '' }}">
+                                                  <label>{{ trans('lang.cvc_no') }} *</label>
+                                                  <img src="{{config('app.aws_se_path'). '/' .'images/pay-img.png'}}">
+                                                  <input id="cvvNumber" type="number" class="form-control" name="cvvNumber" value="{{ old('cvvNumber') }}" autofocus>
+                                                  @if ($errors->has('cvvNumber'))
+                                                      <span class="help-block">
+                                                          <strong>{{ $errors->first('cvvNumber') }}</strong>
+                                                      </span>
+                                                  @endif
+                                              </div>
+                                              
+                                          </fieldset>
+                                  </div>
+                              </b-modal>
 
-                                    <b-modal size="lg"  id='stripe_register_form'  class="la-pay-stripe hide">
-                    <template v-slot:modal-title>
-                        {{ trans('lang.stripe_payment')}} 
-                        <span>{{ trans('lang.stripe_form_note')}}  </span>
-                    </template>
-                    <div class="d-block text-center">
-                            <fieldset>
-                                <div class="form-row" style="padding-top: 64px;">
-                                    <div class="form-group col-lg-4 {{ $errors->has('name') ? ' has-error' : '' }}">
-                                        <label>{{ trans('lang.name') }}</label>
-                                        <input id="stripe_user_name" type="text" class="form-control" name="stripe_user_name" value="{{ old('stripe_user_name') }}" autofocus>
-                                        @if ($errors->has('stripe_user_name'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('stripe_user_name') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group col-lg-4 {{ $errors->has('stripe_user_email') ? ' has-error' : '' }}">
-                                        <label>{{ trans('lang.email') }}</label>
-                                        <input id="email" type="stripe_user_email" class="form-control" name="stripe_user_email" value="{{ old('stripe_user_email') }}" autofocus>
-                                        @if ($errors->has('stripe_user_email'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('stripe_user_email') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                    <div class="form-group col-lg-4 {{ $errors->has('stripe_user_phone') ? ' has-error' : '' }}">
-                                        <label>{{ trans('lang.phone') }}</label>
-                                        <input id="stripe_user_phone" type="number" class="form-control" name="stripe_user_phone" value="{{ old('stripe_user_phone') }}" autofocus>
-                                        @if ($errors->has('phone'))
-                                            <span class="help-block">
-                                                <strong>{{ $errors->first('stripe_user_phone') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputAddress">{{ trans('lang.address1') }}</label>
-                                    <input type="text" class="form-control" name="line1" id="inputAddress" placeholder="">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputAddress2">{{ trans('lang.address2') }}</label>
-                                    <input type="text" class="form-control" name="line2" id="inputAddress2" placeholder="">
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="inputAddress2">Country</label>
-                                    <input type="text" class="form-control" name="country" id="country" placeholder="">
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group col-lg-6">
-                                        <label for="inputCity">{{ trans('lang.city') }}</label>
-                                        <input type="text" class="form-control" name="city" id="inputCity">
-                                    </div>
-                                    <div class="form-group col-lg-4">
-                                        <label for="inputState">{{ trans('lang.state') }}</label>
-                                        <input type="text" class="form-control" name="state" id="inputState">
-                                    </div>
-                                    <div class="form-group col-lg-2">
-                                    <label for="inputPostal">{{ trans('lang.postal_code') }}</label>
-                                    <input type="text" class="form-control" name="postal_code" id="inputPostal">
-                                    </div>
-                                </div>
-                                <div class="form-group wt-inputwithicon {{ $errors->has('card_no') ? ' has-error' : '' }}">
-                                    <label>{{ trans('lang.card_no') }} *</label>
-                                    <img src="{{!empty($stripe_img) ? asset('uploads/settings/payment/'.$stripe_img) : ''}}">
-                                    <input id="card_no" type="text" class="form-control" name="card_no" value="{{ old('card_no') }}" autofocus>
-                                    @if ($errors->has('card_no'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('card_no') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                <div class="form-group {{ $errors->has('ccExpiryMonth') ? ' has-error' : '' }}">
-                                    <label>{{ trans('lang.expiry_month') }} *</label>
-                                    <input id="ccExpiryMonth" type="number" class="form-control" name="ccExpiryMonth" value="{{ old('ccExpiryMonth') }}" min="1" max="12" autofocus>
-                                    @if ($errors->has('ccExpiryMonth'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('ccExpiryMonth') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                <div class="form-group {{ $errors->has('ccExpiryYear') ? ' has-error' : '' }}">
-                                    <label>{{ trans('lang.expiry_year') }}  *(Should be grater than current year 2022)</label>
-                                    <input id="ccExpiryYear" type="text" class="form-control" name="ccExpiryYear" value="{{ old('ccExpiryYear') }}" autofocus>
-                                    @if ($errors->has('ccExpiryYear'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('ccExpiryYear') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                <div class="form-group wt-inputwithicon {{ $errors->has('cvvNumber') ? ' has-error' : '' }}">
-                                    <label>{{ trans('lang.cvc_no') }} *</label>
-                                    <img src="{{config('app.aws_se_path'). '/' .'images/pay-img.png'}}">
-                                    <input id="cvvNumber" type="number" class="form-control" name="cvvNumber" value="{{ old('cvvNumber') }}" autofocus>
-                                    @if ($errors->has('cvvNumber'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('cvvNumber') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                <div class="alert alert-danger" id="alert-danger_stripe" style="display:none"></div>
-
-                            </fieldset>
-                    </div>
-                </b-modal>
-
-                                    <div class="col-12 mb-3 text-center">
+                              <div class="alert alert-danger" id="alert-danger_stripe" style="display:none"></div>
+              
+                                              <div class="col-12 mb-3 text-center">
                                         {!! htmlFormSnippet() !!}
                                         <span class="help-block" style="display: none;">
                                             <strong class="error"></strong>
                                         </span>
                                     </div>
                                     <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                                    <button id='register_pay_btn' class="btn btn-theme rounded-pill px-4 company_register_pay_now_disable float-right py-3 mt-2" type="button" onclick="checkCaptcha()">
+                                <button onclick="checkCaptcha()" id='register_pay_btn' class="btn btn-theme rounded-pill px-4 company_register_pay_now_disable float-right py-3 mt-2" type="button" onclick="checkCaptcha()">
                                         Proceed To Payment
-                                    </button>
+                                    </button> 
+              
                                 </fieldset>
 
                             
@@ -446,6 +461,8 @@ Company Registration
        }else if(payment_method=='stripe'){
         $('#stripe_register_form').show();
 
+       }else if(payment_method=='paypal'){
+        $('#stripe_register_form').hide();
        }
       });
 
@@ -456,7 +473,17 @@ Company Registration
 
         var form_data = $('#msform').serialize();
         var payment_method=$('#payment_method').val();
-        
+        var payment_method=$('#payment_method:checked').val();
+
+         if(payment_method==undefined){
+
+            $('.help-block').show();
+            $('.help-block strong').html('Select payment method.');
+            return false;
+         }
+         $('.help-block').hide();
+         $('.help-block strong').html('');
+
         $.ajax({
             type: "POST",
             url: '/hire/agency/captcha-validation',
@@ -465,7 +492,7 @@ Company Registration
 
                 if (response.errors) {
                     $('.help-block').show();
-                    $('.help-block strong').html('recaptcha field is required.');
+                    $('.help-block strong').html('recaptcha field is required or wait a moment please.');
 
                 } else {
                     $('.help-block').hide();
@@ -477,16 +504,6 @@ Company Registration
                       var ccExpiryMonth=$('#ccExpiryMonth').val();
                       var ccExpiryYear=$('#ccExpiryYear').val();
                       var cvvNumber=$('#cvvNumber').val();
-
-                   /*    var stripe_user_name=$('#stripe_user_name').val();
-                      var line1=$('#line1').val();
-                      var line2=$('#line2').val();
-                      var postal_code=$('#postal_code').val();
-                      var city=$('#city').val();
-                      var state=$('#state').val();
-                      var country=$('#country').val(); */
-
-
 
                       if(card_no=='')
                         {

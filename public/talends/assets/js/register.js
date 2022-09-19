@@ -240,6 +240,23 @@ $(document).ready(function(){
 
         
         
+         if(current==4){
+            var package_id=$('#package_id').val();
+            if(package_id==''){
+                jQuery('.alert-danger').html('');
+                jQuery('.alert-danger').show();
+                jQuery('.alert-danger').append('<p>Please Select Payment Plan</p>'); 
+                is_error=1;
+            }else{
+                jQuery('.alert-danger').html('');
+                jQuery('.alert-danger').hide();
+                is_error=0;
+            }
+            
+         }
+
+         
+        
         if(is_error==0 && current>1){
             jQuery('.alert-danger').html('');
             jQuery('.alert-danger').hide();
