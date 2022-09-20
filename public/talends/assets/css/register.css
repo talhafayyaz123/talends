@@ -147,7 +147,7 @@ label {
     width: 50%;
     right: 0;
 }
-#progressbar li:nth-child(4)::before{
+#progressbar li:nth-child(5)::before{
     width: 50%;
     left: 0;
 }
@@ -170,6 +170,10 @@ label {
     width: 100%;
 }
 #progressbar li:nth-child(4).active::after{
+	left: 0;
+    width: 100%;
+}
+#progressbar li:nth-child(5).active::after{
 	left: 0;
 }
 #progressbar li.active:after {

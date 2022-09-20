@@ -1,11 +1,17 @@
 
     var input = document.querySelector("#phone_number");
     window.intlTelInput(input, {
-        autoHideDialCode: true,
+/*     
         dropdownContainer: document.body,
         formatOnDisplay: true,
-        initialCountry: "auto",
-        separateDialCode: true
+        separateDialCode: true,
+        
+ */        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+         //initialCountry: "pk",
+         preferredCountries: ["ae","pk" ],
+         autoHideDialCode: true,
+         formatOnDisplay: true,
+
     });
 
 $(document).ready(function(){
@@ -34,7 +40,7 @@ $(document).ready(function(){
         var password=$('#register_password').val();
        var country_code=$('.iti__selected-flag').text();
      
-        
+    
         if(password=='')
         {
             $('#register_password').addClass('field_error');
@@ -109,8 +115,7 @@ $(document).ready(function(){
                             jQuery('#email_error').hide();
                             jQuery.each(data.errors, function(key, value){
                            
-                                
-                                
+                                     
                                 if(value=='The password format is invalid.'){
                                     jQuery('#password_error').show();
                                     jQuery('#password_error').append('<p class="mb-0">password must be more than 8 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character</p>'); 
@@ -129,7 +134,9 @@ $(document).ready(function(){
                          is_error=1;
                         }else{
                             is_error=0
-                            $('#phone_number').val(country_code+phone_number);
+                            //$('#phone_number').val(country_code+phone_number);
+                            $('#phone_number').val(phone_number);
+                            
                             jQuery('.alert-danger').html('');
                             jQuery('.alert-danger').hide();
                             current_fs = obj.parent();
@@ -283,8 +290,8 @@ $(document).ready(function(){
             }, 
             duration: 500
         });
+        
         setProgressBar(++current);
-
     }
     });
     
@@ -292,7 +299,6 @@ $(document).ready(function(){
         
         current_fs = $(this).parent();
         previous_fs = $(this).parent().prev();
-        
         //Remove class active
         $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
         
@@ -310,10 +316,13 @@ $(document).ready(function(){
                     'position': 'relative'
                 });
                 previous_fs.css({'opacity': opacity});
+            
             }, 
             duration: 500
         });
+        
         setProgressBar(--current);
+        
     });
     
     function setProgressBar(curStep){
@@ -374,7 +383,7 @@ $(document).ready(function(){
                           }
                          
                      });
-                     $('.step_1_btn').attr('disabled', true);
+                   //  $('.step_1_btn').attr('disabled', true);
                   }else{
                       is_error=0;
                       jQuery('#password_error').html('');
@@ -382,7 +391,7 @@ $(document).ready(function(){
        
                      jQuery('#password_error').hide();
                       jQuery('#email_error').hide();
-                      $('.step_1_btn').removeAttr('disabled');
+                     // $('.step_1_btn').removeAttr('disabled');
                      
                 }
                        
