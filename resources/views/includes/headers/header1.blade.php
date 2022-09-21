@@ -1,12 +1,13 @@
 <header>
-@if(\Request::route()->getName()=='login')
+@if(\Request::route()->getName()=='login'  || \Request::route()->getName()=='password.request' || \Request::route()->getName()=='password.reset' )
     <style>
         .wt-login{
             padding-top: 0px  !important; 
         }
         </style>
         @endif
-    @if(\Request::route()->getName()!='login')
+    
+    @if(\Request::route()->getName()!='login' &&  \Request::route()->getName()!='password.request' && \Request::route()->getName()!='password.reset')
     <div class="container-lg p-0">
         <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand" href="{{ route('home') }}">

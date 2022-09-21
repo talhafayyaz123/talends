@@ -26,7 +26,7 @@
                             @endphp
                             
                             <div class="border-bottom mb-4 p-4">
-                                <a href="#" ><i class="fa fa-check-circle"></i>{{$request->full_name}}</a>
+                                <a ><i class="fa fa-check-circle"></i>{{$request->full_name}}</a>
                                 <h4 >{{$request->company_name}}</h4>
                                 <p class="small  mb-2"><i class="fa fa-envelope" aria-hidden="true"></i> {{$request->email}}</p>
                                 <p class="small"><i class="fas fa-phone"></i> {{$request->phone_number}}</p>
@@ -51,8 +51,15 @@
             @if(!empty($hiring_requests) && $hiring_requests->count() > 0 )
              
             @foreach ($hiring_requests as $request)
-
-                <div class="lead-detail" id="leadDetail_{{$request->id}}" style="display:none ;">
+            @php 
+             $class='display:none;';
+            @endphp
+            @if($loop->first)
+            @php 
+             $class='display:block;';
+            @endphp
+                 @endif
+                 <div class="lead-detail" id="leadDetail_{{$request->id}}" style="{{ $class  }}">
                     <div class="mb-5 px-4">
                         <h4 >Company Name</h4>
                         <p class="mb-0">{{ $request->company_name }}</p>
@@ -79,7 +86,7 @@
                                         @if(!empty($request->detail))
                                             @php
                                                 foreach(unserialize($request->detail) as $key=>$value){
-                                                    $skill = \App\Skill::where('id', $value)->first()->title;  @endphp 
+                                                    $skill = \App\Skill::where('id', $value)->first()->title ?? '';  @endphp 
                                                     <li>{{ $skill }}</li>
                                                     @php  }
                                             @endphp
@@ -103,23 +110,16 @@
                                 @endif
                                </ul>
                         </div>
-                              @if($request->status=='accepted')
-                              <a class="btn btn-theme-white px-4 rounded-pill">Already Accepted</a>
-
-                              @elseif($request->status=='rejected')
-                              <a class="btn btn-theme-white px-4 rounded-pill">Already Rejected</a>
-                              @else
-                              <a class="btn btn-theme-white px-4 rounded-pill" href="{{ route('leadStatus',['id'=>$request->id,'status'=>'accept']) }}">Accept & Send Messages</a>
-                                <a class="btn btn-theme-white px-4 rounded-pill" href="{{ route('leadStatus',['id'=>$request->id,'status'=>'reject']) }}">Reject and Share response with Client</a>
-                              @endif
+                             
                                
                             </div>
                         </div>
                     </div>
-                </div>
+                
 
                 @endforeach
                 @endif
+                </div>
                
             </div>
         </div>

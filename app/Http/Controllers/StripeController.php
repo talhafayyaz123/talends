@@ -530,7 +530,7 @@ if (!empty(config('mail.username')) && !empty(config('mail.password'))) {
             
                     ['price' => $price['id']],
             
-                ],
+                ]
                 ]
             );
             

@@ -49,8 +49,6 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                    
-
                         @php
                         $roles = Spatie\Permission\Models\Role::all()->toArray();
                         @endphp
@@ -94,6 +92,7 @@
                                     </span>
                                 @endif
                             </div>
+                   
                             <!-- <div class="col-md-6 mb-3">
                                 <div class="custom-control custom-checkbox">
                                     <input class="custom-control-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -106,6 +105,8 @@
                                     <label class="custom-control-label" for="terms">Agree to Terms of Use</label>
                                 </div>
                             </div> -->
+                   
+                   
                             <div class="col-md-12 mb-3 mb-3 text-center">
                                 <button class="btn btn-theme rounded-pill px-5 btn-block">Sign in</button>
                             </div>
@@ -119,11 +120,7 @@
                                 <span class="error gmail_error" style="display: none;">Google account is not recognized for Google Sign-In on Talends. Please make sure you are using the same account that you have previously linked.</span>
                             </div>
                         </div>
-                        <div class="form-group mb-3 text-center">
-                            <div id="my-signin3"></div>
-                            <span class="error gmail_error" style="display: none;">Google account is not recognized for Google Sign-In on Talends. Please make sure you are using the same account that you have previously linked.</span>
-
-                        </div>
+                       
                     </form>
                     <div class="mb-3">
                         @if (Route::has('password.request'))
@@ -133,7 +130,8 @@
                     </div>
                 </div>
                 <div class="text-center">
-                    <p class="small">By clicking Sign In, you agree to our <a href="#" class="text-theme">Terms of service</a> & <a href="#" class="text-theme">Privacy policy</a>.</p>
+                    <p class="small">By clicking Sign In, you agree to our 
+                        <a href="{{ route('Agreement') }}" target="_blank"  class="text-theme">Terms of service</a> & <a href="{{ route('privacyPolicy') }}" target="_blank" class="text-theme">Privacy policy</a>.</p>
                 </div>
             </div>
 
