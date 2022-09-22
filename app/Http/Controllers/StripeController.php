@@ -530,6 +530,9 @@ if (!empty(config('mail.username')) && !empty(config('mail.password'))) {
             
                     ['price' => $price['id']],
             
+                ],
+                'payment_settings' => [
+                    'payment_method_types' => ['card'],
                 ]
                 ]
             );
@@ -1253,6 +1256,9 @@ return $json;
                                         ['price' => $price['id']],
                                 
                                     ],
+                                    'payment_settings' => [
+                                        'payment_method_types' => ['card'],
+                                    ]
                                     ]
                                 );
 
