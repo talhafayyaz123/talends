@@ -232,19 +232,19 @@
                             @csrf
                             <div class="row">
                                 <div class="form-group col-md-6 mb-4">
-                                    <input type="text" name="full_name"  value="" class="form-control form-control-lg"  placeholder="Name" id="full_name">
+                                    <input type="text" name="full_name"  value="{{ old('full_name') }}" class="form-control form-control-lg"  placeholder="Name" id="full_name">
                                 </div>
                                 <div class="form-group col-md-6 mb-4">
-                                    <input type="text" name="company_name" class="form-control form-control-lg" placeholder="Company Name (If any)" id="company_name">
+                                    <input type="text" name="company_name" value="{{ old('company_name') }}" class="form-control form-control-lg" placeholder="Company Name (If any)" id="company_name">
                                 </div>
                                 <div class="form-group col-md-6 mb-4">
-                                    <input type="email" name="email" class="form-control form-control-lg" placeholder="Email" id="email">
+                                    <input type="email" name="email" value="{{ old('email') }}" class="form-control form-control-lg" placeholder="Email" id="email">
                                 </div>
                                 <div class="form-group col-md-6 mb-4">
-                                    <input type="text"  name='phone_number' class="form-control form-control-lg" placeholder="Phone Number" id="phone_number">
+                                    <input type="text"  name='phone_number' value="{{ old('phone_number') }}" class="form-control form-control-lg" placeholder="Phone Number" id="phone_number">
                                 </div>
                                 <div class="form-group col-md-12 mb-4">
-                                    <textarea rows="4" name="detail" id='detail' class="form-control form-control-lg">Describe your project</textarea>
+                                    <textarea rows="4" name="detail" value="{{ old('detail') }}" id='detail' class="form-control form-control-lg">Describe your project</textarea>
                                 </div>
                                 <div class="form-group col-md-12 mb-4">
                                 {!! htmlFormSnippet() !!}

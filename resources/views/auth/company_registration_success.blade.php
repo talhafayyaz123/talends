@@ -18,7 +18,7 @@ Registration Successfull
                     <h2 class="">Success</h2>
                     <p class="w-50 mx-auto">We have successfully created your new account. Now start enjoying business growth & maximum mature leads from Talends.com.  You’re done with payment we have send you an activation mail to the email you provided during registration. It should arrive in a couple of minutes
                         <br><br><br>
-                        If the email has not arrived then please check inbox/spam/junk folder.
+                        If the email has not arrived then please check spam/junk folder.
                     </p>
 
                     <form method="POST" action="" class="wt-formtheme wt-formregister" id="verification_form">
@@ -29,7 +29,7 @@ Registration Successfull
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>
+                                     <!--    <label>
                                         
                                             @if (!empty($reg_page))
                                             <a target="_blank" href="{{{url($reg_page)}}}">
@@ -40,7 +40,7 @@ Registration Successfull
                                                 {{{ trans('lang.why_need_code') }}}
                                             </a>
                                             @endif
-                                        </label>
+                                        </label> -->
                                         <input type="text" name="code" id='verification_code' class="form-control" placeholder="{{{ trans('lang.enter_code') }}}" required>
                                     </div>
 

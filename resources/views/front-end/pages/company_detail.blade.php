@@ -264,10 +264,10 @@
                                 <div class="row">
 
                                     @foreach($categories as $category)
-
+                                     
                                     <div class="col-md-4 mb-4">
                                         <div class="image-checkboxes">
-                                            <input type="checkbox" name="services[]" value="{{ $category->id }}" id="myCheckbox{{ $category->id }}" />
+                                            <input type="checkbox" {{ ($loop->first) ? 'checked' :''  }} name="services[]" value="{{ $category->id }}" id="myCheckbox{{ $category->id }}" />
                                             <label for="myCheckbox{{ $category->id }}"><img src="{{ config('app.aws_se_path'). '/' .'uploads/categories/'.$category->image  }}" class="rounded-circle" width="40" />{{ $category->title ?? '' }}</label>
                                         </div>
                                     </div>
@@ -869,8 +869,10 @@
 
         }
 
-
-        if (email == '') {
+        var re = /\S+@\S+\.\S+/;
+        var email_check=re.test($('#email').val());
+        
+        if (email == '' || email_check==false ) {
             $('#email').addClass('field_error');
             is_error = 1;
         } else {
@@ -878,6 +880,7 @@
 
         }
 
+            
         if (phone_number == '') {
             $('#phone_number').addClass('field_error');
             is_error = 1;
@@ -895,6 +898,7 @@
 
         }
 
+         
 
         if (is_error == 0) {
             current_fs = $(this).parent();

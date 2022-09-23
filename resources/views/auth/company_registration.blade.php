@@ -16,7 +16,7 @@ Company Registration
     color: black;
     background-color: white;
     border: 1px solid black;
-    border-radius: 0.7rem !important;
+    border-radius: 1.7rem !important;
 }
     
 </style>
