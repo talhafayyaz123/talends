@@ -285,7 +285,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                         <div class="col-12 mb-3 text-center">
                                                             <button class="btn btn-theme rounded-pill d-inline-block my-3 py-3" type="submit" style="width: 300px;">Create Account</button>
                                                         </div>
-                                                        <div class="col-12 mb-3">
+                                                       <!--  <div class="col-12 mb-3">
                                                             <div class="or-text">
                                                                 <p>or</p>
                                                             </div>
@@ -294,7 +294,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                             <button class="btn btn-outline-theme rounded-pill" style="width: 300px;">
                                                                 <i class="bi-google mr-2"></i> Signin with google
                                                             </button>
-                                                        </div>
+                                                        </div> -->
                                                         <!-- <div class="col-12 text-center mb-3">
                                                             Already have an account? 
                                                             <a href="{{  url('login') }}" class="ml-2 btn-link text-success">Sign in</a>
