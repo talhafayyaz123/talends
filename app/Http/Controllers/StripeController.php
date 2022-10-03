@@ -497,7 +497,7 @@ if (!empty(config('mail.username')) && !empty(config('mail.password'))) {
 
                 'name' => $product_title,
                 'description' => 'Packages purchased',
-                'id'   =>$user_id.'_'.$product_id,
+                'id'   =>time().''.$user_id.'_'.$product_id,
               ]);
             
             $duration='week';
