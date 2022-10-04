@@ -508,7 +508,7 @@ if (!empty(config('mail.username')) && !empty(config('mail.password'))) {
               }
               $price = $stripe->prices()->create([
             
-                'unit_amount' => $product_price,
+                'unit_amount' => $product_price*100,
             
                 'currency' => $currency,
             
@@ -1236,7 +1236,7 @@ return $json;
 
                                 $price = $stripe->prices()->create([
            
-                                    'unit_amount' => $product_price,
+                                    'unit_amount' => $product_price*100,
                                 
                                     'currency' => $currency,
                                 

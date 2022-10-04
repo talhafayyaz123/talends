@@ -492,7 +492,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form_submission" style="{{$class2 }}">
+                <div class="form_submission pb-3 pt-3" style="{{$class2 }}">
                     {!! htmlFormSnippet() !!}
                     <span class="help-block" style="display: none;">
                         <strong class="error"></strong>
