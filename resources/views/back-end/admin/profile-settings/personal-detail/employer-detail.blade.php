@@ -1,6 +1,6 @@
 <div class="wt-tabcompanyinfo wt-tabsinfo">
     <div class="wt-tabscontenttitle">
-        <h2>{{{ trans('lang.company_details') }}}</h2>
+        <p class="mb-0">{{{ trans('lang.company_details') }}}</p>
     </div>
     <div class="wt-accordiondetails">
         <div class="wt-radioboxholder">

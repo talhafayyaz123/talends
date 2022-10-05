@@ -113,7 +113,7 @@
                                                         <label for="wt-check-{{{ $counter }}}"></label>
                                                     </span>
                                                 </td>
-                                                <td data-th="Icon"><span class="bt-content"><figure><img src="{{{asset(Helper::getImage('uploads/articles', $article->banner, '', 'small-default-article.png')) }}}" alt="{{{ $article->title }}}"></figure></span></td>
+                                                <td data-th="Icon"><span class="bt-content"><figure><img src="{{{(Helper::gets3Image('uploads/articles', $article->banner, '', 'small-default-article.png')) }}}" alt="{{{ $article->title }}}"></figure></span></td>
                                                 <td>{{{ $article->title }}}</td>
                                                 <td>{{{ $article->slug }}}</td>
                                                 <td>

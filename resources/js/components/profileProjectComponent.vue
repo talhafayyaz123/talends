@@ -70,7 +70,7 @@
     </div>
 </template>
 <script>
-const getImageUploadTemplate = () => `
+const getImageUploadTemplate = () =>`
 <div class="wt-uploadingbox">
 <div class="dz-preview dz-file-preview">
     <img data-dz-thumbnail />

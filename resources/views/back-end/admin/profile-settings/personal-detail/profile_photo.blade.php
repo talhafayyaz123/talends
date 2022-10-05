@@ -1,10 +1,10 @@
 <div class="wt-location wt-tabsinfo">
     <div class="wt-tabscontenttitle">
-        <h2>{{{ trans('lang.profile_photo') }}}</h2>
+    <p class="mb-0">{{{ trans('lang.profile_photo') }}}</p>
     </div>
     <div class="wt-settingscontent">
         @if (!empty($avater))
-            @php $image = '/uploads/users/'.Auth::user()->id.'/'.$avater; @endphp
+            @php $image =config('app.aws_se_path'). '/uploads/users/'.Auth::user()->id.'/'.$avater; @endphp
             <div class="wt-formtheme wt-userform">
                 <div v-if="this.uploaded_image">
                     <upload-image 

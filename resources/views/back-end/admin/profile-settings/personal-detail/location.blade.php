@@ -1,5 +1,5 @@
 <div class="wt-tabscontenttitle">
-    <h2>Your Location</h2>
+<p class="mb-0">Your Location</p>
 </div>
 <div class="wt-formtheme">
     <fieldset>

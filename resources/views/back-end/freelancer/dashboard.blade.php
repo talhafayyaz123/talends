@@ -7,6 +7,14 @@
             </div>
             @php session()->forget('message');  @endphp
         @endif
+
+        @if( Request::get('paytab_error')==1)
+        <div class="flash_msg">
+          <div class="alert alert-info">Payment Credentials not correct.</div>
+
+            </div>
+            @endif
+            
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="wt-insightsitemholder">

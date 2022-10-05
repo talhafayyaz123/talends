@@ -66,9 +66,11 @@ class EmailTemplateController extends Controller
             $templates = EmailTemplate::getFilterTemplate($request['role']);
             $roles = array_pluck(Role::all(), 'name', 'id');
         } else {
+            
             $templates = $this->email->getEmailTemplates();
             $roles = array_pluck(Role::all(), 'name', 'id');
         }
+    
         if (file_exists(resource_path('views/extend/back-end/admin/email-templates/index.blade.php'))) {
             return View::make('extend.back-end.admin.email-templates.index', compact('templates', 'roles'));
         } else {
@@ -86,6 +88,7 @@ class EmailTemplateController extends Controller
     public function edit($id)
     {
         $template = $this->email::getEmailTemplateByID($id);
+        
         $variables = unserialize($template->variables);
         $variables_array = Arr::pluck($variables, 'key', 'value');
         if (file_exists(resource_path('views/extend/back-end/admin/email-templates/edit.blade.php'))) {

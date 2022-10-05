@@ -1,0 +1,76 @@
+http://127.0.0.1:8000/job/internet-developer
+
+profile freelancer 
+ banner height
+
+meet telands in network  
+horizental scroller
+
+
+all filter in one or two filters
+
+
+
+header set align
+find local gov project  done
+
+find intern
+gender->>>>grade (graduation
+bba
+
+) education
+
+skills=>>>sprcilization (
+
+)
+
+college/university
+
+category
+
+price
+avaianle
+
+
+filetrs
+/////////////////////////
+
+
+done
+
+agemcy  add data test
+
+freelancer/job /fimd interm
+back grund chage
+
+add brud crumb on detail pages
+
+jobs page replace with job page
+
+find jobs and talends code backend wal us ekrna ha
+
+->>employer page   change to company
+
+
+http://preview.codecanyon.net/item/worketic-market-place-for-freelancers/full_screen_preview/23712284?_ga=2.30802943.1928432138.1646988286-351065028.1568031034&_gac=1.150610178.1646988286.EAIaIQobChMIlcH2utW99gIVlud3Ch1eAwkIEAAYAiAAEgJ7JfD_BwE
+
+
+/////////////////////////////////////////
+
+
+find feeelancer/jobs
+chnage to old code cane theme
+just body
+
+sAM ELIKE COMAPNIES
+
+
+ Find Freelancer/ View Freelancer (CodeCanyon)  done
+Find An Agency /View Employers (CodeCanyon)  done
+Find Projects/ Browse Jobs (CodeCanyon)
+
+on back end view pages font should me same like front end
+
+
+company expertise validations
+

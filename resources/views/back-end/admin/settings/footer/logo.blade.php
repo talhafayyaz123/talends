@@ -4,7 +4,7 @@
     </div>
     <div class="wt-settingscontent">
         @if (!empty($footer_logo)) 
-            @php $image = '/uploads/settings/footer/'.$footer_logo; @endphp
+            @php $image = config('app.aws_se_path').'/uploads/settings/footer/'.$footer_logo; @endphp
             <div class="wt-formtheme wt-userform">
                 <div v-if="this.footer_logo">
                     <upload-image 
@@ -16,7 +16,7 @@
                     </upload-image>
                 </div>
                 <div class="wt-uploadingbox" v-else>
-                    <figure><img src="{{{asset($image)}}}" alt="{{{ trans('lang.footer_logo') }}}"></figure>
+                    <figure><img src="{{{($image)}}}" alt="{{{ trans('lang.footer_logo') }}}"></figure>
                     <div class="wt-uploadingbar">
                         <div class="dz-filename">{{{$footer_logo}}}</div>
                         <em>{{{ trans('lang.file_size') }}}<a href="javascript:void(0);" class="lnr lnr-cross" v-on:click.prevent="removeImage('hidden_site_footer_logo')"></a></em>

@@ -91,11 +91,11 @@
 @else
     @if (!empty($show_banner) && $show_banner == 'true')
         @if (!empty($pageType) && $pageType == 'showPage' )
-        <div class="wt-haslayout wt-innerbannerholder" style="background-image:url({{{ asset($banner) }}})">
+        <div class="wt-haslayout wt-innerbannerholder theme_bg_dark" style="background-image:url({{{ asset($banner) }}})">
         @elseif (!empty($path))
-        <div class="wt-haslayout wt-innerbannerholder" style="background-image:url({{{ asset(Helper::getBannerImage($inner_banner, $path)) }}})">
+        <div class="wt-haslayout wt-innerbannerholder theme_bg_dark" style="background-image:url({{{ asset(Helper::getBannerImage($inner_banner, $path)) }}})">
         @else 
-        <div class="wt-haslayout wt-innerbannerholder" style="background-image:url({{{ asset(Helper::getBannerImage($inner_banner, 'uploads/settings/general')) }}})">
+        <div class="wt-haslayout wt-innerbannerholder theme_bg_dark" style="background-image:url({{{ asset(Helper::getBannerImage($inner_banner, 'uploads/settings/general')) }}})">
         @endif        
             <div class="container">
                 <div class="row justify-content-md-center">

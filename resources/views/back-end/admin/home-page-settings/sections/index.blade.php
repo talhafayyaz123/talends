@@ -1,5 +1,5 @@
 <div class="wt-tabscontenttitle la-switch-option">
-    <h2>{{ trans('lang.explore_cat_sec') }}</h2>
+    <p class="mb-0">{{ trans('lang.explore_cat_sec') }}</p>
     <switch_button v-model="cat_section_display">{{{ trans('lang.show_on_homepage') }}}</switch_button>
     <input type="hidden" :value="cat_section_display" name="section[0][cat_section_display]">
 </div>
@@ -9,7 +9,7 @@
     @include('back-end.admin.home-page-settings.sections.explore-categories')
 @endif
 <div class="wt-tabscontenttitle la-switch-option">
-    <h2>{{ trans('lang.start_as_sec') }}</h2>
+    <p class="mb-0">{{ trans('lang.start_as_sec') }}</p>
     <switch_button v-model="home_section_display">{{{ trans('lang.show_on_homepage') }}}</switch_button>
     <input type="hidden" :value="home_section_display" name="section[0][home_section_display]">
 </div>

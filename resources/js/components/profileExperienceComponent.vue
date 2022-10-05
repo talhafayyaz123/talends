@@ -1,7 +1,7 @@
 <template>
   <div :server_error_message="server_errors">
     <div class="wt-tabscontenttitle wt-addnew">
-      <h2>{{ trans('lang.add_your_exp') }}</h2>
+      <p class="mb-0">{{ trans('lang.add_your_exp') }}</p>
       <a
         href="javascript:void(0);"
         @click="addExperience"

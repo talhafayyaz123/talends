@@ -24,7 +24,30 @@
                                 ])
                             !!}
                                 <fieldset>
-                                    <div class="form-group">
+                                
+
+                               
+
+                                <div class="form-group">
+                                        <select name="parent_category" id='parent_category' class="form-control">
+                                         <option value="">Select Parent Category</option>
+                                         <option value="skills in demand">Skills In Demand</option>
+                                         <option value="local projects">Local Projects</option>
+                                         <option value="government initiatives">Government Initiatives</option>
+                                        </select>
+
+                                       
+                                        @if ($errors->has('parent_category'))
+                                        
+                                            <span class="invalid-feedback" role="alert" style="display: block;">
+                                                <strong style="color:#dd0d0d">{{ $errors->first('parent_category') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                   
+
+                                    
+                                <div class="form-group">
                                         {!! Form::text( 'category_title', null, ['class' =>'form-control'.($errors->has('category_title') ? ' is-invalid' : ''), 'placeholder' => trans('lang.ph_cat_title')] ) !!}
                                         <span class="form-group-description">{{{ trans('lang.desc') }}}</span>
                                         @if ($errors->has('category_title'))
@@ -89,6 +112,7 @@
                                                 </span>
                                             </th>
                                             <th>{{{ trans('lang.cat_icon') }}}</th>
+                                            <th>Parent Category</th>
                                             <th>{{{ trans('lang.name') }}}</th>
                                             <th>{{{ trans('lang.slug') }}}</th>
                                             <th>{{{ trans('lang.action') }}}</th>
@@ -104,8 +128,11 @@
                                                         <label for="wt-check-{{{ $counter }}}"></label>
                                                     </span>
                                                 </td>
-                                                <td data-th="Icon"><span class="bt-content"><figure><img src="{{{ asset(\App\Helper::getCategoryImage($cat->image)) }}}" alt="{{{ $cat->title }}}"></figure></span></td>
+                                                
+                                                <td data-th="Icon"><span class="bt-content"><figure><img src="{{{ (\App\Helper::getCategoryImage($cat->image)) }}}" alt="{{{ $cat->title }}}"></figure></span></td>
+                                                <td>{{{ $cat->parent_category }}}</td>
                                                 <td>{{{ $cat->title }}}</td>
+                                                
                                                 <td>{{{ $cat->slug }}}</td>
                                                 <td>
                                                     <div class="wt-actionbtn">

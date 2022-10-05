@@ -169,6 +169,7 @@ class Job extends Model
     {
         $json = array();
         if (!empty($request)) {
+        
             $random_number = Helper::generateRandomCode(8);
             $code = strtoupper($random_number);
             $user_id = Auth::user()->id;
@@ -197,13 +198,16 @@ class Job extends Model
                 $attachments = $request['attachments'];
                 foreach ($attachments as $key => $attachment) {
                     if (Storage::disk('local')->exists($old_path . '/' . $attachment)) {
+
                         $new_path = 'uploads/jobs/' . $user_id;
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
                         $filename = time() . '-' . $attachment;
-                        Storage::move($old_path . '/' . $attachment, $new_path . '/' . $filename);
+                      // move files to aws s3
+                       $contents =  Storage::disk('local')->get($old_path . '/' . $attachment);
+                       Storage::disk('s3')->put($new_path. '/' . $filename,$contents);  
+                      
                         $job_attachments[] = $filename;
+                        Storage::disk('local')->delete($old_path . '/' . $attachment);
+
                     }
                 }
                 $this->attachments = serialize($job_attachments);
@@ -271,18 +275,29 @@ class Job extends Model
             $job_attachments = array();
             if (!empty($request['attachments'])) {
                 $attachments = $request['attachments'];
+
                 foreach ($attachments as $key => $attachment) {
                     $filename = $attachment;
+                    
                     if (Storage::disk('local')->exists($old_path . '/' . $attachment)) {
-                        $new_path = 'uploads/jobs/' . $user_id;
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
-                        $filename = time() . '-' . $attachment;
-                        Storage::move($old_path . '/' . $attachment, $new_path . '/' . $filename);
+                        
+            
+                     $new_path = 'uploads/jobs/' . $user_id;
+                    $filename = time() . '-' . $attachment;
+                    // move files to aws s3
+                    $contents =  Storage::disk('local')->get($old_path . '/' . $attachment);
+                    Storage::disk('s3')->put($new_path. '/' . $filename,$contents);  
+
+                    $job_attachments[] = $filename;
+                    Storage::disk('local')->delete($old_path . '/' . $attachment);
+
+
+
                     }
                     $job_attachments[] = $filename;
                 }
+
+            
                 $job->attachments = serialize($job_attachments);
             } else {
                 $job->attachments = null;

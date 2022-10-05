@@ -109,40 +109,57 @@ class SiteManagement extends Model
                 );
                 if (!empty($email['email_logo'])) {
                     if (file_exists($old_path . '/' . $email['email_logo'])) {
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
+
+                        $s3_path = 'uploads/settings/email';
                         $filename = time() . '-' . $email['email_logo'];
-                        rename($old_path . '/' . $email['email_logo'], $new_path . '/' . $filename);
+                        $contents = file_get_contents($old_path . '/' . $email['email_logo']);
+                        Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                        unlink($old_path . '/' . $email['email_logo']);
                         $email_data_array[$key]['email_logo'] = $filename;
+
                     } else {
                         $email_data_array[$key]['email_logo'] = $email['email_logo'];
                     }
+                    
                 }
+
+
                 if (!empty($email['email_banner'])) {
                     if (file_exists($old_path . '/' . $email['email_banner'])) {
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
+                                            
+                        $s3_path = 'uploads/settings/email';
                         $filename = time() . '-' . $email['email_banner'];
-                        rename($old_path . '/' . $email['email_banner'], $new_path . '/' . $filename);
+                        $contents = file_get_contents($old_path . '/' . $email['email_banner']);
+                        Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                        unlink($old_path . '/' . $email['email_banner']);
+
                         $email_data_array[$key]['email_banner'] = $filename;
                     } else {
                         $email_data_array[$key]['email_banner'] = $email['email_banner'];
                     }
                 }
+
+
                 if (!empty($email['sender_avatar'])) {
                     if (file_exists($old_path . '/' . $email['sender_avatar'])) {
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
+                       
+
+                        $s3_path = 'uploads/settings/email';
                         $filename = time() . '-' . $email['sender_avatar'];
-                        rename($old_path . '/' . $email['sender_avatar'], $new_path . '/' . $filename);
+
+                        $contents = file_get_contents($old_path . '/' . $email['sender_avatar']);
+                        Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                        unlink($old_path . '/' . $email['sender_avatar']);
+
+
                         $email_data_array[$key]['sender_avatar'] = $filename;
                     } else {
                         $email_data_array[$key]['sender_avatar'] = $email['sender_avatar'];
                     }
                 }
+
+
+
             }
             $existing_data = SiteManagement::getMetaValue('email_data');
             if (!empty($existing_data)) {
@@ -387,24 +404,38 @@ class SiteManagement extends Model
                 }
 
                 if (!empty($setting['logo'])) {
+
                     if (file_exists($old_path . '/' . $setting['logo'])) {
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
+                      
                         $filename = time() . '-' . $setting['logo'];
-                        rename($old_path . '/' . $setting['logo'], $new_path . '/' . $filename);
+                        $s3_path = 'uploads/settings/general';
+                        $contents = file_get_contents($old_path . '/' . $setting['logo']);
+                        Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                        unlink($old_path . '/' . $setting['logo']);
+
                         $settings_array[$key]['logo'] = $filename;
                     } else {
                         $settings_array[$key]['logo'] = $setting['logo'];
                     }
+
+
+
                 }
+
+
+
+
+
                 if (!empty($setting['favicon'])) {
                     if (file_exists($old_path . '/' . $setting['favicon'])) {
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
+                        
                         $filename = time() . '-' . $setting['favicon'];
-                        rename($old_path . '/' . $setting['favicon'], $new_path . '/' . $filename);
+                        $s3_path = 'uploads/settings/general';
+                        $contents = file_get_contents($old_path . '/' . $setting['favicon']);
+                        Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                        unlink($old_path . '/' . $setting['favicon']);
+
+
                         $settings_array[$key]['favicon'] = $filename;
                     } else {
                         $settings_array[$key]['favicon'] = $setting['favicon'];
@@ -448,6 +479,83 @@ class SiteManagement extends Model
             return 'success';
         }
     }
+    public static function savePrivacyPolicy($request)
+    {
+        $json = array();
+        $menu = $request['privacy'];
+
+        if (!empty($menu)) {
+
+            foreach ($menu as $key => $value) {
+                if (($value['title'] == null  || $value['description'] == null)) {
+                    $json['type'] = 'error';
+                    return $json;
+                }
+            }
+            
+            $existing_data = SiteManagement::getMetaValue('privacy_policy');
+        if (!empty($existing_data)) {
+            DB::table('site_managements')->where('meta_key', '=', 'privacy_policy')->delete();
+        }
+
+        DB::table('site_managements')->insert(
+            [
+                'meta_key' => 'privacy_policy', 'meta_value' => serialize($menu),
+                "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+            ]
+        );
+        \Artisan::call('config:cache');
+        \Artisan::call('config:clear');
+        \Artisan::call('cache:clear');
+        \Artisan::call('view:clear');
+
+           
+            $json['type'] = 'success';
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            return $json;
+        }
+    }
+
+    public static function saveUserAgreement($request)
+    {
+        $json = array();
+        $menu = $request['user_agreement'];
+
+        if (!empty($menu)) {
+
+            foreach ($menu as $key => $value) {
+                if (($value['title'] == null  || $value['description'] == null)) {
+                    $json['type'] = 'error';
+                    return $json;
+                }
+            }
+            
+            $existing_data = SiteManagement::getMetaValue('user_agreement');
+        if (!empty($existing_data)) {
+            DB::table('site_managements')->where('meta_key', '=', 'user_agreement')->delete();
+        }
+
+        DB::table('site_managements')->insert(
+            [
+                'meta_key' => 'user_agreement', 'meta_value' => serialize($menu),
+                "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+            ]
+        );
+        \Artisan::call('config:cache');
+        \Artisan::call('config:clear');
+        \Artisan::call('cache:clear');
+        \Artisan::call('view:clear');
+
+           
+            $json['type'] = 'success';
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            return $json;
+        }
+    }
 
     /**
      * Save settings
@@ -463,6 +571,8 @@ class SiteManagement extends Model
             $icons = $request['icons'];
             $old_path = Helper::PublicPath() . '/uploads/settings/temp';
             $new_path = Helper::PublicPath() . '/uploads/settings/icon';
+
+
             foreach ($icons as $key => $icon) {
                 if (!empty($icon[$key])) {
                     if (file_exists($old_path . '/' . $icon[$key])) {
@@ -477,6 +587,9 @@ class SiteManagement extends Model
                     }
                 }
             }
+
+
+            
             $existing_data = SiteManagement::getMetaValue('icons');
             if (!empty($existing_data)) {
                 DB::table('site_managements')->where('meta_key', '=', 'icons')->delete();
@@ -538,23 +651,34 @@ class SiteManagement extends Model
             $old_path = Helper::PublicPath() . '/uploads/settings/temp';
             $new_path = Helper::PublicPath() . '/uploads/settings/footer';
             $filename = $footer_settings['footer_logo'];
-            if (file_exists($old_path . '/' . $footer_settings['footer_logo'])) {
-                if (!file_exists($new_path)) {
-                    File::makeDirectory($new_path, 0755, true, true);
-                }
+         
+         
+             if (file_exists($old_path . '/' . $footer_settings['footer_logo'])) {
+                $s3_path = 'uploads/settings/footer';
                 $filename = time() . '-' . $footer_settings['footer_logo'];
-                rename($old_path . '/' . $footer_settings['footer_logo'], $new_path . '/' . $filename);
+                $contents = file_get_contents($old_path . '/' . $footer_settings['footer_logo']);
+                Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                unlink($old_path . '/' . $footer_settings['footer_logo']);
                 $footer_settings['footer_logo'] = $filename;
-            }
+            } 
+          
+          
             $filename2 = $footer_settings['footer_bg'];
+          
+          
             if (file_exists($old_path . '/' . $footer_settings['footer_bg'])) {
-                if (!file_exists($new_path)) {
-                    File::makeDirectory($new_path, 0755, true, true);
-                }
+                
+                
                 $filename2 = time() . '-' . $footer_settings['footer_bg'];
-                rename($old_path . '/' . $footer_settings['footer_bg'], $new_path . '/' . $filename2);
+                $contents = file_get_contents($old_path . '/' . $footer_settings['footer_bg']);
+                Storage::disk('s3')->put($s3_path. '/' . $filename2,$contents  );  
+                unlink($old_path . '/' . $footer_settings['footer_bg']);
+                
                 $footer_settings['footer_bg'] = $filename2;
             }
+ 
+
+
             // Footer Bg
             $existing_data = SiteManagement::getMetaValue('footer_settings');
             if (!empty($existing_data)) {
@@ -647,6 +771,302 @@ class SiteManagement extends Model
         }
     }
 
+
+    public static function saveFooterMenu1($request)
+    {
+        $json = array();
+        $menu_title = $request['menu_title'];
+        $menu = $request['search'];
+        if (!empty($menu)) {
+            foreach ($menu as $key => $value) {
+                if (($value['title'] == null || $value['url'] == null)) {
+                    $json['type'] = 'error';
+                    return $json;
+                }
+            }
+            
+            $existing_menu_item = SiteManagement::getMetaValue('footer_menu1');
+            if (!empty($existing_menu_item)) {
+                DB::table('site_managements')->where('meta_key', '=', 'footer_menu1')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'footer_menu1', 'meta_value' => serialize($menu),
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $existing_menu_title = DB::table('site_managements')->where('meta_key', 'footer_title1')->first();
+            if (!empty($existing_menu_title)) {
+                DB::table('site_managements')->where('meta_key', '=', 'footer_title1')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'footer_title1', 'meta_value' => $menu_title,
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $json['type'] = 'success';
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            return $json;
+        }
+    }
+
+
+    public static function saveFooterMenu2($request)
+    {
+        $json = array();
+        $menu_title = $request['menu_title_2'];
+        $menu = $request['search2'];
+        
+        if (!empty($menu)) {
+            foreach ($menu as $key => $value) {
+                if (($value['title'] == null || $value['url'] == null)) {
+                    $json['type'] = 'error';
+                    return $json;
+                }
+            }
+            
+            $existing_menu_item = SiteManagement::getMetaValue('footer_menu2');
+        
+            if (!empty($existing_menu_item)) {
+                DB::table('site_managements')->where('meta_key', '=', 'footer_menu2')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'footer_menu2', 'meta_value' => serialize($menu),
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $existing_menu_title = DB::table('site_managements')->where('meta_key', 'footer_title2')->first();
+            if (!empty($existing_menu_title)) {
+                DB::table('site_managements')->where('meta_key', '=', 'footer_title2')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'footer_title2', 'meta_value' => $menu_title,
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $json['type'] = 'success';
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            return $json;
+        }
+    }
+
+    public static function saveFooterMenu3($request)
+    {
+        $json = array();
+        $menu_title = $request['menu_title_3'];
+        $menu = $request['search3'];
+        
+        if (!empty($menu)) {
+            foreach ($menu as $key => $value) {
+                if (($value['title'] == null || $value['url'] == null)) {
+                    $json['type'] = 'error';
+                    return $json;
+                }
+            }
+            
+            $existing_menu_item = SiteManagement::getMetaValue('footer_menu3');
+        
+            if (!empty($existing_menu_item)) {
+                DB::table('site_managements')->where('meta_key', '=', 'footer_menu3')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'footer_menu3', 'meta_value' => serialize($menu),
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $existing_menu_title = DB::table('site_managements')->where('meta_key', 'footer_title3')->first();
+            if (!empty($existing_menu_title)) {
+                DB::table('site_managements')->where('meta_key', '=', 'footer_title3')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'footer_title3', 'meta_value' => $menu_title,
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $json['type'] = 'success';
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            return $json;
+        }
+    }
+
+    public static function saveFooterMenu4($request)
+    {
+        $json = array();
+        $menu_title = $request['menu_title_4'];
+        $menu = $request['search4'];
+        
+        if (!empty($menu)) {
+            foreach ($menu as $key => $value) {
+                if (($value['title'] == null || $value['url'] == null)) {
+                    $json['type'] = 'error';
+                    return $json;
+                }
+            }
+            
+            $existing_menu_item = SiteManagement::getMetaValue('footer_menu4');
+        
+            if (!empty($existing_menu_item)) {
+                DB::table('site_managements')->where('meta_key', '=', 'footer_menu4')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'footer_menu4', 'meta_value' => serialize($menu),
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $existing_menu_title = DB::table('site_managements')->where('meta_key', 'footer_title4')->first();
+            if (!empty($existing_menu_title)) {
+                DB::table('site_managements')->where('meta_key', '=', 'footer_title4')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'footer_title4', 'meta_value' => $menu_title,
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $json['type'] = 'success';
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            return $json;
+        }
+    }
+
+    public static function saveHeaderMenus($request){
+        $json = array();
+        $header_menu_title1 = $request['header_menu_title1'];
+        
+        
+        if (!empty($header_menu_title1)) {
+       
+            $existing_menu_title = DB::table('site_managements')->where('meta_key', 'header_menu_title1')->first();
+            if (!empty($existing_menu_title)) {
+                DB::table('site_managements')->where('meta_key', '=', 'header_menu_title1')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'header_menu_title1', 'meta_value' => $header_menu_title1,
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+
+            $header_menu_title2 = DB::table('site_managements')->where('meta_key', 'header_menu_title2')->first();
+            if (!empty($header_menu_title2)) {
+                DB::table('site_managements')->where('meta_key', '=', 'header_menu_title2')->delete();
+            }
+            
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'header_menu_title2', 'meta_value' => $request['header_menu_title2'],
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+
+            $json['type'] = 'success';
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            return $json;
+        }
+    }
+
+    public static function saveHeaderMenus2($request)
+    {
+        $json = array();
+        $menu_title = $request['header_menu_title3'];
+        $menu = $request['search2'];
+        
+        if (!empty($menu)) {
+            foreach ($menu as $key => $value) {
+                if (($value['title'] == null || $value['url'] == null)) {
+                    $json['type'] = 'error';
+                    return $json;
+                }
+            }
+            
+            $existing_menu_item = SiteManagement::getMetaValue('header_menu3');
+        
+            if (!empty($existing_menu_item)) {
+                DB::table('site_managements')->where('meta_key', '=', 'header_menu3')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'header_menu3', 'meta_value' => serialize($menu),
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $existing_menu_title = DB::table('site_managements')->where('meta_key', 'header_menu_title3')->first();
+            if (!empty($existing_menu_title)) {
+                DB::table('site_managements')->where('meta_key', '=', 'header_menu_title3')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'header_menu_title3', 'meta_value' => $menu_title,
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $json['type'] = 'success';
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            return $json;
+        }
+    }
+
+
+    public static function saveHeaderMenus3($request)
+    {
+        $json = array();
+        $menu_title = $request['header_menu_title4'];
+        $menu = $request['search3'];
+       
+        if (!empty($menu)) {
+            foreach ($menu as $key => $value) {
+                if (($value['title'] == null || $value['url'] == null)) {
+                    $json['type'] = 'error';
+                    return $json;
+                }
+            }
+            
+            $existing_menu_item = SiteManagement::getMetaValue('header_menu4');
+        
+            if (!empty($existing_menu_item)) {
+                DB::table('site_managements')->where('meta_key', '=', 'header_menu4')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'header_menu4', 'meta_value' => serialize($menu),
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $existing_menu_title = DB::table('site_managements')->where('meta_key', 'header_menu_title4')->first();
+            if (!empty($existing_menu_title)) {
+                DB::table('site_managements')->where('meta_key', '=', 'header_menu_title4')->delete();
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'header_menu_title4', 'meta_value' => $menu_title,
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            $json['type'] = 'success';
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            return $json;
+        }
+    }
     /**
      * Save commision settings
      *
@@ -822,6 +1242,39 @@ class SiteManagement extends Model
         }
     }
 
+
+    public function savePaytabSettings($request)
+    {
+        $api_key = $request['api_key'];
+     
+        $payment_settings = array();
+        $payment_settings[0]['api_key'] = !empty($api_key) ? $api_key : '';
+     
+        if (!empty($payment_settings)) {
+            $existing_payment_settings = SiteManagement::getMetaValue('paytab_settings');
+            if (!empty($existing_payment_settings)) {
+                DB::table('site_managements')->where('meta_key', '=', 'paytab_settings')->delete();
+                Helper::changeEnv(
+                    [
+                        'PAYTAB_KEY' => ""
+                    ]
+                );
+            }
+            DB::table('site_managements')->insert(
+                [
+                    'meta_key' => 'paytab_settings', 'meta_value' => serialize($payment_settings),
+                    "created_at" => Carbon::now(), "updated_at" => Carbon::now()
+                ]
+            );
+            Helper::changeEnv(
+                [
+                    'PAYTAB_KEY' => $api_key
+                ]
+            );
+            return 'success';
+        }
+    }
+
     /**
      * Get Meta Values form meta keys.
      *
@@ -976,7 +1429,7 @@ class SiteManagement extends Model
         }
     }
 
-
+   
     /**
      * Store registration settings
      *

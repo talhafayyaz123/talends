@@ -1,10 +1,10 @@
 <div class="wt-widget la-empinfo-holder wt-user-service">
     <div class="wt-companysdetails">
         <figure class="wt-companysimg">
-            <img src="{{{ asset(Helper::getUserProfileBanner($seller->id, 'small')) }}}" alt="{{ trans('lang.profile_img') }}">
+            <img src="{{{ (Helper::getUserProfileBanner($seller->id, 'small')) }}}" alt="{{ trans('lang.profile_img') }}">
         </figure>
         <div class="wt-companysinfo">
-            <figure><img src="{{{asset(Helper::getProfileImage($seller->id))}}}" alt="{{ trans('lang.profile_img') }}"></figure>
+            <figure><img src="{{{(Helper::getProfileImage($seller->id))}}}" alt="{{ trans('lang.profile_img') }}"></figure>
             <div class="wt-userprofile">
                 <div class="wt-title">
                     <h3>			

@@ -320,7 +320,7 @@ export default {
       sectionLocations:[],
       searchableRoles:[],
       pageData:[],
-      IconPath:APP_URL+'/images/page-builder/',
+      IconPath:this.$Aws_S3_PATH+'/images/page-builder/',
       cloneElement:false
     }
   },

@@ -1,6 +1,6 @@
 <template>
     <div class="wt-custom-scrollbar-wrapper wt-verticalscrollbar wt-dashboardscrollbar" id="scrollList" ref="scrollList">
-        <div class="wt-messages messages">
+        <div class="wt-messages messages" style="overflow-y:scroll; height:400;">
             <!-- <small class="typing-test">
                 <i>{{this.typing}} {{trans('lang.is_typing')}}</i>
             </small> -->

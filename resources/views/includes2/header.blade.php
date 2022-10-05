@@ -1,161 +1,165 @@
 <header>
-        <div class="container p-0">
-            <nav class="navbar navbar-expand-lg">
-                <a class="navbar-brand" href="{{ route('home') }}">
-                    <img src="{{ asset('talends/assets/img/logo.svg')}}" alt="Dynamics">
-                </a>
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#theme_menu_toggle" aria-expanded="false" aria-controls="theme_menu_toggle">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="theme_menu_toggle">
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">Find Talend <i
-                                    class="fas fa-angle-down"></i></a>
-                            <div class="nav_dropdown" aria-hidden="false" id="dropdown3">
+    <div class="container-lg p-0">
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="{{ route('home') }}">
+                <img src="{{ asset('talends/assets/img/logo.svg')}}" alt="Dynamics">
+            </a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#theme_menu_toggle" aria-expanded="false" aria-controls="theme_menu_toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            @php
+            $header_menus=App\Helper::headerMenus();
+            $after_login_class='';
+            @endphp
+
+            @auth
+             @php
+             $after_login_class='admin_header_after_login';
+             @endphp
+
+            @endauth
+            <div class="collapse navbar-collapse {{ $after_login_class}}  " id="theme_menu_toggle">
+                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">{!! $header_menus['title4'] ?? '' !!} <i class="fas fa-angle-down"></i></a>
+                        <div class="nav_dropdown" aria-hidden="false" id="dropdown3">
+                            <ul class="iconList threeColumns">
                                 <div class="container">
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <ul class="nav nav-tabs mega_menu_tabs" role="tablist">
-                                                <li class="nav-item">
-                                                    <a class="nav-link active" data-toggle="tab" href="#menutabs_ms_d_365">
-                                                        Post a job and hire a pro
-                                                        <br>
-                                                        <small>Talent Marketplace</small>                                                                                                                                                                
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" data-toggle="tab" href="#menutabs_ms_b_solution">
-                                                        Browse and buy projects
-                                                        <br>
-                                                        <small>Project Catalog</small>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" data-toggle="tab" href="#menutabs_ms_power_platform">
-                                                        Let us find you the right talent
-                                                        <br>
-                                                        <small>Talent Scout</small>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="{{ route('findTalents') }}">
-                                                        Find Talents
-                                                        <br>
-                                                        <small>Talent Scout</small>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <!-- Tab panes -->
-                                            <div class="tab-content">
-                                                <div id="menutabs_ms_d_365" class="tab-pane active">
-                                                    <div class="services_list_box_row">
-                                                        <div class="services_list_box"><a href="#">Data Entry Specialists</a></div>
-                                                        <div class="services_list_box"><a href="#">Video Editors</a></div>
-                                                        <div class="services_list_box"><a href="#">Data Analyst</a></div>
-                                                        <div class="services_list_box"><a href="#">Shopify Developer</a></div>
-                                                        <div class="services_list_box"><a href="#">Ruby on Rails Developer</a></div>
-                                                        <div class="services_list_box"><a href="#">Android Developer</a></div>
-                                                        <div class="services_list_box"><a href="#">Bookkeeper</a></div>
-                                                        <div class="services_list_box"><a href="#">Content Writer</a></div>
-                                                        <div class="services_list_box"><a href="#">Copywriter</a></div>
-                                                        <div class="services_list_box"><a href="#">Database Administrator</a></div>
-                                                        <div class="services_list_box"><a href="#">Data Scientist</a></div>
-                                                        <div class="services_list_box"><a href="#">UI Designer</a></div>
-                                                        <div class="services_list_box"><a href="#">UX Designer</a></div>
-                                                    </div>
-                                                </div>
-                                                <div id="menutabs_ms_b_solution" class="tab-pane">
-                                                    <div class="services_list_box_row">
-                                                        <div class="services_list_box"><a href="#">Database Administrator</a></div>
-                                                        <div class="services_list_box"><a href="#">Data Scientist</a></div>
-                                                        <div class="services_list_box"><a href="#">Front-End Developer</a></div>
-                                                        <div class="services_list_box"><a href="#">Game Developer</a></div>
-                                                        <div class="services_list_box"><a href="#">Graphic Designer</a></div>
-                                                        <div class="services_list_box"><a href="#">iOS Developer</a></div>
-                                                        <div class="services_list_box"><a href="#">Java Developer</a></div>
-                                                        <div class="services_list_box"><a href="#">JavaScript Developer</a></div>
-                                                        <div class="services_list_box"><a href="#">Logo Designer</a></div>
-                                                        <div class="services_list_box"><a href="#">Mobile App Developer</a></div>
-                                                        <div class="services_list_box"><a href="#">PHP Developer</a></div>
-                                                        <div class="services_list_box"><a href="#">Python Developer</a></div>
-                                                        <div class="services_list_box"><a href="#">Resume Writer</a></div>
-                                                        <div class="services_list_box"><a href="#">SEO Expert</a></div>
-                                                        <div class="services_list_box"><a href="#">Social Media Manager</a></div>
-                                                        <div class="services_list_box"><a href="#">Web Designer</a></div>
-                                                        <div class="services_list_box"><a href="#">Wordpress Developer</a></div>
-                                                    </div>
-                                                </div>
-                                                <div id="menutabs_ms_power_platform" class="tab-pane">
-                                                    <div class="services_list_box_row">
-                                                        <div class="services_list_box"><a href="#">Database Administrator</a></div>
-                                                        <div class="services_list_box"><a href="#">Data Scientist</a></div>
-                                                        <div class="services_list_box"><a href="#">Front-End Developer</a></div>
-                                                        <div class="services_list_box"><a href="#">Game Developer</a></div>
-                                                        <div class="services_list_box"><a href="#">Graphic Designer</a></div>
-                                                        <div class="services_list_box"><a href="#">iOS Developer</a></div>
-                                                        <div class="services_list_box"><a href="#">Java Developer</a></div>
-                                                        <div class="services_list_box"><a href="#">Technical Writer</a></div>
-                                                        <div class="services_list_box"><a href="#">UI Designer</a></div>
-                                                        <div class="services_list_box"><a href="#">UX Designer</a></div>
-                                                        <div class="services_list_box"><a href="#">Virtual Assistant</a></div>
-                                                        <div class="services_list_box"><a href="#">Web Designer</a></div>
-                                                        <div class="services_list_box"><a href="#">Wordpress Developer</a></div>
-                                                    </div>
-                                                </div>
+                                        @if(isset( $header_menus['sub_menu_item2']) && !empty($header_menus['sub_menu_item2']) )
+                                        @foreach($header_menus['sub_menu_item2'] as $key =>$category)
+
+                                        <div class="col-md-3">
+                                           
+                                            <div class="menu_browse_box">
+                                                @if($category['url']!='#' && Route::has($category['url']) )
+                                                <a href="{{ route($category['url'])  }}">
+                                                    {{ $category['title'] }}
+                                                </a>
+                                                @elseif($category['url'] !='#')
+                                                <a href="{{ url($category['url'])  }}">
+                                                    {{ $category['title'] }}
+                                                </a>
+                                                @else
+                                                <a href="{{ $category['url'] }}">
+                                                    {{ $category['title'] }}
+                                                </a>
+                                                @endif
                                             </div>
                                         </div>
+
+                                        @endforeach
+                                        @endif
+
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">Browse Jobs <i
-                                    class="fas fa-angle-down"></i></a>
-                            <div class="nav_dropdown" aria-hidden="false" id="dropdown3">
-                                <ul class="iconList threeColumns">
-                                    <div class="container">
-                                        <div class="row justify-content-center">
-                                            <div class="col-md-3">
-                                                <div class="menu_browse_box">
-                                                    <a href="{{ route('browseJobs') }}">Ways to earn
-                                                        <br>
-                                                        <small>Learn why Upwork has the right opportunities for you.</small>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="menu_browse_box">
-                                                    <a href="{{ route('browseJobs') }}">Find work for your skills
-                                                        <br>
-                                                        <small>Explore the kind of work available in your field.</small>
-                                                    </a>
-                                                </div>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link main_menu_link has_dropdown" href="javascript:void(0)">{!! $header_menus['title3'] ?? '' !!} <i class="fas fa-angle-down"></i></a>
+                        <div class="nav_dropdown" aria-hidden="false" id="dropdown3">
+                            <ul class="iconList threeColumns">
+                                <div class="container">
+                                    <div class="row">
+                                        @if(isset( $header_menus['sub_menu_item1'] ) && !empty($header_menus['sub_menu_item1']) )
+                                        @foreach($header_menus['sub_menu_item1'] as $key =>$category)
+
+
+                                        <div class="col-md-3">
+                                            <div class="menu_browse_box">
+
+
+                                                @if($category['url']!='#' && Route::has($category['url']) )
+                                                <a href="{{ route($category['url'])  }}">
+                                                    {{ $category['title'] }}
+                                                </a>
+                                                @elseif($category['url'] !='#')
+                                                <a href="{{ url($category['url'])  }}">
+                                                    {{ $category['title'] }}
+                                                </a>
+                                                @else
+                                                <a href="{{ $category['url'] }}">
+                                                    {{ $category['title'] }}
+                                                </a>
+                                                @endif
+
+
                                             </div>
                                         </div>
+
+                                        @endforeach
+                                        @endif
+
                                     </div>
-                                </ul>
+                                </div>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('whyTalends') }}">{!! $header_menus['title2'] ?? '' !!}</a>
+                    </li>
+                    <li class="nav-item menu_green_cta_box nav_item_right">
+                        <a class="nav-link" href="{{ route('government') }}"> {!! $header_menus['title1'] ?? '' !!}</a>
+                    </li>
+                    @guest
+                    <li class="nav-item nav_item_right">
+                        <a class="nav-link menu_green_cta" href="{{ route('login') }}">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu_green_cta_trans" href="{{ route('register') }}">Join Now</a>
+                    </li>
+                    @endguest
+
+                    @auth
+                    <li class="nav-item">
+
+                        @php
+                            $user = !empty(Auth::user()) ? Auth::user() : '';
+                            $role = !empty($user) ? $user->getRoleNames()->first() : array();
+                            $profile = \App\User::find(Auth::user()->id)->profile;
+                            $user_image = !empty($profile) ? $profile->avater : '';
+                            $employer_job = \App\Job::select('status')->where('user_id', Auth::user()->id)->first();
+                        
+                            $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/'.$user->id.'/'.$user_image : config('app.aws_se_path'). '/' .'images/user-login.png';
+                            $payment_settings = \App\SiteManagement::getMetaValue('commision');
+                            $payment_module = !empty($payment_settings) && !empty($payment_settings[0]['enable_packages']) ? $payment_settings[0]['enable_packages'] : 'true';
+                            $employer_payment_module = !empty($payment_settings) && !empty($payment_settings[0]['employer_package']) ? $payment_settings[0]['employer_package'] : 'true';
+                    
+                            $total_hire_agencies = \App\HireAgency::select('is_seen')->where('is_seen', 0)->count();
+                        @endphp
+
+                        <div class="wt-userlogedin">
+                            <figure class="wt-userimg">
+                                <img src="{{{ (Helper::gets3Image('uploads/users/' . Auth::user()->id, $profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}">
+                            </figure>
+                            <div class="wt-username">
+                                <h3>{{{ Helper::getUserName(Auth::user()->id) }}}</h3>
+                                <span>{{{ !empty(Auth::user()->profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Helper::getAuthRoleName() }}}</span>
                             </div>
+                            
+                            @include('back-end.includes.profile-menu')
+
+                        </div>
+                      
+                            
+                    </li>
+                    @if( $role === 'admin' || $role === 'company' )
+                        <li>
+                            <a href="javascript:;" class="nav-link position-relative">
+                                <i class="fa fa-bell fa-2x"></i> <span class="badge badge-success" style="position: absolute; right: -5px; top: 0px;">{{$total_hire_agencies }}</span>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('whyTalends') }}">Why Talends</a>
-                        </li>
-                        <li class="nav-item menu_green_cta_box nav_item_right">
-                            <a class="nav-link" href="{{ route('government') }}">GOVERNMENT</a>
-                        </li>
-                        <li class="nav-item nav_item_right">
-                            <a class="nav-link menu_green_cta" href="">Sign In</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu_green_cta_trans" href="">Join Now</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </header>
+                    @endif
+
+                    @endauth
+
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>

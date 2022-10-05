@@ -2,11 +2,14 @@
 @section('content')
     <section class="wt-haslayout wt-dbsectionspace">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-9" id="message_center">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="message_center">
                 <div class="wt-dashboardbox wt-messages-holder">
                     <div class="wt-dashboardboxtitle">
                         <h2>{{ trans('lang.msgs') }}</h2>
                     </div>
+                    @if(Session::has('message'))
+                        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+                    @endif
                     <message-center 
                         :empty_field="'{{ trans('lang.empty_field') }}'" 
                         :host="'{{!empty($chat_settings['host']) ? $chat_settings['host'] : ''}}'" 

@@ -4,8 +4,9 @@
 @section('title'){{ $user_name }} | {{ $tagline }} @stop
 @section('description', "$desc")
 @section('content')
-    @php $breadcrumbs = Breadcrumbs::generate('showUserProfile', $user->slug); @endphp
-    <div class="wt-haslayout wt-innerbannerholder">
+    @php 
+    $breadcrumbs = Breadcrumbs::generate('showEmployerProfile', $user->slug);@endphp
+    <div class="wt-haslayout wt-innerbannerholder theme_bg_dark">
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-xs-12 col-sm-12 col-md-8 push-md-2 col-lg-6 push-lg-3">
@@ -34,14 +35,14 @@
             </div>
         </div>
         <div class="container">
-            <div class="row">
-                <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left">
+            <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="wt-comsingleimg">
-                            <figure><img src="{{{ asset(Helper::getUserProfileBanner($user->id)) }}}" alt="{{{ trans('lang.company_banner') }}}"></figure>
+                            <figure><img style="max-height: 265px !important;" src="{{{ (Helper::getUserProfileBanner($user->id)) }}}" alt="{{{ trans('lang.company_banner') }}}"></figure>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 float-left">
+                    <div class="col-md-12 col-lg-5 col-xl-4">
                         <aside id="wt-sidebar" class="wt-sidebar">
                             <div class="wt-proposalsr wt-proposalsrvtwo">
                                 <div class="wt-widgetcontent wt-companysinfo">
@@ -98,7 +99,7 @@
                                                 @if (Helper::getRoleName($role_id) !== 'admin' && $follower->follower <> $user->id)
                                                     <li>
                                                         <a href="{{{url('profile/'.$profile->user->slug)}}}">
-                                                            <span><img src="{{{asset(Helper::getProfileImage($follower->follower))}}}" alt="Follower"></span>
+                                                            <span><img src="{{{(Helper::getProfileImage($follower->follower))}}}" alt="Follower"></span>
                                                             <span>{{{Helper::getUserName($follower->follower)}}}</span>
                                                         </a>
                                                     </li>
@@ -160,7 +161,7 @@
                             </div>
                         </aside>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 float-left">
+                    <div class="col-md-12 col-lg-7 col-xl-8">
                         <div class="wt-userlistingholder wt-haslayout">
                             <div class="wt-comcontent">
                                 <div class="wt-title">
@@ -180,7 +181,7 @@
                                     @endphp
                                     <div class="wt-userlistinghold wt-userlistingholdvtwo {{$featured_class}}">
                                         @if ($job->is_featured == 'true')
-                                            <span class="wt-featuredtag"><img src="{{{ asset('images/featured.png') }}}" alt="{{{ trans('lang.is_featured') }}}" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                            <span class="wt-featuredtag"><img src="{{{ config('app.aws_se_path'). '/' .'images/featured.png' }}}" alt="{{{ trans('lang.is_featured') }}}" data-tipso="Plus Member" class="template-content tipso_style"></span>
                                         @endif
                                         <div class="wt-userlistingcontent">
                                             <div class="wt-contenthead">

@@ -32,6 +32,9 @@ return [
     'registeration_form_type' => 'Registeration Form Type',
     'user_email_not_verify_admin' => 'Your account is not verified yet. Please contact site administrator to get it verified',
     'user_email_not_verify' => 'Your email is not verified. Please verify your email from account setting',
+    'user_payment_not_verify' => 'Your payment is due. Please clear your payment from account setting in Payment verification section.',
+    'user_payment_not_verify_admin' => 'Your account payment is due yet. Please contact site administrator to to perform again payment.',
+
     'email_verified' => 'Your email address has been verified successfully',
     'invalid_verification_code' => 'Verification Code is not valid',
     'submit' => 'Submit',
@@ -550,6 +553,8 @@ return [
     'join_now' => 'Join Now',
     'user_avatar' => 'User Avatar',
     'login' => 'Sign In',
+    'login_email'=> 'Sign In',
+    'no_account_text'=>'Don\'t have an Talends account?',
     'forget_pass' => 'Forgot password?',
     'create_account' => 'Create Account',
     'remember' => 'Remember Me',
@@ -575,6 +580,7 @@ return [
     'manage_account' => 'Manage Account',
     'reset_pass' => 'Reset Password',
     'email_notify' => 'Email Notifications',
+    'payment_notify' => 'Payment Verification',
     'empty_field' => 'Empty field not allow',
     'search_note' => 'If searchable option will be disabled then your profile will not show in the search result. To hide your profile all over the site you can disable your profile temporarily',
     'profile_searchable' => 'Make my profile searchable',
@@ -625,7 +631,7 @@ return [
     'agree_terms' => 'Agree Our Terms And Conditions.',
     'previous' => 'Previous',
     'continue' => 'Continue',
-    'verify_code_note' => 'We have sent verification code on your email.',
+    'verify_code_note' => 'We have sent verification code on your email also please check inbox/spam/junk folder.',
     'verify_account' => 'Please verify your account, by clicking on verify button',
     'verify_now' => 'Verify Now',
     'verification_code_img' => 'Verification Code',
@@ -638,7 +644,7 @@ return [
     'goto_dashboard' => 'Goto Dashboard',
     'add_your_team' => 'Would you like to add your team?',
     'almost_there' => 'You\'re Almost There',
-    'acc_almost_created_note' => 'Almost creation of your account hasbeen completed. Verification of your account is necessary.',
+    'acc_almost_created_note' => 'Almost creation of your account has been completed. Verification of your account is necessary.',
     'acc_creation_note' => 'Your account has been created. You can got to your dashboard page by clicking on the "Goto Dashboard" button.',
     'signup_as_country' => 'Signup as company/service seeker & post jobs.',
     'save_changes_note' => 'Save all the latest changes made by you',
@@ -1258,7 +1264,7 @@ return [
     'btn_load_more' => 'Load More',
     'btn_submit' => 'Submit',
     'btn_gotit' => 'Got It',
-    'btn_apply_filters' => 'Apply Filters',
+    'btn_apply_filters' => 'Find',
     'btn_add' => 'Add',
     'btn_send_feedback' => 'Send Feedback',
     'btn_import_updates' => 'Import',
@@ -1577,4 +1583,14 @@ return [
 
     'why-talends-title'=>'Why Talends',
     'why-talends-desc'=>'About Us',
+
+    
+    'government-title'=>'Government',
+    'government-desc'=>'Government',
+
+    'browse-jobs-title'=>'Browse Jobs',
+    'browse-jobs-desc'=>'Browse Jobs',
+
+    'find-talents-title'=>'Find Talents',
+    'find-talents-desc'=>'Find Talents',
 ];

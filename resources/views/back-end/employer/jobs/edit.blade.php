@@ -162,11 +162,14 @@
                                             <div class="form-group input-preview">
                                                 <ul class="wt-attachfile">
                                                     @foreach ($attachments as $key => $attachment)
+
+                        
                                                         <li id="attachment-item-{{$key}}">
                                                             <span>{{{Helper::formateFileName($attachment)}}}</span>
                                                             <em>
-                                                                @if (Storage::disk('local')->exists('uploads/jobs/'.$job->user_id.'/'.$attachment))
-                                                                    {{ trans('lang.file_size') }} {{{Helper::bytesToHuman(Storage::size('uploads/jobs/'.$job->user_id.'/'.$attachment))}}}
+                                                                @if (Storage::disk('s3')->exists('uploads/jobs/'.$job->user_id.'/'.$attachment))
+                                                                    {{ trans('lang.file_size') }} 
+                                                                    {{{Helper::bytesToHuman(Storage::disk('s3')->size('uploads/jobs/'.$job->user_id.'/'.$attachment))}}}
                                                                 @endif
                                                                 <a href="{{{route('getfile', ['type'=>'jobs','attachment'=>$attachment,'id'=>$job->user_id])}}}"><i class="lnr lnr-download"></i></a>
                                                                 <a href="#" v-on:click.prevent="deleteAttachment('attachment-item-{{$key}}')"><i class="lnr lnr-cross"></i></a>

@@ -43,7 +43,7 @@
                                 <div class="wt-package-content">
                                     <h5>{{pkgItem.title}}</h5>
                                     <img :src="baseUrl+'/uploads/packages/' + pkgItem.image" alt="img description" v-if="pkgItem.image">
-                                    <img :src="baseUrl + '/images/packages.png'" alt="img description" v-else>
+                                    <img :src="awsPath + '/images/packages.png'" alt="img description" v-else>
                                     <strong><sup>{{ pkgItem.symbol }}</sup>{{ pkgItem.cost }} <sub>/ {{ getPackageDurationList(pkgItem.options['duration']) }}</sub></strong>
                                     <em>{{ trans('lang.include_all_taxes') }} <i class="ti-info-alt toltip-content tipso_style" data-tipso="Plus Member"></i></em>
                                 </div>
@@ -90,6 +90,8 @@ export default {
             imageUrl:APP_URL+'/uploads/pages/'+this.pageID+'/',
             filtersApplied: false,
             newBgImage:false,
+            awsPath:this.$Aws_S3_PATH,
+            
         }
     },
     computed: {

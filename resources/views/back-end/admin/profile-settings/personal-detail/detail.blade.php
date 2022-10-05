@@ -1,6 +1,6 @@
 <div class="wt-yourdetails wt-tabsinfo">
     <div class="wt-tabscontenttitle">
-        <h2>{{{ trans('lang.your_details') }}}</h2>
+        <p class="mb-0">{{{ trans('lang.your_details') }}}</p>
     </div>
     <fieldset>
         <div class="form-group form-group-half">

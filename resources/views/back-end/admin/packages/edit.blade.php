@@ -192,6 +192,89 @@
                                                 </span>
                                             </div>
                                         @endif
+
+
+                                        @elseif ($package->role_id == 4)
+                                        
+                                       
+                                        <div class="form-group">
+                                            {!! Form::number('agency[no_of_skills]', e($options['no_of_skills']), array('class' => 'form-control', 'placeholder'
+                                            => trans('lang.no_of_skills'))) !!}
+                                        </div>
+                                        <div class="form-group">
+                                            {!! Form::number( 'agency[no_of_services]', e($no_of_services), ['class' =>'form-control ', 'placeholder' => trans('lang.freelancer_pkg_opt.no_of_services')] ) !!}
+                                        </div>
+                                        <div class="form-group">
+                                            {!! Form::number( 'agency[no_of_featured_services]', e($no_of_featured_services), ['class' =>'form-control ', 'placeholder' => trans('lang.freelancer_pkg_opt.no_of_featured_services')] ) !!}
+                                        </div>
+                                        <div class="form-group">
+                                            <span class="wt-select">
+                                                
+
+                                                <select name="agency[duration]">
+                                                    <option value="" disabled="">{{ trans('lang.select_duration') }}</option>
+                                                    @foreach ($durations as $key => $duration)
+                                                        @php $selected = $package_duration == $key ? 'selected' : ''; @endphp
+                                                        <option value="{{$key}}" {{$selected}}>{{ Helper::getPackageDurationList($key) }}</option>
+                                                    @endforeach
+                                                </select>
+
+
+                                            </span>
+                                        </div>
+                                    
+                                        @if ($package->trial != 1)
+                                            <div class="form-group">
+                                                <span class="wt-select">
+                                                    {!! Form::select('agency[badge]', $badges, $package->badge_id, array('placeholder' => trans('lang.select_badge'))) !!}
+                                                </span>
+                                            </div>
+                                        @endif
+                                        <div class="form-group">
+                                            <switch_button v-model="banner_option">{{{ trans('lang.show_banner_opt') }}}</switch_button>
+                                            <input type="hidden" :value="banner_option" name="agency[banner_option]">
+                                        </div>
+                                        <div class="form-group">
+                                            <switch_button v-model="private_chat">{{{ trans('lang.enabale_disable_pvt_chat') }}}</switch_button>
+                                            <input type="hidden" :value="private_chat" name="agency[private_chat]">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <switch_button v-model="lead_management_crm">Access to Talends Lead Management CRM</switch_button>
+                                            <input type="hidden" :value="lead_management_crm" name="agency[lead_management_crm]">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <switch_button v-model="landing_page_cms">Your Own Landing Page with CMS</switch_button>
+                                            <input type="hidden" :value="landing_page_cms" name="agency[landing_page_cms]">
+                                        </div>
+                                        <div class="form-group">
+                                            <switch_button v-model="package_support">Dedicated Support</switch_button>
+                                            <input type="hidden" :value="package_support" name="agency[package_support]">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <switch_button v-model="boost_visibility">Get a boost visibility</switch_button>
+                                            <input type="hidden" :value="boost_visibility" name="agency[boost_visibility]">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <switch_button v-model="leads_opportunities">Get qualified leads and opportunities</switch_button>
+                                            <input type="hidden" :value="leads_opportunities" name="agency[leads_opportunities]">
+                                        </div>
+                                        <div class="form-group">
+                                            <switch_button v-model="commission_signed_deals">0% Commission free on signed deals</switch_button>
+                                            <input type="hidden" :value="commission_signed_deals" name="agency[commission_signed_deals]">
+                                        </div>
+                                        @if ($agency_trial->count() == 0)
+                                            <div class="form-group">
+                                                <span class="wt-checkbox">
+                                                    <input id="trial" type="checkbox" name="trial">
+                                                    <label for="trial"><span>{{{ trans('lang.enable_trial') }}}</span></label>
+                                                </span>
+                                            </div>
+                                        @endif
+
                                     @endif
                                     <input type="hidden" value="{{{$package->role_id}}}" name="roles">
                                     <div class="form-group wt-btnarea">

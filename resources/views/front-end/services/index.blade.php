@@ -64,7 +64,7 @@
                                                             <div class="wt-freelancers {{{$enable_slider}}}">
                                                                 @foreach ($attachments as $attachment)
                                                                     <figure class="item">
-                                                                        <a href="{{{ url('profile/'.$service->seller[0]->slug) }}}"><img src="{{{asset(Helper::getImage('uploads/services/'.$service->seller[0]->id, $attachment, 'medium-', 'medium-service.jpg'))}}}" alt="img description" class="item"></a>
+                                                                        <a href="{{{ url('profile/'.$service->seller[0]->slug) }}}"><img src="{{{(Helper::gets3Image('uploads/services/'.$service->seller[0]->id, $attachment, 'medium-', 'medium-service.jpg'))}}}" alt="img description" class="item"></a>
                                                                     </figure>
                                                                 @endforeach
                                                             </div>
@@ -76,7 +76,7 @@
                                                     <div class="wt-freelancers-details">
                                                         @if ($service->seller->count() > 0)
                                                             <figure class="wt-freelancers-img">
-                                                                <img src="{{ asset(Helper::getProfileImage($service->seller[0]->id)) }}" alt="img description">
+                                                                <img src="{{ (Helper::getProfileImage($service->seller[0]->id)) }}" alt="img description">
                                                             </figure>
                                                         @endif
                                                         <div class="wt-freelancers-content">

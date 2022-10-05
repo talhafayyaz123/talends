@@ -34,7 +34,7 @@
                         </figure>
                         <figure class="wt-workvideo" v-else>
                             <a data-rel="prettyPhoto[video]" :href="work_video.video_link" rel="prettyPhoto[video]">
-                                <img :src="baseUrl+'/images/default-video.png'" alt="video img">
+                                <img :src="awsPath+'/images/default-video.png'" alt="video img">
                             </a>
                         </figure>
                     </div>
@@ -54,7 +54,8 @@ export default {
             baseUrl: APP_URL,
             tempUrl:APP_URL+'/uploads/pages/temp/',
             imageUrl:APP_URL+'/uploads/pages/'+this.pageID+'/',
-            newVideoPosterImage: false
+            newVideoPosterImage: false,
+            awsPath:this.$Aws_S3_PATH,
         }
     },
     computed: {

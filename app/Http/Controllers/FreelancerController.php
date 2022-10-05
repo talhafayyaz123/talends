@@ -38,7 +38,14 @@ use App\Payout;
 use App\SiteManagement;
 use App\Service;
 use App\Review;
+use App\Category;
+use App\SubCategories;
+use App\SubCategorySkills;
 
+use App\UserCategories;
+use App\UserSubCategories;
+use App\UserCategorySkills;
+use App\HireAgency;
 
 /**
  * Class FreelancerController
@@ -75,8 +82,10 @@ class FreelancerController extends Controller
     {
         $locations = Location::pluck('title', 'id');
         $skills = Skill::pluck('title', 'id');
+        $categories = Category::pluck('title','id');
         $profile = $this->freelancer::where('user_id', Auth::user()->id)
             ->get()->first();
+       
         $gender = !empty($profile->gender) ? $profile->gender : '';
         $hourly_rate = !empty($profile->hourly_rate) ? $profile->hourly_rate : '';
         $tagline = !empty($profile->tagline) ? $profile->tagline : '';
@@ -91,10 +100,65 @@ class FreelancerController extends Controller
         $package_options = Package::select('options')->where('role_id', $role_id)->first();
         $options = !empty($package_options) ? unserialize($package_options['options']) : array();
         $videos = !empty($profile->videos) ? Helper::getUnserializeData($profile->videos) : '';
+
+        $user_categories=  UserCategories::where('user_id', Auth::user()->id)
+        ->join('categories','category_id','categories.id')
+        ->select('categories.id','categories.title')
+        ->get();
+
+        $user_sub_categories = UserSubCategories::where('user_id', Auth::user()->id)
+        ->join('sub_categories','user_sub_categories.sub_category_id','sub_categories.sub_category_id')
+        ->select('sub_categories.sub_category_id')
+        ->get();
+ 
+         $selced_sub_categories=array();
+        if(isset($user_sub_categories)){
+            foreach($user_sub_categories as $key =>$value){
+            $selced_sub_categories[]=$value['sub_category_id'];
+            }
+        } 
+
+        $sub_categories='';
+        if(Auth::user()->getRoleNames()[0]=='freelancer' && isset($user_categories[0]) ){
+            $sub_categories = SubCategories::orderby("title","asc")
+            ->select('title','sub_category_id')
+            ->where('category_id',$user_categories[0]->id)
+            ->get();
+        }
+
+       ////////////////////////////////////
+           
+       $user_category_skills = UserCategorySkills::where('user_id', Auth::user()->id)
+       ->select('skill_id')
+       ->get();
+    
+       $sub_cat_skills='';
+
+       if(!empty($selced_sub_categories)){
+        
+        $sub_cat_skills =SubCategorySkills::select('skills.id','skills.title')
+        ->whereIn('sub_category_id',$selced_sub_categories)
+        ->join('skills','skill_id','skills.id')
+        ->groupBy('sub_category_skills.skill_id')
+        ->get();
+      }
+
+
+      $seleced_cat_skills=array();
+      if(isset($user_category_skills)){
+          foreach($user_category_skills as $key =>$value){
+          $seleced_cat_skills[]=$value['skill_id'];
+          }
+      } 
+
+      $aws_s3_path='https://'.env('AWS_BUCKET').'.s3.amazonaws.com';
+
+
         if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/personal-detail/index.blade.php'))) {
             return view(
                 'extend.back-end.freelancer.profile-settings.personal-detail.index',
                 compact(
+                    'user_categories',
                     'videos',
                     'locations',
                     'skills',
@@ -112,9 +176,16 @@ class FreelancerController extends Controller
                 )
             );
         } else {
+            
             return view(
                 'back-end.freelancer.profile-settings.personal-detail.index',
                 compact(
+                    'aws_s3_path',
+                    'seleced_cat_skills',
+                    'sub_cat_skills',
+                    'selced_sub_categories',
+                    'user_categories',
+                    'sub_categories',
                     'videos',
                     'locations',
                     'skills',
@@ -128,7 +199,8 @@ class FreelancerController extends Controller
                     'longitude',
                     'latitude',
                     'avater',
-                    'options'
+                    'options',
+                    'categories'
                 )
             );
         }
@@ -187,6 +259,7 @@ class FreelancerController extends Controller
      */
     public function storeProfileSettings(Request $request)
     {
+        
         $server = Helper::worketicIsDemoSiteAjax();
         if (!empty($server)) {
             $response['type'] = 'error';
@@ -514,6 +587,7 @@ class FreelancerController extends Controller
      */
     public function getFreelancerEducations()
     {
+        
         $json = array();
         $user_id = Auth::user()->id;
         if (Auth::user()) {
@@ -594,7 +668,7 @@ class FreelancerController extends Controller
                     foreach ($projects as $key => $project) {
                         $profile_projects[$key]['project_title'] = !empty($project['project_title']) ? $project['project_title'] : '';
                         $profile_projects[$key]['project_url'] = !empty($project['project_url']) ? $project['project_url'] : '';
-                        $profile_projects[$key]['project_hidden_image'] = !empty($project['project_hidden_image']) ? url('/uploads/users/'.$user_id.'/projects/'.$project['project_hidden_image']) : '';
+                        $profile_projects[$key]['project_hidden_image'] = !empty($project['project_hidden_image']) ? config('app.aws_se_path'). '/' .'uploads/users/'.$user_id.'/projects/'.$project['project_hidden_image'] : '';
                         $profile_projects[$key]['project_image'] = !empty($project['project_hidden_image']) ? $project['project_hidden_image'] : '';
                     }
                 }
@@ -630,7 +704,7 @@ class FreelancerController extends Controller
                     foreach ($awards as $key => $award) {
                         $profile_awards[$key]['award_title'] = $award['award_title'];
                         $profile_awards[$key]['award_date'] = $award['award_date'];
-                        $profile_awards[$key]['award_hidden_image'] = url('/uploads/users/'.$user_id.'/awards/'.$award['award_hidden_image']);
+                        $profile_awards[$key]['award_hidden_image'] = config('app.aws_se_path'). '/' .'uploads/users/'.$user_id.'/awards/'.$award['award_hidden_image'];
                         $profile_awards[$key]['award_image'] = !empty($award['award_hidden_image']) ? $award['award_hidden_image'] : '';
                     }
                 }
@@ -749,8 +823,8 @@ class FreelancerController extends Controller
             $employer_profile = User::find($job->user_id)->profile;
             $employer_avatar = !empty($employer_profile) ? $employer_profile->avater : '';
             $user_image = !empty($profile) ? $profile->avater : '';
-            $profile_image = !empty($user_image) ? '/uploads/users/' . Auth::user()->id . '/' . $user_image : 'images/user-login.png';
-            $employer_image = !empty($employer_avatar) ? '/uploads/users/' . $job->user_id . '/' . $employer_avatar : 'images/user-login.png';
+            $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/' . Auth::user()->id . '/' . $user_image : config('app.aws_se_path'). '/' .'images/user-login.png';
+            $employer_image = !empty($employer_avatar) ?  config('app.aws_se_path').'/uploads/users/' . $job->user_id . '/' . $employer_avatar : config('app.aws_se_path'). '/' .'images/user-login.png';
             $currency   = SiteManagement::getMetaValue('commision');
             $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
             if (file_exists(resource_path('views/extend/back-end/freelancer/jobs/show.blade.php'))) {
@@ -915,6 +989,184 @@ class FreelancerController extends Controller
                     )
                 );
             }
+        }
+    }
+
+
+    public function companyDashboard()
+    {
+        
+        if (Auth::user()) {
+            $ongoing_jobs = array();
+            $freelancer_id = Auth::user()->id;
+            $ongoing_projects = Proposal::getProposalsByStatus($freelancer_id, 'hired');
+            $cancelled_projects = Proposal::getProposalsByStatus($freelancer_id, 'cancelled');
+            $package_item = Item::where('subscriber', $freelancer_id)->first();
+            $package = !empty($package_item) ? Package::find($package_item->product_id) : array();
+            $option = !empty($package) && !empty($package['options']) ? unserialize($package['options']) : '';
+            $expiry = !empty($option) ? $package_item->updated_at->addDays($option['duration']) : '';
+            $expiry_date = !empty($expiry) ? Carbon::parse($expiry)->toDateTimeString() : '';
+            $message_status = Message::where('status', 0)->where('receiver_id', $freelancer_id)->count();
+            $notify_class = $message_status > 0 ? 'wt-insightnoticon' : '';
+            $completed_projects = Proposal::getProposalsByStatus($freelancer_id, 'completed');
+            $completed_projects_history = Proposal::getProposalsByStatus($freelancer_id, 'completed', 'completed');
+            $currency   = SiteManagement::getMetaValue('commision');
+            $symbol     = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
+            $trail      = !empty($package) && $package['trial'] == 1 ? 'true' : 'false';
+            $icons      = SiteManagement::getMetaValue('icons');
+            $enable_package = !empty($currency) && !empty($currency[0]['enable_packages']) ? $currency[0]['enable_packages'] : 'true';
+            $latest_proposals_icon = !empty($icons['hidden_latest_proposal']) ? $icons['hidden_latest_proposal'] : 'img-20.png';
+            $latest_package_expiry_icon = !empty($icons['hidden_package_expiry']) ? $icons['hidden_package_expiry'] : 'img-21.png';
+            $latest_new_message_icon = !empty($icons['hidden_new_message']) ? $icons['hidden_new_message'] : 'img-19.png';
+            $latest_saved_item_icon = !empty($icons['hidden_saved_item']) ? $icons['hidden_saved_item'] : 'img-22.png';
+            $latest_cancel_project_icon = !empty($icons['hidden_cancel_project']) ? $icons['hidden_cancel_project'] : 'img-16.png';
+            $latest_ongoing_project_icon = !empty($icons['hidden_ongoing_project']) ? $icons['hidden_ongoing_project'] : 'img-17.png';
+            $latest_pending_balance_icon = !empty($icons['hidden_pending_balance']) ? $icons['hidden_pending_balance'] : 'icon-01.png';
+            $latest_current_balance_icon = !empty($icons['hidden_current_balance']) ? $icons['hidden_current_balance'] : 'icon-02.png';
+            $published_services_icon = !empty($icons['hidden_published_services']) ? $icons['hidden_published_services'] : 'payment-method.png';
+            $cancelled_services_icon = !empty($icons['hidden_cancelled_services']) ? $icons['hidden_cancelled_services'] : 'decline.png';
+            $completed_services_icon = !empty($icons['hidden_completed_services']) ? $icons['hidden_completed_services'] : 'completed-task.png';
+            $ongoing_services_icon = !empty($icons['hidden_ongoing_services']) ? $icons['hidden_ongoing_services'] : 'onservice.png';
+            $access_type = Helper::getAccessType();
+           
+            $unread_leads=HireAgency::where('is_seen',0)->where('agency_id',$freelancer_id)->count();
+            $total_leads=HireAgency::where('agency_id',$freelancer_id)->count();
+            $skills=UserCategorySkills::where('user_id', $freelancer_id)->get();
+
+            
+            if (file_exists(resource_path('views/extend/back-end/freelancer/dashboard.blade.php'))) {
+                return view(
+                    'extend.back-end.freelancer.dashboard',
+                    compact(
+                        'freelancer_id',
+                        'completed_projects_history',
+                        'access_type',
+                        'ongoing_projects',
+                        'cancelled_projects',
+                        'expiry_date',
+                        'notify_class',
+                        'completed_projects',
+                        'symbol',
+                        'trail',
+                        'latest_proposals_icon',
+                        'latest_package_expiry_icon',
+                        'latest_new_message_icon',
+                        'latest_saved_item_icon',
+                        'latest_cancel_project_icon',
+                        'latest_ongoing_project_icon',
+                        'latest_pending_balance_icon',
+                        'latest_current_balance_icon',
+                        'published_services_icon',
+                        'cancelled_services_icon',
+                        'completed_services_icon',
+                        'ongoing_services_icon',
+                        'enable_package',
+                        'package'
+                    )
+                );
+            } else {
+                return view(
+                    'back-end.freelancer.company_dashboard',
+                    compact(
+                        'skills',
+                        'total_leads',
+                        'unread_leads',
+                        'freelancer_id',
+                        'completed_projects_history',
+                        'access_type',
+                        'ongoing_projects',
+                        'cancelled_projects',
+                        'expiry_date',
+                        'notify_class',
+                        'completed_projects',
+                        'symbol',
+                        'trail',
+                        'latest_proposals_icon',
+                        'latest_package_expiry_icon',
+                        'latest_new_message_icon',
+                        'latest_saved_item_icon',
+                        'latest_cancel_project_icon',
+                        'latest_ongoing_project_icon',
+                        'latest_pending_balance_icon',
+                        'latest_current_balance_icon',
+                        'published_services_icon',
+                        'cancelled_services_icon',
+                        'completed_services_icon',
+                        'ongoing_services_icon',
+                        'enable_package',
+                        'package'
+                    )
+                );
+            }
+        }
+    }
+
+
+    public function interneDashboard()
+    {
+        
+        if (Auth::user()) {
+            $ongoing_jobs = array();
+            $freelancer_id = Auth::user()->id;
+            $ongoing_projects = Proposal::getProposalsByStatus($freelancer_id, 'hired');
+            $cancelled_projects = Proposal::getProposalsByStatus($freelancer_id, 'cancelled');
+            $package_item = Item::where('subscriber', $freelancer_id)->first();
+            $package = !empty($package_item) ? Package::find($package_item->product_id) : array();
+            $option = !empty($package) && !empty($package['options']) ? unserialize($package['options']) : '';
+            $expiry = !empty($option) ? $package_item->updated_at->addDays($option['duration']) : '';
+            $expiry_date = !empty($expiry) ? Carbon::parse($expiry)->toDateTimeString() : '';
+            $message_status = Message::where('status', 0)->where('receiver_id', $freelancer_id)->count();
+            $notify_class = $message_status > 0 ? 'wt-insightnoticon' : '';
+            $completed_projects = Proposal::getProposalsByStatus($freelancer_id, 'completed');
+            $completed_projects_history = Proposal::getProposalsByStatus($freelancer_id, 'completed', 'completed');
+            $currency   = SiteManagement::getMetaValue('commision');
+            $symbol     = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
+            $trail      = !empty($package) && $package['trial'] == 1 ? 'true' : 'false';
+            $icons      = SiteManagement::getMetaValue('icons');
+            $enable_package = !empty($currency) && !empty($currency[0]['enable_packages']) ? $currency[0]['enable_packages'] : 'true';
+            $latest_proposals_icon = !empty($icons['hidden_latest_proposal']) ? $icons['hidden_latest_proposal'] : 'img-20.png';
+            $latest_package_expiry_icon = !empty($icons['hidden_package_expiry']) ? $icons['hidden_package_expiry'] : 'img-21.png';
+            $latest_new_message_icon = !empty($icons['hidden_new_message']) ? $icons['hidden_new_message'] : 'img-19.png';
+            $latest_saved_item_icon = !empty($icons['hidden_saved_item']) ? $icons['hidden_saved_item'] : 'img-22.png';
+            $latest_cancel_project_icon = !empty($icons['hidden_cancel_project']) ? $icons['hidden_cancel_project'] : 'img-16.png';
+            $latest_ongoing_project_icon = !empty($icons['hidden_ongoing_project']) ? $icons['hidden_ongoing_project'] : 'img-17.png';
+            $latest_pending_balance_icon = !empty($icons['hidden_pending_balance']) ? $icons['hidden_pending_balance'] : 'icon-01.png';
+            $latest_current_balance_icon = !empty($icons['hidden_current_balance']) ? $icons['hidden_current_balance'] : 'icon-02.png';
+            $published_services_icon = !empty($icons['hidden_published_services']) ? $icons['hidden_published_services'] : 'payment-method.png';
+            $cancelled_services_icon = !empty($icons['hidden_cancelled_services']) ? $icons['hidden_cancelled_services'] : 'decline.png';
+            $completed_services_icon = !empty($icons['hidden_completed_services']) ? $icons['hidden_completed_services'] : 'completed-task.png';
+            $ongoing_services_icon = !empty($icons['hidden_ongoing_services']) ? $icons['hidden_ongoing_services'] : 'onservice.png';
+            $access_type = Helper::getAccessType();
+            
+            return view(
+                'back-end.freelancer.intern_dashboard',
+                compact(
+                    'freelancer_id',
+                    'completed_projects_history',
+                    'access_type',
+                    'ongoing_projects',
+                    'cancelled_projects',
+                    'expiry_date',
+                    'notify_class',
+                    'completed_projects',
+                    'symbol',
+                    'trail',
+                    'latest_proposals_icon',
+                    'latest_package_expiry_icon',
+                    'latest_new_message_icon',
+                    'latest_saved_item_icon',
+                    'latest_cancel_project_icon',
+                    'latest_ongoing_project_icon',
+                    'latest_pending_balance_icon',
+                    'latest_current_balance_icon',
+                    'published_services_icon',
+                    'cancelled_services_icon',
+                    'completed_services_icon',
+                    'ongoing_services_icon',
+                    'enable_package',
+                    'package'
+                )
+            ); 
         }
     }
 

@@ -263,7 +263,7 @@ class RestAPIController extends Controller
                         foreach ($projects as $project_key => $project) {
                             $freelancer_projects[$project_key]['title'] = !empty($project['project_title']) ? $project['project_title'] : '';
                             $freelancer_projects[$project_key]['url'] = !empty($project['project_url']) ? $project['project_url'] : '';
-                            $freelancer_projects[$project_key]['image']['url'] = !empty($project['project_hidden_image']) ? url('/uploads/users/' . $user['id'] . '/projects/' . $project['project_hidden_image']) : '';
+                            $freelancer_projects[$project_key]['image']['url'] = !empty($project['project_hidden_image']) ? config('app.aws_se_path').'/uploads/users/' . $user['id'] . '/projects/' . $project['project_hidden_image'] : '';
                         }
                         $json[$key]['_projects'] = $freelancer_projects;
                     }
@@ -273,7 +273,7 @@ class RestAPIController extends Controller
                         foreach ($awards as $award_key => $award) {
                             $freelancer_awards[$award_key]['title'] = !empty($award['award_title']) ? $award['award_title'] : '';
                             $freelancer_awards[$award_key]['date'] = !empty($award['award_date']) ? $award['award_date'] : '';
-                            $freelancer_awards[$award_key]['image']['url'] = !empty($award['award_hidden_image']) ? url('/uploads/users/' . $user['id'] . '/awards/' . $award['award_hidden_image']) : '';
+                            $freelancer_awards[$award_key]['image']['url'] = !empty($award['award_hidden_image']) ? config('app.aws_se_path').'/uploads/users/' . $user['id'] . '/awards/' . $award['award_hidden_image'] : '';
                         }
                         $json[$key]['_awards'] = $freelancer_awards;
                     }
@@ -590,7 +590,7 @@ class RestAPIController extends Controller
                                 $email_params['amount'] = $amount;
                                 $email_params['duration'] = Helper::getJobDurationList($duration);
                                 $email_params['message'] = $description;
-                                Mail::to($job->employer->email)
+                                /* Mail::to($job->employer->email)
                                     ->send(
                                         new EmployerEmailMailable(
                                             'employer_email_proposal_received',
@@ -613,7 +613,7 @@ class RestAPIController extends Controller
                                             $template_submit_proposal,
                                             $email_params
                                         )
-                                    );
+                                    ); */
                             }
                         }
                         return Response::json($json, 200);
@@ -1254,14 +1254,14 @@ class RestAPIController extends Controller
                             $email_params['report_by_link'] = url('profile/' . $user->slug);
                             $email_params['reported_by'] = Helper::getUserName($user->id);
                             $email_params['message'] = $request['description'];
-                            Mail::to(config('mail.username'))
+                             /* Mail::to(config('mail.adminmail'))
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_report_project',
                                         $template_data,
                                         $email_params
                                     )
-                                );
+                                );  */
                         }
                     }
                 }
@@ -1518,14 +1518,14 @@ class RestAPIController extends Controller
                         $email_params['link'] = url('profile/' . $freelancer->slug);
                         $email_params['name'] = Helper::getUserName($freelancer->id);
                         $email_params['msg'] = $request['desc'];
-                        Mail::to($freelancer->email)
+                       /*  Mail::to($freelancer->email)
                             ->send(
                                 new FreelancerEmailMailable(
                                     'freelancer_email_send_offer',
                                     $template_data,
                                     $email_params
                                 )
-                            );
+                            ); */
                     }
                 }
                 return Response::json($json, 200);
@@ -1572,14 +1572,14 @@ class RestAPIController extends Controller
                 $email_params['email'] = $request['email'];
                 $email_params['link'] = url('user/password/reset/' . $verification_code);
                 $email_params['name'] = Helper::getUserName($user->id);
-                Mail::to($request['email'])
+               /*  Mail::to($request['email'])
                     ->send(
                         new GeneralEmailMailable(
                             'lost_password',
                             $template_data,
                             $email_params
                         )
-                    );
+                    ); */
                 $json['type'] = 'success';
                 $json['message'] = trans('lang.email_sent');
                 return Response::json($json, 200);
@@ -1788,23 +1788,23 @@ class RestAPIController extends Controller
                         $email_params['name'] = Helper::getUserName($current_user);
                         $email_params['link'] = url('profile/' . $user->slug);
                         $admin_mail = User::role('admin')->select('email')->pluck('email')->first();
-                        Mail::to(config('mail.username'))
+                        /*  Mail::to(config('mail.adminmail'))
                             ->send(
                                 new AdminEmailMailable(
                                     'admin_email_new_job_posted',
                                     $template_data,
                                     $email_params
                                 )
-                            );
+                            ); */ 
                         if (!empty($user->email)) {
-                            Mail::to($user->email)
+                           /*  Mail::to($user->email)
                                 ->send(
                                     new EmployerEmailMailable(
                                         'employer_email_new_job_posted',
                                         $template_data_employer,
                                         $email_params
                                     )
-                                );
+                                ); */
                         }
                     }
                 }
@@ -1921,7 +1921,7 @@ class RestAPIController extends Controller
                 if ($service->seller->count() > 0) {
                     if (!empty($attachments)) {
                         foreach ($attachments as $attachment_key => $attachment) {
-                            $json[$key]['attachment'][$attachment_key]['image'] = asset(Helper::getImageWithSize('uploads/services/'.$service->seller[0]->id, $attachment, 'medium', true));
+                            $json[$key]['attachment'][$attachment_key]['image'] = (Helper::gets3ImageWithSize('uploads/services/'.$service->seller[0]->id, $attachment, 'medium', true));
                         }
                     } else {
                         $json[$key]['attachment'] =array();
@@ -1997,7 +1997,7 @@ class RestAPIController extends Controller
             $json['sales_text'] = trans('lang.sales');
             $json['response_time'] = $response_time->title;
             $json['response_time_text'] = trans('lang.response_time');
-            $json['profile_banner'] = !empty($seller) ? asset(Helper::getUserProfileBanner($seller->id, 'small')) : '';
+            $json['profile_banner'] = !empty($seller) ? (Helper::getUserProfileBanner($seller->id, 'small')) : '';
             $json['profile_image'] = !empty($seller) ? asset(Helper::getProfileImage($seller->id)) : '';
             $json['seller_link'] = !empty($seller) ? url('profile/'.$seller->slug) : '';
             $json['seller_name'] = !empty($seller) ? Helper::getUserName($seller->id) : '';
@@ -2039,7 +2039,7 @@ class RestAPIController extends Controller
             }
             if (!empty($attachments)) {
                 foreach ($attachments as $attachment_key => $attachment) {
-                    $json[$key]['attachment'][$attachment_key]['image'] = asset(Helper::getImageWithSize('uploads/services/'.$service->seller[0]->id, $attachment, 'medium', true));
+                    $json[$key]['attachment'][$attachment_key]['image'] = (Helper::gets3ImageWithSize('uploads/services/'.$service->seller[0]->id, $attachment, 'medium', true));
                 }
             } else {
                 $json[$key]['attachment'] =array();
@@ -2107,14 +2107,14 @@ class RestAPIController extends Controller
                 $email_params['verification_code'] = $user->verification_code;
                 $email_params['name'] = Helper::getUserName($user->id);
                 $email_params['email'] = $user->email;
-                Mail::to($user->email)
+               /*  Mail::to($user->email)
                     ->send(
                         new GeneralEmailMailable(
                             'verification_code',
                             $template_data,
                             $email_params
                         )
-                    );
+                    ); */
             }
         }
         $id = $user_id;
@@ -2226,14 +2226,14 @@ class RestAPIController extends Controller
                         $email_params['name'] = Helper::getUserName($current_user);
                         $email_params['link'] = url('profile/' . $user->slug);
                         $template_data = Helper::getAdminServicePostedEmailContent();
-                        Mail::to(config('mail.username'))
+                       /*   Mail::to(config('mail.adminmail'))
                             ->send(
                                 new AdminEmailMailable(
                                     'admin_email_new_service_posted',
                                     $template_data,
                                     $email_params
                                 )
-                            );
+                            ); */ 
                     }
                     return $json;
                 } elseif ($service_post['type'] == 'error') {
@@ -2267,14 +2267,14 @@ class RestAPIController extends Controller
                     $email_params['name'] = Helper::getUserName($current_user);
                     $email_params['link'] = url('profile/' . $user->slug);
                     $template_data = Helper::getAdminServicePostedEmailContent();
-                    Mail::to(config('mail.username'))
+                    /*  Mail::to(config('mail.adminmail'))
                         ->send(
                             new AdminEmailMailable(
                                 'admin_email_new_service_posted',
                                 $template_data,
                                 $email_params
                             )
-                        );
+                        ); */ 
                 }
                 return $json;
             } elseif ($service_post['type'] == 'error') {

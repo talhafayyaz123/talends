@@ -34,7 +34,7 @@
                         <ul class="wt-categoryvtwo">
                             <li v-for="(cat, index) in categoryList.slice(0, 4)" :key="index">
                                 <div class="wt-categorycontentvtwo">
-                                    <figure><img :src="baseUrl+'/uploads/categories/'+ cat.image" :alt="cat.title"></figure>
+                                    <figure><img :src="awsPath+'/uploads/categories/'+ cat.image" :alt="cat.title"></figure>
                                     <div class="wt-cattitlevtwo">
                                         <h4><a :href="baseUrl+'/search-results?type='+ type+'&category%5B%5D='+cat.slug">{{ cat.title }}</a></h4>
                                     </div>
@@ -63,6 +63,7 @@ export default {
             newBgImage:false,
             tempUrl:APP_URL+'/uploads/pages/temp/',
             imageUrl:APP_URL+'/uploads/pages/'+this.pageID+'/',
+            awsPath:this.$Aws_S3_PATH,
         }
     },
     computed: {

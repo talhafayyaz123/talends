@@ -4,7 +4,7 @@
     </div>
     <div class="wt-settingscontent">
         @if (!empty($banner))
-            @php $image = '/uploads/users/'.Auth::user()->id.'/'.$banner; @endphp
+            @php $image =$aws_s3_path. '/uploads/users/'.Auth::user()->id.'/'.$banner; @endphp
             <div class="wt-formtheme wt-userform">
                 <div v-if="this.uploaded_banner">
                     <upload-image 
@@ -16,7 +16,7 @@
                     </upload-image>
                 </div>
                 <div class="wt-uploadingbox" v-else>
-                    <figure><img src="{{{asset($image)}}}" alt="{{{ trans('lang.profile_photo') }}}"></figure>
+                    <figure><img src="{{{($image)}}}" alt="{{{ trans('lang.profile_photo') }}}"></figure>
                     <div class="wt-uploadingbar">
                         <div class="dz-filename">{{{$banner}}}</div>
                         <em>{{{ trans('lang.file_size') }}}<a href="javascript:void(0);" class="lnr lnr-cross" v-on:click.prevent="removeBanner('hidden_banner')"></a></em>

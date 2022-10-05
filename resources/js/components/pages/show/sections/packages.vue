@@ -129,7 +129,7 @@ export default {
             }
         },
         pkgImgError: function(event) {
-            event.target.src = this.baseUrl + '/images/packages.png'
+            event.target.src =this.$Aws_S3_PATH + '/images/packages.png'
         },
         editElement: function() {
             var self = this

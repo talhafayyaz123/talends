@@ -1,5 +1,5 @@
 <footer id="wt-footer" class="wt-footertwo wt-haslayout">
-    <div class="wt-footer-bg" style="background-image:url({{{ !empty($footer['footer_bg']) ? asset('uploads/settings/footer/'. $footer['footer_bg']) : ''}}})"></div>
+    <div class="wt-footer-bg" style="background-image:url({{{ !empty($footer['footer_bg']) ? config('app.aws_se_path').'/uploads/settings/footer/'. $footer['footer_bg'] : ''}}})"></div>
     @if (!empty($footer))
         <div class="wt-footerholder wt-haslayout">
             <div class="container">
@@ -7,7 +7,7 @@
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="wt-footerlogohold">
                             @if (!empty($footer['footer_logo']))
-                                <strong class="wt-logo"><a href="{{{ url('/') }}}"><img src="{{{ asset(\App\Helper::getFooterLogo($footer['footer_logo'])) }}}" alt="company logo here"></a></strong>
+                                <strong class="wt-logo"><a href="{{{ url('/') }}}"><img src="{{{ (\App\Helper::getFooterLogo($footer['footer_logo'])) }}}" alt="company logo here"></a></strong>
                             @endif
                             @if (!empty($footer['description']))
                                 <div class="wt-description">

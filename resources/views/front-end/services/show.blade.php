@@ -61,20 +61,21 @@
                                     </ul>
                                 </div>
                                 @if (!empty($attachments))
+
                                     @php $enable_slider = count($attachments) > 1 ? 'wt-servicesslider' : ''; @endphp
                                     <div class="wt-freelancers-info">
                                         <div id="{{$enable_slider}}" class="wt-servicesslider owl-carousel">
                                             @foreach ($attachments as $attachment)
                                                 <figure class="item">
-                                                    <img src="{{{asset(Helper::getImage('uploads/services/'.$seller->id, $attachment, 'medium-', 'medium-service.jpg'))}}}" alt="img description" class="item">
+                                                    <img src="{{{(Helper::gets3Image('uploads/services/'.$seller->id, $attachment, 'medium-', 'medium-service.jpg'))}}}" alt="img description" class="item">
                                                 </figure>
                                             @endforeach
                                         </div>
                                         @if (count($attachments) > 1)
                                             <div id="wt-servicesgallery" class="wt-servicesgallery owl-carousel">
                                                 @foreach ($attachments as $attachment)
-                                                    @php $image = 'uploads/services/'.$seller->id.'/'.$attachment; @endphp
-                                                    <div class="item"><figure><img src="{{{asset($image)}}}" alt="img description"></figure></div>
+                                                    @php $image =config('app.aws_se_path'). '/uploads/services/'.$seller->id.'/'.$attachment; @endphp
+                                                    <div class="item"><figure><img src="{{{($image)}}}" alt="img description"></figure></div>
                                                 @endforeach
                                             </div>
                                         @endif
@@ -100,7 +101,7 @@
                                         @endphp
                                         <div class="wt-userlistinghold wt-userlistingsingle">
                                                 <figure class="wt-userlistingimg">
-                                                    <img src="{{ asset(Helper::getProfileImage($review->user_id)) }}" alt="{{{ trans('Employer') }}}">
+                                                    <img src="{{ (Helper::getProfileImage($review->user_id)) }}" alt="{{{ trans('Employer') }}}">
                                                 </figure>
                                                 <div class="wt-userlistingcontent">
                                                     <div class="wt-contenthead">

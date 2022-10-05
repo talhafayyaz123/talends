@@ -96,6 +96,9 @@ class PaypalController extends Controller
             } else if (Auth::user()->getRoleNames()[0] == "freelancer") {
                 session()->forget('type');
                 return Redirect::to('dashboard/packages/freelancer');
+            }else if (Auth::user()->getRoleNames()[0] == "company") {
+                session()->forget('type');
+                return Redirect::to('dashboard/packages/company');
             }
         } else {
             abort(404);
@@ -407,7 +410,7 @@ class PaypalController extends Controller
                                     $email_params['name'] = $package->title;
                                     $email_params['price'] = $package->cost;
                                     $email_params['expiry_date'] = !empty($expiry_date) ? Carbon::parse($expiry_date)->format('M d, Y') : '';
-                                    Mail::to(Auth::user()->email)
+                                     Mail::to(Auth::user()->email)
                                         ->send(
                                             new EmployerEmailMailable(
                                                 'employer_email_package_subscribed',
@@ -417,7 +420,7 @@ class PaypalController extends Controller
                                         );
                                 }
                             }
-                        } elseif ($role === 'freelancer') {
+                        } elseif ($role === 'freelancer' || $role === 'company' ) {
                             if (!empty(Auth::user()->email)) {
                                 $email_params = array();
                                 $template = DB::table('email_types')->select('id')->where('email_type', 'freelancer_email_package_subscribed')->get()->first();
@@ -428,14 +431,14 @@ class PaypalController extends Controller
                                     $email_params['name'] = $package->title;
                                     $email_params['price'] = $package->cost;
                                     $email_params['expiry_date'] = !empty($expiry_date) ? Carbon::parse($expiry_date)->format('M d, Y') : '';
-                                    Mail::to(Auth::user()->email)
+                                     Mail::to(Auth::user()->email)
                                         ->send(
                                             new FreelancerEmailMailable(
                                                 'freelancer_email_package_subscribed',
                                                 $template_data,
                                                 $email_params
                                             )
-                                        );
+                                        ); 
                                 }
                             }
                         }
@@ -476,7 +479,7 @@ class PaypalController extends Controller
                                         $template_data,
                                         $email_params
                                     )
-                                );
+                                );  
                         }
                     }
                 } else {
@@ -519,7 +522,7 @@ class PaypalController extends Controller
                                             $template_data,
                                             $email_params
                                         )
-                                    );
+                                    ); 
                             }
                         }
                     }
