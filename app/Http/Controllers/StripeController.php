@@ -278,6 +278,15 @@ $payment_intent = $stripe->paymentIntents()->create([
 ]);
 
 
+$method=$stripe->paymentMethods()->create([
+    'type' => 'card',
+    'card' => [
+      'number' => $input['card_no'],
+      'exp_month' =>  $input['ccExpiryMonth'],
+      'exp_year' => $input['ccExpiryYear'],
+      'cvc' => $input['cvvNumber'],
+    ],
+  ]);
 
 $customer = $stripe->customers()->create(
 
@@ -309,7 +318,23 @@ $customer = $stripe->customers()->create(
 
 );
 
+$payment=$stripe->paymentMethods()->attach(
+            
+    $method['id'], 
+    $customer['id']
+    
+    
+);
 
+
+$customer = $stripe->customers()->update($customer['id'], [
+    'invoice_settings' => [
+
+        'default_payment_method' =>  $method['id'],
+
+
+    ]
+]);
 
 if ($payment_detail['status'] == 'succeeded') {
 
@@ -1069,7 +1094,15 @@ return $json;
                   ]);
 
 
-
+                  $method=$stripe->paymentMethods()->create([
+                    'type' => 'card',
+                    'card' => [
+                      'number' => $request->get('card_no'),
+                      'exp_month' =>  $request->get('ccExpiryMonth'),
+                      'exp_year' => $request->get('ccExpiryYear'),
+                      'cvc' => $request->get('cvvNumber'),
+                    ],
+                  ]);
                 $customer = $stripe->customers()->create(
 
                     [
@@ -1100,7 +1133,23 @@ return $json;
 
                 );
 
-               
+                $payment=$stripe->paymentMethods()->attach(
+            
+                    $method['id'], 
+                    $customer['id']
+                    
+                    
+                );
+                
+                
+                $customer = $stripe->customers()->update($customer['id'], [
+                    'invoice_settings' => [
+                
+                        'default_payment_method' =>  $method['id'],
+                
+                
+                    ]
+                ]);
 
                 if ($payment_detail['status'] == 'succeeded') {
 

@@ -469,9 +469,10 @@ Company Registration
 
                                     <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
 
-                                    <button onclick="checkCaptcha()" id='register_pay_btn' class="next action-button" type="button" onclick="checkCaptcha()">
+                                    <button onclick="checkCaptcha()" id='register_pay_btn' class="action-button" type="button" onclick="checkCaptcha()">
                                         Proceed To Payment
                                     </button>
+                                    
                                 </fieldset>
 
 
