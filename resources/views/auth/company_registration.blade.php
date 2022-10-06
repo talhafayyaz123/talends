@@ -332,7 +332,7 @@ Company Registration
           </ul>
       </div> -->
 
-                            <b-modal size="lg" id='stripe_register_form' class="la-pay-stripe hide">
+                          <!--   <b-modal size="lg" id='stripe_register_form' class="la-pay-stripe hide" style="display:none">
                                 <template v-slot:modal-title>
                                     {{ trans('lang.stripe_payment')}} <span>{{ trans('lang.stripe_form_note')}} </span>
                                 </template>
@@ -341,7 +341,7 @@ Company Registration
 
                                         <div class="col-lg-12 form-group wt-inputwithicon {{ $errors->has('card_no') ? ' has-error' : '' }}">
                                             <label>{{ trans('lang.card_no') }} *</label>
-                                            <!-- <img src="{{!empty($stripe_img) ? asset('uploads/settings/payment/'.$stripe_img) : ''}}"> -->
+                                             <img src="{{!empty($stripe_img) ? asset('uploads/settings/payment/'.$stripe_img) : ''}}">
                                             <input id="card_no" type="text" class="form-control" name="card_no" value="{{ old('card_no') }}" autofocus>
                                             @if ($errors->has('card_no'))
                                             <span class="help-block">
@@ -455,7 +455,7 @@ Company Registration
                                     </div>
 
                                 </div>
-                            </b-modal>
+                            </b-modal> -->
                             <div class="alert alert-danger" id="alert-danger_stripe" style="display:none"></div>
                                     <div class="col-12 pt-4 text-center" style="padding-left: 0%;">
                                         {!! htmlFormSnippet() !!}
@@ -468,10 +468,10 @@ Company Registration
                             </div>
 
                                     <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-
+<!-- 
                                     <button onclick="checkCaptcha()" id='register_pay_btn' class="action-button" type="button" onclick="checkCaptcha()">
                                         Proceed To Payment
-                                    </button>
+                                    </button> -->
                                     
                                 </fieldset>
 
