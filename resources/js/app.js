@@ -4696,7 +4696,6 @@
                      });
              },
              submitCompanyStripeFrom: function () {
-            
                 this.loading = true;
                 let stripe_payment = document.getElementById('stripe-payment-form');
                 let data = new FormData(stripe_payment);
