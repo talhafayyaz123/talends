@@ -56,7 +56,7 @@ Company Registration
                                     <li><span>2</span></li>
                                     <li><span>3</span></li>
                                     <li><span>4</span></li>
-                                    <li><span>5</span></li>
+                                    <!-- <li><span>5</span></li> -->
                                 </ul>
                                 <!-- fieldsets -->
                                 <fieldset>
@@ -269,6 +269,7 @@ Company Registration
                                                 <input type="hidden" name="yearly_package" id="yearly_package" value="{{ $package[1]->id ?? '0' }}">
                                                 <input type="hidden" name="payment_amount" id="payment_amount" value="">
                                                 <input type="hidden" name="package_id" id="package_id" value="">
+                                                <input type="hidden" value="stripe" id='payment_method' name="payment_method">
                                                 @php
                                                 $amount=$why_agency_plan->agencies_benefits;
                                                 @endphp
@@ -276,20 +277,41 @@ Company Registration
                                         </div>
                                     </div>
 
+                                    <div class="row">
+                                          
+                                            <div class="col-4 stripe mb-4">
+                                               Powered By <a class="SiteHeader__logoLink" data-js-controller="AnalyticsButton" data-analytics-category="Navigation" data-analytics-action="Clicked" data-analytics-label="Stripe Logo" data-testid="header-stripe-logo">
+                                                            <svg viewBox="0 0 60 25" xmlns="http://www.w3.org/2000/svg" width="60" height="25" class="UserLogo variant-- ">
+                                                                <title>Stripe logo</title>
+                                                                <path fill="var(--userLogoColor, #0A2540)" d="M59.64 14.28h-8.06c.19 1.93 1.6 2.55 3.2 2.55 1.64 0 2.96-.37 4.05-.95v3.32a8.33 8.33 0 0 1-4.56 1.1c-4.01 0-6.83-2.5-6.83-7.48 0-4.19 2.39-7.52 6.3-7.52 3.92 0 5.96 3.28 5.96 7.5 0 .4-.04 1.26-.06 1.48zm-5.92-5.62c-1.03 0-2.17.73-2.17 2.58h4.25c0-1.85-1.07-2.58-2.08-2.58zM40.95 20.3c-1.44 0-2.32-.6-2.9-1.04l-.02 4.63-4.12.87V5.57h3.76l.08 1.02a4.7 4.7 0 0 1 3.23-1.29c2.9 0 5.62 2.6 5.62 7.4 0 5.23-2.7 7.6-5.65 7.6zM40 8.95c-.95 0-1.54.34-1.97.81l.02 6.12c.4.44.98.78 1.95.78 1.52 0 2.54-1.65 2.54-3.87 0-2.15-1.04-3.84-2.54-3.84zM28.24 5.57h4.13v14.44h-4.13V5.57zm0-4.7L32.37 0v3.36l-4.13.88V.88zm-4.32 9.35v9.79H19.8V5.57h3.7l.12 1.22c1-1.77 3.07-1.41 3.62-1.22v3.79c-.52-.17-2.29-.43-3.32.86zm-8.55 4.72c0 2.43 2.6 1.68 3.12 1.46v3.36c-.55.3-1.54.54-2.89.54a4.15 4.15 0 0 1-4.27-4.24l.01-13.17 4.02-.86v3.54h3.14V9.1h-3.13v5.85zm-4.91.7c0 2.97-2.31 4.66-5.73 4.66a11.2 11.2 0 0 1-4.46-.93v-3.93c1.38.75 3.1 1.31 4.46 1.31.92 0 1.53-.24 1.53-1C6.26 13.77 0 14.51 0 9.95 0 7.04 2.28 5.3 5.62 5.3c1.36 0 2.72.2 4.09.75v3.88a9.23 9.23 0 0 0-4.1-1.06c-.86 0-1.44.25-1.44.9 0 1.85 6.29.97 6.29 5.88z" fill-rule="evenodd"></path>
+                                                            </svg>
+                                                        </a>
+                                            </div>
+                                        </div>
+
+                                        <div class="alert alert-danger" id="alert-danger_stripe" style="display:none"></div>
+                                    <div class="col-12 pt-4 text-center" style="padding-left: 0%;">
+                                        {!! htmlFormSnippet() !!}
+                                        <span class="help-block" style="display: none;">
+                                            <strong class="error"></strong>
+                                        </span>
+                                    </div>
 
 
                                     <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
 
-                                    <input type="button" name="next" class="next action-button" value="Next" />
+                                    <button onclick="checkCaptcha()" id='register_pay_btn' class="action-button" type="button" onclick="checkCaptcha()">
+                                        Proceed To Payment
+                                    </button>
                                 </fieldset>
 
-                                <fieldset>
+                                <fieldset style="display:none;">
                                     <div class="form-card">
                                         <div class="row">
-                                            <!-- <div class="col-8">
+                                             <div class="col-8">
                                                 <h2 class="fs-title mb-0">Pay with card:</h2>
-                                            </div> -->
-                                            <div class="col-4 stripe mb-4 ml-4">
+                                            </div> 
+                                            <div class="col-4 stripe mb-4">
                                                Powered By <a class="SiteHeader__logoLink" data-js-controller="AnalyticsButton" data-analytics-category="Navigation" data-analytics-action="Clicked" data-analytics-label="Stripe Logo" data-testid="header-stripe-logo">
                                                             <svg viewBox="0 0 60 25" xmlns="http://www.w3.org/2000/svg" width="60" height="25" class="UserLogo variant-- ">
                                                                 <title>Stripe logo</title>
@@ -300,8 +322,8 @@ Company Registration
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 mb-4">
-                                
-                                                    <input type="hidden" value="stripe" id='payment_method' name="payment_method">
+                                            <h4 class="fs-title">We will Redirect you on srtipe checkout page.</h4>
+                                                    <!-- <input type="hidden" value="stripe" id='payment_method' name="payment_method"> -->
                                                         
                                                 
                                                     <!--  <div class="sj-title">
@@ -456,7 +478,7 @@ Company Registration
 
                                 </div>
                             </b-modal> -->
-                            <div class="alert alert-danger" id="alert-danger_stripe" style="display:none"></div>
+ <!--                            <div class="alert alert-danger" id="alert-danger_stripe" style="display:none"></div>
                                     <div class="col-12 pt-4 text-center" style="padding-left: 0%;">
                                         {!! htmlFormSnippet() !!}
                                         <span class="help-block" style="display: none;">
@@ -468,7 +490,6 @@ Company Registration
                             </div>
 
                                     <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-<!-- 
                                     <button onclick="checkCaptcha()" id='register_pay_btn' class="action-button" type="button" onclick="checkCaptcha()">
                                         Proceed To Payment
                                     </button> -->
@@ -515,6 +536,7 @@ Company Registration
        
         var form_data = $('#msform').serialize();
         var payment_method = $('#payment_method').val();
+        var package_id=$('#package_id').val();
 
         if (payment_method == undefined) {
 
@@ -522,6 +544,12 @@ Company Registration
             $('.help-block strong').html('Select payment method.');
             return false;
         }
+         
+        if(package_id==''){
+                $('.help-block').show();
+                $('.help-block strong').html('Please Select Payment Plan'); 
+                return false;
+            }
         $('.help-block').hide();
         $('.help-block strong').html('');
 
@@ -535,7 +563,6 @@ Company Registration
                 if (response.errors) {
                     $('.help-block').show();
                     $('.help-block strong').html('recaptcha field is required.');
-
                 }
 
             }
@@ -545,7 +572,10 @@ Company Registration
                     if (payment_method == 'paytab') {
                         $('#msform').submit();
                     } else if (payment_method == 'stripe') {
-                        var is_error = 0;
+                    
+                        $('#msform').attr('action', '<?php echo url('company/register/stripe/checkout')  ?>').submit();
+
+                       /*  var is_error = 0;
                         var card_no = $('#card_no').val();
                         var ccExpiryMonth = $('#ccExpiryMonth').val();
                         var ccExpiryYear = $('#ccExpiryYear').val();
@@ -558,8 +588,6 @@ Company Registration
                             $('#card_no').removeClass('field_error');
 
                         }
-
-
 
                         if (ccExpiryMonth == '') {
                             $('#ccExpiryMonth').addClass('field_error');
@@ -629,7 +657,7 @@ Company Registration
 
                             });
 
-                        }
+                        } */
 
 
                     }

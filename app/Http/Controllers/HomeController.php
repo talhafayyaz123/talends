@@ -278,10 +278,6 @@ class HomeController extends Controller
         return view('auth.company_registration',compact('currency','symbol','payment_gateway','payout_settings','stripe_img','stripe_settings','package_options','page','meta_desc','meta_keywords','yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
      }
 
-      public function stripeCompanyRegistrationSuccess($id){
-        session()->put(['user_id' => $id]);
-        return view('auth.company_registration_success');
-      }
      public function companyRegistrationSuccess(Request $request){
 
         $content = $request->input();

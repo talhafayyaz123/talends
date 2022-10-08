@@ -38,7 +38,7 @@ $(document).ready(function(){
         var phone_number=$('#phone_number').val();
         var employees=$('#employees').val();
         var password=$('#register_password').val();
-       var country_code=$('.iti__selected-flag').text();
+        var country_code=$('.iti__selected-flag').text();
      
     
         if(password=='')
@@ -246,7 +246,7 @@ $(document).ready(function(){
          }
 
         
-        
+/*         
          if(current==4){
             var package_id=$('#package_id').val();
             if(package_id==''){
@@ -260,7 +260,7 @@ $(document).ready(function(){
                 is_error=0;
             }
             
-         }
+         } */
 
          
         

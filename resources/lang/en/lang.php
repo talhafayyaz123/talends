@@ -1094,6 +1094,7 @@ return [
     'taxes' => 'Taxes',
     'grand_total' => 'Grand Total:',
     'select_pay_method' => 'Select Payment Method',
+    'pay_method' => 'Payment Method',
     'stripe_key' => 'Stripe Key',
     'stripe_secret' => 'Stripe Secret',
     'shiping_amnt' => 'Shipping Amount',
