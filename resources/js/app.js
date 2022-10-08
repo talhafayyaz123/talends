@@ -4695,6 +4695,30 @@
                          console.log(error);
                      });
              },
+             submitCompanyStripeFrom: function () {
+            
+                this.loading = true;
+                let stripe_payment = document.getElementById('stripe-payment-form');
+                let data = new FormData(stripe_payment);
+                var self = this;
+                axios.post(APP_URL + '/company/package/change/stripe', data)
+                    .then(function (response) {
+                        if (response.data.type == 'success') {
+                            self.loading = false;
+                            self.showMessage(response.data.message);
+                            setTimeout(function () {
+                                window.location.replace(response.data.url);
+                            }, 3000);
+                        } else if (response.data.type == 'error') {
+                            self.loading = false;
+                            self.showError(response.data.message);
+                        }
+                    })
+                    .catch(function (error) {
+                        self.loading = false;
+                        console.log(error);
+                    });
+            },
              paytabCheckout: function () {
                  axios.get(APP_URL + '/addmoney/paytab/'+$('#proposal_id').val())
                  .then(function (response) {

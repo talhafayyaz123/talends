@@ -116,8 +116,14 @@
                         <span>{{ trans('lang.stripe_form_note')}}  </span>
                     </template>
                     <div class="d-block text-center">
+                        
+                     @if( Auth::user()->getRoleNames()->first()=='company')
+                        <form class="wt-formtheme wt-form-paycard" method="POST" id="stripe-payment-form" role="form" action="" @submit.prevent='submitCompanyStripeFrom'>
+                        @else
                         <form class="wt-formtheme wt-form-paycard" method="POST" id="stripe-payment-form" role="form" action="" @submit.prevent='submitStripeFrom'>
-                            {{ csrf_field() }}
+                        @endif
+                    
+                        {{ csrf_field() }}
                             <fieldset>
                                 <div class="form-row" style="padding-top: 64px;">
                                     <div class="form-group col-lg-4 {{ $errors->has('name') ? ' has-error' : '' }}">

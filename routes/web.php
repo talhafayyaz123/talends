@@ -695,6 +695,9 @@ Route::post('get-freelancer-education', 'PublicController@getFreelancerEducation
 Route::get('addmoney/stripe', array('as' => 'addmoney.paywithstripe', 'uses' => 'StripeController@payWithStripe',));
 Route::post('addmoney/stripe', array('as' => 'addmoney.stripe', 'uses' => 'StripeController@postPaymentWithStripe',));
 
+Route::post('company/package/change/stripe', array('as' => 'addmoney.stripe', 'uses' => 'StripeController@postCompanyPaymentWithStripe'));
+
+
 Route::get('addmoney/paytab/{amount}', array('as' => 'addmoney.paytab', 'uses' => 'PaytabController@paytabCheckout',));
 
 //Route::post('/redirect/paytab', array('as' => 'redirect.paytab', 'uses' => 'PaytabController@postPaymentWithPaytab',));
