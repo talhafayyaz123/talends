@@ -60,14 +60,14 @@ class EmailHelper extends Model
     {
         ob_start();
         $setting = SiteManagement::getMetaValue('footer_settings');
-        $copyright = !empty($setting) && !empty($setting['copyright']) ? $setting['copyright'] : 'Copyright Talends All Rights Reserved';
+        $copyright = !empty($setting) && !empty($setting['copyright']) ? $setting['copyright'] : 'Copyright Talends.com All Right Reserved';
         ?>
         </div>
         </div>
         </div>
             <div style="width:100%;float:left;background: #002c49;padding: 30px 15px;text-align:center;box-sizing:border-box;border-radius: 0  0 5px 5px;">
                 <p style="font-size: 13px; line-height: 13px; color: #aaaaaa; margin: 0; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;">
-                <?php echo $copyright; ?> <a href="<?php url('/'); ?>" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; color: #348eda; margin: 0; padding: 0;"><?php echo Self::getSiteTitle(); ?></a></p>
+                <?php echo $copyright; ?> <a href="<?php url('/'); ?>" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 100%; line-height: 1.6em; color: #348eda; margin: 0; padding: 0;"></a></p>
             </div>
         </div>
         </div>
