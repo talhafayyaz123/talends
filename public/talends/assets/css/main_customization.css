@@ -1477,10 +1477,10 @@ a.notif {
 	transform: rotate(45deg);
 	transition: all 0.5s;
 }
-.skill-tags ul{
+/* .skill-tags ul{
 	padding: 0 40px;
 	margin-bottom: 50px;
-}
+} */
 .skill-tags ul li{
 	display: inline-block;
 	padding: 5px 15px;
