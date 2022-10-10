@@ -7,6 +7,15 @@
 <!--<![endif]-->
 
 <head>
+	<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GK95ZJXBTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GK95ZJXBTQ');
+</script>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
   	<meta name="google-signin-client_id" content="673600264341-g8j2kqvt50q3c2ekkuhuh8hunnvheel6.apps.googleusercontent.com">
