@@ -1,6 +1,6 @@
 <div class="wt-location wt-tabsinfo">
     <div class="wt-tabscontenttitle">
-        <h2>{{{ trans('lang.banner_photo') }}}</h2>
+        <h2>{{{ trans('lang.banner_photo') }}}  (Size should be 1280 x 324 Px)</h2>
     </div>
     <div class="wt-settingscontent">
         @if (!empty($banner))

@@ -14,8 +14,17 @@
 @section('content')
 
 <div id="pages-list">
-    <section class="agency_banner"></section>
-    <section class="agency_intro">
+@if(isset($profile->banner) && !empty($profile->banner) )
+
+@php  $image = config('app.aws_se_path'). '/' .'uploads/users/'.$id.'/'.$profile->banner; @endphp
+<section style="background-image: url('{{ $image }}');min-height: 300px !important;background-size: cover !important;
+    background-position: left center !important;"></section>
+@else
+                        <section class="" style="background: url(/talends/assets/img/company/banner.png);min-height: 300px !important;     background-size: cover !important;
+    background-position: left center !important;"></section>
+                        @endif
+
+<section class="agency_intro">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -23,6 +32,8 @@
                     <div class="d-md-flex mt-3 mt-md-n2  mb-4">
                         @if(isset($profile->avater) && !empty($profile->avater) )
                         <img style="max-height: 122px;" src=" {{ config('app.aws_se_path'). '/' .'uploads/users/'.$id.'/'.$profile->avater.'' }}" class="img-fluid" alt="Company Image" />
+                        @else
+                        <img style="max-height: 122px;" src=" {{ config('app.aws_se_path'). '/' .'images/user.jpg' }}" class="img-fluid" alt="Company Image" />
                         @endif
                         <div class="ml-md-4 pt-4 px-3">
                             <p class="text-justify">
@@ -66,13 +77,21 @@
                             @endif
                         </div>
                         <h3>Skills</h3>
-                        <div class="skill-tags">
+                        <div class="skill-tags accordion">
                             <ul>
-                                @if(isset($skills))
+                            
+                            @if (!empty($skills) && !empty($skills))
                                 @foreach($skills as $skill)
                                 <li>{{$skill->skill->title}}</li>
                                 @endforeach
-                                @endif
+                            @endif
+
+                            @if(empty($skill))
+                            <li>Not Found</li>
+
+                            @endif
+
+                            
                             </ul>
                         </div>
                         <!-- <h3>Latest Portfolio</h3> -->
@@ -145,46 +164,26 @@
                                 </div>
                             </div>
                         </section>
-                        @endif
-
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 pr-md-0 mt-md-0 mt-4">
-                    <div class="company-detail-stats">
-                        <h5>Talends Activity</h5>
-                        <p class="mb-0 mt-4">Hourly Rate</p>
-                        <p><b>AED {{ $profile->hourly_rate ?? '' }}</b></p>
-                        <p class="mb-0 mt-4">Total Jobs</p>
-                        <p><b>{{ $company_detail->total_jobs ?? '' }}</b></p>
-                        <p class="mb-0 mt-4">Joined Since</p>
-                        @if(isset($company_detail->last_work_date))
-                        <p><b> {{ \Carbon\Carbon::parse($company_detail->last_work_date)->format('Y') ?? '' }}</b></p>
-                        @endif
-                    </div>
-                    <hr />
-                    <div class="company-detail-stats">
-                        <p class="mb-4 mt-5">Company Information</p>
-                        <p class="mb-0 mt-4">Agency Talent Size</p>
-                        <p><b>{{ $profile->no_of_employees ?? '' }}</b></p>
-                        <p class="mb-0 mt-4">Year Founded</p>
-                        @if(isset($company_detail->membership_date))
-                        <p><b>{{ \Carbon\Carbon::parse($company_detail->membership_date)->format('Y') ?? '' }}</b></p>
-                        @endif
-                        <p class="mb-0 mt-4">Client Focus</p>
-                        @if(isset($profile->company_type) && !empty($profile->company_type) )
-                        @foreach(explode(',',$profile->company_type ) as $value)
-                        @if($value=='large_enterprises')
-                        <p><b>Large Enterprises</b></p>
-                        @elseif($value=='small_medium_enterprises')
-                        <p><b>Small & Mid</b></p>
                         @else
-                        <p><b>Startup</b></p>
-                        @endif
+                        <section class="featured_success_stories_sec p-md-0">
+                            <div class="container px-md-0">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div>
+                                            <div class="carousel-inner" style="background:#F8FAF7 !important">
+                                                <h2 class="mb-0" style="font-size:17px !important;">Portfolio Not Found</h2>
+                                             
 
-                        @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                         @endif
                     </div>
                 </div>
+               
             </div>
         </div>
     </section>
@@ -264,10 +263,10 @@
                                 <div class="row">
 
                                     @foreach($categories as $category)
-
+                                     
                                     <div class="col-md-4 mb-4">
                                         <div class="image-checkboxes">
-                                            <input type="checkbox" name="services[]" value="{{ $category->id }}" id="myCheckbox{{ $category->id }}" />
+                                            <input type="checkbox" {{ ($loop->first) ? 'checked' :''  }} name="services[]" value="{{ $category->id }}" id="myCheckbox{{ $category->id }}" />
                                             <label for="myCheckbox{{ $category->id }}"><img src="{{ config('app.aws_se_path'). '/' .'uploads/categories/'.$category->image  }}" class="rounded-circle" width="40" />{{ $category->title ?? '' }}</label>
                                         </div>
                                     </div>
@@ -492,7 +491,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form_submission" style="{{$class2 }}">
+                <div class="form_submission pb-3 pt-3" style="{{$class2 }}">
                     {!! htmlFormSnippet() !!}
                     <span class="help-block" style="display: none;">
                         <strong class="error"></strong>
@@ -869,8 +868,10 @@
 
         }
 
-
-        if (email == '') {
+        var re = /\S+@\S+\.\S+/;
+        var email_check=re.test($('#email').val());
+        
+        if (email == '' || email_check==false ) {
             $('#email').addClass('field_error');
             is_error = 1;
         } else {
@@ -878,6 +879,7 @@
 
         }
 
+            
         if (phone_number == '') {
             $('#phone_number').addClass('field_error');
             is_error = 1;
@@ -895,6 +897,7 @@
 
         }
 
+         
 
         if (is_error == 0) {
             current_fs = $(this).parent();

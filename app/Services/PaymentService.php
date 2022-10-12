@@ -137,6 +137,7 @@ class PaymentService
             if (!empty(config('mail.username')) && !empty(config('mail.password'))) {
 
                 $item = DB::table('items')->where('product_id', $id)->orderBy('id','desc')->get()->toArray();
+                
 
                 $package =  Package::where('id', $item[0]->product_id)->first();
 

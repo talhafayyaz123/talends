@@ -5,47 +5,37 @@
 <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet">
 @endpush
 @section('content')
-
-
-
-<section class="internee_sec theme_bg_dark find-freelancer-banner">
-
-    <div class="container">
-
-        <div class="row">
-            <div class="col-md-7 pb-3 align-self-center">
-                <h5 class="text-white opcty_5">Talents</h5>
-                <h2 class="text-white">Admin Leads <br><span class="theme_color"></span></h2>
-                <p class="text-white opcty_5"></p>
-            </div>
-           
-
-        </div>
-
-    </div>
-
-
-
-</section>
-
+@php
+@endphp
 
 <div class="wt-haslayout">
     <div class="container">
         <div class="row">
             <div class="job-single wt-haslayout">
                 <div id="jobs" class="wt-twocolumns wt-haslayout">
-
-
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 float-left">
-
-                        <div class="wt-tabscontenttitle">
-                            <h2>Response has been saved.<br>Admin will contact with you soon.<br>Thank You.</h2>
-                        </div>
-
+                    @if (Session::has('message'))
+                    <div class="flash_msg">
+                        <flash_messages :message_class="'success'" :time='5' :message="'{{{ Session::get('message') }}}'" v-cloak></flash_messages>
                     </div>
-
+                    @endif
+                    @if ($errors->any())
+                        <ul class="wt-jobalerts">
+                            @foreach ($errors->all() as $error)
+                                <div class="flash_msg">
+                                    <flash_messages :message_class="'danger'" :time='10' :message="'{{{ $error }}}'" v-cloak></flash_messages>
+                                </div>
+                            @endforeach
+                        </ul>
+                    @endif
+                    <div class="col-md-8 mx-auto text-center my-5 py-5">
+                        <img src="{{ asset('talends/assets/img/icons/success-icon.png')}}" class="img-fluid mb-4" />
+                        <h1 class="font-weight-bold"><i>Thank You !</i></h1>
+                        <p class="mb-5">Your response has been saved, Admin will contact with you soon.</p>
+                        <a href="{{ route('home') }}" class="btn btn-theme px-4 rounded-pill"><i class="bi-arrow-left mr-2"></i> Back to Home</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection

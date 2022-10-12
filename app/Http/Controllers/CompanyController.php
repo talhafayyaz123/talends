@@ -287,7 +287,7 @@ class CompanyController extends Controller
         $role=Auth::user()->getRoleNames()[0];
       
            if( $role=='admin'){
-            $hiring_requests=HireAgency::all();
+            $hiring_requests=HireAgency::all()->sortByDesc("id");
           
            }else{
                

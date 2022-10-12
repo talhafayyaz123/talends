@@ -16,7 +16,7 @@ Registration Successfull
             <div class="row row-eq-height">
                 <div class="col-md-12 text-center pb-3">
                     <h2 class="">Success</h2>
-                    <p class="w-50 mx-auto">We have successfully created your new account. Please pay and start enjoying business growth & maximum mature leads from Talends.com. Once you’re done with payment we will send you an activation mail to the email you provided during registration. It should arrive in a couple of minutes
+                    <p class="w-50 mx-auto">We have successfully created your new account. Now start enjoying business growth & maximum mature leads from Talends.com.  You’re done with payment we have send you an activation mail to the email you provided during registration. It should arrive in a couple of minutes
                         <br><br><br>
                         If the email has not arrived then please check spam/junk folder.
                     </p>
@@ -29,8 +29,8 @@ Registration Successfull
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label>
-                                            {{{ trans('lang.verify_code_note') }}}
+                                     <!--    <label>
+                                        
                                             @if (!empty($reg_page))
                                             <a target="_blank" href="{{{url($reg_page)}}}">
                                                 {{{ trans('lang.why_need_code') }}}
@@ -40,7 +40,7 @@ Registration Successfull
                                                 {{{ trans('lang.why_need_code') }}}
                                             </a>
                                             @endif
-                                        </label>
+                                        </label> -->
                                         <input type="text" name="code" id='verification_code' class="form-control" placeholder="{{{ trans('lang.enter_code') }}}" required>
                                     </div>
 

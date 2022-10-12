@@ -77,7 +77,8 @@ Route::get('company/registration', 'HomeController@companyRegistration')->name('
 Route::post('/registration/success', 'HomeController@companyRegistrationSuccess')->name('companyRegistratonSuccess');
 Route::get('registration/again/payment/{id}/{package_id}', 'Auth\RegisterController@registrationAgainPayment')->name('registrationAgainPayment');
 
-Route::get('stripe/registration/success/{id}', 'HomeController@stripeCompanyRegistrationSuccess')->name('companyRegistratonSuccess');
+Route::get('stripe/registration/success/{id}', 'StripeController@stripeCompanyRegistrationSuccess')->name('companyRegistratonSuccess');
+Route::get('stripe/registration/fail/{id}', 'StripeController@stripeCompanyRegistrationFail')->name('companyRegistratonFail');
 
 
 Route::post('store/admin/lead', 'HomePagesController@storeAdminLead')->name('storeAdminLead');
@@ -694,6 +695,9 @@ Route::post('get-freelancer-education', 'PublicController@getFreelancerEducation
 Route::get('addmoney/stripe', array('as' => 'addmoney.paywithstripe', 'uses' => 'StripeController@payWithStripe',));
 Route::post('addmoney/stripe', array('as' => 'addmoney.stripe', 'uses' => 'StripeController@postPaymentWithStripe',));
 
+Route::post('company/package/change/stripe', array('as' => 'addmoney.stripe', 'uses' => 'StripeController@postCompanyPaymentWithStripe'));
+
+
 Route::get('addmoney/paytab/{amount}', array('as' => 'addmoney.paytab', 'uses' => 'PaytabController@paytabCheckout',));
 
 //Route::post('/redirect/paytab', array('as' => 'redirect.paytab', 'uses' => 'PaytabController@postPaymentWithPaytab',));
@@ -712,6 +716,8 @@ Route::post('company/registration', 'Auth\RegisterController@userRegister')->nam
 Route::get('service/payment-process/{id}', 'ServiceController@employerPaymentProcess');
 
 Route::post('addmoney/stripe/company/register', array('as' => 'addmoney.stripe.register', 'uses' => 'StripeController@userRegisterStripe',));
+
+Route::post('company/register/stripe/checkout', 'StripeController@companyRegisterStripeCheckout')->name('company.register.stripe.checkout');
 
 // Page Builder
 Route::get('get-edit-page/{id}', 'PageController@getEditPageData');

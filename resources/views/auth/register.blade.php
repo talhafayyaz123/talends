@@ -59,6 +59,11 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
     <style>
         .entity-form,
         #register-text{display: none;}
+
+        i#togglePassword {
+    position: absolute;
+    top: 42%;
+}
     </style>
     <section class="auth-sec">
     <div class="container">
@@ -68,7 +73,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                 <div class="d-flex align-items-center min-vh-100">
                     <div class="w-100 d-block bg-white shadow-lg rounded my-5 mx-auto pt-4">
                         <div class="row">
-                            <div class="col-lg-7 mx-auto">
+                            <div class="col-lg-8 mx-auto">
                                 <div class="auth-content" id="registration">
                                     <!--<div class="preloader-section" v-if="loading" v-cloak>
                                         <div class="preloader-holder">
@@ -188,7 +193,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                         </div>
                                                         <div class="col-lg-6 mb-3" v-if='user_type== "freelancer" '>
                                                             <div class="form-group">
-                                                            <input id="budget" type="text" class="form-control" value="" name="budget" placeholder="Hourly Rate (AED)" v-bind:class="{ 'is-invalid': form_step2.is_budget_error }">
+                                                            <input id="budget" type="number" class="form-control" value="" name="budget" placeholder="Hourly Rate (AED)" v-bind:class="{ 'is-invalid': form_step2.is_budget_error }">
 
                                                                 <span class="help-block" v-if="form_step2.budget_error">
                                                                     <strong v-cloak>@{{form_step2.budget_error}}</strong>
@@ -224,7 +229,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                         <!-- internee -->
 
                                                         <div class="col-lg-6 mb-3" v-if='user_type== "intern" '>
-                                                            <input id="budget" type="text" class="form-control" value="" name="budget" placeholder="Hourly Rate (AED)" v-bind:class="{ 'is-invalid': form_step2.is_budget_error }">
+                                                            <input id="budget" type="number" class="form-control" value="" name="budget" placeholder="Hourly Rate (AED)" v-bind:class="{ 'is-invalid': form_step2.is_budget_error }">
                                                             <span class="help-block" v-if="form_step2.budget_error">
                                                                 <strong v-cloak>@{{form_step2.budget_error}}</strong>
                                                             </span>
@@ -280,7 +285,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                         <div class="col-12 mb-3 text-center">
                                                             <button class="btn btn-theme rounded-pill d-inline-block my-3 py-3" type="submit" style="width: 300px;">Create Account</button>
                                                         </div>
-                                                        <div class="col-12 mb-3">
+                                                       <!--  <div class="col-12 mb-3">
                                                             <div class="or-text">
                                                                 <p>or</p>
                                                             </div>
@@ -289,7 +294,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                             <button class="btn btn-outline-theme rounded-pill" style="width: 300px;">
                                                                 <i class="bi-google mr-2"></i> Signin with google
                                                             </button>
-                                                        </div>
+                                                        </div> -->
                                                         <!-- <div class="col-12 text-center mb-3">
                                                             Already have an account? 
                                                             <a href="{{  url('login') }}" class="ml-2 btn-link text-success">Sign in</a>
@@ -300,8 +305,8 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                         </div>
                                                         <div class="col-12 text-center mb-3">
                                                             <p class="small">By creating an account, you agree to the Talends.com 
-                                                                <a href="javascript:;" class="btn-link text-success">Terms of Service</a> and 
-                                                                <a href="javascript:;" class="btn-link text-success">Privacy Policy</a>.
+                                                                <a href="{{ route('Agreement') }}"  target="_blank" class="btn-link text-success">Terms of Service</a> and 
+                                                                <a href="{{ route('privacyPolicy') }}" target="_blank" class="btn-link text-success">Privacy Policy</a>.
                                                             </p>
                                                         </div>
                                                     </div>
@@ -327,9 +332,9 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                             </div>
                                             <fieldset>
                                                 <div class="form-group">
-                                                    <label>
+                                                     <label>
                                                         {{{ trans('lang.verify_code_note') }}}
-                                                        @if (!empty($reg_page))
+                                                        <!-- @if (!empty($reg_page))
                                                         <a target="_blank" href="{{{url($reg_page)}}}">
                                                             {{{ trans('lang.why_need_code') }}}
                                                         </a>
@@ -337,10 +342,11 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                         <a href="javascript:void(0)">
                                                             {{{ trans('lang.why_need_code') }}}
                                                         </a>
-                                                        @endif
-                                                    </label>
+                                                        @endif -->
+                                                    </label> 
+                                                    <div class="col-md-6">
                                                     <input type="text" name="code" class="form-control" placeholder="{{{ trans('lang.enter_code') }}}">
-                                                </div>
+                                                </div></div>
                                                 <div class="form-group wt-btnarea">
                                                     <a href="#" @click.prevent="verifyCode()" class="wt-btn">{{{ trans('lang.continue') }}}</a>
                                                 </div>
@@ -353,7 +359,7 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                 <h3>{{{ $reg_four_title }}}</h3>
                                             </div>
                                             <div class="description">
-                                                <p>{{{ $reg_four_subtitle }}}</p>
+                                                <h5>{{{ $reg_four_subtitle }}}</h5>
                                             </div>
                                         </div>
                                         <a href="#" class="wt-btn" @click.prevent="loginRegisterUser()">{{{ trans('lang.goto_dashboard') }}}</a>

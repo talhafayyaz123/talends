@@ -272,14 +272,12 @@ class HomeController extends Controller
         $payment_gateway = !empty($payout_settings) && !empty($payout_settings[0]['payment_method']) ? $payout_settings[0]['payment_method'] : array();
         $symbol = !empty($payout_settings) && !empty($payout_settings[0]['currency']) ? Helper::currencyList($payout_settings[0]['currency']) : array();
             
-    
-        return view('auth.company_registration',compact('symbol','payment_gateway','payout_settings','stripe_img','stripe_settings','package_options','page','meta_desc','meta_keywords','yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
+        $settings = SiteManagement::getMetaValue('commision');
+
+        $currency = !empty($settings[0]['currency']) ? $settings[0]['currency'] : 'USD';
+        return view('auth.company_registration',compact('currency','symbol','payment_gateway','payout_settings','stripe_img','stripe_settings','package_options','page','meta_desc','meta_keywords','yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
      }
 
-      public function stripeCompanyRegistrationSuccess($id){
-        session()->put(['user_id' => $id]);
-        return view('auth.company_registration_success');
-      }
      public function companyRegistrationSuccess(Request $request){
 
         $content = $request->input();
@@ -668,17 +666,15 @@ class HomeController extends Controller
           
               $query->where('location_id',  $request->location_id);
               
-            })->whereHas('user_payment', function ($query) {
-                $query->where('is_success', '=', 1);
-           })->latest()->paginate(6);
+            })->latest()->paginate(6);
   
           } else {
-  
-            $companies = User::select('*')->role('company')->whereHas('user_payment', function ($query) {
-                $query->where('is_success', '=', 1);
-           })->latest()->paginate(6);
+            $companies = User::select('*')->role('company')->latest()->paginate(6);
           }
 
+/*           ->whereHas('user_payment', function ($query) {
+            $query->where('is_success', '=', 1);
+       })->latest()->paginate(6); */
         
 
     $skills     = Skill::all();

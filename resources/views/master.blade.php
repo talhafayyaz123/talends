@@ -7,6 +7,15 @@
 <!--<![endif]-->
 
 <head>
+	<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GK95ZJXBTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GK95ZJXBTQ');
+</script>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
   	<meta name="google-signin-client_id" content="673600264341-g8j2kqvt50q3c2ekkuhuh8hunnvheel6.apps.googleusercontent.com">
@@ -138,7 +147,21 @@
     <script src="{{ asset('js/jquery-ui-min.js') }}"></script>
 	<script src="{{ asset('talends/assets/js/main.js') }}"></script>
 
-	 <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/22223481.js"></script>
+	 <!-- <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/22223481.js"></script> -->
+	 		<!--Start of Tawk.to Script-->
+			 <script type="text/javascript">
+		var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+		(function(){
+		var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+		s1.async=true;
+		s1.src='https://embed.tawk.to/6340099d54f06e12d898e9cc/1gep2b3ro';
+		s1.charset='UTF-8';
+		s1.setAttribute('crossorigin','*');
+		s0.parentNode.insertBefore(s1,s0);
+		})();
+		</script>
+		<!--End of Tawk.to Script-->
+		
     @stack('scripts')
     <script>		
         jQuery(window).load(function () {

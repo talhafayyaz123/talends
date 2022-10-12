@@ -72,7 +72,7 @@ class LoginController extends Controller
                 
                  $role_name=Helper::getRoleNameByRoleID($request->role);
                  if($request->role!=$user_role_type->id){
-                    Session::flash('error', trans('Not found any user of role type ('. $role_name.')'));
+                    Session::flash('error', trans('Not found user of role ('. $role_name.')'));
                     Auth::logout();
                     return Redirect::to('/login');
                  }
