@@ -1,6 +1,6 @@
 <div class="wt-location wt-tabsinfo">
     <div class="wt-tabscontenttitle">
-        <h2>{{{ trans('lang.profile_photo') }}}</h2>
+        <h2>{{{ trans('lang.profile_photo') }}} (Dimensions should not greater than 653x679 px)</h2>
     </div>
     <div class="wt-settingscontent">
         @if (!empty($avater))

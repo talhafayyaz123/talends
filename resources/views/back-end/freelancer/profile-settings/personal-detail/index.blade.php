@@ -93,7 +93,7 @@
                                         @endif
 
                                     </div>
-
+                                    
                                     @if (!empty($options) && $options['banner_option'] === 'true')
 
                                         <div class="wt-bannerphoto wt-tabsinfo">
