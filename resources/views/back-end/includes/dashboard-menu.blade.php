@@ -19,9 +19,10 @@
         @endphp
         <div id="wt-verticalscrollbar" class="wt-verticalscrollbar">
             <div class="wt-companysdetails wt-usersidebar">
-                <figure class="wt-companysimg">
-                    <img src="{{{ (Helper::getUserProfileBanner($user->id, 'small')) }}}" alt="{{{ trans('lang.profile_banner') }}}">
-                </figure>
+                <div class="wt-companysimg" style='background: #166702 !important;'>
+                <p class="mCS_img_loaded" style="margin: 145px 0 20px !important; "></p>
+                    <!-- <img src="{{{ (Helper::getUserProfileBanner($user->id, 'small')) }}}" alt="{{{ trans('lang.profile_banner') }}}"> -->
+                </div>
                 <div class="wt-companysinfo">
                     <figure><img src="{{{ (Helper::gets3ImageWithSize('uploads/users/'.$user->id, $profile->avater, 'listing')) }}}" alt="{{ trans('lang.profile_photo') }}"></figure>
                     <!-- <div class="wt-title">

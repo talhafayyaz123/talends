@@ -105,7 +105,7 @@ $skills_categories=App\Helper::getSkillsCategories();
                             @if(isset( $skills_categories))
                             @foreach($skills_categories as $key =>$category)
                             @if($category['parent_category']=='skills in demand')
-                            <div class="services_list_box"><a href="#">{{ $category['title'] }}</a></div>
+                            <div class="services_list_box">{{ $category['title'] }}</div>
                             @endif
                             @endforeach
                             @endif
@@ -116,7 +116,7 @@ $skills_categories=App\Helper::getSkillsCategories();
                             @if(isset( $skills_categories))
                             @foreach($skills_categories as $key =>$category)
                             @if($category['parent_category']=='local projects')
-                            <div class="services_list_box"><a href="#">{{ $category['title'] }}</a></div>
+                            <div class="services_list_box">{{ $category['title'] }}</div>
                             @endif
                             @endforeach
                             @endif
@@ -127,7 +127,7 @@ $skills_categories=App\Helper::getSkillsCategories();
                             @if(isset( $skills_categories))
                             @foreach($skills_categories as $key =>$category)
                             @if($category['parent_category']=='government initiatives')
-                            <div class="services_list_box"><a href="#">{{ $category['title'] }}</a></div>
+                            <div class="services_list_box">{{ $category['title'] }}</div>
                             @endif
                             @endforeach
                             @endif
