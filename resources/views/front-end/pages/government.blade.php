@@ -106,7 +106,7 @@
                 <div class="col-md-12 text-center">
                     <h2>Get Register <br> Today <span class="theme_color">for Better <br> Tomorrow</span></h2>
                     <a href="{{ route('register') }}" class="theme_btn inverse_btn">Join Talends</a>
-                    <a class="theme_btn ml-3">Connect +971 52 768 4867</a>
+                    <a href="tel:+971527684867" class="theme_btn ml-3">Connect +971 52 768 4867</a>
                 </div>
             </div>
         </div>
