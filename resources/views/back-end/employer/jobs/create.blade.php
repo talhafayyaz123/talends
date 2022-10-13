@@ -114,15 +114,15 @@
                                             </span>
                                         </div>
                                         <div class="form-group form-group-half">
-                                            {!! Form::text( 'address', null, ['id'=>"pac-input", 'class' =>'form-control', 'placeholder' => trans('lang.your_address')] ) !!}
+                                            {!! Form::text( 'address', null, ['id'=>"pac-input1", 'class' =>'form-control', 'placeholder' => trans('lang.your_address')] ) !!}
                                         </div>
-                                        <div class="form-group wt-formmap">
+                                        <div class="form-group wt-formmap"  style="display: none;">
                                             @include('includes.map')
                                         </div>
-                                        <div class="form-group form-group-half">
+                                        <div class="form-group form-group-half"  style="display: none;">
                                             {!! Form::text( 'longitude', null, ['id'=>"lng-input", 'class' =>'form-control', 'placeholder' => trans('lang.enter_logitude')]) !!}
                                         </div>
-                                        <div class="form-group form-group-half">
+                                        <div class="form-group form-group-half"  style="display: none;">
                                             {!! Form::text( 'latitude', null, ['id'=>"lat-input", 'class' =>'form-control', 'placeholder' => trans('lang.enter_latitude')]) !!}
                                         </div>
                                     </fieldset>
