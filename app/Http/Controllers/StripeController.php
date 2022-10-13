@@ -305,6 +305,7 @@ class StripeController extends Controller
                     $email_params['verification_code'] = $user->verification_code;
                     $email_params['name'] = Helper::getUserName($user->id);
                     $email_params['email'] = $user->email;
+                    $email_params['name'] = $user->profile->company_name;
                     $email_params['role'] = 'company';
         
                      Mail::to($user->email)
@@ -320,7 +321,7 @@ class StripeController extends Controller
                 $template = DB::table('email_types')->select('id')->where('email_type', 'new_user')->get()->first();
                 if (!empty($template->id)) {
                     $template_data = EmailTemplate::getEmailTemplateByID($template->id);
-                    $email_params['name'] = Helper::getUserName($user->id);
+                    $email_params['name'] = $user->profile->company_name;
                     $email_params['email'] = $user->email;
                     $email_params['password'] = $request['password'];
                     $email_params['role'] = 'company';
