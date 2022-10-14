@@ -558,7 +558,7 @@ return [
     'forget_pass' => 'Forgot password?',
     'create_account' => 'Create Account',
     'remember' => 'Remember Me',
-    'no_record' => 'No Record Found',
+    'no_record' => 'Please Register and Complete your Profile for better Outcomes',
     'logout' => 'Logout',
     'icon' => 'Icon',
     'locations' => 'Locations',

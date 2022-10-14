@@ -309,13 +309,24 @@ $footer_social_content=App\Helper::getFooterSocialContent();
             </div>
         </div>
     </div>
-    <div class="container-fluid mt-5 border-top position-relative;" style="background-color: #4abd2e;">
-        <button class="btn position-absolute" style="right:10px; font-size:24px; color: green;"><i class="bi-x-circle"></i></button>
+    <div class="container-fluid mt-5 border-top position-relative" id='taelnds_into_model' style="background-color: #4abd2e;">
+        <button class="btn position-absolute talends_intro_close" style="bottom: 50px;font-size:58px;color: white;"><i class="bi-x-circle"></i></button>
         <div class="row">
-            <div class="col-md-11 mx-auto py-3">
+            <div class="col-md-9 mx-auto py-3">
                 <p class="text-light">Talends.com purpose is to make a difference in Remote Space and provide a fair opportunities to all Freelancers, Agencies & Business Owners & Interns. Unlike other platforms our fee structure is far better and we charge just 5% straight fee on successful transactions rather 12%-18% like many existing platforms.</p>
                 <p class="mb-0 text-light">On the other hand, Agencies are set to Enter & Grow their businesses in Dubai, UAE & MENA Region with a very minimum $16 a Month. Once onboard, complete your profile, showcase your services or SaaS products, taends.com marketing ecosystem will make sure to generate amazing leads and opportunities for your business.</p>
             </div>
         </div>
     </div>
 </footer>
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('.talends_intro_close').click(function(e){
+    $('#taelnds_into_model').hide();
+});    
+});
+
+</script>
+@endpush

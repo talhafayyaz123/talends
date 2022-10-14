@@ -96,7 +96,7 @@
                     </div>
                     <div class="col-md-6">
                     {!!  $about_talends->support_description ?? '' !!} 
-                        <a href="{{ route('register') }}" class="theme_btn inverse_btn">join talends</a>
+                    <a href="tel:+971527684867" class="theme_btn ml-3">Connect +971 52 768 4867</a>
                     </div>
                 </div>
             </div>

@@ -20,7 +20,7 @@
 <section style="background-image: url('{{ $image }}');min-height: 300px !important;background-size: cover !important;
     background-position: left center !important;"></section>
 @else
-                        <section class="" style="background: url(/talends/assets/img/company/banner.png);min-height: 300px !important;     background-size: cover !important;
+    <section class="" style="background: url(/talends/assets/img/company/company_banner.jpg);min-height: 300px !important;     background-size: cover !important;
     background-position: left center !important;"></section>
                         @endif
 
