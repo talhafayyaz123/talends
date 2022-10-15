@@ -128,7 +128,164 @@ class StripeController extends Controller
         return view('auth.company_stripe_registration_fail',compact('package'));
 
     }
+    public function trailCompanyRegister(Request $request){
+
+        $validation=array();
+        $validation= [
+            'company_name' => 'required',
+            'email' => ['required','unique:users'],
+            'phone_number' => 'required',
+            'password' => 'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+            'employees' => 'required',
+            'role' => 'not_in:admin',
+            'package_id' => 'required',
+            'locations' => 'required',
+            'agency_language' => 'required',
+            'agency_website' => 'required',
+            'budget' => 'required',
+            'categories.*' => 'required',       
+        ];
+        $customMessages = [
+            'password.required' => 'Your password must be more than 6 characters long, should contain at-least 1 Uppercase, 1 Lowercase, 1 Numeric and 1 special character'
+        ];
+        $this->validate(
+            $request,
+            
+            $validation,$customMessages
+        );  
+        $settings = SiteManagement::getMetaValue('commision');
+
+        $currency = !empty($settings[0]['currency']) ? $settings[0]['currency'] : 'USD';
+
+       $input = array_except($request->all(), array('_token'));
+       $package=Package::find($input['package_id']);
+       if(isset($package) && !empty($package) ){
+        $options = unserialize($package->options);
+        $product_id = $package['id'];
+
+        $product_title = $package['title'];
+
+        $product_price = $package['cost'];
+         
+         $banner = $options['banner_option'] = 1 ? 'ti-check' : 'ti-na';
+         $chat = $options['private_chat'] = 1 ? 'ti-check' : 'ti-na';
+         session()->put(['product_id' => e($product_id)]);
+         session()->put(['product_title' => e($product_title)]);
+         session()->put(['product_price' => e($product_price)]);
+         session()->put(['type' => 'package']);
+          
+ 
+         $product_id = Session::has('product_id') ? session()->get('product_id') : '';
+ 
+         $product_title = Session::has('product_title') ? session()->get('product_title') : '';
+ 
+         $product_price = Session::has('product_price') ? session()->get('product_price') : 0;
+ 
+         $type = Session::has('type') ? session()->get('type') : '';
+         
+
+         $json = array();
+         $user = new User();
+         $register_form = SiteManagement::getMetaValue('reg_form_settings');
+         $registration_type = !empty($register_form) && !empty($register_form[0]['registration_type']) ? $register_form[0]['registration_type'] : 'multiple';
+         $verification_type = !empty($register_form) && !empty($register_form[0]['verification_type']) ? $register_form[0]['verification_type'] : 'admin_verify';
+         $verification_code = '';
+         if ($registration_type !== 'single' && $verification_type !== 'auto_verify') {
+             $random_number = Helper::generateRandomCode(4);
+             $verification_code = strtoupper($random_number);
+         }
+
+         $user_id = $user->storeCompanyUser($input, $verification_code, $registration_type, $verification_type);
+         session()->put(['user_id' => $user_id]);
+        session()->put(['email' => $input['email']]);
+          session()->put(['password' => $input['password']]);
+
+
+          $role_id = Helper::getRoleByUserID($user_id);
+          $package = Package::select('id', 'title', 'cost')->where('role_id', $role_id)->where('trial', 1)->get()->first();
+          $trial_invoice = Invoice::select('id')->where('type', 'trial')->get()->first();
+          if (!empty($package) && !empty($trial_invoice)) {
+              DB::table('items')->insert(
+                  [
+                      'invoice_id' => $trial_invoice->id, 'product_id' => $package->id, 'subscriber' => $user_id,
+                      'item_name' => $package->title, 'item_price' => $package->cost, 'item_qty' => 1,
+                      "created_at" => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now()
+                  ]
+              );
+          }
+
+          
+        if (!empty(config('mail.username')) && !empty(config('mail.password'))) {
+            $email_params = array();
+            
+            if ($registration_type !== 'single' && $verification_type !== 'auto_verify') {
+                $template = DB::table('email_types')->select('id')
+                    ->where('email_type', 'verification_code')->get()->first();
+                if (!empty($template->id)) {
+                    $template_data = EmailTemplate::getEmailTemplateByID($template->id);
+                    $email_params['verification_code'] = $user->verification_code;
+                    $email_params['name'] = Helper::getUserName($user->id);
+                    $email_params['email'] = $user->email;
+                    $email_params['name'] = $user->profile->company_name;
+                    $email_params['role'] = 'company';
         
+                     Mail::to($user->email)
+                        ->send(
+                            new GeneralEmailMailable(
+                                'verification_code',
+                                $template_data,
+                                $email_params
+                            )
+                        ); 
+                }
+            } else {
+                $template = DB::table('email_types')->select('id')->where('email_type', 'new_user')->get()->first();
+                if (!empty($template->id)) {
+                    $template_data = EmailTemplate::getEmailTemplateByID($template->id);
+                    $email_params['name'] = $user->profile->company_name;
+                    $email_params['email'] = $user->email;
+                    $email_params['password'] = $request['password'];
+                    $email_params['role'] = 'company';
+                     Mail::to($user->email)
+                        ->send(
+                            new GeneralEmailMailable(
+                                'new_user',
+                                $template_data,
+                                $email_params
+                            )
+                        ); 
+                }
+                $admin_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_registration')->get()->first();
+                if (!empty($admin_template->id)) {
+                    $template_data = EmailTemplate::getEmailTemplateByID($admin_template->id);
+                    $email_params['name'] = Helper::getUserName($user->id);
+                    $email_params['email'] = $user->email;
+                    $email_params['role'] = 'company';
+                    $email_params['link'] = url('profile/' . $user->slug);
+                    Mail::to(config('mail.adminmail'))
+                        ->send(
+                            new AdminEmailMailable(
+                                'admin_email_registration',
+                                $template_data,
+                                $email_params
+                            )
+                        );  
+                }
+                session()->forget('password');
+                session()->forget('email');
+            }
+        } else {
+            $id = Session::get('user_id');
+            $user = User::find($id);
+            Auth::login($user);
+        
+        }
+       
+       }
+       return view('auth.company_registration_success');
+ 
+    }
+    
     public function companyRegisterStripeCheckout(Request $request){
 
         
@@ -258,7 +415,6 @@ class StripeController extends Controller
         session()->put(['product_price' => e($package->cost)]);
         session()->put(['type' => 'package']);
          
-
         $product_id = Session::has('product_id') ? session()->get('product_id') : '';
 
         $product_title = Session::has('product_title') ? session()->get('product_title') : '';

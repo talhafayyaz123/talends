@@ -74,6 +74,9 @@ Route::get('careers', 'HomeController@careersDetail');
 Route::get('why_agency_plan', 'HomeController@whyAgencyPlan')->name('whyAgencyPlan');
 
 Route::get('company/registration', 'HomeController@companyRegistration')->name('companyRegistraton');
+
+Route::get('company/registration/trail', 'HomeController@trailCompanyRegistration')->name('companyRegistraton');
+
 Route::post('/registration/success', 'HomeController@companyRegistrationSuccess')->name('companyRegistratonSuccess');
 Route::get('registration/again/payment/{id}/{package_id}', 'Auth\RegisterController@registrationAgainPayment')->name('registrationAgainPayment');
 
@@ -718,6 +721,8 @@ Route::get('service/payment-process/{id}', 'ServiceController@employerPaymentPro
 Route::post('addmoney/stripe/company/register', array('as' => 'addmoney.stripe.register', 'uses' => 'StripeController@userRegisterStripe',));
 
 Route::post('company/register/stripe/checkout', 'StripeController@companyRegisterStripeCheckout')->name('company.register.stripe.checkout');
+Route::post('trail/company/register', 'StripeController@trailCompanyRegister')->name('trail.company.register');
+
 
 // Page Builder
 Route::get('get-edit-page/{id}', 'PageController@getEditPageData');
