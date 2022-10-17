@@ -1023,7 +1023,7 @@ return [
     'all_pages' => 'All Pages',
     'add_pages' => 'Add Page',
     'home_page_settings' => 'Home Page Settings',
-    'settings' => 'Settings',
+    'settings' => 'Profile & Account Settings',
     'profile_settings' => 'Profile Settings',
     'job_cats' => 'Job Categories',
     'clear_cache' => 'Clears configuration cache.',

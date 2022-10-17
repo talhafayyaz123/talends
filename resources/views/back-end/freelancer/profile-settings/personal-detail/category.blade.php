@@ -3,8 +3,8 @@
 </div>
 <div class="wt-formtheme">
     <fieldset>
-        <div class="form-group form-group">
-            <span class="wt-select">
+        <div class="form-group">
+            <span class="">
                 {!! Form::select('category_id', $categories, $user_categories[0]->id ?? null ,array('id' => 'category_id','class' => 'form-control', 'onchange' => 'select_sub_categories(this)','placeholder' => 'Category')) !!}
             </span>
         </div>

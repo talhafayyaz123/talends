@@ -47,6 +47,7 @@
         <select name="availability" class='form-control' name="availability">    
             <option value="remote" {{ (Auth::user()->profile->availability=='remote') ? 'selected' :''     }}  >Remote</option>
             <option value="on-site" {{ (Auth::user()->profile->availability=='on-site') ? 'selected' :''   }} >On Site</option>
+            <option value="hybrid" {{ (Auth::user()->profile->availability=='hybrid') ? 'selected' :''   }} >Hybrid</option>
 
         </div>
 
