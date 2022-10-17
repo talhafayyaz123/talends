@@ -163,7 +163,7 @@
 <script>
     
     function close_popup(){
-        $('#taelnds_into_model').hide();
+        $("#taelnds_into_model").fadeOut('slow');
     }
 </script>
 @endpush

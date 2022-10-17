@@ -324,7 +324,7 @@ $footer_social_content=App\Helper::getFooterSocialContent();
 <script>
     $(document).ready(function() {
         $('.talends_intro_close').click(function(e){
-    $('#taelnds_into_model').hide();
+            $("#taelnds_into_model").fadeOut('slow');
 });    
 });
 
