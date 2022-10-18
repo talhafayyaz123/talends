@@ -173,7 +173,7 @@ $footer_social_content=App\Helper::getFooterSocialContent();
 
 
 <footer>
-    <div class="container">
+    <div class="container pb-5">
         <div class="row">
             <div class="col-20 col-sm-6 text-md-left mb-3">
                 <img src="{{asset('talends/assets/img/fav/apple-touch-icon-114x114.png')}}" alt="Talends Icon" class="img-fluid" style="width:60px;"/>
@@ -324,9 +324,9 @@ $footer_social_content=App\Helper::getFooterSocialContent();
 <script>
     $(document).ready(function() {
         $('.talends_intro_close').click(function(e){
-            $("#taelnds_into_model").fadeOut('slow');
-});    
-});
+            $("#taelnds_into_model").fadeOut(4000);
+        });
+    });
 
 </script>
 @endpush

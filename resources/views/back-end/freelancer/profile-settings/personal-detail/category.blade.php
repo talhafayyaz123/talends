@@ -13,11 +13,44 @@
 </div>
 
 <div class="wt-tabscontenttitle">
-    <h2>Sub Categories</h2>
-
+    <h2>Select Sub Categories</h2>
 </div>
 <div class="wt-formtheme">
     <fieldset>
+        <div class="row">
+            <div class="col-12">
+                <div class="subcategories-checkboxes">
+                    <label class="check">
+                        <input type="checkbox" checked>
+                        <span>Graphic Designer</span>
+                    </label>
+                    <label class="check">
+                        <input type="checkbox">
+                        <span>UI/UX Designer</span>
+                    </label>
+
+                    <label class="check">
+                        <input type="checkbox">
+                        <span>Web & App Designer</span>
+                    </label>
+
+                    <label class="check">
+                        <input type="checkbox">
+                        <span>Mobile App Designer</span>
+                    </label>
+
+                    <label class="check">
+                        <input type="checkbox">
+                        <span>Web design and development</span>
+                    </label>
+
+                    <label class="check">
+                        <input type="checkbox">
+                        <span>JQUERY</span>
+                    </label>
+                </div>
+            </div>
+        </div>
         <div class="form-group">
             <span class="wt-select">
                 <select name="sub_categories[]" multiple id="freelancerSubCategory" class="form-control" onchange='select_cat_skills(this)'>
@@ -42,6 +75,40 @@
 </div>
 <div class="wt-formtheme">
     <fieldset>
+        <div class="row">
+            <div class="col-12">
+                <div class="subcategories-checkboxes">
+                    <label class="check">
+                        <input type="checkbox" checked>
+                        <span>HTML</span>
+                    </label>
+                    <label class="check">
+                        <input type="checkbox">
+                        <span>CSS</span>
+                    </label>
+
+                    <label class="check">
+                        <input type="checkbox">
+                        <span>REACT</span>
+                    </label>
+
+                    <label class="check">
+                        <input type="checkbox">
+                        <span>JAVASCRIPT</span>
+                    </label>
+
+                    <label class="check">
+                        <input type="checkbox">
+                        <span>JAVA</span>
+                    </label>
+
+                    <label class="check">
+                        <input type="checkbox">
+                        <span>JQUERY</span>
+                    </label>
+                </div>
+            </div>
+        </div>
         <div class="form-group">
             <span class="wt-select">
             <select name="sub_category_skills[]"  multiple id="freelancerSkills" class="form-control">

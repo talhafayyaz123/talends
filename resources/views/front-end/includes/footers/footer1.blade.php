@@ -15,7 +15,7 @@
 
 
     <footer>
-        <div class="container">
+        <div class="container pb-5">
             <div class="row">
                 <div class="col-20 col-sm-6 text-center text-md-left">
                     <img src="{{asset('talends/assets/img/fav/apple-touch-icon-114x114.png')}}" alt="Talends Icon" class="img-fluid" style="width:60px;"/>
@@ -163,7 +163,7 @@
 <script>
     
     function close_popup(){
-        $("#taelnds_into_model").fadeOut('slow');
+        $("#taelnds_into_model").fadeOut(4000);
     }
 </script>
 @endpush
