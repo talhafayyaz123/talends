@@ -16,6 +16,9 @@
 
   gtag('config', 'G-GK95ZJXBTQ');
 </script>
+
+  <script async src="https://js.stripe.com/v3/"></script>
+
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
   	<meta name="google-signin-client_id" content="673600264341-g8j2kqvt50q3c2ekkuhuh8hunnvheel6.apps.googleusercontent.com">

@@ -15,6 +15,7 @@
 
   gtag('config', 'G-GK95ZJXBTQ');
 </script>
+<script async src="https://js.stripe.com/v3/"></script>
 
 	<meta charset="utf-8">
 
