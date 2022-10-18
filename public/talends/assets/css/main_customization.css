@@ -1010,6 +1010,8 @@ a.notif {
 	position: relative;
 	margin: 0 8px 0 0;
 	width: auto;
+	background: white;
+    color: #30242a;
 }
 /* 
 #location_id {
@@ -2262,3 +2264,4 @@ footer .list-inline a i {
     margin-bottom: 30px;
     font-size: 53px;
 }
+ 

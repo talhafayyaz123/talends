@@ -162,11 +162,11 @@
 
                                     </div>
 
-                                    <div class="wt-updatall">
+                                    <div class="">
 
-                                        <i class="ti-announcement"></i>
+                                        <!-- <i class="ti-announcement"></i> -->
 
-                                        <span>{{{ trans('lang.save_changes_note') }}}</span>
+                                        <!-- <span>{{{ trans('lang.save_changes_note') }}}</span> -->
 
                                         {!! Form::submit(trans('lang.btn_save_update'), ['class' => 'wt-btn', 'id'=>'submit-profile']) !!}
 
