@@ -212,7 +212,7 @@
                  var title = response['sub_categories'][i].title;
                  
 
-                 var option = "<label class='check'><input  type='checkbox' name='sub_categories[]' value='"+id+"' onclick='select_cat_skills()'  >";
+                 var option = "<label class='check'><input  type='checkbox' name='sub_categories[]' value='"+id+"'  onclick='select_cat_skills()'  >";
 
                 option+="<span> "+title+" </span></label>" ; 
 
