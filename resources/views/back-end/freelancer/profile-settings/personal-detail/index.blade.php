@@ -192,10 +192,9 @@
 
 @push('scripts')
     <script>
-
-
+   
    function select_sub_categories(event){
-     $('#freelancerSubCategory').find('option').not(':first').remove();
+    // $('#freelancerSubCategory').find('option').not(':first').remove();
      $.ajax({
            url: '/category_sub_categories/'+event.value,
            type: 'get',
@@ -205,28 +204,43 @@
              if(response['sub_categories'] != null){
                len = response['sub_categories'].length;
              }
+            $("#freelancerSubCategory").html(''); 
+
              if(len > 0){
                for(var i=0; i<len; i++){
                  var id = response['sub_categories'][i].sub_category_id;
                  var title = response['sub_categories'][i].title;
-                 var option = "<option value='"+id+"'>"+title+"</option>"; 
+                 
+
+                 var option = "<label class='check'><input  type='checkbox' name='sub_categories[]' value='"+id+"' onclick='select_cat_skills()'  >";
+
+                option+="<span> "+title+" </span></label>" ; 
+
+
                  $("#freelancerSubCategory").append(option); 
                 
                }
+             }else{
+                $("#freelancerSubCategory").append('<p>Not Found</p>'); 
+
              }
 
            }
         });
    }
 
+
+  
+
    function select_cat_skills (event){
 
-   let skills=$('#freelancerSubCategory').val();
-
+    var skills= $('input[name="sub_categories[]"]:checked').map(function() {
+    return $(this).val();
+  }).get()
     if (    Array.isArray(skills) && skills.length >0) {
 
 
-        $('#freelancerSkills').find('option').not(':first').remove();
+       // $('#freelancerSkills').find('option').not(':first').remove();
         var comma_skills = skills.join(","); 
          
         $.ajax({
@@ -238,15 +252,25 @@
              if(response['sub_category_skills'] != null){
                len = response['sub_category_skills'].length;
              }
+
+             $('#freelancerSkills').html('');
             
              if(len > 0){
                for(var i=0; i<len; i++){
                  var id = response['sub_category_skills'][i].id;
                  var title = response['sub_category_skills'][i].title;
-                 var option = "<option value='"+id+"'>"+title+"</option>"; 
+
+                 var option = "<label class='check'><input  type='checkbox' name='sub_category_skills[]' value='"+id+"'  >";
+
+                 option+="<span> "+title+" </span></label>" ; 
+
+
                  $("#freelancerSkills").append(option); 
                 
                }
+             }else{
+                $("#freelancerSkills").append('<p>Not Found</p>'); 
+
              }
 
            }
