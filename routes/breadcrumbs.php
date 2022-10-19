@@ -191,7 +191,7 @@ Breadcrumbs::for(
 
     'showFreelancerProfile', function ($trail, $slug) {
         $trail->parent('home');
-        $trail->push('Freelancer', url('search-results?type=freelancer'));
+        $trail->push('Find A Freelancer', url('search-results?type=freelancer'));
         $trail->push(trans('lang.profile'), route('showUserProfile', ['slug' => $slug]));
     }
 
@@ -212,7 +212,7 @@ Breadcrumbs::for(
 
     'showInternProfile', function ($trail, $slug) {
         $trail->parent('home');
-        $trail->push('Intern', url('search-results?type=intern'));
+        $trail->push('Find An Intern', url('search-results?type=intern'));
         $trail->push(trans('lang.profile'), route('showUserProfile', ['slug' => $slug]));
     }
 

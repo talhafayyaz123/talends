@@ -162,11 +162,7 @@
 
                                     </div>
 
-                                    <div class="wt-updatall">
-
-                                        <i class="ti-announcement"></i>
-
-                                        <span>{{{ trans('lang.save_changes_note') }}}</span>
+                                    <div>
 
                                         {!! Form::submit(trans('lang.btn_save_update'), ['class' => 'wt-btn', 'id'=>'submit-profile']) !!}
 
@@ -196,7 +192,11 @@
 jQuery('.chosen-select').chosen();
 
    function select_sub_categories(){
-     let category=$('#category_id').val();
+
+
+    var category= $('input[name="category[]"]:checked').map(function() {
+    return $(this).val();
+  }).get()   
      var comma_category = category.join(","); 
    
       $.ajax({
@@ -208,16 +208,22 @@ jQuery('.chosen-select').chosen();
              if(response['sub_categories'] != null){
                len = response['sub_categories'].length;
              }
+             
              if(len > 0){
-                $('#freelancerSubCategory').find('option').not(':first').remove();
+                $('#freelancerSubCategory').html('');
 
                for(var i=0; i<len; i++){
                  var id = response['sub_categories'][i].sub_category_id;
                  var title = response['sub_categories'][i].title;
-                 var option = "<option value='"+id+"'>"+title+"</option>"; 
-                 $("#freelancerSubCategory").append(option); 
+                 var option = "<label class='check'><input  type='checkbox' name='sub_categories[]' value='"+id+"'  onclick='select_cat_skills()'  >";
+
+                option+="<span> "+title+" </span></label>" ; 
+             $("#freelancerSubCategory").append(option); 
                 
                }
+             }else{
+                $("#freelancerSubCategory").html('<p>Not Found</p>'); 
+
              }
 
            }
@@ -226,12 +232,14 @@ jQuery('.chosen-select').chosen();
 
    function select_cat_skills (event){
 
-   let skills=$('#freelancerSubCategory').val();
 
+    var skills= $('input[name="sub_categories[]"]:checked').map(function() {
+    return $(this).val();
+  }).get()
     if (    Array.isArray(skills) && skills.length >0) {
 
 
-        $('#freelancerSkills').find('option').not(':first').remove();
+      //  $('#freelancerSkills').find('option').not(':first').remove();
         var comma_skills = skills.join(","); 
          
         $.ajax({
@@ -243,15 +251,21 @@ jQuery('.chosen-select').chosen();
              if(response['sub_category_skills'] != null){
                len = response['sub_category_skills'].length;
              }
-            
+             $('#freelancerSkills').html('');
+    
              if(len > 0){
                for(var i=0; i<len; i++){
                  var id = response['sub_category_skills'][i].id;
                  var title = response['sub_category_skills'][i].title;
-                 var option = "<option value='"+id+"'>"+title+"</option>"; 
+                 var option = "<label class='check'><input  type='checkbox' name='sub_category_skills[]' value='"+id+"'  >";
+
+                    option+="<span> "+title+" </span></label>" ; 
                  $("#freelancerSkills").append(option); 
                 
                }
+             }else{
+                $("#freelancerSkills").append('<p>Not Found</p>'); 
+
              }
 
            }

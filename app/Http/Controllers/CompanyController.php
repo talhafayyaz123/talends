@@ -88,7 +88,7 @@ class CompanyController extends Controller
     {
         $locations = Location::pluck('title', 'id');
         $skills = Skill::pluck('title', 'id');
-        $categories = Category::pluck('title','id');
+        $categories = Category::get();
         $profile = $this->freelancer::where('user_id', Auth::user()->id)
             ->get()->first();
          
@@ -109,7 +109,7 @@ class CompanyController extends Controller
 
         $user_categories=  UserCategories::where('user_id', Auth::user()->id)
         ->join('categories','category_id','categories.id')
-        ->pluck('categories.id');
+        ->get();
 
         $user_sub_categories = UserSubCategories::where('user_id', Auth::user()->id)
         ->join('sub_categories','user_sub_categories.sub_category_id','sub_categories.sub_category_id')
@@ -125,13 +125,20 @@ class CompanyController extends Controller
 
 
         $sub_categories='';
+        $category_arr=array();
+
         if(isset($user_categories[0]) ){
            
             $sub_categories = SubCategories::orderby("title","asc")
             ->select('title','sub_category_id')
-            ->whereIn('category_id',$user_categories)
+            ->whereIn('category_id',$user_categories->pluck('id'))
             ->get();
+            
+           foreach($user_categories as $key =>$value){
+            $category_arr[]=$value['id'];
+            }
         }
+        $user_categories=$category_arr;
 
            ////////////////////////////////////
            
