@@ -8793,9 +8793,9 @@ select.is-invalid {
 	margin: 0;
 }
 
-.la-ps-freelancer .wt-userform .wt-skills>div:nth-child(2) {
+/* .la-ps-freelancer .wt-userform .wt-skills>div:nth-child(2) {
 	padding: 0 20px;
-}
+} */
 
 .la-ps-freelancer .wt-userform .wt-skills>div:nth-child(2) .wt-skillsform fieldset .form-group {
 	padding-right: 175px;

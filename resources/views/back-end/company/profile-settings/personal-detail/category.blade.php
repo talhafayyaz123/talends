@@ -1,7 +1,7 @@
-<div class="wt-tabscontenttitle">
+<!-- <div class="wt-tabscontenttitle">
         <h2>Category</h2>
-    </div>
-    
+    </div> -->
+        <label for="">Categories</label>
             <div class="form-group">
                 
 
@@ -33,12 +33,13 @@
             </div>
 
     
-
+<!-- 
 <div class="wt-tabscontenttitle">
     <h2>Sub Categories</h2>
 
-</div>
-<div class="wt-formtheme">
+</div> -->
+<label for="">Sub Categories</label>
+<div class="my-3">
 <fieldset>
         <div class="row">
             <div class="col-12">
@@ -48,7 +49,6 @@
                     @foreach($sub_categories as $key =>$value)
                     
                     <label class="check">
-
                         <input type="checkbox" name="sub_categories[]"
                         value="{{  $value->sub_category_id }}" id="sub_category" onclick="select_cat_skills()"
                         {{ in_array($value->sub_category_id,$selced_sub_categories) ? 'checked' :''    }}  
@@ -73,10 +73,11 @@
 </div>
 
 
-<div class="wt-tabscontenttitle">
+<!-- <div class="wt-tabscontenttitle">
     <h2>Skills</h2>
-</div>
-<div class="wt-formtheme">
+</div> -->
+<label for="">Skills</label>
+<div class="my-3">
    
 
 <fieldset>

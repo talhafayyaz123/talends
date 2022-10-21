@@ -6023,8 +6023,9 @@ body.rtl .lara-attachment-files .wt-on-off .switch-button-control .switch-button
     flex-wrap: wrap;
 }
 .subcategories-checkboxes label.check {
-	cursor: pointer;
-  }
+    cursor: pointer;
+    margin-right: 7px;
+}
   .subcategories-checkboxes label.check input {
 	position: absolute;
 	top: 0;

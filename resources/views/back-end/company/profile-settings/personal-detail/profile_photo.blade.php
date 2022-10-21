@@ -1,11 +1,12 @@
 <div class="wt-location wt-tabsinfo">
-    <div class="wt-tabscontenttitle">
+    <!-- <div class="wt-tabscontenttitle">
         <h2>{{{ trans('lang.profile_photo') }}}  (Size should be 200 x 200 Px) </h2>
-    </div>
-    <div class="wt-settingscontent">
+    </div> -->
+    <label for="">Upload Company Photo</label>
+    <div class="">
         @if (!empty($avater))
             @php $image = $aws_s3_path.'/uploads/users/'.Auth::user()->id.'/'.$avater; @endphp
-            <div class="wt-formtheme wt-userform">
+            <div class="">
                 <div v-if="this.uploaded_image">
                     <upload-image 
                         :id="'avater_id'" 
@@ -25,7 +26,7 @@
                 <input type="hidden" name="hidden_avater_image" id="hidden_avater" value="{{{$avater}}}"> 
             </div>
         @else
-            <div class="wt-formtheme wt-userform">
+            <div class="">
                 <upload-image 
                     :id="'avater_id'" 
                     :img_ref="'avater_ref'" 

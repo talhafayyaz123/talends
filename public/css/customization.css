@@ -12,9 +12,9 @@ header {
     top: 0;
     width: 100%;
 }
-label {
+/* label {
     margin-left: 10px;
-}
+} */
 header .navbar {
     padding: 0;
     align-items: center;
