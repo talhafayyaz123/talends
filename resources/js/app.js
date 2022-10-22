@@ -654,9 +654,9 @@
                     }
 
 
-                 $.get("https://ipinfo.io/json?token=20e8fc0c5775d3", function(response) {
+               //  $.get("https://ipinfo.io/json?token=20e8fc0c5775d3", function(response) {
                      
-                    if(response.country=='PK' || response.country=='AE'){
+                  //  if(response.country=='PK' || response.country=='AE'){
                         
                         
                         axios.post(APP_URL + '/register/form-step1-custom-errors', form_data)
@@ -748,12 +748,12 @@
    
     
                         });
-                    }else{
-                        self.showError('Only Pakistan And UAE Candidates are allowed to register.');
+                    //}
+                   // else{
+                      //  self.showError('Only Pakistan And UAE Candidates are allowed to register.');
   
-                    }
-                }, "jsonp");
-                
+                   // }
+              //  }, "jsonp");
                 
              },
              checkStep2: function (error_message) {

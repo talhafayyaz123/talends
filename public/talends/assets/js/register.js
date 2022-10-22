@@ -98,7 +98,7 @@ $(document).ready(function(){
                       }
                   });
                    jQuery.ajax({
-                    url: "/agency/register/custom-errors",
+                    url: "http://localhost/talends/public/agency/register/custom-errors",
                       method: 'post',
                       data: {
                         email:email,
@@ -351,7 +351,7 @@ $(document).ready(function(){
                 }
             });
              jQuery.ajax({
-              url: "/agency/register/custom-errors",
+              url: "http://localhost/talends/public/agency/register/custom-errors",
                 method: 'post',
                 data: {
                   email:email,
