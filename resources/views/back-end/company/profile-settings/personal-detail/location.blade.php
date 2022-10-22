@@ -1,7 +1,8 @@
-<div class="wt-tabscontenttitle">
+<!-- <div class="wt-tabscontenttitle">
     <h2>{{trans('lang.your_loc')}}</h2>
-</div>
-<div class="wt-formtheme">
+</div> -->
+<label for="">Location</label>
+<div class="my-3">
     <fieldset>
         <div class="form-group form-group-half">
             <span class="wt-select">

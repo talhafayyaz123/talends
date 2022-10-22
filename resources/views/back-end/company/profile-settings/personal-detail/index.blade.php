@@ -79,7 +79,19 @@
                                         @endif
 
                                     </div>
+                                    <div class="wt-location wt-tabsinfo mb-2">
 
+                                        @if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/personal-detail/location.blade.php'))) 
+
+                                            @include('extend.back-end.company.profile-settings.personal-detail.location')
+
+                                        @else 
+
+                                            @include('back-end.company.profile-settings.personal-detail.location')
+
+                                        @endif
+
+                                    </div>
                                     <div class="wt-profilephoto wt-tabsinfo">
 
                                         @if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/personal-detail/profile_photo.blade.php'))) 
@@ -114,27 +126,15 @@
 
 
 
-                                    <div class="wt-location wt-tabsinfo">
+                                    <div class="wt-location wt-tabsinfo mb-2">
 
                                         @include('back-end.company.profile-settings.personal-detail.category')
 
                                     </div>
 
-                                    <div class="wt-location wt-tabsinfo">
+                                   
 
-                                        @if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/personal-detail/location.blade.php'))) 
-
-                                            @include('extend.back-end.company.profile-settings.personal-detail.location')
-
-                                        @else 
-
-                                            @include('back-end.company.profile-settings.personal-detail.location')
-
-                                        @endif
-
-                                    </div>
-
-                                    <div class="wt-skills la-skills-holder wt-tabsinfo">
+                                    <div class="wt-skills la-skills-holder wt-tabsinfo mb-2">
 
                                         @if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/personal-detail/skill.blade.php'))) 
 
