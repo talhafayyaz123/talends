@@ -105,7 +105,7 @@ $skills_categories=App\Helper::getSkillsCategories();
                             @if(isset( $skills_categories))
                             @foreach($skills_categories as $key =>$category)
                             @if($category['parent_category']=='skills in demand')
-                            <div class="services_list_box"><a href="#">{{ $category['title'] }}</a></div>
+                            <div class="services_list_box">{{ $category['title'] }}</div>
                             @endif
                             @endforeach
                             @endif
@@ -116,7 +116,7 @@ $skills_categories=App\Helper::getSkillsCategories();
                             @if(isset( $skills_categories))
                             @foreach($skills_categories as $key =>$category)
                             @if($category['parent_category']=='local projects')
-                            <div class="services_list_box"><a href="#">{{ $category['title'] }}</a></div>
+                            <div class="services_list_box">{{ $category['title'] }}</div>
                             @endif
                             @endforeach
                             @endif
@@ -127,7 +127,7 @@ $skills_categories=App\Helper::getSkillsCategories();
                             @if(isset( $skills_categories))
                             @foreach($skills_categories as $key =>$category)
                             @if($category['parent_category']=='government initiatives')
-                            <div class="services_list_box"><a href="#">{{ $category['title'] }}</a></div>
+                            <div class="services_list_box">{{ $category['title'] }}</div>
                             @endif
                             @endforeach
                             @endif
@@ -173,7 +173,7 @@ $footer_social_content=App\Helper::getFooterSocialContent();
 
 
 <footer>
-    <div class="container">
+    <div class="container pb-5">
         <div class="row">
             <div class="col-20 col-sm-6 text-md-left mb-3">
                 <img src="{{asset('talends/assets/img/fav/apple-touch-icon-114x114.png')}}" alt="Talends Icon" class="img-fluid" style="width:60px;"/>
@@ -309,4 +309,23 @@ $footer_social_content=App\Helper::getFooterSocialContent();
             </div>
         </div>
     </div>
+    <div class="container-fluid border-top position-absolute bg-white" id='taelnds_into_model' style="bottom:0;">
+        <button class="position-absolute talends_intro_close bg-white border-0" style="top: 10px;font-size:24px;"><i class="bi-x-circle"></i></button>
+        <div class="row">
+            <div class="col-md-9 mx-auto py-3 text-center col-10">
+                <p class="mb-0">Talends.com purpose is to make a difference in Remote Space and provide a fair opportunities to all Freelancers, Agencies & Business Owners & Interns. Unlike other platforms our fee structure is far better and we charge just 5% straight fee on successful transactions rather 12%-18% like many existing platforms. On the other hand, Agencies are set to Enter & Grow their businesses in Dubai, UAE & MENA Region with a very minimum $16 a Month. Once onboard, complete your profile, showcase your services or SaaS products, taends.com marketing ecosystem will make sure to generate amazing leads and opportunities for your business.</p>
+            </div>
+        </div>
+    </div>
 </footer>
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        $('.talends_intro_close').click(function(e){
+            $("#taelnds_into_model").fadeOut(4000);
+        });
+    });
+
+</script>
+@endpush

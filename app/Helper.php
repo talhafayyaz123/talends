@@ -1655,6 +1655,25 @@ return $response;
 
 
                 );
+            }else if($role=='trail_agency'){
+                $list = array(
+                    '0' => trans('lang.freelancer_pkg_opt.price'),
+                    '1' => trans('lang.freelancer_pkg_opt.no_of_skills'),
+                    '2' => trans('lang.freelancer_pkg_opt.no_of_services'),
+                    '3' => trans('lang.freelancer_pkg_opt.no_of_featured_services'),
+                    '4' => trans('lang.freelancer_pkg_opt.pkg_duration'),
+                    '5' => trans('lang.freelancer_pkg_opt.banner'),
+                    '6' => trans('lang.freelancer_pkg_opt.pvt_cht'),
+
+                    '7' => 'Access to Talends Lead Management CRM',
+                    '8' => 'Your Own Landing Page with CMS',
+                    '9' => 'Dedicated Support',
+                    '10' => 'Get a boost visibility',
+                    '11' => 'Get qualified leads and opportunities',
+                    '12' => '0% Commission free on signed deals',
+
+
+                );
             }
             return $list;
         }

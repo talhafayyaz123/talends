@@ -234,6 +234,98 @@ $breadcrumbs = Breadcrumbs::generate('showInternProfile', $user->slug);
             <div id="wt-twocolumns" class="wt-twocolumns wt-haslayout">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7 col-xl-8 float-left">
                     <div class="wt-usersingle">
+                       
+                        <div class="wt-experience wt-education">
+                            <div class="wt-usertitle">
+                                <h2>{{{ trans('lang.education') }}}</h2>
+                            </div>
+                            @if (!empty($education))
+                            <education :freelancer_id="'{{$profile->user_id}}'" :no_of_post="1"></education>
+                            @else
+                            <div class="wt-userprofile">
+                                @if (file_exists(resource_path('views/extend/errors/no-record.blade.php')))
+                                @include('extend.errors.no-record')
+                                @else
+                                @include('errors.no-record')
+                                @endif
+                            </div>
+                            @endif
+                        </div>
+
+                        <div class="wt-experience">
+                            <div class="wt-usertitle">
+                                <h2>{{{ trans('lang.experience') }}}</h2>
+                            </div>
+                            @if (!empty($experiences))
+                            <div class="wt-experiencelisting-hold">
+                                <experience :freelancer_id="'{{$profile->user_id}}'" :no_of_post="2"></experience>
+                            </div>
+                            @else
+                            <div class="wt-userprofile">
+                                @if (file_exists(resource_path('views/extend/errors/no-record.blade.php')))
+                                @include('extend.errors.no-record')
+                                @else
+                                @include('errors.no-record')
+                                @endif
+                            </div>
+                            @endif
+                        </div>
+
+
+                        <div class="wt-craftedprojects">
+                            <div class="wt-usertitle">
+                                <h2>{{{ trans('lang.crafted_projects') }}}</h2>
+                            </div>
+                            @if (!empty($projects))
+                            <crafted_project :no_of_post="3" :project="'{{  json_encode($projects) }}'" :freelancer_id="'{{$profile->user_id}}'" :img="'{{ trans('lang.img') }}'"></crafted_project>
+                            @else
+                            <div class="wt-userprofile">
+                                @if (file_exists(resource_path('views/extend/errors/no-record.blade.php')))
+                                @include('extend.errors.no-record')
+                                @else
+                                @include('errors.no-record')
+                                @endif
+                            </div>
+                            @endif
+                        </div>
+                        @if (!empty($videos))
+                        <div class="wt-videos">
+                            <div class="wt-usertitle">
+                                <h2>{{{ trans('lang.videos') }}}</h2>
+                            </div>
+                            <div class="wt-user-videos">
+                                @foreach ($videos as $video)
+                                @php
+                                $width = 367;
+                                $height = 206;
+                                $url = parse_url($video['url']);
+                                @endphp
+                                @if (!empty($url) && !empty($url['query']))
+                                <figure>
+                                    @php
+                                    if ( isset( $url['host'] ) && ( $url['host'] == 'vimeo.com' || $url['host'] == 'player.vimeo.com' ) ) {
+                                    $content_exp = explode("/", $media);
+                                    $content_vimo = array_pop($content_exp);
+                                    echo '<iframe width="' . intval($width) . '" height="' . intval($height) . '" src="https://player.vimeo.com/video/' . $content_vimo . '"></iframe>';
+                                    } elseif ( isset( $url['host'] ) && $url['host'] == 'soundcloud.com') {
+                                    $video = wp_oembed_get($media, array('height' => intval($height)));
+                                    $search = array('webkitallowfullscreen', 'mozallowfullscreen', 'frameborder="no"', 'scrolling="no"');
+                                    $video = str_replace($search, '', $video);
+                                    echo str_replace('&', '&amp;', $video);
+                                    } else {
+                                    echo '<iframe width="'.$width.'" height="'.$height.'" src="https://www.youtube.com/embed/'.str_replace(" v=", '', $url['query']).'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                                    }
+                                    @endphp
+
+                                </figure>
+                                @endif
+                                @endforeach
+                            </div>
+                        </div>
+                        @endif
+                        
+
+
                         <div class="wt-clientfeedback la-no-record">
                             <div class="wt-usertitle wt-titlewithselect">
                                 <h2>{{ trans('lang.client_feedback') }}</h2>
@@ -330,91 +422,10 @@ $breadcrumbs = Breadcrumbs::generate('showInternProfile', $user->slug);
                             </div>
                             @endif
                         </div>
-                        <div class="wt-craftedprojects">
-                            <div class="wt-usertitle">
-                                <h2>{{{ trans('lang.crafted_projects') }}}</h2>
-                            </div>
-                            @if (!empty($projects))
-                            <crafted_project :no_of_post="3" :project="'{{  json_encode($projects) }}'" :freelancer_id="'{{$profile->user_id}}'" :img="'{{ trans('lang.img') }}'"></crafted_project>
-                            @else
-                            <div class="wt-userprofile">
-                                @if (file_exists(resource_path('views/extend/errors/no-record.blade.php')))
-                                @include('extend.errors.no-record')
-                                @else
-                                @include('errors.no-record')
-                                @endif
-                            </div>
-                            @endif
-                        </div>
-                        @if (!empty($videos))
-                        <div class="wt-videos">
-                            <div class="wt-usertitle">
-                                <h2>{{{ trans('lang.videos') }}}</h2>
-                            </div>
-                            <div class="wt-user-videos">
-                                @foreach ($videos as $video)
-                                @php
-                                $width = 367;
-                                $height = 206;
-                                $url = parse_url($video['url']);
-                                @endphp
-                                @if (!empty($url) && !empty($url['query']))
-                                <figure>
-                                    @php
-                                    if ( isset( $url['host'] ) && ( $url['host'] == 'vimeo.com' || $url['host'] == 'player.vimeo.com' ) ) {
-                                    $content_exp = explode("/", $media);
-                                    $content_vimo = array_pop($content_exp);
-                                    echo '<iframe width="' . intval($width) . '" height="' . intval($height) . '" src="https://player.vimeo.com/video/' . $content_vimo . '"></iframe>';
-                                    } elseif ( isset( $url['host'] ) && $url['host'] == 'soundcloud.com') {
-                                    $video = wp_oembed_get($media, array('height' => intval($height)));
-                                    $search = array('webkitallowfullscreen', 'mozallowfullscreen', 'frameborder="no"', 'scrolling="no"');
-                                    $video = str_replace($search, '', $video);
-                                    echo str_replace('&', '&amp;', $video);
-                                    } else {
-                                    echo '<iframe width="'.$width.'" height="'.$height.'" src="https://www.youtube.com/embed/'.str_replace(" v=", '', $url['query']).'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-                                    }
-                                    @endphp
+                       
 
-                                </figure>
-                                @endif
-                                @endforeach
-                            </div>
-                        </div>
-                        @endif
-                        <div class="wt-experience">
-                            <div class="wt-usertitle">
-                                <h2>{{{ trans('lang.experience') }}}</h2>
-                            </div>
-                            @if (!empty($experiences))
-                            <div class="wt-experiencelisting-hold">
-                                <experience :freelancer_id="'{{$profile->user_id}}'" :no_of_post="2"></experience>
-                            </div>
-                            @else
-                            <div class="wt-userprofile">
-                                @if (file_exists(resource_path('views/extend/errors/no-record.blade.php')))
-                                @include('extend.errors.no-record')
-                                @else
-                                @include('errors.no-record')
-                                @endif
-                            </div>
-                            @endif
-                        </div>
-                        <div class="wt-experience wt-education">
-                            <div class="wt-usertitle">
-                                <h2>{{{ trans('lang.education') }}}</h2>
-                            </div>
-                            @if (!empty($education))
-                            <education :freelancer_id="'{{$profile->user_id}}'" :no_of_post="1"></education>
-                            @else
-                            <div class="wt-userprofile">
-                                @if (file_exists(resource_path('views/extend/errors/no-record.blade.php')))
-                                @include('extend.errors.no-record')
-                                @else
-                                @include('errors.no-record')
-                                @endif
-                            </div>
-                            @endif
-                        </div>
+
+
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5 col-xl-4 float-left">

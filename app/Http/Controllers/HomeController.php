@@ -37,6 +37,7 @@ use App\UserCategorySkills;
 use App\AgencyServices;
 use function Psy\debug;
 use App\Department;
+use App\TialAgencyTokens;
 
 class HomeController extends Controller
 {
@@ -276,6 +277,56 @@ class HomeController extends Controller
 
         $currency = !empty($settings[0]['currency']) ? $settings[0]['currency'] : 'USD';
         return view('auth.company_registration',compact('currency','symbol','payment_gateway','payout_settings','stripe_img','stripe_settings','package_options','page','meta_desc','meta_keywords','yearly_options','monthly_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages'));
+     }
+
+
+     public function trailCompanyRegistration(Request $request){
+
+       if($request->input('token')){
+           
+           $url=config('app.url').'/company/registration/trial?token='.$request->input('token');
+         $trial_link=TialAgencyTokens::where('url_token',$url)->where('status','active')->first();
+         if(!$trial_link){
+            return view('auth.trail_company_fail');
+
+         }else{
+
+            $why_agency_plan=AboutTalendsPage::where('page_type','why_agency_plan')->first();
+            $categories = Category::all();
+            $employees = Helper::getEmployeesList();
+            $locations = Location::select('title', 'id')->get()->pluck('title', 'id')->toArray();
+            $company_bedget = Helper::getComapnyBudgetList();
+            $languages=Language::all();
+            $package=Package::where('role_id',4)->where('trial','=',1)->orderBy('id','asc')->get();
+            
+            $trail_options = !empty($package[0]->options) ? unserialize($package[0]->options) : array();
+            $package_options = Helper::getPackageOptions('trail_agency');
+        
+            $company_registration_tags=$this->helper::getPageSeoTitles('agency_registration');
+        
+            $meta_title = !empty($company_registration_tags)  ? $company_registration_tags->meta_title : ('Agency Registration');
+            $meta_desc = !empty($company_registration_tags)  ? $company_registration_tags->meta_description : ('Register your agency on Talends.com.');
+            $meta_keywords = !empty($company_registration_tags)  ? $company_registration_tags->meta_keywords : 'Freelance Agency registration.';
+            $page['title'] = $meta_title;
+    
+    
+            $payout_settings = SiteManagement::getMetaValue('commision');
+            $payment_gateway = !empty($payout_settings) && !empty($payout_settings[0]['payment_method']) ? $payout_settings[0]['payment_method'] : array();
+            $symbol = !empty($payout_settings) && !empty($payout_settings[0]['currency']) ? Helper::currencyList($payout_settings[0]['currency']) : array();
+                
+            $settings = SiteManagement::getMetaValue('commision');
+    
+            $currency = !empty($settings[0]['currency']) ? $settings[0]['currency'] : 'USD';
+            return view('auth.trail_company_registration',compact('currency','symbol','payment_gateway','payout_settings','package_options','page','meta_desc','meta_keywords','trail_options','package','why_agency_plan','categories','employees','locations','company_bedget','languages','url'));
+    
+         }
+
+       }else{
+           
+        return view('auth.trail_company_fail');
+           
+       }
+
      }
 
      public function companyRegistrationSuccess(Request $request){

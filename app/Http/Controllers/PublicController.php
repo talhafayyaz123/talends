@@ -339,7 +339,15 @@ class PublicController extends Controller
                         $template = DB::table('email_types')->select('id')->where('email_type', 'new_user')->get()->first();
                         if (!empty($template->id)) {
                             $template_data = EmailTemplate::getEmailTemplateByID($template->id);
-                            $email_params['name'] = Helper::getUserName($id);
+                            $name=Helper::getUserName($id);
+                            if($user->getRoleNames()[0]=='company'){
+                                
+                                $email_params['name'] =$user->profile->company_name;
+
+
+                            }else{
+                                $email_params['name'] = $name;
+                            }
                             $email_params['email'] = $email;
                             $email_params['password'] = $password;
                             $email_params['role'] =$user->getRoleNames()[0];
@@ -413,7 +421,12 @@ class PublicController extends Controller
                         $template = DB::table('email_types')->select('id')->where('email_type', 'new_user')->get()->first();
                         if (!empty($template->id)) {
                             $template_data = EmailTemplate::getEmailTemplateByID($template->id);
-                            $email_params['name'] = Helper::getUserName($id);
+                            if($user->getRoleNames()[0]=='company'){
+                                $email_params['name'] = $user->profile->company_name;
+                            }else{
+                                $email_params['name'] = Helper::getUserName($id);
+                            }
+                          
                             $email_params['email'] = $email;
                             $email_params['password'] = $password;
                             $email_params['role'] =$user->getRoleNames()[0];

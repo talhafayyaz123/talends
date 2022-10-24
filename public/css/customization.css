@@ -12,9 +12,9 @@ header {
     top: 0;
     width: 100%;
 }
-label {
+/* label {
     margin-left: 10px;
-}
+} */
 header .navbar {
     padding: 0;
     align-items: center;
@@ -254,7 +254,7 @@ header .navbar .navbar-nav .nav_item_right {
 
 footer {
     position: relative;
-    padding: 40px 0 20px;
+    padding: 40px 0 0px;
     background: #12300b;
 }
 
@@ -781,7 +781,10 @@ footer .row .col-md-6:last-child>ul {
     border-top: unset;
     border-radius: 0;
 }
-
+select.form-contro{
+    background: white;
+    color: #30242a;
+}
 
 a.notif {
 	position: relative;
@@ -1273,6 +1276,10 @@ header .menu_browse_box a:hover {
     font-size: 14px;
     border-radius: 5px;
 }
+#registration select.form-control{
+    background: white;
+    color: #30242a;
+}
 .btn-check{
     padding-left: 0;
 }
@@ -1522,3 +1529,11 @@ footer .list-inline a i {
   ::-webkit-scrollbar-thumb:hover {
 	background: #2d9215;
   }
+  .freelancer_filters .dropdown-menu.show {
+	top: 55px !important;
+	width: 100% !important;
+	/* min-width: 230px; */
+	right: unset;
+	left: 0 !important;
+	transform: translateX(0px) !important;
+}

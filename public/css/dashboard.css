@@ -6017,3 +6017,35 @@ body.rtl .lara-attachment-files .wt-on-off .switch-button-control .switch-button
 	border-radius: 25px;
 	margin:5px;
 }
+/* sub Categories tags */
+.subcategories-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+}
+.subcategories-checkboxes label.check {
+    cursor: pointer;
+    margin-right: 7px;
+}
+  .subcategories-checkboxes label.check input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	visibility: hidden;
+	pointer-events: none;
+  }
+  .subcategories-checkboxes label.check span {
+    display: inline-block;
+    box-shadow: 0px 2px 11px rgba(69, 65, 164, 0.06), 0px 4px 10px rgba(31, 37, 89, 0.07);
+    border-radius: 10px;
+    background-color: #ffffff;
+    border: 2px solid #349F1A;
+    padding: 7px 15px;
+}
+  .subcategories-checkboxes label.check input:checked + span {
+	border-color: #349F1A;
+	  background-color: #349F1A;
+	  color: #fff;
+  }
+  select.form-control option:hover{
+	background-color:#349F1A;
+  }

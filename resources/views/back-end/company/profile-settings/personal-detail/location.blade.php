@@ -1,7 +1,8 @@
-<div class="wt-tabscontenttitle">
+<!-- <div class="wt-tabscontenttitle">
     <h2>{{trans('lang.your_loc')}}</h2>
-</div>
-<div class="wt-formtheme">
+</div> -->
+<label for="">Location</label>
+<div class="my-3">
     <fieldset>
         <div class="form-group form-group-half">
             <span class="wt-select">
@@ -9,15 +10,15 @@
             </span>
         </div>
         <div class="form-group form-group-half">
-            {!! Form::text( 'address', e($address), ['id'=>"pac-input", 'class' =>'form-control', 'placeholder' => trans('lang.your_address')] ) !!}
+            {!! Form::text( 'address', e($address), ['id'=>"pac-input1", 'class' =>'form-control', 'placeholder' => trans('lang.your_address')] ) !!}
         </div>
-        <div class="form-group wt-formmap">
+        <div class="form-group wt-formmap" style="display: none;">
             @include('includes.map')
         </div>
-        <div class="form-group form-group-half">
+        <div class="form-group form-group-half" style="display: none;">
             {!! Form::text( 'longitude', e($longitude), ['id'=>"lng-input", 'class' =>'form-control', 'placeholder' => trans('lang.enter_logitude')] ) !!}
         </div>
-        <div class="form-group form-group-half">
+        <div class="form-group form-group-half" style="display: none;">
             {!! Form::text( 'latitude', e($latitude), ['id'=>"lat-input", 'class' =>'form-control', 'placeholder' => trans('lang.enter_latitude')] ) !!}
         </div>
     </fieldset>

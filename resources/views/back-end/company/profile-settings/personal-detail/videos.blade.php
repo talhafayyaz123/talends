@@ -1,8 +1,9 @@
-<div class="wt-tabscontenttitle">
+<!-- <div class="wt-tabscontenttitle">
     <h2>{{{ trans('lang.videos') }}}</h2>
-</div>
+</div> -->
+<label for="">Video</label>
 <div class="wt-skillsform">
-    <fieldset class="social-icons-content">
+    <fieldset class="">
         @if (!empty($videos))
             @php $counter = 0 @endphp
             @foreach ($videos as $video_key => $mem_value)

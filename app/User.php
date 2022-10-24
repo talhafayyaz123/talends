@@ -553,19 +553,6 @@ class User extends Authenticatable
                \DB::table('user_categories')->insert($insert); 
               } 
 
-
-         /*   $role_id = Helper::getRoleByUserID($user_id);
-            $package = Package::select('id', 'title', 'cost')->where('role_id', $role_id)->where('trial', 1)->get()->first();
-            $trial_invoice = Invoice::select('id')->where('type', 'trial')->get()->first();
-            if (!empty($package) && !empty($trial_invoice)) {
-                DB::table('items')->insert(
-                    [
-                        'invoice_id' => $trial_invoice->id, 'product_id' => $package->id, 'subscriber' => $user_id,
-                        'item_name' => $package->title, 'item_price' => $package->cost, 'item_qty' => 1,
-                        "created_at" => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now()
-                    ]
-                );
-            }  */
             return $user_id;
         }
     }

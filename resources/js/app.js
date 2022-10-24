@@ -318,6 +318,12 @@
                          timeout: 4000,
                          class: 'error_notification'
                      },
+                     alert: {
+                        overlay: true,
+                        zindex: 999,
+                        position: 'center',
+                        timeout: 3000
+                    }
                  }
              }, 
          },
@@ -435,7 +441,13 @@
                      error: {
                          position: "topRight",
                          timeout: 4000
-                     }
+                     },
+                     alert: {
+                        overlay: true,
+                        zindex: 999,
+                        position: 'center',
+                        timeout: 3000
+                    }
                  }
              },
              step: 1,
@@ -642,9 +654,9 @@
                     }
 
 
-                 $.get("https://ipinfo.io/json?token=20e8fc0c5775d3", function(response) {
+               //  $.get("https://ipinfo.io/json?token=20e8fc0c5775d3", function(response) {
                      
-                    if(response.country=='PK' || response.country=='AE'){
+                  //  if(response.country=='PK' || response.country=='AE'){
                         
                         
                         axios.post(APP_URL + '/register/form-step1-custom-errors', form_data)
@@ -736,12 +748,12 @@
    
     
                         });
-                    }else{
-                        self.showError('Only Pakistan And UAE Candidates are allowed to register.');
+                    //}
+                   // else{
+                      //  self.showError('Only Pakistan And UAE Candidates are allowed to register.');
   
-                    }
-                }, "jsonp");
-                
+                   // }
+              //  }, "jsonp");
                 
              },
              checkStep2: function (error_message) {
@@ -1089,6 +1101,12 @@
                          timeout: 4000,
                          class: 'error_notification'
                      },
+                     alert: {
+                        overlay: true,
+                        zindex: 999,
+                        position: 'center',
+                        timeout: 3000
+                    }
                  }
              },
          },
@@ -1825,7 +1843,13 @@
                          onClosing: function (instance, toast, closedBy) {
                              freelancerProfile.showCompleted(Vue.prototype.trans('lang.profile_update_success'));
                          }
-                     }
+                     },
+                     alert: {
+                        overlay: true,
+                        zindex: 999,
+                        position: 'center',
+                        timeout: 3000
+                    }
                  }
              },
              is_popup: false,
@@ -1840,7 +1864,12 @@
              showInfo(message) {
                  return this.$toast.info(' ', message, this.notificationSystem.options.info);
              },
-             showMessage(message) {
+             showInfoBeforeSave(message)
+             {
+                return this.$toast.info(' ', message, this.notificationSystem.options.alert);
+             
+            }
+            ,showMessage(message) {
                  return this.$toast.success(' ', message, this.notificationSystem.options.success);
              },
              showError(error) {
@@ -1881,6 +1910,7 @@
              },
              submitInterneProfile: function () {
                  var self = this;
+                 self.showInfoBeforeSave('Yor Profile Saving In Progress.');
                  var profile_data = document.getElementById('interne_profile');
                  let form_data = new FormData(profile_data);
                  axios.post(APP_URL + '/interne/store-profile-settings', form_data)
@@ -1914,6 +1944,8 @@
              },
              submitCompanyProfile: function () {
                  var self = this;
+                 self.showInfoBeforeSave('Yor Profile Saving In Progress.');
+
                  var profile_data = document.getElementById('company_profile');
                  let form_data = new FormData(profile_data);
                  axios.post(APP_URL + '/company/store-profile-settings', form_data)
@@ -1947,6 +1979,7 @@
              },
              submitWorkDetails: function () {
                 var self = this;
+                self.showInfoBeforeSave('Yor Work Detail Saving In Progress.');
                 var company_work_detail = document.getElementById('company_work_detail');
                 let form_data = new FormData(company_work_detail);
                 console.log(form_data);
@@ -1993,6 +2026,8 @@
             },
              submitInterneExperienceEduction: function () {
                  var self = this;
+                 self.showInfoBeforeSave('Experience & Eduction saving In Progress.');
+
                  var exp_edu_data = document.getElementById('experience_form');
                  let form_data = new FormData(exp_edu_data);
                  axios.post(APP_URL + '/interne/store-experience-settings', form_data)
@@ -2011,6 +2046,8 @@
              },
              submitInterneAwardsProjects: function () {
                  var self = this;
+                 self.showInfoBeforeSave('Projects & Awards saving In Progress.');
+
                  var awards_projects = document.getElementById('awards_projects');
                  let form_data = new FormData(awards_projects);
                  axios.post(APP_URL + '/interne/store-project-award-settings', form_data)
@@ -2029,6 +2066,7 @@
              },
              submitCompanyExperienceEduction: function () {
                  var self = this;
+                 self.showInfoBeforeSave('Experience & Eduction saving In Progress.');
                  var exp_edu_data = document.getElementById('experience_form');
                  let form_data = new FormData(exp_edu_data);
                  axios.post(APP_URL + '/company/store-experience-settings', form_data)
@@ -2047,6 +2085,7 @@
              },
              submitCompanyAwardsProjects: function () {
                  var self = this;
+                 self.showInfoBeforeSave('Projects & Awards saving In Progress.');
                  var awards_projects = document.getElementById('awards_projects');
                  let form_data = new FormData(awards_projects);
                  axios.post(APP_URL + '/company/store-project-award-settings', form_data)
@@ -2065,6 +2104,7 @@
              },
              submitFreelancerProfile: function () {
                  var self = this;
+                 self.showInfoBeforeSave('Yor Profile Saving In Progress.');
                  var profile_data = document.getElementById('freelancer_profile');
                  let form_data = new FormData(profile_data);
                  axios.post(APP_URL + '/freelancer/store-profile-settings', form_data)
@@ -2098,6 +2138,7 @@
              },
              submitExperienceEduction: function () {
                  var self = this;
+                 self.showInfoBeforeSave('Experience & Eduction saving In Progress.');
                  var exp_edu_data = document.getElementById('experience_form');
                  let form_data = new FormData(exp_edu_data);
                  axios.post(APP_URL + '/freelancer/store-experience-settings', form_data)
@@ -2137,6 +2178,7 @@
              },
              submitAwardsProjects: function () {
                  var self = this;
+                 self.showInfoBeforeSave('Projects saving In Progress.');
                  var awards_projects = document.getElementById('awards_projects');
                  let form_data = new FormData(awards_projects);
                  axios.post(APP_URL + '/freelancer/store-project-award-settings', form_data)
@@ -2155,6 +2197,8 @@
              },
              submitEmployerProfile: function () {
                  var self = this;
+                 self.showInfoBeforeSave('Yor Profile Saving In Progress.');
+
                  var profile_data = document.getElementById('employer_data');
                  let form_data = new FormData(profile_data);
                  axios.post(APP_URL + '/employer/store-profile-settings', form_data)
@@ -2188,6 +2232,7 @@
              },
              submitAdminProfile: function () {
                  var self = this;
+                 self.showInfoBeforeSave('Yor Profile Saving In Progress.');
                  var profile_data = document.getElementById('admin_data');
                  let form_data = new FormData(profile_data);
                  axios.post(APP_URL + '/admin/store-profile-settings', form_data)
@@ -2506,7 +2551,13 @@
                          onClosing: function (instance, toast, closedBy) {
                              VueSettings.showCompleted(VueSettings.success_message);
                          }
-                     }
+                     },
+                     alert: {
+                        overlay: true,
+                        zindex: 999,
+                        position: 'center',
+                        timeout: 3000
+                    }
                  }
              },
              social: {
@@ -2725,8 +2776,14 @@
                  return this.$toast.success(' ', message, this.notificationSystem.options.completed);
              },
              showInfo(message) {
+        
                  return this.$toast.info(' ', message, this.notificationSystem.options.info);
              },
+             showInfoBeforeSave(message)
+             {
+                return this.$toast.info(' ', message, this.notificationSystem.options.alert);
+             
+            },
              showMessage(message) {
                  return this.$toast.success(Vue.prototype.trans('lang.success'), message, this.notificationSystem.options.success);
              },
@@ -3576,7 +3633,13 @@
                              onClosing: function (instance, toast, closedBy) {
                                  VueSettings.showCompleted(VueSettings.success_message);
                              }
-                         }
+                         } ,
+                     alert: {
+                        overlay: true,
+                        zindex: 999,
+                        position: 'center',
+                        timeout: 3000
+                    }
                      }
                  }
  
@@ -3594,8 +3657,14 @@
                  return this.$toast.success(' ', message, this.notificationSystem.options.completed);
              },
              showInfo(message) {
+                
                  return this.$toast.info(' ', message, this.notificationSystem.options.info);
              },
+             showInfoBeforeSave(message)
+             {
+                return this.$toast.info(' ', message, this.notificationSystem.options.alert);
+             
+            },
              showMessage(message) {
                  return this.$toast.success('Success', message, this.notificationSystem.options.success);
              },
@@ -3826,7 +3895,13 @@
                          onClosing: function (instance, toast, closedBy) {
                              vmpostJob.showCompleted(Vue.prototype.trans('lang.process_cmplted_success'));
                          }
-                     }
+                     },
+                     alert: {
+                        overlay: true,
+                        zindex: 999,
+                        position: 'center',
+                        timeout: 3000
+                    }
                  }
              }
          },
@@ -3838,8 +3913,14 @@
                  return this.$toast.success(' ', message, this.notificationSystem.options.completed);
              },
              showInfo(message) {
+                
                  return this.$toast.info(' ', message, this.notificationSystem.options.info);
              },
+             showInfoBeforeSave(message)
+             {
+                return this.$toast.info(' ', message, this.notificationSystem.options.alert);
+             
+            },
              showMessage(message) {
                  return this.$toast.success(Vue.prototype.trans('lang.success'), message, this.notificationSystem.options.success);
              },
@@ -4057,7 +4138,13 @@
                          position: 'center',
                          timeout: 900,
                          progressBar: false
-                     }
+                     },
+                     alert: {
+                        overlay: true,
+                        zindex: 999,
+                        position: 'center',
+                        timeout: 3000
+                    }
                  }
              },
          },
@@ -4096,8 +4183,14 @@
                  return this.$toast.success(' ', message, this.notificationSystem.options.completed);
              },
              showInfo(message) {
+                
                  return this.$toast.info(' ', message, this.notificationSystem.options.info);
              },
+             showInfoBeforeSave(message)
+             {
+                return this.$toast.info(' ', message, this.notificationSystem.options.alert);
+             
+            },
              showMessage(message) {
                  return this.$toast.success(' ', message, this.notificationSystem.options.success);
              },
@@ -4497,6 +4590,13 @@
                          position: "topRight",
                          timeout: 4000
                      },
+                     
+                     alert: {
+                        overlay: true,
+                        zindex: 999,
+                        position: 'center',
+                        timeout: 3000
+                    }
                  }
              },
          },
@@ -4805,6 +4905,13 @@
                          position: "topRight",
                          timeout: 4000
                      },
+                     
+                     alert: {
+                        overlay: true,
+                        zindex: 999,
+                        position: 'center',
+                        timeout: 3000
+                    }
                  }
              },
          },
@@ -5235,7 +5342,13 @@
                          timeout: 3000,
                          class: 'iziToast-info',
                          id: 'info_notify',
-                     }
+                     },
+                     alert: {
+                        overlay: true,
+                        zindex: 999,
+                        position: 'center',
+                        timeout: 3000
+                    }
                  }
              }
          },
@@ -5274,8 +5387,14 @@
                  return this.$toast.success(' ', message, this.notificationSystem.options.completed);
              },
              showInfo(message) {
+            
                  return this.$toast.info(' ', message, this.notificationSystem.options.info);
              },
+             showInfoBeforeSave(message)
+             {
+                return this.$toast.info(' ', message, this.notificationSystem.options.alert);
+             
+            },
              showMessage(message) {
                  return this.$toast.success(' ', message, this.notificationSystem.options.success);
              },

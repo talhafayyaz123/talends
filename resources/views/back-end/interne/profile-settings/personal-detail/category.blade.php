@@ -17,20 +17,33 @@
 
 </div>
 <div class="wt-formtheme">
-    <fieldset>
-        <div class="form-group">
-            <span class="wt-select">
-                <select name="sub_categories[]" multiple id="freelancerSubCategory" class="form-control" onchange='select_cat_skills(this)'>
-                    <option value="">Select Sub Categories</option>
-                     @if(isset($sub_categories) && !empty($sub_categories)  )    
+<fieldset>
+        <div class="row">
+            <div class="col-12">
+                <div class="subcategories-checkboxes" id="freelancerSubCategory">
+                
+                @if(isset($sub_categories) && !empty($sub_categories)  )    
                     @foreach($sub_categories as $key =>$value)
-                          <option value="{{  $value->sub_category_id }}"  {{ ( in_array($value->sub_category_id,$selced_sub_categories)) ? 'selected' :''     }}   >{{  $value->title }}</option>
+                    
+                    <label class="check">
 
-                          @endforeach
-                          @endif
-                </select>
+                        <input type="checkbox" name="sub_categories[]"
+                        value="{{  $value->sub_category_id }}" id="sub_category" onclick="select_cat_skills()"
+                        {{ in_array($value->sub_category_id,$selced_sub_categories) ? 'checked' :''    }}  
+                          >
+                        <span>{{  $value->title }}</span>
+                        </label>
 
-            </span>
+                        @endforeach
+                        @else
+
+                         <p>Not Found</p>
+                        @endif
+                         
+
+                    
+                </div>
+            </div>
         </div>
 
     </fieldset>
@@ -41,21 +54,26 @@
     <h2>Skills</h2>
 </div>
 <div class="wt-formtheme">
-    <fieldset>
-        <div class="form-group">
-            <span class="wt-select">
-            <select name="sub_category_skills[]"  multiple id="freelancerSkills" class="form-control">
-                    <option value="">Select Skills</option>
+<fieldset>
+        <div class="row">
+            <div class="col-12">
+                <div class="subcategories-checkboxes" id="freelancerSkills">
                     @if(isset($sub_cat_skills)  && !empty($sub_cat_skills)  )    
                     @foreach($sub_cat_skills as $key =>$value)
-                          <option value="{{  $value->id }}" {{ ( in_array($value->id,$seleced_cat_skills)) ? 'selected' :''     }}   >{{  $value->title }}</option>
+                         
+                          <label class="check">
+                        <input type="checkbox"  value="{{  $value->id }}" name="sub_category_skills[]" {{ ( in_array($value->id,$seleced_cat_skills)) ? 'checked' :''     }}  >
+                        <span>{{  $value->title }}</span>
+                        </label>
 
                           @endforeach
-                          @endif
-                </select>
+                          @else
 
-            </span>
+                         <p>Not Found</p>
+                        @endif
+                </div>
+            </div>
         </div>
-
+ 
     </fieldset>
 </div>

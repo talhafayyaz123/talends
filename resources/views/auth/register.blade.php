@@ -43,6 +43,12 @@ $reg_form_banner = !empty($register_form) && !empty($register_form[0]['reg_form_
 $selected_registration_type = !empty($register_form) && !empty($register_form[0]['registration_type']) ? $register_form[0]['registration_type'] : 'multiple';
 $breadcrumbs_settings = \App\SiteManagement::getMetaValue('show_breadcrumb');
 $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'true';
+
+$settings = App\SiteManagement::getMetaValue('commision');
+
+$currency = !empty($settings[0]['currency']) ? $settings[0]['currency'] : 'USD';
+
+
 @endphp
 @php $breadcrumbs = Breadcrumbs::generate('registerPage'); @endphp
 
@@ -63,6 +69,28 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
         i#togglePassword {
     position: absolute;
     top: 42%;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.input-group .intl-tel-input .form-control {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 0;
+}
+.input-group-addon {
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: #555;
+    text-align: center;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
     </style>
     <section class="auth-sec">
@@ -193,7 +221,12 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                         </div>
                                                         <div class="col-lg-6 mb-3" v-if='user_type== "freelancer" '>
                                                             <div class="form-group">
-                                                            <input id="budget" type="number" class="form-control" value="" name="budget" placeholder="Hourly Rate (AED)" v-bind:class="{ 'is-invalid': form_step2.is_budget_error }">
+                                                            <div class="input-group">
+                                                            <input id="budget" type="number" class="form-control" value="" name="budget" placeholder="Hourly Rate" v-bind:class="{ 'is-invalid': form_step2.is_budget_error }">
+                                                                <span class="input-group-addon">{{$currency}}</span>
+                                                            </div>
+                                                                
+                                                           
 
                                                                 <span class="help-block" v-if="form_step2.budget_error">
                                                                     <strong v-cloak>@{{form_step2.budget_error}}</strong>
@@ -229,7 +262,14 @@ $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'tru
                                                         <!-- internee -->
 
                                                         <div class="col-lg-6 mb-3" v-if='user_type== "intern" '>
-                                                            <input id="budget" type="number" class="form-control" value="" name="budget" placeholder="Hourly Rate (AED)" v-bind:class="{ 'is-invalid': form_step2.is_budget_error }">
+
+
+                                                        <div class="input-group">
+                                                        <input id="budget" type="number" class="form-control" value="" name="budget" placeholder="Hourly Rate" v-bind:class="{ 'is-invalid': form_step2.is_budget_error }">
+                                                                <span class="input-group-addon">{{$currency}}</span>
+                                                            </div>
+                                                        
+                                                        
                                                             <span class="help-block" v-if="form_step2.budget_error">
                                                                 <strong v-cloak>@{{form_step2.budget_error}}</strong>
                                                             </span>

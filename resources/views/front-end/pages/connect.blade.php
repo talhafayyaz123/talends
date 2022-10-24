@@ -27,7 +27,7 @@
                     <h1 class="text-white">We’re here 24/7</h1>
                     <p class="text-white opcty_5">Reach out with your questions, concerns and challenges. Or just to say hi. We’ll be happy to chat and help.</p>
                     <!-- <a href="javascript:;" class="btn btn-theme px-4 rounded-pill">Chat Now</a> -->
-                    <h4 class="text-white">Call <a href="tel: Call 888-401-4678" class="text-decoration text-white">888-401-4678</a></h4>
+                    <h4 class="text-white">Call <a href="tel:+971527684867" class="text-decoration text-white">+971 52 768 4867</a></h4>
                     <p class="text-white opcty_5">International calling fees may apply</p>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                         <div>
                             <h4 class="mt-0 font-weight-bold">Dubai</h4>
                             <p><i class="bi-phone"></i> +971 52 768 4867</p>
-                            <p><i class="bi-phone"></i> +971 4 332 4444</p>
+                            <p><i class="bi-phone"></i> +971 4 437 3103</p>
                             <p><i class="bi-globe"></i> 1803 The Metropolis Tower DUBAI</p>
                         </div>
                     </div>

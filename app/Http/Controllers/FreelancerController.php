@@ -110,6 +110,7 @@ class FreelancerController extends Controller
         ->join('sub_categories','user_sub_categories.sub_category_id','sub_categories.sub_category_id')
         ->select('sub_categories.sub_category_id')
         ->get();
+
  
          $selced_sub_categories=array();
         if(isset($user_sub_categories)){
@@ -117,6 +118,7 @@ class FreelancerController extends Controller
             $selced_sub_categories[]=$value['sub_category_id'];
             }
         } 
+        
 
         $sub_categories='';
         if(Auth::user()->getRoleNames()[0]=='freelancer' && isset($user_categories[0]) ){
