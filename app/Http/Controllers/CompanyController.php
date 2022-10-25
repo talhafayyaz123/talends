@@ -881,7 +881,7 @@ class CompanyController extends Controller
                     'total_hours'    => 'required',
                     'total_jobs' => 'required',
                     'last_work_date'    => 'required',
-                    'office_location'    => 'required',
+                    //'office_location'    => 'required',
                     'detail'    => 'required',
                     'portfolio' => 'required',
                     'team_detail'    => 'required',

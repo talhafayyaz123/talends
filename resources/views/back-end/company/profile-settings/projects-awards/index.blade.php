@@ -46,10 +46,8 @@
                                             @include('back-end.company.profile-settings.projects-awards.awards') 
                                         @endif
                                     </div>
-                                    <div class="wt-updatall">
-                                        <i class="ti-announcement"></i>
-                                        <span>{{{ trans('lang.save_changes_note') }}}</span>
-                                        {!! Form::submit(trans('lang.btn_save_update'), ['class' => 'wt-btn', 'id'=>'submit-profile']) !!}
+                                    <div>
+                                          {!! Form::submit(trans('lang.btn_save_update'), ['class' => 'wt-btn', 'id'=>'submit-profile']) !!}
                                     </div>
                                 {!! form::close(); !!}
                             </div>

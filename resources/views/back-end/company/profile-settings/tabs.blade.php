@@ -1,7 +1,7 @@
 <div class="wt-dashboardtabs">
     <ul class="wt-tabstitle nav navbar-nav">
         <li class="nav-item">
-            <a class="{{{ \Request::route()->getName()==='companyProfile'? 'active': '' }}}" href="{{{ route('companyProfile') }}}">{{{ trans('lang.personal_detail') }}}</a>
+            <a class="{{{ \Request::route()->getName()==='companyProfile'? 'active': '' }}}" href="{{{ route('companyProfile') }}}">Agency Details & Skills</a>
         </li>
         <!-- <li class="nav-item">
             <a class="{{{ \Request::route()->getName()==='companyExperienceEducation'? 'active': '' }}}" href="{{{ route('companyExperienceEducation') }}}">{{{ trans('lang.experience_education') }}}</a>

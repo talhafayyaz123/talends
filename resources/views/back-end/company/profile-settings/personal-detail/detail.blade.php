@@ -17,10 +17,11 @@
                 {!! Form::text( 'tagline', e($tagline), ['class' =>'form-control', 'placeholder' => trans('lang.ph_add_tagline')] ) !!}
             </div>
             <div class="col-md-6 mb-3">
-                <label for="">Job Type</label>
+                <label for="">Availability</label>
                 <select name="availability" class='form-control' name="availability">
                     <option value="remote" {{ (Auth::user()->profile->availability=='remote') ? 'selected' :''     }}>Remote</option>
                     <option value="on-site" {{ (Auth::user()->profile->availability=='on-site') ? 'selected' :''   }}>On Site</option>
+                    <option value="hybrid" {{ (Auth::user()->profile->availability=='hybrid') ? 'selected' :''   }}>Hybrid</option>
                 </select>
             </div>
             <div class="col-md-12 mb-3">
