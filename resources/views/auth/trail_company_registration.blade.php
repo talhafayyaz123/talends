@@ -290,7 +290,7 @@ Company Registration
          if($('#g-recaptcha-response').val()==''){
             $.ajax({
             type: "POST",
-            url: 'http://localhost/talends/public/hire/agency/captcha-validation',
+            url: '/hire/agency/captcha-validation',
             data: form_data,
             success: function(response) {
 
