@@ -58,7 +58,7 @@
             </div>
 
             <div class="wt-tabscontenttitle">
-                <h2>OverView</h2>
+                <h2>Bio</h2>
             </div>
             <div class="wrap-search wt-haslayout">
             <fieldset>
@@ -80,7 +80,7 @@
 
 
         <div class="wt-tabscontenttitle">
-                <h2>Team Detail</h2>
+                <h2>Overview</h2>
             </div>
             <div class="wrap-search wt-haslayout">
             <fieldset>
