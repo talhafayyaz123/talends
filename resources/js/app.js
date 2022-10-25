@@ -1975,6 +1975,14 @@
                          if (error.response.data.errors.longitude) {
                              self.showError(error.response.data.errors.longitude[0]);
                          }
+
+                         if (error.response.data.errors.company_name) {
+                            self.showError(error.response.data.errors.company_name[0]);
+                        }
+                        
+                        if (error.response.data.errors.hourly_rate) {
+                            self.showError(error.response.data.errors.hourly_rate[0]);
+                        }
                      });
              },
              submitWorkDetails: function () {

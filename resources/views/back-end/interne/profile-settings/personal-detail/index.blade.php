@@ -201,7 +201,9 @@
              if(response['sub_categories'] != null){
                len = response['sub_categories'].length;
              }
-             $("#freelancerSubCategory").html(''); 
+             $("#freelancerSubCategory").html('');
+             $('#freelancerSkills').html('');
+ 
 
              if(len > 0){
                for(var i=0; i<len; i++){

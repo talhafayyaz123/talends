@@ -197,6 +197,7 @@ class Profile extends Model
         $profile->user()->associate($user_id);
         $profile->freelancer_type = 'Basic';
         $profile->hourly_rate = intval($request['hourly_rate']);
+        $profile->company_name =isset($request['company_name'])  ? ($request['company_name']) : '';
         $profile->category_id = intval($request['category']);
         $profile->availability = ($request['availability']);
         $profile->gender = filter_var($request['gender'], FILTER_SANITIZE_STRING);

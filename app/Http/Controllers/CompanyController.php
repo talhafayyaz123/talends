@@ -462,9 +462,9 @@ class CompanyController extends Controller
         $this->validate(
             $request,
             [
-                'first_name'    => 'required',
-                'last_name'    => 'required',
-                'gender'    => 'required',
+                'company_name'    => 'required',
+                'hourly_rate'    => 'required',
+          //      'gender'    => 'required',
             ]
         );
         if (!empty($request['latitude']) || !empty($request['longitude'])) {

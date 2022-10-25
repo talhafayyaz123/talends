@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="">Company Name</label>
-                {!! Form::text( 'first_name', e(Auth::user()->first_name), ['class' =>'form-control', 'placeholder' => trans('lang.ph_first_name')] ) !!}
+                {!! Form::text( 'company_name', e(Auth::user()->profile->company_name), ['class' =>'form-control', 'placeholder' => 'Company Name'] ) !!}
             </div>
             <div class="col-md-6 mb-3">
                 <label for="">Service Hourly Rate (AED)</label>
