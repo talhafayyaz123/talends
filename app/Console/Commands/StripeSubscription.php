@@ -10,6 +10,7 @@ use App\Mail\GeneralEmailMailable;
 use Illuminate\Support\Facades\Mail;
 use App\Helper;
 use DB;
+use Illuminate\Support\Facades\Log;
 
 class StripeSubscription extends Command
 {
@@ -59,7 +60,7 @@ class StripeSubscription extends Command
         $item_price=$user->item[0]['item_price'];
         $item_name=$user->item[0]['item_name'];
         $product_id=$user->item[0]['product_id'];
-        
+        Log::info('reminder_date: '.$reminder_date.'  currentDate  '.$currentDate);
        if ($reminder_date == $currentDate) {
          
           if (!empty(config('mail.username')) && !empty(config('mail.password'))) {
