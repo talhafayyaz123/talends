@@ -70,8 +70,8 @@
                 </div>
             </div>
             <div class="col-md-12 mb-3">
-                    <label for="">About Company</label>
-                    {!! Form::textarea( 'description', e($description), ['class' =>'form-control', 'placeholder' => trans('lang.ph_desc')] ) !!}
+                <label for="">About Company</label>
+                {!! Form::textarea( 'description', e($description), ['class' =>'form-control', 'placeholder' => trans('lang.ph_desc')] ) !!}
             </div>
         </div>
         <!-- <div class="form-group form-group-half">

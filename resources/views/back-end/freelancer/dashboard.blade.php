@@ -14,15 +14,15 @@
 
             </div>
             @endif
-            
         <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <div class="wt-insightsitemholder">
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                             <div class="wt-insightsitem wt-dashboardbox">
-                                <figure class="wt-userlistingimg">
-                                    {{ Helper::getImages('uploads/settings/icon',$latest_proposals_icon, 'layers') }}
+                                <figure class="bg-dash-icons p-3 shadow rounded text-white mb-4">
+                                    <!-- {{ Helper::getImages('uploads/settings/icon',$latest_proposals_icon, 'layers') }} -->
+                                    <i class="bi-text-paragraph"></i>
                                 </figure>
                                 <div class="wt-insightdetails">
                                     <div class="wt-title">
@@ -51,8 +51,9 @@
                         @endif
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                             <div class="wt-insightsitem wt-dashboardbox {{ $notify_class }}">
-                                <figure class="wt-userlistingimg">
-                                    {{ Helper::getImages('uploads/settings/icon',$latest_new_message_icon, 'book') }}
+                                <figure class="bg-dash-icons p-3 shadow rounded text-white mb-4">
+                                    <i class="bi-chat-dots"></i>
+                                    <!-- {{ Helper::getImages('uploads/settings/icon',$latest_new_message_icon, 'book') }} -->
                                 </figure>
                                 <div class="wt-insightdetails">
                                     <div class="wt-title">
@@ -64,8 +65,9 @@
                         </div>
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                             <div class="wt-insightsitem wt-dashboardbox">
-                                <figure class="wt-userlistingimg">
-                                    {{ Helper::getImages('uploads/settings/icon',$latest_saved_item_icon, 'lnr lnr-heart') }}
+                                <figure class="bg-dash-icons p-3 shadow rounded text-white mb-4">
+                                    <i class="bi-list-check"></i>   
+                                <!-- {{ Helper::getImages('uploads/settings/icon',$latest_saved_item_icon, 'lnr lnr-heart') }} -->
                                 </figure>
                                 <div class="wt-insightdetails">
                                     <div class="wt-title">
@@ -78,8 +80,9 @@
                         @if ($access_type == 'jobs' || $access_type== 'both')
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                 <div class="wt-insightsitem wt-dashboardbox">
-                                    <figure class="wt-userlistingimg">
-                                        {{ Helper::getImages('uploads/settings/icon',$latest_cancel_project_icon, 'cross-circle') }}
+                                    <figure class="bg-dash-icons p-3 shadow rounded text-white mb-4">
+                                        <i class="bi-calendar2-x"></i>    
+                                    <!-- {{ Helper::getImages('uploads/settings/icon',$latest_cancel_project_icon, 'cross-circle') }} -->
                                     </figure>
                                     <div class="wt-insightdetails">
                                         <div class="wt-title">
@@ -92,8 +95,9 @@
                             </div>
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                 <div class="wt-insightsitem wt-dashboardbox">
-                                    <figure class="wt-userlistingimg">
-                                        {{ Helper::getImages('uploads/settings/icon',$latest_ongoing_project_icon, 'cloud-sync') }}
+                                    <figure class="bg-dash-icons p-3 shadow rounded text-white mb-4">
+                                        <i class="bi-calendar2-week"></i>    
+                                    <!-- {{ Helper::getImages('uploads/settings/icon',$latest_ongoing_project_icon, 'cloud-sync') }} -->
                                     </figure>
                                     <div class="wt-insightdetails">
                                         <div class="wt-title">
@@ -107,8 +111,9 @@
                         @endif
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                             <div class="wt-insightsitem wt-dashboardbox">
-                                <figure class="wt-userlistingimg">
-                                    {{ Helper::getImages('uploads/settings/icon',$latest_pending_balance_icon, 'cart') }}
+                                <figure class="bg-dash-icons p-3 shadow rounded text-white mb-4">
+                                    <i class="bi-brightness-high-fill"></i>    
+                                <!-- {{ Helper::getImages('uploads/settings/icon',$latest_pending_balance_icon, 'cart') }} -->
                                 </figure>
                                 <div class="wt-insightdetails">
                                     <div class="wt-title">
@@ -120,8 +125,9 @@
                         </div>
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                             <div class="wt-insightsitem wt-dashboardbox">
-                                <figure class="wt-userlistingimg">
-                                    {{ Helper::getImages('uploads/settings/icon',$latest_current_balance_icon, 'gift') }}
+                                <figure class="bg-dash-icons p-3 shadow rounded text-white mb-4">
+                                    <i class="bi-cash"></i>  
+                                    <!-- {{ Helper::getImages('uploads/settings/icon',$latest_current_balance_icon, 'gift') }} -->
                                 </figure>
                                 <div class="wt-insightdetails">
                                     <div class="wt-title">
@@ -134,8 +140,9 @@
                         @if ($access_type == 'services' || $access_type== 'both')
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                 <div class="wt-insightsitem wt-dashboardbox">
-                                    <figure class="wt-userlistingimg">
-                                        {{ Helper::getImages('uploads/settings/icon',$ongoing_services_icon, 'gift') }}
+                                    <figure class="bg-dash-icons p-3 shadow rounded text-white mb-4">
+                                        <i class="bi-clipboard-data"></i>    
+                                    <!-- {{ Helper::getImages('uploads/settings/icon',$ongoing_services_icon, 'gift') }} -->
                                     </figure>
                                     <div class="wt-insightdetails">
                                         <div class="wt-title">
@@ -148,8 +155,9 @@
                             </div>
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                 <div class="wt-insightsitem wt-dashboardbox">
-                                    <figure class="wt-userlistingimg">
-                                        {{ Helper::getImages('uploads/settings/icon',$completed_services_icon, 'gift') }}
+                                    <figure class="bg-dash-icons p-3 shadow rounded text-white mb-4">
+                                        <i class="bi-clipboard-check"></i>
+                                        <!-- {{ Helper::getImages('uploads/settings/icon',$completed_services_icon, 'gift') }} -->
                                     </figure>
                                     <div class="wt-insightdetails">
                                         <div class="wt-title">
@@ -162,8 +170,9 @@
                             </div>
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                 <div class="wt-insightsitem wt-dashboardbox">
-                                    <figure class="wt-userlistingimg">
-                                        {{ Helper::getImages('uploads/settings/icon',$cancelled_services_icon, 'gift') }}
+                                    <figure class="bg-dash-icons p-3 shadow rounded text-white mb-4">
+                                        <i class="bi-clipboard-minus"></i>
+                                        <!-- {{ Helper::getImages('uploads/settings/icon',$cancelled_services_icon, 'gift') }} -->
                                     </figure>
                                     <div class="wt-insightdetails">
                                         <div class="wt-title">
@@ -176,8 +185,9 @@
                             </div>
                             <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-3">
                                 <div class="wt-insightsitem wt-dashboardbox">
-                                    <figure class="wt-userlistingimg">
-                                        {{ Helper::getImages('uploads/settings/icon',$published_services_icon, 'gift') }}
+                                    <figure class="bg-dash-icons p-3 shadow rounded text-white mb-4">
+                                        <i class="bi-clipboard-heart"></i>
+                                        <!-- {{ Helper::getImages('uploads/settings/icon',$published_services_icon, 'gift') }} -->
                                     </figure>
                                     <div class="wt-insightdetails">
                                         <div class="wt-title">
@@ -200,7 +210,7 @@
                         <h2>{{ trans('lang.ongoing_project') }}</h2>
                     </div>
                     <div class="wt-dashboardboxcontent wt-hiredfreelance">
-                            <table class="wt-tablecategories wt-freelancer-table">
+                            <table class="wt-tablecategories wt-freelancer-table table-sm">
                                 <thead>
                                     <tr>
                                         <th>{{trans('lang.project_title')}}</th>
