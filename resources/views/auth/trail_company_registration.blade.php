@@ -232,6 +232,8 @@ Company Registration
                                             </div>
                                             <div class="col-md-12 text-center">
 
+                                            <input type="hidden" name="url" id="url" value="{{ $url ?? '' }}">
+
                                                 <input type="hidden" name="payment_amount" id="payment_amount" value="{{ $package[0]->cost ?? '0' }}">
                                                 <input type="hidden" name="package_id" id="package_id" value="{{ $package[0]->id ?? '0' }}">
                                                 @php

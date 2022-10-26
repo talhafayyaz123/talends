@@ -211,6 +211,7 @@ jQuery('.chosen-select').chosen();
              
              if(len > 0){
                 $('#freelancerSubCategory').html('');
+                $('#freelancerSkills').html('');
 
                for(var i=0; i<len; i++){
                  var id = response['sub_categories'][i].sub_category_id;

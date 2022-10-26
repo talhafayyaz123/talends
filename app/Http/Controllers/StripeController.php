@@ -57,6 +57,7 @@ use Auth;
 use App\Invoice;
 
 use DB;
+use App\TialAgencyTokens;
 
 use App\Package;
 
@@ -199,6 +200,10 @@ class StripeController extends Controller
          session()->put(['user_id' => $user_id]);
         session()->put(['email' => $input['email']]);
           session()->put(['password' => $input['password']]);
+
+
+          TialAgencyTokens::where("url_token", $input['url'])->update(["status" => "inactive"]);
+
 
 
           $role_id = Helper::getRoleByUserID($user_id);

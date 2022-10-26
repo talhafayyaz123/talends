@@ -160,6 +160,12 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{{ route('tial_agency_tokens.index') }}}">
+                                <i class="ti-user"></i>
+                                <span>Agency Trial Links</span>
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{{ route('emailTemplates') }}}">
                                 <i class="ti-email"></i>
                                 <span>{{ trans('lang.email_templates') }}</span>

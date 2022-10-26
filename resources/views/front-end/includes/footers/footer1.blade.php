@@ -162,7 +162,7 @@
 <script>
     
     function close_popup(){
-        $("#taelnds_into_model").fadeOut(4000);
+        $("#taelnds_into_model").fadeOut(250);
     }
 </script>
 @endpush

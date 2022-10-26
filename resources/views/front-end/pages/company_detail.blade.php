@@ -183,7 +183,42 @@
                         @endif
                     </div>
                 </div>
-               
+                <div class="col-lg-2 col-md-4 pr-md-0 mt-md-0 mt-4">
+                    <div class="company-detail-stats">
+                        <h5>Talends Activity</h5>
+                        <p class="mb-0 mt-4">Hourly Rate</p>
+                        <p><b>AED {{ $profile->hourly_rate ?? '' }}</b></p>
+                        <p class="mb-0 mt-4">Total Jobs</p>
+                        <p><b>{{ $company_detail->total_jobs ?? '' }}</b></p>
+                        <p class="mb-0 mt-4">Joined Since</p>
+                        @if(isset($company_detail->last_work_date))
+                        <p><b> {{ \Carbon\Carbon::parse($company_detail->last_work_date)->format('Y') ?? '' }}</b></p>
+                        @endif
+                    </div>
+                    <hr />
+                    <div class="company-detail-stats">
+                        <p class="mb-4 mt-5">Company Information</p>
+                        <p class="mb-0 mt-4">Agency Talent Size</p>
+                        <p><b>{{ $profile->no_of_employees ?? '' }}</b></p>
+                        <p class="mb-0 mt-4">Year Founded</p>
+                        @if(isset($company_detail->membership_date))
+                        <p><b>{{ \Carbon\Carbon::parse($company_detail->membership_date)->format('Y') ?? '' }}</b></p>
+                        @endif
+                        <p class="mb-0 mt-4">Client Focus</p>
+                        @if(isset($profile->company_type) && !empty($profile->company_type) )
+                        @foreach(explode(',',$profile->company_type ) as $value)
+                        @if($value=='large_enterprises')
+                        <p><b>Large Enterprises</b></p>
+                        @elseif($value=='small_medium_enterprises')
+                        <p><b>Small & Mid</b></p>
+                        @else
+                        <p><b>Startup</b></p>
+                        @endif
+
+                        @endforeach
+                        @endif
+                    </div>
+                </div>
             </div>
         </div>
     </section>
