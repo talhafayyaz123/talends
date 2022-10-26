@@ -6049,3 +6049,6 @@ body.rtl .lara-attachment-files .wt-on-off .switch-button-control .switch-button
   select.form-control option:hover{
 	background-color:#349F1A;
   }
+  .bg-dash-icons{
+	background-color: #349f1a !important;
+}

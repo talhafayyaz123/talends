@@ -25,8 +25,10 @@
                                 </ul>
                             </div>
                         </div>
+                    
                         @if (!empty($packages) && $packages->count() > 0)
                             @foreach ($packages as $key => $package)
+                            @if($package->id!=12 )
                                 @php  $options = unserialize($package->options); @endphp
                                 
                                 @if (!empty($package))
@@ -57,7 +59,7 @@
                                                     @endphp
                                                     
                                                     @if($package->role_id==4)
-
+                                                    
                                                     @if ($key == 'banner_option' || $key == 'private_chat'  || $key == 'lead_management_crm' || $key == 'landing_page_cms' || $key == 'package_support' || $key == 'boost_visibility' || $key == 'leads_opportunities' || $key == 'commission_signed_deals')
                                                         <li><span><i class="{{{ $class }}}"></i></span></li>
                                                     @elseif ($key == 'duration')
@@ -95,6 +97,7 @@
                                             @endif
                                         </div>
                                     </div>
+                                @endif
                                 @endif
                             @endforeach
                         @else

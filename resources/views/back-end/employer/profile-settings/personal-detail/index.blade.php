@@ -113,6 +113,7 @@ jQuery('.chosen-select').chosen();
                len = response['sub_categories'].length;
              }
              $('#freelancerSubCategory').html('');
+             $('#freelancerSkills').html('');
 
              if(len > 0){
               

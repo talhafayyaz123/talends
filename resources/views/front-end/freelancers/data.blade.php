@@ -9,7 +9,7 @@
      {{$freelancer->user_skills  }}
 
     @php
-
+    $skills=array();
             $user_image = !empty($freelancer->profile->avater) ?
 
             config('app.aws_se_path').'/uploads/users/'.$freelancer->id.'/'.$freelancer->profile->avater :

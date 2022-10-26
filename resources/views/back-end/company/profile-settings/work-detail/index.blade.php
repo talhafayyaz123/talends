@@ -2,7 +2,18 @@
 
 @section('content')
 
-    <div class="wt-dbsectionspace wt-haslayout la-ps-freelancer">
+@push('stylesheets')
+
+<style>
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+    </style>
+@endpush
+<div class="wt-dbsectionspace wt-haslayout la-ps-freelancer">
 
         <div class="freelancer-profile" id="user_profile">
 
@@ -61,12 +72,9 @@
                                     <div class="wt-yourdetails wt-tabsinfo">
                                     @include('back-end.company.profile-settings.work-detail.detail')
                                     </div>
-                                    <div class="wt-updatall">
+                                    <div>
 
-                                        <i class="ti-announcement"></i>
-
-                                        <span>{{{ trans('lang.save_changes_note') }}}</span>
-
+                                     
                                         {!! Form::submit(trans('lang.btn_save_update'), ['class' => 'wt-btn', 'id'=>'submit-profile']) !!}
 
                                     </div>
