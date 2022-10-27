@@ -283,7 +283,7 @@
                             <div class="wt-tabscontenttitle">
                                 <h2>Expertise (What Your Agency Is Best At)</h2>
                             </div>
-                            <fieldset class="search-content expertise_list">
+                            <fieldset class="expertise_list">
                                 @php $counter = 0; @endphp
                                 @if (!empty($company_expertise_array) && !empty($company_expertise_array))
                                
