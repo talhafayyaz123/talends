@@ -1,8 +1,7 @@
 <div class="wt-location wt-tabsinfo">
-    <!-- <div class="wt-tabscontenttitle">
-        <h2>{{{ trans('lang.profile_photo') }}}  (Size should be 200 x 200 Px) </h2>
-    </div> -->
-    <label for="">Upload Company Photo</label>
+     <div class="wt-tabscontenttitle">
+        <h2>Upload Company Photo  (Size should be 200 x 200 Px) </h2>
+    </div>
     <div class="wt-settingscontent">
         @if (!empty($avater))
             @php $image = $aws_s3_path.'/uploads/users/'.Auth::user()->id.'/'.$avater; @endphp

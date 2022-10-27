@@ -6,16 +6,9 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label for="">Company Name</label>
-                {!! Form::text( 'company_name', e(Auth::user()->profile->company_name), ['class' =>'form-control', 'placeholder' => 'Company Name'] ) !!}
+                {!! Form::text( 'company_name', e(Auth::user()->profile->company_name), ['class' =>'form-control', 'placeholder' => 'Write Your Agency Name'] ) !!}
             </div>
-            <div class="col-md-6 mb-3">
-                <label for="">Service Hourly Rate (AED)</label>
-                {!! Form::number( 'hourly_rate', e($hourly_rate), ['class' =>'form-control', 'placeholder' => trans('lang.ph_service_hoyrly_rate')] ) !!}
-            </div>
-            <div class="col-md-6 mb-3">
-                <label for="">Tagline</label>
-                {!! Form::text( 'tagline', e($tagline), ['class' =>'form-control', 'placeholder' => trans('lang.ph_add_tagline')] ) !!}
-            </div>
+            
             <div class="col-md-6 mb-3">
                 <label for="">Availability</label>
                 <select name="availability" class='form-control' name="availability">
@@ -25,123 +18,97 @@
                 </select>
             </div>
             <div class="col-md-12 mb-3">
-                <div>
-                    <label for="">Company Type</label>
-                </div>
-                <div class="custom-control custom-checkbox custom-control-inline">
-                    <input class="custom-control-input" id="startup" type="checkbox" name="company_type[]" value="Startup" {{  !empty(Auth::user()->profile->company_type) &&  (in_array('Startup',explode(',', Auth::user()->profile->company_type))) ? 'checked' :''}}>
-                    <label class="custom-control-label" for="startup">Startup</label>
-                </div>
-                <div class="custom-control custom-checkbox custom-control-inline">
-                    <input class="custom-control-input" id="small_medium_enterprises" type="checkbox" name="company_type[]" value="small_medium_enterprises" {{  !empty(Auth::user()->profile->company_type)  && (in_array('small_medium_enterprises',explode(',', Auth::user()->profile->company_type))) ? 'checked' :''}}>
-                    <label class="custom-control-label" for="small_medium_enterprises">Small & Mid Enterprises</label>
-                </div>
-                <div class="custom-control custom-checkbox custom-control-inline">
-                    <input class="custom-control-input" id="large_enterprises" type="checkbox" name="company_type[]" value="large_enterprises" {{  !empty(Auth::user()->profile->company_type)   &&  (in_array('large_enterprises',explode(',', Auth::user()->profile->company_type))) ? 'checked' :''}}>
-                    <label class="custom-control-label" for="large_enterprises">Large enterprises</label>
-                </div>
+                <label for="">Tagline</label>
+                {!! Form::text( 'tagline', e($tagline), ['maxlength'=>'100','class' =>'form-control', 'placeholder' => 'Please write up to 100 Words only'] ) !!}
             </div>
+            
+            <div class="col-md-4 mb-3">
+                <label for="">Hourly Rate ({{$currency}})</label>
+                {!! Form::number( 'hourly_rate', e($hourly_rate), ['class' =>'form-control', 'placeholder' => trans('lang.ph_service_hoyrly_rate')] ) !!}
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label for="">Total Number of jobs Delivered</label>
+                {!! Form::number( 'total_jobs', $company_work_detail->total_jobs ?? null, ['class' =>'form-control', 'placeholder' => 'Total Jobs'  ] ) !!}
+            </div>
+
+            
+            <div class="col-md-4 mb-3">
+                <label for="">Joined Talends Since</label>
+                {!! Form::date( 'last_work_date', $company_work_detail->last_work_date ?? null, ['class' =>'form-control', 'placeholder' => 'Lat Worked'  ] ) !!}
+              </div>
+
+
+              
+            <div class="col-md-4 mb-3">
+            <label for="">Total Team Members</label>
             @php
                 $employees = Helper::getEmployeesList();
                 $company_bedget = Helper::getComapnyBudgetList();
             @endphp
-            <div class="col-md-6 mb-3">
-                <div class="wt-radioboxholder w-100">
-                    <h4>Total Team Strength </h4>
-                    <div class="form-group team_strength">
-                        @foreach ($employees as $key => $employee)
-                        <span class="wt-radio">
-                            <input id="wt-just-{{{$key}}}" type="radio" name="employees" value="{{{$employee['value']}}}" {{  !empty(Auth::user()->profile->no_of_employees) &&  (Auth::user()->profile->no_of_employees ==$employee['value']) ? 'checked' :''     }}>
-                            <label for="wt-just-{{{$key}}}">{{{$employee['title']}}}</label>
-                        </span>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 mb-3">
-                <div class="wt-radioboxholder w-100">
-                    <h4>Minimum Budget</h4>
-                    @foreach ($company_bedget as $key => $budget)
-                    <span class="wt-radio">
-                        <input id="wt-budget-{{{$key}}}" type="radio" name="budget" value="{{{$budget['value']}}}" {{  !empty(Auth::user()->profile->min_budget) &&  (Auth::user()->profile->min_budget ==$budget['value']) ? 'checked' :''     }}>
-                        <label for="wt-budget-{{{$key}}}">{{{$budget['title']}}}</label>
-                    </span>
-                    @endforeach
-                </div>
-            </div>
-            <div class="col-md-12 mb-3">
-                <label for="">About Company</label>
-                {!! Form::textarea( 'description', e($description), ['class' =>'form-control', 'placeholder' => trans('lang.ph_desc')] ) !!}
-            </div>
-        </div>
-        <!-- <div class="form-group form-group-half">
-            <span class="wt-select">
-                
-                {!! Form::select( 'gender', ['male' => 'Male', 'female' => 'Female'], e($gender), ['placeholder' => trans('lang.ph_select_gender')] ) !!}
-            </span>
-        </div> -->
-        <!-- <div class="form-group form-group-half">
-            {!! Form::text( 'first_name', e(Auth::user()->first_name), ['class' =>'form-control', 'placeholder' => trans('lang.ph_first_name')] ) !!}
-        </div>
-        <div class="form-group form-group-half">
-            {!! Form::text( 'last_name', e(Auth::user()->last_name), ['class' =>'form-control', 'placeholder' => trans('lang.ph_last_name')] ) !!}
-        </div>
-        <div class="form-group form-group-half">
-            {!! Form::number( 'hourly_rate', e($hourly_rate), ['class' =>'form-control', 'placeholder' => trans('lang.ph_service_hoyrly_rate')] ) !!}
-        </div>
-        <div class="form-group">
-            {!! Form::text( 'tagline', e($tagline), ['class' =>'form-control', 'placeholder' => trans('lang.ph_add_tagline')] ) !!}
-        </div>
-        <div class="form-group">
-            <select name="availability" class='form-control' name="availability">
-                <option value="remote" {{ (Auth::user()->profile->availability=='remote') ? 'selected' :''     }}>Remote</option>
-                <option value="on-site" {{ (Auth::user()->profile->availability=='on-site') ? 'selected' :''   }}>On Site</option>
-            </select>
-        </div> -->
-        <!-- <div class="form-group my-3">
-            <div>
-                <label for="">Company Type</label>
-            </div>
-            <div class="custom-control custom-checkbox custom-control-inline">
-                <input class="custom-control-input" id="startup" type="checkbox" name="company_type[]" value="Startup" {{  !empty(Auth::user()->profile->company_type) &&  (in_array('Startup',explode(',', Auth::user()->profile->company_type))) ? 'checked' :''}}>
-                <label class="custom-control-label" for="startup">Startup</label>
-            </div>
-            <div class="custom-control custom-checkbox custom-control-inline">
-                <input class="custom-control-input" id="small_medium_enterprises" type="checkbox" name="company_type[]" value="small_medium_enterprises" {{  !empty(Auth::user()->profile->company_type)  && (in_array('small_medium_enterprises',explode(',', Auth::user()->profile->company_type))) ? 'checked' :''}}>
-                <label class="custom-control-label" for="small_medium_enterprises">Small & Mid Enterprises</label>
-            </div>
-            <div class="custom-control custom-checkbox custom-control-inline">
-                <input class="custom-control-input" id="large_enterprises" type="checkbox" name="company_type[]" value="large_enterprises" {{  !empty(Auth::user()->profile->company_type)   &&  (in_array('large_enterprises',explode(',', Auth::user()->profile->company_type))) ? 'checked' :''}}>
-                <label class="custom-control-label" for="large_enterprises">Large enterprises</label>
-            </div>
-        </div> -->
-        <!-- @php
-            $employees = Helper::getEmployeesList();
-            $company_bedget = Helper::getComapnyBudgetList();
-        @endphp -->
-
-        <!-- <div class="wt-radioboxholder">
-            <h4>Total Team Strength </h4>
-            <div class="form-group team_strength">
+                <select name="employees" class='form-control' name="employees">
                 @foreach ($employees as $key => $employee)
-                <span class="wt-radio">
-                    <input id="wt-just-{{{$key}}}" type="radio" name="employees" value="{{{$employee['value']}}}" {{  !empty(Auth::user()->profile->no_of_employees) &&  (Auth::user()->profile->no_of_employees ==$employee['value']) ? 'checked' :''     }}>
-                    <label for="wt-just-{{{$key}}}">{{{$employee['title']}}}</label>
-                </span>
+                      
+                <option value="{{{$employee['value']}}}" {{  !empty(Auth::user()->profile->no_of_employees) &&  (Auth::user()->profile->no_of_employees ==$employee['value']) ? 'selected' :''     }}>{{{$employee['title']}}}</option>
+                    @endforeach
+             
+                </select>
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label for="">Agency Founded</label>
+                {!! Form::date( 'membership_date', $company_work_detail->membership_date ?? null, ['class' =>'form-control', 'placeholder' => 'Membership Date'  ] ) !!}
+              </div>
+
+              
+            <div class="col-md-4 mb-3">
+            <label for="">Client Focus</label>
+          
+                <select  class='form-control chosen-select' name="company_type[]" multiple>
+                      
+                <option value="Startup" {{  !empty(Auth::user()->profile->company_type) &&  (in_array('Startup',explode(',', Auth::user()->profile->company_type))) ? 'selected' :''}}>Startup</option>
+                <option value="small_medium_enterprises" {{  !empty(Auth::user()->profile->company_type)  && (in_array('small_medium_enterprises',explode(',', Auth::user()->profile->company_type))) ? 'selected' :''}}>Small & Mid Enterprises</option>
+                <option value="large_enterprises" {{  !empty(Auth::user()->profile->company_type)   &&  (in_array('large_enterprises',explode(',', Auth::user()->profile->company_type))) ? 'selected' :''}}>Large enterprises</option>
+             
+                </select>
+              </div>
+
+
+              <div class="col-md-4 mb-3">
+            <label for="">Budget</label>
+          
+                <select name="budget" class='form-control' name="budget">
+                @foreach ($company_bedget as $key => $budget)
+                <option value="{{{$budget['value']}}}" {{  !empty(Auth::user()->profile->min_budget) &&  (Auth::user()->profile->min_budget ==$budget['value']) ? 'selected' :''     }}>{{{$budget['title']}}}</option>
                 @endforeach
+
+                </select>
+              </div>
+
+
+              <div class="col-md-12 mb-3">
+              @include('back-end.company.profile-settings.personal-detail.profile_photo') 
+               </div>
+
+               <div class="col-md-12 mb-3">
+               @include('back-end.company.profile-settings.personal-detail.location')
+               </div>
+
+            <div class="col-md-12 mb-3">
+                <label for="">Overview (Please Write about your Agency)</label>
+                <textarea name="detail" style="height: 119px;" cols="100" placeholder="Please Write about your Agency">{{$company_work_detail->detail ?? null}}</textarea>
             </div>
         </div>
-        <div class="wt-radioboxholder">
-            <h4>Minimum Budget</h4>
-            @foreach ($company_bedget as $key => $budget)
-            <span class="wt-radio">
-                <input id="wt-budget-{{{$key}}}" type="radio" name="budget" value="{{{$budget['value']}}}" {{  !empty(Auth::user()->profile->min_budget) &&  (Auth::user()->profile->min_budget ==$budget['value']) ? 'checked' :''     }}>
-                <label for="wt-budget-{{{$key}}}">{{{$budget['title']}}}</label>
-            </span>
-            @endforeach
-        </div> -->
-        <!-- <div class="form-group">
-            {!! Form::textarea( 'description', e($description), ['class' =>'form-control', 'placeholder' => trans('lang.ph_desc')] ) !!}
-        </div> -->
+
     </fieldset>
 </div>
+
+
+@push('scripts')
+    <script>
+
+jQuery('.chosen-select').chosen();
+
+
+</script>
+    @endpush

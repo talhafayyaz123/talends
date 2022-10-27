@@ -62,7 +62,7 @@
             </div>
             <div class="wrap-search wt-haslayout">
             <fieldset>
-            {!! Form::textarea('detail', $company_work_detail->detail ?? null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => 'Detail'  ]  ) !!}
+            {!! Form::textarea('detail', $company_work_detail->detail ?? null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor_detail', 'placeholder' => 'Detail'  ]  ) !!}
 
             </fieldset>
         </div>
@@ -73,7 +73,7 @@
             </div>
             <div class="wrap-search wt-haslayout">
             <fieldset>
-            {!! Form::textarea('portfolio', $company_work_detail->portfolio ?? null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => 'Portfolio'  ]  ) !!}
+            {!! Form::textarea('portfolio', $company_work_detail->portfolio ?? null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor_portfolio', 'placeholder' => 'Portfolio'  ]  ) !!}
 
             </fieldset>
         </div>
@@ -84,7 +84,7 @@
             </div>
             <div class="wrap-search wt-haslayout">
             <fieldset>
-            {!! Form::textarea('team_detail', $company_work_detail->team_detail ?? null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => 'Team Detail'  ]  ) !!}
+            {!! Form::textarea('team_detail', $company_work_detail->team_detail ?? null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor_team_detail', 'placeholder' => 'Team Detail'  ]  ) !!}
 
             </fieldset>
         </div>
@@ -96,7 +96,7 @@
             </div>
             <div class="wrap-search wt-haslayout">
             <fieldset>
-            {!! Form::textarea('experience', $company_work_detail->experience ?? null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => 'Experience'  ]  ) !!}
+            {!! Form::textarea('experience', $company_work_detail->experience ?? null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor_experience', 'placeholder' => 'Experience'  ]  ) !!}
 
             </fieldset>
         </div>
@@ -107,7 +107,7 @@
             </div>
             <div class="wrap-search wt-haslayout">
             <fieldset>
-            {!! Form::textarea('technology_experience', $company_work_detail->technology_experience ?? null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => 'Technology Experience'  ]  ) !!}
+            {!! Form::textarea('technology_experience', $company_work_detail->technology_experience ?? null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor_technology_experience', 'placeholder' => 'Technology Experience'  ]  ) !!}
 
             </fieldset>
         </div>

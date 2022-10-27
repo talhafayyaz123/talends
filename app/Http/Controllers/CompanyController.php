@@ -166,11 +166,17 @@ class CompanyController extends Controller
       } 
 
       $aws_s3_path='https://'.env('AWS_BUCKET').'.s3.amazonaws.com';
+      $settings = SiteManagement::getMetaValue('commision');
+
+      $currency = !empty($settings[0]['currency']) ? $settings[0]['currency'] : 'USD';
+      $company_work_detail=CompanyDetail::where('user_id',Auth()->user()->id)->first();
 
 
         return view(
             'back-end.company.profile-settings.personal-detail.index',
             compact(
+                'company_work_detail',
+                'currency',
                 'aws_s3_path',
                 'seleced_cat_skills',
                 'sub_cat_skills',
@@ -464,7 +470,10 @@ class CompanyController extends Controller
             [
                 'company_name'    => 'required',
                 'hourly_rate'    => 'required',
-          //      'gender'    => 'required',
+                'total_jobs'    => 'required', 
+                 'last_work_date'=> 'required',
+                 'membership_date'=>'required',
+                 'detail'=>'required'
             ]
         );
         if (!empty($request['latitude']) || !empty($request['longitude'])) {

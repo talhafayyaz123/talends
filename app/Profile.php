@@ -108,6 +108,40 @@ class Profile extends Model
             }
         }
 
+/////////////
+if($user->getRoleNames()[0]=='company'){
+    $existing_menu_item=DB::table('company_details')->where('user_id', '=', auth()->user()->id)->first();
+               
+    if (!empty($existing_menu_item)) {
+       
+        DB::table('company_details')->where('user_id', '=', auth()->user()->id)->update(
+            [
+    
+                'total_jobs' => $request['total_jobs'],
+                'last_work_date' => $request['last_work_date'],
+                'membership_date' => $request['membership_date'],
+                'detail' => $request['detail'],
+                
+            ]
+        );
+    }else{
+        DB::table('company_details')->insert(
+            [
+                'user_id' => auth()->user()->id, 
+                'total_jobs' => $request['total_jobs'],
+                'last_work_date' => $request['last_work_date'],
+                'membership_date' => $request['membership_date'],
+                'detail' => $request['detail'],
+                "created_at" => Carbon::now(), 
+                "updated_at" => Carbon::now()
+            ]
+        );
+    }
+}
+
+////////////
+
+
         UserCategories::where('user_id', $user_id)->delete();
         
         if($user->getRoleNames()[0]=='freelancer'  ||$user->getRoleNames()[0]=='intern'){
@@ -228,6 +262,7 @@ class Profile extends Model
         if (!empty($request['company_type'])) {
             $profile->company_type = implode(',',$request['company_type']) ;
         }
+        
         if (!empty($request['employees'])) {
             $profile->no_of_employees = intval($request['employees']);
         }

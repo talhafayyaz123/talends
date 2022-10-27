@@ -76,7 +76,7 @@
 <!-- <div class="wt-tabscontenttitle">
     <h2>Skills</h2>
 </div> -->
-<label for="">Skills</label>
+<label for="">Skills  (Choose Specific Skillsets)</label>
 <div class="my-3">
    
 

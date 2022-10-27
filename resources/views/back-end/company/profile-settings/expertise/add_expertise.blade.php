@@ -3,38 +3,26 @@
 <div class="wrap-search wt-haslayout">
     
     <div class="form-group">
-        <div class="form-group-holder">
+
+    <div class="wt-tabscontenttitle">
+            <h2>Title</h2>
+        </div>
+
+        <div class="">
             {!! Form::text('expertise['.$no.'][title]', null, ['class' => 'form-control',
-            'placeholder' => trans('lang.ph_title')])
+            'placeholder' => trans('lang.ph_title'),'style'=>'border-radius: 4px;border: 1px solid #ddd;width:100%;'])
             !!}
-            {!! Form::text('expertise['.$no.'][total_developers]', null, ['class' => 'form-control',
-            'placeholder' => 'Total Developers'])
-            !!}
-
         </div>
 
-        <div class="wt-formtheme wt-userform">
-            <div class="form-group">
-                {!! Form::text('expertise['.$no.'][project_cost]', null, ['class' => 'form-control',
-                'placeholder' => 'Project Cost'])
-                !!}
-            </div>
-        </div>
+     
 
         <div class="wt-jobskills wt-tabsinfo">
-            <div class="wt-tabscontenttitle">
-                <h2>Categories</h2>
-            </div>
-            {!! Form::select('expertise['.$no.'][categories][]', $categories, '', array('class' => 'chosen-select', 'multiple', 'data-placeholder' => trans('lang.select_job_cats'))) !!}
-
-
-        </div>
-
-        <div class="wt-jobskills wt-tabsinfo">
+            <br>
             <div class="wt-tabscontenttitle">
                 <h2>Description</h2>
             </div>
-            {!! Form::textarea('expertise['.$no.'][description][]', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+            <textarea name="expertise[{{$no}}][description][]" style="height: 115px;" cols="100" placeholder="{{  trans('lang.job_dtl_note') }}"></textarea>
+
         </div>
 
 
@@ -43,7 +31,6 @@
         <span class="wt-addinfobtn wt-deleteinfo delete-search" >
         <i class="fa fa-trash"></i>
     </span>
-            <!-- <span class="wt-removeinfo" onclick="remove_expertise(this)"><i class="fa fa-trash"></i></span> -->
         </div>
     </div>
 </div>

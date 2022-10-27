@@ -37,7 +37,7 @@
                         @endif
                         <div class="ml-md-4 pt-4 px-3">
                             <p class="text-justify">
-                                {!! $company_detail->detail ?? '' !!}
+                            {{ $profile->tagline ?? '' }}
                             </p>
                             <p><span class="mr-3"><i class="bi-geo-alt-fill mr-2"></i> {{$profile->user->location->title ?? '' }}</span>
                                 <span class="mr-3"><i class="bi-share-fill mr-2"></i> Share</span>
@@ -53,7 +53,7 @@
                 <div class="col-lg-10 col-md-8 border-right">
                     <div class="company-detail-content px-4">
                         <h3>Overview</h3>
-                        {!! $company_detail->team_detail ?? '' !!}
+                        {!! $company_detail->detail ?? '' !!}
                         <!-- <button class="btn btn-link text-success pl-0" onclick="readMoreFunction()" id="myBtn">Read more <i class="bi-caret-down-fill"></i></button>  -->
                         <h3>Expertise</h3>
                         <div class="accordion" id="accordionExpertise">
