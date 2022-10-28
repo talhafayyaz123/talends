@@ -137,7 +137,7 @@
                             <figure class="wt-userimg">
                                 <img src="{{{ (Helper::gets3Image('uploads/users/' . Auth::user()->id, $profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}">
                             </figure>
-                            <div class="wt-username">
+                            <div class="wt-username" style="display:none;">
                                 <h3>{{{ Helper::getUserName(Auth::user()->id) }}}</h3>
                                 <span>{{{ !empty(Auth::user()->profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Helper::getAuthRoleName() }}}</span>
                             </div>

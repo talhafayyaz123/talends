@@ -15,6 +15,7 @@ use App\Http\Resources\User as UserResource;
 |
 */
 
+/*
 Route::get('v1/listing/get-freelancers', 'RestAPIController@getFreelancer');
 Route::get('v1/listing/get-employers', 'RestAPIController@getEmployer');
 Route::get('v1/listing/get-jobs', 'RestAPIController@getJobs');
@@ -41,3 +42,4 @@ Route::get('v1/listing/get-settings', 'RestAPIController@getSettings');
 Route::get('v1/listing/get-chat-users', 'RestAPIController@getChatUsers');
 Route::get('v1/listing/get-user-messages', 'RestAPIController@getUserMessages');
 Route::post('v1/listing/store-messages', 'RestAPIController@storeMessages');
+*/

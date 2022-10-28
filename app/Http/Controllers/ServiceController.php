@@ -95,7 +95,7 @@ class ServiceController extends Controller
                     'services_total_records',
                     'type',
                     'services',
-                    'symbol',
+                    //'symbol',
                     'keyword',
                     'categories',
                     'locations',
@@ -671,6 +671,8 @@ class ServiceController extends Controller
      */
     public function employerPaymentProcess($id)
     {
+
+      
         if (Auth::user() && !empty($id)) {
             if (Auth::user()->getRoleNames()->first() === 'employer') {
                 $user_id = Auth::user()->id;
@@ -722,7 +724,7 @@ class ServiceController extends Controller
                 return Redirect::back();
             }
         } else {
-            Session::flash('error', trans('lang.buy_service_warning'));
+           Session::flash('error', trans('lang.buy_service_warning'));
             return Redirect::back();
         }
     }

@@ -97,8 +97,6 @@ Route::get('freelancer/get-freelancer-educations', 'FreelancerController@getFree
 Route::get('freelancer/project-awards/{id}', 'HomeController@projectAwardsSettings')->name('freelancerProjectAwards');
 
 
-Route::get('articles/{category?}', 'ArticleController@articlesList')->name('articlesList');
-Route::get('article/{slug}', 'ArticleController@showArticle')->name('showArticle');
 Route::get('profile/{slug}', 'PublicController@showUserProfile')->name('showUserProfile');
 Route::get('categories', 'CategoryController@categoriesList')->name('categoriesList');
 Route::get('page/{slug}', 'PageController@show')->name('showPage');
@@ -108,10 +106,10 @@ if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'jobs') {
     Route::get('job/{slug}', 'JobController@show')->name('jobDetail');
 }
 
-if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services') {
+/* if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services') {
     Route::get('services', 'ServiceController@index')->name('services');
     Route::get('service/{slug}', 'ServiceController@show')->name('serviceDetail');
-}
+} */
 Route::get('user/password/reset/{verify_code}', 'PublicController@resetPasswordView')->name('getResetPassView');
 Route::post('user/update/password', 'PublicController@resetUserPassword')->name('resetUserPassword');
 // Authentication|Guest Routes
@@ -647,7 +645,7 @@ Route::group(
     }
 );
 
-Route::get('hire/agency/{id}', 'CompanyController@hireAgencyForm')->name('hireAgencyForm');
+//Route::get('hire/agency/{id}', 'CompanyController@hireAgencyForm')->name('hireAgencyForm');
 Route::post('store/hire/agency/{id}', 'CompanyController@storeHireAgency')->name('storeHireAgency');
 Route::get('success/hire/agency/{id}', 'CompanyController@successHireAgencyForm')->name('successHireAgency');
 Route::get('privacy/policy', 'PublicController@privacyPolicy')->name('privacyPolicy');
@@ -655,10 +653,10 @@ Route::get('term/agreement', 'PublicController@userAgreement')->name('Agreement'
 
 
 
-Route::get('page/get-page-data/{id}', 'PageController@getPage');
+//Route::get('page/get-page-data/{id}', 'PageController@getPage');
 Route::get('get-categories', 'CategoryController@getCategories');
 Route::get('get-seven-categories', 'CategoryController@getSevenCategories');
-Route::get('get-articles', 'PublicController@getArticles');
+//Route::get('get-articles', 'PublicController@getArticles');
 Route::get('get-home-slider/{id}', 'PageController@getSlider');
 
 Route::get('category_sub_categories/{id}','CategoryController@getCategorySubCategories')->name('category_subcategories');
