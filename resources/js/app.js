@@ -1983,6 +1983,26 @@
                         if (error.response.data.errors.hourly_rate) {
                             self.showError(error.response.data.errors.hourly_rate[0]);
                         }
+
+                        
+                        if (error.response.data.errors.total_jobs) {
+                            self.showError(error.response.data.errors.total_jobs[0]);
+                        }
+
+                        
+                        if (error.response.data.errors.last_work_date) {
+                            self.showError(error.response.data.errors.last_work_date[0]);
+                        }
+
+                        
+                        if (error.response.data.errors.membership_date) {
+                            self.showError(error.response.data.errors.membership_date[0]);
+                        }
+
+                        
+                        if (error.response.data.errors.detail) {
+                            self.showError(error.response.data.errors.detail[0]);
+                        }
                      });
              },
              submitWorkDetails: function () {
@@ -1990,6 +2010,24 @@
                 self.showInfoBeforeSave('Yor Work Detail Saving In Progress.');
                 var company_work_detail = document.getElementById('company_work_detail');
                 let form_data = new FormData(company_work_detail);
+
+                var description = tinyMCE.get('wt-tinymceeditor_detail').getContent();
+                form_data.append('detail', description);
+
+                 var description = tinyMCE.get('wt-tinymceeditor_portfolio').getContent();
+                form_data.append('portfolio', description);
+
+                 var description = tinyMCE.get('wt-tinymceeditor_team_detail').getContent();
+                form_data.append('team_detail', description);
+
+                 var description = tinyMCE.get('wt-tinymceeditor_experience').getContent();
+                form_data.append('experience', description);
+
+
+                  var description = tinyMCE.get('wt-tinymceeditor_technology_experience').getContent();
+                form_data.append('technology_experience', description);
+
+
                 console.log(form_data);
                 axios.post(APP_URL + '/company/store-work-detail', form_data)
                     .then(function (response) {

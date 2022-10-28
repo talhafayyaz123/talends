@@ -2,6 +2,17 @@
 
 @section('content')
 
+@push('stylesheets')
+
+<style>
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+    </style>
+@endpush
     <div class="wt-dbsectionspace wt-haslayout la-ps-freelancer">
 
         <div class="freelancer-profile" id="user_profile">
@@ -79,32 +90,7 @@
                                         @endif
 
                                     </div>
-                                    <div class="wt-location wt-tabsinfo mb-2">
-
-                                        @if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/personal-detail/location.blade.php'))) 
-
-                                            @include('extend.back-end.company.profile-settings.personal-detail.location')
-
-                                        @else 
-
-                                            @include('back-end.company.profile-settings.personal-detail.location')
-
-                                        @endif
-
-                                    </div>
-                                    <div class="wt-profilephoto wt-tabsinfo">
-
-                                        @if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/personal-detail/profile_photo.blade.php'))) 
-
-                                            @include('extend.back-end.company.profile-settings.personal-detail.profile_photo') 
-
-                                        @else 
-
-                                            @include('back-end.company.profile-settings.personal-detail.profile_photo') 
-
-                                        @endif
-
-                                    </div>
+                                    
 
                                     @if (!empty($options) && $options['banner_option'] === 'true')
 
@@ -134,33 +120,7 @@
 
                                    
 
-                                    <div class="wt-skills la-skills-holder wt-tabsinfo mb-2">
 
-                                        @if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/personal-detail/skill.blade.php'))) 
-
-                                            @include('extend.back-end.company.profile-settings.personal-detail.skill')   
-
-                                        @else 
-
-                                            @include('back-end.company.profile-settings.personal-detail.skill')   
-
-                                        @endif 
-
-                                    </div>
-
-                                    <div class="wt-videos-holder wt-tabsinfo la-footer-setting">
-
-                                        @if (file_exists(resource_path('views/extend/back-end/freelancer/profile-settings/personal-detail/videos.blade.php'))) 
-
-                                            @include('extend.back-end.company.profile-settings.personal-detail.videos')   
-
-                                        @else 
-
-                                            @include('back-end.company.profile-settings.personal-detail.videos')   
-
-                                        @endif 
-
-                                    </div>
 
                                     <div>
 

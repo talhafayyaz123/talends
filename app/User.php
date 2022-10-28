@@ -285,7 +285,7 @@ class User extends Authenticatable
      */
     public function item()
     {
-        return $this->hasMany('App\item', 'subscriber');
+        return $this->hasMany('App\Item', 'subscriber');
     }
 
    

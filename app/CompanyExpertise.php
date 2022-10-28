@@ -30,7 +30,7 @@ class CompanyExpertise extends Model
         if (!empty($menu)) {
 
             foreach ($menu as $key => $value) {
-                if (($value['title'] == null || $value['total_developers'] == null || $value['project_cost'] == null || $value['description'] == null)) {
+                if (($value['title'] == null  || $value['description'] == null)) {
                     $json['type'] = 'error';
                     return $json;
                 }
@@ -38,8 +38,9 @@ class CompanyExpertise extends Model
             
             $existing_menu_item=DB::table('company_expertise')->where('user_id', '=', auth()->user()->id)->first();
             $portfolio_image = null;
+            
             if(empty($existing_menu_item)){
-                
+            
                 if (!empty($request->hasFile('portfolio_image'))) {
                   
                     $portfolio_image = $request->file('portfolio_image');
@@ -55,6 +56,8 @@ class CompanyExpertise extends Model
     
                     $portfolio_image = filter_var($file_name, FILTER_SANITIZE_STRING);
     
+                }else{
+                    $portfolio_image = NULL;
                 }
 
                 if (!empty($request->hasFile('portfolio_image_2'))) {
@@ -72,6 +75,8 @@ class CompanyExpertise extends Model
 
                     $portfolio_image_2 = filter_var($file_name, FILTER_SANITIZE_STRING);
     
+                }else{
+                    $portfolio_image_2=NULL;
                 }
 
 
@@ -90,6 +95,8 @@ class CompanyExpertise extends Model
 
                     $portfolio_image_3 = filter_var($file_name, FILTER_SANITIZE_STRING);
     
+                }else{
+                    $portfolio_image_3=NULL;
                 }
 
             }else{

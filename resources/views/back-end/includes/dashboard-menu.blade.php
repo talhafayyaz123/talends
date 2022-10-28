@@ -286,7 +286,7 @@
                                 <li><hr><a href="{{{ url($role.'/profile') }}}">{{ trans('lang.profile_settings') }}</a></li>
                                 <li><hr><a href="{{{ route('manageAccount') }}}">{{ trans('lang.acc_settings') }}</a></li>
                                 @if ($role === 'company')
-                                <li><hr><a href="{{{ url('company/settings/expertise') }}}">Expertise</a></li>
+                                <li><hr><a href="{{{ url('company/settings/expertise') }}}">Portfolio</a></li>
                              @endif
                             </ul>
                         </li>

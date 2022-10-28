@@ -44,7 +44,7 @@
 
 
                             <div class="wt-tabscontenttitle">
-                                <h2>Portfilio</h2>
+                                <h2>Add Your Best Delivered Projects</h2>
                             </div>
                             <div class="wt-tabscontenttitle">
                                 <h2>Portfolio Detail</h2>
@@ -156,7 +156,7 @@
                                 <div class="wt-attachmentsholder">
                                     <div class="lara-attachment-files">
                                         <div class="wt-tabscontenttitle">
-                                            <h2>Attachment</h2>
+                                            <h2>Attachment  (Please Click on Chose File To Replace The Image)</h2>
 
                                             <div class="form-group form-group-label">
                                                 <div class="wt-labelgroup">
@@ -201,7 +201,7 @@
                                 <div class="wt-attachmentsholder">
                                     <div class="lara-attachment-files">
                                         <div class="wt-tabscontenttitle">
-                                            <h2>Attachment 2</h2>
+                                            <h2>Attachment 2 (Please Click on Chose File To Replace The Image)</h2>
 
                                             <div class="form-group form-group-label">
                                                 <div class="wt-labelgroup">
@@ -246,7 +246,7 @@
                                 <div class="wt-attachmentsholder">
                                     <div class="lara-attachment-files">
                                         <div class="wt-tabscontenttitle">
-                                            <h2>Attachment 3</h2>
+                                            <h2>Attachment 3 (Please Click on Chose File To Replace The Image)</h2>
 
                                             <div class="form-group form-group-label">
                                                 <div class="wt-labelgroup">
@@ -281,9 +281,9 @@
 
 
                             <div class="wt-tabscontenttitle">
-                                <h2>Expertise</h2>
+                                <h2>Expertise (What Your Agency Is Best At)</h2>
                             </div>
-                            <fieldset class="search-content expertise_list">
+                            <fieldset class="expertise_list">
                                 @php $counter = 0; @endphp
                                 @if (!empty($company_expertise_array) && !empty($company_expertise_array))
                                
@@ -291,34 +291,20 @@
                                 
                                 <div class="wrap-search wt-haslayout">
                                     <div class="form-group">
-                                        <div class="form-group-holder">
-                                            {!! Form::text('expertise['.$counter.'][title]', $value['title'], ['class' => 'form-control']) !!}
-                                            {!! Form::text('expertise['.$counter.'][total_developers]', $value['total_developers'], ['class' => 'form-control']) !!}
-                                        </div>
+                                    <div class="wt-tabscontenttitle">
+                                                <h2>Title</h2>
+                                                {!! Form::text('expertise['.$counter.'][title]', $value['title'], ['class' => 'form-control','style'=>'border-radius: 4px;border: 1px solid #ddd;width:100%;']) !!}
 
-                                        <div class="wt-formtheme wt-userform">
-                                            <div class="form-group">
-                                                {!! Form::text('expertise['.$counter.'][project_cost]',  $value['project_cost'], ['class' => 'form-control',
-                                                'placeholder' => 'Project Cost'])
-                                                !!}
                                             </div>
-                                        </div>
+                                       
 
-                                        <div class="wt-jobskills wt-tabsinfo">
-                                            <div class="wt-tabscontenttitle">
-                                                <h2>Categories</h2>
-                                            </div>
-                                                {!! Form::select('expertise['.$counter.'][categories][]', $categories, $value['categories'], array('class' => 'chosen-select', 'multiple', 'data-placeholder' => trans('lang.select_job_cats'))) !!}
-
-                                        </div>
-
-
+                                       
                                         <div class="wt-jobskills wt-tabsinfo">
                                             <div class="wt-tabscontenttitle">
                                                 <h2>Description</h2>
                                             </div>
 
-                                                {!! Form::textarea('expertise['.$counter.'][description][]', $value['description'][0], ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+                                                {!! Form::textarea('expertise['.$counter.'][description][]', $value['description'][0], ['cols'=>'100','class' => '', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note'),'style'=>'height:115px;']) !!}
 
                                         </div>
 
@@ -344,40 +330,25 @@
                                 @else
 
                                 <div class="wrap-search wt-haslayout">
+                                    
                                     <div class="form-group">
-                                        <div class="form-group-holder">
-                                        {!! Form::text('expertise[0][title]', null, ['class' => 'form-control',
-                                        'placeholder' => trans('lang.ph_title')])
-                                        !!}
-                                        {!! Form::text('expertise[0][total_developers]', null, ['class' => 'form-control',
-                                        'placeholder' => 'Total Developers'])
-                                        !!}
-
-                                        </div>
-
-                                        <div class="wt-formtheme wt-userform">
-                                            <div class="form-group">
-                                                {!! Form::text('expertise[0][project_cost]', null, ['class' => 'form-control',
-                                                'placeholder' => 'Project Cost'])
-                                                !!}
+                                    <div class="">
+                                    <div class="wt-tabscontenttitle">
+                                                <h2>Title</h2>
                                             </div>
-                                        </div>
 
+                                    {!! Form::text('expertise[0][title]', null, ['class' => 'form-control',
+                                        'placeholder' => trans('lang.ph_title'),'style'=>'border-radius: 4px;border: 1px solid #ddd;width:100%;'])
+                                        !!}
+                                         </div>
+                                       <br><br>
                                         <div class="wt-jobskills wt-tabsinfo">
-                                            <div class="wt-tabscontenttitle">
-                                                <h2>Categories</h2>
-                                            </div>
-                                                {!! Form::select('expertise[0][categories][]', $categories, '', array('class' => 'chosen-select', 'multiple', 'data-placeholder' => trans('lang.select_job_cats'))) !!}
-
-                                        </div>
-
-
-                                        <div class="wt-jobskills wt-tabsinfo">
+                                            <br>
                                             <div class="wt-tabscontenttitle">
                                                 <h2>Description</h2>
                                             </div>
                                             
-                                            {!! Form::textarea('expertise[0][description][]', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+                                            <textarea name='expertise[0][description][]' style="height: 115px;" cols="100" placeholder="{{  trans('lang.job_dtl_note') }}"></textarea>
 
                                         </div>
 
@@ -390,9 +361,7 @@
                                 @endif
 
                             </fieldset>
-                            <div class="wt-updatall la-updateall-holder">
-                                <i class="ti-announcement"></i>
-                                <span>{{{ trans('lang.save_changes_note') }}}</span>
+                            <div>
                                 {!! Form::submit(trans('lang.btn_save'),['class' => 'wt-btn']) !!}
                             </div>
 
