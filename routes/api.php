@@ -14,7 +14,6 @@ use App\Http\Resources\User as UserResource;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 /*
 Route::get('v1/listing/get-freelancers', 'RestAPIController@getFreelancer');
 Route::get('v1/listing/get-employers', 'RestAPIController@getEmployer');
