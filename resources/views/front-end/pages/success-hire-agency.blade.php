@@ -5,34 +5,6 @@
 <link href="{{ asset('css/owl.carousel.min.css') }}" rel="stylesheet">
 @endpush
 @section('content')
-@php
-$breadcrumbs = Breadcrumbs::generate('hireAgencyForm', $id);
-@endphp
-
-
-<!-- <div class="wt-haslayout wt-innerbannerholder theme_bg_dark">
-
-    <div class="container">
-        <div class="row justify-content-md-center">
-            <div class="col-xs-12 col-sm-12">
-                <div class="wt-innerbannercontent">
-                    <div class="wt-title">
-                        <h2>{{ $company_work_detail->company_name ?? 'Agency' }}</h2>
-                    </div>
-                    <ol class="wt-breadcrumb">
-                        @foreach ($breadcrumbs as $breadcrumb)
-                        @if ($breadcrumb->url && !$loop->last)
-                        <li><a href="{{{ $breadcrumb->url }}}">{{{ $breadcrumb->title }}}</a></li>
-                        @else
-                        <li class="active">{{{ $breadcrumb->title }}}</li>
-                        @endif
-                        @endforeach
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
 
 <div class="wt-haslayout">
     <div class="container">
