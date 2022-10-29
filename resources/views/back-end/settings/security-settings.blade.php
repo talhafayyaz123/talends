@@ -73,8 +73,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group form-group-half wt-btnarea">
-                                {!! Form::submit(trans('lang.btn_save'), ['class' => 'wt-btn']) !!}
+                            <div class="form-group form-group-half wt-btnarea" style="padding-top: 27px;">
+                                {!! Form::submit(trans('lang.btn_save_update'), ['class' => 'wt-btn']) !!}
                             </div>
                         {!! Form::close() !!}
                     </div>

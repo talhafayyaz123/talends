@@ -9,7 +9,8 @@
                         <span>{{ trans('lang.manage_articles') }}</span>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="{{{ route('articles') }}}">{{ trans('lang.articles') }}</a></li>
+               
+                    <li><a href="{{{ route('articles') }}}">{{ trans('lang.articles') }}</a></li>
                         <li><a href="{{{ route('articleCategories') }}}">{{ trans('lang.categories') }}</a></li>
                     </ul>
                 </li>

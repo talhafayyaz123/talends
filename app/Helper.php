@@ -554,7 +554,7 @@ return $response;
             '3' => array(
                 'title' => 'AED 10,000',
                 'search_title' => 'AED 10000',
-                'value' => '500',
+                'value' => '10000',
             ),
             '4' => array(
                 'title' => 'AED 25,000',
@@ -564,10 +564,10 @@ return $response;
             '5' => array(
                 'title' => 'AED 50,000',
                 'search_title' => 'AED 50000',
-                'value' => '5000',
+                'value' => '50000',
             ),
             '6' => array(
-                'title' => 'AED 1,000,00',
+                'title' => 'AED 100,000',
                 'search_title' => 'AED 100000',
                 'value' => '100000',
             ),

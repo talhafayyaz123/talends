@@ -57,15 +57,17 @@
                         @endif
                         <div class="row">
                             <div class="col-md-12 mb-3">
-                                <label>Account Type</label>
+                                <label>Account Type </label>
+                                
                                 <select name="role" id="role" class="form-control">
                                     @if(!empty($roles))
+                                    {{old('role')}}
                                         @foreach ($roles as $key => $role)
                                            @if(Request::get('admin') &&  Request::get('admin')==1 )
-                                         <option value="{{$role['id']}}">{{$role['role_type']}}</option>                 
+                                         <option value="{{$role['id']}}" {{(old('role') == $role['id'] ?'selected':'')}}>{{$role['role_type']}}</option>                 
                                            @else
                                            @if (!in_array($role['id'] == 1, $roles))
-                                           <option value="{{$role['id']}}">{{$role['role_type']}}</option>                 
+                                           <option value="{{$role['id']}}" {{ old('role') == $role['id'] ? 'selected' : '' }}>{{$role['role_type']}}</option>                 
 
                                            @endif
 

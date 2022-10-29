@@ -42,9 +42,9 @@
 
                 <div class="col-md-7 pb-3 align-self-center">
 
-                    <h5 class="text-white opcty_5">talents</h5>
+                    <h5 class="text-white opcty_5">Agencies</h5>
 
-                    <h2 class="text-white">Trusted companies <br><span class="theme_color"> best suits your Needs</span></h2>
+                    <h2 class="text-white">Trusted agencies <br><span class="theme_color"> best suits your Needs</span></h2>
 
                     <p class="text-white opcty_5">We have Trusted off-shore companies, making sure they deliver the best of what your dream within a very reasonable amount of money.</p>
 
@@ -225,6 +225,20 @@
 
                 @foreach($companies as $key => $value)
 
+                @php
+                $feedbacks = \App\Review::select('feedback')->where('receiver_id', $value->profile->user_id)->count();
+
+                $avg_rating = App\Review::where('receiver_id', $value->profile->user_id)->sum('avg_rating');
+
+                $rating  = $avg_rating != 0 ? round($avg_rating/\App\Review::count()) : 0;
+
+                $reviews = \App\Review::where('receiver_id', $value->profile->user_id)->get();
+
+                $stars  = $reviews->sum('avg_rating') != 0 ? (($reviews->sum('avg_rating')/$feedbacks)/5)*100 : 0;
+
+                $average_rating_count = !empty($feedbacks) ? $reviews->sum('avg_rating')/$feedbacks : 0;
+                
+                @endphp
                 <div class="col-md-6">
 
                     <div class="talent_list_box">
@@ -245,9 +259,9 @@
                              
                                 <h3> {{  substr($value->profile->company_name, 0,30) . '...' }} </h3>                            
                              
-                            <div class="tlb__reviews row">
+                            <div class="tlb__reviews row" style="padding-left:12px;">
 
-                                <div class="bh-stars" data-bh-rating="4.5">
+                                <div class="bh-stars" data-bh-rating="5">
 
                                     <svg version="1.1" class="bh-star bh-star--1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve">
 
@@ -304,11 +318,7 @@
                                 <div class="tlb__reviews_score">
 
                                     <ul>
-
-                                        <li>5.0/5.0</li>
-
-                                        <li>{{ $value->reviews->avg('avg_rating') ?  $value->reviews->avg('avg_rating')  : '0' }} Reviews</li>
-
+                                        <li>Ratings</li>
                                     </ul>
 
                                 </div>
@@ -317,7 +327,27 @@
 
                             <span class="company_description">Minimum Budget</span>
 
-                            <br>$ {{ $value->profile->min_budget ?? "0" }}
+                            <br>{{$currency}}
+                            @if(isset($value->profile->min_budget ) && !empty($value->profile->min_budget ) )
+                            
+                            @if($value->profile->min_budget=='5000')
+                            
+                            <span>5,000</span>
+                            @elseif($value->profile->min_budget=='10000')
+                            <span>10,000</span>
+                            @elseif($value->profile->min_budget=='25000')
+                            <span>25,000</span>
+                            @elseif($value->profile->min_budget=='50000')
+                            <span>50,000</span>
+                            @elseif($value->profile->min_budget=='100000')
+                            <span>100,000</span>
+                            @else
+                           {{$value->profile->min_budget}}
+                            @endif
+
+                            @else
+                             0
+                            @endif
 
 
 

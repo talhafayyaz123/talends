@@ -112,7 +112,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 
-                                    <div class="wt-location wt-tabsinfo mb-2">
+                                    <div class="wt-location wt-tabsinfo mb-7">
 
                                         @include('back-end.company.profile-settings.personal-detail.category')
 
@@ -121,7 +121,7 @@ input[type=number]::-webkit-outer-spin-button {
                                    
 
 
-
+                                     
                                     <div>
 
                                         {!! Form::submit(trans('lang.btn_save_update'), ['class' => 'wt-btn', 'id'=>'submit-profile']) !!}

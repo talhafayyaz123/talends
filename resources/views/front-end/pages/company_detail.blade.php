@@ -5,6 +5,64 @@
     #readMore {
         display: none;
     }
+    .wt-breadcrumb li {
+    width: auto;
+    float: left;
+    color: #fff;
+    padding: 0 15px;
+    position: relative;
+    line-height: inherit;
+    list-style-type: none;
+}
+.wt-breadcrumb li a {
+    color: green;
+    display: block;
+}
+.wt-breadcrumb {
+    padding: 0;
+    margin: 21px 0 0;
+    list-style: none;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    text-transform: capitalize;
+    font: 400 18px/18px 'Poppins', Arial, Helvetica, sans-serif;
+    position: relative;
+    bottom: 22%;
+}
+.wt-title {
+    float: left;
+    width: 100%;
+}
+
+.wt-title h2{
+color: white;
+}
+.wt-innerbannercontent {
+    float: left;
+    width: 100%;
+    text-align: center;
+}
+.wt-breadcrumb li:after {
+    top: 0;
+    left: -3px;
+    color: #fff;
+    content: '/';
+    position: absolute;
+    font-size: inherit;
+    line-height: inherit;
+}
+.wt-breadcrumb li:first-child:after {
+	display: none;
+}
+.wt-breadcrumb li:first-child {
+	padding-left: 0;
+}
+
+.wt-breadcrumb li:last-child {
+	padding-right: 0;
+}
+
 </style>
 
 @endpush
@@ -14,7 +72,52 @@
 @section('content')
 
 <div id="pages-list">
-@if(isset($profile->banner) && !empty($profile->banner) )
+<!-- 
+<section class="internee_sec theme_bg_dark companies_banner_section" style="padding-top: 0px !important;display:none;">
+
+<div class="container">
+
+    <div class="row row-eq-height">
+
+        <div class="col-md-12 align-self-center">
+
+            <h2 class="text-white"><div class="wt-innerbannercontent">
+   
+             <div class="row justify-content-md-center">
+
+            
+            
+            <div class="wt-innerbannercontent">
+            <div class="wt-title">
+                        <h2>{{ $profile->company_name ?? '' }}</h2>
+                    </div>
+             <ol class="wt-breadcrumb">
+            <li><a href="{{route('home')}}">Home</a></li>
+            <li><a href="{{route('Companies')}}">Find An Agency/</a></li>
+            <li  class="active"><a>Detail<a></li>
+             </ol>
+
+            </div>
+            
+            </div>
+
+            </div></h2>
+
+                
+                </div>
+            </div>
+        </div>
+        </section> -->
+<!-- 
+        <div class="col-md-3" style="position: relative;top: 153px;left: 11%;z-index: 999;">
+             <ol class="wt-breadcrumb">
+             <li><a href="{{route('home')}}">Home</a></li>
+            <li><a href="{{route('Companies')}}">Find An Agency</a></li>
+            <li class="active"><a>Agency Page</a></li>
+             </ol>            
+            </div> -->
+
+            @if(isset($profile->banner) && !empty($profile->banner) )
 
 @php  $image = config('app.aws_se_path'). '/' .'uploads/users/'.$id.'/'.$profile->banner; @endphp
 <section style="background-image: url('{{ $image }}');min-height: 300px !important;background-size: cover !important;
@@ -192,7 +295,7 @@
                         <p><b>{{ $company_detail->total_jobs ?? '' }}</b></p>
                         <p class="mb-0 mt-4">Joined Since</p>
                         @if(isset($company_detail->last_work_date))
-                        <p><b> {{ \Carbon\Carbon::parse($company_detail->last_work_date)->format('Y') ?? '' }}</b></p>
+                        <p><b> {{ $company_detail->last_work_date ?? '' }}</b></p>
                         @endif
                     </div>
                     <hr />
@@ -202,7 +305,7 @@
                         <p><b>{{ $profile->no_of_employees ?? '' }}</b></p>
                         <p class="mb-0 mt-4">Year Founded</p>
                         @if(isset($company_detail->membership_date))
-                        <p><b>{{ \Carbon\Carbon::parse($company_detail->membership_date)->format('Y') ?? '' }}</b></p>
+                        <p><b>{{ $company_detail->membership_date ?? '' }}</b></p>
                         @endif
                         <p class="mb-0 mt-4">Client Focus</p>
                         @if(isset($profile->company_type) && !empty($profile->company_type) )

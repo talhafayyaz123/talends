@@ -40,7 +40,7 @@
                                                 {!! Form::password('confirm_new_password', ['class' => 'form-control','placeholder' => trans('lang.ph_confirm_new_pass')]) !!}
                                             </div>
                                             {!! Form::hidden('user_id', $user_id) !!}
-                                            <div class="form-group form-group-half wt-btnarea">
+                                            <div class="form-group form-group-half wt-btnarea"  style="padding-top: 32px;">
                                                 {!! Form::submit(trans('lang.btn_save'), ['class' => 'wt-btn']) !!}
                                             </div>
                                         </fieldset>

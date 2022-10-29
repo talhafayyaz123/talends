@@ -34,8 +34,8 @@
 
             
             <div class="col-md-4 mb-3">
-                <label for="">Joined Talends Since</label>
-                {!! Form::date( 'last_work_date', $company_work_detail->last_work_date ?? null, ['class' =>'form-control', 'placeholder' => 'Lat Worked'  ] ) !!}
+                <label for="">Joined Talends Since (Year)</label>
+                {!! Form::number( 'last_work_date', $company_work_detail->last_work_date ?? null, ['class' =>'form-control', 'placeholder' => '2022'  ] ) !!}
               </div>
 
 
@@ -56,23 +56,11 @@
               </div>
 
               <div class="col-md-4 mb-3">
-                <label for="">Agency Founded</label>
-                {!! Form::date( 'membership_date', $company_work_detail->membership_date ?? null, ['class' =>'form-control', 'placeholder' => 'Membership Date'  ] ) !!}
+                <label for="">Agency Founded (Year)</label>
+                {!! Form::number( 'membership_date', $company_work_detail->membership_date ?? null, ['class' =>'form-control', 'placeholder' => '2022'  ] ) !!}
               </div>
 
               
-            <div class="col-md-4 mb-3">
-            <label for="">Client Focus</label>
-          
-                <select  class='form-control chosen-select' name="company_type[]" multiple>
-                      
-                <option value="Startup" {{  !empty(Auth::user()->profile->company_type) &&  (in_array('Startup',explode(',', Auth::user()->profile->company_type))) ? 'selected' :''}}>Startup</option>
-                <option value="small_medium_enterprises" {{  !empty(Auth::user()->profile->company_type)  && (in_array('small_medium_enterprises',explode(',', Auth::user()->profile->company_type))) ? 'selected' :''}}>Small & Mid Enterprises</option>
-                <option value="large_enterprises" {{  !empty(Auth::user()->profile->company_type)   &&  (in_array('large_enterprises',explode(',', Auth::user()->profile->company_type))) ? 'selected' :''}}>Large enterprises</option>
-             
-                </select>
-              </div>
-
 
               <div class="col-md-4 mb-3">
             <label for="">Budget</label>
@@ -85,7 +73,45 @@
                 </select>
               </div>
 
+              <div class="row" style="padding-left: 2rem !important;">
+            <label for="">Client Focus</label>
 
+            <div class="form-group">
+                
+            <div class="subcategories-checkboxes" id="employercategories">
+                  
+                      <label class="check">
+  
+                      <input type="checkbox" name="company_type[]"
+                      value="Startup"
+                      {{  !empty(Auth::user()->profile->company_type) &&  (in_array('Startup',explode(',', Auth::user()->profile->company_type))) ? 'checked' :''}}>
+                      <span>Startup</span>
+                      </label>
+
+
+                      <label class="check">
+  
+                      <input type="checkbox" name="company_type[]"
+                      value="small_medium_enterprises"
+                      {{  !empty(Auth::user()->profile->company_type) &&  (in_array('small_medium_enterprises',explode(',', Auth::user()->profile->company_type))) ? 'checked' :''}}  >
+                      <span>Small & Mid Enterprises</span>
+                      </label>
+
+
+                      <label class="check">
+                    
+                    <input type="checkbox" name="company_type[]"
+                    value="large_enterprises"
+                    {{  !empty(Auth::user()->profile->company_type) &&  (in_array('large_enterprises',explode(',', Auth::user()->profile->company_type))) ? 'checked' :''}}  >
+                    <span>Large enterprises</span>
+                    </label>
+  
+                  </div>           
+              
+              </div></div>
+
+
+             
               <div class="col-md-12 mb-3">
               @include('back-end.company.profile-settings.personal-detail.profile_photo') 
                </div>

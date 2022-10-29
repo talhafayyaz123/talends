@@ -756,7 +756,11 @@ class HomeController extends Controller
     $page['meta_desc'] = $meta_desc;
     $page['meta_keywords'] = $meta_keywords;
 
-    return view('front-end.pages.companies',compact('agency_services','page','agency_need_banner','companies','skills','locations','categories','sub_categories','featured_success_stories'));
+    $settings = SiteManagement::getMetaValue('commision');
+
+    $currency = !empty($settings[0]['currency']) ? $settings[0]['currency'] : 'USD';
+
+    return view('front-end.pages.companies',compact('currency','agency_services','page','agency_need_banner','companies','skills','locations','categories','sub_categories','featured_success_stories'));
      }
 
 

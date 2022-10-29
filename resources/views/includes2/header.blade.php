@@ -114,11 +114,11 @@
                         <a class="nav-link menu_green_cta_trans" href="{{ route('register') }}">Join Now</a>
                     </li>
                     @endguest
-
+                    
+                  
                     @auth
-                    <li class="nav-item">
-
-                        @php
+    
+                    @php
                             $user = !empty(Auth::user()) ? Auth::user() : '';
                             $role = !empty($user) ? $user->getRoleNames()->first() : array();
                             $profile = \App\User::find(Auth::user()->id)->profile;
@@ -130,10 +130,19 @@
                             $payment_module = !empty($payment_settings) && !empty($payment_settings[0]['enable_packages']) ? $payment_settings[0]['enable_packages'] : 'true';
                             $employer_payment_module = !empty($payment_settings) && !empty($payment_settings[0]['employer_package']) ? $payment_settings[0]['employer_package'] : 'true';
                     
-                            $total_hire_agencies = \App\HireAgency::select('is_seen')->where('is_seen', 0)->count();
+                            $total_hire_agencies = \App\HireAgency::select('is_seen')->where('agency_id', Auth::user()->id)->where('is_seen', 0)->count();
                         @endphp
+                    
+                        @if( $role === 'admin' || $role === 'company' )
+                        <li>
+                            <a href="javascript:;" class="nav-link position-relative">
+                                <i class="fa fa-bell fa-2x"></i> <span class="badge badge-success" style="position: absolute; right: -5px; top: 0px;">{{$total_hire_agencies }}</span>
+                            </a>
+                        </li>
+                    @endif
+                        <li class="nav-item auth_icons">
 
-                        <div class="wt-userlogedin">
+                        <div class="wt-userlogedin auth_icons">
                             <figure class="wt-userimg">
                                 <img src="{{{ (Helper::gets3Image('uploads/users/' . Auth::user()->id, $profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}">
                             </figure>
@@ -145,16 +154,9 @@
                             @include('back-end.includes.profile-menu')
 
                         </div>
-                      
-                            
+                        
                     </li>
-                    @if( $role === 'admin' || $role === 'company' )
-                        <li>
-                            <a href="javascript:;" class="nav-link position-relative">
-                                <i class="fa fa-bell fa-2x"></i> <span class="badge badge-success" style="position: absolute; right: -5px; top: 0px;">{{$total_hire_agencies }}</span>
-                            </a>
-                        </li>
-                    @endif
+                    
 
                     @endauth
 

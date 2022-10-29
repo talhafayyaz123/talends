@@ -222,8 +222,6 @@ $slider = Helper::getPageSlider($page_id);
                                 <img src="{{{ (Helper::gets3Image('uploads/users/' . Auth::user()->id, $profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}" width="40px" class="img-fluid rounded-circle"/> 
                                 <div class="ml-2">
                                     <h5 class="mb-0">{{{ Helper::getUserName(Auth::user()->id) }}} <i class="bi-chevron-down float-right ml-3" style="font-size:22px;"></i></h5>
-                                    <span>{{{ !empty(Auth::user()->profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Helper::getAuthRoleName() }}}</span>
-
                                 </div>
                             </div>
                             @include('back-end.includes.profile-menu')

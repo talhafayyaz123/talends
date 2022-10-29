@@ -361,8 +361,8 @@
                                 @endif
 
                             </fieldset>
-                            <div>
-                                {!! Form::submit(trans('lang.btn_save'),['class' => 'wt-btn']) !!}
+                            <div style="padding-top:30px;">
+                                {!! Form::submit(trans('lang.btn_save_update'),['class' => 'wt-btn']) !!}
                             </div>
 
                             {!! Form::close() !!}
