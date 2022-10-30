@@ -143,7 +143,7 @@
                         <span>{{ trans('lang.msg_center') }}</span>
                     </a>
                 </li>
-                <li class="menu-item-has-children">
+                <li class="menu-item-has-children page_item_has_children header_text_color">
                     <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                     <a href="javascript:void(0);">
                         <i class="ti-settings"></i>

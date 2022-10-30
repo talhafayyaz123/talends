@@ -34,14 +34,13 @@
                             <div class="row align-items-center">
                                 <div class="col-md-4 col-lg-6 order-md-2">
                                     <div class="content_box_wrapper text-center">
-                                        <div class="content_box">
+                                        <div class="content_box banner_image_section">
                                             @if(isset( $banner_settings->about_talends_image) )
                                                 <picture>
                                                     <source media="(min-width:992px)" srcset="{{$banner_settings->about_talends_image}}" class="img-fluic" width="450">
                                                     <source media="(min-width:480px)" srcset="{{$banner_settings->about_talends_image}}" class="img-fluic" width="300">
                                                     <img src="{{$banner_settings->about_talends_image}}" alt="Footer Image" class="img-fluic" width="200">
                                                 </picture>
-                                            <!-- <img src="{{asset('uploads/home-pages/banners/'.$banner_settings->about_talends_image)}}" class="img-fluid" width="450" alt=""> -->
                                             @endif
                                         </div>
                                     </div>

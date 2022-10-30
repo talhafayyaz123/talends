@@ -361,8 +361,10 @@ body.lang-es .wt-sidebarwrapper .wt-navdashboard .menu-item-has-children .sub-me
 	content: "\e874";
 }
 
+
 .wt-navigation>ul>.menu-item-has-children {
 	padding-right: 10px;
+	
 }
 
 .wt-headerelevenvtwo .wt-categories-nav>ul>li.wt-catnav-children:after,
@@ -1062,6 +1064,10 @@ a.notif {
 
 
 @media screen and (max-width:499px) {
+
+	.banner_image_section {
+		display: none;
+	  }
 	
 	.mega_menu_tabs.nav-tabs .nav-link {
 		font-size: 12px;

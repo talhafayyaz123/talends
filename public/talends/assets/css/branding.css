@@ -1,9 +1,9 @@
 @font-face {
 	font-family: 'Joan';
-    src: url('../talends/assets/fonts/joan/Joan-Regular.woff2') format('woff2'),
-        url('../talends/assets/fonts/joan/Joan-Regular.woff') format('woff'),
-        url('../talends/assets/fonts/joan/Joan-Regular.ttf') format('truetype'),
-        url('../talends/assets/fonts/joan/Joan-Regular.svg#Joan-Regular') format('svg');
+    src: url('https://talends.com/talends/assets/fonts/joan/Joan-Regular.woff2') format('woff2'),
+        url('https://talends.com/talends/assets/fonts/joan/Joan-Regular.woff') format('woff'),
+        url('https://talends.com/talends/assets/fonts/joan/Joan-Regular.ttf') format('truetype'),
+        url('https://talends.com/talends/assets/fonts/joan/Joan-Regular.svg#Joan-Regular') format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: swap;

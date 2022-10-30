@@ -81,6 +81,8 @@
 	@stack('PackageStyle')
 
 
+    <link href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css" rel="stylesheet">
+
 
     <link rel="preload" href="{{ asset('talends/assets/css/animate.css')}}" as="style">
 
