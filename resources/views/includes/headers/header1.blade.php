@@ -206,7 +206,7 @@
                             <figure class="wt-userimg">
                                 <img src="{{{ (Helper::gets3Image('uploads/users/' . Auth::user()->id, $profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}">
                             </figure>
-                            <div class="wt-username">
+                            <div class="wt-username" style="display: none;">
                                 <h3>{{{ Helper::getUserName(Auth::user()->id) }}}</h3>
                                 <span>{{{ !empty(Auth::user()->profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Helper::getAuthRoleName() }}}</span>
                             </div>
@@ -219,6 +219,16 @@
                     </li>
 
                     
+                    <li>
+                    <div class="">
+                        <h5 class="mb-0">
+                            <i class="bi-chevron-down float-right header_menu_model" onclick="toggle_menu()" style="font-size: 22px;"></i>
+                        </h5>
+                    </div>
+
+                        </li>
+
+                    
                     @endauth
 
 
@@ -228,3 +238,18 @@
     </div>
     @endif
 </header>
+
+
+@push('scripts')
+<script>
+
+ function toggle_menu(){
+
+    if($('#wt-profiledashboard').hasClass('header_menu_toogle')){
+        $('#wt-profiledashboard').removeClass('header_menu_toogle');
+    }else{
+        $('#wt-profiledashboard').addClass('header_menu_toogle');
+    }
+ }
+</script>
+@endpush

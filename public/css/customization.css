@@ -33,6 +33,11 @@ button.navbar-toggle {
     font-size:14px;
 }
 
+.header_menu_toogle{
+	visibility: visible !important;
+	opacity: 1 !important;
+}
+
 .navbar-toggle {
     background: 0 0;
     border: none;

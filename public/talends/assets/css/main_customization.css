@@ -43,6 +43,11 @@ body.wt-login .wt-userlogedin {
 	max-height: 50px;
 }
 
+.header_menu_toogle{
+	visibility: visible !important;
+	opacity: 1 !important;
+}
+
 .wt-messages-holder .wt-userlogedin .wt-username {
 	padding: 2px 0;
 }

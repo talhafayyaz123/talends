@@ -717,10 +717,10 @@ class HomeController extends Controller
           
               $query->where('location_id',  $request->location_id);
               
-            })->latest()->paginate(6);
+            })->where('user_verified',1)->latest()->paginate(6);
   
           } else {
-            $companies = User::select('*')->role('company')->latest()->paginate(6);
+            $companies = User::select('*')->where('user_verified',1)->role('company')->latest()->paginate(6);
           }
 
 /*           ->whereHas('user_payment', function ($query) {

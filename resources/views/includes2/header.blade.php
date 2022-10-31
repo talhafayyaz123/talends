@@ -142,7 +142,7 @@
                     @endif
                         <li class="nav-item auth_icons">
 
-                        <div class="wt-userlogedin auth_icons">
+                        <div>
                             <figure class="wt-userimg">
                                 <img src="{{{ (Helper::gets3Image('uploads/users/' . Auth::user()->id, $profile->avater, '' , 'user.jpg')) }}}" alt="{{{ trans('lang.user_avatar') }}}">
                             </figure>
@@ -156,7 +156,16 @@
                         </div>
                         
                     </li>
-                    
+         
+                    <li>
+                    <div class="">
+                        <h5 class="mb-0">
+                            <i class="bi-chevron-down float-right header_menu_model" onclick="toggle_menu()" style="font-size: 22px;"></i>
+                        </h5>
+                    </div>
+
+                        </li>
+
 
                     @endauth
 
@@ -165,3 +174,23 @@
         </nav>
     </div>
 </header>
+
+@push('scripts')
+<script>
+
+ function toggle_menu(){
+
+    if($('#wt-profiledashboard').hasClass('header_menu_toogle')){
+        $('#wt-profiledashboard').removeClass('header_menu_toogle');
+    }else{
+        $('#wt-profiledashboard').addClass('header_menu_toogle');
+    }
+ }
+/*  $('body').on("click", function () {
+    if($('#wt-profiledashboard').hasClass('header_menu_toogle')){
+     alert('dd');
+        $('#wt-profiledashboard').removeClass('header_menu_toogle');
+    }
+  }); */
+</script>
+@endpush

@@ -1,4 +1,4 @@
-<nav id="wt-profiledashboard" class="wt-usernav">
+<nav id="wt-profiledashboard" class="wt-usernav" style="top:64px;">
         <ul>
             
             @if ($role === 'admin')
@@ -145,7 +145,7 @@
                 </li>
                 <li class="menu-item-has-children page_item_has_children header_text_color">
                     <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
-                    <a href="javascript:void(0);">
+                    <a href="javascript:void(0);" style="bottom: 7px;">
                         <i class="ti-settings"></i>
                         <span>{{ trans('lang.settings') }}</span>
                     </a>

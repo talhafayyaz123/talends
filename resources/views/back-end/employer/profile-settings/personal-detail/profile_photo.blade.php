@@ -4,7 +4,9 @@
     </div>
     <div class="wt-settingscontent">
         @if (!empty($avater))
-            @php $image = $aws_s3_path. '/uploads/users/'.Auth::user()->id.'/'.$avater; @endphp
+            @php
+            $aws_s3_path='https://'.env('AWS_BUCKET').'.s3.amazonaws.com';
+            $image = $aws_s3_path. '/uploads/users/'.Auth::user()->id.'/'.$avater; @endphp
             <div class="wt-formtheme wt-userform">
                 <div v-if="this.uploaded_image">
                     <upload-image 
