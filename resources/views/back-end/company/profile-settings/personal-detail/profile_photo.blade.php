@@ -5,8 +5,8 @@
     <div class="wt-settingscontent">
         @if (!empty($avater))
             @php 
-            $aws_s3_path='https://'.env('AWS_BUCKET').'.s3.amazonaws.com';
-
+            
+            $aws_s3_path='https://talends-bucket.s3.amazonaws.com';
             $image = $aws_s3_path.'/uploads/users/'.Auth::user()->id.'/'.$avater; @endphp
             <div class="wt-formtheme wt-userform">
                 <div v-if="this.uploaded_image">
