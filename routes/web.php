@@ -734,5 +734,5 @@ Route::get('get-top-packages/{role}', 'PackageController@getTopPackages');
 
 // Search Component V2
 Route::get('search/get-search-filtersV2', 'PublicController@getFilterOptions');
-
+Route::get('search/get_users', 'PublicController@get_users');
 Route::get('search/location-list', 'PublicController@getLocationList');

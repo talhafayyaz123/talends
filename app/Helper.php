@@ -1861,6 +1861,17 @@ return $response;
         }
     }
 
+    
+    public static function get_users(){
+        $users = DB::table('users')
+        ->join('model_has_roles as mr', 'mr.model_id', '=', 'users.id')
+        ->join('profiles as pr', 'pr.user_id', '=', 'users.id')->
+        select('*')->where('role_id', 2)->get();
+
+        return $users;
+    }
+
+
     /**
      * Get search filters
      *

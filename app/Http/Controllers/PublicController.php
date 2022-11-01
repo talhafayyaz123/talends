@@ -804,6 +804,25 @@ class PublicController extends Controller
         }
     }
 
+    public function get_users()
+    {
+        $json = array();
+        $locations  = array();
+        $filters = Helper::get_users();
+        // $locations  = Location::all();
+        // dd($locations);
+        if (!empty($filters)) {
+            $json['type'] = 'success';
+            $json['result'] = $filters;
+            // $json['locations'] = $locations;
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            $json['message'] = trans('lang.something_wrong');
+            return $json;
+        }
+    }
+
     /**
      * Get home services tabs
      *
