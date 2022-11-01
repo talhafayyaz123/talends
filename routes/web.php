@@ -106,10 +106,10 @@ if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'jobs') {
     Route::get('job/{slug}', 'JobController@show')->name('jobDetail');
 }
 
-/* if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services') {
+if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services') {
     Route::get('services', 'ServiceController@index')->name('services');
     Route::get('service/{slug}', 'ServiceController@show')->name('serviceDetail');
-} */
+} 
 Route::get('user/password/reset/{verify_code}', 'PublicController@resetPasswordView')->name('getResetPassView');
 Route::post('user/update/password', 'PublicController@resetUserPassword')->name('resetUserPassword');
 // Authentication|Guest Routes
