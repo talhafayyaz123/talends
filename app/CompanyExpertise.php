@@ -27,15 +27,6 @@ class CompanyExpertise extends Model
         $menu = $request['expertise'];
 
        
-        if (!empty($menu)) {
-
-            foreach ($menu as $key => $value) {
-                if (($value['title'] == null  || $value['description'] == null)) {
-                    $json['type'] = 'error';
-                    return $json;
-                }
-            }
-            
             $existing_menu_item=DB::table('company_expertise')->where('user_id', '=', auth()->user()->id)->first();
             $portfolio_image = null;
             
@@ -224,9 +215,6 @@ class CompanyExpertise extends Model
            
             $json['type'] = 'success';
             return $json;
-        } else {
-            $json['type'] = 'error';
-            return $json;
-        }
+        
     }
 }

@@ -51,7 +51,7 @@ use App\HireAgency;
 use App\EmailTemplate;
 use App\Mail\AdminEmailMailable;
 use Illuminate\Support\Facades\Mail;
-
+use App\AdminLeads;
 
 /**
  * Class FreelancerController
@@ -207,7 +207,7 @@ class CompanyController extends Controller
         $categories = Category::pluck('title','id');
         $company_expertise=CompanyExpertise::where('user_id',auth()->user()->id)->first();
         $company_expertise_array= isset($company_expertise) ? unserialize($company_expertise->description)   : '';
-      
+       
         return view('back-end.company.profile-settings.expertise.index',compact('company_expertise_array','categories','company_expertise'));
     }
 
@@ -221,13 +221,28 @@ class CompanyController extends Controller
     public function storeExpertise(Request $request)
     {
 
-         $this->validate(
-            $request,
-            [
-                'portfolio_detail' => 'required',
-                // 'portfolio_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:1024'
-          ]
-        );
+         $is_portfolio_error=0;
+         $is_expertise_error=0;
+        
+         if($request->portfolio_detail==null && $request->portfolio_detail_2==null &&  $request->portfolio_detail_3==null){
+            $is_portfolio_error=1;
+         }
+         
+         if($request->expertise[0]['description'][0]==null && $request->expertise[0]['title']==null){
+        
+            $is_expertise_error=1;
+         }
+
+
+        if($is_portfolio_error==1 && $is_expertise_error==1){
+            $this->validate(
+                $request,
+                [
+                    'portfolio_detail' => 'required'
+              ]
+            );
+        }
+       
  
         $json = array();
         if (!empty($request)) {
@@ -313,6 +328,18 @@ class CompanyController extends Controller
             'back-end.company.hiring_requests.index',
             compact(
                 'hiring_requests','role'
+            )
+        );
+    }
+
+    public function adminLeads(){
+
+            $admin_leads=AdminLeads::get();
+        
+        return view(
+            'back-end.admin.admin_leads.index',
+            compact(
+                'admin_leads'
             )
         );
     }

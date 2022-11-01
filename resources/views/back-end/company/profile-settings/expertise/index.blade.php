@@ -1,5 +1,22 @@
 @extends(file_exists(resource_path('views/extend/back-end/master.blade.php')) ? 'extend.back-end.master' : 'back-end.master')
 @section('content')
+
+@push('stylesheets')
+<style>
+.heading_style{
+    background: #166702 !important;
+    padding: 18px 30px !important;
+}
+.heading_style h2{
+    color: white; 
+     font-size: 25px !important;
+}
+     
+
+</style>
+
+@endpush
+
 <div class="wt-haslayout wt-manage-account wt-dbsectionspace la-admin-setting" id="settings">
     @if (Session::has('message'))
     <div class="flash_msg">
@@ -39,26 +56,24 @@
                             @endif
 
 
-                            <!-- start of footer menu 2 -->
                             {!! Form::open(['url' => ('company/store-expertise'), 'class' => 'wt-formtheme wt-skillsform', 'id'=>'header_menu2' ,'enctype'=>'multipart/form-data' ]) !!}
 
 
-                            <div class="wt-tabscontenttitle">
+                            <div class="wt-tabscontenttitle heading_style">
                                 <h2>Add Your Best Delivered Projects</h2>
                             </div>
                             <div class="wt-tabscontenttitle">
                                 <h2>Portfolio Detail</h2>
                             </div>
-                            @if(!isset($company_expertise->portfolio_detail) && empty($company_expertise->portfolio_detail))
-
+                            @if(!isset($company_expertise->id) && empty($company_expertise->id))
                         
                             
                              <div class="wrap-search wt-haslayout">
                                 <fieldset>
-                                {!! Form::textarea('portfolio_detail', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+                                <textarea name='portfolio_detail' style="height: 155px;" cols="100" placeholder="Write Project Details"></textarea>
 
                                 </fieldset>
-
+                                <br>
                                 <div class="wt-attachmentsholder">
                                     <div class="lara-attachment-files">
                                         <div class="wt-tabscontenttitle">
@@ -86,10 +101,10 @@
 
                             <div class="wrap-search wt-haslayout">
                                 <fieldset>
-                                {!! Form::textarea('portfolio_detail_2', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+                                <textarea name='portfolio_detail_2' style="height: 155px;" cols="100" placeholder="Write Project Details"></textarea>
 
                                 </fieldset>
-
+                                <br>
                                 <div class="wt-attachmentsholder">
                                     <div class="lara-attachment-files">
                                         <div class="wt-tabscontenttitle">
@@ -118,10 +133,10 @@
 
                             <div class="wrap-search wt-haslayout">
                                 <fieldset>
-                                {!! Form::textarea('portfolio_detail_3', null, ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+                                <textarea name='portfolio_detail_3' style="height: 155px;" cols="100" placeholder="Write Project Details"></textarea>
 
                                 </fieldset>
-
+                                 <br>
                                 <div class="wt-attachmentsholder">
                                     <div class="lara-attachment-files">
                                         <div class="wt-tabscontenttitle">
@@ -149,10 +164,11 @@
                           
                             <div class="wrap-search wt-haslayout">
                                 <fieldset>
-                                {!! Form::textarea('portfolio_detail', e($company_expertise['portfolio_detail']), ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
 
-                                </fieldset>
+                                <textarea name='portfolio_detail' style="height: 155px;" cols="100" placeholder="Write Project Details">{{e($company_expertise['portfolio_detail'])}}</textarea>
 
+                                 </fieldset>
+                               <br>
                                 <div class="wt-attachmentsholder">
                                     <div class="lara-attachment-files">
                                         <div class="wt-tabscontenttitle">
@@ -194,10 +210,10 @@
                           
                             <div class="wrap-search wt-haslayout">
                                 <fieldset>
-                                {!! Form::textarea('portfolio_detail_2', e($company_expertise['portfolio_detail_2']), ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+                                <textarea name='portfolio_detail_2' style="height: 155px;" cols="100" placeholder="Write Project Details">{{e($company_expertise['portfolio_detail_2'])}}</textarea>
 
                                 </fieldset>
-
+                                 <br>
                                 <div class="wt-attachmentsholder">
                                     <div class="lara-attachment-files">
                                         <div class="wt-tabscontenttitle">
@@ -239,10 +255,10 @@
                           
                             <div class="wrap-search wt-haslayout">
                                 <fieldset>
-                                {!! Form::textarea('portfolio_detail_3', e($company_expertise['portfolio_detail_3']), ['class' => 'wt-tinymceeditor', 'id' => 'wt-tinymceeditor', 'placeholder' => trans('lang.job_dtl_note')]) !!}
+                                <textarea name='portfolio_detail_3' style="height: 155px;" cols="100" placeholder="Write Project Details">{{e($company_expertise['portfolio_detail_3'])}}</textarea>
 
                                 </fieldset>
-
+                             <br>
                                 <div class="wt-attachmentsholder">
                                     <div class="lara-attachment-files">
                                         <div class="wt-tabscontenttitle">
@@ -280,7 +296,7 @@
                             @endif
 
 
-                            <div class="wt-tabscontenttitle">
+                            <div class="wt-tabscontenttitle heading_style">
                                 <h2>Expertise (What Your Agency Is Best At)</h2>
                             </div>
                             <fieldset class="expertise_list">

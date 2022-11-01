@@ -211,7 +211,14 @@
                             <li>
                                 <a href="{{{ route('adminHiringRequests') }}}">
                                 <i class="ti-bookmark-alt"></i>
-                                <span> Leads</span>
+                                <span>Agency Leads</span>
+                                </a>
+
+                            </li>
+                            <li>
+                                <a href="{{{ route('adminLeads') }}}">
+                                <i class="ti-bookmark-alt"></i>
+                                <span>Admin Leads</span>
                                 </a>
 
                             </li>

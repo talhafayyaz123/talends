@@ -144,7 +144,9 @@ Route::group(
         Route::post('admin/conversation/delete-message', 'MessageController@deleteMessage');
         Route::post('admin/conversation/delete', 'MessageController@deleteConversation');
         Route::post('admin/update/user-verify', 'UserController@updateUserVerification');
-       
+
+        Route::get('admin/leads', 'CompanyController@adminLeads')->name('adminLeads');
+
         Route::get('admin/hiring_requests', 'CompanyController@companyHiringRequests')->name('adminHiringRequests');
         Route::get('admin/hiring_request_detail/{id}', 'CompanyController@companyHiringRequestDetail')->name('adminHiringRequestDetail');
 

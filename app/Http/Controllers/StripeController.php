@@ -111,16 +111,7 @@ class StripeController extends Controller
 
     {
 
-        if (file_exists(resource_path('views/extend/back-end/paymentstripe.blade.php'))) {
-
-            return view('extend.back-end.paymentstripe');
-
-        } else {
-
-            return view('back-end.paymentstripe');
-
-        }
-
+        exit;
     }
 
     public function stripeCompanyRegistrationFail($product_id){
