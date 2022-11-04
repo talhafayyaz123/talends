@@ -325,7 +325,7 @@
 
                             </div>
 
-                            <span class="company_description">Minimum Budget</span>
+                            <span class="company_description">Minimum Project Budget</span>
 
                             <br>{{$currency}}
                             @if(isset($value->profile->min_budget ) && !empty($value->profile->min_budget ) )
