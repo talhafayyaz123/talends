@@ -160,6 +160,58 @@ class StripeController extends Controller
      }
     
 
+     public function employerJobHire($product_id){
+        
+
+        if (!empty(env('STRIPE_SECRET'))) {
+            \Artisan::call('optimize:clear');
+   
+            $stripe = Stripe::make(env('STRIPE_SECRET'));     
+        }
+
+        $product_id = Session::has('product_id') ? session()->get('product_id') : '';
+         $package=Proposal::find($product_id );
+        
+       if(isset($package) && !empty($package) ){
+        $settings = SiteManagement::getMetaValue('commision');
+
+        $currency = !empty($settings[0]['currency']) ? $settings[0]['currency'] : 'USD';
+        $product = $stripe->products()->create([
+
+            'name' => 'Hire Freelancer on Job',
+            'description' => 'Hire Freelancer on Job',
+            'id'   =>time().''.'_'.$product_id,
+          ]);
+          $price = $stripe->prices()->create([
+        
+            'unit_amount' => $package->amount*100,
+        
+            'currency' => $currency,
+        
+            'product' => $product['id'],
+        
+          ]);
+        $session=  $stripe->checkout()->sessions()->create([
+
+            'success_url' => url('stripe/package/payment/success/'.$product_id.'?session_id={CHECKOUT_SESSION_ID}'),
+            'cancel_url' =>url('payment-process/'.$product_id.'?job_hire=fail'),
+            'billing_address_collection' => 'required',
+    
+               'line_items' => [
+                  [
+                    'price' => $price['id'],
+                    'quantity' => 1,
+                  ]
+                ], 
+                'mode' => 'payment',
+              ]);
+              return redirect()->away( $session['url']);    
+
+       }
+
+
+     }
+
      public function companyCheckoutPurchasePackage($product_id){
    
         $settings = SiteManagement::getMetaValue('commision');
@@ -3215,18 +3267,7 @@ return $json;
           $payment_status=$session['payment_status'];
           $banner = $options['banner_option'] = 1 ? 'ti-check' : 'ti-na';
           $chat = $options['private_chat'] = 1 ? 'ti-check' : 'ti-na';
-  
-            $package=Package::find($product_id);
-            if(isset($package) && !empty($package) ){
-                $options = unserialize($package->options);
 
-         
-        if (!empty(env('STRIPE_SECRET'))) {
-             \Artisan::call('optimize:clear');
-
-             $stripe = Stripe::make(env('STRIPE_SECRET'));
-
-         }
     
           ////////////
             
@@ -3705,12 +3746,10 @@ return $json;
    
                 }
    
-   
-             
-            
+          
           ////////////
          
-        }
+        
     }
     public function postPaymentWithStripe(Request $request)
 
