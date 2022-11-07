@@ -82,13 +82,19 @@
                         </div>
                         <div class="col-md-12 col-lg-7 col-xl-8">
                             <div class="wt-userlistingholder wt-haslayout job_list">
-                                @if (!empty($keyword))
-                                    <!-- <div class="wt-userlistingtitle">
-                                        <span>{{ trans('lang.01') }} {{$jobs->count()}} of {{$Jobs_total_records}} results for <em>"{{{$keyword}}}"</em></span>
-                                    </div> -->
-                                @endif
+                                
+                            @if ($jobs->count() == 0)
+                    
+                                     <div class="wt-userlistingtitle">
+                                     <div class="wt-userlistinghold" style="box-shadow: none;">
+                            <p>No Jobs Found</p>
+                        </div>
+                                    </div>
+                                @else
                                 <br>
                                 @include('front-end.jobs.ajax_jobs')
+
+                                @endif
                             </div>
                         </div>
                 </div>
