@@ -42,8 +42,8 @@ class Kernel extends ConsoleKernel
         }
 
         if( isset($payment_gateway) && in_array('stripe',$payment_gateway)){
-            $schedule->command('stripe-subscription:cron')
-            ->everyMinute();
+           /*  $schedule->command('stripe-subscription:cron')
+            ->everyMinute(); */
         }
 
 
