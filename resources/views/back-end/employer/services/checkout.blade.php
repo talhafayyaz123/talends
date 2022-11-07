@@ -9,6 +9,12 @@
                     </div>
                 </div>
                 <div class="wt-dashboardbox">
+                @if (Request::get('service_purchase'))
+                    <div class="flash_msg">
+                        <flash_messages :message_class="'danger'" :time ='10' :message="'{{ ' Payment Fail due to incorrect credentials.Please try again.' }}'" v-cloak></flash_messages>
+                    </div>
+                    @php session()->forget('error'); @endphp
+                @endif
                 @if (Session::has('message'))
                     <div class="flash_msg">
                         <flash_messages :message_class="'success'" :time ='5' :message="'{{{ Session::get('message') }}}'" v-cloak></flash_messages>
@@ -80,7 +86,7 @@
                                                 <span><em>{{ trans('lang.pay_amount_via') }}</em> {{ Helper::getPaymentMethodList($gatway)['title']}} {{ trans('lang.pay_gateway') }}</span>
                                             </a>
                                         @elseif ($gatway == "stripe")
-                                            <a href="javascrip:void(0);" v-on:click.prevent="getStriprForm">
+                                        <a href="{{  url('employer/service/purchase/'.$service->id) }}">
                                                 <i class="fab fa-stripe-s"></i>
                                                 <span><em>{{ trans('lang.pay_amount_via') }}</em> {{ Helper::getPaymentMethodList($gatway)['title']}} {{ trans('lang.pay_gateway') }}</span>
                                             </a>

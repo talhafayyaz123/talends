@@ -645,6 +645,8 @@ Route::group(
         Route::get('lead/status/{id}/{status}', 'CompanyController@leadStatus')->name('leadStatus');
 
         Route::get('employer/job/hire/{id}', 'StripeController@employerJobHire')->name('employerJobHire');
+        Route::get('employer/service/purchase/{id}', 'StripeController@employerServicePurchase')->name('employerServicePurchase');
+
 
         Route::get('package/purchase/{id}', 'StripeController@purchasePackage')->name('packagePurchase');
         Route::get('stripe/package/payment/success/{id}', 'StripeController@stripeUserPackagePurchaseSuccess')->name('packagePaymentSuccess');

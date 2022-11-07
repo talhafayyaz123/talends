@@ -71,4 +71,14 @@
     </div>
 @endforeach
 
+@else
+
+    
+<div class="wt-userlistinghold" style="box-shadow: none;">
+    <p>No Jobs Found</p>
+
+</div>
+
+
+
 @endif

@@ -160,6 +160,57 @@ class StripeController extends Controller
      }
     
 
+     public function employerServicePurchase($product_id){
+        
+
+        if (!empty(env('STRIPE_SECRET'))) {
+            \Artisan::call('optimize:clear');
+   
+            $stripe = Stripe::make(env('STRIPE_SECRET'));     
+        }
+
+        $product_id = Session::has('product_id') ? session()->get('product_id') : '';
+         $package=Service::find($product_id );
+
+       if(isset($package) && !empty($package) ){
+        $settings = SiteManagement::getMetaValue('commision');
+
+        $currency = !empty($settings[0]['currency']) ? $settings[0]['currency'] : 'USD';
+        $product = $stripe->products()->create([
+
+            'name' => $package->title,
+            'description' => 'Purchasee Freelancer Service',
+            'id'   =>time().''.'_'.$product_id,
+          ]);
+          $price = $stripe->prices()->create([
+        
+            'unit_amount' => $package->price*100,
+        
+            'currency' => $currency,
+        
+            'product' => $product['id'],
+        
+          ]);
+        $session=  $stripe->checkout()->sessions()->create([
+
+            'success_url' => url('stripe/package/payment/success/'.$product_id.'?session_id={CHECKOUT_SESSION_ID}'),
+            'cancel_url' =>url('service/payment-process/'.$product_id.'?service_purchase=fail'),
+            'billing_address_collection' => 'required',
+    
+               'line_items' => [
+                  [
+                    'price' => $price['id'],
+                    'quantity' => 1,
+                  ]
+                ], 
+                'mode' => 'payment',
+              ]);
+              return redirect()->away( $session['url']);    
+
+       }
+
+
+     }
      public function employerJobHire($product_id){
         
 
