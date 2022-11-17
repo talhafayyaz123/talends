@@ -309,7 +309,7 @@ $footer_social_content=App\Helper::getFooterSocialContent();
             </div>
         </div>
     </div>
-    <div class="container-fluid border-top position-absolute bg-white" id='taelnds_into_model' style="bottom:0;">
+    <div class="container-fluid border-top position-absolute bg-white" id='taelnds_into_model' style="bottom:0;display: none;" >
         <button class="position-absolute talends_intro_close bg-white border-0" style="top: 10px;font-size:24px;"><i class="bi-x-circle"></i></button>
         <div class="row">
             <div class="col-md-9 mx-auto py-3 text-center col-10">
@@ -321,9 +321,39 @@ $footer_social_content=App\Helper::getFooterSocialContent();
 
 @push('scripts')
 <script>
-    $(document).ready(function() {
+         
+         function setCookie(c_name, value, exdays) {
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+    document.cookie = c_name + "=" + c_value;
+}
+
+function getCookie(c_name) {
+    var i, x, y, ARRcookies = document.cookie.split(";");
+    for (i = 0; i < ARRcookies.length; i++) {
+        x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+        y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+        x = x.replace(/^\s+|\s+$/g, "");
+        if (x == c_name) {
+            return unescape(y);
+        }
+    }
+}
+
+         $("#taelnds_into_model").hide();
+   $(document).ready(function() {
+
+        if (getCookie("footer_talends_intro") !=null) 
+        {
+            $("#taelnds_into_model").hide();
+        }else{
+            $("#taelnds_into_model").show();
+        }
+
         $('.talends_intro_close').click(function(e){
             $("#taelnds_into_model").fadeOut(250);
+            setCookie("footer_talends_intro", '1', 3);
         });
     });
 
