@@ -557,7 +557,7 @@ class PublicController extends Controller
 
                 $similar_users = $similar_users->orderByRaw('-badge_id DESC')->orderBy('expiry_date', 'DESC');
 
-                $similar_users = $similar_users->paginate(8)->setPath('');
+                $similar_users = $similar_users->paginate(2)->setPath('');
             
             
             
