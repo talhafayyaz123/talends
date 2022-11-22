@@ -27,7 +27,7 @@ class TialAgencyTokensController extends Controller
     {
         if (!empty($_GET['keyword'])) {
             $keyword = $_GET['keyword'];
-            $tial_agency_tokens = $this->agency_token::where('url_token', 'like', '%' . $keyword . '%')->paginate(7)->setPath('');
+            $tial_agency_tokens = $this->agency_token::where('url_token', 'like', '%' . $keyword . '%')->orderBy('id','desc')->paginate(7)->setPath('');
             
             $pagination = $tial_agency_tokens->appends(
                 array(
@@ -35,7 +35,7 @@ class TialAgencyTokensController extends Controller
                 )
             );
         } else {
-            $tial_agency_tokens = $this->agency_token->paginate(10);
+            $tial_agency_tokens = $this->agency_token->orderBy('id','desc')->paginate(10);
         }
 
         $token = Str::random(30);

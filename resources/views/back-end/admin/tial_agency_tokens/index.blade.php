@@ -70,6 +70,7 @@
                                                     <label for="wt-cats"></label>
                                                 </span>
                                             </th>
+                                            <th>Serial No.</th>
                                             <th>Url</th>
                                             <th>Status</th>
                                             <th>{{{ trans('lang.action') }}}</th>
@@ -85,7 +86,7 @@
                                                         <label for="wt-check-{{{ $counter }}}"></label>
                                                     </span>
                                                 </td>
-                                                
+                                                <td>{{{ $cat->id }}}</td>
                                                 <td>{{{ $cat->url_token }}}</td>
                                               
                                                 <td>{{{ ucfirst($cat->status)  }}}</td>
