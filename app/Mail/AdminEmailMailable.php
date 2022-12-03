@@ -50,6 +50,7 @@ class AdminEmailMailable extends Mailable
     {
         $from_email = EmailHelper::getEmailFrom();
         $from_email_id = EmailHelper::getEmailID();
+
         $subject = !empty($this->template->subject) ? $this->template->subject : '';
         if ($this->type == 'admin_email_registration') {
             $email_message = $this->prepareAdminEmailRegisteredUser($this->email_params);
@@ -72,6 +73,7 @@ class AdminEmailMailable extends Mailable
         } elseif ($this->type == 'admin_email_dispute_raised') {
             $email_message = $this->prepareAdminEmailDisputeRaised($this->email_params);
         } elseif ($this->type == 'admin_new_order_received') {
+            $subject = !empty($this->template['subject']) ? $this->template['subject'] : '';
             $email_message = $this->prepareAdminNewOrder($this->email_params);
         } elseif ($this->type == 'lead_rejected') {
             $email_message = $this->prepareLeadRejected($this->email_params);
@@ -531,7 +533,8 @@ class AdminEmailMailable extends Mailable
         $user_name = $name;
         $order = $order_id;
         $signature = EmailHelper::getSignature();
-        $app_content = $this->template->content;
+        
+        $app_content = $this->template['content'];
 
         $email_content_default =    "hi Admin,
                                     User %name% has made the payment against the order #%order_id%. Please confirm and update the order status. 
@@ -541,10 +544,10 @@ class AdminEmailMailable extends Mailable
         if (empty($app_content)) {
             $app_content = $email_content_default;
         }
+
         $app_content = str_replace("%name%", $user_name, $app_content);
         $app_content = str_replace("%order_id%", $order, $app_content);
         $app_content = str_replace("%signature%", $signature, $app_content);
-
         $body = "";
         $body .= EmailHelper::getEmailHeader();
         $body .= $app_content;

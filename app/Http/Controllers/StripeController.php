@@ -421,9 +421,9 @@ class StripeController extends Controller
         session()->put(['email' => $input['email']]);
           session()->put(['password' => $input['password']]);
 
-
-          TialAgencyTokens::where("url_token", $input['url'])->update(["status" => "inactive"]);
-
+           if(isset($input['url'])  ){
+         TialAgencyTokens::where("url_token", $input['url'])->update(["status" => "inactive"]);
+           }
 
 
           $role_id = Helper::getRoleByUserID($user_id);
