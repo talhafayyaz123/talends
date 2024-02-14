@@ -7,7 +7,7 @@
  *
  * @package Worketic
  * @author  Amentotech <theamentotech@gmail.com>
- * @license http://www.amentotech.com Amentotech
+ * @license http://www.amentotech.com Amentotechfseatc
  * @link    http://www.amentotech.com
  */
 
@@ -53,6 +53,8 @@ use App\Service;
 use App\DeliveryTime;
 use App\ResponseTime;
 use App\Article;
+use App\AboutTalendsPage;
+use App\Rules\checkBusinessEmail;
 
 /**
  * Class PublicController
@@ -73,6 +75,7 @@ class PublicController extends Controller
     public function loginUser(Request $request)
     {
         $json = array();
+
         if (Session::has('user_id')) {
             $id = Session::get('user_id');
             $user = User::find($id);
@@ -88,6 +91,36 @@ class PublicController extends Controller
         }
     }
 
+    public function gmailLoginUser($email){
+        $json = array();
+        $user = User::where('email',$email)->first();
+        
+        if (isset($user)) {
+
+            session()->put(['user_id' => $user->id]);
+            session()->put(['email' => $user->email]);
+            $id = $user->id;
+            $user = User::find($id);
+            Auth::login($user);
+            $json['type'] = 'success';
+            $json['role'] = $user->getRoleNames()->first();
+            session()->forget('user_id');
+            return $json;
+        } else {
+            $json['type'] = 'error';
+            $json['message'] = trans('lang.something_wrong');
+            return $json;
+        } 
+    }
+    public function universityAutocomplete(){
+        $name=$_POST['name'];
+         $result= DB::table('universities')->select('name')->where("name","LIKE","%{$name}%")->get();
+         $array = json_decode(json_encode($result), true);
+         foreach($array as $row){
+            $names[]=$row['name'];
+        }
+         echo json_encode($names); 
+        }
     /**
      * Step1 Registeration Validation
      *
@@ -99,16 +132,119 @@ class PublicController extends Controller
      */
     public function registerStep1Validation(Request $request)
     {
-        $this->validate(
-            $request,
-            [
+
+       $role=$request['role'];
+        $validation=array();
+        if($role=='freelancer'){
+          
+            $validation= [
                 'first_name' => 'required',
                 'last_name' => 'required',
                 'email' => 'required|email|unique:users',
-            ]
+                'gender' => 'required',
+                'availability' => 'required',
+                'budget' => 'required',
+                'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+                'role' => 'not_in:admin',
+                'locations' => 'required',
+                'g-recaptcha-response' => 'required|recaptcha',
+            ];
+        }elseif($role=='employer'){
+
+            $validation= [
+
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+                'role' => 'not_in:admin',
+                //'availability' => 'required',
+                'locations' => 'required',
+                'employees' => 'required',
+                'department' => 'required',
+                'g-recaptcha-response' => 'required|recaptcha',
+            ];
+            
+
+
+        }else{
+            
+            $validation= [
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|string|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+                'role' => 'not_in:admin',
+                'availability' => 'required',
+                'locations' => 'required',
+                'budget' => 'required',
+                'university' => 'required',
+                'grade' => 'required',
+                'specialization' => 'required',
+                'g-recaptcha-response' => 'required|recaptcha',
+            ];
+        }
+        $this->validate(
+            $request,
+            $validation
         );
     }
 
+    public function CompanyRegisterValidation(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            //'email' => ['required','unique:users', 'email', new checkBusinessEmail],
+            'email' => ['required','unique:users'],
+            'password' => 'required|string|min:8|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
+        ]);
+        
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
+        return response()->json(['success'=>'Record is successfully added']);
+
+    }
+
+    public function HireAgencyLoginCheck(Request $request)
+    {
+
+        $user = User::where('email', $request->email)->first();
+        if($user){
+            $user_role_type = User::getUserRoleType($user->id);
+            $user_role = $user_role_type->role_type;
+          
+           if ($user && Hash::check($request->password, $user->password) && $user_role=='employer') 
+           {
+            session()->put(['user_id' => $user->id]);
+            session()->put(['email' => $user->email]);
+            Auth::login($user);
+            
+            return response()->json(['success'=>'Login Successfully.']);
+
+
+            }else{
+                return response()->json(['errors'=>'Login Credentials not match or User May not Exist With Role (Employer).']);
+            }
+        }else{
+            return response()->json(['errors'=>'Login Credentials not match.']);
+        }
+
+    }
+
+    public function HireAgencyRegisterValidations(Request $request)
+    {
+
+        $user = User::where('email', $request->email)->first();
+        if($user){
+           
+            return response()->json(['errors'=>'User With Email Already Exist.']);
+
+        }else{
+            return response()->json(['success'=>'not Exist.']);
+        }
+
+    }
     /**
      * Step2 Registeration Validation
      *
@@ -130,7 +266,21 @@ class PublicController extends Controller
             ]
         );
     }
+    public function registerAgencyCaptchaValidation(Request $request)
+    {
 
+        $validator = \Validator::make($request->all(), [
+            'g-recaptcha-response' => 'required|recaptcha',
+        ]);
+        
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
+        return response()->json(['success'=>'']);
+
+      
+    }
     /**
      * Single Form validation
      *
@@ -165,7 +315,84 @@ class PublicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function verifyUserCode(Request $request)
+    public function verifyUserCode($code)
+    {
+
+//     session()->put(['user_id' => '108']);
+
+        $json = array();
+        if (Session::has('user_id')) {
+            $id = Session::get('user_id');
+            $email = Session::get('email');
+            $password = Session::get('password');
+            $user = User::find($id);
+            if (!empty($code)) {
+                if ($code === $user->verification_code) {
+                    $user->user_verified = 1;
+                    $user->verification_code = null;
+                    $user->save();
+                    $json['type'] = 'success';
+                    //send mail
+                    if (!empty(config('mail.username')) && !empty(config('mail.password'))) {
+                        $email_params = array();
+                        $template = DB::table('email_types')->select('id')->where('email_type', 'new_user')->get()->first();
+                        if (!empty($template->id)) {
+                            $template_data = EmailTemplate::getEmailTemplateByID($template->id);
+                            $email_params['name'] = Helper::getUserName($id);
+                            $email_params['email'] = $email;
+                            $email_params['password'] = $password;
+                            $email_params['role'] =$user->getRoleNames()[0];
+                            Mail::to($email)
+                                ->send(
+                                    new GeneralEmailMailable(
+                                        'new_user',
+                                        $template_data,
+                                        $email_params
+                                    )
+                                );
+                        }
+                        $admin_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_registration')->get()->first();
+                        if (!empty($template->id)) {
+                            $template_data = EmailTemplate::getEmailTemplateByID($admin_template->id);
+                            $email_params['name'] = Helper::getUserName($id);
+                            $email_params['email'] = $email;
+                            $email_params['link'] = url('profile/' . $user->slug);
+                             Mail::to(config('mail.username'))
+                                ->send(
+                                    new AdminEmailMailable(
+                                        'admin_email_registration',
+                                        $template_data,
+                                        $email_params
+                                    )
+                                );
+                        }
+                    }
+
+                    Auth::login($user);
+                    $json['redirect_url'] =env('APP_URL').'/'. $user->getRoleNames()->first().'/dashboard';
+                    session()->forget('user_id');
+                    session()->forget('password');
+                    session()->forget('email');
+                    return $json;
+                } else {
+                    $json['type'] = 'error';
+                    $json['message'] = trans('lang.invalid_verify_code');
+                    return $json;
+                }
+            } else {
+                $json['type'] = 'error';
+                $json['message'] = trans('lang.verify_code');
+                return $json;
+            }
+        } else {
+            $json['type'] = 'error';
+            $json['message'] = trans('lang.session_expire');
+            return $json;
+        }
+    }
+
+
+    public function verifyUserRegistrationCode(Request $request)
     {
         $json = array();
         if (Session::has('user_id')) {
@@ -188,6 +415,8 @@ class PublicController extends Controller
                             $email_params['name'] = Helper::getUserName($id);
                             $email_params['email'] = $email;
                             $email_params['password'] = $password;
+                            $email_params['role'] =$user->getRoleNames()[0];
+                    
                             Mail::to($email)
                                 ->send(
                                     new GeneralEmailMailable(
@@ -195,7 +424,7 @@ class PublicController extends Controller
                                         $template_data,
                                         $email_params
                                     )
-                                );
+                                );  
                         }
                         $admin_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_registration')->get()->first();
                         if (!empty($template->id)) {
@@ -203,18 +432,29 @@ class PublicController extends Controller
                             $email_params['name'] = Helper::getUserName($id);
                             $email_params['email'] = $email;
                             $email_params['link'] = url('profile/' . $user->slug);
-                            Mail::to(config('mail.username'))
+                        
+                              Mail::to('admin@talends.com')
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_registration',
                                         $template_data,
                                         $email_params
                                     )
-                                );
+                                );  
                         }
                     }
-                    session()->forget('password');
-                    session()->forget('email');
+                   
+                     
+                    if(isset($request['otp_verify']) &&  !empty($request['otp_verify']) ){
+                        session()->put(['user_id' => $user->id]);
+                        session()->put(['email' => $user->email]);
+                        Auth::login($user);
+                        
+                    }else{
+                        session()->forget('password');
+                        session()->forget('email');
+                    }
+
                     return $json;
                 } else {
                     $json['type'] = 'error';
@@ -248,8 +488,8 @@ class PublicController extends Controller
         $filename = $request->get('attachment');
         $type = $request->get('type');
         if (!empty($type) && !empty($filename) && !empty($id)) {
-            if (Storage::disk('local')->exists('uploads/' . $type . '/' . $id . '/' . $filename)) {
-                return Storage::download('uploads/' . $type . '/' . $id . '/' . $filename);
+            if (Storage::disk('s3')->exists('uploads/' . $type . '/' . $id . '/' . $filename)) {
+                return Storage::disk('s3')->download('uploads/' . $type . '/' . $id . '/' . $filename);
             } else {
                 Session::flash('error', trans('lang.file_not_found'));
                 return Redirect::back();
@@ -268,6 +508,7 @@ class PublicController extends Controller
      */
     public function showUserProfile($slug)
     {
+        
         $user = User::select('id')->where('slug', $slug)->first();
         if (!empty($user)) {
             $user = User::find($user->id);
@@ -275,17 +516,51 @@ class PublicController extends Controller
                 abort(404);
             }
             $skills = $user->skills()->get();
+
+            $role=$user->getRoleNames()->first();
+
+            $user_by_role =  User::role($role)->select('id')->get()->pluck('id')->toArray();
+
+            $similar_users = !empty($user_by_role) ? User::whereIn('id', $user_by_role)->where('is_disabled', 'false') : array();
+                           
+            $new_sills=$skills->pluck('id')->all();
+
+           
+                if (!empty($new_sills)  &&  isset($new_sills) ) {
+                    
+                    $similar_skills = Skill::whereIn('id', $new_sills)->get();
+                    
+               foreach ($similar_skills as $key => $skill) {
+                    if (!empty($skill->freelancers[$key]->id)) {
+                            $user_id[] = $skill->freelancers[$key]->id;
+                        }
+                    }
+                
+                   $similar_users->whereIn('id', $user_id);
+                
+                }
+
+                $similar_users->where('id','!=',$user->id);
+
+                $similar_users = $similar_users->orderByRaw('-badge_id DESC')->orderBy('expiry_date', 'DESC');
+
+                $similar_users = $similar_users->paginate(8)->setPath('');
+            
+            
+            
+
             $job = Job::where('user_id', $user->id)->get();
             $profile = Profile::all()->where('user_id', $user->id)->first();
             $reasons = Helper::getReportReasons();
             $avatar = Helper::getProfileImage($profile->user_id, 'medium-small-');
-            $banner = !empty($profile->banner) ? '/uploads/users/' . $profile->user_id . '/' . $profile->banner : Helper::getUserProfileBanner($user->id);
+            $banner = !empty($profile->banner) ? config('app.aws_se_path').'/uploads/users/' . $profile->user_id . '/' . $profile->banner : Helper::getUserProfileBanner($user->id);
             $auth_user = Auth::user() ? true : false;
             $user_name = Helper::getUserName($profile->user_id);
             $current_date = Carbon::now()->format('M d, Y');
             $tagline = !empty($profile) ? $profile->tagline : '';
             $desc = !empty($profile) ? $profile->description : '';
-            if ($user->getRoleNames()->first() === 'freelancer') {
+             
+            if ($user->getRoleNames()->first() === 'freelancer'  || $user->getRoleNames()->first() === 'intern') {
                 $services = array();
                 if (Schema::hasTable('services') && Schema::hasTable('service_user')) {
                     $services = $user->services;
@@ -316,6 +591,11 @@ class PublicController extends Controller
                 $feedbacks = Review::select('feedback')->where('receiver_id', $user->id)->count(); 
                 $average_rating_count = !empty($feedbacks) ? $reviews->sum('avg_rating')/$feedbacks : 0;
                 $show_earnings = !empty($settings) && !empty($settings[0]['show_earnings']) ? $settings[0]['show_earnings'] : true;
+                $user_role=$user->getRoleNames()->first();
+              
+                $freelancer_side_bar=AboutTalendsPage::where('page_type','freelancer_side_bar')->first();
+                
+              
                 if (file_exists(resource_path('views/extend/front-end/users/freelancer-show.blade.php'))) {
                     return View(
                         'extend.front-end.users.freelancer-show',
@@ -361,6 +641,9 @@ class PublicController extends Controller
                     return View(
                         'front-end.users.freelancer-show',
                         compact(
+                            'freelancer_side_bar',
+                            'similar_users',
+                            'user_role',
                             'show_earnings',
                             'average_rating_count',
                             'videos',
@@ -433,6 +716,7 @@ class PublicController extends Controller
                         )
                     );
                 } else {
+                
                     return View(
                         'front-end.users.employer-show',
                         compact(
@@ -591,8 +875,9 @@ class PublicController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getSearchResult($search_type = "")
+    public function getSearchResult(Request $request,$search_type = "")
     {
+        
         $categories = array();
         $locations  = array();
         $languages  = array();
@@ -607,9 +892,15 @@ class PublicController extends Controller
         $address = !empty($_GET['addr']) ? $_GET['addr'] : '';
         $keyword = !empty($_GET['s']) ? $_GET['s'] : '';
         $type = !empty($_GET['type']) ? $_GET['type'] : $search_type;
+        
         $search_categories = !empty($_GET['category']) ? $_GET['category'] : array();
+        $search_sub_categories = !empty($_GET['sub_categories']) ? $_GET['sub_categories'] : array();
         $search_locations = !empty($_GET['locations']) ? $_GET['locations'] : array();
         $search_skills = !empty($_GET['skills']) ? $_GET['skills'] : array();
+        $search_speciality = !empty($_GET['speciality']) ? $_GET['speciality'] : '';
+        $search_university = !empty($_GET['university']) ? $_GET['university'] : '';
+        $search_grade = !empty($_GET['grade']) ? $_GET['grade'] : '';
+
         $search_project_lengths = !empty($_GET['project_lengths']) ? $_GET['project_lengths'] : array();
         $search_languages = !empty($_GET['languages']) ? $_GET['languages'] : array();
         $search_employees = !empty($_GET['employees']) ? $_GET['employees'] : array();
@@ -626,8 +917,12 @@ class PublicController extends Controller
         $enable_package = !empty($payment_settings) && !empty($payment_settings[0]['enable_packages']) ? $payment_settings[0]['enable_packages'] : 'true';
         $breadcrumbs_settings = SiteManagement::getMetaValue('show_breadcrumb');
         $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'true';
+        $interne_university_collaboration=AboutTalendsPage::where('page_type','interne_university_collaboration')->first();
+        $freelancer_side_bar=AboutTalendsPage::where('page_type','freelancer_side_bar')->first();
+
         if (!empty($_GET['type'])) {
-            if ($type == 'employer' || $type == 'freelancer') {
+            if ($type == 'employer' || $type == 'freelancer' || $type == 'intern') {
+                
                 $users_total_records = User::count();
                 $search =  User::getSearchResult(
                     $type,
@@ -638,9 +933,15 @@ class PublicController extends Controller
                     $search_hourly_rates,
                     $search_freelaner_types,
                     $search_english_levels,
-                    $search_languages
+                    $search_languages,
+                    $search_speciality,
+                    $search_university,
+                    $search_grade ,
+                    $search_categories,
+                    $search_sub_categories
                 );
                 $users = count($search['users']) > 0 ? $search['users'] : '';
+               //dd($users);
                 $save_freelancer = !empty(auth()->user()->profile->saved_freelancer) ?
                     unserialize(auth()->user()->profile->saved_freelancer) : array();
                 $save_employer = !empty(auth()->user()->profile->saved_employers) ?
@@ -698,59 +999,98 @@ class PublicController extends Controller
                         );
                     }
                 } elseif ($type === 'freelancer') {
+                   
+                   
                     $f_list_meta_title = !empty($inner_page) && !empty($inner_page[0]['f_list_meta_title']) ? $inner_page[0]['f_list_meta_title'] : trans('lang.freelancer_listing');
                     $f_list_meta_desc = !empty($inner_page) && !empty($inner_page[0]['f_list_meta_desc']) ? $inner_page[0]['f_list_meta_desc'] : trans('lang.freelancer_meta_desc');
                     $show_f_banner = !empty($inner_page) && !empty($inner_page[0]['show_f_banner']) ? $inner_page[0]['show_f_banner'] : 'true';
                     $f_inner_banner = !empty($inner_page) && !empty($inner_page[0]['f_inner_banner']) ? $inner_page[0]['f_inner_banner'] : null;
-                    if (file_exists(resource_path('views/extend/front-end/freelancers/index.blade.php'))) {
-                        return view(
-                            'extend.front-end.freelancers.index',
-                            compact(
-                                'type',
-                                'users',
-                                'categories',
-                                'locations',
-                                'languages',
-                                'skills',
-                                'project_length',
-                                'keyword',
-                                'users_total_records',
-                                'save_freelancer',
-                                'symbol',
-                                'current_date',
-                                'f_list_meta_title',
-                                'f_list_meta_desc',
-                                'show_f_banner',
-                                'f_inner_banner',
-                                'enable_package',
-                                'show_breadcrumbs'
-                            )
-                        );
-                    } else {
-                        return view(
-                            'front-end.freelancers.index',
-                            compact(
-                                'type',
-                                'users',
-                                'categories',
-                                'locations',
-                                'languages',
-                                'skills',
-                                'project_length',
-                                'keyword',
-                                'users_total_records',
-                                'save_freelancer',
-                                'symbol',
-                                'current_date',
-                                'f_list_meta_title',
-                                'f_list_meta_desc',
-                                'show_f_banner',
-                                'f_inner_banner',
-                                'enable_package',
-                                'show_breadcrumbs'
-                            )
-                        );
+                  
+                    if($request->ajax()){
+                        $view = view('front-end.freelancers.data',  compact(
+                            'type',
+                            'users',
+                            'categories',
+                            'locations',
+                            'languages',
+                            'skills',
+                            'project_length',
+                            'keyword',
+                            'users_total_records',
+                            'save_freelancer',
+                            'symbol',
+                            'current_date',
+                            'f_list_meta_title',
+                            'f_list_meta_desc',
+                            'show_f_banner',
+                            'f_inner_banner',
+                            'enable_package',
+                            'show_breadcrumbs'
+                        ))->render();
+                        return response()->json(['html'=>$view]);
                     }
+
+                    
+                    return view(
+                        'front-end.freelancers.index',
+                        compact(
+                            'freelancer_side_bar',
+                            'type',
+                            'users',
+                            'categories',
+                            'locations',
+                            'languages',
+                            'skills',
+                            'project_length',
+                            'keyword',
+                            'users_total_records',
+                            'save_freelancer',
+                            'symbol',
+                            'current_date',
+                            'f_list_meta_title',
+                            'f_list_meta_desc',
+                            'show_f_banner',
+                            'f_inner_banner',
+                            'enable_package',
+                            'show_breadcrumbs'
+                        )
+                    );
+                    
+                    
+
+                }elseif ($type === 'intern') {
+                    $f_list_meta_title = !empty($inner_page) && !empty($inner_page[0]['f_list_meta_title']) ? $inner_page[0]['f_list_meta_title'] : trans('lang.freelancer_listing');
+                    $f_list_meta_desc = !empty($inner_page) && !empty($inner_page[0]['f_list_meta_desc']) ? $inner_page[0]['f_list_meta_desc'] : trans('lang.freelancer_meta_desc');
+                    $show_f_banner = !empty($inner_page) && !empty($inner_page[0]['show_f_banner']) ? $inner_page[0]['show_f_banner'] : 'true';
+                    $f_inner_banner = !empty($inner_page) && !empty($inner_page[0]['f_inner_banner']) ? $inner_page[0]['f_inner_banner'] : null;
+                   
+                    return view(
+                        'front-end.intern.index',
+                        compact(
+                            'type',
+                            'users',
+                            'categories',
+                            'locations',
+                            'languages',
+                            'skills',
+                            'project_length',
+                            'keyword',
+                            'users_total_records',
+                            'save_freelancer',
+                            'symbol',
+                            'current_date',
+                            'f_list_meta_title',
+                            'f_list_meta_desc',
+                            'show_f_banner',
+                            'f_inner_banner',
+                            'enable_package',
+                            'show_breadcrumbs',
+                            'search_speciality',
+                            'search_university',
+                            'search_grade',
+                            'interne_university_collaboration'
+                        )
+                    );
                 } else {
                     abort(404);
                 }
@@ -819,7 +1159,8 @@ class PublicController extends Controller
                         )
                     );
                 }
-            } else {
+            } elseif ($type == 'gov_projects') {
+
                 $min_price = !empty($_GET['minprice']) ? $_GET['minprice'] : 0;
                 $max_price = !empty($_GET['maxprice']) ? $_GET['maxprice'] : 0;
                 $Jobs_total_records = Job::count();
@@ -842,7 +1183,85 @@ class PublicController extends Controller
                     $max_price
                 );
                 $jobs = $results['jobs'];
+                
                 if (!empty($jobs)) {
+                      return view(
+                            'front-end.gov_projects.index',
+                            compact(
+                                'address',
+                                'jobs',
+                                'categories',
+                                'locations',
+                                'languages',
+                                'freelancer_skills',
+                                'project_length',
+                                'Jobs_total_records',
+                                'keyword',
+                                'skills',
+                                'type',
+                                'current_date',
+                                'symbol',
+                                'job_list_meta_title',
+                                'job_list_meta_desc',
+                                'show_job_banner',
+                                'job_inner_banner',
+                                'show_breadcrumbs'
+                            )
+                        );
+                }
+            }else {
+                
+                $min_price = !empty($_GET['minprice']) ? $_GET['minprice'] : 0;
+                $max_price = !empty($_GET['maxprice']) ? $_GET['maxprice'] : 0;
+                $Jobs_total_records = Job::count();
+                $job_list_meta_title = !empty($inner_page) && !empty($inner_page[0]['job_list_meta_title']) ? $inner_page[0]['job_list_meta_title'] : trans('lang.job_listing');
+                $job_list_meta_desc = !empty($inner_page) && !empty($inner_page[0]['job_list_meta_desc']) ? $inner_page[0]['job_list_meta_desc'] : trans('lang.job_meta_desc');
+                $show_job_banner = !empty($inner_page) && !empty($inner_page[0]['show_job_banner']) ? $inner_page[0]['show_job_banner'] : 'true';
+                $job_inner_banner = !empty($inner_page) && !empty($inner_page[0]['job_inner_banner']) ? $inner_page[0]['job_inner_banner'] : null;
+                $project_settings = !empty(SiteManagement::getMetaValue('project_settings')) ? SiteManagement::getMetaValue('project_settings') : array();
+                $completed_project_setting = !empty($project_settings) && !empty($project_settings['enable_completed_projects']) ? $project_settings['enable_completed_projects'] : 'true';
+                $results = Job::getSearchResult(
+                    $address,
+                    $keyword,
+                    $search_categories,
+                    $search_locations,
+                    $search_skills,
+                    $search_project_lengths,
+                    $search_languages,
+                    $completed_project_setting,
+                    $min_price,
+                    $max_price
+                );
+                $jobs = $results['jobs'];
+                
+                if (!empty($jobs)) {
+
+                    if($request->ajax()){
+                        $view = view('front-end.jobs.ajax_jobs',  
+                         compact(
+                            'address',
+                            'jobs',
+                            'categories',
+                            'locations',
+                            'languages',
+                            'freelancer_skills',
+                            'project_length',
+                            'Jobs_total_records',
+                            'keyword',
+                            'skills',
+                            'type',
+                            'current_date',
+                            'symbol',
+                            'job_list_meta_title',
+                            'job_list_meta_desc',
+                            'show_job_banner',
+                            'job_inner_banner',
+                            'show_breadcrumbs'
+                        ) )->render();
+                        return response()->json(['html'=>$view]);
+                    }
+
+
                     if (file_exists(resource_path('views/extend/front-end/jobs/index.blade.php'))) {
                         return view(
                             'extend.front-end.jobs.index',
@@ -983,7 +1402,7 @@ class PublicController extends Controller
     public function checkProposalAuth()
     {
         $json = array();
-        if (Auth::user() && Auth::user()->getRoleNames()->first() === 'freelancer') {
+        if (Auth::user() && (Auth::user()->getRoleNames()->first() === 'freelancer') || (Auth::user()->getRoleNames()->first() === 'intern')  ) {
             $json['auth'] = true;
             return $json;
         } else {
@@ -1126,7 +1545,7 @@ class PublicController extends Controller
                 $aticle_list[$key]['id'] = $article['id'];
                 $aticle_list[$key]['title'] = $article['title'];
                 $aticle_list[$key]['slug'] = $article['slug'];
-                $aticle_list[$key]['banner'] = asset(Helper::getImage('uploads/articles', $article['banner'], 'small-', 'small-default-article.png'));
+                $aticle_list[$key]['banner'] = (Helper::gets3Image('uploads/articles', $article['banner'], 'small-', 'small-default-article.png'));
                 $aticle_list[$key]['published_date'] = $article['created_at'];
                 $aticle_list[$key]['description'] = $article['description'];
                 $aticle_list[$key]['name'] = Helper::getUserName($article['user_id']);
@@ -1165,4 +1584,21 @@ class PublicController extends Controller
 		$price_range = !empty($general_settings) && !empty($general_settings[0]['price_range']) ? $general_settings[0]['price_range'] : 1000;
         return $price_range;
     }
+
+    public function privacyPolicy()
+    {
+        $json = array();
+        $privacy_policy = !empty(SiteManagement::getMetaValue('privacy_policy')) ? SiteManagement::getMetaValue('privacy_policy') : array();
+        return View('front-end.pages.privacy_policy',compact('privacy_policy'));
+
+    }
+
+    public function userAgreement()
+    {
+        $json = array();
+        $user_agreement = !empty(SiteManagement::getMetaValue('user_agreement')) ? SiteManagement::getMetaValue('user_agreement') : array();
+        return View('front-end.pages.user_agreement',compact('user_agreement'));
+
+    }
+    
 }

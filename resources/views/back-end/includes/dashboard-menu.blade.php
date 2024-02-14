@@ -1,12 +1,12 @@
 @auth
     <div id="wt-sidebarwrapper" class="wt-sidebarwrapper">
-        <div id="wt-btnmenutoggle" class="wt-btnmenutoggle">
+        <!-- <div id="wt-btnmenutoggle" class="wt-btnmenutoggle">
             <span class="menu-icon">
                 <em></em>
                 <em></em>
                 <em></em>
             </span>
-        </div>
+        </div> -->
         @php
             $user = !empty(Auth::user()) ? Auth::user() : '';
             $role = !empty($user) ? $user->getRoleNames()->first() : array();
@@ -20,25 +20,28 @@
         <div id="wt-verticalscrollbar" class="wt-verticalscrollbar">
             <div class="wt-companysdetails wt-usersidebar">
                 <figure class="wt-companysimg">
-                    <img src="{{{ asset(Helper::getUserProfileBanner($user->id, 'small')) }}}" alt="{{{ trans('lang.profile_banner') }}}">
+                    <img src="{{{ (Helper::getUserProfileBanner($user->id, 'small')) }}}" alt="{{{ trans('lang.profile_banner') }}}">
                 </figure>
                 <div class="wt-companysinfo">
-                    <figure><img src="{{{ asset(Helper::getImageWithSize('uploads/users/'.$user->id, $profile->avater, 'listing')) }}}" alt="{{ trans('lang.profile_photo') }}"></figure>
-                    <div class="wt-title">
+                    <figure><img src="{{{ (Helper::gets3ImageWithSize('uploads/users/'.$user->id, $profile->avater, 'listing')) }}}" alt="{{ trans('lang.profile_photo') }}"></figure>
+                    <!-- <div class="wt-title">
                         <h2>
                             <a href="{{{ $role != 'admin' ? url($role.'/dashboard') : 'javascript:void()' }}}">
                                 {{{ !empty(Auth::user()) ? Helper::getUserName(Auth::user()->id) : 'No Name' }}}
                             </a>
                         </h2>
                         <span>{{{ !empty(Auth::user()->profile->tagline) ? str_limit(Auth::user()->profile->tagline, 26, '') : Helper::getAuthRoleName() }}}</span>
-                    </div>
+                    </div> -->
+                    
                     @if ($role === 'employer')
                     @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'jobs')
+                    
                         <div class="wt-btnarea"><a href="{{{ url(route('employerPostJob')) }}}" class="wt-btn">{{{ trans('lang.post_job') }}}</a></div>
                     @else
                         <div class="wt-btnarea"><a href="{{{ url(route('showUserProfile', ['slug' => Auth::user()->slug])) }}}" class="wt-btn">{{{ trans('lang.view_profile') }}}</a></div>
                     @endif
-                    @elseif ($role === 'freelancer')
+
+                    @elseif ($role === 'freelancer' || $role === 'intern' )
                         @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services')
                             <div class="wt-btnarea"><a href="{{{ url(route('freelancerPostService')) }}}" class="wt-btn">{{{ trans('lang.post_service') }}}</a></div>
                         @else
@@ -50,7 +53,44 @@
             <nav id="wt-navdashboard" class="wt-navdashboard">
                 <ul>
                     @if ($role === 'admin')
+                        
+                    <li class="menu-item-has-children">
+                            <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
+                            <a href="javascript:void(0)">
+                                <i class="ti-layers"></i>
+                                <span>Front Footer & Header</span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><hr><a href="{{{ url('admin/settings/front-footer/how-works') }}}">Footer How It Works</a></li>
+                                <li><hr><a href="{{{ url('admin/settings/front-footer/join_community') }}}">Join Community</a></li>
+
+
+                                <li><hr><a href="{{{ url('admin/settings/front-footer/footer_menus') }}}">Footer Menus</a></li>
+                                <li><hr><a href="{{{ url('admin/settings/front-footer/header_menus') }}}">Header Menus</a></li>
+                               
+                            </ul>
+                        </li>
+
+
                         <li class="menu-item-has-children">
+                            <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
+                            <a href="javascript:void(0)">
+                                <i class="ti-layers"></i>
+                                <span>Home Page Settings</span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li><hr><a href="{{{ url('admin/settings/home-page-settings/banner_settings') }}}">Banner Settings</a></li>
+                                <li><hr><a href="{{{ url('admin/settings/front-footer/agency_profile') }}}">Agency Profile</a></li>
+
+                                <li><hr><a href="{{{ url('admin/settings/home-page-settings/featured_success_stories') }}}">Success Stories</a></li>
+                                <li><hr><a href="{{{ url('admin/settings/home-page-settings/team_demand') }}}">Team On Demand</a></li>
+                                <li><hr><a href="{{{ url('admin/settings/home-page-settings/why_choose_talends') }}}">Why Choose Talends</a></li>
+                                <li><hr><a href="{{{ url('admin/settings/home-page-settings/interne_university_collaboration') }}}">Interne University Collaboration</a></li>
+
+                            </ul>
+                        </li>
+
+                    <li class="menu-item-has-children">
                             <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                             <a href="javascript:void(0)">
                                 <i class="ti-layers"></i>
@@ -120,6 +160,17 @@
                             <ul class="sub-menu">
                                 <li><hr><a href="{{{ route('pages') }}}">{{ trans('lang.all_pages') }}</a></li>
                                 <li><hr><a href="{{{ route('createPage') }}}">{{ trans('lang.add_pages') }}</a></li>
+                                <li><hr><a href="{{{ route('GovernmentPage') }}}">Government</a></li>
+
+                                <li><hr><a href="{{{ route('aboutTalends') }}}">About Talends</a></li>
+                                <li><hr><a href="{{{ route('adminWhyAgencyPlan') }}}">Why Agency Plan</a></li>
+
+
+                                <li><hr><a href="{{{ route('findRightTalends') }}}">Let Us Find Right Talends</a></li>
+                                <li><hr><a href="{{{ route('findRightTalendsTestimonials') }}}">Find Right Talends Testimonials</a></li>
+                                <li><hr><a href="{{{ route('adminPrivacyPolicy') }}}">Privacy Policy</a></li>
+                                <li><hr><a href="{{{ route('userAgreement') }}}">user Agreement</a></li>
+
 
                             </ul>
                         </li>
@@ -135,6 +186,17 @@
                                 <span>{{ trans('lang.payouts') }}</span>
                             </a>
                         </li>
+
+                        @if( $role === 'admin')
+                            <li>
+                                <a href="{{{ route('adminHiringRequests') }}}">
+                                <i class="ti-bookmark-alt"></i>
+                                <span> Leads</span>
+                                </a>
+
+                            </li>
+                            @endif
+
                         @if (empty(\App\SiteManagement::getMetaValue('homepage')))
                             <li>
                                 <a href="{{{ route('homePageSettings') }}}">
@@ -164,6 +226,7 @@
                             <ul class="sub-menu">
                                 <li><hr><a href="{{{ route('skills') }}}">{{ trans('lang.skills') }}</a></li>
                                 <li><hr><a href="{{{ route('categories') }}}">{{ trans('lang.job_cats') }}</a></li>
+                                <li><hr><a href="{{{ route('agencyServices') }}}">Agency Services</a></li>
                                 <li><hr><a href="{{{ route('departments') }}}">{{ trans('lang.dpts') }}</a></li>
                                 <li><hr><a href="{{{ route('languages') }}}">{{ trans('lang.langs') }}</a></li>
                                 <li><hr><a href="{{{ route('locations') }}}">{{ trans('lang.locations') }}</a></li>
@@ -173,7 +236,7 @@
                             </ul>
                         </li>
                     @endif
-                    @if ($role === 'employer' || $role === 'freelancer' )
+                    @if ($role === 'employer' || $role === 'freelancer' || $role === 'company' || $role === 'intern')
                         <li>
                             <a href="{{{ url($role.'/dashboard') }}}">
                                 <i class="ti-desktop"></i>
@@ -183,7 +246,13 @@
                         <li>
                             <a href="{{{ route('message') }}}">
                                 <i class="ti-envelope"></i>
+                                @if($role === 'company')
+                                <span>Messages</span>
+
+                                @else
                                 <span>{{ trans('lang.inbox') }}</span>
+
+                                @endif
                             </a>
                         </li>
                         <li class="menu-item-has-children">
@@ -195,6 +264,9 @@
                             <ul class="sub-menu">
                                 <li><hr><a href="{{{ url($role.'/profile') }}}">{{ trans('lang.profile_settings') }}</a></li>
                                 <li><hr><a href="{{{ route('manageAccount') }}}">{{ trans('lang.acc_settings') }}</a></li>
+                                @if ($role === 'company')
+                                <li><hr><a href="{{{ url('company/settings/expertise') }}}">Expertise</a></li>
+                             @endif
                             </ul>
                         </li>
                         @if ($role === 'employer')
@@ -212,6 +284,8 @@
                                     </ul>
                                 </li>
                             @endif
+
+                            
                             @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services')
                                 <li class="menu-item-has-children">
                                     <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
@@ -226,12 +300,15 @@
                                     </ul>
                                 </li>
                             @endif
+
+                    
                             <li>
                                 <a href="{{{ route('employerPayoutsSettings') }}}">
                                     <i class="ti-money"></i>
                                     <span> {{ trans('lang.payouts') }}</span>
                                 </a>
                             </li>
+                          
                             <li class="menu-item-has-children">
                                 <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                                 <a href="javascript:void(0)">
@@ -253,7 +330,7 @@
                                     </a>
                                 </li>
                             @endif
-                        @elseif ($role === 'freelancer')
+                        @elseif ($role === 'freelancer' || $role === 'company' || $role === 'intern')
                             <li class="menu-item-has-children">
                                 <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                                 <a href="javascript:void(0)">
@@ -261,11 +338,24 @@
                                     <span>{{ trans('lang.all_projects') }}</span>
                                 </a>
                                 <ul class="sub-menu">
+                                    @if($role === 'intern')
+                                    <li><hr><a href="{{{ url('internee/jobs/completed') }}}">{{ trans('lang.completed_projects') }}</a></li>
+                                    <li><hr><a href="{{{ url('internee/jobs/cancelled') }}}">{{ trans('lang.cancelled_projects') }}</a></li>
+                                    <li><hr><a href="{{{ url('internee/jobs/hired') }}}">{{ trans('lang.ongoing_projects') }}</a></li>
+                                    @elseif($role === 'company')
+                                    <li><hr><a href="{{{ url('company/jobs/completed') }}}">{{ trans('lang.completed_projects') }}</a></li>
+                                    <li><hr><a href="{{{ url('company/jobs/cancelled') }}}">{{ trans('lang.cancelled_projects') }}</a></li>
+                                    <li><hr><a href="{{{ url('company/jobs/hired') }}}">{{ trans('lang.ongoing_projects') }}</a></li>
+                                    @else
                                     <li><hr><a href="{{{ url('freelancer/jobs/completed') }}}">{{ trans('lang.completed_projects') }}</a></li>
                                     <li><hr><a href="{{{ url('freelancer/jobs/cancelled') }}}">{{ trans('lang.cancelled_projects') }}</a></li>
                                     <li><hr><a href="{{{ url('freelancer/jobs/hired') }}}">{{ trans('lang.ongoing_projects') }}</a></li>
+                                 
+                                    @endif
                                 </ul>
                             </li>
+                        
+                            @if($role !== 'company')
                             @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services')
                                 <li class="menu-item-has-children">
                                     <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
@@ -274,26 +364,71 @@
                                         <span>{{ trans('lang.manage_services') }}</span>
                                     </a>
                                     <ul class="sub-menu">
+                                    @if($role === 'intern')
+                                        <li><hr><a href="{{{ route('InterneserviceListing', ['status'=>'posted']) }}}">{{ trans('lang.posted_services') }}</a></li>
+                                        <li><hr><a href="{{{ route('InterneserviceListing', ['status'=>'hired']) }}}">{{ trans('lang.ongoing_services') }}</a></li>
+                                        <li><hr><a href="{{{ route('InterneserviceListing', ['status'=>'completed']) }}}">{{ trans('lang.completed_services') }}</a></li>
+                                        <li><hr><a href="{{{ route('InterneserviceListing', ['status'=>'cancelled']) }}}">{{ trans('lang.cancelled_services') }}</a></li>
+                                        @else
                                         <li><hr><a href="{{{ route('ServiceListing', ['status'=>'posted']) }}}">{{ trans('lang.posted_services') }}</a></li>
                                         <li><hr><a href="{{{ route('ServiceListing', ['status'=>'hired']) }}}">{{ trans('lang.ongoing_services') }}</a></li>
                                         <li><hr><a href="{{{ route('ServiceListing', ['status'=>'completed']) }}}">{{ trans('lang.completed_services') }}</a></li>
                                         <li><hr><a href="{{{ route('ServiceListing', ['status'=>'cancelled']) }}}">{{ trans('lang.cancelled_services') }}</a></li>
+                                     
+
+                                        @endif
                                     </ul>
                                 </li>
                             @endif
+                            @endif
+
+
+
                             <li>
-                                <a href="{{{ route('showFreelancerProposals') }}}">
+
+                            @if($role === 'intern')
+                            <a href="{{{ route('showInterneProposals') }}}">
                                     <i class="ti-bookmark-alt"></i>
                                     <span> {{ trans('lang.proposals') }}</span>
                                 </a>
+                            @elseif($role !== 'company')
+                            <a href="{{{ route('showFreelancerProposals') }}}">
+                                    <i class="ti-bookmark-alt"></i>
+                                    <span> {{ trans('lang.proposals') }}</span>
+                                </a>
+                            @endif
+                              
                             </li>
                             <li>
-                                <a href="{{{ route('FreelancerPayoutsSettings') }}}">
+                            @if($role === 'intern')
+                            <a href="{{{ route('InterneePayoutsSettings') }}}">
                                     <i class="ti-money"></i>
                                     <span> {{ trans('lang.payouts') }}</span>
                                 </a>
+                             @elseif($role !== 'company')
+                             <a href="{{{ route('FreelancerPayoutsSettings') }}}">
+                                    <i class="ti-money"></i>
+                                    <span> {{ trans('lang.payouts') }}</span>
+                                </a>
+                             @endif
+                                
                             </li>
+
+                        
+                             @if( $role === 'company')
+                            <li>
+                                <a href="{{{ route('companyHiringRequests') }}}">
+                                <i class="ti-bookmark-alt"></i>
+                                    <span> Leads</span>
+                                </a>
+
+                            </li>
+                            @endif
+
+                            
                             @if ($payment_module === 'true' )
+                            
+                            @if($role !== 'company')
                                 <li class="menu-item-has-children">
                                     <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                                     <a href="javascript:void(0)">
@@ -301,9 +436,17 @@
                                         <span>{{ trans('lang.invoices') }}</span>
                                     </a>
                                     <ul class="sub-menu">
-                                        <li><hr><a href="{{{ url('freelancer/package/invoice') }}}">{{ trans('lang.pkg_inv') }}</a></li>
+                                    @if($role === 'intern')
+
+                                    <li><hr><a href="{{{ url('internee/package/invoice') }}}">{{ trans('lang.pkg_inv') }}</a></li>
+                                    @else
+
+                                    <li><hr><a href="{{{ url('freelancer/package/invoice') }}}">{{ trans('lang.pkg_inv') }}</a></li>
+                                    @endif
                                     </ul>
                                 </li>
+                                 @endif
+
                                 <li>
                                     <a href="{{{ url('dashboard/packages/'.$role) }}}">
                                         <i class="ti-package"></i>
@@ -312,12 +455,16 @@
                                 </li>
                             @endif
                         @endif
+
+                        @if($role !== 'company')
                         <li>
                             <a href="{{{ url($role.'/saved-items') }}}">
                                 <i class="ti-heart"></i>
                                 <span>{{ trans('lang.saved_items') }}</span>
                             </a>
                         </li>
+                       @endif
+
                     @endif
                     <li>
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('dashboard-logout-form').submit();">
@@ -336,3 +483,23 @@
         </div>
     </div>
 @endauth
+@push('scripts')
+<script>
+    
+     var path = window.location.href; // because the 'href' property of the DOM element is the absolute path
+     jQuery('nav ul li a').each(function() {
+      if (this.href === path) {
+       jQuery(this).parent('li').addClass('wt-active');
+      }
+     });
+     jQuery("ul.sub-menu > li > a").each(function () {
+         var currentURL = document.location.href;
+         var thisURL = jQuery(this).attr("href");
+         if (currentURL.indexOf(thisURL) != -1) {
+            jQuery(this).closest('.menu-item-has-children').addClass('wt-open');
+             jQuery(this).closest("ul.sub-menu").css('display', 'block');
+         }
+       });
+    
+</script>
+@endpush

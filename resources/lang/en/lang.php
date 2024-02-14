@@ -550,6 +550,8 @@ return [
     'join_now' => 'Join Now',
     'user_avatar' => 'User Avatar',
     'login' => 'Sign In',
+    'login_email'=> 'Sign In',
+    'no_account_text'=>'Don\'t have an Talends account?',
     'forget_pass' => 'Forgot password?',
     'create_account' => 'Create Account',
     'remember' => 'Remember Me',
@@ -1258,7 +1260,7 @@ return [
     'btn_load_more' => 'Load More',
     'btn_submit' => 'Submit',
     'btn_gotit' => 'Got It',
-    'btn_apply_filters' => 'Apply Filters',
+    'btn_apply_filters' => 'Find',
     'btn_add' => 'Add',
     'btn_send_feedback' => 'Send Feedback',
     'btn_import_updates' => 'Import',
@@ -1577,4 +1579,14 @@ return [
 
     'why-talends-title'=>'Why Talends',
     'why-talends-desc'=>'About Us',
+
+    
+    'government-title'=>'Government',
+    'government-desc'=>'Government',
+
+    'browse-jobs-title'=>'Browse Jobs',
+    'browse-jobs-desc'=>'Browse Jobs',
+
+    'find-talents-title'=>'Find Talents',
+    'find-talents-desc'=>'Find Talents',
 ];

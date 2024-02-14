@@ -16,14 +16,20 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Intervention\Image\Facades\Image;
 use File;
-use Storage;
+use Illuminate\Support\Facades\Storage;
 use function Opis\Closure\serialize;
 use function Opis\Closure\unserialize;
+use function Psy\debug;
+
 use DB;
 use App\User;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
+use App\UserCategories;
+use App\UserSubCategories;
+use App\UserCategorySkills;
+
 
 /**
  * Class Profile
@@ -38,12 +44,12 @@ class Profile extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'department_id', 'no_of_employees', 'freelancer_type',
+        'user_id', 'department_id', 'min_budget','no_of_employees', 'freelancer_type',
         'english_level', 'hourly_rate', 'experience', 'education', 'awards',
         'projects', 'saved_freelancer', 'saved_jobs', 'saved_employers',
         'rating', 'address', 'longitude', 'latitude', 'avater', 'banner',
         'gender', 'tagline', 'description', 'delete_reason', 'delete_description',
-        'profile_searchable', 'profile_blocked', 'weekly_alerts', 'message_alerts'
+        'profile_searchable', 'profile_blocked', 'weekly_alerts', 'message_alerts','availability','category_id','skill_id'
     ];
 
     /**
@@ -66,7 +72,6 @@ class Profile extends Model
         return $this->belongsTo('App\User');
     }
 
-
     /**
      * Store Profile in database
      *
@@ -77,6 +82,7 @@ class Profile extends Model
      */
     public function storeProfile($request, $user_id)
     {
+
         $user = User::find($user_id);
         if ($user->first_name . '-' . $user->last_name != $request['first_name'] . '-' . $request['last_name']) {
             $user->slug = filter_var($request['first_name'], FILTER_SANITIZE_STRING) . '-' .
@@ -84,6 +90,7 @@ class Profile extends Model
         }
         $user->first_name = filter_var($request['first_name'], FILTER_SANITIZE_STRING);
         $user->last_name = filter_var($request['last_name'], FILTER_SANITIZE_STRING);
+        
         if (!empty($request['email'])) {
             $user->email = filter_var($request['email'], FILTER_SANITIZE_STRING);
         }
@@ -101,6 +108,84 @@ class Profile extends Model
             }
         }
 
+        UserCategories::where('user_id', $user_id)->delete();
+        
+        if($user->getRoleNames()[0]=='freelancer'  ||$user->getRoleNames()[0]=='intern'){
+            $user_categories= new UserCategories;
+            if(isset($request['category_id']) && !empty($request['category_id']) ){
+                $user_categories->category_id=$request['category_id'];
+                $user_categories->user_id=$user_id;
+                $user_categories->save(); 
+    
+            }
+         }else{
+
+            if(isset($request['category'])  && !empty($request['category']) ){
+                $category= $request['category'];
+                $insert = array();
+               
+                foreach($category as $index=>$value){
+                 $draw = [   
+                      'user_id'=> $user_id,
+                      'category_id'=>  $value,
+                      "created_at" => \Carbon\Carbon::now(), 
+                      'updated_at' => \Carbon\Carbon::now()
+     
+                 ];
+                 $insert[] = $draw;
+                }
+     
+               \DB::table('user_categories')->insert($insert); 
+              } 
+
+
+         }
+
+         UserSubCategories::where('user_id', $user_id)->delete();
+            
+         
+         if(isset($request['sub_categories'])  && !empty($request['sub_categories']) ){
+            $sub_categories= $request['sub_categories'];
+            $insert = array();
+           
+            foreach($sub_categories as $index=>$value){
+             $draw = [   
+                  'user_id'=> $user_id,
+                  'sub_category_id'=>  $value,
+                  "created_at" => \Carbon\Carbon::now(), 
+                  'updated_at' => \Carbon\Carbon::now()
+ 
+             ];
+             $insert[] = $draw;
+            }
+ 
+           \DB::table('user_sub_categories')->insert($insert); 
+          } 
+
+
+          UserCategorySkills::where('user_id', $user_id)->delete();
+         
+          if(isset($request['sub_category_skills']) && !empty($request['sub_category_skills']) ){
+            $sub_category_skills= $request['sub_category_skills'];
+            $insert = array();
+  
+            foreach($sub_category_skills as $index=>$value){
+             $draw = [   
+                  'user_id'=> $user_id,
+                  'skill_id'=>  $value,
+                  "created_at" => \Carbon\Carbon::now(), 
+                  'updated_at' => \Carbon\Carbon::now()
+  
+             ];
+             $insert[] = $draw;
+            }
+  
+           \DB::table('user_category_skills')->insert($insert);
+  
+ 
+        }
+    
+
         $user_profile = $this::select('id')->where('user_id', $user_id)
             ->get()->first();
         if (!empty($user_profile->id)) {
@@ -112,6 +197,8 @@ class Profile extends Model
         $profile->user()->associate($user_id);
         $profile->freelancer_type = 'Basic';
         $profile->hourly_rate = intval($request['hourly_rate']);
+        $profile->category_id = intval($request['category']);
+        $profile->availability = ($request['availability']);
         $profile->gender = filter_var($request['gender'], FILTER_SANITIZE_STRING);
         $profile->tagline = filter_var($request['tagline'], FILTER_SANITIZE_STRING);
         $profile->description = filter_var($request['description'], FILTER_SANITIZE_STRING);
@@ -125,43 +212,143 @@ class Profile extends Model
             $department = Department::find($request['department']);
             $profile->department()->associate($department);
         }
+        if ($request['specialization']) {
+            $profile->specialization = $request['specialization'];
+
+        }
+        if ($request['university']) {
+            $profile->university = $request['university'];
+
+        }
+        if ($request['grade']) {
+            $profile->grade = $request['grade'];
+
+        }
+        if (!empty($request['company_type'])) {
+            $profile->company_type = implode(',',$request['company_type']) ;
+        }
+        if (!empty($request['employees'])) {
+            $profile->no_of_employees = intval($request['employees']);
+        }
+        if (!empty($request['budget'])) {
+            $profile->min_budget = ($request['budget']);
+        }
+
+        ///////////////////////////////////////////////////////
         $old_path = Helper::PublicPath() . '/uploads/users/temp';
         if (!empty($request['hidden_avater_image'])) {
             $filename = $request['hidden_avater_image'];
+
             if (file_exists($old_path . '/' . $request['hidden_avater_image'])) {
-                $new_path = Helper::PublicPath() . '/uploads/users/' . $user_id;
-                if (!file_exists($new_path)) {
-                    File::makeDirectory($new_path, 0755, true, true);
-                }
-                $filename = time() . '-' . $request['hidden_avater_image'];
-                rename($old_path . '/' . $request['hidden_avater_image'], $new_path . '/' . $filename);
-                rename($old_path . '/small-' . $request['hidden_avater_image'], $new_path . '/small-' . $filename);
-                rename($old_path . '/medium-small-' . $request['hidden_avater_image'], $new_path . '/medium-small-' . $filename);
-                rename($old_path . '/medium-' . $request['hidden_avater_image'], $new_path . '/medium-' . $filename);
+              
+                $filename = $user_id . '-' . $request['hidden_avater_image'];
+                  
+                $s3_path='uploads/users/'. $user_id;
+
+                /// delete previous
+               $profile_avater=$profile->avater;
+               if($profile_avater){
+                if(Storage::disk('s3')->exists($s3_path.'/'.$profile_avater)){
+                    Storage::disk('s3')->delete($s3_path.'/'.$profile_avater);  
+                  }
+
+                  if(Storage::disk('s3')->exists($s3_path.'/small-'.$profile_avater)){
+                    Storage::disk('s3')->delete($s3_path.'/small-'.$profile_avater);  
+                  }
+
+                  if(Storage::disk('s3')->exists($s3_path.'/medium-small-'.$profile_avater)){
+                    Storage::disk('s3')->delete($s3_path.'/medium-small-'.$profile_avater);  
+                  }
+
+                  if(Storage::disk('s3')->exists($s3_path.'/medium-'.$profile_avater)){
+                    Storage::disk('s3')->delete($s3_path.'/medium-'.$profile_avater);  
+                  }
+
+                  if(Storage::disk('s3')->exists($s3_path.'/listing-'.$profile_avater)){
+                    Storage::disk('s3')->delete($s3_path.'/listing-'.$profile_avater);  
+                  }
+               }
+                
+               sleep(3);
+                $contents = file_get_contents($old_path . '/' . $request['hidden_avater_image']);
+                Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                
+                $contents = file_get_contents($old_path . '/small-' . $request['hidden_avater_image']);
+                Storage::disk('s3')->put($s3_path. '/small-' . $filename,$contents  ); 
+                
+                $contents = file_get_contents($old_path . '/medium-small-' . $request['hidden_avater_image']);
+                Storage::disk('s3')->put($s3_path. '/medium-small-' . $filename,$contents  );
+                
+                $contents = file_get_contents($old_path . '/medium-' . $request['hidden_avater_image']);
+                Storage::disk('s3')->put($s3_path. '/medium-' . $filename,$contents  );
+
                 if (file_exists($old_path . '/listing-' . $request['hidden_avater_image'])) {
-                    rename($old_path . '/listing-' . $request['hidden_avater_image'], $new_path . '/listing-' . $filename);
+                    $contents = file_get_contents($old_path . '/listing-' . $request['hidden_avater_image']);
+                    Storage::disk('s3')->put($s3_path. '/listing-' . $filename,$contents  );
+                    unlink($old_path . '/listing-' . $request['hidden_avater_image']);
                 }
+
+                unlink($old_path . '/' . $request['hidden_avater_image']);
+                unlink($old_path . '/small-' . $request['hidden_avater_image']);
+                unlink($old_path . '/medium-small-' . $request['hidden_avater_image']);
+                unlink($old_path . '/medium-' . $request['hidden_avater_image']);
             }
+
+            /////////////////////////////////////////
             $profile->avater = filter_var($filename, FILTER_SANITIZE_STRING);
         } else {
             $profile->avater = null;
         }
+        /////////////////////////////////////////////////
         if (!empty($request['hidden_banner_image'])) {
             $filename = $request['hidden_banner_image'];
             if (file_exists($old_path . '/' . $request['hidden_banner_image'])) {
-                $new_path = Helper::PublicPath() . '/uploads/users/' . $user_id;
-                if (!file_exists($new_path)) {
-                    File::makeDirectory($new_path, 0755, true, true);
-                }
-                $filename = time() . '-' . $request['hidden_banner_image'];
-                rename($old_path . '/' . $request['hidden_banner_image'], $new_path . '/' . $filename);
-                rename($old_path . '/small-' . $request['hidden_banner_image'], $new_path . '/small-' . $filename);
-                rename($old_path . '/medium-' . $request['hidden_banner_image'], $new_path . '/medium-' . $filename);
+
+                $filename =  $user_id . '-' . $request['hidden_banner_image'];
+            
+                $s3_path='uploads/users/'. $user_id;
+
+                /// delete previous
+               $profile_banner=$profile->banner;
+               if($profile_banner){
+                if(Storage::disk('s3')->exists($s3_path.'/'.$profile_banner)){
+                    Storage::disk('s3')->delete($s3_path.'/'.$profile_banner);  
+                  }
+
+                  if(Storage::disk('s3')->exists($s3_path.'/small-'.$profile_banner)){
+                    Storage::disk('s3')->delete($s3_path.'/small-'.$profile_banner);  
+                  }
+
+                 
+
+                  if(Storage::disk('s3')->exists($s3_path.'/medium-'.$profile_banner)){
+                    Storage::disk('s3')->delete($s3_path.'/medium-'.$profile_banner);  
+                  }
+
+                  
+               }
+                sleep(3);
+                $contents = file_get_contents($old_path . '/' . $request['hidden_banner_image']);
+                Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+                
+                $contents = file_get_contents($old_path . '/small-' . $request['hidden_banner_image']);
+                Storage::disk('s3')->put($s3_path. '/small-' . $filename,$contents  ); 
+                
+  
+                $contents = file_get_contents($old_path . '/medium-' . $request['hidden_banner_image']);
+                Storage::disk('s3')->put($s3_path. '/medium-' . $filename,$contents  );
+
+                unlink($old_path . '/' . $request['hidden_banner_image']);
+                unlink($old_path . '/small-' . $request['hidden_banner_image']);
+                unlink($old_path . '/medium-' . $request['hidden_banner_image']);
+
             }
             $profile->banner = filter_var($filename, FILTER_SANITIZE_STRING);
         } else {
             $profile->banner = null;
         }
+        /////////////////////////////////////////////////////
+
         $videos = !empty($request['video']) ? $request['video'] : array();
         if (!empty($videos)) {
             foreach ($videos as $key => $video) {
@@ -239,11 +426,15 @@ class Profile extends Model
     {
         $json = array();
         $user = User::find($user_id);
+        $profile =  $this::select('projects','awards')->where('user_id', $user_id)->get()->first();
+ 
         $count = 0;
         $award_counter = 0;
         $request_project = array();
         $request_award = array();
         $old_path = Helper::PublicPath() . '/uploads/users/temp';
+       
+       //////////////////////////
         if (!empty($request['project'])) {
             foreach ($request['project'] as $key => $project) {
                 if ($project['project_title'] == 'Project title here' || $project['project_url'] == 'Project url here') {
@@ -256,14 +447,56 @@ class Profile extends Model
                 if (!empty($project['project_hidden_image'])) {
                     $filename = $project['project_hidden_image'];
                     if (file_exists($old_path . '/' . $project['project_hidden_image'])) {
-                        $new_path = Helper::PublicPath() . '/uploads/users/' . $user_id . '/projects';
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
-                        $filename = time() . $count . '-' . $project['project_hidden_image'];
-                        rename($old_path . '/' . $project['project_hidden_image'], $new_path . '/' . $filename);
-                        rename($old_path . '/small-' . $project['project_hidden_image'], $new_path . '/small-' . $filename);
-                        rename($old_path . '/medium-' . $project['project_hidden_image'], $new_path . '/medium-' . $filename);
+
+                        $filename =  $user_id . $count . '-' . $project['project_hidden_image'];
+
+                        $s3_path='uploads/users/'. $user_id . '/projects';
+
+                        /* if (!empty($profile)) {
+                            $db_projects = !empty($profile->projects) ? Helper::getUnserializeData($profile->projects) : array();
+                            if (!empty($db_projects)) {
+                                foreach ($db_projects as $key => $db_project) {
+                                    $project_hidden_image=$db_project['project_hidden_image'];
+                                   if($project_hidden_image){
+                                    
+                                    if(Storage::disk('s3')->exists($s3_path.'/'.$project_hidden_image)){
+                                        Storage::disk('s3')->delete($s3_path.'/'.$project_hidden_image);  
+                                    }
+
+                                    if(Storage::disk('s3')->exists($s3_path.'/small-'.$project_hidden_image)){
+                                        Storage::disk('s3')->delete($s3_path.'/small-'.$project_hidden_image);  
+                                    }
+
+
+                                    if(Storage::disk('s3')->exists($s3_path.'/medium-'.$project_hidden_image)){
+                                        Storage::disk('s3')->delete($s3_path.'/medium-'.$project_hidden_image);  
+                                    }
+
+
+                                   }
+                                }
+                            }
+                        } */
+
+                      
+                        sleep(5);
+                        $contents = file_get_contents($old_path . '/' . $project['project_hidden_image']);
+                        Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  ); 
+                        
+                        
+                        $contents = file_get_contents($old_path . '/small-' . $project['project_hidden_image']);
+                        Storage::disk('s3')->put($s3_path. '/small-' . $filename,$contents  ); 
+
+                        $contents = file_get_contents($old_path . '/medium-' . $project['project_hidden_image']);
+                        Storage::disk('s3')->put($s3_path. '/medium-' . $filename,$contents  ); 
+
+                        unlink($old_path . '/' . $project['project_hidden_image']);
+                        unlink($old_path . '/small-' . $project['project_hidden_image']);
+                        unlink($old_path . '/medium-' . $project['project_hidden_image']);
+
+                        
+                    ////////////////////////////////////////////////
+                    
                     }
                     $request_project[$count]['project_hidden_image'] = $filename;
                 } else {
@@ -272,7 +505,38 @@ class Profile extends Model
                 $count++;
             }
         }
+
+
+
         if (!empty($request['award'])) {
+            $s3_path='uploads/users/'. $user_id . '/awards';
+/* 
+            $db_awards = !empty($profile->awards) ? Helper::getUnserializeData($profile->awards) : array();
+                        
+            
+                                    if (!empty($db_awards)) {
+                                        foreach ($db_awards as $key => $db_award) {
+                                            $award_hidden_image=$db_award['award_hidden_image'];
+                                           if($award_hidden_image){
+                                            
+                                            if(Storage::disk('s3')->exists($s3_path.'/'.$award_hidden_image)){
+                                                Storage::disk('s3')->delete($s3_path.'/'.$award_hidden_image);  
+                                            }
+            
+                                            if(Storage::disk('s3')->exists($s3_path.'/small-'.$award_hidden_image)){
+                                                Storage::disk('s3')->delete($s3_path.'/small-'.$award_hidden_image);  
+                                            }
+            
+            
+                                            if(Storage::disk('s3')->exists($s3_path.'/medium-'.$award_hidden_image)){
+                                                Storage::disk('s3')->delete($s3_path.'/medium-'.$award_hidden_image);  
+                                            }
+            
+            
+                                           }
+                                        }
+                                    }  */
+
             foreach ($request['award'] as $key => $award) {
                 if ($award['award_title'] == 'Award title here' || $award['award_date'] == 'Select Award date') {
                     $json['type'] = 'error';
@@ -284,14 +548,28 @@ class Profile extends Model
                 if (!empty($award['award_hidden_image'])) {
                     $filename = $award['award_hidden_image'];
                     if (file_exists($old_path . '/' . $award['award_hidden_image'])) {
-                        $new_path = Helper::PublicPath() . '/uploads/users/' . $user_id . '/awards';
-                        if (!file_exists($new_path)) {
-                            File::makeDirectory($new_path, 0755, true, true);
-                        }
-                        $filename = time() . $award_counter . '-' . $award['award_hidden_image'];
-                        rename($old_path . '/' . $award['award_hidden_image'], $new_path . '/' . $filename);
-                        rename($old_path . '/small-' . $award['award_hidden_image'], $new_path . '/small-' . $filename);
-                        rename($old_path . '/medium-' . $award['award_hidden_image'], $new_path . '/medium-' . $filename);
+
+                    //////////////////////////////////////////
+
+                    $filename = $user_id . $award_counter . '-' . $award['award_hidden_image'];
+
+
+                    sleep(5);
+                    $contents = file_get_contents($old_path . '/' . $award['award_hidden_image']);
+                    Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  ); 
+
+                    $contents = file_get_contents($old_path . '/small-' . $award['award_hidden_image']);
+                    Storage::disk('s3')->put($s3_path. '/small-' . $filename,$contents  ); 
+
+                    $contents = file_get_contents($old_path . '/medium-' . $award['award_hidden_image']);
+                    Storage::disk('s3')->put($s3_path. '/medium-' . $filename,$contents  ); 
+                    
+            
+                    unlink($old_path . '/' . $award['award_hidden_image']);
+                    unlink($old_path . '/small-' . $award['award_hidden_image']);
+                    unlink($old_path . '/medium-' . $award['award_hidden_image']);
+                    /////////////////////////////////////////
+                   
                     }
                     $request_award[$award_counter]['award_hidden_image'] = $filename;
                 } else {
@@ -300,6 +578,11 @@ class Profile extends Model
                 $award_counter++;
             }
         }
+
+
+
+
+
         $project = !empty($request['project']) ? serialize($request_project) : '';
         $award = !empty($request['award']) ? serialize($request_award) : '';
         $user_profile = $this::select('id')->where('user_id', $user_id)
@@ -317,6 +600,7 @@ class Profile extends Model
         return $json;
     }
 
+    
     /**
      * Add to whish list
      *
@@ -451,4 +735,6 @@ class Profile extends Model
         $profile->payout_settings  = serialize($payouts);
         $profile->save();
     }
+
+ 
 }

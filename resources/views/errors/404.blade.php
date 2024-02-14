@@ -23,7 +23,7 @@
             <div class="row justify-content-md-center">
                 <div class="col-xs-12 col-sm-12 col-md-10 push-md-1 col-lg-8 push-lg-2">
                     <div class="wt-404errorpage">
-                        <figure class="wt-404errorimg"><img src="{{{ asset('images/404-img.jpg') }}}" alt="{{ trans('lang.404_img') }}"></figure>
+                        <figure class="wt-404errorimg"><img src="{{{ config('app.aws_se_path'). '/' .'images/404-img.jpg' }}}" alt="{{ trans('lang.404_img') }}"></figure>
                         <div class="wt-404errorcontent">
                             <div class="wt-title">
                                 <h3>{{ trans('lang.link_crashed') }}</h3>

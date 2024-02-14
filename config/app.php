@@ -67,6 +67,9 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'aws_se_path' => 'https://'.env('AWS_BUCKET').'.s3.amazonaws.com',
+
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
@@ -175,7 +178,7 @@ return [
         SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-
+        Biscolab\ReCaptcha\ReCaptchaServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -184,6 +187,7 @@ return [
         App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         App\Providers\AmentotechServiceProvider::class,
         Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
@@ -253,5 +257,6 @@ return [
         'Helper' => App\Helper::class,
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
     ],
 ];

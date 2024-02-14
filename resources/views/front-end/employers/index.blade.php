@@ -10,11 +10,27 @@
             ['title' => trans('lang.employers'), 'inner_banner' => $e_inner_banner, 'show_banner' => $show_emp_banner ]
         )
     @else 
-        @include('front-end.includes.inner-banner', 
-            ['title' =>  trans('lang.employers'), 'inner_banner' => $e_inner_banner, 'show_banner' => $show_emp_banner ]
-        )
+       
+
+    <section class="internee_sec theme_bg_dark">
+        <div class="container">
+            <div class="row row-eq-height">
+                <div class="col-md-7 pb-3 align-self-center">
+                    <h2 class="text-white">Browse Employers </h2>
+                 
+                  
+                </div>
+                <div class="col-md-5">
+                    <img src="{{ asset('talends/assets/img/browse-jobs/banner.png')}}" class="w-100" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+ 
+
     @endif
-    <div class="wt-haslayout wt-main-section" id="user_profile">
+   <br><br>
+    <div id="user_profile">
         @if (Session::has('payment_message'))
             @php $response = Session::get('payment_message') @endphp
             <div class="flash_msg">
@@ -41,17 +57,19 @@
                             <div class="wt-companysinfoholder">
                                 <div class="row">
                                     @if (!empty($users))
+                                      
+                                    
                                         @foreach ($users as $employer)
                                             @php
                                                 $verified_user = \App\User::select('user_verified')->where('id', $employer->id)->pluck('user_verified')->first();
                                                 $user_image = !empty($employer->profile->avater) ?
-                                                            '/uploads/users/'.$employer->id.'/'.$employer->profile->avater :
-                                                            'images/user.jpg';
+                                                config('app.aws_se_path'). '/uploads/users/'.$employer->id.'/'.$employer->profile->avater :
+                                                config('app.aws_se_path'). '/' .'images/user.jpg';
                                             @endphp
                                             <div class="col-12 col-sm-12 col-md-12 col-lg-6">
                                                 <div class="wt-companysdetails">
                                                     <figure class="wt-companysimg">
-                                                        <img src="{{{ asset(Helper::getUserProfileBanner($employer->id, 'small')) }}}" alt="Company">
+                                                        <img src="{{{ (Helper::getUserProfileBanner($employer->id, 'small')) }}}" alt="Company">
                                                     </figure>
                                                     <div class="wt-companysinfo">
                                                         <figure><img src="{{{ asset($user_image) }}}" alt="Company"></figure>
@@ -112,3 +130,19 @@
         </div>
     </div>
     @endsection
+
+    @push('scripts')
+
+<script>
+
+function toogle_total_employes(){
+ $('.total_employes_filter').toggle();
+}
+
+function toogle_location(){
+ $('.location_filter').toggle();
+}
+
+</script>
+@endpush
+

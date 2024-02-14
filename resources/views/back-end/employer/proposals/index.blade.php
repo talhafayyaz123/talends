@@ -25,7 +25,7 @@
                         <div class="wt-dashboardboxcontent wt-rcvproposala">
                             <div class="wt-userlistinghold wt-userlistingvtwo {{ $feature_class }}">
                                 @if (!empty($job->is_featured) && $job->is_featured === 'true')
-                                    <span class="wt-featuredtag"><img src="{{{ asset('images/featured.png') }}}" alt="{{ trans('lang.is_featured') }}" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                    <span class="wt-featuredtag"><img src="{{{ config('app.aws_se_path'). '/' .'images/featured.png' }}}" alt="{{ trans('lang.is_featured') }}" data-tipso="Plus Member" class="template-content tipso_style"></span>
                                 @endif
                                 <div class="wt-userlistingcontent">
                                     <div class="wt-contenthead">
@@ -69,9 +69,9 @@
                                                         @php
                                                             $profile = \App\User::find($proposal->freelancer_id)->profile;
                                                             $user_image = !empty($profile) ? $profile->avater : '';
-                                                            $profile_image = !empty($user_image) ? '/uploads/users/'.$proposal->freelancer_id.'/'.$user_image : 'images/user-login.png';
+                                                            $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/'.$proposal->freelancer_id.'/'.$user_image : config('app.aws_se_path'). '/' . 'images/user-login.png';
                                                         @endphp
-                                                        <li><figure><img src="{{{ asset($profile_image) }}}" alt="{{ trans('lang.img') }}" class="mCS_img_loaded"></figure></li>
+                                                        <li><figure><img src="{{{ ($profile_image) }}}" alt="{{ trans('lang.img') }}" class="mCS_img_loaded"></figure></li>
                                                     @endforeach
                                                 </ul>
                                             @endif
@@ -89,7 +89,7 @@
                                         $user = \App\User::find($accepted_proposal->freelancer_id);
                                         $profile = \App\User::find($accepted_proposal->freelancer_id)->profile;
                                         $user_image = !empty($profile) ? $profile->avater : '';
-                                        $profile_image = !empty($user_image) ? '/uploads/users/'.$accepted_proposal->freelancer_id.'/'.$user_image : 'images/user-login.png';
+                                        $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/'.$accepted_proposal->freelancer_id.'/'.$user_image : config('app.aws_se_path'). '/' .'images/user-login.png';
                                         $user_name = Helper::getUserName($user->id);
                                         $feedbacks = \App\Review::select('feedback')->where('receiver_id', $user->id)->count();
                                         $avg_rating = App\Review::where('receiver_id', $user->id)->sum('avg_rating');
@@ -99,6 +99,7 @@
                                         $average_rating_count = !empty($feedbacks) ? $reviews->sum('avg_rating')/$feedbacks : 0;
                                         $completion_time = !empty($accepted_proposal->completion_time) ? \App\Helper::getJobDurationList($accepted_proposal->completion_time) : '';
                                         $p_attachments = !empty($accepted_proposal->attachments) ? unserialize($accepted_proposal->attachments) : '';
+                                        
                                         $badge = Helper::getUserBadge($user->id);
                                         if (!empty($enable_package) && $enable_package === 'true') {
                                             $feature_class = !empty($badge) ? 'wt-featured' : '';
@@ -119,7 +120,7 @@
                                                 @endif
                                             @endif
                                             <figure class="wt-userlistingimg">
-                                                <img src="{{{ asset($profile_image) }}}" alt="{{ trans('lang.profile_img') }}" class="mCS_img_loaded">
+                                                <img src="{{{ ($profile_image) }}}" alt="{{ trans('lang.profile_img') }}" class="mCS_img_loaded">
                                             </figure>
                                             <div class="wt-proposaldetails">
                                                 @if (!empty($user_name))
@@ -154,7 +155,7 @@
                                                     @if (!empty($p_attachments))
                                                         {!! Form::open(['url' => url('proposal/download-attachments'), 'class' =>'post-job-form wt-haslayout', 'id' => 'accepted-download-attachments-form-'.$accepted_proposal->id]) !!}
                                                             @foreach ($p_attachments as $attachments)
-                                                                @if (Storage::disk('local')->exists('uploads/proposals/'.$accepted_proposal->freelancer_id.'/'.$attachments))
+                                                                @if (Storage::disk('s3')->exists('uploads/proposals/'.$accepted_proposal->freelancer_id.'/'.$attachments))
                                                                     {!! Form::hidden('attachments['.$count.']', $attachments, []) !!}
                                                                     @php $count++; @endphp
                                                                 @endif
@@ -187,7 +188,7 @@
                                                     $user = \App\User::find($proposal->freelancer_id);
                                                     $profile = \App\User::find($proposal->freelancer_id)->profile;
                                                     $user_image = !empty($profile) ? $profile->avater : '';
-                                                    $profile_image = !empty($user_image) ? '/uploads/users/'.$proposal->freelancer_id.'/'.$user_image : 'images/user-login.png';
+                                                    $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/'.$proposal->freelancer_id.'/'.$user_image : config('app.aws_se_path'). '/' . 'images/user-login.png';
                                                     $user_name = $user->first_name.' '.$user->last_name;
                                                     $feedbacks = \App\Review::select('feedback')->where('receiver_id', $proposal->freelancer_id)->count();
                                                     $avg_rating = App\Review::where('receiver_id', $proposal->freelancer_id)->sum('avg_rating');
@@ -222,7 +223,7 @@
                                                         @endif
                                                     @endif    
                                                     <figure class="wt-userlistingimg">
-                                                        <img src="{{{ asset($profile_image) }}}" alt="{{ trans('lang.profile_img') }}" class="mCS_img_loaded">
+                                                        <img src="{{{ ($profile_image) }}}" alt="{{ trans('lang.profile_img') }}" class="mCS_img_loaded">
                                                     </figure>
                                                     <div class="wt-proposaldetails">
                                                         @if (!empty($user_name))
@@ -264,7 +265,7 @@
                                                             @if (!empty($attachments))
                                                                 {!! Form::open(['url' => url('proposal/download-attachments'), 'class' =>'post-job-form wt-haslayout', 'id' => 'download-attachments-form-'.$proposal->id]) !!}
                                                                     @foreach ($attachments as $attachment)
-                                                                        @if (Storage::disk('local')->exists('uploads/proposals/'.$proposal->freelancer_id.'/'.$attachment))
+                                                                        @if (Storage::disk('s3')->exists('uploads/proposals/'.$proposal->freelancer_id.'/'.$attachment))
                                                                             {!! Form::hidden('attachments['.$received_proposal_count.']', $attachment, []) !!}
                                                                             @php $received_proposal_count++; @endphp
                                                                         @endif

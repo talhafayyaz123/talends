@@ -632,6 +632,7 @@ class UserController extends Controller
             $saved_employers   = !empty($profile->saved_employers) ? unserialize($profile->saved_employers) : array();
             $currency          = SiteManagement::getMetaValue('commision');
             $symbol            = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
+           
             if ($request->path() === 'employer/saved-items') {
                 if (file_exists(resource_path('views/extend/back-end/employer/saved-items.blade.php'))) {
                     return view(
@@ -669,8 +670,34 @@ class UserController extends Controller
                         )
                     );
                 } else {
+
                     return view(
                         'back-end.freelancer.saved-items',
+                        compact(
+                            'profile',
+                            'saved_jobs',
+                            'saved_freelancers',
+                            'saved_employers',
+                            'symbol'
+                        )
+                    );
+                }
+            } elseif ($request->path() === 'intern/saved-items') {
+                if (file_exists(resource_path('views/extend/back-end/freelancer/saved-items.blade.php'))) {
+                    return view(
+                        'extend.back-end.freelancer.saved-items',
+                        compact(
+                            'profile',
+                            'saved_jobs',
+                            'saved_freelancers',
+                            'saved_employers',
+                            'symbol'
+                        )
+                    );
+                } else {
+
+                    return view(
+                        'back-end.interne.saved-items',
                         compact(
                             'profile',
                             'saved_jobs',
@@ -891,16 +918,73 @@ class UserController extends Controller
     {
         if (!empty($request['attachments'])) {
             $freelancer_id = $request['freelancer_id'];
-            $path = storage_path() . '/app/uploads/proposals/' . $freelancer_id;
-            if (!file_exists($path)) {
-                File::makeDirectory($path, 0755, true, true);
+           
+                //////////////////////////
+                $path = storage_path() . '/app/uploads/proposals/temp';
+                if (!file_exists($path)) {
+                    File::makeDirectory($path, 0755, true, true);
+                }
+                $zip = new \Madnest\Madzipper\Madzipper;
+                $exist=Storage::disk('s3')->exists('uploads/proposals'. '/'. $freelancer_id . '/' . 'attachments.zip');
+                 
+                if(!$exist){
+                    foreach ($request['attachments'] as $attachment) {
+                       
+                        if (Storage::disk('s3')->exists('uploads/proposals/'. $freelancer_id.'/' . $attachment)) {
+                        
+                            if (!file_exists($path . '/' . $attachment)) {
+                            $s3_file= Storage::disk('s3')->get('uploads/proposals'. '/'. $freelancer_id.'/' . $attachment);
+                            $s3 = Storage::disk('local');
+                             
+                            $s3->put('uploads/proposals'. '/temp'.'/' . $attachment, $s3_file);
+                            }
+                                               
+                           $zip->make($path . '/attachments.zip')->add($path . '/' . $attachment); 
+                           
+                        }
+                        $zip->close(); 
+        
+                    }
+                }else{
+            
+                    if (Storage::disk('s3')->exists('uploads/proposals'.'/'. $freelancer_id . '/'.'attachments.zip')) {
+                  
+                        return Storage::disk('s3')->download('uploads/proposals'.'/'. $freelancer_id.'/'.'attachments.zip');
+                        
+                      } else {
+                          Session::flash('error', trans('lang.file_not_found'));
+                          return Redirect::back();
+                      } 
+                }
+                
+            if (file_exists($path .'/'.'attachments.zip')) {
+                $contents = file_get_contents($path .'/'.'attachments.zip');
+                Storage::disk('s3')->put('uploads/proposals'. '/'. $freelancer_id.'/'.'attachments.zip', $contents);
+                unlink($path .'/'.'attachments.zip');
             }
-            $zip = new \Madnest\Madzipper\Madzipper;
-            foreach ($request['attachments'] as $attachment) {
-                $zip->make($path . '/attachments.zip')->add($path . '/' . $attachment);
-                $zip->close();
+
+            if(!$exist){
+                foreach ($request['attachments'] as $attachment) {
+                    if (file_exists($path .'/'. $attachment)) {
+                        unlink($path .'/'. $attachment);
+                    }
+                }
             }
-            return response()->download(storage_path('app/uploads/proposals/' . $freelancer_id . '/attachments.zip'));
+
+            // download freom s3 bucket  
+            if (Storage::disk('s3')->exists('uploads/proposals' . '/'. $freelancer_id . '/' . 'attachments.zip')) {
+              
+                return Storage::disk('s3')->download('uploads/proposals'. '/'. $freelancer_id . '/' . 'attachments.zip');
+                
+              } else {
+                  Session::flash('error', trans('lang.file_not_found'));
+                  return Redirect::back();
+              }
+
+
+
+                //////////////////////////
+
         } else {
             Session::flash('error', trans('lang.files_not_found'));
             return Redirect::back();
@@ -1219,16 +1303,16 @@ class UserController extends Controller
                     foreach ($message_data as $key => $data) {
                         $content = $data->content;
                         $excerpt = str_limit($content, 100);
-                        $default_avatar = url('images/user-login.png');
+                        $default_avatar = config('app.aws_se_path'). '/' .'images/user-login.png';
                         $profile_image = !empty($data->avater)
-                            ? '/uploads/users/' . $data->author_id . '/' . $data->avater
+                            ? config('app.aws_se_path').'/uploads/users/' . $data->author_id . '/' . $data->avater
                             : $default_avatar;
                         $messages[$key]['id'] = $data->id;
                         $messages[$key]['author_id'] = $data->author_id;
                         $messages[$key]['proposal_id'] = $data->proposal_id;
                         $messages[$key]['content'] = $content;
                         $messages[$key]['excerpt'] = $excerpt;
-                        $messages[$key]['user_image'] = asset($profile_image);
+                        $messages[$key]['user_image'] = ($profile_image);
                         $messages[$key]['created_at'] = Carbon::parse($data->created_at)->format('d-m-Y');
                         $messages[$key]['notify'] = $data->notify;
                         $messages[$key]['attachments'] = !empty($data->attachments) ? 1 : 0;
@@ -1268,24 +1352,67 @@ class UserController extends Controller
             } elseif ($messages[0]->project_type == 'job') {
                 $project_type = 'proposals';
             }
-            $path = storage_path() . '/app/uploads/' . $project_type . '/' . $messages[0]->author_id;
+
+            $path = storage_path() . '/app/uploads/' . $project_type . '/temp';
             if (!file_exists($path)) {
                 File::makeDirectory($path, 0755, true, true);
             }
             
             $zip = new \Madnest\Madzipper\Madzipper;
-            foreach ($attachments as $attachment) {
-                if (Storage::disk('local')->exists('uploads/' . $project_type . '/' . $messages[0]->author_id . '/' . $attachment)) {
-                    $zip->make($path . '/' . $id . '-attachments.zip')->add($path . '/' . $attachment);
+
+            $exist=Storage::disk('s3')->exists('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip');
+            if(!$exist){
+                foreach ($attachments as $attachment) {
+                    if (Storage::disk('s3')->exists('uploads/' . $project_type . '/'. $messages[0]->author_id.'/' . $attachment)) {
+                       
+                        if (!file_exists($path . '/' . $attachment)) {
+                        $s3_file= Storage::disk('s3')->get('uploads/' . $project_type . '/'. $messages[0]->author_id.'/' . $attachment);
+                        $s3 = Storage::disk('local');
+                        $s3->put('uploads/' . $project_type . '/temp'.'/' . $attachment, $s3_file);
+                        }
+                                           
+                       $zip->make($path . '/' . $id . '-attachments.zip')->add($path . '/' . $attachment);
+                       
+                    }
+                    $zip->close();
+    
                 }
-                $zip->close();
+            }else{
+        
+                if (Storage::disk('s3')->exists('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip')) {
+              
+                    return Storage::disk('s3')->download('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip');
+                    
+                  } else {
+                      Session::flash('error', trans('lang.file_not_found'));
+                      return Redirect::back();
+                  }
             }
-            if (Storage::disk('local')->exists('uploads/' . $project_type . '/' . $messages[0]->author_id . '/' . $id . '-attachments.zip')) {
-                return response()->download(storage_path('app/uploads/' . $project_type . '/' . $messages[0]->author_id . '/' . $id . '-attachments.zip'));
+          
+            if (file_exists($path .'/'. $id . '-attachments.zip')) {
+                $contents = file_get_contents($path .'/'. $id . '-attachments.zip');
+                Storage::disk('s3')->put( 'uploads/' . $project_type . '/'. $messages[0]->author_id.'/' . $id . '-attachments.zip'  , $contents );
+                unlink($path .'/'. $id . '-attachments.zip');
+            }
+
+            if(!$exist){
+            foreach ($attachments as $attachment) {
+                if (file_exists($path .'/'. $attachment)) {
+                    unlink($path .'/'. $attachment);
+                }
+            }
+        }
+          
+            /// download freom s3 bucket  
+            if (Storage::disk('s3')->exists('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip')) {
+              
+              return Storage::disk('s3')->download('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip');
+              
             } else {
                 Session::flash('error', trans('lang.file_not_found'));
                 return Redirect::back();
             }
+
         }
     }
 
@@ -1307,10 +1434,11 @@ class UserController extends Controller
             $payment_gateway = !empty($payout_settings) && !empty($payout_settings[0]['payment_method']) ? $payout_settings[0]['payment_method'] : array();
             $symbol = !empty($payout_settings) && !empty($payout_settings[0]['currency']) ? Helper::currencyList($payout_settings[0]['currency']) : array();
             $mode = !empty($payout_settings) && !empty($payout_settings[0]['payment_mode']) ? $payout_settings[0]['payment_mode'] : 'true';
+        
             if (file_exists(resource_path('views/extend/back-end/package/checkout.blade.php'))) {
                 return view::make('extend.back-end.package.checkout', compact('stripe_img', 'package', 'package_options', 'payment_gateway', 'symbol', 'mode'));
             } else {
-                return view::make('back-end.package.checkout', compact('stripe_img', 'package', 'package_options', 'payment_gateway', 'symbol', 'mode'));
+                return view::make('back-end.package.checkout', compact('stripe_img', 'package', 'package_options', 'payment_gateway', 'symbol', 'mode','id'));
             }
         }
     }
@@ -1459,18 +1587,25 @@ class UserController extends Controller
                 $invoice->detail = !empty($request['trans_detail']) ? $request['trans_detail'] : '';
                 $old_path = 'uploads\users\temp';
                 $trans_attachments = array();
+                
                 if (!empty($request['attachments'])) {
                     $attachments = $request['attachments'];
                     foreach ($attachments as $key => $attachment) {
+
+
                         if (Storage::disk('local')->exists($old_path . '/' . $attachment)) {
                             $new_path = 'uploads/users/' . Auth::user()->id;
-                            if (!file_exists($new_path)) {
-                                File::makeDirectory($new_path, 0755, true, true);
-                            }
                             $filename = time() . '-' . $attachment;
-                            Storage::move($old_path . '/' . $attachment, $new_path . '/' . $filename);
-                            $trans_attachments[] = $filename;
+                          // move files to aws s3
+                           $contents =  Storage::disk('local')->get($old_path . '/' . $attachment);
+                           Storage::disk('s3')->put($new_path. '/' . $filename,$contents  );
+                           $trans_attachments[] = $filename;
+                            Storage::disk('local')->delete($old_path . '/' . $attachment);
+                            
                         }
+
+
+
                     }
                     $invoice->transection_doc = serialize($trans_attachments);
                 }
@@ -1847,6 +1982,38 @@ class UserController extends Controller
         }
     }
 
+
+    public function getInterneeInvoices($type = '')
+    {
+        if (Auth::user()->getRoleNames()[0] != 'admin' && Auth::user()->getRoleNames()[0] === 'intern') {
+            $invoices = array();
+            $invoices = DB::table('invoices')
+                ->join('items', 'items.invoice_id', '=', 'invoices.id')
+                ->join('packages', 'packages.id', '=', 'items.product_id')
+                ->select('invoices.*', 'packages.options')
+                ->where('items.subscriber', Auth::user()->id)
+                ->where('invoices.type', $type)
+                ->get();
+            $expiry_date = '';
+            $currency   = SiteManagement::getMetaValue('commision');
+            $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
+            if ($type === 'project') {
+                if (file_exists(resource_path('views/extend/back-end/interne/invoices/project.blade.php'))) {
+                    return view('extend.back-end.interne.invoices.project', compact('invoices', 'type', 'expiry_date', 'symbol'));
+                } else {
+                    return view('back-end.interne.invoices.project', compact('invoices', 'type', 'expiry_date', 'symbol'));
+                }
+            } elseif ($type === 'package') {
+                if (file_exists(resource_path('views/extend/back-end/interne/invoices/package.blade.php'))) {
+                    return view('extend.back-end.interne.invoices.package', compact('invoices', 'type', 'expiry_date', 'symbol'));
+                } else {
+                    return view('back-end.interne.invoices.package', compact('invoices', 'type', 'expiry_date', 'symbol'));
+                }
+            }
+        } else {
+            abort(404);
+        }
+    }
     /**
      * Get Invoices.
      *
@@ -1924,10 +2091,13 @@ class UserController extends Controller
         $avater = !empty($profile->avater) ? $profile->avater : '';
         $tagline = !empty($profile->tagline) ? $profile->tagline : '';
         $description = !empty($profile->description) ? $profile->description : '';
+        $aws_s3_path='https://'.env('AWS_BUCKET').'.s3.amazonaws.com';
+
         if (file_exists(resource_path('views/extend/back-end/admin/profile-settings/personal-detail/index.blade.php'))) {
             return view(
                 'extend.back-end.admin.profile-settings.personal-detail.index',
                 compact(
+                    'aws_s3_path',
                     'banner',
                     'avater',
                     'tagline',
@@ -1938,6 +2108,7 @@ class UserController extends Controller
             return view(
                 'back-end.admin.profile-settings.personal-detail.index',
                 compact(
+                    'aws_s3_path',
                     'banner',
                     'avater',
                     'tagline',
@@ -2146,6 +2317,61 @@ class UserController extends Controller
         }
     }
 
+    public function raiseInterneDispute($slug)
+    {
+        $breadcrumbs_settings = SiteManagement::getMetaValue('show_breadcrumb');
+        $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'true';
+        $job = Job::where('slug', $slug)->first();
+        $reasons = Arr::pluck(Helper::getReportReasons(), 'title', 'title');
+        if (file_exists(resource_path('views/extend/back-end/freelancer/jobs/dispute.blade.php'))) {
+            return View(
+                'extend.back-end.interne.jobs.dispute',
+                compact(
+                    'job',
+                    'reasons',
+                    'show_breadcrumbs'
+                )
+            );
+        } else {
+            return View(
+                'back-end.interne.jobs.dispute',
+                compact(
+                    'job',
+                    'reasons',
+                    'show_breadcrumbs'
+                )
+            );
+        }
+    }
+
+
+    public function raiseCompanyDispute($slug)
+    {
+        $breadcrumbs_settings = SiteManagement::getMetaValue('show_breadcrumb');
+        $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'true';
+        $job = Job::where('slug', $slug)->first();
+        $reasons = Arr::pluck(Helper::getReportReasons(), 'title', 'title');
+        if (file_exists(resource_path('views/extend/back-end/freelancer/jobs/dispute.blade.php'))) {
+            return View(
+                'extend.back-end.interne.jobs.dispute',
+                compact(
+                    'job',
+                    'reasons',
+                    'show_breadcrumbs'
+                )
+            );
+        } else {
+            return View(
+                'back-end.company.jobs.dispute',
+                compact(
+                    'job',
+                    'reasons',
+                    'show_breadcrumbs'
+                )
+            );
+        }
+    }
+
     /**
      * Raise dispute
      *
@@ -2220,6 +2446,7 @@ class UserController extends Controller
                 );
             } else {
                 $users = User::select('*')->latest()->paginate(10);
+                
             }
             if (file_exists(resource_path('views/extend/back-end/admin/users/index.blade.php'))) {
                 return view('extend.back-end.admin.users.index', compact('users'));

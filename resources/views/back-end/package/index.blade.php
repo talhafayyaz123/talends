@@ -28,6 +28,7 @@
                         @if (!empty($packages) && $packages->count() > 0)
                             @foreach ($packages as $key => $package)
                                 @php  $options = unserialize($package->options); @endphp
+                                
                                 @if (!empty($package))
                                     <div class="wt-package wt-baiscpackage">
                                         @if (!empty($package->title || $package->subtitle ))
@@ -40,13 +41,24 @@
                                             <ul class="wt-packageinfo">
                                                 <li class="wt-packageprice"><span><sup>{{ !empty($symbol['symbol']) ? $symbol['symbol'] : '$' }}</sup>{{{$package->cost}}}<sub>\ {{{ Helper::getPackageDurationList($options['duration']) }}}</sub></span></li>
                                                 @foreach ($options as $key => $option)
+                                                
                                                     @php
                                                         $class = '';
-                                                        if ($key == 'banner_option' || $key == 'private_chat') {
+                                                        if($package->role_id==4){
+                                                            if ($key == 'banner_option' || $key == 'private_chat'  || $key == 'lead_management_crm' || $key == 'landing_page_cms' || $key == 'package_support' || $key == 'boost_visibility' || $key == 'leads_opportunities' || $key == 'commission_signed_deals' ) {
                                                             $class = $option == 'true' ? 'ti-check' : 'ti-na';
                                                         }
+                                                        }else{
+                                                            if ($key == 'banner_option' || $key == 'private_chat') {
+                                                            $class = $option == 'true' ? 'ti-check' : 'ti-na';
+                                                        }
+                                                        }
+                                                       
                                                     @endphp
-                                                    @if ($key == 'banner_option' || $key == 'private_chat')
+                                                    
+                                                    @if($package->role_id==4)
+
+                                                    @if ($key == 'banner_option' || $key == 'private_chat'  || $key == 'lead_management_crm' || $key == 'landing_page_cms' || $key == 'package_support' || $key == 'boost_visibility' || $key == 'leads_opportunities' || $key == 'commission_signed_deals')
                                                         <li><span><i class="{{{ $class }}}"></i></span></li>
                                                     @elseif ($key == 'duration')
                                                         <li><span> {{ Helper::getPackageDurationList($options['duration']) }}</span></li>
@@ -55,15 +67,31 @@
                                                     @else
                                                         <li><span> {{ $option }}</span></li>
                                                     @endif
+                                                    
+                                                    @else
+
+
+                                                    @if ($key == 'banner_option' || $key == 'private_chat')
+                                                        <li><span><i class="{{{ $class }}}"></i></span></li>
+                                                    @elseif ($key == 'duration')
+                                                        <li><span> {{ Helper::getPackageDurationList($options['duration']) }}</span></li>
+                                                    @elseif ($key == 'badge')
+                                                        <li><span> {{ Helper::getBadgeTitle($package->badge_id) }}</span></li>
+                                                    @else
+                                                        <li><span> {{ $option }}</span></li>
+
+                                                    @endif
+
+                                                    @endif
+
                                                 @endforeach
                                             </ul>
                                             @if (Auth::user()->getRoleNames()[0] != "admin")
-                                                <a class="wt-btn" href="{{url('user/package/checkout/'.$package->id)}}"><span>{{ trans('lang.buy_now') }}</span></a>
-                                                {{-- @if (in_array($package->id, $purchase_packages))
-                                                    <a class="wt-btn" href="{{url('user/package/checkout/'.$package->id)}}"><span>{{ trans('lang.purchased') }}</span></a>
+                                                 @if (in_array($package->id, $purchase_packages))
+                                                    <a class="wt-btn"><span>{{ trans('lang.purchased') }}</span></a>
                                                 @else
                                                     <a class="wt-btn" href="{{url('user/package/checkout/'.$package->id)}}"><span>{{ trans('lang.buy_now') }}</span></a>
-                                                @endif --}}
+                                                @endif 
                                             @endif
                                         </div>
                                     </div>

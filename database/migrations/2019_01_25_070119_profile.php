@@ -33,6 +33,25 @@ class Profile extends Migration
                 $table->increments('id');
                 $table->integer('user_id')->nullable();
                 $table->integer('department_id')->nullable();
+                $table->string('min_budget')->nullable();
+
+                $table->string('availability')->nullable();
+                $table->integer('category_id')->nullable();
+                $table->integer('skill_id')->nullable();
+
+
+                $table->string('specialization')->nullable();
+                $table->string('grade')->nullable();
+                $table->string('university')->nullable();
+                $table->string('company_type')->nullable();
+
+                $table->string('company_name')->nullable();
+                $table->integer('company_language')->nullable();
+                $table->string('company_website')->nullable();
+                $table->string('phone_number')->nullable();
+
+
+
                 $table->integer('no_of_employees')->nullable();
                 $table->string('freelancer_type')->nullable();
                 $table->enum(

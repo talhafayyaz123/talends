@@ -33,7 +33,7 @@
                             <div class="wt-jobdetailscontent">
                                 <div class="wt-userlistinghold wt-featured wt-userlistingvtwo">
                                     @if (!empty($job->is_featured) && $job->is_featured === 'true')
-                                        <span class="wt-featuredtag"><img src="{{{ asset('images/featured.png') }}}" alt="{{ trans('lang.is_featured') }}" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                        <span class="wt-featuredtag"><img src="{{{ config('app.aws_se_path'). '/' .'images/featured.png' }}}" alt="{{ trans('lang.is_featured') }}" data-tipso="Plus Member" class="template-content tipso_style"></span>
                                     @endif
                                     <div class="wt-userlistingcontent">
                                         <div class="wt-contenthead">
@@ -71,7 +71,7 @@
                                                     <h4>{{ trans('lang.hired') }}</h4>
                                                     <span>{{{ $freelancer_name }}}</span>
                                                     <ul class="wt-hireduserimgs">
-                                                        <li><figure><img src="{{{ asset($profile_image) }}}" alt="{{ trans('lang.profile_img') }}" class="mCS_img_loaded"></figure></li>
+                                                        <li><img src="{{{ ($profile_image) }}}" alt="{{ trans('lang.profile_img') }}" class="mCS_img_loaded"></li>
                                                     </ul>
                                                 </div>
                                             @elseif ($job->status === 'completed')
@@ -79,7 +79,7 @@
                                                     <h4>{{ trans('lang.completed') }}</h4>
                                                     <span>{{{ $freelancer_name }}}</span>
                                                     <ul class="wt-hireduserimgs">
-                                                        <li><figure><img src="{{{ asset($profile_image) }}}" alt="{{ trans('lang.profile_img') }}" class="mCS_img_loaded"></figure></li>
+                                                        <li><img src="{{{ ($profile_image) }}}" alt="{{ trans('lang.profile_img') }}" class="mCS_img_loaded"></li>
                                                     </ul>
                                                 </div>
                                             @else
@@ -104,7 +104,7 @@
                                 @if (!empty($accepted_proposal))
                                     <div class="wt-userlistinghold wt-featured wt-proposalitem">
                                         <figure class="wt-userlistingimg">
-                                            <img src="{{{ asset($profile_image) }}}" alt="{{ trans('lang.is_featured') }}" class="mCS_img_loaded">
+                                            <img src="{{{ ($profile_image) }}}" alt="{{ trans('lang.is_featured') }}" class="mCS_img_loaded">
                                         </figure>
                                         <div class="wt-proposaldetails">
                                             @if (!empty($freelancer_name))
@@ -147,7 +147,7 @@
                                                     <i class="fa fa-paperclip"></i>
                                                     {!! Form::open(['url' => url('proposal/download-attachments'), 'class' =>'post-job-form wt-haslayout', 'id' => 'download-attachments-form-'.$accepted_proposal->freelancer_id]) !!}
                                                         @foreach ($attachments as $attachment)
-                                                            @if (Storage::disk('local')->exists('uploads/proposals/'.$accepted_proposal->freelancer_id.'/'.$attachment))
+                                                            @if (Storage::disk('s3')->exists('uploads/proposals/'.$accepted_proposal->freelancer_id.'/'.$attachment))
                                                                 {!! Form::hidden('attachments['.$count.']', $attachment, []) !!}
                                                                 @php $count++; @endphp
                                                             @endif

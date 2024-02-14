@@ -63,7 +63,10 @@
                             </tbody>
                         </table>
                     </div>
-                    @if (!empty($payment_gateway))
+                    <input type="hidden" value="{{ $service->id }}" id='service_id'>
+                    <input type="hidden" value="{{ $freelancer->id }}" id='service_seller'>
+
+                     @if (!empty($payment_gateway))
                         <div class="sj-checkpaymentmethod">
                             <div class="sj-title">
                                 <h3>{{ trans('lang.select_pay_method') }}</h3>
@@ -80,6 +83,11 @@
                                             <a href="javascrip:void(0);" v-on:click.prevent="getStriprForm">
                                                 <i class="fab fa-stripe-s"></i>
                                                 <span><em>{{ trans('lang.pay_amount_via') }}</em> {{ Helper::getPaymentMethodList($gatway)['title']}} {{ trans('lang.pay_gateway') }}</span>
+                                            </a>
+                                            @elseif($gatway == "paytab")
+                                        <a href="javascrip:void(0);" @click="EmployerPaytabServicePayment">
+                                                <i class="fa fa-credit-card"></i>
+                                                <span><em>Pay via Cedit Card</em> {{ Helper::getPaymentMethodList($gatway)['title']}} {{ trans('lang.pay_gateway') }}</span>
                                             </a>
                                         @endif
                                     </li>
@@ -178,7 +186,7 @@
                                 </div>
                                 <div class="form-group wt-inputwithicon {{ $errors->has('cvvNumber') ? ' has-error' : '' }}">
                                     <label>{{ trans('lang.cvc_no') }}</label>
-                                    <img src="{{asset('images/pay-img.png')}}">
+                                    <img src="{{ config('app.aws_se_path'). '/' .'images/pay-img.png' }}">
                                     <input id="cvvNumber" type="text" class="form-control" name="cvvNumber" value="{{ old('cvvNumber') }}" autofocus>
                                     @if ($errors->has('cvvNumber'))
                                         <span class="help-block">

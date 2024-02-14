@@ -88,14 +88,31 @@ class Badge extends Model
             if (!empty($request['uploaded_image'])) {
                 $filename = $request['uploaded_image'];
                 if (file_exists($old_path . '/' . $request['uploaded_image'])) {
-                    $new_path = Helper::PublicPath().'/uploads/badges/';
-                    if (!file_exists($new_path)) {
-                        File::makeDirectory($new_path, 0755, true, true);
-                    }
-                    $filename = time() . '-' . $request['uploaded_image'];
-                    rename($old_path . '/' . $request['uploaded_image'], $new_path . '/' . $filename);
-                    rename($old_path . '/small-' . $request['uploaded_image'], $new_path . '/small-' . $filename);
-                    rename($old_path . '/medium-' . $request['uploaded_image'], $new_path . '/medium-' . $filename);
+
+                    
+
+                $new_path = Helper::PublicPath().'/uploads/badges/';
+                $s3_path = 'uploads/badges';
+                
+                $filename = time() . '-' . $request['uploaded_image'];
+
+                $contents = file_get_contents($old_path . '/' . $request['uploaded_image']);
+                Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+
+
+                $contents = file_get_contents($old_path . '/small-' . $request['uploaded_image']);
+                Storage::disk('s3')->put($s3_path. '/small-' . $filename,$contents  );  
+
+
+                $contents = file_get_contents($old_path . '/medium-' . $request['uploaded_image']);
+                Storage::disk('s3')->put($s3_path. '/medium-' . $filename,$contents  ); 
+                
+                
+                unlink($old_path . '/' . $request['uploaded_image']);
+                unlink($old_path . '/small-' . $request['uploaded_image']);
+                unlink($old_path . '/medium-' . $request['uploaded_image']);
+
+                 
                 }
                 $this->image = filter_var($filename, FILTER_SANITIZE_STRING);
             } else {
@@ -129,14 +146,53 @@ class Badge extends Model
             if (!empty($request['uploaded_image'])) {
                 $filename = $request['uploaded_image'];
                 if (file_exists($old_path . '/' . $request['uploaded_image'])) {
-                    $new_path = Helper::PublicPath().'/uploads/badges/';
-                    if (!file_exists($new_path)) {
-                        File::makeDirectory($new_path, 0755, true, true);
-                    }
-                    $filename = time() . '-' . $request['uploaded_image'];
-                    rename($old_path . '/' . $request['uploaded_image'], $new_path . '/' . $filename);
-                    rename($old_path . '/small-' . $request['uploaded_image'], $new_path . '/small-' . $filename);
-                    rename($old_path . '/medium-' . $request['uploaded_image'], $new_path . '/medium-' . $filename);
+                    
+                $new_path = Helper::PublicPath().'/uploads/badges/';
+                $s3_path = 'uploads/badges';
+                
+                $filename = time() . '-' . $request['uploaded_image'];
+
+                if(isset($badge->image) && !empty($badge->image) ){
+                    $file =$badge->image;
+                     
+                if(Storage::disk('s3')->exists('uploads/badges/'.$file)){
+                  
+                  Storage::disk('s3')->delete('uploads/badges/'.$file); 
+                  
+                }
+                
+                if(Storage::disk('s3')->exists('uploads/badges/small-'.$file)){
+                  
+                    Storage::disk('s3')->delete('uploads/badges/small-'.$file); 
+                    
+                }
+
+                if(Storage::disk('s3')->exists('uploads/badges/medium-'.$file)){
+                  
+                    Storage::disk('s3')->delete('uploads/badges/medium-'.$file); 
+                    
+                }
+
+                }
+
+
+                $contents = file_get_contents($old_path . '/' . $request['uploaded_image']);
+                Storage::disk('s3')->put($s3_path. '/' . $filename,$contents  );  
+
+
+                $contents = file_get_contents($old_path . '/small-' . $request['uploaded_image']);
+                Storage::disk('s3')->put($s3_path. '/small-' . $filename,$contents  );  
+
+
+                $contents = file_get_contents($old_path . '/medium-' . $request['uploaded_image']);
+                Storage::disk('s3')->put($s3_path. '/medium-' . $filename,$contents  ); 
+                
+                
+                unlink($old_path . '/' . $request['uploaded_image']);
+                unlink($old_path . '/small-' . $request['uploaded_image']);
+                unlink($old_path . '/medium-' . $request['uploaded_image']);
+
+
                 }
                 $badge->image = filter_var($filename, FILTER_SANITIZE_STRING);
             } else {

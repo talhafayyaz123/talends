@@ -116,10 +116,21 @@ class Package extends Model
             $package->role_id = intval($request['roles'][0]);
             if ($request->roles == '2') {
                 $package->options = serialize($request['employer']);
-            } else {
+            } elseif($request->roles == '3') {
                 $package->options = serialize($request['freelancer']);
+            }else{
+                $package->options = serialize($request['agency']);
             }
-            $package->badge_id = !empty($request['freelancer']['badge']) ? intval($request['freelancer']['badge']) : 0;
+           
+             if($request->roles == '4'){
+                $package->badge_id = !empty($request['agency']['badge']) ? intval($request['agency']['badge']) : 0;
+
+             }else{
+                $package->badge_id = !empty($request['freelancer']['badge']) ? intval($request['freelancer']['badge']) : 0;
+
+             }
+
+             
             $old_path = Helper::PublicPath() . '/uploads/packages/temp';
             if (!empty($request['uploaded_image'])) {
                 $filename = $request['uploaded_image'];

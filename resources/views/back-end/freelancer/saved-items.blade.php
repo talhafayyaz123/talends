@@ -17,7 +17,7 @@
                         <div class="wt-personalskillshold tab-pane active fade show" id="wt-skills">
                             <div class="wt-yourdetails">
                                 <div class="wt-tabscontenttitle">
-                                    <h2>{{ trans('lang.saved_jobs') }}</h2>
+                                    <p class="mb-0">{{ trans('lang.saved_jobs') }}</p>
                                 </div>
                                 @if (!empty($saved_jobs))
                                     <div class="wt-dashboradsaveitem">
@@ -32,7 +32,7 @@
                                             @endphp
                                             <div class="wt-userlistinghold wt-featured wt-dashboradsaveditems">
                                                 @if (!empty($job->is_featured) && $job->is_featured === 'true')
-                                                    <span class="wt-featuredtag"><img src="{{{ asset('images/featured.png') }}}" alt="{{ trans('lang.img') }}" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                                    <span class="wt-featuredtag"><img src="{{{ config('app.aws_se_path'). '/' .'images/featured.png' }}}" alt="{{ trans('lang.img') }}" data-tipso="Plus Member" class="template-content tipso_style"></span>
                                                 @endif
                                                 <div class="wt-userlistingcontent">
                                                     <div class="wt-contenthead wt-dashboardsavehead">
@@ -80,9 +80,11 @@
                                     @endif
                                 @endif
                             </div>
-                            @if ( method_exists($saved_jobs,'links') )
+                        
+                            @if (isset(  $saved_jobs)  && !empty($saved_jobs) &&  method_exists($saved_jobs,'links') )
                                 {{ $saved_jobs->links('pagination.custom') }}
                             @endif
+                        
                         </div>
                         <div class="wt-educationholder tab-pane fade" id="wt-education">
                             <div class="wt-userexperience wt-followcompomy">
@@ -96,14 +98,14 @@
                                                 $emp = \App\User::find($employer);
                                                 $profile = \App\User::find($employer)->profile;
                                                 $user_image = !empty($profile) ? $profile->avater : '';
-                                                $profile_image = !empty($user_image) ? '/uploads/users/'.$employer.'/'.$user_image : 'images/user-login.png';
+                                                $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/'.$employer.'/'.$user_image : config('app.aws_se_path'). '/' .'images/user-login.png';
                                                 $user_name = Helper::getUserName($employer);
                                                 $verified_user = \App\User::select('user_verified')->where('id', $emp->id)->pluck('user_verified')->first();
                                             @endphp
                                             <div class="wt-followedcompnies">
                                                 <div class="wt-userlistinghold wt-userlistingsingle">
                                                     <figure class="wt-userlistingimg">
-                                                        <img src="{{{ asset($profile_image) }}}" alt="image description">
+                                                        <img src="{{{ ($profile_image) }}}" alt="image description">
                                                     </figure>
                                                     <div class="wt-userlistingcontent">
                                                         <div class="wt-contenthead wt-followcomhead">
@@ -133,7 +135,7 @@
                                     @endif
                                 @endif
                             </div>
-                            @if ( method_exists($saved_employers,'links') )
+                            @if (  isset(  $saved_employers)  && !empty($saved_employers) && method_exists($saved_employers,'links') )
                                 {{ $saved_employers->links('pagination.custom') }}
                             @endif
                         </div>
@@ -150,7 +152,7 @@
                                             $profile = \App\User::find($freelancer)->profile;
                                             $rating = !empty($profile->rating) ? $profile->rating : 0;
                                             $user_image = !empty($profile) ? $profile->avater : '';
-                                            $profile_image = !empty($user_image) ? '/uploads/users/'.$freelancer.'/'.$user_image : 'images/user.jpg';
+                                            $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/'.$freelancer.'/'.$user_image : config('app.aws_se_path'). '/' .'images/user.jpg';
                                             $user_name = Helper::getUserName($freelancer);
                                             $reviews = \App\Review::where('receiver_id', $freelancer)->count();
                                             $proposal = \App\Proposal::select('job_id')->where('freelancer_id', $user->id)->pluck('job_id')->first();
@@ -165,10 +167,10 @@
                                         @endphp
                                         <div class="wt-userlistinghold {{$featured_class}}">
                                             @if ( !empty($job->is_featured) && $job->is_featured == 'true')
-                                                <span class="wt-featuredtag"><img src="{{{ asset('images/featured.png') }}}" alt="{{{ trans('ph.is_featured') }}}" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                                <span class="wt-featuredtag"><img src="{{{ config('app.aws_se_path'). '/' .'images/featured.png' }}}" alt="{{{ trans('ph.is_featured') }}}" data-tipso="Plus Member" class="template-content tipso_style"></span>
                                             @endif
                                             <figure class="wt-userlistingimg">
-                                                <img src="{{{ asset($profile_image) }}}" alt="{{ trans('lang.profile_img') }}">
+                                                <img src="{{{ ($profile_image) }}}" alt="{{ trans('lang.profile_img') }}">
                                             </figure>
                                             <div class="wt-userlistingcontent">
                                                 <div class="wt-contenthead">
@@ -204,7 +206,8 @@
                                     @endif
                                 @endif
                             </div>
-                            @if ( method_exists($saved_freelancers,'links') )
+                          
+                            @if (  isset(  $saved_freelancers)  && !empty($saved_freelancers) && method_exists($saved_freelancers,'links') )
                                 {{ $saved_freelancers->links('pagination.custom') }}
                             @endif
                         </div>
