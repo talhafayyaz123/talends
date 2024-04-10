@@ -23,7 +23,7 @@ steps:
 
 - script: |
     sudo composer self-update
-    composer install --no-interaction --prefer-dist --no-suggest
+    composer install --ignore-platform-req=php --no-interaction --prefer-dist --no-suggest
     composer --version
   displayName: 'Installing Package Dependencies'
 
