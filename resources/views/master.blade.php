@@ -17,6 +17,9 @@
   gtag('config', 'G-GK95ZJXBTQ');
 </script>
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5048427330709374" crossorigin="anonymous"></script>
+
+
   <script async src="https://js.stripe.com/v3/"></script>
 
 	<meta charset="utf-8">

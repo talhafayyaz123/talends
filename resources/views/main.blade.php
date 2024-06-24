@@ -15,6 +15,9 @@
 
   gtag('config', 'G-GK95ZJXBTQ');
 </script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5048427330709374" crossorigin="anonymous"></script>
+
 <script async src="https://js.stripe.com/v3/"></script>
 
 	<meta charset="utf-8">
@@ -29,7 +32,7 @@
 
 		<title>@yield('title')</title>
 
-	@else 
+	@else
 
 		<title>{{ config('app.name') }}</title>
 
@@ -60,7 +63,7 @@
 
     <meta name="twitter:image"  />
 
-	
+
 
 	<link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png')}}">
 
@@ -90,7 +93,7 @@
 
     <link rel="stylesheet" href="{{ asset('talends/bootstrap/4.4.1/css/bootstrap.min.css')}}" >
 
- 
+
 <link rel="stylesheet" href="https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/css/intlTelInput.css"/>
 
 {!!  ReCaptcha::htmlScriptTagJsApi() !!}
@@ -120,7 +123,7 @@
 	<link href="{{ asset('talends/assets/css/main_customization.css') }}" rel="stylesheet">
 
  	<link href="{{ asset('talends/assets/css/register.css') }}" rel="stylesheet">
- 
+
 
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
@@ -141,11 +144,11 @@
 
     @php echo \App\Typo::setSiteStyling(); @endphp
 
-    
+
 
 	@stack('stylesheets')
 	@stack('owlstyle')
-	
+
 
 	@if (Auth::user())
 
@@ -265,7 +268,7 @@
 
 	 <!-- <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/22223481.js"></script> -->
 		<!--Start of Tawk.to Script-->
-		<script type="text/javascript">
+		/* <script type="text/javascript">
 		var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 		(function(){
 		var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -275,7 +278,7 @@
 		s1.setAttribute('crossorigin','*');
 		s0.parentNode.insertBefore(s1,s0);
 		})();
-		</script>
+		</script> */
 		<!--End of Tawk.to Script-->
 
 
