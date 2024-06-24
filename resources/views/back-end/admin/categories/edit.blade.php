@@ -22,6 +22,21 @@
                                 'class' =>'wt-formtheme wt-formprojectinfo wt-formcategory', 'id' => 'categories'] )
                             !!}
                                 <fieldset>
+
+                                
+                                <div class="form-group">
+                                        <select name="parent_category" id='parent_category' class="form-control">
+                                         <option value="skills in demand" {{ ( $cats['parent_category'] == "skills in demand"  ) ? 'selected' : '' }} >Skills In Demand</option>
+                                         <option value="local projects" {{ ( $cats['parent_category'] == "local projects"  ) ? 'selected' : '' }}>Local Projects</option>
+                                         <option value="government initiatives" {{ ( $cats['parent_category'] == "government initiatives"  ) ? 'selected' : '' }}>Government Initiatives</option>
+                                        </select>
+                                        @if ($errors->has('parent_category'))
+                                            <span class="invalid-feedback" role="alert" style="display: block;">
+                                                <strong style="color:#dd0d0d">{{ $errors->first('parent_category') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+
                                     <div class="form-group">
                                         {!! Form::text( 'category_title', e($cats['title']), ['class' =>'form-control'] ) !!}
                                         <span class="form-group-description">{{{ trans('lang.desc') }}}</span>

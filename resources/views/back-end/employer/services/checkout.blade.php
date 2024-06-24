@@ -9,6 +9,12 @@
                     </div>
                 </div>
                 <div class="wt-dashboardbox">
+                @if (Request::get('service_purchase'))
+                    <div class="flash_msg">
+                        <flash_messages :message_class="'danger'" :time ='10' :message="'{{ ' Payment Fail due to incorrect credentials.Please try again.' }}'" v-cloak></flash_messages>
+                    </div>
+                    @php session()->forget('error'); @endphp
+                @endif
                 @if (Session::has('message'))
                     <div class="flash_msg">
                         <flash_messages :message_class="'success'" :time ='5' :message="'{{{ Session::get('message') }}}'" v-cloak></flash_messages>
@@ -63,7 +69,10 @@
                             </tbody>
                         </table>
                     </div>
-                    @if (!empty($payment_gateway))
+                    <input type="hidden" value="{{ $service->id }}" id='service_id'>
+                    <input type="hidden" value="{{ $freelancer->id }}" id='service_seller'>
+
+                     @if (!empty($payment_gateway))
                         <div class="sj-checkpaymentmethod">
                             <div class="sj-title">
                                 <h3>{{ trans('lang.select_pay_method') }}</h3>
@@ -77,9 +86,14 @@
                                                 <span><em>{{ trans('lang.pay_amount_via') }}</em> {{ Helper::getPaymentMethodList($gatway)['title']}} {{ trans('lang.pay_gateway') }}</span>
                                             </a>
                                         @elseif ($gatway == "stripe")
-                                            <a href="javascrip:void(0);" v-on:click.prevent="getStriprForm">
+                                        <a href="{{  url('employer/service/purchase/'.$service->id) }}">
                                                 <i class="fab fa-stripe-s"></i>
                                                 <span><em>{{ trans('lang.pay_amount_via') }}</em> {{ Helper::getPaymentMethodList($gatway)['title']}} {{ trans('lang.pay_gateway') }}</span>
+                                            </a>
+                                            @elseif($gatway == "paytab")
+                                        <a href="javascrip:void(0);" @click="EmployerPaytabServicePayment">
+                                                <i class="fa fa-credit-card"></i>
+                                                <span><em>Pay via Cedit Card</em> {{ Helper::getPaymentMethodList($gatway)['title']}} {{ trans('lang.pay_gateway') }}</span>
                                             </a>
                                         @endif
                                     </li>
@@ -97,7 +111,7 @@
                         <form class="wt-formtheme wt-form-paycard" method="POST" id="stripe-payment-form" role="form" action="" @submit.prevent='submitStripeFrom'>
                             {{ csrf_field() }}
                             <fieldset>
-                                <div class="form-row">
+                                <div class="form-row" style="padding-top: 64px;">
                                     <div class="form-group col-lg-4 {{ $errors->has('name') ? ' has-error' : '' }}">
                                         <label>{{ trans('lang.name') }}</label>
                                         <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus>
@@ -178,7 +192,7 @@
                                 </div>
                                 <div class="form-group wt-inputwithicon {{ $errors->has('cvvNumber') ? ' has-error' : '' }}">
                                     <label>{{ trans('lang.cvc_no') }}</label>
-                                    <img src="{{asset('images/pay-img.png')}}">
+                                    <img src="{{ config('app.aws_se_path'). '/' .'images/pay-img.png' }}">
                                     <input id="cvvNumber" type="text" class="form-control" name="cvvNumber" value="{{ old('cvvNumber') }}" autofocus>
                                     @if ($errors->has('cvvNumber'))
                                         <span class="help-block">

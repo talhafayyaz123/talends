@@ -49,6 +49,7 @@ export default {
               });
           }
       },
+      counter:0
     }
   },
   methods:{
@@ -74,19 +75,23 @@ export default {
       let parentClass = this.$refs.success_ref.id;
       parent = document.getElementsByClassName('wt-attachfile')
       var listitems= parent[0].getElementsByTagName("li")
+
       var i;
-      for (i=0; i<listitems.length; i++) {
+       for (i=0; i<listitems.length; i++) {
           if (!(listitems[i].id)) {
-            listitems[i].setAttribute("id", "attachmentList-"+i);
-            var input = document.createElement("input");
+            
+            listitems[i].setAttribute("id", "attachmentList-"+this.counter);
+             var input = document.createElement("input");
             input.setAttribute("type", "hidden");
-            input.setAttribute("name", 'attachments['+i+']'); 
+            input.setAttribute("name", 'attachments['+this.counter+']'); 
             input.setAttribute("value", file.name);
-            input.setAttribute("id", 'attachment-'+i);
-          }
-      }
+            input.setAttribute("id", 'attachment-'+this.counter); 
+            this.counter++;
+            
+          } 
+      } 
       var listParent = document.getElementById(file.previewElement.id)
-      listParent.appendChild(input);
+      listParent.appendChild(input); 
     },
     failed:function(file,message,xhr){
       this.showError(message);
@@ -94,6 +99,13 @@ export default {
     }
   },
   mounted: function () {
+     parent = document.getElementsByClassName('wt-attachfile')
+     if(parent[1]){
+var counter=parent[1].getElementsByTagName("li").length;
+      this.counter=counter;
+     }
+
+
     jQuery(document).on('click', '.image_upload_anchor', function(e){
       e.preventDefault();
       var _this = jQuery(this);

@@ -30,10 +30,12 @@ class CreateCategoriesTable extends Migration
             'categories', 
             function (Blueprint $table) {
                 $table->increments('id');
+                $table->enum('parent_category',['skills in demand','local projects','government initiatives']);
                 $table->string('title');
                 $table->string('slug');
                 $table->text('abstract')->nullable();
                 $table->string('image')->nullable();
+
                 $table->timestamps();
             }
         );

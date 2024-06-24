@@ -1,14 +1,16 @@
-<nav id="wt-profiledashboard" class="wt-usernav">
+<nav id="wt-profiledashboard" class="wt-usernav" style="top:64px;">
         <ul>
+            
             @if ($role === 'admin')
-                <li class="menu-item-has-children">
+                <li class="">
                     <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
                     <a href="javascript:void(0)">
                         <i class="ti-layers"></i>
                         <span>{{ trans('lang.manage_articles') }}</span>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="{{{ route('articles') }}}">{{ trans('lang.articles') }}</a></li>
+               
+                    <li><a href="{{{ route('articles') }}}">{{ trans('lang.articles') }}</a></li>
                         <li><a href="{{{ route('articleCategories') }}}">{{ trans('lang.categories') }}</a></li>
                     </ul>
                 </li>
@@ -116,6 +118,9 @@
                     <ul class="sub-menu">
                         <li><a href="{{{ route('skills') }}}">{{ trans('lang.skills') }}</a></li>
                         <li><a href="{{{ route('categories') }}}">{{ trans('lang.job_cats') }}</a></li>
+                        <li><hr><a href="{{{ route('agencyServices') }}}">Agency Services</a></li>
+                        <li><hr><a href="{{{ url('admin/seo_meta_tags') }}}">Seo Meta Tags</a></li>
+                        <li><a href="{{{ route('subCategories') }}}">Sub Categories</a></li>
                         <li><a href="{{{ route('departments') }}}">{{ trans('lang.dpts') }}</a></li>
                         <li><a href="{{{ route('languages') }}}">{{ trans('lang.langs') }}</a></li>
                         <li><a href="{{{ route('locations') }}}">{{ trans('lang.locations') }}</a></li>
@@ -125,7 +130,7 @@
                     </ul>
                 </li>
             @endif
-            @if ($role === 'employer' || $role === 'freelancer' )
+            @if ($role === 'employer' || $role === 'freelancer' || $role==='company' || $role==='intern' )
                 <li>
                     <a href="{{{ url($role.'/dashboard') }}}">
                         <i class="ti-desktop"></i>
@@ -138,9 +143,9 @@
                         <span>{{ trans('lang.msg_center') }}</span>
                     </a>
                 </li>
-                <li class="menu-item-has-children">
+                <li class="menu-item-has-children page_item_has_children header_text_color">
                     <span class="wt-dropdowarrow"><i class="lnr lnr-chevron-right"></i></span>
-                    <a href="javascript:void(0);">
+                    <a href="javascript:void(0);" style="bottom: 7px;">
                         <i class="ti-settings"></i>
                         <span>{{ trans('lang.settings') }}</span>
                     </a>
@@ -157,7 +162,7 @@
                                 <span>{{{ trans('lang.post_job') }}}</span>
                             </a>
                         </li>
-                        <li class="menu-item-has-children page_item_has_children">
+                        <li class="menu-item-has-children page_item_has_children header_text_color">
                             <a href="javascript:void(0);">
                                 <i class="ti-announcement"></i>
                                 <span>{{ trans('lang.jobs') }}</span>
@@ -209,16 +214,24 @@
                             </a>
                         </li>
                     @endif
-                @elseif ($role === 'freelancer')
-                    <li class="menu-item-has-children page_item_has_children">
+                @elseif ($role === 'freelancer' || $role==='company' || $role==='intern')
+                    <li class="menu-item-has-children page_item_has_children header_text_color">
                         <a href="javascript:void(0)">
                             <i class="ti-briefcase"></i>
                             <span>{{ trans('lang.all_projects') }}</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="{{{ url('freelancer/jobs/completed') }}}">{{ trans('lang.completed_projects') }}</a></li>
+                        @if($role === 'intern')
+
+                        <li><a href="{{{ url('internee/jobs/completed') }}}">{{ trans('lang.completed_projects') }}</a></li>
+                            <li><a href="{{{ url('internee/jobs/cancelled') }}}">{{ trans('lang.cancelled_projects') }}</a></li>
+                            <li><a href="{{{ url('internee/jobs/hired') }}}">{{ trans('lang.ongoing_projects') }}</a></li>
+                        @else
+
+                        <li><a href="{{{ url('freelancer/jobs/completed') }}}">{{ trans('lang.completed_projects') }}</a></li>
                             <li><a href="{{{ url('freelancer/jobs/cancelled') }}}">{{ trans('lang.cancelled_projects') }}</a></li>
                             <li><a href="{{{ url('freelancer/jobs/hired') }}}">{{ trans('lang.ongoing_projects') }}</a></li>
+                        @endif
                         </ul>
                     </li>
                     @if (Helper::getAccessType() == 'both' || Helper::getAccessType() == 'services')
@@ -229,24 +242,58 @@
                                 <span>{{ trans('lang.manage_services') }}</span>
                             </a>
                             <ul class="sub-menu">
-                                <li><a href="{{{ route('ServiceListing', ['status'=>'posted']) }}}">{{ trans('lang.posted_services') }}</a></li>
+                            @if($role === 'intern')
+                                        <li><hr><a href="{{{ route('InterneserviceListing', ['status'=>'posted']) }}}">{{ trans('lang.posted_services') }}</a></li>
+                                        <li><hr><a href="{{{ route('InterneserviceListing', ['status'=>'hired']) }}}">{{ trans('lang.ongoing_services') }}</a></li>
+                                        <li><hr><a href="{{{ route('InterneserviceListing', ['status'=>'completed']) }}}">{{ trans('lang.completed_services') }}</a></li>
+                                        <li><hr><a href="{{{ route('InterneserviceListing', ['status'=>'cancelled']) }}}">{{ trans('lang.cancelled_services') }}</a></li>
+                                        @else
+                                        <li><a href="{{{ route('ServiceListing', ['status'=>'posted']) }}}">{{ trans('lang.posted_services') }}</a></li>
                                 <li><a href="{{{ route('ServiceListing', ['status'=>'hired']) }}}">{{ trans('lang.ongoing_services') }}</a></li>
                                 <li><a href="{{{ route('ServiceListing', ['status'=>'completed']) }}}">{{ trans('lang.completed_services') }}</a></li>
                                 <li><a href="{{{ route('ServiceListing', ['status'=>'cancelled']) }}}">{{ trans('lang.cancelled_services') }}</a></li>
+
+                                        @endif
+                                        
+                                        
+                            
                             </ul>
                         </li>
                     @endif
                     <li>
-                        <a href="{{{ route('showFreelancerProposals') }}}">
+
+                    @if($role === 'intern')
+                    <a href="{{{ route('showInterneProposals') }}}">
                             <i class="ti-bookmark-alt"></i>
                             <span>{{ trans('lang.proposals') }}</span>
                         </a>
+                            @else
+                            <a href="{{{ route('showFreelancerProposals') }}}">
+                            <i class="ti-bookmark-alt"></i>
+                            <span>{{ trans('lang.proposals') }}</span>
+                        </a>
+                            @endif
+                          
+                      
                     </li>
                     <li>
-                        <a href="{{{ route('FreelancerPayoutsSettings') }}}">
-                            <i class="ti-money"></i>
-                            <span>{{ trans('lang.payouts') }}</span>
-                        </a>
+
+
+                    
+                    @if($role === 'intern')
+                            <a href="{{{ route('InterneePayoutsSettings') }}}">
+                                    <i class="ti-money"></i>
+                                    <span> {{ trans('lang.payouts') }}</span>
+                                </a>
+                             @else
+                             <a href="{{{ route('FreelancerPayoutsSettings') }}}">
+                                    <i class="ti-money"></i>
+                                    <span> {{ trans('lang.payouts') }}</span>
+                                </a>
+                             @endif
+
+
+
                     </li>
                     @if ($payment_module === 'true' )
                         <li class="menu-item-has-children">
@@ -255,7 +302,15 @@
                                 <span>{{ trans('lang.invoices') }}</span>
                             </a>
                             <ul class="sub-menu">
-                                    <li><a href="{{{ url('freelancer/package/invoice') }}}">{{ trans('lang.pkg_inv') }}</a></li>
+                            @if($role === 'intern')
+
+<li><hr><a href="{{{ url('internee/package/invoice') }}}">{{ trans('lang.pkg_inv') }}</a></li>
+@else
+
+<li><a href="{{{ url('freelancer/package/invoice') }}}">{{ trans('lang.pkg_inv') }}</a></li>
+@endif
+
+                                  
                             </ul>
                         </li>
                         <li>

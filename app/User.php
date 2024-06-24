@@ -33,6 +33,11 @@ use canResetPassword;
 use App\Notifications;
 use Event;
 use App\Notifications\MailResetPasswordNotification;
+use App\UserCategories;
+use App\UserSubCategories;
+use App\UserCategorySkills;
+
+use function PHPSTORM_META\type;
 
 /**
  * Class User
@@ -53,7 +58,7 @@ class User extends Authenticatable
         'first_name', 'last_name', 'slug', 'email', 'password',
         'avatar', 'banner', 'tagline', 'description',
         'location_id', 'verification_code', 'address',
-        'longitude', 'latitude'
+        'longitude', 'latitude','stripe_product_id','stripe_price_id','stripe_customer_id','stripe_subscription_id','is_recurring_email'
     ];
 
     /**
@@ -70,6 +75,7 @@ class User extends Authenticatable
             }
         );
     }
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -91,6 +97,10 @@ class User extends Authenticatable
         $this->notify(new MailResetPasswordNotification($token));
     }
 
+
+      public function getFullNameAttribute($value){
+        return $this->attributes['first_name'].'  '.$this->attributes['last_name'];
+      }
     /**
      * User Can have multiple articles
      *
@@ -131,6 +141,8 @@ class User extends Authenticatable
         return $this->morphToMany('App\Language', 'langable');
     }
 
+   
+
     /**
      * Get the location that owns the user.
      *
@@ -149,6 +161,11 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->hasOne('App\Profile');
+    }
+
+    public function user_payment()
+    {
+        return $this->hasOne('App\UserPayments');
     }
 
     /**
@@ -268,9 +285,10 @@ class User extends Authenticatable
      */
     public function item()
     {
-        return $this->hasMany('App\item', 'subscriber');
+        return $this->hasMany('App\Item', 'subscriber');
     }
 
+   
     /**
      * Set slug before saving in DB
      *
@@ -309,7 +327,10 @@ class User extends Authenticatable
      */
     public function storeUser($request, $verification_code, $registration_type = '', $verification_type = '')
     {
+
         if (!empty($request)) {
+            
+            
             $this->first_name = filter_var($request['first_name'], FILTER_SANITIZE_STRING);
             $this->last_name = filter_var($request['last_name'], FILTER_SANITIZE_STRING);
             $this->slug = filter_var($request['first_name'], FILTER_SANITIZE_STRING) . '-' .
@@ -335,6 +356,11 @@ class User extends Authenticatable
             $this->badge_id = null;
             $this->expiry_date = null;
             $this->save();
+
+          
+             
+
+
             $user_id = $this->id;
             $profile = new Profile();
             $profile->user()->associate($user_id);
@@ -345,6 +371,42 @@ class User extends Authenticatable
                 $department = Department::find($request['department_name']);
                 $profile->department()->associate($department);
             }
+            if (!empty($request['budget'])) {
+                $profile->min_budget = ($request['budget']);
+            }
+
+            if (!empty($request['gender'])) {
+                $profile->gender = ($request['gender']);
+            }
+
+            if (!empty($request['category_id'])) {
+                $profile->category_id = intval($request['category_id']);
+            }
+
+            if (!empty($request['skill_id'])) {
+                $profile->skill_id = intval($request['skill_id']);
+            }
+            if (!empty($request['availability'])) {
+                $profile->availability = ($request['availability']);
+            }
+
+            if (!empty($request['university'])) {
+                $profile->university = ($request['university']);
+            }
+
+            if (!empty($request['grade'])) {
+                $profile->grade = ($request['grade']);
+            }
+
+            if (!empty($request['specialization'])) {
+                $profile->specialization = ($request['specialization']);
+            }
+
+            
+            if (!empty($request['company_type'])) {
+                $profile->company_type = implode(',',$request['company_type']) ;
+            }
+
             $profile->save();
             $role_id = Helper::getRoleByUserID($user_id);
             $package = Package::select('id', 'title', 'cost')->where('role_id', $role_id)->where('trial', 1)->get()->first();
@@ -362,6 +424,138 @@ class User extends Authenticatable
         }
     }
 
+    public function storeCompanyUser($request, $verification_code, $registration_type = '', $verification_type = '')
+    {
+
+        if (!empty($request)) {
+           
+            $this->first_name =  isset($request['first_name']) ?  filter_var($request['first_name'], FILTER_SANITIZE_STRING) : '';
+
+            $this->last_name = isset($request['last_name']) ?  filter_var($request['last_name'], FILTER_SANITIZE_STRING) :'';
+
+            $this->slug = isset($request['company_name'] ) ? filter_var($request['company_name'], FILTER_SANITIZE_STRING)  :'' ;
+
+                $this->email = filter_var($request['email'], FILTER_VALIDATE_EMAIL);
+
+                $this->password = Hash::make($request['password']);
+              
+            if ($registration_type !== 'single' && $verification_type !== 'auto_verify') {
+                $this->verification_code = $verification_code;
+                $this->user_verified = 0;
+            } else if ($registration_type == 'single' && $verification_type == 'auto_verify') {
+                $this->verification_code = null;
+                $this->user_verified = 1;
+            
+            } else if ($registration_type == 'single' && $verification_type == 'admin_verify') {
+                $this->verification_code = null;
+                $this->user_verified = 0;
+            }    
+            $this->assignRole($request['role']);
+            if (!empty($request['locations'])) {
+                $location = Location::find($request['locations']);
+                $this->location()->associate($location);
+            }
+            $this->badge_id = null;
+            $this->expiry_date = null;
+            $this->save();
+
+          
+             
+
+
+            $user_id = $this->id;
+            $profile = new Profile();
+            $profile->user()->associate($user_id);
+            if (!empty($request['employees'])) {
+                $profile->no_of_employees = intval($request['employees']);
+            }
+            if (!empty($request['department_name'])) {
+                $department = Department::find($request['department_name']);
+                $profile->department()->associate($department);
+            }
+            if (!empty($request['budget'])) {
+                $profile->min_budget = ($request['budget']);
+            }
+
+            if (!empty($request['gender'])) {
+                $profile->gender = ($request['gender']);
+            }
+
+            if (!empty($request['category_id'])) {
+                $profile->category_id = intval($request['category_id']);
+            }
+
+            if (!empty($request['skill_id'])) {
+                $profile->skill_id = intval($request['skill_id']);
+            }
+            if (!empty($request['availability'])) {
+                $profile->availability = ($request['availability']);
+            }
+
+            if (!empty($request['university'])) {
+                $profile->university = ($request['university']);
+            }
+
+            if (!empty($request['grade'])) {
+                $profile->grade = ($request['grade']);
+            }
+
+            if (!empty($request['specialization'])) {
+                $profile->specialization = ($request['specialization']);
+            }
+
+            
+            if (!empty($request['company_type'])) {
+                $profile->company_type = implode(',',$request['company_type']) ;
+            }
+
+
+            if (!empty($request['company_name'])) {
+                $profile->company_name = ($request['company_name']);
+            }
+
+
+            
+            if (!empty($request['company_name'])) {
+                $profile->phone_number = ($request['phone_number']);
+            }
+
+
+            if (!empty($request['agency_language'])) {
+                $profile->company_language = ($request['agency_language']);
+            }
+
+            
+            if (!empty($request['agency_website'])) {
+                $profile->company_website = ($request['agency_website']);
+            }
+
+
+            $profile->save();
+
+            
+            if(isset($request['categories'])  && !empty($request['categories']) ){
+                $categories=$request['categories'][0];
+                $categories= explode(',',$categories);
+                $insert = array();
+               
+                foreach($categories as $index=>$value){
+                 $draw = [   
+                      'user_id'=> $user_id,
+                      'category_id'=>  $value,
+                      "created_at" => \Carbon\Carbon::now(), 
+                      'updated_at' => \Carbon\Carbon::now()
+     
+                 ];
+                 $insert[] = $draw;
+                }
+     
+               \DB::table('user_categories')->insert($insert); 
+              } 
+
+            return $user_id;
+        }
+    }
     /**
      * Get user role type by user ID
      *
@@ -410,11 +604,19 @@ class User extends Authenticatable
         $search_hourly_rates,
         $search_freelaner_types,
         $search_english_levels,
-        $search_languages
+        $search_languages,
+        $search_speciality,
+        $search_university,
+        $search_grade,
+        $search_categories,
+        $search_sub_categories
     ) {
+
+       
         $json = array();
         $user_id = array();
         $user_by_role =  User::role($type)->select('id')->get()->pluck('id')->toArray();
+
         $users = !empty($user_by_role) ? User::whereIn('id', $user_by_role)->where('is_disabled', 'false') : array();
         $filters = array();
         if (!empty($users)) {
@@ -427,6 +629,45 @@ class User extends Authenticatable
                 $users->whereIn('id', $user_by_role);
                 $users->where('is_disabled', 'false');
             }
+           
+            if(!empty($search_categories)){
+                $filters['category'] = $search_categories;
+                if($type=='freelancer'){
+                    $user_categories = UserCategories::where('category_id', $search_categories)->get();
+
+                }else{
+                    $user_categories = UserCategories::whereIn('category_id', $search_categories)->get();
+
+                }
+                foreach ($user_categories as $key => $category) {
+                    if (!empty($category->user_id)) {
+                        $user_id[] = $category->user_id;
+                    }
+                }
+              
+                $users->whereIn('id', $user_id);
+
+            }
+
+            if(!empty($search_sub_categories)){
+
+                $filters['sub_categories'] = $search_sub_categories;
+                    
+                    $user_categories = UserSubCategories::whereIn('sub_category_id', $search_sub_categories)->get();
+
+                
+                foreach ($user_categories as $key => $category) {
+                    if (!empty($category->user_id)) {
+                        $user_id[] = $category->user_id;
+                    }
+                }
+
+                $users->whereIn('id', $user_id);
+
+            }
+            
+        
+
             if (!empty($search_locations)) {
                 $locations = array();
                 $filters['locations'] = $search_locations;
@@ -439,6 +680,48 @@ class User extends Authenticatable
                 }
                 $users->whereIn('location_id', $locations);
             }
+
+
+            if (!empty($search_speciality)) {
+
+                $filters['speciality'] = $search_speciality;
+                $interns = Profile::where('specialization','like', '%' . $search_speciality . '%')->get();
+                foreach ($interns as $key => $intern) {
+                    if (!empty($intern->user_id)) {
+                        $user_id[] = $intern->user_id;
+                    }
+                }
+                $users->whereIn('id', $user_id)->get();
+            }
+
+
+            if (!empty($search_university)) {
+
+                $filters['university'] = $search_university;
+                $interns = Profile::where('university','like', '%' . $search_university . '%')->get();
+                foreach ($interns as $key => $intern) {
+                    if (!empty($intern->user_id)) {
+                        $user_id[] = $intern->user_id;
+                    }
+                }
+                $users->whereIn('id', $user_id)->get();
+            }
+
+
+            
+            if (!empty($search_grade)) {
+
+                $filters['grade'] = $search_grade;
+                $interns = Profile::where('grade','like', '%' . $search_grade . '%')->get();
+                foreach ($interns as $key => $intern) {
+                    if (!empty($intern->user_id)) {
+                        $user_id[] = $intern->user_id;
+                    }
+                }
+                $users->whereIn('id', $user_id)->get();
+            }
+
+            
             if (!empty($search_employees)) {
                 $filters['employees'] = $search_employees;
                 $employees = Profile::whereIn('no_of_employees', $search_employees)->get();
@@ -511,6 +794,7 @@ class User extends Authenticatable
             }
             $users = $users->paginate(8)->setPath('');
         }
+
         foreach ($filters as $key => $filter) {
             $pagination = $users->appends(
                 array(

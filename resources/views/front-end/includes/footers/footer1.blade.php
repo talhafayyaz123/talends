@@ -1,81 +1,199 @@
-<footer id="wt-footer" class="wt-footer wt-haslayout">
-    @if (!empty($footer))
-        <div class="wt-footerholder wt-haslayout">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                        <div class="wt-footerlogohold">
-                            @if (!empty($footer['footer_logo']))
-                                <strong class="wt-logo"><a href="{{{ url('/') }}}"><img src="{{{ asset(\App\Helper::getFooterLogo($footer['footer_logo'])) }}}" alt="company logo here"></a></strong>
-                            @endif
-                            @if (!empty($footer['description']))
-                                <div class="wt-description">
-                                    <p>{{{ str_limit($footer['description'], 150)  }}}</p>
-                                </div>
-                            @endif
-                            @php Helper::displaySocials(); @endphp
-                        </div>
-                    </div>
-                    @if (!empty($footer['menu_title_1']) || !empty($footer['menu_pages_1']))
-                        <div class="col-12 col-sm-6 col-md-3 col-lg-3">
-                            <div class="wt-footercol wt-widgetcompany">
-                                @if (!empty($footer['menu_title_1']))
-                                    <div class="wt-fwidgettitle">
-                                        <h3>{{{ $footer['menu_title_1'] }}}</h3>
-                                    </div>
-                                @endif
-                                @if(!empty($footer['menu_pages_1']))
-                                    <ul class="wt-fwidgetcontent">
-                                        @foreach($footer['menu_pages_1'] as $menu_1_page)
-                                            @php  $page = \App\Page::where('id', $menu_1_page)->first(); @endphp
-                                            @if (!empty($page))
-                                                <li><a href="{{{ url('page/'.$page->slug) }}}">{{{ $page->title }}}</a></li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
-                                @endif
-                            </div>
-                        </div>
-                    @endif
-                    @if (!empty($search_menu) || !empty($menu_title))
-                        <div class="col-12 col-sm-6 col-md-3 col-lg-3">
-                            <div class="wt-footercol wt-widgetcompany">
-                                @if (!empty($menu_title))
-                                    <div class="wt-fwidgettitle">
-                                        <h3>{{ $menu_title->meta_value }}</h3>
-                                    </div>
-                                @endif
-                                <ul class="wt-fwidgetcontent">
-                                    @foreach($search_menu as $key => $page)
-                                        <li><a href="{!! url($page['url']) !!}">{{$page['title']}}</a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </div>
-    @endif
-    <div class="wt-haslayout wt-footerbottom">
-        <div class="container">
+@php
+ $footer_how_work=App\Helper::getfooterHowWork();
+ 
+@endphp
+
+
+    @php
+    
+        $footer_menus_1=App\Helper::footerMenu1();
+        $footer_menus_2=App\Helper::footerMenu2();
+        $footer_menus_3=App\Helper::footerMenu3();
+        $footer_menus_4=App\Helper::footerMenu4();
+        $footer_social_content=App\Helper::getFooterSocialContent();
+        @endphp
+
+
+    <footer>
+        <div class="container pb-5">
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <p class="wt-copyrights"><span>{{{ !empty($footer['copyright']) ? $footer['copyright'] : 'Worketic. All Rights Reserved. Amentotech.'  }}}</p>
-                    @if(!empty($footer['pages']))
-                        <nav class="wt-addnav">
-                            <ul>
-                                @foreach($footer['pages'] as $menu_page)
-                                    @php $page = \App\Page::where('id', $menu_page)->first(); @endphp
-                                    @if (!empty($page))
-                                        <li><a href="{{{ url('page/'.$page->slug) }}}">{{{ $page->title }}}</a></li>
-                                    @endif
-                                @endforeach
-                            </ul>
-                        </nav>
-                    @endif
+                <div class="col-20 col-sm-6 text-center text-md-left">
+                    <img src="{{asset('talends/assets/img/fav/apple-touch-icon-114x114.png')}}" alt="Talends Icon" class="img-fluid" style="width:60px;"/>
+                </div>
+                <div class="col-20 col-sm-6">
+                    <h4> {{ $footer_menus_1['title']}} </h4>
+                    <ul class="quick-links" id="ftr-links">
+                        @if(!empty($footer_menus_1['menu_items']))
+                        @foreach($footer_menus_1['menu_items'] as $key=>$value)
+                        <li>
+                        @if($value['url']!='#' && Route::has($value['url']))
+                        <a href="{{ route($value['url'])  }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @elseif($value['url'] !='#')
+                        <a href="{{ url($value['url'])  }}">
+                            {{ $value['title'] }}
+                        </a>
+                        @else
+                        <a href="{{ $value['url'] }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @endif
+                            
+                            </li>
+                       @endforeach
+                       @endif
+                    </ul>
+                </div>
+
+ 
+                <div class="col-20 col-sm-6">
+                    <h4> {{ $footer_menus_2['title']}} </h4>
+                    <ul class="quick-links">
+                        @if(!empty($footer_menus_2['menu_items']))
+                        @foreach($footer_menus_2['menu_items'] as $key=>$value)
+                        <li> 
+                        @if($value['url']!='#' && Route::has($value['url']))
+                        <a href="{{ route($value['url'])  }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @elseif($value['url'] !='#')
+                        <a href="{{ url($value['url'])  }}">
+                            {{ $value['title'] }}
+                        </a>
+                        @else
+                        <a href="{{ $value['url'] }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @endif
+                        </li>
+                       @endforeach
+                       @endif
+                    </ul>
+                </div>
+                <div class="col-20 col-sm-6">
+                    <h4> {{ $footer_menus_3['title']}} </h4>
+                    <ul class="quick-links">
+                        @if(!empty($footer_menus_3['menu_items']))
+                        @foreach($footer_menus_3['menu_items'] as $key=>$value)
+                        <li> 
+                        @if($value['url']!='#' && Route::has($value['url']))
+                        <a href="{{ route($value['url'])  }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @elseif($value['url'] !='#')
+                        <a href="{{ url($value['url'])  }}">
+                            {{ $value['title'] }}
+                        </a>
+                        @else
+                        <a href="{{ $value['url'] }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @endif
+                        </li>
+                       @endforeach
+                       @endif
+                    </ul>
+                </div>
+                <div class="col-20 col-sm-6">
+                    <h4> {{ $footer_menus_4['title']}} </h4>
+                    <ul class="quick-links">
+                        @if(!empty($footer_menus_4['menu_items']))
+                        @foreach($footer_menus_4['menu_items'] as $key=>$value)
+                        <li> 
+                        @if($value['url']!='#' && Route::has($value['url']))
+                        <a href="{{ route($value['url'])  }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @elseif($value['url'] !='#')
+                        <a href="{{ url($value['url'])  }}">
+                            {{ $value['title'] }}
+                        </a>
+                        @else
+                        <a href="{{ $value['url'] }}">
+                            {{ ($value['title'])  }}
+                        </a>
+                        @endif
+                        </li>
+                       @endforeach
+                       @endif
+                    </ul>
+                </div>
+            </div>
+            <div class="row footer_bottom align-items-end">
+                <div class="col-md-7">
+                    <div class="secondary-footer">
+                    <ul class="list-inline mb-2">
+                        <li class="px-1"> <a href="{{ $footer_social_content->banner_description ?? ''}}" target="_blank"><i class="fa fa-facebook"></i></a> </li>
+                        <!-- <li class="px-1"> <a href="javascript:;" target="_blank"><i class="fa fa-twitter"></i></a> </li> -->
+                        <li class="px-1"> <a href="{{ $footer_social_content->features_text ?? ''}}" target="_blank"><i class="fa fa-linkedin"></i></a> </li>
+                        <li class="px-1"> <a href="{{ $footer_social_content->work_description ?? ''}}" target="_blank"><i class="fa fa-instagram"></i></a> </li>
+                        <li class="px-1"> <a href="{{ $footer_social_content->services_description ?? ''}}" target="_blank"><i class="fa fa-youtube"></i></a> </li>
+                        <li class="px-1"> <a href="{{ $footer_social_content->payment_description ?? ''}}" target="_blank"><i class="bi-tiktok" style="padding: 6px 7px;"></i></a> </li>    
+                    </ul>
+                        <p class="mb-0">Talends.com ©2022 All Rights Reserved.</p>
+                        <p class="small">Dubai, United Arab Emirates</p>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="secondary-footer d-md-flex pl-md-4">
+                        <a href="https://aws.amazon.com/what-is-cloud-computing"><img src="https://d0.awsstatic.com/logos/powered-by-aws-white.png" alt="Powered by AWS Cloud Computing" width="70"></a>
+                        <ul class="list-inline mb-0 ml-auto">
+                            <li class="px-2"> <a href="{{ route('sitemap.index') }}" target="_blank">Site Map</a> </li>
+                            <li class="px-2"> <a href="{{ route('Agreement') }}" target="_self">Term & Conditions</a> </li>
+                            <li class="px-2"> <a href="{{ route('privacyPolicy') }}" target="_self">Privacy Policy</a> </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</footer>
+        <div class="container-fluid border-top position-absolute bg-white" id='taelnds_into_model' style="bottom:0;display: none;">
+            <button class="position-absolute border-0 bg-transparent" onClick="close_popup()" style="top: 10px;font-size:24px;"><i class="bi-x-circle"></i></button>
+            <div class="row">
+                <div class="col-md-9 text-center col-10 mx-auto py-3">
+                    <p class="mb-0">Talends.com purpose is to make a difference in Remote Space and provide a fair opportunities to all Freelancers, Agencies & Business Owners & Interns. Unlike other platforms our fee structure is far better and we charge just 5% straight fee on successful transactions rather 12%-18% like many existing platforms. On the other hand, Agencies are set to Enter & Grow their businesses in Dubai, UAE & MENA Region with a very minimum $16 a Month. Once onboard, complete your profile, showcase your services or SaaS products, taends.com marketing ecosystem will make sure to generate amazing leads and opportunities for your business.</p>  
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+@push('scripts')
+<script>
+
+function setCookie(c_name, value, exdays) {
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+    document.cookie = c_name + "=" + c_value;
+}
+
+function getCookie(c_name) {
+    var i, x, y, ARRcookies = document.cookie.split(";");
+    for (i = 0; i < ARRcookies.length; i++) {
+        x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+        y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+        x = x.replace(/^\s+|\s+$/g, "");
+        if (x == c_name) {
+            return unescape(y);
+        }
+    }
+}
+$("#taelnds_into_model").hide();
+
+        if (getCookie("footer_talends_intro") !=null) 
+        {
+            $("#taelnds_into_model").hide();
+        }else{
+        
+            $("#taelnds_into_model").show();
+        }
+    
+
+    function close_popup(){
+        $("#taelnds_into_model").fadeOut(250);
+        setCookie("footer_talends_intro", '1', 3);
+
+    }
+</script>
+@endpush

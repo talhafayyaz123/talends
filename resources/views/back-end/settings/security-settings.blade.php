@@ -2,7 +2,7 @@
 @section('content')
 <div class="wt-haslayout wt-manage-account wt-dbsectionspace" id="profile_settings">
     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+        <div class="col-xs-12 col-sm-12 col-md-12">
             @if (Session::has('message'))
                 <div class="flash_msg">
                     <flash_messages :message_class="'success'" :time='5' :message="'{{{ Session::get('message') }}}'" v-cloak></flash_messages>
@@ -73,8 +73,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group form-group-half wt-btnarea">
-                                {!! Form::submit(trans('lang.btn_save'), ['class' => 'wt-btn']) !!}
+                            <div class="form-group form-group-half wt-btnarea" style="padding-top: 27px;">
+                                {!! Form::submit(trans('lang.btn_save_update'), ['class' => 'wt-btn']) !!}
                             </div>
                         {!! Form::close() !!}
                     </div>

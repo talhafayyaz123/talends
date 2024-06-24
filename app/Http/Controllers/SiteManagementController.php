@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Redirect;
 use Hash;
 use Auth;
 use DB;
+use App\Category;
+use App\CompanyExpertise;
 use App\Helper;
 use App\Profile;
 use Session;
@@ -121,6 +123,11 @@ class SiteManagementController extends Controller
         $stripe_key = !empty($stripe_settings) ? $stripe_settings[0]['stripe_key'] : '';
         $stripe_secret = !empty($stripe_settings) ? $stripe_settings[0]['stripe_secret'] : '';
         $stripe_img = !empty($stripe_settings) ? $stripe_settings[0]['stripe_img'] : '';
+
+        $paytab_settings = $this->settings::getMetaValue('paytab_settings');
+        $paytab_key = !empty($paytab_settings) ? $paytab_settings[0]['api_key'] : '';
+
+
         $languages = Helper::getTranslatedLang();
         $selected_language = !empty($settings[0]['language']) ? $settings[0]['language'] : '' ;
         $currency = array_pluck(Helper::currencyList(), 'code', 'code');
@@ -260,11 +267,13 @@ class SiteManagementController extends Controller
                     'service_meta_desc', 'access_type', 'reg_form_banner', 'port', 'host', 'homepage_list',
                     'selected_homepage', 'article_meta_title','article_meta_desc','show_article_banner','article_inner_banner',
                     'selected_header', 'selected_footer', 'f_selected_header', 'emp_selected_header', 'job_selected_header',
-                    'service_selected_header', 'article_selected_header'
+                    'service_selected_header', 'article_selected_header','paytab_key'
                 )
             );
         }
     }
+
+    
 
     /**
      * Show home page settings form.
@@ -840,6 +849,107 @@ class SiteManagementController extends Controller
         }
     }
 
+    
+    public function privacyPolicy(){
+        $categories = Category::pluck('title','id');
+
+        $privacy_policy = !empty(SiteManagement::getMetaValue('privacy_policy')) ? SiteManagement::getMetaValue('privacy_policy') : array();
+    
+      
+        return view('back-end.admin.home-pages.privacy_policy.index',compact('privacy_policy','categories'));
+    }
+
+
+    public function userAgreement(){
+        $user_agreement = !empty(SiteManagement::getMetaValue('privacy_policy')) ? SiteManagement::getMetaValue('user_agreement') : array();
+        return view('back-end.admin.home-pages.user_agreement.index',compact('user_agreement'));
+    }
+
+
+      
+    public function addMorePrivacyPolicy($no){
+        $categories = Category::pluck('title','id');
+
+        return view("back-end.admin.home-pages.privacy_policy.add_privacy_policy",compact('categories','no'));
+
+    }
+
+
+    public function addMoreUserAgreement($no){
+        $categories = Category::pluck('title','id');
+        return view("back-end.admin.home-pages.user_agreement.add_user_agreement",compact('categories','no'));
+    }
+    
+    public function storePrivacyPolicy(Request $request)
+    {
+
+         $this->validate(
+            $request,
+            [
+                'privacy.*.title' => 'required',
+                'privacy.*.description' => 'required',
+          ]
+
+        );
+ 
+       $json = array();
+        if (!empty($request)) {
+          
+
+            $search_menu = SiteManagement::savePrivacyPolicy($request);
+           
+            if ($search_menu['type'] == "success") {
+                                
+                Session::flash('message','Privacy Policy Saved Successfully');
+                return Redirect::back();
+
+            } else {
+               
+                Session::flash('message',trans('lang.all_required'));
+                return Redirect::back();
+
+            }
+        }  
+    
+
+
+    }
+
+
+    public function storeUserAgreement(Request $request)
+    {
+
+         $this->validate(
+            $request,
+            [
+                'user_agreement.*.title' => 'required',
+                'user_agreement.*.description' => 'required',
+          ]
+
+        );
+ 
+       $json = array();
+        if (!empty($request)) {
+          
+
+            $search_menu = SiteManagement::saveUserAgreement($request);
+           
+            if ($search_menu['type'] == "success") {
+                                
+                Session::flash('message','User Agreement Saved Successfully');
+                return Redirect::back();
+
+            } else {
+               
+                Session::flash('message',trans('lang.all_required'));
+                return Redirect::back();
+
+            }
+        }  
+    
+
+
+    }
     /**
      * Store theme color settings
      *
@@ -909,6 +1019,154 @@ class SiteManagementController extends Controller
             $json['message'] = trans('lang.something_wrong');
             return $json;
         }
+    }
+
+    public function storeFooterMenu1(Request $request,$type)
+    {
+
+        $server = Helper::worketicIsDemoSiteAjax();
+        if (!empty($server)) {
+            $response['type'] = 'error';
+            $response['message'] = $server->getData()->message;
+            return $response;
+        }
+       
+
+        if($type=='footer_menu1'){
+            $this->validate(
+                $request,
+                [
+                    'menu_title' => 'required',
+                ]
+            );
+           }else if($type=='footer_menu2'){
+              
+            $this->validate(
+                $request,
+                [
+                    'menu_title_2' => 'required',
+                ]
+            );
+
+           }else if($type=='footer_menu3'){
+              
+            $this->validate(
+                $request,
+                [
+                    'menu_title_3' => 'required',
+                ]
+            );
+
+           }else if($type=='footer_menu4'){
+              
+            $this->validate(
+                $request,
+                [
+                    'menu_title_4' => 'required',
+                ]
+            );
+
+           }
+
+
+
+        $json = array();
+        if (!empty($request)) {
+           if($type=='footer_menu1'){
+            $search_menu = $this->settings->saveFooterMenu1($request);
+           }else if($type=='footer_menu2'){
+            $search_menu = $this->settings->saveFooterMenu2($request);
+           }else if($type=='footer_menu3'){
+            $search_menu = $this->settings->saveFooterMenu3($request);
+           }else if($type=='footer_menu4'){
+            $search_menu = $this->settings->saveFooterMenu4($request);
+           }
+           
+           
+            if ($search_menu['type'] == "success") {
+                                
+                Session::flash('message','Footer Menus Record Saved Successfully');
+                return Redirect::back();
+
+            } else {
+               
+                Session::flash('message',trans('lang.all_required'));
+                return Redirect::back();
+
+            }
+        } 
+        
+
+       
+
+
+    }
+
+    public function storeHeaderMenu(Request $request,$type)
+    {
+
+        $server = Helper::worketicIsDemoSiteAjax();
+        if (!empty($server)) {
+            $response['type'] = 'error';
+            $response['message'] = $server->getData()->message;
+            return $response;
+        }
+       
+
+        if($type=='header_menu1'){
+            $this->validate(
+                $request,
+                [
+                    'header_menu_title1' => 'required',
+                    'header_menu_title2' => 'required',
+                ]
+            );
+           }elseif($type=='header_menu2'){
+               $this->validate(
+                   $request,
+                   [
+                       'header_menu_title3' => 'required',
+                   ]
+               );
+              }elseif($type=='header_menu3'){
+                $this->validate(
+                    $request,
+                    [
+                        'header_menu_title4' => 'required',
+                    ]
+                );
+               }
+
+
+
+        $json = array();
+        if (!empty($request)) {
+           if($type=='header_menu1'){
+            $search_menu = $this->settings->saveHeaderMenus($request);
+           }else if($type=='header_menu2'){
+            $search_menu = $this->settings->saveHeaderMenus2($request);
+           }else if($type=='header_menu3'){
+            $search_menu = $this->settings->saveHeaderMenus3($request);
+           }
+           
+           
+            if ($search_menu['type'] == "success") {
+                                
+                Session::flash('message','Header Menus Record Saved Successfully');
+                return Redirect::back();
+
+            } else {
+               
+                Session::flash('message',trans('lang.all_required'));
+                return Redirect::back();
+
+            }
+        } 
+        
+
+       
+
+
     }
 
     /**
@@ -1117,6 +1375,41 @@ class SiteManagementController extends Controller
         }
     }
 
+
+    public function storePaytabSettings(Request $request)
+    {
+        $server = Helper::worketicIsDemoSiteAjax();
+        if (!empty($server)) {
+            $response['type'] = 'error';
+            $response['message'] = $server->getData()->message;
+            return $response;
+        }
+        $this->validate(
+            $request,
+            [
+                'api_key' => 'required'
+            ]
+        );
+        $json = array();
+        if (!empty($request)) {
+            $default_settings = $this->settings->savePaytabSettings($request);
+            if ($default_settings == "success") {
+                $json['type'] = 'success';
+                $json['progressing'] = trans('lang.saving');
+                $json['message'] = trans('lang.settings_saved');
+                return $json;
+            } else {
+                $json['type'] = 'error';
+                $json['message'] = trans('lang.something_wrong');
+                return $json;
+            }
+        } else {
+            $json['type'] = 'error';
+            $json['message'] = trans('lang.something_wrong');
+            return $json;
+        }
+    }
+
     /**
      * Upload Image to temporary folder.
      *
@@ -1201,6 +1494,7 @@ class SiteManagementController extends Controller
             \Artisan::call('route:clear');
         }
         $json['type'] = 'success';
+        
         return $json;
     }
 

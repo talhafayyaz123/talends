@@ -30,10 +30,17 @@ use App\User;
 use App\Page;
 use App\SiteManagement;
 use App\Badge;
+use App\AboutTalendsPage;
+use App\Skill;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Schema;
 use Request;
-
+use App\Profile;
+use App\UserCategorySkills;
+use App\CompanyExpertise;
+use App\CompanyDetail;
+use App\UserPayments;
+use App\SeoMetaTags;
 /**
  * Class Helper
  *
@@ -52,6 +59,423 @@ class Helper extends Model
         $gender = ['male' => 'Male', 'female' => 'Female'];
         return $gender;
     }
+
+    public static function checkoutPaytab($amount,$id){
+           
+        $user=Auth::user();
+    
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => "https://secure.paytabs.com/payment/request",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "POST",
+    
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://talends.com/redirect/paytab/?package_id=$id&user_id=$user->id\",\n    \"return\": \"https://talends.com/redirect/paytab/?package_id=$id&user_id=$user->id\"\n  }",
+    CURLOPT_HTTPHEADER => array(
+        "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
+        "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
+        "cache-control: no-cache",
+        "content-type: application/json"
+    ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+    if ($err) {
+    echo "cURL Error #:" . $err;
+    } else {
+    
+    return $response;
+    
+    }
+    }
+    
+    public static function getPageSeoTitles($page_name){
+        $seo_meta_tags=SeoMetaTags::where('meta_page_name',$page_name)->first();
+        return $seo_meta_tags;
+    }
+
+    public static function packagePaymentPaytab($amount,$id){
+           
+        $user=Auth::user();
+    
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => "https://secure.paytabs.com/payment/request",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "POST",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://talends.com/redirect/package/paytab?package_id=$id&type=package&user_id=$user->id\",\n    \"return\": \"https://talends.com/redirect/package/paytab?package_id=$id&type=package&user_id=$user->id\"\n  }",
+    CURLOPT_HTTPHEADER => array(
+        "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
+        "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
+        "cache-control: no-cache",
+        "content-type: application/json"
+    ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+    if ($err) {
+    echo "cURL Error #:" . $err;
+    } else {
+    
+    return $response;
+    
+    }
+    }
+
+
+    public static function ServicePaymentPaytab($amount,$service_id,$service_seller){
+           
+        $user=Auth::user();
+    
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => "https://secure.paytabs.com/payment/request",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "POST",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Freelancer Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://talends.com/redirect/package/paytab?service_id=$service_id&type=project&user_id=$user->id&service_seller=$service_seller\",\n    \"return\": \"https://talends.com/redirect/package/paytab?service_id=$service_id&type=project&user_id=$user->id&service_seller=$service_seller\"\n  }",
+    CURLOPT_HTTPHEADER => array(
+        "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
+        "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
+        "cache-control: no-cache",
+        "content-type: application/json"
+    ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+    if ($err) {
+    echo "cURL Error #:" . $err;
+    } else {
+    
+    return $response;
+    
+    }
+    }
+
+
+    public static function registrationPayment($amount,$user_id,$package_id){
+
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => "https://secure.paytabs.com/payment/request",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "POST",
+    CURLOPT_POSTFIELDS => "{\n    \"profile_id\": 91323,\n \"tokenise\": 2,\n \"show_save_card\": true,\n    \"tran_type\": \"sale\",\n    \"tran_class\": \"ecom\" ,\n    \"cart_id\":\"4244b9fd-c7e9-4f16-8d3c-4fe7bf6c48ca\",\n    \"cart_description\": \"Company Registration Payment\",\n    \"cart_currency\": \"AED\",\n    \"cart_amount\": $amount,\n    \"callback\": \"https://talends.com/registration/success?user_id=$user_id&package_id=$package_id\",\n    \"return\": \"https://talends.com/registration/success?user_id=$user_id&package_id=$package_id\"\n  }",
+    CURLOPT_HTTPHEADER => array(
+        "Postman-Token: 251e27cf-84e6-4e03-b10e-7bc329f467e3",
+        "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
+        "cache-control: no-cache",
+        "content-type: application/json"
+    ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+    if ($err) {
+    echo "cURL Error #:" . $err;
+    } else {
+    
+    return $response;
+    
+    }
+    }
+
+    public static function recurringPayment($token,$amount,$tran_ref,$cart_id,$user_id){
+
+        
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://secure.paytabs.com/payment/request',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS =>'{
+    "profile_id": "91323",
+    "tran_type": "sale",
+    "tran_class": "recurring",
+    "token":  "'.$token.'",
+    "tran_ref": "'.$tran_ref.'",
+    "cart_id":"'.$cart_id.'",
+    "cart_currency": "AED",
+    "cart_amount": 100,
+    "cart_description": "Company recurring Payment",
+    "callback": "https://talends.com/registration/success?user_id='.$user_id.'"
+}',
+  CURLOPT_HTTPHEADER => array(
+    'authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6',
+    'content-type: application/json'
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+return $response;
+        }
+ 
+     public static function transection_query($tran_ref){
+         
+        $curl = curl_init();
+        
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => "https://secure.paytabs.com/payment/query",
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => "",
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 30,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => "POST",
+          CURLOPT_POSTFIELDS => "{\r\n  \"profile_id\": \"91323\",\r\n  \"tran_ref\": \"$tran_ref\"\r\n}",
+          CURLOPT_HTTPHEADER => array(
+            "Postman-Token: ed553a7a-f8a3-4ab8-914a-dc2f303dd116",
+            "authorization: S2JN2MDR6R-JDDKDLH9JM-Z662LJRDW6",
+            "cache-control: no-cache",
+            "content-type: application/json"
+          ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+    
+        curl_close($curl);
+    
+        if ($err) {
+        echo "cURL Error #:" . $err;
+        } else {
+        
+        return $response;
+        
+        }
+     }
+
+     public static function getfooterHowWork(){
+        $footer_how_work=AboutTalendsPage::where('page_type','footer-how-work')->first();
+        return $footer_how_work;
+    }
+
+    public static function getJoinCommunity(){
+        $join_community=AboutTalendsPage::where('page_type','join_community')->first();
+        return $join_community;
+    }
+
+
+    
+    public static function getBannerSettings(){
+        $banner_settings=AboutTalendsPage::where('page_type','banner_settings')->first();
+        return $banner_settings;
+    }
+
+
+    public static function getFooterSocialContent(){
+        $footer_social_content=AboutTalendsPage::where('page_type','footer-social-content')->first();
+        return $footer_social_content;
+    }
+
+
+    
+    
+    public static function footerMenu1(){
+        
+        $data=array();
+        $existing_menu_title = DB::table('site_managements')->where('meta_key', 'footer_title1')->first();
+        $existing_menu_item = SiteManagement::getMetaValue('footer_menu1');
+        
+
+         $title='';
+        if(!empty($existing_menu_title) &&  isset($existing_menu_title)  ){
+           $title= $existing_menu_title->meta_value;
+        }
+        $data['title']=$title;
+
+        $menu_items='';
+        if(!empty($existing_menu_item) &&  isset($existing_menu_item)  ){
+          $menu_items=$existing_menu_item;
+        }
+        
+        $data['menu_items']=$menu_items;
+
+        return $data;
+    }
+    public static function footerMenu2(){
+        
+        $data=array();
+        $existing_menu_title = DB::table('site_managements')->where('meta_key', 'footer_title2')->first();
+        $existing_menu_item = SiteManagement::getMetaValue('footer_menu2');
+        
+
+         $title='';
+        if(!empty($existing_menu_title) &&  isset($existing_menu_title)  ){
+           $title= $existing_menu_title->meta_value;
+        }
+        $data['title']=$title;
+
+        $menu_items='';
+        if(!empty($existing_menu_item) &&  isset($existing_menu_item)  ){
+          $menu_items=$existing_menu_item;
+        }
+        
+        $data['menu_items']=$menu_items;
+
+        return $data;
+    }
+
+    public static function footerMenu3(){
+        
+        $data=array();
+        $existing_menu_title = DB::table('site_managements')->where('meta_key', 'footer_title3')->first();
+        $existing_menu_item = SiteManagement::getMetaValue('footer_menu3');
+        
+
+         $title='';
+        if(!empty($existing_menu_title) &&  isset($existing_menu_title)  ){
+           $title= $existing_menu_title->meta_value;
+        }
+        $data['title']=$title;
+
+        $menu_items='';
+        if(!empty($existing_menu_item) &&  isset($existing_menu_item)  ){
+          $menu_items=$existing_menu_item;
+        }
+        
+        $data['menu_items']=$menu_items;
+
+        return $data;
+    }
+
+    public static function footerMenu4(){
+        
+        $data=array();
+        $existing_menu_title = DB::table('site_managements')->where('meta_key', 'footer_title4')->first();
+        $existing_menu_item = SiteManagement::getMetaValue('footer_menu4');
+        
+
+         $title='';
+        if(!empty($existing_menu_title) &&  isset($existing_menu_title)  ){
+           $title= $existing_menu_title->meta_value;
+        }
+        $data['title']=$title;
+
+        $menu_items='';
+        if(!empty($existing_menu_item) &&  isset($existing_menu_item)  ){
+          $menu_items=$existing_menu_item;
+        }
+        
+        $data['menu_items']=$menu_items;
+
+        return $data;
+    }
+
+    public static function headerMenus(){
+        $data=array();
+        $header_menu_title1 = DB::table('site_managements')->where('meta_key', 'header_menu_title1')->first();
+        $header_menu_title2 = DB::table('site_managements')->where('meta_key', 'header_menu_title2')->first();
+        $header_menu_title3 = DB::table('site_managements')->where('meta_key', 'header_menu_title3')->first();
+        $header_menu_title4 = DB::table('site_managements')->where('meta_key', 'header_menu_title4')->first();
+
+        $header_menu3 = SiteManagement::getMetaValue('header_menu3');
+        $header_menu4 = SiteManagement::getMetaValue('header_menu4');
+
+        $title1='';
+        if(!empty($header_menu_title1) &&  isset($header_menu_title1)  ){
+           $title1= $header_menu_title1->meta_value;
+        }
+        $data['title1']=$title1;
+       
+        
+        $title2='';
+        if(!empty($header_menu_title2) &&  isset($header_menu_title2)  ){
+           $title2= $header_menu_title2->meta_value;
+        }
+        $data['title2']=$title2;
+
+
+        
+        $title3='';
+        if(!empty($header_menu_title3) &&  isset($header_menu_title3)  ){
+           $title3= $header_menu_title3->meta_value;
+        }
+        $data['title3']=$title3;
+
+
+        
+        $title4='';
+        if(!empty($header_menu_title4) &&  isset($header_menu_title4)  ){
+           $title4= $header_menu_title4->meta_value;
+        }
+        $data['title4']=$title4;
+
+        
+        $sub_menu_item1='';
+        if(!empty($header_menu3) &&  isset($header_menu3)  ){
+          $sub_menu_item1=$header_menu3;
+        }
+        
+        $data['sub_menu_item1']=$sub_menu_item1;
+
+
+        $sub_menu_item2='';
+        if(!empty($header_menu4) &&  isset($header_menu4)  ){
+          $sub_menu_item2=$header_menu4;
+        }
+        
+        $data['sub_menu_item2']=$sub_menu_item2;
+       return $data;
+
+    }
+
+    public static function getSkillsCategories(){
+       $categories=Category::all();
+       return $categories;
+    }
+
+
+    public static function getCategories(){
+        $categories=Category::pluck('title','id');
+        return $categories;
+     }
+
+    public static function getSkills(){
+        $skills=Skill::all();
+        return $skills;
+     }
 
     /**
      * Generate random code
@@ -113,6 +537,66 @@ class Helper extends Model
         return $list;
     }
 
+
+    public static function getComapnyBudgetList()
+    {
+        $list = array(
+            '1' => array(
+                'title' => 'AED 500',
+                'search_title' => 'AED 500',
+                'value' => '500',
+            ),
+            '2' => array(
+                'title' => 'AED 5,000',
+                'search_title' => 'AED 5000',
+                'value' => '5000',
+            ),
+            '3' => array(
+                'title' => 'AED 10,000',
+                'search_title' => 'AED 10000',
+                'value' => '10000',
+            ),
+            '4' => array(
+                'title' => 'AED 25,000',
+                'search_title' => 'AED 25000',
+                'value' => '25000',
+            ),
+            '5' => array(
+                'title' => 'AED 50,000',
+                'search_title' => 'AED 50000',
+                'value' => '50000',
+            ),
+            '6' => array(
+                'title' => 'AED 100,000',
+                'search_title' => 'AED 100000',
+                'value' => '100000',
+            ),
+        );
+        return $list;
+    }
+
+    public static function getFreelancerBudgetList()
+    {
+        $list = array(
+            '1' => array(
+                'title' => 'AED 50',
+                'search_title' => 'AED 50',
+                'value' => '50',
+            ),
+            '2' => array(
+                'title' => 'AED 25',
+                'search_title' => 'AED 25',
+                'value' => '25',
+            ),
+            '3' => array(
+                'title' => 'AED 50+',
+                'search_title' => 'AED 50+',
+                'value' => '50+',
+            ),
+        );
+        return $list;
+    }
+    
     /**
      * Get location flag
      *
@@ -124,10 +608,16 @@ class Helper extends Model
      */
     public static function getLocationFlag($image)
     {
+      
         if (!empty($image)) {
-            return '/uploads/locations/' . $image;
+            if(Storage::disk('s3')->exists('uploads/locations/' . $image)){
+                return config('app.aws_se_path').'/uploads/locations/' . $image;
+            }else{
+                return config('app.aws_se_path').'/uploads/locations/img-09.png';
+            }
+            
         } else {
-            return 'images/img-09.png';
+            return config('app.aws_se_path').'/uploads/locations/img-09.png';
         }
     }
 
@@ -143,9 +633,29 @@ class Helper extends Model
     public static function getCategoryImage($image)
     {
         if (!empty($image)) {
-            return '/uploads/categories/' . $image;
+            if(Storage::disk('s3')->exists('uploads/categories/' . $image)){
+                return config('app.aws_se_path').'/uploads/categories/' . $image;
+            }else{
+                return config('app.aws_se_path').'/uploads/categories/img-09.png';
+            }
+            
         } else {
-            return 'uploads/categories/img-09.png';
+            return config('app.aws_se_path').'/uploads/categories/img-09.png';
+        }
+    }
+
+    public static function getAgencyServiceImage($image)
+    {
+       
+        if (!empty($image)) {
+            if(Storage::disk('s3')->exists('uploads/agency_services/' . $image)){
+                return config('app.aws_se_path').'/uploads/agency_services/' . $image;
+            }else{
+                return config('app.aws_se_path').'/uploads/agency_services/img-09.png';
+            }
+            
+        } else {
+            return config('app.aws_se_path').'/uploads/agency_services/img-09.png';
         }
     }
 
@@ -196,11 +706,20 @@ class Helper extends Model
      */
     public static function getBadgeImage($image)
     {
+        
+
         if (!empty($image)) {
-            return '/uploads/badges/' . $image;
+            if(Storage::disk('s3')->exists('uploads/badges/' . $image)){
+                return config('app.aws_se_path').'/uploads/badges/' . $image;
+            }else{
+                return '';
+            }
+            
         } else {
             return '';
         }
+
+
     }
 
     /**
@@ -250,10 +769,16 @@ class Helper extends Model
      */
     public static function getHeaderLogo($image)
     {
+
         if (!empty($image)) {
-            return '/uploads/settings/general/' . $image;
+            if(Storage::disk('s3')->exists('uploads/settings/general/' . $image)){
+                return config('app.aws_se_path').'/uploads/settings/general/' . $image;
+            }else{
+                return config('app.aws_se_path').'/images/logo.png';
+            }
+            
         } else {
-            return 'images/logo.png';
+            return config('app.aws_se_path').'/images/logo.png';
         }
     }
 
@@ -268,11 +793,18 @@ class Helper extends Model
      */
     public static function getFooterLogo($image)
     {
+    
         if (!empty($image)) {
-            return '/uploads/settings/footer/' . $image;
+            if(Storage::disk('s3')->exists('uploads/settings/footer/' . $image)){
+                return config('app.aws_se_path').'/uploads/settings/footer/' . $image;
+            }else{
+                return config('app.aws_se_path').'/images/flogo.png';
+            }
+            
         } else {
-            return 'images/flogo.png';
+            return config('app.aws_se_path').'/images/flogo.png';
         }
+
     }
 
     /**
@@ -1047,6 +1579,15 @@ class Helper extends Model
         }
     }
 
+    public static function getCompanyName($user_id)
+    {
+        if (!empty($user_id) && !empty(User::find($user_id))) {
+            return User::find($user_id)->profile->company_name;
+        } else {
+            return '';
+        }
+    }
+
     /**
      * Get role name by ID
      *
@@ -1082,7 +1623,7 @@ class Helper extends Model
                     '4' => trans('lang.emp_pkg_opt.banner'),
                     '5' => trans('lang.emp_pkg_opt.pvt_cht'),
                 );
-            } elseif ($role == 'freelancer') {
+            } elseif ($role == 'freelancer'  || $role == 'intern') {
                 $list = array(
                     '0' => trans('lang.freelancer_pkg_opt.price'),
                     '1' => trans('lang.freelancer_pkg_opt.no_of_credits'),
@@ -1093,6 +1634,45 @@ class Helper extends Model
                     '6' => trans('lang.freelancer_pkg_opt.badge'),
                     '7' => trans('lang.freelancer_pkg_opt.banner'),
                     '8' => trans('lang.freelancer_pkg_opt.pvt_cht'),
+                );
+            }elseif($role == 'company'  ){
+                $list = array(
+                    '0' => trans('lang.freelancer_pkg_opt.price'),
+                    '2' => trans('lang.freelancer_pkg_opt.no_of_skills'),
+                    '3' => trans('lang.freelancer_pkg_opt.no_of_services'),
+                    '4' => trans('lang.freelancer_pkg_opt.no_of_featured_services'),
+                    '5' => trans('lang.freelancer_pkg_opt.pkg_duration'),
+                    '6' => trans('lang.freelancer_pkg_opt.badge'),
+                    '7' => trans('lang.freelancer_pkg_opt.banner'),
+                    '8' => trans('lang.freelancer_pkg_opt.pvt_cht'),
+
+                    '9' => 'Access to Talends Lead Management CRM',
+                    '10' => 'Your Own Landing Page with CMS',
+                    '11' => 'Dedicated Support',
+                    '12' => 'Get a boost visibility',
+                    '13' => 'Get qualified leads and opportunities',
+                    '14' => '0% Commission free on signed deals',
+
+
+                );
+            }else if($role=='trail_agency'){
+                $list = array(
+                    '0' => trans('lang.freelancer_pkg_opt.price'),
+                    '1' => trans('lang.freelancer_pkg_opt.no_of_skills'),
+                    '2' => trans('lang.freelancer_pkg_opt.no_of_services'),
+                    '3' => trans('lang.freelancer_pkg_opt.no_of_featured_services'),
+                    '4' => trans('lang.freelancer_pkg_opt.pkg_duration'),
+                    '5' => trans('lang.freelancer_pkg_opt.banner'),
+                    '6' => trans('lang.freelancer_pkg_opt.pvt_cht'),
+
+                    '7' => 'Access to Talends Lead Management CRM',
+                    '8' => 'Your Own Landing Page with CMS',
+                    '9' => 'Dedicated Support',
+                    '10' => 'Get a boost visibility',
+                    '11' => 'Get qualified leads and opportunities',
+                    '12' => '0% Commission free on signed deals',
+
+
                 );
             }
             return $list;
@@ -1150,7 +1730,7 @@ class Helper extends Model
             ->first();
         return $role->role_id;
     }
-
+  
     /**
      * Get role name by userID
      *
@@ -1280,6 +1860,17 @@ class Helper extends Model
             return $list;
         }
     }
+
+    
+    public static function get_users(){
+        $users = DB::table('users')
+        ->join('model_has_roles as mr', 'mr.model_id', '=', 'users.id')
+        ->join('profiles as pr', 'pr.user_id', '=', 'users.id')->
+        select('*')->where('role_id', 2)->get();
+
+        return $users;
+    }
+
 
     /**
      * Get search filters
@@ -1550,18 +2141,19 @@ class Helper extends Model
     {
         $profile_image = !empty(User::find($user_id)->profile->avater) ? User::find($user_id)->profile->avater : '';
         if (!empty($size)) {
-            if (file_exists(self::publicPath() . '/uploads/users/' . $user_id . '/' . $size . $profile_image)) {
-                return !empty($profile_image) ? '/uploads/users/' . $user_id . '/' . $size . $profile_image : '/images/user.jpg';
-            } else if (file_exists(self::publicPath() . '/uploads/users/' . $user_id . '/' . $profile_image)) {
-                return !empty($profile_image) ? '/uploads/users/' . $user_id . '/' . $profile_image : '/images/user.jpg';
+
+            if (Storage::disk('s3')->exists('uploads/users/' . $user_id . '/' . $size . $profile_image)) {
+                return !empty($profile_image) ? config('app.aws_se_path'). '/' .'uploads/users/' . $user_id . '/' . $size . $profile_image : config('app.aws_se_path'). '/' .'images/user.jpg';
+            } else if (Storage::disk('s3')->exists('uploads/users/' . $user_id . '/' . $profile_image)) {
+                return !empty($profile_image) ? config('app.aws_se_path').'/uploads/users/' . $user_id . '/' . $profile_image : config('app.aws_se_path').'/images/user.jpg';
             } else {
-                return '/images/user.jpg';
+                return config('app.aws_se_path').'/images/user.jpg';
             }
 
-        } else if (file_exists(self::publicPath() . '/uploads/users/' . $user_id . '/' . $profile_image)) {
-            return !empty($profile_image) ? '/uploads/users/' . $user_id . '/' . $profile_image : '/images/user.jpg';
+        } else if (Storage::disk('s3')->exists('uploads/users/' . $user_id . '/' . $profile_image)) {
+            return !empty($profile_image) ? config('app.aws_se_path').'/uploads/users/' . $user_id . '/' . $profile_image : config('app.aws_se_path').'/images/user.jpg';
         } else {
-            return '/images/user.jpg';
+            return config('app.aws_se_path').'/images/user.jpg';
         }
     }
 
@@ -1595,6 +2187,31 @@ class Helper extends Model
         }
     }
 
+
+    
+    public static function gets3Image($path, $image, $size = '', $default = '')
+    {
+
+        if (!empty($path) && !empty($image)) {
+            $file = $path . '/' . $size . $image;
+            
+            if (Storage::disk('s3')->exists($file)) {
+                
+                if (!empty($size)) {
+                    return config('app.aws_se_path'). '/' .$path . '/' . $size . $image;
+                } else {
+                    return config('app.aws_se_path'). '/' .$path . '/' . $image;
+                }
+            } else {
+                return config('app.aws_se_path'). '/' .'images/' . $default;
+            }
+        } else {
+            return config('app.aws_se_path'). '/' .'images/' . $default;
+        }
+    }
+
+
+
     /**
      * Get user profile image
      *
@@ -1611,29 +2228,47 @@ class Helper extends Model
         $profile_banner = User::find($user_id)->profile->banner;
         if (!empty($profile_banner)) {
             if (!empty($size)) {
-                return '/uploads/users/' . $user_id . '/' . $size . '-' . $profile_banner;
+                
+                if (Storage::disk('s3')->exists('uploads/users/' . $user_id . '/' . $size . '-' . $profile_banner)) {
+                
+                    return config('app.aws_se_path').'/uploads/users/' . $user_id . '/' . $size . '-' . $profile_banner;
+                
+                }else{
+                    return  config('app.aws_se_path').'/images/' . $size . '-e-1110x300.jpg';
+                }
+               
             } else {
-                return '/uploads/users/' . $user_id . '/' . $profile_banner;
+
+                if (Storage::disk('s3')->exists('uploads/users/' . $user_id . '/' . $profile_banner)) {
+                
+                    return config('app.aws_se_path').'/uploads/users/' . $user_id . '/' . $profile_banner;
+                
+                }else{
+                    return config('app.aws_se_path').'/images/e-1110x300.jpg';
+
+                }
+
+
             }
         } elseif ($user->role_type == 'freelancer') {
             if (!empty($size)) {
-                if (file_exists('images/' . $size . '-frbanner-1920x400.jpg')) {
-                    return 'images/' . $size . '-frbanner-1920x400.jpg';
+                if (Storage::disk('s3')->exists('images/' . $size . '-frbanner-1920x400.jpg')) {
+                    return config('app.aws_se_path').'/images/' . $size . '-frbanner-1920x400.jpg';
                 } else {
-                    return 'images/frbanner-1920x400.jpg';
+                    return  config('app.aws_se_path').'/images/frbanner-1920x400.jpg';
                 }
             } else {
-                return 'images/frbanner-1920x400.jpg';
+                return config('app.aws_se_path').'/images/frbanner-1920x400.jpg';
             }
         } elseif ($user->role_type == 'employer') {
             if (!empty($size)) {
-                if (file_exists('images/' . $size . '-e-1110x300.jpg')) {
-                    return 'images/' . $size . '-e-1110x300.jpg';
+                if (Storage::disk('s3')->exists('images/' . $size . '-e-1110x300.jpg')) {
+                    return  config('app.aws_se_path').'/images/' . $size . '-e-1110x300.jpg';
                 } else {
-                    return 'images/e-1110x300.jpg';
+                    return config('app.aws_se_path').'/images/e-1110x300.jpg';
                 }
             } else {
-                return 'images/e-1110x300.jpg';
+                return config('app.aws_se_path').'/images/e-1110x300.jpg';
             }
         }
     }
@@ -1651,7 +2286,7 @@ class Helper extends Model
     public static function getProfileBanner($user_id)
     {
         $banner = User::find($user_id)->profile->banner;
-        return !empty($banner) ? '/uploads/users/' . $user_id . '/' . $banner : 'images/embanner-350x172.jpg';
+        return !empty($banner) ? config('app.aws_se_path').'/uploads/users/' . $user_id . '/' . $banner : config('app.aws_se_path'). '/' .'images/embanner-350x172.jpg';
     }
 
     /**
@@ -1718,7 +2353,7 @@ class Helper extends Model
      */
     public static function getProjectImage($image, $user_id)
     {
-        return !empty($image) ? '/uploads/users/' . $user_id . '/' . $image : 'images/projects/img-01.jpg';
+        return !empty($image) ? config('app.aws_se_path'). '/' .'uploads/users/' . $user_id . '/' . $image : config('app.aws_se_path'). '/' .'images/projects/img-01.jpg';
     }
 
     /**
@@ -3352,6 +3987,10 @@ class Helper extends Model
             'stripe' => array(
                 'title' => trans('lang.payment_methods.stripe'),
                 'value' => 'stripe',
+            ), 
+            'paytab' => array(
+                'title' => 'Paytab',
+                'value' => 'paytab',
             ),
         );
         if (!empty($key) && array_key_exists($key, $list)) {
@@ -4317,12 +4956,18 @@ class Helper extends Model
     public static function getSiteFavicon()
     {
         $settings = SiteManagement::getMetaValue('settings');
-        $favicon = !empty($settings[0]['favicon']) ? $settings[0]['favicon'] : null;
+        $favicon = !empty($settings[0]['favicon']) ? $settings[0]['favicon'] : null; 
         if (!empty($favicon)) {
-            return '/uploads/settings/general/' . $favicon;
+            if(Storage::disk('s3')->exists('uploads/settings/general/' . $favicon)){
+                return config('app.aws_se_path').'/uploads/settings/general/' . $favicon;
+            }else{
+                return '';
+            }
+            
         } else {
             return '';
         }
+
     }
 
     /**
@@ -4357,6 +5002,37 @@ class Helper extends Model
             }
         } else {
             return '/images/user.jpg';
+        }
+    }
+
+    public static function getS3ImageWithSize($path, $image, $size = "", $space_encode = false)
+    {
+        $requested_file = $image;
+        if (!empty($path) && !empty($image)) {
+            if ($space_encode == true) {
+                if ($image == trim($image) && strpos($image, ' ') !== false) {
+                    $requested_file = str_replace(' ', '%20', $image);
+                }
+            }
+            if (!empty($size)) {
+                $file = $path . '/' . $size . '-' . $image;
+                if (Storage::disk('s3')->exists($file)) {
+                    return config('app.aws_se_path'). '/' .$path . '/' . $size . '-' . $requested_file;
+                } elseif (Storage::disk('s3')->exists($path . '/' . $image)) {
+                    return config('app.aws_se_path'). '/' .$path . '/' . $requested_file;
+                } else {
+                return    config('app.aws_se_path'). '/' .'images/user.jpg';
+                
+                }
+            } elseif (Storage::disk('s3')->exists($path . '/' . $image)) {
+                return config('app.aws_se_path'). '/' .$path . '/' . $requested_file;
+            } else {
+                return    config('app.aws_se_path'). '/' .'images/user.jpg';
+
+            }
+        } else {
+            return    config('app.aws_se_path'). '/' .'images/user.jpg';
+
         }
     }
 
@@ -4843,6 +5519,53 @@ class Helper extends Model
         return serialize($data);
     }
 
+
+   public static function getProfileCompleteRatio()
+   {
+       $ratio=30;
+       $user_id=Auth::user()->id;
+       $user_category_skills=UserCategorySkills::where('user_id',$user_id)->count();
+       $company_expertise=CompanyExpertise::where('user_id',$user_id)->first();
+       $profile=Profile::where('user_id',$user_id)->first();
+       $company_detail=CompanyDetail::where('user_id',$user_id)->first();
+
+       if($user_category_skills!=0){
+         $ratio+=5;
+       }
+
+         if($company_expertise){
+            $ratio+=10;
+
+         }
+
+         if($profile->projects){
+            $ratio+=10;
+         }
+
+         if($profile->banner){
+            $ratio+=10;
+         }
+
+         if($profile->avater){
+            $ratio+=10;
+         }
+
+         if($profile->hourly_rate){
+            $ratio+=10;
+         }
+        if($company_detail ){
+        if($company_detail->detail){
+            $ratio+=5;
+        }
+        if($company_detail->portfolio){
+            $ratio+=10;
+        }
+        }
+      return $ratio;
+   }
+
+  
+
     /**
      * Get Seeder Data
      *
@@ -5259,7 +5982,7 @@ class Helper extends Model
         $register_form = SiteManagement::getMetaValue('reg_form_settings');
         $selected_registration_type = !empty($register_form) && !empty($register_form[0]['registration_type']) ? $register_form[0]['registration_type'] : 'multiple';
         $output = "";
-        if (auth()->user()->getRoleNames()->first() != 'admin') {
+        if (auth()->user()->getRoleNames()->first() != 'admin' &&  auth()->user()->getRoleNames()->first() != 'company' ) {
             if (Auth::user()->user_verified == 0 && $selected_registration_type == 'multiple') {
                 $output .= '<div class="wt-jobalertsholder la-email-warning float-right">';
                 $output .= '<ul id="wt-jobalerts">';
@@ -5277,6 +6000,42 @@ class Helper extends Model
                 $output .= '<li class="alert alert-danger alert-email alert-dismissible fade show">';
                 $output .= '<span>';
                 $output .= trans('lang.user_email_not_verify_admin');
+                $output .= '</span>';
+                $output .= '<a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="Close"><i class="fa fa-close"></i></a>';
+                $output .= '</li>';
+                $output .= '</ul>';
+                $output .= '</div>';
+            }
+        }
+        echo $output;
+    }
+
+    public static function displayPaymentWarning(){
+        $register_form = SiteManagement::getMetaValue('reg_form_settings');
+        $selected_registration_type = !empty($register_form) && !empty($register_form[0]['registration_type']) ? $register_form[0]['registration_type'] : 'multiple';
+      
+      $output = "";
+        if (auth()->user()->getRoleNames()->first() == 'company') {
+            $company_payment=UserPayments::where('user_id',Auth::user()->id)->first();
+             
+             
+            if ( isset($company_payment->is_success)  &&  $company_payment->is_success == 0 && $selected_registration_type == 'multiple') {
+                $output .= '<div class="wt-jobalertsholder  float-right payment_warning" style="position: relative !important;top: 33px !important;">';
+                $output .= '<ul id="wt-jobalerts">';
+                $output .= '<li class="alert alert-danger alert-email alert-dismissible fade show">';
+                $output .= '<span>';
+                $output .= trans('lang.user_payment_not_verify');
+                $output .= '</span>';
+                $output .= '<a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="Close"><i class="fa fa-close"></i></a>';
+                $output .= '</li>';
+                $output .= '</ul>';
+                $output .= '</div>';
+            } else if (isset($company_payment->is_success)  && $company_payment->is_success == 0 && $selected_registration_type == 'single') {
+                $output .= '<div class="wt-jobalertsholder  float-right payment_warning" style="position: relative !important;top: 33px !important;">';
+                $output .= '<ul id="wt-jobalerts">';
+                $output .= '<li class="alert alert-danger alert-email alert-dismissible fade show">';
+                $output .= '<span>';
+                $output .= trans('lang.user_payment_not_verify_admin');
                 $output .= '</span>';
                 $output .= '<a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="Close"><i class="fa fa-close"></i></a>';
                 $output .= '</li>';

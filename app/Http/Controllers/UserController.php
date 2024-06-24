@@ -206,7 +206,7 @@ class UserController extends Controller
                             $email_params['name'] = Helper::getUserName($user_id);
                             $email_params['email'] = $user->email;
                             $email_params['password'] = $request->confirm_password;
-                            try {
+                             try {
                                 Mail::to($user->email)
                                     ->send(
                                         new GeneralEmailMailable(
@@ -218,7 +218,7 @@ class UserController extends Controller
                             } catch (\Exception $e) {
                                 Session::flash('error', trans('lang.ph_email_warning'));
                                 return Redirect::back();
-                            }
+                            } 
                         }
                     }
                     $user->save();
@@ -255,6 +255,8 @@ class UserController extends Controller
             return view('back-end.settings.email-notifications', compact('user_email'));
         }
     }
+
+ 
     
     /**
      * Email Verification Settings Form.
@@ -269,6 +271,18 @@ class UserController extends Controller
             return view('extend.back-end.settings.email-verification');
         } else {
             return view('back-end.settings.email-verification');
+        }
+    }
+
+    /**
+     * Get Payment Verification
+     */
+    public function paymentVerificationSettings()
+    {
+        if (file_exists(resource_path('views/extend/back-end/settings/email-verification.blade.php'))) {
+            return view('extend.back-end.settings.email-verification');
+        } else {
+            return view('back-end.settings.payment-verification');
         }
     }
 
@@ -297,14 +311,14 @@ class UserController extends Controller
                     $email_params['verification_code'] = $user->verification_code;
                     $email_params['name']  = Helper::getUserName($user->id);
                     $email_params['email'] = $user->email;
-                    Mail::to($user->email)
+                     Mail::to($user->email)
                         ->send(
                             new GeneralEmailMailable(
                                 'verification_code',
                                 $template_data,
                                 $email_params
                             )
-                        );
+                        ); 
                 }
             }
             $json['type'] = 'success';
@@ -436,14 +450,14 @@ class UserController extends Controller
                     if (!empty($template->id)) {
                         $template_data = EmailTemplate::getEmailTemplateByID($template->id);
                         $email_params['reason'] = $delete_reason;
-                        Mail::to(config('mail.username'))
+                         Mail::to(config('mail.adminmail'))
                             ->send(
                                 new AdminEmailMailable(
                                     'admin_email_delete_account',
                                     $template_data,
                                     $email_params
                                 )
-                            );
+                            ); 
                     }
                 }
                 Auth::logout();
@@ -632,6 +646,7 @@ class UserController extends Controller
             $saved_employers   = !empty($profile->saved_employers) ? unserialize($profile->saved_employers) : array();
             $currency          = SiteManagement::getMetaValue('commision');
             $symbol            = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
+           
             if ($request->path() === 'employer/saved-items') {
                 if (file_exists(resource_path('views/extend/back-end/employer/saved-items.blade.php'))) {
                     return view(
@@ -669,8 +684,34 @@ class UserController extends Controller
                         )
                     );
                 } else {
+
                     return view(
                         'back-end.freelancer.saved-items',
+                        compact(
+                            'profile',
+                            'saved_jobs',
+                            'saved_freelancers',
+                            'saved_employers',
+                            'symbol'
+                        )
+                    );
+                }
+            } elseif ($request->path() === 'intern/saved-items') {
+                if (file_exists(resource_path('views/extend/back-end/freelancer/saved-items.blade.php'))) {
+                    return view(
+                        'extend.back-end.freelancer.saved-items',
+                        compact(
+                            'profile',
+                            'saved_jobs',
+                            'saved_freelancers',
+                            'saved_employers',
+                            'symbol'
+                        )
+                    );
+                } else {
+
+                    return view(
+                        'back-end.interne.saved-items',
                         compact(
                             'profile',
                             'saved_jobs',
@@ -827,14 +868,14 @@ class UserController extends Controller
                         $job_completed_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_job_completed')->get()->first();
                         if (!empty($job_completed_template->id)) {
                             $template_data = EmailTemplate::getEmailTemplateByID($job_completed_template->id);
-                            Mail::to(config('mail.username'))
+                              Mail::to(config('mail.adminmail'))
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_job_completed',
                                         $template_data,
                                         $email_params
                                     )
-                                );
+                                );  
                         }
                         $freelancer_job_completed_template = DB::table('email_types')->select('id')->where('email_type', 'freelancer_email_job_completed')->get()->first();
                         if (!empty($freelancer_job_completed_template->id)) {
@@ -846,21 +887,21 @@ class UserController extends Controller
                                         $template_data,
                                         $email_params
                                     )
-                                );
+                                ); 
                         }
                     } else if ($project_type == 'service') {
                         $service = Service::find($request['service_id']);
                         $email_params['project_title'] = $service->title;
                         $email_params['completed_project_link'] = url('service/' . $service->slug);
                         $template_data = Helper::getFreelancerCompletedServiceEmailContent();
-                        Mail::to($freelancer->email)
+                         Mail::to($freelancer->email)
                             ->send(
                                 new FreelancerEmailMailable(
                                     'freelancer_email_job_completed',
                                     $template_data,
                                     $email_params
                                 )
-                            );
+                            ); 
                     }
                 }
                 return $json;
@@ -891,16 +932,73 @@ class UserController extends Controller
     {
         if (!empty($request['attachments'])) {
             $freelancer_id = $request['freelancer_id'];
-            $path = storage_path() . '/app/uploads/proposals/' . $freelancer_id;
-            if (!file_exists($path)) {
-                File::makeDirectory($path, 0755, true, true);
+           
+                //////////////////////////
+                $path = storage_path() . '/app/uploads/proposals/temp';
+                if (!file_exists($path)) {
+                    File::makeDirectory($path, 0755, true, true);
+                }
+                $zip = new \Madnest\Madzipper\Madzipper;
+                $exist=Storage::disk('s3')->exists('uploads/proposals'. '/'. $freelancer_id . '/' . 'attachments.zip');
+                 
+                if(!$exist){
+                    foreach ($request['attachments'] as $attachment) {
+                       
+                        if (Storage::disk('s3')->exists('uploads/proposals/'. $freelancer_id.'/' . $attachment)) {
+                        
+                            if (!file_exists($path . '/' . $attachment)) {
+                            $s3_file= Storage::disk('s3')->get('uploads/proposals'. '/'. $freelancer_id.'/' . $attachment);
+                            $s3 = Storage::disk('local');
+                             
+                            $s3->put('uploads/proposals'. '/temp'.'/' . $attachment, $s3_file);
+                            }
+                                               
+                           $zip->make($path . '/attachments.zip')->add($path . '/' . $attachment); 
+                           
+                        }
+                        $zip->close(); 
+        
+                    }
+                }else{
+            
+                    if (Storage::disk('s3')->exists('uploads/proposals'.'/'. $freelancer_id . '/'.'attachments.zip')) {
+                  
+                        return Storage::disk('s3')->download('uploads/proposals'.'/'. $freelancer_id.'/'.'attachments.zip');
+                        
+                      } else {
+                          Session::flash('error', trans('lang.file_not_found'));
+                          return Redirect::back();
+                      } 
+                }
+                
+            if (file_exists($path .'/'.'attachments.zip')) {
+                $contents = file_get_contents($path .'/'.'attachments.zip');
+                Storage::disk('s3')->put('uploads/proposals'. '/'. $freelancer_id.'/'.'attachments.zip', $contents);
+                unlink($path .'/'.'attachments.zip');
             }
-            $zip = new \Madnest\Madzipper\Madzipper;
-            foreach ($request['attachments'] as $attachment) {
-                $zip->make($path . '/attachments.zip')->add($path . '/' . $attachment);
-                $zip->close();
+
+            if(!$exist){
+                foreach ($request['attachments'] as $attachment) {
+                    if (file_exists($path .'/'. $attachment)) {
+                        unlink($path .'/'. $attachment);
+                    }
+                }
             }
-            return response()->download(storage_path('app/uploads/proposals/' . $freelancer_id . '/attachments.zip'));
+
+            // download freom s3 bucket  
+            if (Storage::disk('s3')->exists('uploads/proposals' . '/'. $freelancer_id . '/' . 'attachments.zip')) {
+              
+                return Storage::disk('s3')->download('uploads/proposals'. '/'. $freelancer_id . '/' . 'attachments.zip');
+                
+              } else {
+                  Session::flash('error', trans('lang.file_not_found'));
+                  return Redirect::back();
+              }
+
+
+
+                //////////////////////////
+
         } else {
             Session::flash('error', trans('lang.files_not_found'));
             return Redirect::back();
@@ -972,14 +1070,14 @@ class UserController extends Controller
                                 $email_params['report_by_link'] = url('profile/' . $user->slug);
                                 $email_params['reported_by'] = Helper::getUserName(Auth::user()->id);
                                 $email_params['message'] = $request['description'];
-                                Mail::to(config('mail.username'))
+                                 Mail::to(config('mail.adminmail'))
                                     ->send(
                                         new AdminEmailMailable(
                                             'admin_email_report_project',
                                             $template_data,
                                             $email_params
                                         )
-                                    );
+                                    );  
                             }
                         } else if ($request['report_type'] == 'employer-report') {
                             $report_employer_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_report_employer')->get()->first();
@@ -991,14 +1089,14 @@ class UserController extends Controller
                                 $email_params['report_by_link'] = url('profile/' . $user->slug);
                                 $email_params['reported_by'] = Helper::getUserName(Auth::user()->id);
                                 $email_params['message'] = $request['description'];
-                                Mail::to(config('mail.username'))
+                                  Mail::to(config('mail.adminmail'))
                                     ->send(
                                         new AdminEmailMailable(
                                             'admin_email_report_employer',
                                             $template_data,
                                             $email_params
                                         )
-                                    );
+                                    );  
                             }
                         } else if ($request['report_type'] == 'freelancer-report') {
                             $report_freelancer_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_report_freelancer')->get()->first();
@@ -1010,14 +1108,14 @@ class UserController extends Controller
                                 $email_params['report_by_link'] = url('profile/' . $user->slug);
                                 $email_params['reported_by'] = Helper::getUserName(Auth::user()->id);
                                 $email_params['message'] = $request['description'];
-                                Mail::to(config('mail.username'))
+                                  Mail::to(config('mail.adminmail'))
                                     ->send(
                                         new AdminEmailMailable(
                                             'admin_email_report_freelancer',
                                             $template_data,
                                             $email_params
                                         )
-                                    );
+                                    ); 
                             }
                         }
                     }
@@ -1037,28 +1135,28 @@ class UserController extends Controller
                             $email_params['employer_profile'] = url('profile/' . Auth::user()->slug);
                             $email_params['emp_name'] = Helper::getUserName(Auth::user()->id);
                             $email_params['msg'] = $request['description'];
-                            Mail::to($freelancer->email)
+                             Mail::to($freelancer->email)
                                 ->send(
                                     new FreelancerEmailMailable(
                                         'freelancer_email_cancel_job',
                                         $template_data,
                                         $email_params
                                     )
-                                );
+                                ); 
                             $job_cancelle_admin_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_cancel_job')->get()->first();
                             if (!empty($job_cancelle_admin_template)) {
                                 $template_data = EmailTemplate::getEmailTemplateByID($job_cancelle_admin_template->id);
                             } else {
                                 $template_data = '';
                             }
-                            Mail::to(config('mail.username'))
+                              Mail::to(config('mail.adminmail'))
                                 ->send(
                                     new AdminEmailMailable(
                                         'admin_email_cancel_job',
                                         $template_data,
                                         $email_params
                                     )
-                                );
+                                ); 
                         }
                     }
                 } else if ($request['report_type'] == 'service_cancel') {
@@ -1076,14 +1174,14 @@ class UserController extends Controller
                             $email_params['employer_profile'] = url('profile/' . Auth::user()->slug);
                             $email_params['emp_name'] = Helper::getUserName(Auth::user()->id);
                             $email_params['msg'] = $request['description'];
-                            Mail::to($freelancer->email)
+                             Mail::to($freelancer->email)
                                 ->send(
                                     new FreelancerEmailMailable(
                                         'freelancer_email_cancel_job',
                                         $template_data,
                                         $email_params
                                     )
-                                );
+                                ); 
                         }
 
                         $job_cancelle_admin_template = DB::table('email_types')->select('id')->where('email_type', 'admin_email_cancel_job')->get()->first();
@@ -1092,14 +1190,14 @@ class UserController extends Controller
                         } else {
                             $template_data = '';
                         }
-                        Mail::to(config('mail.username'))
+                         Mail::to(config('mail.adminmail'))
                             ->send(
                                 new AdminEmailMailable(
                                     'admin_email_cancel_job',
                                     $template_data,
                                     $email_params
                                 )
-                            );
+                            ); 
                     }
                 }
                 if ($request['report_type'] == 'service_cancel') {
@@ -1219,16 +1317,16 @@ class UserController extends Controller
                     foreach ($message_data as $key => $data) {
                         $content = $data->content;
                         $excerpt = str_limit($content, 100);
-                        $default_avatar = url('images/user-login.png');
+                        $default_avatar = config('app.aws_se_path'). '/' .'images/user-login.png';
                         $profile_image = !empty($data->avater)
-                            ? '/uploads/users/' . $data->author_id . '/' . $data->avater
+                            ? config('app.aws_se_path').'/uploads/users/' . $data->author_id . '/' . $data->avater
                             : $default_avatar;
                         $messages[$key]['id'] = $data->id;
                         $messages[$key]['author_id'] = $data->author_id;
                         $messages[$key]['proposal_id'] = $data->proposal_id;
                         $messages[$key]['content'] = $content;
                         $messages[$key]['excerpt'] = $excerpt;
-                        $messages[$key]['user_image'] = asset($profile_image);
+                        $messages[$key]['user_image'] = ($profile_image);
                         $messages[$key]['created_at'] = Carbon::parse($data->created_at)->format('d-m-Y');
                         $messages[$key]['notify'] = $data->notify;
                         $messages[$key]['attachments'] = !empty($data->attachments) ? 1 : 0;
@@ -1268,24 +1366,67 @@ class UserController extends Controller
             } elseif ($messages[0]->project_type == 'job') {
                 $project_type = 'proposals';
             }
-            $path = storage_path() . '/app/uploads/' . $project_type . '/' . $messages[0]->author_id;
+
+            $path = storage_path() . '/app/uploads/' . $project_type . '/temp';
             if (!file_exists($path)) {
                 File::makeDirectory($path, 0755, true, true);
             }
             
             $zip = new \Madnest\Madzipper\Madzipper;
-            foreach ($attachments as $attachment) {
-                if (Storage::disk('local')->exists('uploads/' . $project_type . '/' . $messages[0]->author_id . '/' . $attachment)) {
-                    $zip->make($path . '/' . $id . '-attachments.zip')->add($path . '/' . $attachment);
+
+            $exist=Storage::disk('s3')->exists('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip');
+            if(!$exist){
+                foreach ($attachments as $attachment) {
+                    if (Storage::disk('s3')->exists('uploads/' . $project_type . '/'. $messages[0]->author_id.'/' . $attachment)) {
+                       
+                        if (!file_exists($path . '/' . $attachment)) {
+                        $s3_file= Storage::disk('s3')->get('uploads/' . $project_type . '/'. $messages[0]->author_id.'/' . $attachment);
+                        $s3 = Storage::disk('local');
+                        $s3->put('uploads/' . $project_type . '/temp'.'/' . $attachment, $s3_file);
+                        }
+                                           
+                       $zip->make($path . '/' . $id . '-attachments.zip')->add($path . '/' . $attachment);
+                       
+                    }
+                    $zip->close();
+    
                 }
-                $zip->close();
+            }else{
+        
+                if (Storage::disk('s3')->exists('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip')) {
+              
+                    return Storage::disk('s3')->download('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip');
+                    
+                  } else {
+                      Session::flash('error', trans('lang.file_not_found'));
+                      return Redirect::back();
+                  }
             }
-            if (Storage::disk('local')->exists('uploads/' . $project_type . '/' . $messages[0]->author_id . '/' . $id . '-attachments.zip')) {
-                return response()->download(storage_path('app/uploads/' . $project_type . '/' . $messages[0]->author_id . '/' . $id . '-attachments.zip'));
+          
+            if (file_exists($path .'/'. $id . '-attachments.zip')) {
+                $contents = file_get_contents($path .'/'. $id . '-attachments.zip');
+                Storage::disk('s3')->put( 'uploads/' . $project_type . '/'. $messages[0]->author_id.'/' . $id . '-attachments.zip'  , $contents );
+                unlink($path .'/'. $id . '-attachments.zip');
+            }
+
+            if(!$exist){
+            foreach ($attachments as $attachment) {
+                if (file_exists($path .'/'. $attachment)) {
+                    unlink($path .'/'. $attachment);
+                }
+            }
+        }
+          
+            /// download freom s3 bucket  
+            if (Storage::disk('s3')->exists('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip')) {
+              
+              return Storage::disk('s3')->download('uploads/' . $project_type . '/'. $messages[0]->author_id . '/' . $id . '-attachments.zip');
+              
             } else {
                 Session::flash('error', trans('lang.file_not_found'));
                 return Redirect::back();
             }
+
         }
     }
 
@@ -1299,6 +1440,7 @@ class UserController extends Controller
     public function checkout($id)
     {
         if (!empty($id)) {
+
             $package_options = Helper::getPackageOptions(Auth::user()->getRoleNames()[0]);
             $package = Package::find($id);
             $stripe_settings = SiteManagement::getMetaValue('stripe_settings');
@@ -1307,10 +1449,11 @@ class UserController extends Controller
             $payment_gateway = !empty($payout_settings) && !empty($payout_settings[0]['payment_method']) ? $payout_settings[0]['payment_method'] : array();
             $symbol = !empty($payout_settings) && !empty($payout_settings[0]['currency']) ? Helper::currencyList($payout_settings[0]['currency']) : array();
             $mode = !empty($payout_settings) && !empty($payout_settings[0]['payment_mode']) ? $payout_settings[0]['payment_mode'] : 'true';
+        
             if (file_exists(resource_path('views/extend/back-end/package/checkout.blade.php'))) {
                 return view::make('extend.back-end.package.checkout', compact('stripe_img', 'package', 'package_options', 'payment_gateway', 'symbol', 'mode'));
             } else {
-                return view::make('back-end.package.checkout', compact('stripe_img', 'package', 'package_options', 'payment_gateway', 'symbol', 'mode'));
+                return view::make('back-end.package.checkout', compact('stripe_img', 'package', 'package_options', 'payment_gateway', 'symbol', 'mode','id'));
             }
         }
     }
@@ -1459,18 +1602,25 @@ class UserController extends Controller
                 $invoice->detail = !empty($request['trans_detail']) ? $request['trans_detail'] : '';
                 $old_path = 'uploads\users\temp';
                 $trans_attachments = array();
+                
                 if (!empty($request['attachments'])) {
                     $attachments = $request['attachments'];
                     foreach ($attachments as $key => $attachment) {
+
+
                         if (Storage::disk('local')->exists($old_path . '/' . $attachment)) {
                             $new_path = 'uploads/users/' . Auth::user()->id;
-                            if (!file_exists($new_path)) {
-                                File::makeDirectory($new_path, 0755, true, true);
-                            }
                             $filename = time() . '-' . $attachment;
-                            Storage::move($old_path . '/' . $attachment, $new_path . '/' . $filename);
-                            $trans_attachments[] = $filename;
+                          // move files to aws s3
+                           $contents =  Storage::disk('local')->get($old_path . '/' . $attachment);
+                           Storage::disk('s3')->put($new_path. '/' . $filename,$contents  );
+                           $trans_attachments[] = $filename;
+                            Storage::disk('local')->delete($old_path . '/' . $attachment);
+                            
                         }
+
+
+
                     }
                     $invoice->transection_doc = serialize($trans_attachments);
                 }
@@ -1488,14 +1638,14 @@ class UserController extends Controller
                     $template_data['content'] = !empty($order_settings) && !empty($order_settings['admin_order']['email_content']) ? $order_settings['admin_order']['email_content'] : '';
                     $email_params['name'] = Helper::getUserName(Auth::user()->id);
                     $email_params['order_id'] = $order->id;
-                    Mail::to(config('mail.username'))
+                     Mail::to(config('mail.adminmail'))
                         ->send(
                             new AdminEmailMailable(
                                 'admin_new_order_received',
                                 $template_data,
                                 $email_params
                             )
-                        );
+                        ); 
                 }
                 session()->forget('product_id');
                 session()->forget('product_title');
@@ -1586,7 +1736,7 @@ class UserController extends Controller
                                             $template_data,
                                             $email_params
                                         )
-                                    );
+                                    ); 
                             }
                         }
                     }
@@ -1620,14 +1770,14 @@ class UserController extends Controller
                         $email_params['employer_profile'] = url('profile/' . $user->slug);
                         $email_params['employer_name'] = Helper::getUserName($user->id);
                         $freelancer_data = User::find(intval($service->seller[0]->id));
-                        Mail::to($freelancer_data->email)
+                         Mail::to($freelancer_data->email)
                             ->send(
                                 new FreelancerEmailMailable(
                                     'freelancer_email_new_order',
                                     $template_data,
                                     $email_params
                                 )
-                            );
+                            ); 
                     }
                 } elseif ($order->type == 'package') {
                     $item_type = 'package';
@@ -1709,7 +1859,7 @@ class UserController extends Controller
                                                 $template_data,
                                                 $email_params
                                             )
-                                        );
+                                        ); 
                                 }
                             }
                         } elseif ($role === 'freelancer') {
@@ -1723,14 +1873,14 @@ class UserController extends Controller
                                     $email_params['name'] = !empty($package) ? $package->title : '';
                                     $email_params['price'] = !empty($package) ? $package->cost : '';
                                     $email_params['expiry_date'] = !empty($expiry_date) ? Carbon::parse($expiry_date)->format('M d, Y') : '';
-                                    Mail::to($user->email)
+                                     Mail::to($user->email)
                                         ->send(
                                             new FreelancerEmailMailable(
                                                 'freelancer_email_package_subscribed',
                                                 $template_data,
                                                 $email_params
                                             )
-                                        );
+                                        ); 
                                 }
                             }
                         }
@@ -1847,6 +1997,38 @@ class UserController extends Controller
         }
     }
 
+
+    public function getInterneeInvoices($type = '')
+    {
+        if (Auth::user()->getRoleNames()[0] != 'admin' && Auth::user()->getRoleNames()[0] === 'intern') {
+            $invoices = array();
+            $invoices = DB::table('invoices')
+                ->join('items', 'items.invoice_id', '=', 'invoices.id')
+                ->join('packages', 'packages.id', '=', 'items.product_id')
+                ->select('invoices.*', 'packages.options')
+                ->where('items.subscriber', Auth::user()->id)
+                ->where('invoices.type', $type)
+                ->get();
+            $expiry_date = '';
+            $currency   = SiteManagement::getMetaValue('commision');
+            $symbol = !empty($currency) && !empty($currency[0]['currency']) ? Helper::currencyList($currency[0]['currency']) : array();
+            if ($type === 'project') {
+                if (file_exists(resource_path('views/extend/back-end/interne/invoices/project.blade.php'))) {
+                    return view('extend.back-end.interne.invoices.project', compact('invoices', 'type', 'expiry_date', 'symbol'));
+                } else {
+                    return view('back-end.interne.invoices.project', compact('invoices', 'type', 'expiry_date', 'symbol'));
+                }
+            } elseif ($type === 'package') {
+                if (file_exists(resource_path('views/extend/back-end/interne/invoices/package.blade.php'))) {
+                    return view('extend.back-end.interne.invoices.package', compact('invoices', 'type', 'expiry_date', 'symbol'));
+                } else {
+                    return view('back-end.interne.invoices.package', compact('invoices', 'type', 'expiry_date', 'symbol'));
+                }
+            }
+        } else {
+            abort(404);
+        }
+    }
     /**
      * Get Invoices.
      *
@@ -1924,10 +2106,13 @@ class UserController extends Controller
         $avater = !empty($profile->avater) ? $profile->avater : '';
         $tagline = !empty($profile->tagline) ? $profile->tagline : '';
         $description = !empty($profile->description) ? $profile->description : '';
+        $aws_s3_path='https://'.env('AWS_BUCKET').'.s3.amazonaws.com';
+
         if (file_exists(resource_path('views/extend/back-end/admin/profile-settings/personal-detail/index.blade.php'))) {
             return view(
                 'extend.back-end.admin.profile-settings.personal-detail.index',
                 compact(
+                    'aws_s3_path',
                     'banner',
                     'avater',
                     'tagline',
@@ -1938,6 +2123,7 @@ class UserController extends Controller
             return view(
                 'back-end.admin.profile-settings.personal-detail.index',
                 compact(
+                    'aws_s3_path',
                     'banner',
                     'avater',
                     'tagline',
@@ -2089,7 +2275,7 @@ class UserController extends Controller
                                         $template_data,
                                         $email_params
                                     )
-                                );
+                                ); 
                         }
                     }
                     return $json;
@@ -2146,6 +2332,61 @@ class UserController extends Controller
         }
     }
 
+    public function raiseInterneDispute($slug)
+    {
+        $breadcrumbs_settings = SiteManagement::getMetaValue('show_breadcrumb');
+        $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'true';
+        $job = Job::where('slug', $slug)->first();
+        $reasons = Arr::pluck(Helper::getReportReasons(), 'title', 'title');
+        if (file_exists(resource_path('views/extend/back-end/freelancer/jobs/dispute.blade.php'))) {
+            return View(
+                'extend.back-end.interne.jobs.dispute',
+                compact(
+                    'job',
+                    'reasons',
+                    'show_breadcrumbs'
+                )
+            );
+        } else {
+            return View(
+                'back-end.interne.jobs.dispute',
+                compact(
+                    'job',
+                    'reasons',
+                    'show_breadcrumbs'
+                )
+            );
+        }
+    }
+
+
+    public function raiseCompanyDispute($slug)
+    {
+        $breadcrumbs_settings = SiteManagement::getMetaValue('show_breadcrumb');
+        $show_breadcrumbs = !empty($breadcrumbs_settings) ? $breadcrumbs_settings : 'true';
+        $job = Job::where('slug', $slug)->first();
+        $reasons = Arr::pluck(Helper::getReportReasons(), 'title', 'title');
+        if (file_exists(resource_path('views/extend/back-end/freelancer/jobs/dispute.blade.php'))) {
+            return View(
+                'extend.back-end.interne.jobs.dispute',
+                compact(
+                    'job',
+                    'reasons',
+                    'show_breadcrumbs'
+                )
+            );
+        } else {
+            return View(
+                'back-end.company.jobs.dispute',
+                compact(
+                    'job',
+                    'reasons',
+                    'show_breadcrumbs'
+                )
+            );
+        }
+    }
+
     /**
      * Raise dispute
      *
@@ -2182,14 +2423,14 @@ class UserController extends Controller
                     $email_params['name'] = Helper::getUserName(Auth::user()->id);
                     $email_params['msg'] = $request['description'];
                     $email_params['reason'] = $request['reason'];
-                    Mail::to(config('mail.username'))
+                     Mail::to(config('mail.adminmail'))
                         ->send(
                             new AdminEmailMailable(
                                 'admin_email_dispute_raised',
                                 $template_data,
                                 $email_params
                             )
-                        );
+                        );  
                 }
             }
             return $json;
@@ -2220,6 +2461,7 @@ class UserController extends Controller
                 );
             } else {
                 $users = User::select('*')->latest()->paginate(10);
+                
             }
             if (file_exists(resource_path('views/extend/back-end/admin/users/index.blade.php'))) {
                 return view('extend.back-end.admin.users.index', compact('users'));

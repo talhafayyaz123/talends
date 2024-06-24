@@ -5,6 +5,8 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Helper;
+use App\SiteManagement;
+
 
 class Kernel extends ConsoleKernel
 {
@@ -14,7 +16,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\RecurringPaymentCron::class,
+        Commands\StripeSubscription::class,
     ];
 
     /**
@@ -30,6 +33,20 @@ class Kernel extends ConsoleKernel
                 Helper::updatePayouts();
             }
         )->everyMinute();
+
+        $payout_settings = SiteManagement::getMetaValue('commision');
+        $payment_gateway = !empty($payout_settings) && !empty($payout_settings[0]['payment_method']) ? $payout_settings[0]['payment_method'] : array();
+        if( isset($payment_gateway) && in_array('paytab',$payment_gateway)){
+            $schedule->command('recurring-payment:cron')
+            ->everyMinute();
+        }
+
+        if( isset($payment_gateway) && in_array('stripe',$payment_gateway)){
+           /*  $schedule->command('stripe-subscription:cron')
+            ->everyMinute(); */
+        }
+
+
     }
 
     /**

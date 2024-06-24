@@ -7,8 +7,25 @@
 <!--<![endif]-->
 
 <head>
+	<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GK95ZJXBTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GK95ZJXBTQ');
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5048427330709374" crossorigin="anonymous"></script>
+
+
+  <script async src="https://js.stripe.com/v3/"></script>
+
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="google-signin-client_id" content="673600264341-g8j2kqvt50q3c2ekkuhuh8hunnvheel6.apps.googleusercontent.com">
+
 	@if (trim($__env->yieldContent('title')))
 		<title>@yield('title')</title>
 	@else 
@@ -19,7 +36,22 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+	
 	<link rel="icon" href="{{{ asset(Helper::getSiteFavicon()) }}}" type="image/x-icon">
+	
+	
+	<link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png')}}">
+
+    <link rel="shortcut icon" href="{{ asset('talends/assets/img/fav/favicon.png')}}">
+
+    <link rel="apple-touch-icon" href="{{ asset('talends/assets/img/fav/apple-touch-icon-57x57.png')}}">
+
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('talends/assets/img/fav/apple-touch-icon-72x72.png')}}">
+
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('talends/assets/img/fav/apple-touch-icon-114x114.png')}}">
+
+	
 	@stack('PackageStyle')
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/normalize-min.css') }}" rel="stylesheet">
@@ -29,6 +61,9 @@
 	<link href="{{ asset('css/themify-icons.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/jquery-ui-min.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/linearicons.css') }}" rel="stylesheet">
+
+   {!!  ReCaptcha::htmlScriptTagJsApi() !!}
+ 
 	@stack('sliderStyle')
 	<link href="{{ asset('css/main.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/custom.css') }}" rel="stylesheet">
@@ -36,11 +71,14 @@
 		<link href="{{ asset('css/rtl.css') }}" rel="stylesheet">
 	@endif
 	<link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
-
+	<link rel="icon" href="{{{ asset(Helper::getSiteFavicon()) }}}" type="image/x-icon">
 	<link href="{{ asset('css/color.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/maintwo.css') }}" rel="stylesheet">
 	@php echo \App\Typo::setSiteStyling(); @endphp
     <link href="{{ asset('css/transitions.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/customization.css') }}" rel="stylesheet">
+	
+
 	@stack('stylesheets')
 	<script type="text/javascript">
 		var APP_URL = {!! json_encode(url('/')) !!}
@@ -58,7 +96,7 @@
 				'authenticated' => auth()->check(),
 				'id' => auth()->check() ? auth()->user()->id : null,
 				'name' => auth()->check() ? auth()->user()->first_name : null,
-				'image' => !empty(auth()->user()->profile->avater) ? asset('uploads/users/'.auth()->user()->id .'/'.auth()->user()->profile->avater) : asset('images/user-login.png'),
+				'image' => !empty(auth()->user()->profile->avater) ? config('app.aws_se_path'). '/' .'uploads/users/'.auth()->user()->id .'/'.auth()->user()->profile->avater : config('app.aws_se_path'). '/' .'images/user-login.png',
 				'image_name' => !empty(auth()->user()->profile->avater) ? auth()->user()->profile->avater : '',
 				]
 				])
@@ -76,6 +114,8 @@
 		echo json_encode($trans);
 		?>;
 	</script>
+	<!-- bootstrap icons -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
 </head>
 
 <body class="wt-login {{Helper::getBodyLangClass()}} {{Helper::getTextDirection()}} {{empty(Request::segment(1)) ? 'home-wrapper' : '' }}">
@@ -94,7 +134,7 @@
 			</div>
 		</div>
 	@endif
-	<div id="wt-wrapper" class="wt-wrapper wt-haslayout">
+	<div id="wt-wrapper" class="wt-wrapper wt-haslayout wt-openmenu">
 		<div class="wt-contentwrapper">
 			@yield('header')
 			@yield('slider')
@@ -103,6 +143,7 @@
 		</div>
 	</div>
 	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+
 	<script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
 	@yield('bootstrap_script')
 	<script src="{{ asset('js/app.js') }}"></script>
@@ -110,13 +151,31 @@
 	<script src="{{ asset('js/scrollbar.min.js') }}"></script>
 	<script src="{{ asset('js/particles.min.js') }}"></script>
     <script src="{{ asset('js/jquery-ui-min.js') }}"></script>
-    @stack('scripts')
-    <script>
+	<script src="{{ asset('talends/assets/js/main.js') }}"></script>
+
+	 <!-- <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/22223481.js"></script> -->
+	 		<!--Start of Tawk.to Script-->
+			 <script type="text/javascript">
+		var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+		(function(){
+		var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+		s1.async=true;
+		s1.src='https://embed.tawk.to/6340099d54f06e12d898e9cc/1gep2b3ro';
+		s1.charset='UTF-8';
+		s1.setAttribute('crossorigin','*');
+		s0.parentNode.insertBefore(s1,s0);
+		})();
+		</script>
+		<!--End of Tawk.to Script-->
 		
+    @stack('scripts')
+    <script>		
         jQuery(window).load(function () {
             jQuery(".preloader-outer").delay(500).fadeOut();
             jQuery(".pins").delay(500).fadeOut("slow");
         });
+		
     </script>
+	  
 </body>
 </html>

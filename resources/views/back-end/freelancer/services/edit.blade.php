@@ -103,15 +103,15 @@
                                             </span>
                                         </div>
                                         <div class="form-group form-group-half">
-                                            {!! Form::text( 'address', e($service->address), ['id'=>"pac-input", 'class' =>'form-control', 'placeholder' => trans('lang.your_address')] ) !!}
+                                            {!! Form::text( 'address', e($service->address), ['id'=>"pac-input1", 'class' =>'form-control', 'placeholder' => trans('lang.your_address')] ) !!}
                                         </div>
-                                        <div class="form-group wt-formmap">
+                                        <div class="form-group wt-formmap" style="display: none;">
                                             @include('includes.map')
                                         </div>
-                                        <div class="form-group form-group-half">
+                                        <div class="form-group form-group-half" style="display: none;">
                                             {!! Form::text( 'longitude', e($service->longitude), ['id'=>"lng-input", 'class' =>'form-control', 'placeholder' => trans('lang.enter_logitude')]) !!}
                                         </div>
-                                        <div class="form-group form-group-half">
+                                        <div class="form-group form-group-half" style="display: none;">
                                             {!! Form::text( 'latitude', e($service->latitude), ['id'=>"lat-input", 'class' =>'form-control', 'placeholder' => trans('lang.enter_latitude')]) !!}
                                         </div>
                                     </fieldset>
@@ -149,8 +149,8 @@
                                                     <li id="attachment-item-{{$key}}">
                                                         <span>{{{Helper::formateFileName($attachment)}}}</span>
                                                         <em>
-                                                            @if (Storage::disk('local')->exists('uploads/services/'.$freelancer->user_id.'/'.$attachment))
-                                                                {{ trans('lang.file_size') }} {{{Helper::bytesToHuman(Storage::size('uploads/services/'.$freelancer->user_id.'/'.$attachment))}}}
+                                                            @if (Storage::disk('s3')->exists('uploads/services/'.$freelancer->user_id.'/'.$attachment))
+                                                                {{ trans('lang.file_size') }} {{{Helper::bytesToHuman(Storage::disk('s3')->size('uploads/services/'.$freelancer->user_id.'/'.$attachment))}}}
                                                             @endif
                                                             <a href="{{{route('getfile', ['type'=>'services','attachment'=>$attachment,'id'=>$freelancer->user_id])}}}"><i class="lnr lnr-download"></i></a>
                                                             <a href="#" v-on:click.prevent="deleteAttachment('attachment-item-{{$key}}')"><i class="lnr lnr-cross"></i></a>

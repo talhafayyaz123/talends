@@ -4,7 +4,7 @@
     <div class="wt-haslayout wt-dbsectionspace">
         <div class="wt-haslayout wt-reset-pass" id="pass-reset">
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9">
+                <div class="col-xs-12 col-sm-12 col-md-12">
                     @if (Session::has('error'))
                         <div class="flash_msg float-right">
                             <flash_messages :message_class="'danger'" :time='5' message="{{{ Session::get('error') }}}" v-cloak></flash_messages>
@@ -40,7 +40,7 @@
                                                 {!! Form::password('confirm_new_password', ['class' => 'form-control','placeholder' => trans('lang.ph_confirm_new_pass')]) !!}
                                             </div>
                                             {!! Form::hidden('user_id', $user_id) !!}
-                                            <div class="form-group form-group-half wt-btnarea">
+                                            <div class="form-group form-group-half wt-btnarea"  style="padding-top: 32px;">
                                                 {!! Form::submit(trans('lang.btn_save'), ['class' => 'wt-btn']) !!}
                                             </div>
                                         </fieldset>

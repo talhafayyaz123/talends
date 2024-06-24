@@ -2,7 +2,7 @@
 @section('content')
     <div class="wt-haslayout wt-delete-account wt-dbsectionspace" id="profile_settings">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+            <div class="col-xs-12 col-sm-12 col-md-12">
                 @if (Session::has('message'))
                     <div class="flash_msg">
                         <flash_messages :message_class="'success'" :time='5' :message="'{{{ Session::get('message') }}}'" v-cloak></flash_messages>
@@ -40,7 +40,7 @@
                                         <div class="form-group">
                                             <textarea name="delete_description" class="form-control" placeholder="{{{ trans('lang.ph_desc_optional') }}}"></textarea>
                                         </div>
-                                        <div class="form-group form-group-half wt-btnarea">
+                                        <div class="form-group form-group-half wt-btnarea" style="padding-top: 32px;">
                                             {!! Form::submit(trans('lang.btn_delete_account'), ['class' => 'wt-btn']) !!}
                                         </div>
                                     </fieldset>

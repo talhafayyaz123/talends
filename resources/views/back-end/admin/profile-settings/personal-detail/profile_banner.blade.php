@@ -1,10 +1,10 @@
 <div class="wt-location wt-tabsinfo">
     <div class="wt-tabscontenttitle">
-        <h2>{{{ trans('lang.banner_photo') }}}</h2>
+    <p class="mb-0">{{{ trans('lang.banner_photo') }}}</p>
     </div>
     <div class="wt-settingscontent">
         @if (!empty($banner)) 
-            @php $image = '/uploads/users/'.Auth::user()->id.'/'.$banner; @endphp
+            @php $image =config('app.aws_se_path').  '/uploads/users/'.Auth::user()->id.'/'.$banner; @endphp
             <div class="wt-formtheme wt-userform">
                 <div v-if="this.uploaded_banner">
                     <upload-image :id="'banner_id'" :img_ref="'banner_ref'" :url="'{{url('admin/upload-temp-image')}}'" :name="'hidden_banner_image'">

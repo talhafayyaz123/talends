@@ -17,7 +17,7 @@
                         <div class="wt-personalskillshold tab-pane active fade show" id="wt-skills">
                             <div class="wt-yourdetails">
                                 <div class="wt-tabscontenttitle">
-                                    <h2>{{ trans('lang.saved_jobs') }}</h2>
+                                <p class="mb-0">{{ trans('lang.saved_jobs') }}</p>
                                 </div>
                                 @if (!empty($saved_jobs))
                                     <div class="wt-dashboradsaveitem">
@@ -33,7 +33,7 @@
                                             @if (!empty($job))
                                                 <div class="wt-userlistinghold wt-featured wt-dashboradsaveditems">
                                                     @if (!empty($job->is_featured) && $job->is_featured === 'true')
-                                                        <span class="wt-featuredtag"><img src="{{{ asset('images/featured.png') }}}" alt="{{ trans('lang.is_featured') }}" data-tipso="Plus Member" class="template-content tipso_style"></span>
+                                                        <span class="wt-featuredtag"><img src="{{{ config('app.aws_se_path'). '/' .'images/featured.png' }}}" alt="{{ trans('lang.is_featured') }}" data-tipso="Plus Member" class="template-content tipso_style"></span>
                                                     @endif
                                                     <div class="wt-userlistingcontent">
                                                         <div class="wt-contenthead wt-dashboardsavehead">
@@ -94,7 +94,7 @@
                                                 if (!empty($user)) {
                                                     $profile = \App\User::find($employer)->profile;
                                                     $user_image = !empty($profile) ? $profile->avater : '';
-                                                    $profile_image = !empty($user_image) ? '/uploads/users/'.$employer.'/'.$user_image : 'images/user-login.png';
+                                                    $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/'.$employer.'/'.$user_image : config('app.aws_se_path'). '/' .'images/user-login.png';
                                                     $user_name = Helper::getUserName($employer);
                                                 }
                                             @endphp
@@ -102,7 +102,7 @@
                                                 <div class="wt-followedcompnies">
                                                     <div class="wt-userlistinghold wt-userlistingsingle">
                                                         <figure class="wt-userlistingimg">
-                                                            <img src="{{{ asset($profile_image) }}}" alt="{{ trans('lang.profile_img') }}">
+                                                            <img src="{{{ ($profile_image) }}}" alt="{{ trans('lang.profile_img') }}">
                                                         </figure>
                                                         <div class="wt-userlistingcontent">
                                                             <div class="wt-contenthead wt-followcomhead">
@@ -151,7 +151,7 @@
                                                     $profile = \App\User::find($freelancer)->profile;
                                                     $rating = !empty($profile->rating) ? $profile->rating : 0;
                                                     $user_image = !empty($profile) ? $profile->avater : '';
-                                                    $profile_image = !empty($user_image) ? '/uploads/users/'.$freelancer.'/'.$user_image : 'images/user.jpg';
+                                                    $profile_image = !empty($user_image) ? config('app.aws_se_path'). '/uploads/users/'.$freelancer.'/'.$user_image : config('app.aws_se_path'). '/' .'images/user.jpg';
                                                     $user_name = Helper::getUserName($freelancer);
                                                     $reviews = \App\Review::where('receiver_id', $freelancer)->count();
                                                     $avg_rating = \App\Review::where('receiver_id', $user->id)->sum('avg_rating');
@@ -163,7 +163,7 @@
                                             @if (!empty($user))
                                                 <div class="wt-userlistinghold wt-featured">
                                                     <figure class="wt-userlistingimg">
-                                                        <img src="{{{ asset($profile_image) }}}" alt="{{{ trans('lang.profile_img') }}}">
+                                                        <img src="{{{ ($profile_image) }}}" alt="{{{ trans('lang.profile_img') }}}">
                                                     </figure>
                                                     <div class="wt-userlistingcontent">
                                                         <div class="wt-contenthead">

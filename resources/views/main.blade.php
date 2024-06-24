@@ -1,130 +1,297 @@
 <!doctype html>
-<html class="no-js" lang="" dir="{{Helper::getTextDirection()}}">
+
+<html class="no-js"  lang="" dir="{{Helper::getTextDirection()}}">
+
+
 
 <head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GK95ZJXBTQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GK95ZJXBTQ');
+</script>
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5048427330709374" crossorigin="anonymous"></script>
+
+<script async src="https://js.stripe.com/v3/"></script>
+
 	<meta charset="utf-8">
+
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
+
+
 	@if (trim($__env->yieldContent('title')))
+
 		<title>@yield('title')</title>
-	@else 
+
+	@else
+
 		<title>{{ config('app.name') }}</title>
+
 	@endif
+
 	<meta name="description" content="@yield('description')">
+
 	<meta name="keywords" content="@yield('keywords')">
+
 	<meta name="csrf-token" content="{{ csrf_token() }}">
+
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-      
+
     <meta property="og:title" content="Talends" />
+
     <meta name="twitter:card" content="summary_large_image" />
+
     <meta name="twitter:site" content="@Talends" />
+
     <meta name="twitter:title" content="Talends" />
+
     <meta property="og:description" content="Talends" />
+
     <meta name="twitter:description" content="Talends" />
+
     <meta property="og:image"  />
+
     <meta name="twitter:image"  />
 
+
+
 	<link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png')}}">
+
     <link rel="shortcut icon" href="{{ asset('talends/assets/img/fav/favicon.png')}}">
+
     <link rel="apple-touch-icon" href="{{ asset('talends/assets/img/fav/apple-touch-icon-57x57.png')}}">
+
     <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('talends/assets/img/fav/apple-touch-icon-72x72.png')}}">
+
     <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('talends/assets/img/fav/apple-touch-icon-114x114.png')}}">
+
+
 
 	<link rel="icon" href="{{{ asset(Helper::getSiteFavicon()) }}}" type="image/x-icon">
 
+
+
 	@stack('PackageStyle')
 
+
+    <link href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css" rel="stylesheet">
+
+
     <link rel="preload" href="{{ asset('talends/assets/css/animate.css')}}" as="style">
+
     <link rel="stylesheet" href="{{ asset('talends/assets/css/animate.css')}}">
+
     <link rel="stylesheet" href="{{ asset('talends/bootstrap/4.4.1/css/bootstrap.min.css')}}" >
- 
+
+
+<link rel="stylesheet" href="https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+
+{!!  ReCaptcha::htmlScriptTagJsApi() !!}
+
 
 
     @stack('sliderStyle')
 
 
+<link rel="stylesheet" type="text/css" href="https://www.jqueryscript.net/demo/validate-password-requirements/css/jquery.passwordRequirements.css">
+
+
+
 	<link rel="preload" href="{{ asset('talends/assets/css/style.css')}}" as="style">
+
     <link rel="stylesheet" href="{{ asset('talends/assets/css/style.css')}}">
+
+	<!-- bootstrap icons -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
 
 
     <script src="{{ asset('talends/jquery-3.4.1.slim.min.js') }}" >
+
     </script>
+
     <script defer src="{{ asset('talends/bbcc34f546.js') }}" ></script>
+	<link href="{{ asset('talends/assets/css/main_customization.css') }}" rel="stylesheet">
+
+ 	<link href="{{ asset('talends/assets/css/register.css') }}" rel="stylesheet">
+
+
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+
+
+	<link rel="stylesheet" href="{{ asset('bootstrap-multiselect.css') }}" type="text/css">
+	<script type="text/javascript" src="{{ asset('bootstrap-multiselect.js') }}"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
 
 	@if(Helper::getTextDirection() == 'rtl')
+
 		<link href="{{ asset('css/rtl.css') }}" rel="stylesheet">
+
 	@endif
+
+
 
     @php echo \App\Typo::setSiteStyling(); @endphp
-    
+
+
+
 	@stack('stylesheets')
-	
+	@stack('owlstyle')
+
+
 	@if (Auth::user())
+
 		<script type="text/javascript">
+
 			var USERID = {!! json_encode(Auth::user()->id) !!}
+
 			window.Laravel = {!! json_encode([
+
 			'csrfToken'=> csrf_token(),
+
 			'user'=> [
+
 				'authenticated' => auth()->check(),
+
 				'id' => auth()->check() ? auth()->user()->id : null,
+
 				'name' => auth()->check() ? auth()->user()->first_name : null,
-				'image' => !empty(auth()->user()->profile->avater) ? asset('uploads/users/'.auth()->user()->id .'/'.auth()->user()->profile->avater) : asset('images/user-login.png'),
+
+				'image' => !empty(auth()->user()->profile->avater) ? config('app.aws_se_path'). '/' .'uploads/users/'.auth()->user()->id .'/'.auth()->user()->profile->avater : config('app.aws_se_path'). '/' .'images/user-login.png',
+
 				'image_name' => !empty(auth()->user()->profile->avater) ? auth()->user()->profile->avater : '',
+
 				]
+
 				])
+
 			!!};
+
 		</script>
+
 	@endif
+
 	<script>
+
 		window.trans = <?php
+
 		$lang_files = File::files(resource_path() . '/lang/' . App::getLocale());
+
 		$trans = [];
+
 		foreach ($lang_files as $f) {
+
 			$filename = pathinfo($f)['filename'];
+
 			$trans[$filename] = trans($filename);
+
 		}
+
 		echo json_encode($trans);
+
 		?>;
+
 	</script>
+
 </head>
 
+
+
 <body class="{{Helper::getBodyLangClass()}} {{Helper::getTextDirection()}} {{empty(Request::segment(1)) ? 'home' : '' }}">
+
 	{{ \App::setLocale(env('APP_LANG')) }}
+
 	<!--[if lt IE 8]>
+
 		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+
 	<![endif]-->
+
 	@php
+
 		$general_settings = !empty(App\SiteManagement::getMetaValue('settings')) ? App\SiteManagement::getMetaValue('settings') : array();
+
 		$enable_loader = !empty($general_settings) && !empty($general_settings[0]['enable_loader']) ? $general_settings[0]['enable_loader'] : true;
+
 	@endphp
+
 	@if (!empty($enable_loader) && ($enable_loader === true || $enable_loader === 'true'))
+
 		<div class="preloader-outer">
+
 			<div class="preloader-holder">
+
 				<div class="loader"></div>
+
 			</div>
+
 		</div>
+
 	@endif
+
 	<div id="wt-wrapper" class="wt-wrapper wt-haslayout">
+
 		<div class="wt-contentwrapper">
+
 			@yield('header')
+
 			@yield('slider')
+
 			@yield('main')
+
 			@yield('footer')
+
 		</div>
+
 	</div>
 
-   <script src="{{ asset('talends/npm/popper_js_1.16.0/dist/umd/popper.min.js') }}" >
-    </script>
-    <script src="{{ asset('talends/bootstrap/4.4.1/js/bootstrap.min.js') }}" >
-    </script>
+
+
+	<script src="{{ asset('talends/npm/popper_js_1.16.0/dist/umd/popper.min.js') }}" ></script>
+	<script src="{{ asset('talends/bootstrap/4.4.1/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('talends/assets/js/wow.min.js') }}"></script>
     <script src="{{ asset('talends/assets/js/main.js') }}"></script>
+    <script src="https://www.jqueryscript.net/demo/validate-password-requirements/js/jquery.passwordRequirements.min.js"></script>
+
+	<script src="https://cdn.tutorialjinni.com/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+
+	 <!-- <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/22223481.js"></script> -->
+		<!--Start of Tawk.to Script-->
+		/* <script type="text/javascript">
+		var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+		(function(){
+		var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+		s1.async=true;
+		s1.src='https://embed.tawk.to/6340099d54f06e12d898e9cc/1gep2b3ro';
+		s1.charset='UTF-8';
+		s1.setAttribute('crossorigin','*');
+		s0.parentNode.insertBefore(s1,s0);
+		})();
+		</script> */
+		<!--End of Tawk.to Script-->
+
 
 	@yield('bootstrap_script')
-	
     @stack('scripts')
+	<script>
+		$(function () {
+			$("#register_password").passwordRequirements({});
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>
+
 </body>
+
 </html>
+

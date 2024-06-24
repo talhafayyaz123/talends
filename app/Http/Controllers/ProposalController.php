@@ -68,6 +68,8 @@ class ProposalController extends Controller
                 $proposal_status = Job::find($job->id)->proposals()->where('status', 'hired')->first();
                 $role_id =  Helper::getRoleByUserID(Auth::user()->id);
                 $package = DB::table('items')->where('subscriber', Auth::user()->id)->select('product_id', 'updated_at')->first();
+
+                
                 $package_options = Package::select('options')->where('id', $package->product_id)->get()->first();
                 $options = !empty($package_options) ? unserialize($package_options['options']) : array();
                 $settings = SiteManagement::getMetaValue('settings');
@@ -242,7 +244,7 @@ class ProposalController extends Controller
                                         $email_params['amount'] = $request['amount'];
                                         $email_params['duration'] = Helper::getJobDurationList($request['completion_time']);
                                         $email_params['message'] = $request['description'];
-                                        Mail::to($job->employer->email)
+                                         Mail::to($job->employer->email)
                                             ->send(
                                                 new EmployerEmailMailable(
                                                     'employer_email_proposal_received',
@@ -257,7 +259,7 @@ class ProposalController extends Controller
                                                     $template_submit_proposal,
                                                     $email_params
                                                 )
-                                            );
+                                            ); 
                                     } else {
                                         $json['type'] = 'error';
                                         $json['message'] = trans('lang.something_wrong');
@@ -299,7 +301,7 @@ class ProposalController extends Controller
                                     $email_params['amount'] = $request['amount'];
                                     $email_params['duration'] = Helper::getJobDurationList($request['completion_time']);
                                     $email_params['message'] = $request['description'];
-                                    Mail::to($job->employer->email)
+                                     Mail::to($job->employer->email)
                                         ->send(
                                             new EmployerEmailMailable(
                                                 'employer_email_proposal_received',
@@ -314,7 +316,7 @@ class ProposalController extends Controller
                                                 $template_submit_proposal,
                                                 $email_params
                                             )
-                                        );
+                                        ); 
                                 } else {
                                     $json['type'] = 'error';
                                     $json['message'] = trans('lang.something_wrong');
@@ -446,7 +448,7 @@ class ProposalController extends Controller
         $profile = User::find($accepted_proposal->freelancer_id)->profile;
         $attachments = !empty($accepted_proposal->attachments) ? unserialize($accepted_proposal->attachments) : '';
         $user_image = !empty($profile) ? $profile->avater : '';
-        $profile_image = !empty($user_image) ? '/uploads/users/' . $accepted_proposal->freelancer_id . '/' . $user_image : 'images/user-login.png';
+        $profile_image = !empty($user_image) ? config('app.aws_se_path').'/uploads/users/' . $accepted_proposal->freelancer_id . '/' . $user_image : config('app.aws_se_path').'/images/user-login.png';
         $employer_name = Helper::getUserName($job->user_id);
         $project_status = Helper::getProjectStatus();
         $duration = !empty($job->duration) ? Helper::getJobDurationList($job->duration) : '';

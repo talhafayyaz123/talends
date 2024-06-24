@@ -33,7 +33,7 @@ import Event from '../event.js';
                 receiver: '',
                 socket : io(this.chat_host+':'+this.chat_port),
                 chat_start: false,
-                no_record_img: APP_URL+'/images/message-img.png',
+                no_record_img: this.$Aws_S3_PATH+'/images/message-img.png',
                 typing: false,
                 message_id: 0,
                 notificationSystem: {

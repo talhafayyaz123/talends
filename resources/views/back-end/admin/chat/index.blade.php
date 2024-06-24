@@ -37,7 +37,14 @@
                                         @endphp
                                         <tr class="del-{{$conv->user_id}}-{{$conv->receiver_id}}">
                                             <td>
-                                                <a href="{{{ url(route('showUserProfile', ['slug' => $user->slug])) }}}">{{{ $user_name }}}</a> , <a href="{{{ url(route('showUserProfile', ['slug' => $receiver->slug])) }}}">{{$receiver_name}}</a>
+                                            @if( isset($user->slug) )
+                                                <a href="{{{ url(route('showUserProfile', ['slug' => $user->slug])) }}}">{{{ $user_name }}}</a> ,
+                                                @endif
+
+                                                @if( isset($receiver->slug) )
+                                                
+                                                <a href="{{{ url(route('showUserProfile', ['slug' => $receiver->slug])) }}}">{{$receiver_name}}</a>
+                                                  @endif
                                             </td>
                                             <td>
                                                 <span class="bt-content">
